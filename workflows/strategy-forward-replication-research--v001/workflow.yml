@@ -1,0 +1,45 @@
+schema_version: 1
+workflow: strategy-forward-replication-research
+status: draft
+
+data_intervals:
+  - role: warmup-only
+    start_date: "2013-01-01"
+    end_date: "2013-12-31"
+    purpose: 僅供指標前置觀察，不計入績效
+
+  - role: development
+    start_date: "2014-01-01"
+    end_date: "2018-12-31"
+    purpose: 用於研究、策略比較及選出候選
+
+  - role: quarantine
+    start_date: "2019-01-01"
+    end_date: "2019-12-31"
+    purpose: 隔離區間，不得移入或併入其他資料角色
+
+  - role: historical-evaluation
+    start_date: "2020-01-01"
+    end_date: "2024-12-31"
+    purpose: 歷史評估，分為五個互不重疊的年度 folds
+    folds:
+      - year: 2020
+        start_date: "2020-01-01"
+        end_date: "2020-12-31"
+      - year: 2021
+        start_date: "2021-01-01"
+        end_date: "2021-12-31"
+      - year: 2022
+        start_date: "2022-01-01"
+        end_date: "2022-12-31"
+      - year: 2023
+        start_date: "2023-01-01"
+        end_date: "2023-12-31"
+      - year: 2024
+        start_date: "2024-01-01"
+        end_date: "2024-12-31"
+
+  - role: retrospective-execution-replay
+    start_date: "2025-01-01"
+    end_date: "2025-12-31"
+    purpose: 用於固定歷史成交重播
