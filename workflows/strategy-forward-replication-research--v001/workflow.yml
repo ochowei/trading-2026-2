@@ -1,45 +1,594 @@
 schema_version: 1
 workflow: strategy-forward-replication-research
+title: 策略前瞻複製研究流程
 status: draft
+language: zh-TW
+
+summary: >-
+  只使用 Development 資料開發並記錄所有 trials；完成 provenance audit 後，
+  以 exact digests 凍結唯一候選及全部輸入；再依序執行 Historical Evaluation、
+  robustness challenges 和 historical replay，將結果保存為 immutable evidence，
+  最後由 independent reviewer 重算。失敗後不得修改策略、資料或門檻再重試。
+
+scope:
+  route: fixed-calendar-retrospective
+  description: 所有 outcome windows 都已結束，本流程只提供回溯穩健性證據。
+  pass_authority: retrospectively-supported
+  live_trading_authority: false
+  future_performance_guaranteed: false
+
+references:
+  human_guide: reference/minimal-executable-study.md
+  source_guide: reference/strategy-forward-replication-research-v011-guide.md
 
 data_intervals:
-  - role: warmup-only
-    start_date: "2013-01-01"
-    end_date: "2013-12-31"
-    purpose: 僅供指標前置觀察，不計入績效
+  description: 所有 study 都必須使用以下固定、完整且互不重疊的資料區間。
+  rules:
+    dates_are_fixed: true
+    missing_sessions_allowed: false
+    extra_sessions_allowed: false
+    overlapping_roles_allowed: false
+  intervals:
+    - role: warmup-only
+      name: 指標暖機
+      start_date: "2013-01-01"
+      end_date: "2013-12-31"
+      purpose: 只供指標前置觀察，不計入績效。
+      contributes_to_performance: false
 
-  - role: development
-    start_date: "2014-01-01"
-    end_date: "2018-12-31"
-    purpose: 用於研究、策略比較及選出候選
+    - role: development
+      name: 策略開發
+      start_date: "2014-01-01"
+      end_date: "2018-12-31"
+      purpose: 研究、比較及選出唯一候選策略。
+      tuning_allowed: true
 
-  - role: quarantine
-    start_date: "2019-01-01"
-    end_date: "2019-12-31"
-    purpose: 隔離區間，不得移入或併入其他資料角色
+    - role: quarantine
+      name: 隔離區間
+      start_date: "2019-01-01"
+      end_date: "2019-12-31"
+      purpose: 隔離 Development 與 Evaluation，不得移入其他資料角色。
+      contributes_to_performance: false
 
-  - role: historical-evaluation
-    start_date: "2020-01-01"
-    end_date: "2024-12-31"
-    purpose: 歷史評估，分為五個互不重疊的年度 folds
-    folds:
-      - year: 2020
-        start_date: "2020-01-01"
-        end_date: "2020-12-31"
-      - year: 2021
-        start_date: "2021-01-01"
-        end_date: "2021-12-31"
-      - year: 2022
-        start_date: "2022-01-01"
-        end_date: "2022-12-31"
-      - year: 2023
-        start_date: "2023-01-01"
-        end_date: "2023-12-31"
-      - year: 2024
-        start_date: "2024-01-01"
-        end_date: "2024-12-31"
+    - role: historical-evaluation
+      name: 歷史評估
+      start_date: "2020-01-01"
+      end_date: "2024-12-31"
+      purpose: 使用五個互不重疊的年度 folds 驗證凍結候選。
+      tuning_allowed: false
+      folds:
+        - year: 2020
+          start_date: "2020-01-01"
+          end_date: "2020-12-31"
+        - year: 2021
+          start_date: "2021-01-01"
+          end_date: "2021-12-31"
+        - year: 2022
+          start_date: "2022-01-01"
+          end_date: "2022-12-31"
+        - year: 2023
+          start_date: "2023-01-01"
+          end_date: "2023-12-31"
+        - year: 2024
+          start_date: "2024-01-01"
+          end_date: "2024-12-31"
 
-  - role: retrospective-execution-replay
-    start_date: "2025-01-01"
-    end_date: "2025-12-31"
-    purpose: 用於固定歷史成交重播
+    - role: retrospective-execution-replay
+      name: 歷史成交重播
+      start_date: "2025-01-01"
+      end_date: "2025-12-31"
+      purpose: 依 session 順序模擬訊號、成交、部位、現金與成本。
+      tuning_allowed: false
+
+study_identity:
+  description: 每次執行都必須具有唯一且可追蹤的身份。
+  required_fields:
+    - field: study_id
+      description: 本次 study 的唯一識別碼。
+    - field: research_round_id
+      description: 本輪研究的唯一識別碼。
+    - field: experiment_family
+      description: 完整候選策略家族。
+    - field: research_owner
+      description: 負責核准研究與階段晉級的人類 owner。
+    - field: replay_operator
+      description: 負責執行歷史 replay 的 operator。
+    - field: workflow_digest
+      description: 本 workflow 規格的 exact digest。
+    - field: policy_set_digest
+      description: 本次使用 policy set 的 exact digest。
+
+study_manifest:
+  description: >-
+    每個 study 都必須有一份人類可讀、機器可驗證的 study.yml。
+    它是 study 的 manifest，保存實際 identity、狀態、digests 與 evidence references；
+    大型或不可變 artifacts 不直接嵌入，而是以 repository-relative path 和 SHA-256 引用。
+  file_name: study.yml
+  path_pattern: studies/<study_id>/study.yml
+  format: yaml
+
+  mutation_policy:
+    description: Study 進行中只能補入新事實；已凍結或已發布的事實不得改寫。
+    append_or_fill_only: true
+    deletion_allowed: false
+    rewrite_bound_digests_allowed: false
+    terminal_manifest_is_read_only: true
+    immutable_after_set:
+      - study.identity.study_id
+      - study.identity.research_round_id
+      - study.identity.experiment_family
+      - workflow_binding.workflow_digest
+      - workflow_binding.policy_set_digest
+      - calendar_binding
+      - preregistration.digest
+      - provenance
+      - candidate_freeze
+      - evidence.entries.*.digest
+      - outcome
+
+  required_top_level_fields:
+    - schema_version
+    - study
+    - workflow_binding
+    - lifecycle
+    - calendar_binding
+    - preregistration
+    - trial_registry
+    - provenance
+    - candidate_freeze
+    - evidence
+    - outcome
+
+  sections:
+    schema_version:
+      type: integer
+      constant: 1
+      description: study.yml 的欄位結構版本。
+
+    study:
+      description: 本次 study 的固定身份與負責人。
+      required_from: creation
+      required_fields:
+        - field: identity.study_id
+          type: string
+          description: Study 的唯一識別碼，必須與目錄名稱一致。
+        - field: identity.research_round_id
+          type: string
+          description: 本輪研究的唯一識別碼。
+        - field: identity.experiment_family
+          type: string
+          description: 本次研究的完整策略家族識別碼。
+        - field: research_owner
+          type: string
+          description: Human research owner 的穩定識別碼。
+        - field: replay_operator
+          type: string
+          description: Historical replay operator 的穩定識別碼。
+        - field: created_at
+          type: string
+          format: date-time
+          description: Study 實際建立時間，不得回填成較早時間。
+
+    workflow_binding:
+      description: 將 study 綁定到 exact workflow、policy 與程式版本。
+      required_from: creation
+      required_fields:
+        - field: workflow_id
+          type: string
+          constant: strategy-forward-replication-research
+        - field: workflow_schema_version
+          type: integer
+          constant: 1
+        - field: workflow_digest
+          type: string
+          format: sha256
+        - field: policy_set_digest
+          type: string
+          format: sha256
+        - field: git_commit
+          type: string
+          format: git-commit-sha
+
+    lifecycle:
+      description: 記錄 study 目前階段與是否已終止。
+      required_from: creation
+      required_fields:
+        - field: status
+          type: string
+          allowed_values:
+            - planned
+            - active
+            - terminal
+        - field: current_stage
+          type: string
+          allowed_values:
+            - preregistration
+            - development
+            - candidate-freeze
+            - historical-evaluation
+            - robustness-challenges
+            - retrospective-execution-replay
+            - independent-review
+            - terminal
+        - field: last_transition_at
+          type: string
+          format: date-time
+
+    calendar_binding:
+      description: 綁定本 workflow 的固定日期與實際 session inventories。
+      required_from: creation
+      required_fields:
+        - field: data_intervals_digest
+          type: string
+          format: sha256
+        - field: session_inventory_digests.warmup-only
+          type: string
+          format: sha256
+        - field: session_inventory_digests.development
+          type: string
+          format: sha256
+        - field: session_inventory_digests.quarantine
+          type: string
+          format: sha256
+        - field: session_inventory_digests.historical-evaluation
+          type: string
+          format: sha256
+        - field: session_inventory_digests.retrospective-execution-replay
+          type: string
+          format: sha256
+
+    preregistration:
+      description: 指向 outcome 前已核准且不可覆寫的 preregistration artifact。
+      required_before_stage: development
+      required_fields:
+        - field: artifact_path
+          type: string
+          format: repository-relative-path
+        - field: digest
+          type: string
+          format: sha256
+        - field: maximum_trials
+          type: integer
+          minimum: 1
+        - field: approved_by
+          type: string
+          description: 核准人的穩定識別碼。
+        - field: approved_at
+          type: string
+          format: date-time
+
+    trial_registry:
+      description: >-
+        指向本 study 的 append-only trial registry，並提供可快速閱讀的完整性摘要。
+        實際 trial records 存在 registry artifact，不在 study.yml 內重複保存。
+      required_from: development
+      required_fields:
+        - field: artifact_path
+          type: string
+          format: repository-relative-path
+        - field: status
+          type: string
+          allowed_values:
+            - open
+            - frozen
+        - field: maximum_trials
+          type: integer
+          minimum: 1
+        - field: recorded_trial_count
+          type: integer
+          minimum: 0
+        - field: complete_family_trial_ids
+          type: array
+          items: string
+        - field: digest
+          type: string
+          format: sha256
+          required_when: status is frozen
+
+    provenance:
+      description: 保存 asset-specific provenance audit 的實際結論與證據綁定。
+      required_before_stage: historical-evaluation
+      required_fields:
+        - field: status
+          type: string
+          allowed_values:
+            - verified-clean
+            - known-contaminated
+            - provenance-unknown
+        - field: artifact_path
+          type: string
+          format: repository-relative-path
+        - field: digest
+          type: string
+          format: sha256
+        - field: audited_by
+          type: string
+        - field: audited_at
+          type: string
+          format: date-time
+
+    candidate_freeze:
+      description: 保存唯一候選、baseline、核准與所有 frozen bindings。
+      required_before_stage: historical-evaluation
+      required_fields:
+        - field: status
+          type: string
+          allowed_values:
+            - pending
+            - frozen
+        - field: selected_candidate_id
+          type: string
+          required_when: status is frozen
+        - field: baseline_id
+          type: string
+          required_when: status is frozen
+        - field: artifact_path
+          type: string
+          format: repository-relative-path
+          required_when: status is frozen
+        - field: digest
+          type: string
+          format: sha256
+          required_when: status is frozen
+        - field: strategy_definition_digest
+          type: string
+          format: sha256
+          required_when: status is frozen
+        - field: market_data_snapshot_digest
+          type: string
+          format: sha256
+          required_when: status is frozen
+        - field: trial_registry_digest
+          type: string
+          format: sha256
+          required_when: status is frozen
+        - field: qualification_spec_digest
+          type: string
+          format: sha256
+          required_when: status is frozen
+        - field: approved_by
+          type: string
+          required_when: status is frozen
+        - field: frozen_at
+          type: string
+          format: date-time
+          required_when: status is frozen
+
+    evidence:
+      description: 每個正式階段的 immutable evidence 索引；不得只記錄 passed flag。
+      required_from: development
+      required_fields:
+        - field: entries
+          type: array
+          item_required_fields:
+            - field: stage
+              type: string
+              allowed_values:
+                - development
+                - candidate-freeze
+                - historical-evaluation
+                - robustness-challenges
+                - retrospective-execution-replay
+                - independent-review
+            - field: artifact_path
+              type: string
+              format: repository-relative-path
+            - field: digest
+              type: string
+              format: sha256
+            - field: published_at
+              type: string
+              format: date-time
+
+    outcome:
+      description: 保存 independent reviewer 重算後的唯一 terminal 結果。
+      required_from: creation
+      required_fields:
+        - field: status
+          type: string
+          allowed_values:
+            - pending
+            - pass
+            - fail
+            - indeterminate
+        - field: authority
+          type: string
+          allowed_values:
+            - none
+            - retrospectively-supported
+        - field: reviewer_id
+          type: string
+          required_when: status is pass, fail, or indeterminate
+        - field: decided_at
+          type: string
+          format: date-time
+          required_when: status is pass, fail, or indeterminate
+        - field: terminal_evidence_digest
+          type: string
+          format: sha256
+          required_when: status is pass, fail, or indeterminate
+        - field: reasons
+          type: array
+          items: string
+          required_when: status is fail or indeterminate
+
+  cross_field_rules:
+    - description: Study ID 必須與 study.yml 所在目錄名稱一致。
+      rule: study.identity.study_id equals path study_id
+    - description: Trial registry 的 maximum_trials 必須等於 preregistration 的 maximum_trials。
+      rule: trial_registry.maximum_trials equals preregistration.maximum_trials
+    - description: Candidate freeze 必須引用同一份 frozen trial registry。
+      rule: candidate_freeze.trial_registry_digest equals trial_registry.digest
+    - description: Pass 只能授予 retrospectively-supported。
+      rule: outcome.status is pass implies outcome.authority is retrospectively-supported
+    - description: 非 pass 結果不得授予任何權限。
+      rule: outcome.status is fail or indeterminate implies outcome.authority is none
+    - description: Terminal study 必須具有 terminal outcome 與 independent-review evidence。
+      rule: lifecycle.status is terminal implies outcome.status is not pending
+
+preregistration:
+  description: 在查看正式 Evaluation 或 replay outcome 前，先固定研究方法與判定規則。
+  required_before_stage: development
+  implicit_defaults_allowed: false
+  required_fields:
+    - hypothesis
+    - complete_candidate_family
+    - maximum_trials
+    - eligibility_rules
+    - selection_rule
+    - tie_handling
+    - distinct_family_baseline
+    - trading_and_holding_rules
+    - base_and_stress_costs
+    - risk_limits
+    - challenge_contracts
+    - evaluation_gates
+    - replay_gates
+    - pause_and_recovery_rules
+    - outcome_rules
+
+trial_registry:
+  description: 每個曾查看結果且可能影響選擇的策略版本都算一個 trial。
+  append_only: true
+  record_failed_trials: true
+  record_removed_trials: true
+  record_abandoned_trials: true
+  deletion_allowed: false
+  hidden_trials_allowed: false
+  stop_when_budget_exhausted_without_candidate: true
+
+provenance:
+  description: 在查看正式 Evaluation 或 replay outcome 前，凍結資料與既有 outcome exposure 的來源狀態。
+  required_before_stage: historical-evaluation
+  asset_specific: true
+  allowed_statuses:
+    - status: verified-clean
+      description: 有足夠證據證明未受不當 outcome exposure 污染。
+    - status: known-contaminated
+      description: 已知曾受 outcome exposure 污染。
+    - status: provenance-unknown
+      description: 缺少足夠證據，無法判定是否乾淨。
+  default_when_unproven: provenance-unknown
+  reset_by_new_researcher_or_study: false
+
+candidate_freeze:
+  description: 依預先登記的規則選出並永久凍結至多一個候選策略。
+  maximum_candidates: 1
+  distinct_simpler_baseline_required: true
+  required_bindings:
+    - selected_candidate
+    - complete_trial_family
+    - strategy_definition_digest
+    - market_data_snapshot_digest
+    - workflow_digest
+    - policy_set_digest
+    - trial_registry_digest
+    - qualification_spec_digest
+    - exact_git_commit
+    - human_approval_identity
+    - human_approval_time
+  forbidden_after_freeze:
+    - tuning
+    - reranking
+    - candidate_family_expansion
+    - candidate_replacement
+
+evidence:
+  description: 所有正式輸入與結果都必須不可覆寫，並以 exact digests 相互綁定。
+  immutable: true
+  digest_bound: true
+  overwrite_allowed: false
+  deletion_allowed: false
+  rename_after_reference_allowed: false
+  mutable_latest_pointer_allowed: false
+  recovery_rule: 只能恢復或完成 inputs 完全相同的 frozen operation。
+
+stages:
+  description: 各階段必須依下列順序執行，不得跳過前置條件。
+  ordered:
+    - id: development
+      name: Development 開發
+      data_role: development
+      action: 開發策略並將所有 outcome-relevant 版本寫入 append-only trial registry。
+      exit_condition: 依預先登記規則選出合格候選，否則終止。
+
+    - id: candidate-freeze
+      name: 候選凍結
+      depends_on: development
+      action: 綁定唯一候選、完整 trial family、exact digests 與人類核准。
+      exit_condition: 所有 required bindings 完整且一致。
+
+    - id: historical-evaluation
+      name: Historical Evaluation
+      depends_on: candidate-freeze
+      data_role: historical-evaluation
+      action: 使用 immutable snapshots 和 offline runs 評估五個年度 folds。
+      trade_assignment: 依 signal date 歸屬，並在同一 fold 內退出。
+      exit_condition: 全部預先登記的 Evaluation gates 通過。
+
+    - id: robustness-challenges
+      name: 穩健性挑戰
+      depends_on: historical-evaluation
+      action: 對凍結候選執行九項預先登記的 challenges。
+      required_challenges:
+        - id: cash-benchmark
+          name: 現金基準
+        - id: simpler-family-baseline
+          name: 不同且較簡單的 family baseline
+        - id: exposure-matched-random-entry
+          name: Exposure-matched 隨機進場
+        - id: parameter-perturbation
+          name: 小幅參數擾動
+        - id: delayed-entry
+          name: 延後進場
+        - id: higher-costs
+          name: 較高成本
+        - id: worse-fills
+          name: 較差成交
+        - id: missed-orders
+          name: 漏單
+        - id: market-regime
+          name: 市場 regime 檢查
+      exit_condition: 九項 challenge gates 全部通過。
+
+    - id: retrospective-execution-replay
+      name: 2025 歷史成交重播
+      depends_on: robustness-challenges
+      data_role: retrospective-execution-replay
+      action: 依 session 順序產生非行動性 proposals、模擬成交、部位、現金、ledger 與 drift assessment。
+      broker_access_allowed: false
+      real_orders_allowed: false
+      exit_condition: 全部預先登記的 replay gates 通過。
+
+    - id: independent-review
+      name: 獨立結果審查
+      depends_on: retrospective-execution-replay
+      action: Reviewer 從 frozen inputs、registries、digests 與 immutable evidence 重算結果。
+      caller_reported_pass_is_authoritative: false
+      repair_or_tuning_during_review_allowed: false
+
+outcomes:
+  description: Independent reviewer 只能產生以下結果。
+  allowed:
+    - id: pass
+      meaning: 全部必要 gates 通過。
+      authority: retrospectively-supported
+    - id: fail
+      meaning: 任一可判定的必要 gate 失敗。
+      authority: none
+    - id: indeterminate
+      meaning: Identity、資料、artifact、approval、provenance 或 integrity 不足以可信判定。
+      authority: none
+
+failure_policy:
+  description: Evaluation 或 replay 失敗後，不得修改 frozen facts 再重試。
+  forbidden_actions:
+    - candidate_change
+    - strategy_tuning
+    - trial_deletion_or_rewrite
+    - data_period_change
+    - session_addition_or_extension
+    - data_generation_change
+    - threshold_relaxation
+    - evidence_overwrite
+    - relabeling_existing_evidence_as_clean_or_prospective
