@@ -8,11 +8,27 @@
 
 不要根據已看過的 Development 數值，把門檻設在剛好能通過的位置而不說明依據。沿用舊 Development 時，在 provenance 明確標示 `development-informed`。
 
-## 2. 同名 research bundle 與資料
+## 2. 同名 research bundle 與資料 reference
 
-建立 `research/<study-id>/`。所有 data binding 都應指向這個同名目錄。Development runner 只可開啟 2013 warmup-only 與 2014--2018 Development。
+建立 `research/<study-id>/` 放置 Study 專屬的規格、runner、evidence binding 與研究紀錄；raw
+market data 預設不複製到這個目錄。資料重用採 shared reference-first，詳細欄位與判斷順序見
+[`data-reuse.md`](data-reuse.md)。
 
-Historical Evaluation、quarantine、replay 快照可以依 manifest 既有 digest 機械複製與 hash 驗證；不要輸出內容、統計或策略績效。不得連線 provider 更新正式資料。
+優先 reference `research/market-data/<provider>/` 下已通過品質檢查、內容定址的公用快照；若
+只有舊 Study 有相容檔案，先公用化一次再 reference，除非有明確理由不能公用化。workflow
+的 `data-snapshot-set.yml` role entry 必須維持 `data-snapshot.schema.yml` 要求的固定欄位，
+不能直接加入 `data_source`、`path` 或 `view` 等額外欄位。每個 role 的 source path、source
+digest、品質報告與不重疊 session view，應記在 Study 的 acquisition/lineage manifest，並由
+Development inputs 與 runner 明確綁定。
+同一份完整公用快照可以被多個 role reference，但 runner 必須依明確日期範圍和 XNYS inventory
+切 view，並核對 view digest；不能靠檔名或目前資料夾位置猜測來源。
+
+Development runner 只可開啟 2013 warmup-only 與 2014--2018 Development view。若 runner 只
+接受實體 CSV，才在 Study 內物化副本，並保留 source reference、source digest 和物化原因；
+這是相容性 fallback，不是預設流程。
+
+Historical Evaluation、quarantine、replay 在 candidate freeze 前只保存 reference metadata，
+不得讀取內容、輸出統計或執行策略。正式 run 不得連線 provider 更新公用快照。
 
 ## 3. Outcome-relevant 程式
 
