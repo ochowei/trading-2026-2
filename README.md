@@ -13,7 +13,7 @@ Python 3.11 project managed with uv.
 在建立或凍結 Study 前，從 repository 根目錄執行：
 
 ```bash
-python research/tools/studyctl.py --repository-root . all <study-id>
+uv run python research/tools/studyctl.py --repository-root . all <study-id>
 ```
 
 需要分開定位問題時，可執行 `identity`、`contract`、`synthetic` 或 `freeze`。輸出固定是 JSON；找到問題時 exit code 為 `1`，命令或環境無法執行時為 `2`。正式 freeze 前若要連同本機 authority checkpoint 一起核對，再加上 `--authority-root <path>`。
