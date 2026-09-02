@@ -325,6 +325,98 @@ def test_trial_rejects_unregistered_bootstrap_seed(
         )
 
 
+@pytest.mark.parametrize(
+    "tampering",
+    [
+        "missing-metrics",
+        "missing-trades",
+        "changed-pnl",
+        "changed-year-breakdown",
+        "changed-leave-one-year-out",
+        "changed-bootstrap-statistic",
+    ],
+)
+def test_trial_rejects_tampered_development_raw_evidence(
+    workflow_root: Path, tmp_path: Path, tampering: str
+) -> None:
+    study_service = service(workflow_root, tmp_path)
+    study_id = f"tampered-development-{tampering}"
+    study_service.create_study(
+        study_id,
+        "owner",
+        research_round_id="round",
+        experiment_family="family-a",
+        research_owner="owner",
+        replay_operator="owner",
+        source_bundle={
+            "schema_version": 1,
+            "files": [{"path": "runner.py", "digest": DIGESTS["source"]}],
+        },
+    )
+    from helpers import preregistration
+
+    prereg_path, prereg_digest = study_service.publish_artifact(
+        study_id, "manifests/preregistration.yml", preregistration()
+    )
+    study_service.append_event(
+        study_id,
+        "preregistration-approved",
+        "owner",
+        {"preregistration_path": prereg_path, "preregistration_digest": prereg_digest},
+    )
+    auth_path, auth_digest = study_service.publish_artifact(
+        study_id, "evidence/auth.yml", {"authorized": True}
+    )
+    study_service.append_event(
+        study_id,
+        "development-authorized",
+        "owner",
+        {"evidence_path": auth_path, "evidence_digest": auth_digest},
+    )
+    source_digest = study_service.validate(study_id)["workflow_binding"][
+        "source_bundle_digest"
+    ]
+    inputs_path, inputs_digest = study_service.publish_artifact(
+        study_id,
+        "manifests/development-trial-inputs.yml",
+        development_inputs(prereg_digest, source_digest),
+    )
+    evidence = development_evidence(prereg_digest, source_digest, inputs_digest)
+    if tampering == "missing-metrics":
+        del evidence["metrics"]
+    elif tampering == "missing-trades":
+        del evidence["trades"]
+    elif tampering == "changed-pnl":
+        evidence["trades"][0]["base"]["pnl"] = "101"
+    elif tampering == "changed-year-breakdown":
+        evidence["diagnostics"]["by_signal_year"]["2014"]["base_pnl"] = "101"
+    elif tampering == "changed-leave-one-year-out":
+        evidence["diagnostics"]["leave_one_signal_year_out"]["stress"]["2014"][
+            "return"
+        ] = "0.1"
+    elif tampering == "changed-bootstrap-statistic":
+        evidence["diagnostics"]["block_bootstrap"]["stress"][0][
+            "positive_return_ratio"
+        ] = "0.5"
+    evidence_path, evidence_digest = study_service.publish_artifact(
+        study_id, "evidence/development.yml", evidence
+    )
+    with pytest.raises((IntegrityError, ValidationError)):
+        study_service.append_event(
+            study_id,
+            "trial-recorded",
+            "owner",
+            {
+                "trial_id": "trial-1",
+                "inputs_path": inputs_path,
+                "inputs_digest": inputs_digest,
+                "development_evidence_path": evidence_path,
+                "development_evidence_digest": evidence_digest,
+                "status": "completed",
+            },
+        )
+
+
 def test_known_gate_failure_terminates_as_fail(workflow_root: Path, tmp_path: Path) -> None:
     study_service = service(workflow_root, tmp_path)
     study_id = "failed-study"

@@ -1,0 +1,243 @@
+baseline_definition:
+  baseline_id: fxi-risk2-single-condition-pullback-v001
+  candidate_family: risk-budgeted-multi-condition-oversold-volatility-expansion-exit-cooldown
+  execution_is_identical: true
+  family: risk-budgeted-single-condition-pullback
+  objectively_simpler_because: 只保留 5% 至 12% 深度回檔，移除 Williams %R、ATR ratio 與退場後 cooldown 三類條件；2% 風險預算、成本與退場規則與候選完全相同。
+  simpler_rule: signal 僅要求 adjusted Close 相對 adjusted High(10) 回檔 5% 至 12%。
+complete_candidate_family:
+  - fxi-mr-risk2-exitcd7-devverify-v001
+eligibility_rules:
+  accepted_signal:
+    atr_ceiling: none
+    atr_ratio:
+      fast_wilder_length: 5
+      operator: '>'
+      slow_wilder_length: 20
+      value: '1.05'
+    closepos_filter: none
+    cooldown:
+      clock_anchor: completed-position-exit
+      minimum_completed_session_steps_after_exit: 7
+      position_must_be_flat: true
+    decision_time: completed-session-close
+    pullback:
+      denominator: adjusted-high-rolling-10-including-current-session
+      lower_inclusive: '0.05'
+      numerator: adjusted-high-10-minus-adjusted-close
+      upper_inclusive: '0.12'
+    symbol: FXI
+    williams_r:
+      formula: -100 * (adjusted-high-10 - adjusted-close) / (adjusted-high-10 - adjusted-low-10)
+      length: 10
+      operator: <=
+      value: '-80'
+  challenge_plan:
+    cash-benchmark:
+      gate: candidate base 與 stress return 均大於 0，亦即嚴格勝過零報酬現金。
+    delayed-entry:
+      gate: 延後一個 XNYS session 進場後，base/stress return > 0、profit factor > 1、stress drawdown <= 10%、單筆實現虧損 <= 4%。
+      perturbation: 原 next-open 改成再晚一個 session open。
+    exposure-matched-random-entry:
+      family_adjustment: Bonferroni 使用完整候選 family 數一個，未調整與調整後 p-value 都必須 <= 0.10。
+      gate: 候選 stress return 必須嚴格高於至少 90% 的隨機結果。
+      repetitions: 10000
+      seed: 20260904
+    higher-costs:
+      gate: return > 0、profit factor > 1、maximum drawdown <= 10%、單筆實現虧損 <= 4%。
+      per_side_fee_bps: '4'
+      per_side_slippage_bps: '40'
+    market-regime:
+      definition: 以每個 fold 內已完成 session 的 adjusted Close 相對 SMA(20) 分為 above 與 at-or-below。
+      gate: 兩種 regime 均至少一筆完成交易、stress 合計 PnL >= 0，且整體 stress gates 仍通過。
+    missed-orders:
+      drop_probability: '0.10'
+      gate: 1000 組固定亂數路徑中，第 5 百分位 return > 0、中位 profit factor > 1、maximum drawdown <= 10%、單筆實現虧損 <= 4%。
+      repetitions: 1000
+      seed: 20260905
+    parameter-perturbation:
+      atr_floor_variants:
+        - '1.00'
+        - '1.10'
+      closepos_variant:
+        formula: (adjusted-close - adjusted-low) / (adjusted-high - adjusted-low)
+        maximum_inclusive: '0.35'
+      cooldown_clock_anchor: completed-position-exit
+      cooldown_variants:
+        - 5
+        - 9
+      full_family_selection_adjustment: 與 exposure-matched random-entry 共用完整 family 與 Bonferroni gate，不得只報未調整 p-value。
+      gate: 五個參數變體各自 base/stress return > 0、profit factor > 1、stress drawdown <= 10%、單筆實現虧損 <= 4%，且 family adjustment 通過；任一失敗即本 challenge 失敗。
+    simpler-family-baseline:
+      gate: 候選 base 與 stress return 均嚴格高於已凍結、同樣採 2% 風險預算的簡單 baseline。
+    worse-fills:
+      gate: return > 0、profit factor > 1、maximum drawdown <= 10%、單筆實現虧損 <= 4%。
+      rule: 在 stress 成本外，entry 再不利 10 bps、exit 再不利 10 bps；gap 仍按實際 open，stop/target 同觸仍 stop-first。
+  costs:
+    base:
+      fee_per_side_bps: '1'
+      slippage_per_side_bps: '5'
+    stress:
+      fee_per_side_bps: '2'
+      slippage_per_side_bps: '20'
+  development_diagnostics:
+    block_bootstrap:
+      block_lengths:
+        - 3
+        - 5
+      maximum_stress_drawdown_above_10pct_ratio: '0.10'
+      minimum_stress_positive_return_ratio: '0.80'
+      repetitions: 50000
+      seed: 20260904
+      seed_application: exact-same-seed-for-each-block-length
+    leave_one_signal_year_out:
+      maximum_stress_drawdown: '0.10'
+      minimum_stress_profit_factor: '1.00'
+      minimum_stress_return: '0'
+    signal_year_breakdown: true
+  development_gates:
+    base_profit_factor:
+      operator: '>'
+      value: '1.10'
+    base_return:
+      operator: '>'
+      value: '0'
+    completed_trades:
+      operator: '>='
+      value: 20
+    maximum_realized_trade_loss_fraction:
+      operator: <=
+      value: '0.04'
+    maximum_stress_block_bootstrap_drawdown_above_10pct_ratio:
+      operator: <=
+      value: '0.10'
+    maximum_stress_leave_one_year_out_drawdown:
+      operator: <=
+      value: '0.10'
+    minimum_stress_block_bootstrap_positive_return_ratio:
+      operator: '>='
+      value: '0.80'
+    minimum_stress_leave_one_year_out_profit_factor:
+      operator: '>'
+      value: '1.00'
+    minimum_stress_leave_one_year_out_return:
+      operator: '>'
+      value: '0'
+    stress_maximum_drawdown:
+      operator: <=
+      value: '0.10'
+    stress_profit_factor:
+      operator: '>'
+      value: '1.00'
+    stress_return:
+      operator: '>'
+      value: '0'
+    traded_years:
+      operator: '>='
+      value: 3
+  execution:
+    entry: 下一個 XNYS session open，以 MARKET proposal 模擬。
+    gap_fill: stop gap 以較差 open、target gap 以 open 價格改善成交，再套用成本。
+    holding_period: 進場 session 算第一個完整 session；完成第 20 個 session 後於下一 open 退出。
+    intrabar_ambiguity: target 與 stop 同 session 觸及時先算 stop。
+    position_sizing:
+      cash_cap: 不得超過可用現金，不借款、不加碼、最多一個部位。
+      modeled_stop_loss: 以 raw entry 的 -5% stop，納入指定成本模型的進出場滑價與費用。
+      risk_fraction_of_pre_entry_equity: '0.02'
+      shares: 同時符合現金上限與 stop 風險預算的最大整數股數。
+    stop:
+      level_from_raw_entry_open: '-0.050'
+      order: STOP_MARKET
+      time_in_force: GTC
+    target:
+      level_from_raw_entry_open: '0.055'
+      order: LIMIT
+      reissued_each_open_position_session: true
+      time_in_force: DAY
+  gate_policy: Development、Evaluation、challenge 或 replay 任一完整 gate 失敗即否證假說並終止 Study。
+  source_and_adjustment:
+    adjustment_policy: Yahoo auto_adjust，OHLC 全部使用同一調整基礎。
+    calendar: XNYS
+    interval: 1d
+    provider: yahoo
+    timezone: America/New_York
+evaluation_gates:
+  base_compounded_return:
+    operator: '>'
+    value: '0'
+  base_profit_factor:
+    operator: '>'
+    value: '1.10'
+  completed_trades:
+    operator: '>='
+    value: 20
+  family_wise_confidence:
+    operator: '>='
+    value: '0.90'
+  maximum_fold_positive_profit_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_fold_trade_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_realized_trade_loss_fraction:
+    operator: <=
+    value: '0.04'
+  positive_traded_fold_ratio:
+    operator: '>='
+    value: '0.60'
+  stress_max_drawdown:
+    operator: <=
+    value: '0.10'
+  stress_profit_factor:
+    operator: '>'
+    value: '1.00'
+  stress_return:
+    operator: '>'
+    value: '0'
+  traded_folds:
+    operator: '>='
+    value: 3
+fold_warmup_sessions: 20
+hypothesis: 在完全不改變 FXI 訊號、成交、成本、風險預算、seed 與退場規則的前提下，workflow 必須從 Development raw trades 重算整體指標、年度分段、leave-one-year-out、block bootstrap 與完整 gates；所有 evidence 欄位都與重算結果一致且原有 gates 全數通過，候選才可凍結。
+initial_cash: '100000'
+maximum_holding_sessions: 21
+maximum_trials: 1
+replay_gates:
+  base_max_drawdown:
+    operator: <=
+    value: '0.10'
+  base_profit_factor:
+    operator: '>'
+    value: '1.00'
+  base_return:
+    operator: '>'
+    value: '0'
+  completed_simulated_fills:
+    operator: '>='
+    value: 12
+  critical_drift_passed:
+    operator: equals
+    value: true
+  expected_sessions_covered:
+    operator: equals
+    value: true
+  maximum_realized_trade_loss_fraction:
+    operator: <=
+    value: '0.04'
+  stress_max_drawdown:
+    operator: <=
+    value: '0.10'
+  stress_profit_factor:
+    operator: '>'
+    value: '1.00'
+  stress_return:
+    operator: '>'
+    value: '0'
+selection_rule:
+  eligible_candidate: 唯一 Trial 必須通過全部 Development gates；未通過時 candidate_available=false 並終止。
+  family_selection_adjustment: 完整 family 僅有預先指定的一個 Trial；Evaluation random-entry 仍須以 family size 1 完成 Bonferroni adjustment。
+  method: fixed-single-candidate-no-outcome-ranking
+  selected_candidate_id: fxi-mr-risk2-exitcd7-devverify-v001
+tie_handling:
+  method: not-applicable-single-candidate

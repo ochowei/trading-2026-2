@@ -1,0 +1,24 @@
+assessed_at: '2026-09-02T07:28:40Z'
+assessment: 本輪依前一個 Study 的 blind review，補上從 raw trades 重算整體 metrics、年度分段、leave-one-year-out、bootstrap 與 gates 的 workflow 驗證；策略、資料、成本、seed 與 gates 完全不變。建立、測試與 Development 階段沒有開啟本 Study 的 Evaluation、challenge 或 replay outcome，也沒有使用任何正式結果調整候選。
+assets:
+  - exposure_status: development-informed
+    role: warmup-only
+  - exposure_status: development-informed
+    role: development
+  - exposure_status: structurally-reused-digest-no-strategy-outcome
+    role: quarantine
+  - exposure_status: structurally-reused-digest-no-strategy-outcome
+    role: historical-evaluation
+  - exposure_status: structurally-reused-digest-no-strategy-outcome
+    role: retrospective-execution-replay
+controls:
+  candidate_family_frozen_before_evaluation: true
+  evaluation_strategy_outcome_accessed: false
+  replay_strategy_outcome_accessed: false
+  trial_registry_frozen: true
+declaration:
+  actor_id: william
+  confirmed: true
+  statement: 我只補齊 Development raw evidence 重算程序，沒有改變策略；凍結前沒有讀取本 Study 的 2020--2025 策略績效結果。
+schema_version: 1
+status: verified-clean

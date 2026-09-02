@@ -1,0 +1,28 @@
+files:
+  - digest: 50b4336af9765d807b07213648ee51a02283602c203201ac39b75a67d4cd7098
+    path: src/trading_2026_2/fxi_mean_reversion.py
+  - digest: fed7aa8a8ee48764b3b0d4c33ecf32fca1b9230b3b1a36a4130582580bb173c3
+    path: src/trading_2026_2/fxi_mean_reversion_risk_budget.py
+  - digest: 7efd1e228bcd228e60528085642b4020a8cc00efb53a8c979ebed489975f4682
+    path: src/trading_2026_2/fxi_risk2_seedfix.py
+  - digest: 1e52f5d6f68cabdca505002ccac90157dd1acc4f395bfe173a5ffcafc298ab49
+    path: tests/test_fxi_mean_reversion.py
+  - digest: 5ce753e043c7abbac0128d75c4f9ce88181a8d9f7be90c3bc1fcf205067d82e4
+    path: tests/test_fxi_mean_reversion_risk_budget.py
+  - digest: f72da97c443021bae72f2a5207f5cb414a9fa6ef154b5acc17df81d507bedc50
+    path: tests/test_fxi_risk2_seedfix.py
+  - digest: bd2e1fbcbf1a6379db5df32a242b7c97a9a4c79702b7dc1bd9e43dfd6fd8f807
+    path: research/fxi-deep-pullback-risk2-exitcd7-devverify-v001/run_development.py
+  - digest: 6686f89cc2067c0685b8071324cc33eaf5d277c95d6ce1b98d960df1f920f434
+    path: research/fxi-deep-pullback-risk2-exitcd7-devverify-v001/run_historical_evaluation.py
+  - digest: 12befa28fe233018db5579d615b3d385a389d6e97212d0b5d6a3e989dbd03668
+    path: research/fxi-deep-pullback-risk2-exitcd7-devverify-v001/preregistration.yml
+  - digest: 0436439d93009f9a91990067faddbe28ca95ec3e387a9a4894e6a154a8468a4e
+    path: research/fxi-deep-pullback-risk2-exitcd7-devverify-v001/qualification-spec.yml
+  - digest: 7476c29d8f49dc469be99a777f0646fa5afa369066370ee8d3783a4562873ee6
+    path: research/fxi-deep-pullback-risk2-exitcd7-devverify-v001/candidate-definition.yml
+  - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+    path: pyproject.toml
+  - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+    path: uv.lock
+schema_version: 1

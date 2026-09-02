@@ -1,0 +1,6 @@
+candidate_available: true
+complete_family_trial_ids:
+  - fxi-mr-risk2-exitcd7-devverify-v001
+maximum_trials: 1
+recorded_trial_count: 1
+trial_registry_digest: 7679165d1b1cf7f2ad16b38bfea8cf9b6ede549b70369ca64ebfe0e24f33ae1b

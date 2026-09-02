@@ -63,7 +63,7 @@ files:
     path: schemas/workflow.schema.yml
   - digest: b006ea4a7334b6b1056233b18f9aaa898287e919528512d2ecd90b9f90f2c4c2
     path: tests/conftest.py
-  - digest: 278daca12077de086c8c675257c13f76989607fde0d9b5e5be624f7b75102779
+  - digest: 200cacfa3d82c6b1c465385cdb8d92c750bcbfe31b67add74bf67698a30a2cb1
     path: tests/helpers.py
   - digest: a99788dfb721e34c2314b56651f4fc7cbff5c9ae6bdd780d1f2bb6b52029cfba
     path: tests/test_canonical_yaml.py
@@ -75,11 +75,11 @@ files:
     path: tests/test_policy_conformance.py
   - digest: da6ce3c515a10c355ce90d9191a9fb1a5f3bace913ab459f1d2c135c1db133b9
     path: tests/test_release_candidate.py
-  - digest: 4dc49cbff692704cada19a66c7dc9809bb20c3f93fc679ce07c55f96f82e48d5
+  - digest: 2b654f320de475650b1f5e0d32865b0069b0698edbb10d69eb31a78f78fd456e
     path: tests/test_study_end_to_end.py
   - digest: f61295b0118b47162f4adfdd3af6842545a425d855849ff6a890a5cbf6e41e75
     path: validator/__init__.py
-  - digest: a3d78d48fc557e8e3ab868c2b79437096551d29d4bf915f67868251205fab6f1
+  - digest: 6816f05c1e533cfb1213fe54f8df84d70d55fa155d410c59701fd9b3a76e1b2c
     path: validator/artifacts.py
   - digest: c0e6125eba53da58cd28c5f9502b77739ded8889c7b1f6a383a272016806284f
     path: validator/canonical_yaml.py
@@ -112,5 +112,5 @@ files:
 generated_at: '2026-09-02T06:48:22.886089Z'
 schema_version: 1
 workflow: strategy-forward-replication-research
-workflow_digest: 3a592813c99f9296bbf29064dc5c4a808d91e1dd5886b0722d939d6f391539a7
+workflow_digest: 3da13fbfd78f62fb4385d00299141cae9a0d429bcc8a5c1d21643f48c78462b9
 workflow_version: v001

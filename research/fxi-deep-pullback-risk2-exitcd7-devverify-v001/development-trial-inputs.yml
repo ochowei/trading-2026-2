@@ -1,0 +1,56 @@
+candidate_id: fxi-mr-risk2-exitcd7-devverify-v001
+cost_models:
+  base:
+    fee_per_side_bps: '1'
+    slippage_per_side_bps: '5'
+  stress:
+    fee_per_side_bps: '2'
+    slippage_per_side_bps: '20'
+data_bindings:
+  development_digest: 708a4c2705c691af95cf68ca874d81c96ce81314dd1ead96fcffc644b59a0d86
+  development_path: research/fxi-deep-pullback-risk2-exitcd7-devverify-v001/data/snapshots/FXI-development--sha256-708a4c2705c691af95cf68ca874d81c96ce81314dd1ead96fcffc644b59a0d86.csv
+  warmup_digest: 9f1c11926a7567e0ac07f175f4514b5fb0df167ef2c29d92b3916d9a1fa00588
+  warmup_path: research/fxi-deep-pullback-risk2-exitcd7-devverify-v001/data/snapshots/FXI-warmup-only--sha256-9f1c11926a7567e0ac07f175f4514b5fb0df167ef2c29d92b3916d9a1fa00588.csv
+date_controls:
+  formal_provider_access: false
+  signal_end: '2018-12-31'
+  signal_start: '2014-01-01'
+  warmup_end: '2013-12-31'
+  warmup_start: '2013-01-01'
+development_diagnostics:
+  block_lengths:
+    - 3
+    - 5
+  bootstrap_seed: 20260904
+  leave_one_signal_year_out: true
+  repetitions: 50000
+  seed_application: exact-same-seed-for-each-block-length
+execution:
+  cooldown_anchor: completed-position-exit
+  cooldown_completed_session_steps_after_exit: 7
+  entry: next-XNYS-open
+  holding_sessions: 20
+  intrabar_ambiguity: adverse-stop-first
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    modeled_stop_includes_costs: true
+    risk_fraction_of_pre_entry_equity: '0.02'
+  stop_market_gtc: '-0.05'
+  target_limit_day: '0.055'
+preregistration_digest: 12befa28fe233018db5579d615b3d385a389d6e97212d0b5d6a3e989dbd03668
+schema_version: 1
+signal:
+  atr_ceiling: none
+  atr_fast_wilder: 5
+  atr_ratio_operator: '>'
+  atr_ratio_threshold: '1.05'
+  atr_slow_wilder: 20
+  closepos_filter: none
+  high_lookback: 10
+  pullback_max_inclusive: '0.12'
+  pullback_min_inclusive: '0.05'
+  williams_r_length: 10
+  williams_r_max_inclusive: '-80'
+source_bundle_digest: 1793c945863c53977729f048018c3a1126fb73debb5f57a83a74e41c0c567707
+strategy_engine_digest: fed7aa8a8ee48764b3b0d4c33ecf32fca1b9230b3b1a36a4130582580bb173c3
+study_procedure_digest: 7efd1e228bcd228e60528085642b4020a8cc00efb53a8c979ebed489975f4682

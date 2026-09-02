@@ -1,0 +1,50 @@
+candidate_freeze:
+  baseline_family: risk-budgeted-single-condition-pullback
+  baseline_id: fxi-risk2-single-condition-pullback-v001
+  baseline_objectively_simpler: true
+  candidate_digest: 7476c29d8f49dc469be99a777f0646fa5afa369066370ee8d3783a4562873ee6
+  development_evidence_digest: 4c88f7eb7308ff7eeab697a87fe6f75cb2b7bb6c6bb40f491c883e783a4588ce
+  evaluation_snapshot_digest: 9b2436c5fa9535abef5e281a707cc97d3d825f657103ee22db83a6ec0a7a5cf7
+  fold_inventory_digest: 142fa9ac20ad0df32a13a5f6ad0ce1da9d14ea909c47406f3476ae7e55d65df8
+  qualification_spec_digest: 0436439d93009f9a91990067faddbe28ca95ec3e387a9a4894e6a154a8468a4e
+  replay_snapshot_digest: 7b7fd8f8f6dbcb06814d489a565238a5045491fcbabb9555211fc6a0a5f54271
+  selected_candidate_id: fxi-mr-risk2-exitcd7-devverify-v001
+  selection_evidence_digest: 0f5b69ab55f37b456773bfe8ae3135d3dae1b82fcf47e99f99ea2487f89f4aeb
+  selection_evidence_path: evidence/selection-evidence.yml
+  snapshot_set_digest: 12285fc38a258872783f5a6edae86137b7e6190957c97f04cb5567593afb1207
+  snapshot_set_path: manifests/data-snapshot-set.yml
+  trial_registry_digest: 7679165d1b1cf7f2ad16b38bfea8cf9b6ede549b70369ca64ebfe0e24f33ae1b
+evidence:
+  candidate-freeze: ef656152fa52c4fd5426cad13162044892dc178f9de5aaa7a48384a181372266
+  development: 4c88f7eb7308ff7eeab697a87fe6f75cb2b7bb6c6bb40f491c883e783a4588ce
+lifecycle:
+  current_event: candidate-frozen
+  event_chain_head_digest: 4c37dd08c9927ecb21c9bce102cd4f109fa67f9b7d8deaf708e527a07d4b0636
+  event_count: 7
+  status: active
+outcome:
+  authority: none
+  status: pending
+preregistration:
+  digest: 12befa28fe233018db5579d615b3d385a389d6e97212d0b5d6a3e989dbd03668
+provenance:
+  status: verified-clean
+schema_version: 1
+study:
+  identity:
+    experiment_family: fxi-deep-pullback-risk-budget-procedure-reissue
+    replay_operator: william
+    research_owner: william
+    research_round_id: fxi-deep-pullback-risk2-devverify-round-v001
+    source_bundle_digest: 1793c945863c53977729f048018c3a1126fb73debb5f57a83a74e41c0c567707
+    source_bundle_path: manifests/source-bundle.yml
+  study_id: fxi-deep-pullback-risk2-exitcd7-devverify-v001
+trial_registry:
+  digest: 7679165d1b1cf7f2ad16b38bfea8cf9b6ede549b70369ca64ebfe0e24f33ae1b
+  recorded_trial_count: 1
+  trial_ids:
+    - fxi-mr-risk2-exitcd7-devverify-v001
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 1793c945863c53977729f048018c3a1126fb73debb5f57a83a74e41c0c567707
+  workflow_digest: 3da13fbfd78f62fb4385d00299141cae9a0d429bcc8a5c1d21643f48c78462b9
