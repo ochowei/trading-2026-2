@@ -1,0 +1,50 @@
+candidate_freeze:
+  baseline_family: risk-budgeted-single-condition-pullback
+  baseline_id: fxi-risk2-single-condition-pullback-v001
+  baseline_objectively_simpler: true
+  candidate_digest: ea444cd6941ae101ba72c372aa6827b75fdb1c8622475f025de5cdd2937ad9c2
+  development_evidence_digest: 73a8320bd5eaac6f70726be8e6270007f165d76369ba76883566206f7634daad
+  evaluation_snapshot_digest: 9b2436c5fa9535abef5e281a707cc97d3d825f657103ee22db83a6ec0a7a5cf7
+  fold_inventory_digest: 142fa9ac20ad0df32a13a5f6ad0ce1da9d14ea909c47406f3476ae7e55d65df8
+  qualification_spec_digest: afdf39e070b2bc574676c483c8cb2101f675b8428aa75fadeb227d8c8827b382
+  replay_snapshot_digest: 7b7fd8f8f6dbcb06814d489a565238a5045491fcbabb9555211fc6a0a5f54271
+  selected_candidate_id: fxi-mr-risk2-exitcd7-seedfix-v001
+  selection_evidence_digest: 2fcc9892d5ce576888d211a51a42d5224178993b98085ceaea180bbed04d4ee4
+  selection_evidence_path: evidence/selection-evidence.yml
+  snapshot_set_digest: 12285fc38a258872783f5a6edae86137b7e6190957c97f04cb5567593afb1207
+  snapshot_set_path: manifests/data-snapshot-set.yml
+  trial_registry_digest: eb1f1449ca59b1236f89f45506dea0acb74d652e77b8ecbbf5bbdd30cdca1a6c
+evidence:
+  candidate-freeze: 80b5f94c18d5d8c6d1f81c94ea96683567c0987dc6342e8d61bc8e6dfac616e8
+  development: 73a8320bd5eaac6f70726be8e6270007f165d76369ba76883566206f7634daad
+lifecycle:
+  current_event: candidate-frozen
+  event_chain_head_digest: 3d6d0d3dc2e83e347893f051c2e4da2e006454e949d0de72c6f49b8f564f1706
+  event_count: 7
+  status: active
+outcome:
+  authority: none
+  status: pending
+preregistration:
+  digest: fe0f5a2c7791d1478f68326375abbfd717766b910e4dde3de366b2c9e61634d3
+provenance:
+  status: verified-clean
+schema_version: 1
+study:
+  identity:
+    experiment_family: fxi-deep-pullback-risk-budget-procedure-reissue
+    replay_operator: william
+    research_owner: william
+    research_round_id: fxi-deep-pullback-risk2-seedfix-round-v001
+    source_bundle_digest: 71209441e522c2d98a07d0435ea5788fbfa0c0bc745d7e96d2d072aa5a4e38ea
+    source_bundle_path: manifests/source-bundle.yml
+  study_id: fxi-deep-pullback-risk2-exitcd7-seedfix-v001
+trial_registry:
+  digest: eb1f1449ca59b1236f89f45506dea0acb74d652e77b8ecbbf5bbdd30cdca1a6c
+  recorded_trial_count: 1
+  trial_ids:
+    - fxi-mr-risk2-exitcd7-seedfix-v001
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 71209441e522c2d98a07d0435ea5788fbfa0c0bc745d7e96d2d072aa5a4e38ea
+  workflow_digest: 3a592813c99f9296bbf29064dc5c4a808d91e1dd5886b0722d939d6f391539a7

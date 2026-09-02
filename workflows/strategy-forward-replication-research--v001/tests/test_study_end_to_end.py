@@ -8,6 +8,8 @@ from helpers import (
     advance_to_candidate,
     challenge_artifact,
     challenge_evidence,
+    development_evidence,
+    development_inputs,
     evaluation_evidence,
     replay_evidence,
     service,
@@ -98,6 +100,7 @@ def test_complete_pass_allows_same_person_reviewer(workflow_root: Path, tmp_path
             "preregistration_digest": before_review["preregistration"]["digest"],
             "trial_registry_digest": before_review["trial_registry"]["digest"],
             "candidate_freeze_digest": before_review["evidence"]["candidate-freeze"],
+            "development_evidence_digest": before_review["evidence"]["development"],
             "historical_evaluation_digest": before_review["evidence"][
                 "historical-evaluation"
             ],
@@ -215,11 +218,31 @@ def test_registry_count_cannot_be_forged(workflow_root: Path, tmp_path: Path) ->
         "owner",
         {"evidence_path": auth_path, "evidence_digest": auth_digest},
     )
+    source_bundle_digest = study_service.validate(study_id)["workflow_binding"][
+        "source_bundle_digest"
+    ]
+    inputs_path, inputs_digest = study_service.publish_artifact(
+        study_id,
+        "manifests/development-trial-inputs.yml",
+        development_inputs(digest, source_bundle_digest),
+    )
+    development_path, development_digest = study_service.publish_artifact(
+        study_id,
+        "evidence/development.yml",
+        development_evidence(digest, source_bundle_digest, inputs_digest),
+    )
     study_service.append_event(
         study_id,
         "trial-recorded",
         "owner",
-        {"trial_id": "trial-1", "inputs_digest": "2" * 64, "status": "completed"},
+        {
+            "trial_id": "trial-1",
+            "inputs_path": inputs_path,
+            "inputs_digest": inputs_digest,
+            "development_evidence_path": development_path,
+            "development_evidence_digest": development_digest,
+            "status": "completed",
+        },
     )
     with pytest.raises(ValidationError, match="recorded_trial_count"):
         study_service.append_event(
@@ -232,6 +255,72 @@ def test_registry_count_cannot_be_forged(workflow_root: Path, tmp_path: Path) ->
                 "complete_family_trial_ids": ["trial-1"],
                 "trial_registry_digest": "3" * 64,
                 "candidate_available": True,
+            },
+        )
+
+
+def test_trial_rejects_unregistered_bootstrap_seed(
+    workflow_root: Path, tmp_path: Path
+) -> None:
+    study_service = service(workflow_root, tmp_path)
+    study_id = "wrong-development-seed"
+    study_service.create_study(
+        study_id,
+        "owner",
+        research_round_id="round",
+        experiment_family="family-a",
+        research_owner="owner",
+        replay_operator="owner",
+        source_bundle={
+            "schema_version": 1,
+            "files": [{"path": "runner.py", "digest": DIGESTS["source"]}],
+        },
+    )
+    from helpers import preregistration
+
+    prereg_path, prereg_digest = study_service.publish_artifact(
+        study_id, "manifests/preregistration.yml", preregistration()
+    )
+    study_service.append_event(
+        study_id,
+        "preregistration-approved",
+        "owner",
+        {"preregistration_path": prereg_path, "preregistration_digest": prereg_digest},
+    )
+    auth_path, auth_digest = study_service.publish_artifact(
+        study_id, "evidence/auth.yml", {"authorized": True}
+    )
+    study_service.append_event(
+        study_id,
+        "development-authorized",
+        "owner",
+        {"evidence_path": auth_path, "evidence_digest": auth_digest},
+    )
+    source_digest = study_service.validate(study_id)["workflow_binding"][
+        "source_bundle_digest"
+    ]
+    inputs_path, inputs_digest = study_service.publish_artifact(
+        study_id,
+        "manifests/development-trial-inputs.yml",
+        development_inputs(prereg_digest, source_digest),
+    )
+    evidence_path, evidence_digest = study_service.publish_artifact(
+        study_id,
+        "evidence/development.yml",
+        development_evidence(prereg_digest, source_digest, inputs_digest, seed=45),
+    )
+    with pytest.raises(IntegrityError, match="未使用登記 seed"):
+        study_service.append_event(
+            study_id,
+            "trial-recorded",
+            "owner",
+            {
+                "trial_id": "trial-1",
+                "inputs_path": inputs_path,
+                "inputs_digest": inputs_digest,
+                "development_evidence_path": evidence_path,
+                "development_evidence_digest": evidence_digest,
+                "status": "completed",
             },
         )
 

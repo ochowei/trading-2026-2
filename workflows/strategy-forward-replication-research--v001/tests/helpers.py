@@ -31,7 +31,19 @@ def preregistration() -> dict[str, Any]:
         "hypothesis": "候選策略在固定歷史日曆下通過不可降低門檻。",
         "complete_candidate_family": ["trial-1"],
         "maximum_trials": 1,
-        "eligibility_rules": {"minimum_history": "fixed-calendar"},
+        "eligibility_rules": {
+            "development_diagnostics": {
+                "block_bootstrap": {
+                    "block_lengths": [3, 5],
+                    "repetitions": 100,
+                    "seed": 42,
+                }
+            },
+            "development_gates": {
+                "completed_trades": {"operator": ">=", "value": 1}
+            },
+            "minimum_history": "fixed-calendar",
+        },
         "selection_rule": {"metric": "development-sharpe", "order": "descending"},
         "tie_handling": {"method": "stable-trial-id"},
         "baseline_definition": {
@@ -44,6 +56,64 @@ def preregistration() -> dict[str, Any]:
         "initial_cash": "10000",
         "evaluation_gates": {},
         "replay_gates": {},
+    }
+
+
+def development_inputs(
+    preregistration_digest: str, source_bundle_digest: str
+) -> dict[str, Any]:
+    return {
+        "schema_version": 1,
+        "candidate_id": "trial-1",
+        "preregistration_digest": preregistration_digest,
+        "source_bundle_digest": source_bundle_digest,
+        "development_diagnostics": {
+            "block_lengths": [3, 5],
+            "bootstrap_seed": 42,
+            "repetitions": 100,
+            "seed_application": "exact-same-seed-for-each-block-length",
+        },
+    }
+
+
+def development_evidence(
+    preregistration_digest: str,
+    source_bundle_digest: str,
+    trial_inputs_digest: str,
+    *,
+    seed: int = 42,
+) -> dict[str, Any]:
+    bootstrap = [
+        {"block_length": length, "repetitions": 100, "seed": seed}
+        for length in (3, 5)
+    ]
+    return {
+        "schema_version": 1,
+        "stage": "development",
+        "candidate_id": "trial-1",
+        "disposition": "pass",
+        "failed_gates": [],
+        "network_access_during_run": False,
+        "bindings": {
+            "preregistration_digest": preregistration_digest,
+            "source_bundle_digest": source_bundle_digest,
+            "trial_inputs_digest": trial_inputs_digest,
+        },
+        "diagnostics": {
+            "block_bootstrap": {
+                "base": bootstrap,
+                "stress": bootstrap,
+            }
+        },
+        "gates": [
+            {
+                "gate": "completed_trades",
+                "actual": 1,
+                "operator": ">=",
+                "required": 1,
+                "passed": True,
+            }
+        ],
     }
 
 
@@ -153,6 +223,7 @@ def terminal_evidence(
     if projection["trial_registry"]["digest"]:
         bindings["trial_registry_digest"] = projection["trial_registry"]["digest"]
     evidence_names = {
+        "development": "development_evidence_digest",
         "candidate-freeze": "candidate_freeze_digest",
         "historical-evaluation": "historical_evaluation_digest",
         "robustness-challenges": "robustness_challenges_digest",
@@ -212,7 +283,27 @@ def advance_to_candidate(
         "same-person",
         {"evidence_path": auth_path, "evidence_digest": auth_digest},
     )
-    trial = {"trial_id": "trial-1", "inputs_digest": "2" * 64, "status": "completed"}
+    source_bundle_digest = service.validate(study_id)["workflow_binding"][
+        "source_bundle_digest"
+    ]
+    inputs_path, inputs_digest = service.publish_artifact(
+        study_id,
+        "manifests/development-trial-inputs.yml",
+        development_inputs(prereg_digest, source_bundle_digest),
+    )
+    evidence_path, evidence_digest = service.publish_artifact(
+        study_id,
+        "evidence/development.yml",
+        development_evidence(prereg_digest, source_bundle_digest, inputs_digest),
+    )
+    trial = {
+        "trial_id": "trial-1",
+        "inputs_path": inputs_path,
+        "inputs_digest": inputs_digest,
+        "development_evidence_path": evidence_path,
+        "development_evidence_digest": evidence_digest,
+        "status": "completed",
+    }
     service.append_event(study_id, "trial-recorded", "same-person", trial)
     registry_digest = canonical_digest({"trials": [trial]})
     service.append_event(
@@ -316,6 +407,7 @@ def advance_to_candidate(
             "evaluation_snapshot_digest": DIGESTS["evaluation_snapshot"],
             "replay_snapshot_digest": DIGESTS["replay_snapshot"],
             "fold_inventory_digest": fold_inventory_digest,
+            "development_evidence_digest": evidence_digest,
             "snapshot_set_path": snapshot_path,
             "snapshot_set_digest": snapshot_digest,
             "selection_evidence_path": selection_path,

@@ -1,0 +1,18 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 71209441e522c2d98a07d0435ea5788fbfa0c0bc745d7e96d2d072aa5a4e38ea
+  workflow_digest: 3a592813c99f9296bbf29064dc5c4a808d91e1dd5886b0722d939d6f391539a7
+event_type: study-created
+occurred_at: '2026-09-02T06:55:37.499964Z'
+payload:
+  experiment_family: fxi-deep-pullback-risk-budget-procedure-reissue
+  replay_operator: william
+  research_owner: william
+  research_round_id: fxi-deep-pullback-risk2-seedfix-round-v001
+  source_bundle_digest: 71209441e522c2d98a07d0435ea5788fbfa0c0bc745d7e96d2d072aa5a4e38ea
+  source_bundle_path: manifests/source-bundle.yml
+previous_event_digest: null
+schema_version: 1
+sequence: 1
+study_id: fxi-deep-pullback-risk2-exitcd7-seedfix-v001

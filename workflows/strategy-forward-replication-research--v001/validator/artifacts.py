@@ -76,6 +76,8 @@ def historical_metrics(value: dict[str, Any]) -> dict[str, Any]:
     fold_counts: dict[int, int] = defaultdict(int)
     base_pnls: list[Decimal] = []
     stress_pnls: list[Decimal] = []
+    fold_equity: dict[tuple[int, str], Decimal] = defaultdict(lambda: initial_cash)
+    maximum_realized_loss_fraction = Decimal("0")
     for trade in trades:
         signal_year = date.fromisoformat(trade["signal_date"]).year
         exit_year = date.fromisoformat(trade["exit_date"]).year
@@ -87,6 +89,14 @@ def historical_metrics(value: dict[str, Any]) -> dict[str, Any]:
         stress_pnl = decimal_value(trade["stress_pnl"])
         base_pnls.append(base_pnl)
         stress_pnls.append(stress_pnl)
+        for model, pnl in (("base", base_pnl), ("stress", stress_pnl)):
+            key = (trade["fold"], model)
+            equity = fold_equity[key]
+            if pnl < 0 and equity > 0:
+                maximum_realized_loss_fraction = max(
+                    maximum_realized_loss_fraction, -pnl / equity
+                )
+            fold_equity[key] = equity + pnl
         fold_pnls[trade["fold"]] += base_pnl
         fold_counts[trade["fold"]] += 1
     completed = len(trades)
@@ -113,6 +123,7 @@ def historical_metrics(value: dict[str, Any]) -> dict[str, Any]:
         "family_wise_confidence": value["family_wise_confidence"],
         "maximum_fold_positive_profit_concentration": str(max_profit_concentration),
         "maximum_fold_trade_concentration": str(max_trade_concentration),
+        "maximum_realized_trade_loss_fraction": str(maximum_realized_loss_fraction),
         "positive_traded_fold_ratio": str(positive_ratio),
         "stress_max_drawdown": stress_drawdown,
         "stress_profit_factor": _profit_factor(stress_pnls),
@@ -182,6 +193,9 @@ def replay_metrics(
     initial_cash = decimal_value(value["initial_cash"])
     base_pnls: list[Decimal] = []
     stress_pnls: list[Decimal] = []
+    base_equity = initial_cash
+    stress_equity = initial_cash
+    maximum_realized_loss_fraction = Decimal("0")
     calendar = xcals.get_calendar("XNYS")
     expected_sessions = [
         timestamp.strftime("%Y-%m-%d")
@@ -205,14 +219,28 @@ def replay_metrics(
             raise ValidationError(f"fill {fill['fill_id']} 違反最大持有期")
         if entry_index + maximum_holding_sessions >= len(expected_sessions):
             raise ValidationError(f"fill {fill['fill_id']} 違反 2025 entry cutoff")
-        base_pnls.append(decimal_value(fill["base_pnl"]))
-        stress_pnls.append(decimal_value(fill["stress_pnl"]))
+        base_pnl = decimal_value(fill["base_pnl"])
+        stress_pnl = decimal_value(fill["stress_pnl"])
+        base_pnls.append(base_pnl)
+        stress_pnls.append(stress_pnl)
+        if base_pnl < 0 and base_equity > 0:
+            maximum_realized_loss_fraction = max(
+                maximum_realized_loss_fraction, -base_pnl / base_equity
+            )
+        if stress_pnl < 0 and stress_equity > 0:
+            maximum_realized_loss_fraction = max(
+                maximum_realized_loss_fraction, -stress_pnl / stress_equity
+            )
+        base_equity += base_pnl
+        stress_equity += stress_pnl
     return {
+        "base_max_drawdown": _maximum_drawdown(initial_cash, base_pnls),
         "base_profit_factor": _profit_factor(base_pnls),
         "base_return": _return(initial_cash, base_pnls),
         "completed_simulated_fills": len(fills),
         "critical_drift_passed": value["critical_drift_passed"],
         "expected_sessions_covered": value["expected_sessions"] == value["observed_sessions"],
+        "maximum_realized_trade_loss_fraction": str(maximum_realized_loss_fraction),
         "stress_max_drawdown": _maximum_drawdown(initial_cash, stress_pnls),
         "stress_profit_factor": _profit_factor(stress_pnls),
         "stress_return": _return(initial_cash, stress_pnls),
@@ -259,6 +287,105 @@ def evaluate_challenges(
             item["actual"], item["operator"], item["expected"], metric=item["challenge_id"]
         ):
             failures.append(item["challenge_id"])
+    return failures
+
+
+def validate_development_trial(
+    value: dict[str, Any],
+    inputs: dict[str, Any],
+    preregistration: dict[str, Any],
+    *,
+    trial_id: str,
+    trial_inputs_digest: str,
+    preregistration_digest: str,
+    source_bundle_digest: str,
+) -> list[str]:
+    """核對 Development evidence 的 frozen bindings、seed 與完整 gates。"""
+
+    required = {
+        "bindings",
+        "candidate_id",
+        "diagnostics",
+        "disposition",
+        "failed_gates",
+        "gates",
+        "network_access_during_run",
+        "schema_version",
+        "stage",
+    }
+    missing = sorted(required.difference(value))
+    if missing:
+        raise ValidationError(f"Development evidence 缺少欄位: {', '.join(missing)}")
+    if value["schema_version"] != 1 or value["stage"] != "development":
+        raise ValidationError("Development evidence identity 不正確")
+    if value["network_access_during_run"] is not False:
+        raise ValidationError("Development formal run 不得使用網路")
+    if inputs.get("candidate_id") != trial_id or value["candidate_id"] != trial_id:
+        raise IntegrityError("Trial、inputs 與 Development evidence candidate_id 不一致")
+
+    expected_bindings = {
+        "preregistration_digest": preregistration_digest,
+        "source_bundle_digest": source_bundle_digest,
+        "trial_inputs_digest": trial_inputs_digest,
+    }
+    for name, expected in expected_bindings.items():
+        if value["bindings"].get(name) != expected:
+            raise IntegrityError(f"Development evidence {name} binding 不一致")
+
+    registered = preregistration["eligibility_rules"]["development_diagnostics"][
+        "block_bootstrap"
+    ]
+    input_diagnostics = inputs.get("development_diagnostics", {})
+    registered_seed = registered["seed"]
+    registered_lengths = registered["block_lengths"]
+    if input_diagnostics.get("bootstrap_seed") != registered_seed:
+        raise IntegrityError("Development inputs bootstrap seed 與 preregistration 不一致")
+    if input_diagnostics.get("block_lengths") != registered_lengths:
+        raise IntegrityError("Development inputs block lengths 與 preregistration 不一致")
+    if input_diagnostics.get("repetitions") != registered["repetitions"]:
+        raise IntegrityError("Development inputs bootstrap repetitions 與 preregistration 不一致")
+    if input_diagnostics.get("seed_application") != "exact-same-seed-for-each-block-length":
+        raise ValidationError("Development inputs 必須明示每個 block length 使用同一登記 seed")
+
+    bootstrap = value["diagnostics"].get("block_bootstrap", {})
+    for cost_model in ("base", "stress"):
+        records = bootstrap.get(cost_model)
+        if not isinstance(records, list):
+            raise ValidationError(f"Development evidence 缺少 {cost_model} bootstrap")
+        lengths = [item.get("block_length") for item in records]
+        if lengths != registered_lengths:
+            raise IntegrityError(f"{cost_model} bootstrap block lengths 與登記不一致")
+        for item in records:
+            if item.get("seed") != registered_seed:
+                raise IntegrityError(
+                    f"{cost_model} block length {item.get('block_length')} 未使用登記 seed"
+                )
+            if item.get("repetitions") != registered["repetitions"]:
+                raise IntegrityError(f"{cost_model} bootstrap repetitions 與登記不一致")
+
+    gate_rules = preregistration["eligibility_rules"]["development_gates"]
+    gate_records = value["gates"]
+    if not isinstance(gate_records, list):
+        raise ValidationError("Development gates 必須是 list")
+    names = [item.get("gate") for item in gate_records]
+    if len(names) != len(set(names)) or set(names) != set(gate_rules):
+        raise IntegrityError("Development evidence gates 與 preregistration 不完整一致")
+    failures: list[str] = []
+    for item in gate_records:
+        name = item["gate"]
+        rule = gate_rules[name]
+        if item.get("operator") != rule["operator"] or item.get("required") != rule["value"]:
+            raise IntegrityError(f"Development gate {name} 的 operator 或門檻不一致")
+        passed = compare(item.get("actual"), rule["operator"], rule["value"], metric=name)
+        if item.get("passed") is not passed:
+            raise IntegrityError(f"Development gate {name} 的 passed 與重算結果不一致")
+        if not passed:
+            failures.append(name)
+    if value["failed_gates"] != failures:
+        raise IntegrityError("Development failed_gates 與重算結果不一致")
+    expected_disposition = "fail" if failures else "pass"
+    if value["disposition"] != expected_disposition:
+        raise IntegrityError("Development disposition 與重算 gates 不一致")
     return failures
 
 

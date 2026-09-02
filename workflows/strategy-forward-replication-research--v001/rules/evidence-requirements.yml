@@ -5,6 +5,10 @@ challenge_bindings:
   - policy_set_digest
   - qualification_spec_digest
   - source_bundle_digest
+legacy_development_binding_exempt_workflow_digests:
+  - 6b17533c6a766bf244f63c8ad732f5cac479445cc574abcd495382dd5dded70b
+legacy_metric_shape_workflow_digests:
+  - 6b17533c6a766bf244f63c8ad732f5cac479445cc574abcd495382dd5dded70b
 required_challenges:
   - cash-benchmark
   - simpler-family-baseline
@@ -28,6 +32,7 @@ seed_required_challenges:
   - missed-orders
 terminal_bindings:
   - event_chain_head_digest
+  - development_evidence_digest
   - preregistration_digest
   - trial_registry_digest
   - candidate_freeze_digest

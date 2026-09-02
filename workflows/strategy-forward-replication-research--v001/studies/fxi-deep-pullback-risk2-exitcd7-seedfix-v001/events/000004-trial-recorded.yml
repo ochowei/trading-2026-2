@@ -1,0 +1,18 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 71209441e522c2d98a07d0435ea5788fbfa0c0bc745d7e96d2d072aa5a4e38ea
+  workflow_digest: 3a592813c99f9296bbf29064dc5c4a808d91e1dd5886b0722d939d6f391539a7
+event_type: trial-recorded
+occurred_at: '2026-09-02T06:56:36.296618Z'
+payload:
+  development_evidence_digest: 73a8320bd5eaac6f70726be8e6270007f165d76369ba76883566206f7634daad
+  development_evidence_path: evidence/development.yml
+  inputs_digest: d62d0aa2ab3b9570efbf543deade8d052b646f52a12fe9813dc43764dfa012ed
+  inputs_path: manifests/development-trial-inputs.yml
+  status: completed
+  trial_id: fxi-mr-risk2-exitcd7-seedfix-v001
+previous_event_digest: 13b72e1b4664c35433e63a8b4fc57a3f978d7af3884bb775b7f6210c7d5d83a2
+schema_version: 1
+sequence: 4
+study_id: fxi-deep-pullback-risk2-exitcd7-seedfix-v001
