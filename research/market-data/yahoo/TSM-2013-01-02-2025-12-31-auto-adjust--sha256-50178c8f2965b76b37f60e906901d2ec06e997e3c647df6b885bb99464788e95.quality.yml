@@ -1,0 +1,32 @@
+adjustment_policy: auto_adjusted
+interval: 1d
+provider: yahoo
+quality:
+  calendar: XNYS
+  expected_sessions: 3270
+  first_session: '2013-01-02'
+  last_session: '2025-12-31'
+  observed_sessions: 3270
+  ohlc_tolerance: 1e-10
+  repaired_high_rows: 0
+  repaired_low_rows: 0
+  rows: 3270
+  status: passed
+request:
+  calendar: XNYS
+  end_exclusive: '2026-01-01'
+  end_inclusive: '2025-12-31'
+  start_inclusive: '2013-01-02'
+schema_version: 1
+snapshot:
+  bytes: 311430
+  columns:
+  - Date
+  - Open
+  - High
+  - Low
+  - Close
+  - Volume
+  digest: 50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95
+  path: research/market-data/yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv
+ticker: TSM
