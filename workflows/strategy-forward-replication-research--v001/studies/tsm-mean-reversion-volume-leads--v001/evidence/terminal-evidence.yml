@@ -1,0 +1,13 @@
+authority: none
+bindings:
+  event_chain_head_digest: ca981b13a91ea82fa4fab16033d0fcf79cc73b6adb5570399de019a32c45354a
+  evidence_unavailable_digest: 6dfacefa9836a1fb74a4b93ad2a7298e2a0a70fd8da0b3eecf572052a721040d
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  preregistration_digest: 2b924acadabc1eeab678184494a9ba0dd8fe37f5c6745cd20b2cb214e163b3f7
+  source_bundle_digest: e1e71fa86b853f3ecbe6f688eb76e009ab0a2d82569accc47ebf38d57eae4063
+  workflow_digest: 3da13fbfd78f62fb4385d00299141cae9a0d429bcc8a5c1d21643f48c78462b9
+outcome: indeterminate
+reasons:
+  - Development could not produce valid evidence after the frozen source/data validation mismatch.
+recomputed: true
+schema_version: 1

@@ -1,0 +1,34 @@
+candidate_freeze: null
+evidence:
+  development: 1da3a9c499ac3f4a09615688eb07ff48f7189305266a6dd166e48a7caf14374f
+lifecycle:
+  current_event: study-terminal
+  event_chain_head_digest: 4b6bfadfb67b91ffb9a3a25f0ed9878dfc8fe691e86a14e0c740f9f72194e97b
+  event_count: 6
+  status: terminal
+outcome:
+  authority: none
+  status: fail
+preregistration:
+  digest: 2b924acadabc1eeab678184494a9ba0dd8fe37f5c6745cd20b2cb214e163b3f7
+provenance:
+  status: null
+schema_version: 1
+study:
+  identity:
+    experiment_family: tsm-mean-reversion-volume-lead-confirmation
+    replay_operator: william
+    research_owner: william
+    research_round_id: tsm-mean-reversion-2026-09-02-r002
+    source_bundle_digest: 31064fcc3e7d2f7daa6c3e80d629a55f26b10412515d1397e6cca33eda0c4a0d
+    source_bundle_path: manifests/source-bundle.yml
+  study_id: tsm-mean-reversion-volume-leads--v002
+trial_registry:
+  digest: 078e96f03c8ec63f300d6d97a2069a382701d91116852132d20d8ef489ddc2b4
+  recorded_trial_count: 1
+  trial_ids:
+    - tsm-mr-volume-lead-v001
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 31064fcc3e7d2f7daa6c3e80d629a55f26b10412515d1397e6cca33eda0c4a0d
+  workflow_digest: 3da13fbfd78f62fb4385d00299141cae9a0d429bcc8a5c1d21643f48c78462b9
