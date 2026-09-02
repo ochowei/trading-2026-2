@@ -2,7 +2,7 @@
 
 ## 文件定位
 
-本文件說明 `strategy-forward-replication-research--v001` 的操作方式。行為權威是同一 Workflow Package 內，由 `release-manifest.yml` 綁定的 `workflow.yml`、`rules/`、`schemas/`、`policies/`、`validator/` 與 `writer/`。目前交付是 release candidate；trusted approver 建立 `release.yml` 前，不得作為 active workflow 使用。
+本文件說明 `strategy-forward-replication-research--v001` 的操作方式。行為權威是同一 Workflow Package 內，由 `release-manifest.yml` 綁定的 `workflow.yml`、`rules/`、`schemas/`、`policies/`、`validator/` 與 `writer/`。v001 已於 2026-09-02 由 trusted approver 核准，可作為 active workflow 使用；正式研究不得使用 `--allow-draft` 規避 release 驗證。
 
 ## 結果能代表什麼
 
@@ -88,6 +88,6 @@ python -m writer.cli --authority-root <authority-root> recover ...
 
 `--allow-draft` 只供 tests 和 release preparation。正式 writer 沒有有效 `release.yml` 時會拒絕操作。
 
-## Release candidate
+## Release 與後續修改
 
-Release candidate 必須具備可重算的 `release-manifest.yml` 與 `release-test-report.yml`，並通過全部 tests 和 Ruff。實作者不建立 `release.yml`；trusted approver 必須在檢查證據後另行核准。
+正式 release 必須具備可重算的 `release-manifest.yml` 與 `release-test-report.yml`，通過全部 tests 和 Ruff，並由 trusted approver 建立 `release.yml`。任何受 manifest 保護的規則、程式、測試或文件只要修改，就必須重新執行驗證、產生 manifest 與測試報告，再由 trusted approver 重新核准；不能沿用舊 release 宣稱修改後的內容仍已獲核准。

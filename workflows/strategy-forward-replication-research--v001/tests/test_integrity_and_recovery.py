@@ -104,8 +104,16 @@ def test_incomplete_journal_recovers_exact_bytes(workflow_root: Path, tmp_path: 
 
 
 def test_formal_writer_requires_release(workflow_root: Path, tmp_path: Path) -> None:
+    (workflow_root / "release.yml").unlink()
     with pytest.raises(ValidationError, match="release"):
         StudyService(workflow_root, tmp_path / "authority")
+
+
+def test_formal_writer_accepts_approved_release(
+    workflow_root: Path, tmp_path: Path
+) -> None:
+    study_service = StudyService(workflow_root, tmp_path / "authority")
+    assert study_service.workflow_digest
 
 
 def test_projection_cannot_be_used_to_forge_pass(workflow_root: Path, tmp_path: Path) -> None:

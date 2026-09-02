@@ -1,7 +1,7 @@
 # Strategy Forward Replication Research v001 修復計畫
 
 狀態：implemented，已於 2026-09-02 由 trusted approver `william` 核准啟用
-交付目標：release candidate，不建立 `release.yml`
+交付結果：active release，已建立 `release.yml`
 
 實作結果：validator、guarded writer、local authority store、canonical YAML、四份本地 policy releases、完整事件流程、反例 tests、文件、release manifest 與 test report 均已建立。Release candidate 經 trusted approver 核准後，已建立 `release.yml` 並通過正式模式驗證。
 
@@ -355,7 +355,7 @@ uv run ruff check .
    - Independent Review 不要求不同人，但一定要重算。
 6. 產生 `release-manifest.yml`，列出 definition、schemas、rules、policies、validators、writers 與 maintained tests 的 exact digests，明確排除 `studies/`。
 7. 產生 release test report。
-8. 確認沒有 `release.yml`；把 release candidate 交給 trusted approver。
+8. Release candidate 交付時先確認沒有 `release.yml`，再交給 trusted approver；此步驟完成後，已由 `william` 核准並建立正式 release。
 
 ### 完成條件
 
@@ -363,7 +363,7 @@ uv run ruff check .
 - Workflow Package 不依賴原專案路徑、Git、網路或 broker。
 - 所有 tests 與 Ruff 通過。
 - `release-manifest.yml` 可重算且沒有包含 `studies/`。
-- `release.yml` 不存在。
+- Release candidate 交付當下沒有 `release.yml`；後續正式核准另以 release record 留痕。
 
 ## 原始缺陷與修復對照
 
