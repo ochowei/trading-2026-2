@@ -1,5 +1,5 @@
 files:
-  - digest: 3387d2870310c045e55b58160c099c231680a6116d51a77b973e68bc200d2cf8
+  - digest: 3336003f018d156b75de8973a6577a799a34b25d440c803d6b78657989476e0d
     path: README.md
   - digest: 5c9cf24818d52cdb946a0b7a69a71eb2d5b3157e22f49489c632a802101b8d76
     path: examples/README.md
@@ -17,7 +17,7 @@ files:
     path: policies/us-equity-market--v002/policy.yml
   - digest: 8026f12aa00c27735de503241b28e52f94202341e482ca7d21705d6885bec6ea
     path: reference/minimal-executable-study.md
-  - digest: ad32419fd2838090018fc8af00983510b87fce6607f3b526d0b395bc71dfe70f
+  - digest: d4e7fc955d4004e231022edd493605ec80268b3ddda5875a1ad461c64f88ad89
     path: reference/strategy-forward-replication-research-v001-guide.md
   - digest: 6405c39a3c52d6e3b016fa4411d32c2b6c8853646515286a045264d339494e62
     path: rules/evidence-requirements.yml
@@ -67,13 +67,13 @@ files:
     path: tests/helpers.py
   - digest: a99788dfb721e34c2314b56651f4fc7cbff5c9ae6bdd780d1f2bb6b52029cfba
     path: tests/test_canonical_yaml.py
-  - digest: cac92ca073c2bc3f6f3f322886dfddcfda639ef290ea3603583355ab61961bd6
+  - digest: 02d7c159616c4f406fde14a5ccb0824b09a4a0199923af52a061e28f3538eaac
     path: tests/test_integrity_and_recovery.py
   - digest: 56ba6412aee702dcb234709ee9cfb228a4de461af36b21792f0ea5d857d6445b
     path: tests/test_metrics.py
   - digest: d6662c3b8314d2ff79eb1f0c36c37a4676ab2a9e27130ebb45828649c48d67d2
     path: tests/test_policy_conformance.py
-  - digest: 89c891512167b2c848da8e0866a1d97f19027f549c867236f7c3ce2c4d9aa29e
+  - digest: da6ce3c515a10c355ce90d9191a9fb1a5f3bace913ab459f1d2c135c1db133b9
     path: tests/test_release_candidate.py
   - digest: dbaed605789ccb617da08bf4f5059135f325ea600a5366f361fac70026a8db2c
     path: tests/test_study_end_to_end.py
@@ -109,8 +109,8 @@ files:
     path: writer/lock.py
   - digest: 5d4198c69a6564786a83e583febc097700574edc4b58fa2159412d54db95ec1f
     path: writer/service.py
-generated_at: '2026-09-02T01:26:58Z'
+generated_at: '2026-09-02T02:32:23Z'
 schema_version: 1
 workflow: strategy-forward-replication-research
-workflow_digest: 0a21fb7abe0150f956bec79a1c74d8ebcead22b151354e22147a6985b19ce11a
+workflow_digest: 6b17533c6a766bf244f63c8ad732f5cac479445cc574abcd495382dd5dded70b
 workflow_version: v001

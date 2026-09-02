@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from validator.canonical_yaml import canonical_digest, load_canonical
-from validator.release import validate_release_manifest
+from validator.release import validate_release_manifest, validate_release_record
 from validator.schema_validation import SchemaStore
 
 
@@ -23,11 +23,12 @@ def test_vendored_policy_releases_are_self_contained(workflow_root) -> None:
             )
 
 
-def test_release_candidate_manifest_is_reproducible(workflow_root) -> None:
+def test_release_package_is_reproducible_and_approved(workflow_root) -> None:
     report = load_canonical(workflow_root / "release-test-report.yml")
     SchemaStore(workflow_root / "schemas").validate(
         "release-test-report.schema.yml", report
     )
     manifest = validate_release_manifest(workflow_root)
     assert all(not item["path"].startswith("studies/") for item in manifest["files"])
-    assert not (workflow_root / "release.yml").exists()
+    release = validate_release_record(workflow_root)
+    assert release["workflow_digest"] == manifest["workflow_digest"]

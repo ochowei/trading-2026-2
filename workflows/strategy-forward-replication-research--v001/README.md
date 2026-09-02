@@ -2,7 +2,7 @@
 
 這是一個自包含的美國股票日線回溯研究 Workflow Package。規則、schemas、policies、validator、guarded writer、tests、reference docs 與 Studies 都位於本目錄；大型或敏感 raw artifacts 以 Evidence Manifest 引用外部 content-addressed storage。
 
-目前狀態是 release candidate preparation。`release.yml` 不存在，因此正式 writer 會 fail closed；開發與測試只能明確使用 `--allow-draft`。
+目前 v001 已於 2026-09-02 由 trusted approver 核准啟用。正式研究應直接使用正式 writer，不得加上 `--allow-draft`；如果 `release.yml` 缺失、內容損壞，或與 release manifest、測試報告不一致，writer 會拒絕操作。
 
 ## 使用方式
 
@@ -16,7 +16,9 @@ uv run ruff check workflows/strategy-forward-replication-research--v001
 
 Study 會建立在本 package 的 `studies/<study-id>/`。本機 authority root 必須另外指定；它保存每次事件發布後的 head checkpoint，用來發現事件被意外刪除或退回舊版本。它不依賴 Git，也不需要網路或券商連線。
 
-正式 writer 只接受已有 `release-manifest.yml` 且經 trusted approver 建立 `release.yml` 的版本。目前只有 release candidate，因此請勿把 `--allow-draft` 用於正式研究。
+正式 writer 只接受已有 `release-manifest.yml`，且經 trusted approver 建立有效 `release.yml` 的版本。`--allow-draft` 只供尚未發布版本的開發與測試，不能用來建立正式研究。
+
+第一次建立正式 Study 前，還要準備真實 Source Bundle、獨立的 authority root、Study identity 與 preregistration。`examples/` 內的 digest 和內容只是格式範例，不能直接當成正式研究輸入。
 
 ## 備份與恢復
 
