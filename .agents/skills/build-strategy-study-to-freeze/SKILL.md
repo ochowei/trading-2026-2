@@ -28,6 +28,28 @@ python3 .agents/skills/build-strategy-study-to-freeze/scripts/check_new_study.py
 - Candidate freeze 後不得修改 Source Bundle、候選、資格規格、資料綁定、選擇證據或任何 outcome-relevant 程式。
 - 任一 Development gate 失敗時保留 Trial，依 preregistered 規則凍結 registry 並走提前終止；不得調低 gate 後重跑成同一 Study。
 
+## 資料取得與既有快照重用
+
+- 新 ticker 或既有資料覆蓋不到的新日期區間，使用 repository 共用工具
+  `research/tools/download_market_data.py` 下載 Yahoo Finance 的 1d、auto-adjusted
+  OHLCV 資料。`--start` 與 `--end` 都是含頭含尾日期；工具會先檢查交易日清單、缺值、有限數值、正價格、非負成交量，以及
+  `Low <= Open/Close <= High` 和 `Low <= High`，通過後才保存內容帶 SHA-256 的快照與
+  `.quality.yml` 報告。正式 workflow 仍以 XNYS 為交易所日曆。
+- 既有 ticker 應先查找 `research/market-data/yahoo/` 的共用快照，以及既有
+  `research/<study-id>/data/snapshots/` 的內容定址快照。只有在 ticker、資料起訖日、
+  provider、交易所日曆、`1d` 頻率、auto-adjusted 設定、欄位與品質檢查結果都相符時，才可
+  依 immutable digest 機械重用；不得因檔名相近就直接載入，也不得把不同區間或不同調整
+  方式的資料當成相同資料。
+- 重用既有快照時，必須核對實際檔案 SHA-256，並在新 Study 的同名
+  `research/<new-study-id>/` 目錄建立或機械複製所需檔案，讓新 Study 的 data binding 指向
+  自己的目錄。若日期或其他設定不吻合，就用工具下載符合設定的新快照，或明確記錄資料
+  無法重用；不能靜默混接兩份不同快照。
+- 共用完整快照只是一份可追溯的資料來源；仍須依 workflow 的固定角色切出不重疊的
+  `warmup-only`、`development`、`quarantine`、`historical-evaluation` 與
+  `retrospective-execution-replay` snapshots。Development 只能開啟允許的 warmup 與
+  Development 資料，Evaluation、quarantine 與 replay 資料在 candidate freeze 前不得用來
+  調參、選模或檢查策略績效。
+
 ## 必做工作
 
 完整閱讀 [references/build-method.md](references/build-method.md)，依其順序建立研究。特別確保：
