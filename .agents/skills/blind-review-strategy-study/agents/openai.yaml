@@ -1,0 +1,4 @@
+interface:
+  display_name: "策略 Study 封存式檢討"
+  short_description: "只用設計與 Development 證據檢討 v001 Study"
+  default_prompt: "使用 $blind-review-strategy-study 檢討指定的 v001 Study，且不要讀取正式 Evaluation 結果。"
