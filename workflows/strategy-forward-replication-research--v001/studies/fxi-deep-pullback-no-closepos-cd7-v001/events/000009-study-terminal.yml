@@ -1,0 +1,16 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 2ed88908918b895d5372ea2bf94bb23631d567b7781f6e6e1816e40969cf5077
+  workflow_digest: 6b17533c6a766bf244f63c8ad732f5cac479445cc574abcd495382dd5dded70b
+event_type: study-terminal
+occurred_at: '2026-09-02T03:51:20.242405Z'
+payload:
+  authority: none
+  outcome: fail
+  terminal_evidence_digest: 1438bbeb81c0e5040ff9d32f6bb1640f44ee5ca0c5ec3776d5c0fea25104f810
+  terminal_evidence_path: evidence/terminal-evidence.yml
+previous_event_digest: ed02a81982aaf6f398bff26e3e18b0ec6248732d17b96e96900202e9cde22c87
+schema_version: 1
+sequence: 9
+study_id: fxi-deep-pullback-no-closepos-cd7-v001

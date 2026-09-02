@@ -1,0 +1,50 @@
+candidate_freeze:
+  baseline_family: single-condition-pullback
+  baseline_id: fxi-single-condition-pullback-v001
+  baseline_objectively_simpler: true
+  candidate_digest: d2d0d83237df8d25e6c0fbc50a84de37d80fd97145df504ec2ac817215ccbaf0
+  evaluation_snapshot_digest: 9b2436c5fa9535abef5e281a707cc97d3d825f657103ee22db83a6ec0a7a5cf7
+  fold_inventory_digest: 142fa9ac20ad0df32a13a5f6ad0ce1da9d14ea909c47406f3476ae7e55d65df8
+  qualification_spec_digest: 9f887024bb4bef5e51e74e3b787a94d3099c79b1ee03251d9a31bc4c45896d76
+  replay_snapshot_digest: 7b7fd8f8f6dbcb06814d489a565238a5045491fcbabb9555211fc6a0a5f54271
+  selected_candidate_id: fxi-mr-no-closepos-cd7-v001
+  selection_evidence_digest: 152982cb41457abd07c0a72ff7035a0cc58f7ed6b5d05b122d3dbb2f6392178b
+  selection_evidence_path: evidence/selection-evidence.yml
+  snapshot_set_digest: 12285fc38a258872783f5a6edae86137b7e6190957c97f04cb5567593afb1207
+  snapshot_set_path: manifests/data-snapshot-set.yml
+  trial_registry_digest: 85b7dc6fb2ae816ba4ce483515de11d87c6efdb309fb30af6f80d8d99f1231b4
+evidence:
+  candidate-freeze: 4de970a6a472785ec9b17e56d6033c79b8b017338419eb9dfc9251d431da7b66
+  historical-evaluation: bf74f95f139aaf1b0a88a8409810b26b0395d2b879096ce10438eea6e3d4f39e
+  historical-evaluation-metrics: 596c7454ade5b1e4e0513987e947e219ac5b46b0ff5e2e722ae9198cfb1ceb2c
+lifecycle:
+  current_event: study-terminal
+  event_chain_head_digest: 17dc484e16ad41d485a26f773411f813a143d1d2196e7acaeb46e4bd7ee0c6fa
+  event_count: 9
+  status: terminal
+outcome:
+  authority: none
+  status: fail
+preregistration:
+  digest: b5133b5e644a42e5384fba8d01409c54cde7a17c7c70cd360813f7b4e6fc7d63
+provenance:
+  status: verified-clean
+schema_version: 1
+study:
+  identity:
+    experiment_family: multi-condition-oversold-volatility-expansion
+    replay_operator: william
+    research_owner: william
+    research_round_id: fxi-mean-reversion-2026-09-02-r001
+    source_bundle_digest: 2ed88908918b895d5372ea2bf94bb23631d567b7781f6e6e1816e40969cf5077
+    source_bundle_path: manifests/source-bundle.yml
+  study_id: fxi-deep-pullback-no-closepos-cd7-v001
+trial_registry:
+  digest: 85b7dc6fb2ae816ba4ce483515de11d87c6efdb309fb30af6f80d8d99f1231b4
+  recorded_trial_count: 1
+  trial_ids:
+    - fxi-mr-no-closepos-cd7-v001
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 2ed88908918b895d5372ea2bf94bb23631d567b7781f6e6e1816e40969cf5077
+  workflow_digest: 6b17533c6a766bf244f63c8ad732f5cac479445cc574abcd495382dd5dded70b

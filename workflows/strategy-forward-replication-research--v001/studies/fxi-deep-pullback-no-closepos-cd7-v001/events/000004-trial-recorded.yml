@@ -1,0 +1,15 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 2ed88908918b895d5372ea2bf94bb23631d567b7781f6e6e1816e40969cf5077
+  workflow_digest: 6b17533c6a766bf244f63c8ad732f5cac479445cc574abcd495382dd5dded70b
+event_type: trial-recorded
+occurred_at: '2026-09-02T03:29:40.040039Z'
+payload:
+  inputs_digest: 7cf4208990c264cff535e83f6dbe45798e9cfed74858975e9916a66aba4cddc6
+  status: completed
+  trial_id: fxi-mr-no-closepos-cd7-v001
+previous_event_digest: b636fda2bd62be36ceb35d4ae4467a449cecd652d9788c5da8911d867d228dea
+schema_version: 1
+sequence: 4
+study_id: fxi-deep-pullback-no-closepos-cd7-v001
