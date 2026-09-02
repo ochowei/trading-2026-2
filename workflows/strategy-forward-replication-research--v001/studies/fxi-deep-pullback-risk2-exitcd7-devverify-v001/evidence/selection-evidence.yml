@@ -1,0 +1,5 @@
+ordered_eligible_trial_ids:
+  - fxi-mr-risk2-exitcd7-devverify-v001
+rule_digest: d0d536a6e392398f7e34f82b151e0e98e7ce8a5c9cd67c40eb627a13e19e42ac
+schema_version: 1
+selected_candidate_id: fxi-mr-risk2-exitcd7-devverify-v001

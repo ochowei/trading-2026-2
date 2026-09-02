@@ -11,6 +11,7 @@ from .artifacts import (
     evaluate_challenges,
     evaluate_historical,
     evaluate_replay,
+    validate_development_trial,
     validate_snapshot_set,
     verified_artifact,
 )
@@ -150,6 +151,7 @@ def _expected_terminal_bindings(projection: StudyProjection) -> dict[str, str]:
     if projection.trial_registry_digest:
         bindings["trial_registry_digest"] = projection.trial_registry_digest
     evidence_names = {
+        "development": "development_evidence_digest",
         "candidate-freeze": "candidate_freeze_digest",
         "historical-evaluation": "historical_evaluation_digest",
         "robustness-challenges": "robustness_challenges_digest",
@@ -251,6 +253,36 @@ def _validate_event_semantics(
             recorded["inputs_digest"] for recorded in projection.trials.values()
         }:
             raise ValidationError("完全相同 inputs 是同一 Trial，不得用新 Trial ID 重複計數")
+        legacy_exempt = projection.bindings["workflow_digest"] in rules.evidence_requirements.get(
+            "legacy_development_binding_exempt_workflow_digests", []
+        )
+        if not legacy_exempt:
+            _require(
+                payload,
+                "inputs_path",
+                "development_evidence_path",
+                "development_evidence_digest",
+            )
+            inputs_path, inputs = verified_artifact(
+                study_root, payload["inputs_path"], payload["inputs_digest"]
+            )
+            evidence_path, evidence = verified_artifact(
+                study_root,
+                payload["development_evidence_path"],
+                _digest(payload["development_evidence_digest"], "development_evidence_digest"),
+            )
+            assert projection.preregistration is not None
+            assert projection.preregistration_digest is not None
+            validate_development_trial(
+                evidence,
+                inputs,
+                projection.preregistration,
+                trial_id=trial_id,
+                trial_inputs_digest=canonical_digest(inputs_path.read_bytes()),
+                preregistration_digest=projection.preregistration_digest,
+                source_bundle_digest=projection.bindings["source_bundle_digest"],
+            )
+            projection.evidence["development"] = canonical_digest(evidence_path.read_bytes())
         projection.trials[trial_id] = dict(payload)
         return
 
@@ -322,6 +354,13 @@ def _validate_event_semantics(
             raise ValidationError("Selected Candidate 不在完整 Candidate Family")
         if projection.trials[selected]["status"] != "completed":
             raise ValidationError("Selected Candidate 必須是已完成的 Trial")
+        selected_trial = projection.trials[selected]
+        if "development_evidence_digest" in selected_trial:
+            _require(payload, "development_evidence_digest")
+            if payload["development_evidence_digest"] != selected_trial[
+                "development_evidence_digest"
+            ]:
+                raise IntegrityError("Candidate Freeze 沒有綁定 selected Trial 的 Development evidence")
         if payload["baseline_id"] in projection.trials:
             raise ValidationError("Baseline 必須位於 Candidate Family 之外")
         if payload["baseline_family"] == projection.identity["experiment_family"]:
@@ -395,6 +434,10 @@ def _validate_event_semantics(
             fold_warmup_sessions=projection.preregistration["fold_warmup_sessions"],
             maximum_holding_sessions=projection.preregistration["maximum_holding_sessions"],
         )
+        if projection.bindings["workflow_digest"] in rules.evidence_requirements.get(
+            "legacy_metric_shape_workflow_digests", []
+        ):
+            metrics.pop("maximum_realized_trade_loss_fraction", None)
         expected = "fail" if failures else "pass"
         if payload.get("disposition") != expected:
             raise ValidationError("Historical Evaluation disposition 與重算 gates 不一致")
@@ -449,6 +492,11 @@ def _validate_event_semantics(
             fold_warmup_sessions=projection.preregistration["fold_warmup_sessions"],
             maximum_holding_sessions=projection.preregistration["maximum_holding_sessions"],
         )
+        if projection.bindings["workflow_digest"] in rules.evidence_requirements.get(
+            "legacy_metric_shape_workflow_digests", []
+        ):
+            metrics.pop("base_max_drawdown", None)
+            metrics.pop("maximum_realized_trade_loss_fraction", None)
         expected = "fail" if failures else "pass"
         if payload.get("disposition") != expected:
             raise ValidationError("Replay disposition 與重算 gates 不一致")

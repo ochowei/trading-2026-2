@@ -197,5 +197,4 @@ def test_gate_preflight_rejects_unsupported_frozen_gates() -> None:
     )
     assert returncode == 2
     assert result["status"] == "rejected"
-    assert "maximum_realized_trade_loss_fraction" in result["unsupported_gates"]
-    assert "stress_maximum_drawdown" in result["unsupported_gates"]
+    assert result["unsupported_gates"] == ["stress_maximum_drawdown"]

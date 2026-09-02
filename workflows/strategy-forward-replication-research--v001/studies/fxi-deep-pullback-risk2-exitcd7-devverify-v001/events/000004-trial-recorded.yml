@@ -1,0 +1,18 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 1793c945863c53977729f048018c3a1126fb73debb5f57a83a74e41c0c567707
+  workflow_digest: 3da13fbfd78f62fb4385d00299141cae9a0d429bcc8a5c1d21643f48c78462b9
+event_type: trial-recorded
+occurred_at: '2026-09-02T07:39:24.158777Z'
+payload:
+  development_evidence_digest: 4c88f7eb7308ff7eeab697a87fe6f75cb2b7bb6c6bb40f491c883e783a4588ce
+  development_evidence_path: evidence/development.yml
+  inputs_digest: 7d2fd29f9ae6cbe5263a0bf30016f6af8bf52d4b4913e5e6055e9de502908f5e
+  inputs_path: manifests/development-trial-inputs.yml
+  status: completed
+  trial_id: fxi-mr-risk2-exitcd7-devverify-v001
+previous_event_digest: 64187c4a83be44c1282a86e10caf22c1fe2b1b624eaa3a276db9fc13dc59d776
+schema_version: 1
+sequence: 4
+study_id: fxi-deep-pullback-risk2-exitcd7-devverify-v001

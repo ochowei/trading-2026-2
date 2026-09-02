@@ -1,0 +1,6 @@
+development_evidence_digest: 73a8320bd5eaac6f70726be8e6270007f165d76369ba76883566206f7634daad
+development_evidence_path: evidence/development.yml
+inputs_digest: d62d0aa2ab3b9570efbf543deade8d052b646f52a12fe9813dc43764dfa012ed
+inputs_path: manifests/development-trial-inputs.yml
+status: completed
+trial_id: fxi-mr-risk2-exitcd7-seedfix-v001

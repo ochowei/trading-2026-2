@@ -1,0 +1,6 @@
+development_evidence_digest: 4c88f7eb7308ff7eeab697a87fe6f75cb2b7bb6c6bb40f491c883e783a4588ce
+development_evidence_path: evidence/development.yml
+inputs_digest: 7d2fd29f9ae6cbe5263a0bf30016f6af8bf52d4b4913e5e6055e9de502908f5e
+inputs_path: manifests/development-trial-inputs.yml
+status: completed
+trial_id: fxi-mr-risk2-exitcd7-devverify-v001
