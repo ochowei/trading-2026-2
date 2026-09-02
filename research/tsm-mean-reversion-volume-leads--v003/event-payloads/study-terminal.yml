@@ -1,0 +1,4 @@
+authority: none
+outcome: fail
+terminal_evidence_digest: 0ebce9e6a675002e383cf735067fabd0de624d0f0b9b974a7e0bdefdef431657
+terminal_evidence_path: evidence/terminal-evidence.yml

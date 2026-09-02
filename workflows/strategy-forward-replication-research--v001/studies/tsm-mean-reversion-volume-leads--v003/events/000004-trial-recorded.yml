@@ -1,0 +1,18 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: f4e7a01550eca155aa52fb2e6c26891b1efbcc107d367ddf6c475bd0afa0e91a
+  workflow_digest: 3da13fbfd78f62fb4385d00299141cae9a0d429bcc8a5c1d21643f48c78462b9
+event_type: trial-recorded
+occurred_at: '2026-09-02T11:28:04.863615Z'
+payload:
+  development_evidence_digest: 8972bcafba020f1ee6bdd5de1a3cb9242e6935ed9ade155b49c454c75009c263
+  development_evidence_path: evidence/development.yml
+  inputs_digest: bc65de27be4793492bd4096f074ff01a1b964748f3c71125faaf1e6bcba1d2ed
+  inputs_path: manifests/development-trial-inputs.yml
+  status: completed
+  trial_id: tsm-mr-volume-lead-downclose-v001
+previous_event_digest: d2446d6004be9979602468230ccb44b1f6fee51716977f2d73e5aa382b368d32
+schema_version: 1
+sequence: 4
+study_id: tsm-mean-reversion-volume-leads--v003

@@ -1,0 +1,8 @@
+authorized_at: '2026-09-02T09:00:00Z'
+authorized_by: william
+data_roles:
+  - warmup-only
+  - development
+network_access: false
+scope: development-only
+study_id: tsm-mean-reversion-volume-leads--v003

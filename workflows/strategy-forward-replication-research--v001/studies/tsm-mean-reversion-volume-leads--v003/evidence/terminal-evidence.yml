@@ -1,0 +1,18 @@
+authority: none
+bindings:
+  development_evidence_digest: 8972bcafba020f1ee6bdd5de1a3cb9242e6935ed9ade155b49c454c75009c263
+  event_chain_head_digest: 0aeee3aab7c1bfc8e5a5cb131e1ee692632cf44da22f649f40c176376bf70579
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  preregistration_digest: 689bbf14886c38d4d35207a95fc445a53bf85f055fa5642500de713219ff19f9
+  source_bundle_digest: f4e7a01550eca155aa52fb2e6c26891b1efbcc107d367ddf6c475bd0afa0e91a
+  trial_registry_digest: 5d7d4fe62a488024583b5a96a5632247c19a93bc964fef2df89e6f0b41c9dbd5
+  workflow_digest: 3da13fbfd78f62fb4385d00299141cae9a0d429bcc8a5c1d21643f48c78462b9
+outcome: fail
+reasons:
+  - Development 的 block-bootstrap 高回撤比例為 0.34794，超過預先登記的 0.10 上限。
+  - Development 的 block-bootstrap 正報酬比例為 0.50224，低於預先登記的 0.80 下限。
+  - Development 的最低 stress leave-one-year-out profit factor 為 0.8257592758557332，未嚴格高於 1.00。
+  - Development 的最低 stress leave-one-year-out return 為 -0.024307415035893065，未嚴格高於 0。
+  - 同執行規則的 SMA＋RSI baseline 在 Development 的 base/stress return 分別為 0.22954864562425994 與 0.14415662732239856，候選未顯示相對優勢。
+recomputed: true
+schema_version: 1
