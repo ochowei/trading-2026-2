@@ -1,0 +1,14 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 8134e5a38e9202180cad3dfa62bcdbe2fdf3c36f9d816e567a1bd703788cc896
+  workflow_digest: 6b17533c6a766bf244f63c8ad732f5cac479445cc574abcd495382dd5dded70b
+event_type: development-authorized
+occurred_at: '2026-09-02T05:30:13.105568Z'
+payload:
+  evidence_digest: 75655120fa2c32b18127ee70b4d2bbc4f417e8cd9cb02fb792b2e04eafc007d3
+  evidence_path: evidence/development-authorization.yml
+previous_event_digest: 5d413bda58a5d60e3ae44d4c13b4d1867c8531d44fd4f9f772f5ee29e8ffbb80
+schema_version: 1
+sequence: 3
+study_id: fxi-deep-pullback-risk2-exitcd7-v001

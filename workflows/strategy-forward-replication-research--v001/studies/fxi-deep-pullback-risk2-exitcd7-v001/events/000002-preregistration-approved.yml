@@ -1,0 +1,14 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 8134e5a38e9202180cad3dfa62bcdbe2fdf3c36f9d816e567a1bd703788cc896
+  workflow_digest: 6b17533c6a766bf244f63c8ad732f5cac479445cc574abcd495382dd5dded70b
+event_type: preregistration-approved
+occurred_at: '2026-09-02T05:30:12.777758Z'
+payload:
+  preregistration_digest: 9a4c848ed34d15c769dd6ab3c620266a29b0013c30987f30edf7bc71137a65fc
+  preregistration_path: manifests/preregistration.yml
+previous_event_digest: 33c7ad473c06613008dba196f0f9fd9d4235864784a85ba900537dd1d2f41e65
+schema_version: 1
+sequence: 2
+study_id: fxi-deep-pullback-risk2-exitcd7-v001

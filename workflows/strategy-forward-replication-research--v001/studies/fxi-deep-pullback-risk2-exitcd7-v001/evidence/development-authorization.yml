@@ -1,0 +1,8 @@
+authorized: true
+controls:
+  evaluation_outcome_access: prohibited
+  formal_run_network_access: prohibited
+  quarantine_outcome_access: prohibited
+  replay_outcome_access: prohibited
+  trial_budget: 1
+scope: 2013 warmup-only 與 2014--2018 Development；只執行預先登記的唯一 2% stop 風險預算與 exit-based cooldown 候選。

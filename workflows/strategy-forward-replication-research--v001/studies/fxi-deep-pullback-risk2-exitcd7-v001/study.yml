@@ -1,0 +1,48 @@
+candidate_freeze:
+  baseline_family: risk-budgeted-single-condition-pullback
+  baseline_id: fxi-risk2-single-condition-pullback-v001
+  baseline_objectively_simpler: true
+  candidate_digest: 1fe8b8ecdcdc05b7af5153a8bc3e1c19aa983c49fc8726045623651a7f5c1c3c
+  evaluation_snapshot_digest: 9b2436c5fa9535abef5e281a707cc97d3d825f657103ee22db83a6ec0a7a5cf7
+  fold_inventory_digest: 142fa9ac20ad0df32a13a5f6ad0ce1da9d14ea909c47406f3476ae7e55d65df8
+  qualification_spec_digest: c084732969954caedc0d1206e6590f93f5b73172c099ffeeeb339d81cd9c1812
+  replay_snapshot_digest: 7b7fd8f8f6dbcb06814d489a565238a5045491fcbabb9555211fc6a0a5f54271
+  selected_candidate_id: fxi-mr-risk2-exitcd7-v001
+  selection_evidence_digest: df999946cce27cd96e3cd824d701837450772f1a2878af358ce31fc2b1eae20b
+  selection_evidence_path: evidence/selection-evidence-v2.yml
+  snapshot_set_digest: 12285fc38a258872783f5a6edae86137b7e6190957c97f04cb5567593afb1207
+  snapshot_set_path: manifests/data-snapshot-set.yml
+  trial_registry_digest: ed154f6519a3bfa0bedff9854b4dfcbf7f3479a0d68d2ebfd8b13021b0fbff65
+evidence:
+  candidate-freeze: 012ec893f640ced08c0c916cd8ed7ee80c28fb20e62af177a3fa2b92814ac270
+lifecycle:
+  current_event: candidate-frozen
+  event_chain_head_digest: fdd61a2ac87bbb56c79237922976b533f46241d37e6bdbcedc3b0c3fb0d33ee8
+  event_count: 7
+  status: active
+outcome:
+  authority: none
+  status: pending
+preregistration:
+  digest: 9a4c848ed34d15c769dd6ab3c620266a29b0013c30987f30edf7bc71137a65fc
+provenance:
+  status: verified-clean
+schema_version: 1
+study:
+  identity:
+    experiment_family: fxi-deep-pullback-risk-budget
+    replay_operator: william
+    research_owner: william
+    research_round_id: fxi-deep-pullback-risk-budget-round-v001
+    source_bundle_digest: 8134e5a38e9202180cad3dfa62bcdbe2fdf3c36f9d816e567a1bd703788cc896
+    source_bundle_path: manifests/source-bundle.yml
+  study_id: fxi-deep-pullback-risk2-exitcd7-v001
+trial_registry:
+  digest: ed154f6519a3bfa0bedff9854b4dfcbf7f3479a0d68d2ebfd8b13021b0fbff65
+  recorded_trial_count: 1
+  trial_ids:
+    - fxi-mr-risk2-exitcd7-v001
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 8134e5a38e9202180cad3dfa62bcdbe2fdf3c36f9d816e567a1bd703788cc896
+  workflow_digest: 6b17533c6a766bf244f63c8ad732f5cac479445cc574abcd495382dd5dded70b

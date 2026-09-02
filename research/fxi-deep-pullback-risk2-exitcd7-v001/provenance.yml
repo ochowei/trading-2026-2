@@ -1,0 +1,24 @@
+assessed_at: '2026-09-02T05:27:44Z'
+assessment: 本輪由前一個 Study 的 blind review 與 Development 警訊提出 2% stop 風險預算；建立、測試與 Development 階段沒有開啟本候選的 Evaluation、challenge 或 replay outcome，也沒有使用前一候選的正式結果。
+assets:
+  - exposure_status: development-informed
+    role: warmup-only
+  - exposure_status: development-informed
+    role: development
+  - exposure_status: structurally-reused-digest-no-strategy-outcome
+    role: quarantine
+  - exposure_status: structurally-reused-digest-no-strategy-outcome
+    role: historical-evaluation
+  - exposure_status: structurally-reused-digest-no-strategy-outcome
+    role: retrospective-execution-replay
+controls:
+  candidate_family_frozen_before_evaluation: true
+  evaluation_strategy_outcome_accessed: false
+  replay_strategy_outcome_accessed: false
+  trial_registry_frozen: true
+declaration:
+  actor_id: william
+  confirmed: true
+  statement: 我採用成本內含 2% stop 風險預算作為唯一策略變更；凍結前沒有讀取這個候選的 2020--2025 策略績效結果。
+schema_version: 1
+status: verified-clean
