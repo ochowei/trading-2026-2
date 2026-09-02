@@ -1,0 +1,22 @@
+authority: none
+bindings:
+  candidate_freeze_digest: 4de970a6a472785ec9b17e56d6033c79b8b017338419eb9dfc9251d431da7b66
+  event_chain_head_digest: ed02a81982aaf6f398bff26e3e18b0ec6248732d17b96e96900202e9cde22c87
+  historical_evaluation_digest: bf74f95f139aaf1b0a88a8409810b26b0395d2b879096ce10438eea6e3d4f39e
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  preregistration_digest: b5133b5e644a42e5384fba8d01409c54cde7a17c7c70cd360813f7b4e6fc7d63
+  source_bundle_digest: 2ed88908918b895d5372ea2bf94bb23631d567b7781f6e6e1816e40969cf5077
+  trial_registry_digest: 85b7dc6fb2ae816ba4ce483515de11d87c6efdb309fb30af6f80d8d99f1231b4
+  workflow_digest: 6b17533c6a766bf244f63c8ad732f5cac479445cc574abcd495382dd5dded70b
+outcome: fail
+reasons:
+  - 2020--2024 base return 為 -42.2758%，未大於 0。
+  - base profit factor 為 0.4795，未大於 1.10。
+  - 只有 1/5 有交易年度為正，positive traded fold ratio 為 0.20，未達 0.60。
+  - 唯一正報酬年度承擔 100% 正 profit，超過 50% 集中度上限。
+  - stress return 為 -48.6446%，未大於 0。
+  - stress profit factor 為 0.4285，未大於 1.00。
+  - stress 最大回撤為 51.1066%，超過 20% 上限。
+  - deterministic gates 已失敗，未進入 random-entry，family-wise confidence 未獲證明。
+recomputed: true
+schema_version: 1
