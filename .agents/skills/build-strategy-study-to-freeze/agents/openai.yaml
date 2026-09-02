@@ -1,0 +1,4 @@
+interface:
+  display_name: "建立策略 Study 至凍結"
+  short_description: "建立新策略 Study 並停在 Historical Evaluation 前"
+  default_prompt: "使用 $build-strategy-study-to-freeze 建立一個新策略 Study，完成 Development 與 candidate freeze。"

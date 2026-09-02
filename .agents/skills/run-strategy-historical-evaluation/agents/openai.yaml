@@ -1,0 +1,4 @@
+interface:
+  display_name: "執行策略 Historical Evaluation"
+  short_description: "對已凍結候選執行一次性 Historical Evaluation"
+  default_prompt: "使用 $run-strategy-historical-evaluation 對指定的已凍結 Study 執行 Historical Evaluation。"
