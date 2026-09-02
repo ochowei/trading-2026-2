@@ -1,9 +1,9 @@
 # Strategy Forward Replication Research v001 修復計畫
 
-狀態：implemented，release candidate 等待 trusted approver
+狀態：implemented，已於 2026-09-02 由 trusted approver `william` 核准啟用
 交付目標：release candidate，不建立 `release.yml`
 
-實作結果：validator、guarded writer、local authority store、canonical YAML、四份本地 policy releases、完整事件流程、反例 tests、文件、release manifest 與 test report 均已建立。正式啟用仍刻意保留給 trusted approver，故本次沒有建立 `release.yml`。
+實作結果：validator、guarded writer、local authority store、canonical YAML、四份本地 policy releases、完整事件流程、反例 tests、文件、release manifest 與 test report 均已建立。Release candidate 經 trusted approver 核准後，已建立 `release.yml` 並通過正式模式驗證。
 
 ## 目標
 
