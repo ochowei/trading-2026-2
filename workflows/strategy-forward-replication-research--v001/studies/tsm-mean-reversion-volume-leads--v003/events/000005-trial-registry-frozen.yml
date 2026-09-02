@@ -1,0 +1,18 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: f4e7a01550eca155aa52fb2e6c26891b1efbcc107d367ddf6c475bd0afa0e91a
+  workflow_digest: 3da13fbfd78f62fb4385d00299141cae9a0d429bcc8a5c1d21643f48c78462b9
+event_type: trial-registry-frozen
+occurred_at: '2026-09-02T11:28:26.959862Z'
+payload:
+  candidate_available: false
+  complete_family_trial_ids:
+    - tsm-mr-volume-lead-downclose-v001
+  maximum_trials: 1
+  recorded_trial_count: 1
+  trial_registry_digest: 5d7d4fe62a488024583b5a96a5632247c19a93bc964fef2df89e6f0b41c9dbd5
+previous_event_digest: 014437176c8bef70deda10aa2820b56461ea0dbd29ca429f7427de23037058c4
+schema_version: 1
+sequence: 5
+study_id: tsm-mean-reversion-volume-leads--v003

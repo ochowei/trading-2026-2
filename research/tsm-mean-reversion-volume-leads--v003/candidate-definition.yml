@@ -1,0 +1,58 @@
+costs:
+  base:
+    fee_per_side_bps: '1'
+    slippage_per_side_bps: '5'
+  stress:
+    fee_per_side_bps: '2'
+    slippage_per_side_bps: '20'
+data:
+  adjustment_policy: auto_adjusted
+  calendar: XNYS
+  interval: 1d
+  provider: yahoo
+  symbol: TSM
+  timezone: America/New_York
+execution:
+  entry: next-session-open-market
+  gap_fill: stop-gap-at-open-target-gap-at-open
+  held_complete_sessions: 15
+  intrabar_ambiguity: adverse-stop-first
+  maximum_holding_session_span_for_validator: 16
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    modeled_stop_includes_costs: true
+    risk_fraction_of_pre_entry_equity: '0.02'
+    shares: maximum-integer-shares-within-risk-and-cash-caps
+  stop:
+    level_from_raw_entry_open: '-0.04'
+    order_type: STOP_MARKET
+    time_in_force: GTC
+  target:
+    level_from_raw_entry_open: '0.04'
+    order_type: LIMIT
+    reissued_each_session: true
+    time_in_force: DAY
+fold_policy:
+  evaluation_fold_warmup_sessions: 25
+  indicator_state_carried_between_folds: false
+  portfolio_state_reset_each_fold: true
+  replay_warmup_sessions: 25
+schema_version: 1
+signal:
+  accepted_only_when_flat: true
+  cooldown:
+    clock_anchor: completed-position-exit
+    completed_session_steps_after_exit: 5
+  decision_time: completed-session-close
+  mean_reversion:
+    close_vs_sma20_gap_minimum: '0.02'
+    rsi_length: 2
+    rsi_maximum: '35'
+    sma_length: 20
+  price_direction_confirmation:
+    close_below_prior_close: true
+  symbol: TSM
+  volume_leads_price:
+    prior_session_window: 5
+    volume_average_length: 20
+    volume_ratio_minimum: '1.25'

@@ -1,0 +1,6 @@
+development_evidence_digest: 8972bcafba020f1ee6bdd5de1a3cb9242e6935ed9ade155b49c454c75009c263
+development_evidence_path: evidence/development.yml
+inputs_digest: bc65de27be4793492bd4096f074ff01a1b964748f3c71125faaf1e6bcba1d2ed
+inputs_path: manifests/development-trial-inputs.yml
+status: completed
+trial_id: tsm-mr-volume-lead-downclose-v001

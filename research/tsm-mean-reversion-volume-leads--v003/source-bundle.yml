@@ -1,0 +1,30 @@
+files:
+  - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+    path: pyproject.toml
+  - digest: db989025a09391ebb42d08b7613929abe98e877985794cc694fe3e16432b7927
+    path: research/tsm-mean-reversion-volume-leads--v003/acquire_snapshots.py
+  - digest: aa0610633007f7d2391d6a3ef086c9bd82327658922e8ff6e648b41139c07a8e
+    path: research/tsm-mean-reversion-volume-leads--v003/candidate-definition.yml
+  - digest: ef8fc923bbbc2a01614f93f2b3b2c63d2c21239e57b8a4b2f40581cb2397a16e
+    path: research/tsm-mean-reversion-volume-leads--v003/data-snapshot-acquisition.yml
+  - digest: 791fcdd9e59fd2d9e10fc66230772355e1684716c9702ca53b1858b434d11e19
+    path: research/tsm-mean-reversion-volume-leads--v003/data-snapshot-set.yml
+  - digest: 8afc8877b342bd0fed5e493d20e86835d8badc1ce0493995d1715a22a1bbaa99
+    path: research/tsm-mean-reversion-volume-leads--v003/implementation-contract.yml
+  - digest: 689bbf14886c38d4d35207a95fc445a53bf85f055fa5642500de713219ff19f9
+    path: research/tsm-mean-reversion-volume-leads--v003/preregistration.yml
+  - digest: e0242e7e730fa16d70bafaa65fe89db951b20b6b33f3d2f31ca81568c28758bb
+    path: research/tsm-mean-reversion-volume-leads--v003/qualification-spec.yml
+  - digest: 02c994d9c08bdf3bf97e038276fede340cefcb191227ed512d8c28dfa0f7c952
+    path: research/tsm-mean-reversion-volume-leads--v003/run_development.py
+  - digest: 097ed3c35f4ca24cc50187d62d95f8710bd917214ffaded69ba4099f407922bb
+    path: research/tsm-mean-reversion-volume-leads--v003/run_historical_evaluation.py
+  - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+    path: src/trading_2026_2/__init__.py
+  - digest: ad7ad40ec0ffe5fcac3872c602eacc8913509c4fc9b67358098a879475c7d9e8
+    path: src/trading_2026_2/tsm_mean_reversion_volume_leads_v003.py
+  - digest: 1173ebf4fe1e4881a84e36d68bdde1ba7be51b782319f9fd7508313356968e16
+    path: tests/test_tsm_mean_reversion_volume_leads_v003.py
+  - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+    path: uv.lock
+schema_version: 1
