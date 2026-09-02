@@ -1,0 +1,29 @@
+schema_version: 1
+engine:
+  path: src/trading_2026_2/example_strategy.py
+  spec_constant: DEFAULT_SPEC
+  cost_constant: BASE_COST
+indicator_contract:
+  required_history_sessions: 25
+  columns:
+    sma: sma_20
+    rsi: rsi_2
+    volume_lead: prior_volume_spike_ratio
+  sma:
+    lookback: 20
+    min_periods: 20
+    not_ready: null
+  rsi:
+    length: 2
+    formula: simple-rolling-mean
+    min_periods: 2
+    not_ready: null
+    zero_gain_and_loss: 50
+    zero_loss_only: 100
+    zero_gain_only: 0
+  volume_lead:
+    volume_average_length: 20
+    average_min_periods: 20
+    prior_session_window: 5
+    lead_min_periods: 5
+    uses_prior_sessions_only: true

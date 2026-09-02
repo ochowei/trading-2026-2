@@ -1,11 +1,13 @@
 ---
 name: build-strategy-study-to-freeze
-description: 為 strategy-forward-replication-research--v001 建立單一新 Study，完成預先登記、Development、provenance、候選選擇與 candidate freeze，並在執行 Historical Evaluation 前停止。使用者要求開發新策略 Study、建立下一輪研究或做到 Evaluation 前時使用；不接手既有 Study 的 Evaluation、challenge、replay 或 terminal 階段。
+description: 為 strategy-forward-replication-research--v001 建立單一新 Study，完成預先登記、Development、provenance、候選選擇與 candidate freeze，並以 Study preflight CLI 驗證規格與實作後，在執行 Historical Evaluation 前停止。使用者要求開發新策略 Study、建立下一輪研究或做到 Evaluation 前時使用；不接手既有 Study 的 Evaluation、challenge、replay 或 terminal 階段。
 ---
 
 # 建立策略 Study 至候選凍結
 
 只處理 repository 內 `strategy-forward-replication-research--v001` 的一個新 Study。目標是留下可由下一個 task 安全接手的 `candidate-frozen` 事件鏈，不是取得正式結果。
+
+本 skill 必須搭配 repository 的唯讀 `research/tools/studyctl.py`。它補足人工閱讀與 writer validator 不容易及早發現的規格／實作落差，是 candidate freeze 前的硬閘門；它不會寫入 Event，也不取代 workflow writer 或 validator。
 
 ## 開始條件
 
@@ -17,6 +19,7 @@ python3 .agents/skills/build-strategy-study-to-freeze/scripts/check_new_study.py
 ```
 
 - 只有輸出 `eligible` 且 exit code 0 才能繼續。不得覆寫、恢復或改名既有 Study 來冒充新 Study。
+- `check_new_study.py` 只確認 Study ID 可以建立；Study 目錄、research bundle、Source Bundle 與 implementation contract 建好後，仍必須依下方規則執行 `studyctl`。
 - 先確認目前 task 沒有看過這個候選的 Historical Evaluation、challenge 或 replay 策略結果。若已曝光，不得宣告 `verified-clean`；依 workflow 記錄實際 provenance。
 - 讀取並遵守 repository `AGENTS.md`、workflow release、guide、rules、schemas、writer 與 validator。不得使用 `--allow-draft`。
 
@@ -56,11 +59,46 @@ python3 .agents/skills/build-strategy-study-to-freeze/scripts/check_new_study.py
 
 1. 新假說只包含能清楚歸因的有限變更，並有可否證 gate。
 2. Preregistration、qualification spec 與執行器對 Development、Evaluation、replay gate 完全一致，而且每個正式 gate 都是 workflow validator 能重算的 metric。
-3. Source Bundle 在 Study 建立前納入所有 outcome-relevant 程式，包括 Development runner、Historical Evaluation runner、策略引擎與測試。
+3. Source Bundle 在 Study 建立前納入所有 outcome-relevant 程式，包括 Development runner、Historical Evaluation runner、策略引擎、測試與 implementation contract；每個 contract 檔案都必須有明確路徑與 digest 綁定。
 4. Historical Evaluation runner 必須能只靠 frozen inputs 產生 schema-compliant raw evidence；本 skill 只能用合成資料測試它，不得對正式 Evaluation snapshot 執行。
 5. Development evidence 保存 preregistered 分段、leave-one-year-out、block bootstrap 或其他診斷，不得只保存摘要 pass/fail。
 6. Study 與 `research/<study-id>/` 使用同一 ID；正式 artifacts 只經 guarded writer 發布，事件只經 writer 追加。
 7. 最後執行完整測試、Ruff、Source Bundle hash 重算與 writer validator。
+
+## CLI 前置檢查與 implementation contract
+
+每個新 Study 都必須有一份明確的 implementation contract。優先使用
+`research/<study-id>/implementation-contract.yml`，並把它納入 Study 與 research 的
+Source Bundle；若 workflow schema 要求設定直接放在 candidate-definition 或
+preregistration，也可以內嵌，但必須由 candidate／preregistration manifest 綁定，不能成為
+未追蹤的旁路設定。至少要說清楚：
+
+- 策略引擎路徑、`DEFAULT_SPEC`（或等價規格常數）與成本常數；
+- SMA、RSI、volume lead 的欄位、lookback、`min_periods` 與有效歷史長度；
+- RSI 使用的公式、尚未 ready 時的值，以及 gain/loss 同時為零、只有 loss 為零、只有 gain 為零時的處理；
+- volume lead 是否只使用前一個 session 可取得的資料；
+- stop、target、gap、同日先後順序、holding span、cooldown 等會改變 outcome 的邊界語意。
+
+執行順序如下：
+
+1. 任何寫入前先跑 `check_new_study.py`。這一步不能用 `studyctl all` 取代，因為此時新 Study 的必要檔案尚未存在。
+2. Study、同名 research bundle、preregistration、candidate、qualification、Source Bundle 與 implementation contract 已由正式 writer 發布後，至少在 `preregistration-approved` 前跑一次 `contract` 與 `synthetic`；需要定位問題時可先分開跑 `identity`。
+3. 候選選擇證據與所有 freeze 前 artifact 完成後、追加 `candidate-frozen` 前，從 repository 根目錄執行：
+
+```bash
+uv run python research/tools/studyctl.py \
+  --repository-root . \
+  --authority-root <authority-root> \
+  all <study-id>
+```
+
+`--authority-root` 是正式 freeze 流程的必要參數；若只是本地開發定位問題可以省略，但不能把未核對 authority checkpoints 的結果當成正式 freeze 通過。CLI 輸出必須是 `status: "passed"` 且 exit code 0；所有 warning 都要檢查，正式 freeze 不得留下 `authority-not-checked`。不要用 `--allow-draft`、忽略 exit code，或修改 CLI 來掩蓋失敗。
+
+`all` 會依序檢查 identity、contract、synthetic 與 freeze。以下任一類問題都必須先修正或依 preregistered 規則終止 Study：舊 Study 路徑殘留、candidate／preregistration／qualification 不一致、validator 不支援的 gate、warmup 太短、指標尚未 ready 就被使用、RSI／交易邊界語意不明、Source Bundle 或 authority digest 不符，以及 workflow validator 拒絕。
+
+Development gate 失敗而 workflow 已合法進入 `terminal-without-candidate` 時，candidate freeze 不適用；不要為了讓 CLI 通過而補造 candidate、selection 或 provenance evidence。此分支應核對 `studyctl freeze` 回報的 terminal state 與 authority，然後依提前終止規則交接；若 CLI 回報的是已存在 artifact 的實際錯誤，仍須修正或記錄。
+
+`studyctl` 是檢查器，不是事件發布器。通過後仍只能用 guarded writer 追加 `candidate-frozen`，並立即重新執行 writer validator；CLI 的命令、Study ID、status、contract 路徑、derived history、Source Bundle digest 與 authority 驗證結果要記入交接摘要或既有 audit 紀錄。
 
 ## 完成與交接
 
@@ -70,6 +108,7 @@ python3 .agents/skills/build-strategy-study-to-freeze/scripts/check_new_study.py
 - Development gates、主要結果與不確定性；
 - Source Bundle digest、event-chain head 與 authority root；
 - frozen Historical Evaluation runner 路徑；
+- candidate freeze 前 `studyctl all` 的通過結果，以及 implementation contract 路徑與驗證摘要；
 - 明確聲明沒有執行或讀取正式 Evaluation、challenge、replay 策略結果。
 
 不要自動接續 Historical Evaluation。使用者另行要求後，交給 `$run-strategy-historical-evaluation`。

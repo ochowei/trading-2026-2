@@ -18,7 +18,9 @@ Historical Evaluation、quarantine、replay 快照可以依 manifest 既有 dige
 
 不要修改已被其他 Study Source Bundle 凍結的檔案。新增獨立策略模組與測試，或在不影響舊 digest 的前提下重用既有模組。
 
-Source Bundle 至少包含策略引擎、直接依賴、測試、Development runner、Historical Evaluation runner、preregistration、`pyproject.toml` 與 lockfile。
+Source Bundle 至少包含策略引擎、直接依賴、測試、Development runner、Historical Evaluation runner、preregistration、qualification spec、implementation contract、`pyproject.toml` 與 lockfile。Implementation contract 應優先放在
+`research/<study-id>/implementation-contract.yml`；若內嵌在 candidate-definition 或
+preregistration，則該 manifest 必須明確綁定它。它至少要固定引擎規格常數、成本常數、各指標的 lookback／`min_periods`／not-ready 語意、RSI 的零 gain/loss 分支、volume lead 的 prior-only 語意，以及 stop、target、gap、同日先後順序、holding 與 cooldown 等 outcome 邊界。
 
 Historical Evaluation runner 必須在 freeze 前完成並用合成 folds 測試：
 
@@ -44,6 +46,20 @@ assert qualification["replay"] == preregistration["replay_gates"]
 
 此外，逐一把 Evaluation 與 replay gate 名稱對照 `validator/artifacts.py` 實際產生的 metrics。v001 Historical Evaluation 的 drawdown metric 名稱是 `stress_max_drawdown`；不得使用看似合理但 validator 不會產生的別名，也不得在不更新並重新 release workflow validator 的情況下加入自訂正式 metric。Freeze 前應以空白合成 evidence 跑一次 validator gate-support preflight。
 
+此外，在 implementation contract、Source Bundle 與必要 manifests 已發布後，至少在
+`preregistration-approved` 前執行 `studyctl contract` 與 `studyctl synthetic`。候選選擇與
+freeze 前 artifacts 完成後，追加 `candidate-frozen` 前必須從 repository 根目錄執行：
+
+```bash
+uv run python research/tools/studyctl.py \
+  --repository-root . \
+  --authority-root <authority-root> \
+  all <study-id>
+```
+
+CLI 必須 exit code 0 且輸出 `status: "passed"`；`--authority-root` 省略時只能作為本地
+定位，不能作為正式 freeze 的完成證據。CLI 只讀取與檢查，不得取代 writer 或 validator。
+
 ## 5. Development
 
 在 preregistration-approved 與 development-authorized 後，按 Trial budget 執行。每個曾查看結果且 outcome-relevant inputs 不同的版本都是新 Trial。
@@ -52,7 +68,7 @@ Development evidence 至少保存 base/stress 逐筆交易、pre-entry equity �
 
 ## 6. Writer 事件鏈
 
-只使用 workflow writer，依序發布：`study-created`、`preregistration-approved`、`development-authorized`、`trial-recorded`、`trial-registry-frozen`、`provenance-audited`、`candidate-frozen`。
+只使用 workflow writer，依序發布：`study-created`、`preregistration-approved`、`development-authorized`、`trial-recorded`、`trial-registry-frozen`、`provenance-audited`、`candidate-frozen`。Candidate freeze 前的 CLI 通過不會自行追加事件；必須在 CLI 通過後仍由 writer 發布最後事件。
 
 Artifact 發布後不可覆寫。若未被事件引用的 artifact 有錯，保留原檔並用新路徑發布修正版。使用既有 authority root；不確定時先向使用者確認。中斷時先用 writer `recover`，不要手動補 event。
 
@@ -61,8 +77,14 @@ Artifact 發布後不可覆寫。若未被事件引用的 artifact 有錯，保�
 - Source Bundle 逐檔 SHA-256 相符；
 - snapshot manifest 與實際 SHA-256 相符；
 - YAML 為 repository-canonical；
+- implementation contract 存在、已被 Source Bundle 綁定，且 `studyctl contract` 與 `studyctl synthetic` 通過；
 - qualification gates 與 preregistration 完全相同；
 - selection rule digest 包含 eligibility、selection 與 tie handling；
 - Candidate Freeze 綁定 registry、candidate、qualification、snapshot set、fold inventory、selection evidence；
 - Ruff、策略測試、workflow tests、writer validate、`git diff --check` 全部通過；
+- `studyctl all` 執行時帶 `--authority-root`，exit code 為 0、輸出 `status: "passed"`，且沒有未處理的 warning；
 - 最後事件是 `candidate-frozen`，沒有 `000008-*`。
+
+若 Development gate 失敗且 projection 已是合法的 `terminal-without-candidate`，candidate freeze
+不適用，不得為了滿足上述 candidate artifact 清單而製造候選證據；此時核對 terminal state、
+authority 與既有 artifact 的必要錯誤後，依提前終止規則交接。
