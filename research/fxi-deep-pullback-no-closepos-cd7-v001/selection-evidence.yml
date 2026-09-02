@@ -1,0 +1,5 @@
+ordered_eligible_trial_ids:
+  - fxi-mr-no-closepos-cd7-v001
+rule_digest: 1eda3ca15dcc79e8da6c7c1f9af7714c03eb0bd63ce94fd332aa19dabea2da61
+schema_version: 1
+selected_candidate_id: fxi-mr-no-closepos-cd7-v001

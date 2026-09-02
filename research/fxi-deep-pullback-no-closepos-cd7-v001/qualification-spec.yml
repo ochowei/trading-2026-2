@@ -1,0 +1,97 @@
+challenge_requirements:
+  - cash-benchmark
+  - simpler-family-baseline
+  - exposure-matched-random-entry
+  - parameter-perturbation
+  - delayed-entry
+  - higher-costs
+  - worse-fills
+  - missed-orders
+  - market-regime
+development:
+  base_profit_factor:
+    operator: '>'
+    value: '1.10'
+  base_return:
+    operator: '>'
+    value: '0'
+  completed_trades:
+    operator: '>='
+    value: 20
+  stress_maximum_drawdown:
+    operator: <=
+    value: '0.20'
+  stress_profit_factor:
+    operator: '>'
+    value: '1.00'
+  stress_return:
+    operator: '>'
+    value: '0'
+  traded_years:
+    operator: '>='
+    value: 3
+evaluation:
+  base_compounded_return:
+    operator: '>'
+    value: '0'
+  base_profit_factor:
+    operator: '>'
+    value: '1.10'
+  completed_trades:
+    operator: '>='
+    value: 20
+  family_wise_confidence:
+    operator: '>='
+    value: '0.90'
+  maximum_fold_positive_profit_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_fold_trade_concentration:
+    operator: <=
+    value: '0.50'
+  positive_traded_fold_ratio:
+    operator: '>='
+    value: '0.60'
+  stress_maximum_drawdown:
+    operator: <=
+    value: '0.20'
+  stress_profit_factor:
+    operator: '>'
+    value: '1.00'
+  stress_return:
+    operator: '>'
+    value: '0'
+  traded_folds:
+    operator: '>='
+    value: 3
+gate_policy: Development、Evaluation、九項 challenge 或 replay 任一完整 gate 失敗即否證並終止。
+preregistration_digest: b5133b5e644a42e5384fba8d01409c54cde7a17c7c70cd360813f7b4e6fc7d63
+replay:
+  base_maximum_drawdown:
+    operator: <=
+    value: '0.20'
+  base_profit_factor:
+    operator: '>'
+    value: '1.00'
+  base_return:
+    operator: '>'
+    value: '0'
+  completed_simulated_fills:
+    operator: '>='
+    value: 12
+  critical_drift_passed:
+    operator: equals
+    value: true
+  expected_sessions_covered:
+    operator: equals
+    value: true
+  stress_maximum_drawdown:
+    operator: <=
+    value: '0.20'
+  stress_profit_factor:
+    operator: '>'
+    value: '1.00'
+  stress_return:
+    operator: '>'
+    value: '0'
+schema_version: 1

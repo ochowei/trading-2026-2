@@ -1,0 +1,43 @@
+candidate_id: fxi-mr-no-closepos-cd7-v001
+cost_models:
+  base:
+    fee_per_side_bps: '1'
+    slippage_per_side_bps: '5'
+  stress:
+    fee_per_side_bps: '2'
+    slippage_per_side_bps: '20'
+data_bindings:
+  development_digest: 708a4c2705c691af95cf68ca874d81c96ce81314dd1ead96fcffc644b59a0d86
+  development_path: research/fxi-deep-pullback-no-closepos-cd7-v001/data/snapshots/FXI-development--sha256-708a4c2705c691af95cf68ca874d81c96ce81314dd1ead96fcffc644b59a0d86.csv
+  warmup_digest: 9f1c11926a7567e0ac07f175f4514b5fb0df167ef2c29d92b3916d9a1fa00588
+  warmup_path: research/fxi-deep-pullback-no-closepos-cd7-v001/data/snapshots/FXI-warmup-only--sha256-9f1c11926a7567e0ac07f175f4514b5fb0df167ef2c29d92b3916d9a1fa00588.csv
+date_controls:
+  formal_provider_access: false
+  signal_end: '2018-12-31'
+  signal_start: '2014-01-01'
+  warmup_end: '2013-12-31'
+  warmup_start: '2013-01-01'
+execution:
+  entry: next-XNYS-open
+  holding_sessions: 20
+  intrabar_ambiguity: adverse-stop-first
+  position_sizing: integer-shares-using-available-cash
+  stop_market_gtc: '-0.05'
+  target_limit_day: '0.055'
+preregistration_digest: b5133b5e644a42e5384fba8d01409c54cde7a17c7c70cd360813f7b4e6fc7d63
+schema_version: 1
+signal:
+  atr_ceiling: none
+  atr_fast_wilder: 5
+  atr_ratio_operator: '>'
+  atr_ratio_threshold: '1.05'
+  atr_slow_wilder: 20
+  closepos_filter: none
+  cooldown_sessions: 7
+  high_lookback: 10
+  pullback_max_inclusive: '0.12'
+  pullback_min_inclusive: '0.05'
+  williams_r_length: 10
+  williams_r_max_inclusive: '-80'
+source_bundle_digest: 2ed88908918b895d5372ea2bf94bb23631d567b7781f6e6e1816e40969cf5077
+strategy_engine_digest: 50b4336af9765d807b07213648ee51a02283602c203201ac39b75a67d4cd7098
