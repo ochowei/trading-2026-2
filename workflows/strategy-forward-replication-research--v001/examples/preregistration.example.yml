@@ -1,0 +1,20 @@
+baseline_definition:
+  baseline_id: cash-baseline
+  family: cash
+  simpler_rule: zero-signal-parameters
+complete_candidate_family:
+  - trial-001
+eligibility_rules:
+  minimum_history: fixed-calendar
+evaluation_gates: {}
+fold_warmup_sessions: 20
+hypothesis: 候選策略在固定歷史日曆與不可降低門檻下仍通過。
+initial_cash: '100000'
+maximum_holding_sessions: 10
+maximum_trials: 1
+replay_gates: {}
+selection_rule:
+  metric: development-sharpe
+  order: descending
+tie_handling:
+  method: stable-trial-id

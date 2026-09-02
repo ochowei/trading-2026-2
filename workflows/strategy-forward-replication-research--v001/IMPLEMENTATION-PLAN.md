@@ -1,7 +1,9 @@
 # Strategy Forward Replication Research v001 修復計畫
 
-狀態：ready for implementation  
+狀態：implemented，release candidate 等待 trusted approver
 交付目標：release candidate，不建立 `release.yml`
+
+實作結果：validator、guarded writer、local authority store、canonical YAML、四份本地 policy releases、完整事件流程、反例 tests、文件、release manifest 與 test report 均已建立。正式啟用仍刻意保留給 trusted approver，故本次沒有建立 `release.yml`。
 
 ## 目標
 
@@ -345,7 +347,7 @@ uv run ruff check .
 1. 將仍適用的 v011 說明改寫為 v001 自包含指南。
 2. 更新 `minimal-executable-study.md`，使術語、階段、folders、events 與 outcomes 和實作一致。
 3. 刪除 `strategy-forward-replication-research-v011-guide.md`。
-4. 移除所有 v011、`--v011`、implicit latest 與不存在文件的引用。
+4. 移除所有指向 v011 行為權威、`--v011`、implicit latest 與不存在文件的有效引用；本計畫與 ADR 可保留遷移歷史。
 5. 更新 package README，說明：
    - 如何建立與驗證 Study。
    - authority root 如何設定、備份與恢復。
@@ -357,7 +359,7 @@ uv run ruff check .
 
 ### 完成條件
 
-- Repository 搜尋不到有效的 v011 引用。
+- Repository 不存在指向 v011 行為權威的有效引用；本計畫與 ADR 的遷移歷史不在此限。
 - Workflow Package 不依賴原專案路徑、Git、網路或 broker。
 - 所有 tests 與 Ruff 通過。
 - `release-manifest.yml` 可重算且沒有包含 `studies/`。

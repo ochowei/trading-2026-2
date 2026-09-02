@@ -1,0 +1,23 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  family:
+    pattern: ^[a-z0-9-]+$
+    type: string
+  kind:
+    minLength: 1
+    type: string
+  schema_version:
+    const: 1
+  values:
+    type: object
+  version:
+    pattern: ^v[0-9]{3}$
+    type: string
+required:
+  - schema_version
+  - family
+  - version
+  - kind
+  - values
+type: object

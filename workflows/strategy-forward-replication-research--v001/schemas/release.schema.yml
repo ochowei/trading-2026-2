@@ -1,0 +1,37 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  approved_at:
+    minLength: 20
+    type: string
+  approved_by:
+    minLength: 1
+    type: string
+  release_manifest_digest:
+    format: sha256
+    type: string
+  schema_version:
+    const: 1
+  test_report_digest:
+    format: sha256
+    type: string
+  test_report_path:
+    const: release-test-report.yml
+  workflow:
+    const: strategy-forward-replication-research
+  workflow_digest:
+    format: sha256
+    type: string
+  workflow_version:
+    const: v001
+required:
+  - schema_version
+  - workflow
+  - workflow_version
+  - workflow_digest
+  - release_manifest_digest
+  - test_report_path
+  - test_report_digest
+  - approved_by
+  - approved_at
+type: object

@@ -1,0 +1,24 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  ordered_eligible_trial_ids:
+    items:
+      minLength: 1
+      type: string
+    minItems: 1
+    type: array
+    uniqueItems: true
+  rule_digest:
+    format: sha256
+    type: string
+  schema_version:
+    const: 1
+  selected_candidate_id:
+    minLength: 1
+    type: string
+required:
+  - schema_version
+  - ordered_eligible_trial_ids
+  - selected_candidate_id
+  - rule_digest
+type: object

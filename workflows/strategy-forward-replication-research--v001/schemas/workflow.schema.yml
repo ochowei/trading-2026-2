@@ -1,0 +1,73 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  authority:
+    type: object
+  bindings:
+    type: object
+  candidate_policy:
+    type: object
+  data_intervals:
+    type: object
+  evidence_requirements_path:
+    pattern: ^rules/[a-z0-9-]+\.yml$
+    type: string
+  failure_and_recovery_path:
+    pattern: ^rules/[a-z0-9-]+\.yml$
+    type: string
+  fold_policy:
+    type: object
+  language:
+    const: zh-TW
+  outcomes:
+    type: object
+  provenance_policy:
+    type: object
+  release:
+    type: object
+  safety:
+    type: object
+  schema_version:
+    const: 1
+  scope:
+    type: object
+  state_machine_path:
+    pattern: ^rules/[a-z0-9-]+\.yml$
+    type: string
+  storage:
+    type: object
+  title:
+    minLength: 1
+    type: string
+  trial_policy:
+    type: object
+  workflow:
+    const: strategy-forward-replication-research
+  workflow_floors_path:
+    pattern: ^rules/[a-z0-9-]+\.yml$
+    type: string
+  workflow_version:
+    const: v001
+required:
+  - schema_version
+  - workflow
+  - workflow_version
+  - title
+  - language
+  - release
+  - scope
+  - authority
+  - bindings
+  - data_intervals
+  - fold_policy
+  - provenance_policy
+  - trial_policy
+  - candidate_policy
+  - state_machine_path
+  - workflow_floors_path
+  - evidence_requirements_path
+  - failure_and_recovery_path
+  - safety
+  - storage
+  - outcomes
+type: object

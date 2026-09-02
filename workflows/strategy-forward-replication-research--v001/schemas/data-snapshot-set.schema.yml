@@ -1,0 +1,14 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  schema_version:
+    const: 1
+  snapshots:
+    items:
+      type: object
+    minItems: 5
+    type: array
+required:
+  - schema_version
+  - snapshots
+type: object

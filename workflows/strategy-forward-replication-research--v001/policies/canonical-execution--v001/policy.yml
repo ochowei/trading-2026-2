@@ -1,0 +1,19 @@
+family: canonical-execution
+kind: execution
+schema_version: 1
+values:
+  base_cost_bps:
+    entry_slippage: '5'
+    exit_slippage: '5'
+    fee_per_side: '1'
+  entry_mode: next_open_market
+  expiry_mode: next_open_market
+  intrabar_ambiguity: adverse_stop_first
+  missing_next_session: unfilled
+  stop_mode: stop_market_gtc
+  stress_cost_bps:
+    entry_slippage: '20'
+    exit_slippage: '20'
+    fee_per_side: '2'
+  target_mode: limit_order_day
+version: v001

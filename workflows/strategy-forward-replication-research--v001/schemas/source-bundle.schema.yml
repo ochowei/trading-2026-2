@@ -1,0 +1,25 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  files:
+    items:
+      additionalProperties: false
+      properties:
+        digest:
+          format: sha256
+          type: string
+        path:
+          minLength: 1
+          type: string
+      required:
+        - path
+        - digest
+      type: object
+    minItems: 1
+    type: array
+  schema_version:
+    const: 1
+required:
+  - schema_version
+  - files
+type: object

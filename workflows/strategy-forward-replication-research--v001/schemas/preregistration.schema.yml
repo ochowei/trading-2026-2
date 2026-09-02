@@ -1,0 +1,50 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  baseline_definition:
+    type: object
+  complete_candidate_family:
+    items:
+      type: string
+    minItems: 1
+    type: array
+    uniqueItems: true
+  eligibility_rules:
+    type: object
+  evaluation_gates:
+    type: object
+  fold_warmup_sessions:
+    minimum: 1
+    type: integer
+  hypothesis:
+    minLength: 1
+    type: string
+  initial_cash:
+    pattern: ^[0-9]+(\.[0-9]+)?$
+    type: string
+  maximum_holding_sessions:
+    minimum: 1
+    type: integer
+  maximum_trials:
+    minimum: 1
+    type: integer
+  replay_gates:
+    type: object
+  selection_rule:
+    type: object
+  tie_handling:
+    type: object
+required:
+  - hypothesis
+  - complete_candidate_family
+  - maximum_trials
+  - eligibility_rules
+  - selection_rule
+  - tie_handling
+  - baseline_definition
+  - maximum_holding_sessions
+  - fold_warmup_sessions
+  - initial_cash
+  - evaluation_gates
+  - replay_gates
+type: object

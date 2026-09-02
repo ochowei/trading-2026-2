@@ -1,7 +1,7 @@
 # Study 最小可執行規格
 
 本文件將 `strategy-forward-replication-research` 的研究流程縮減為最小可執行規格。詳細規則與
-解釋請參考 [`strategy-forward-replication-research-v011-guide.md`](strategy-forward-replication-research-v011-guide.md)。
+解釋請參考 [`strategy-forward-replication-research-v001-guide.md`](strategy-forward-replication-research-v001-guide.md)。
 
 ## 目的
 
@@ -87,7 +87,8 @@ baseline。
 - workflow 與 policy-set digests；
 - trial registry digest；
 - qualification specification digest；
-- exact Git commit；
+- Source Bundle digest（把會影響結果的程式與設定列成檔案清單，不要求 Git）；
+- selection evidence digest（證明候選是依預先登記的排序規則選出）；
 - human approval identity 與時間。
 
 凍結後不得調參、重新排名、擴大候選集合或更換候選。
@@ -134,11 +135,12 @@ candidate freeze、plan、policy set、data generation 與完整 2025 session in
 
 Replay 只產生歷史模擬 evidence，不得建立 broker order、真實成交或實際部位。
 
-### 9. 獨立重算並判定結果
+### 9. 重算並判定結果
 
-Independent reviewer 必須從 frozen inputs、exact digests、registry 與 immutable evidence 重算所有
-必要結果，不得信任執行者或 manifest 自行宣告的 `pass`，也不得在 review 時補資料、改門檻或調整
-策略。
+Reviewer 必須從 frozen inputs、exact digests、registry 與 immutable evidence 重算所有必要結果，
+不得信任執行者或 manifest 自行宣告的 `pass`，也不得在 review 時補資料、改門檻或調整策略。
+Reviewer 可以和 research owner、replay operator 或 evidence producer 是同一人；這裡的「獨立」指
+重新計算，不要求不同人員。
 
 結果只能是：
 

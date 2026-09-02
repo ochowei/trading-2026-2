@@ -1,0 +1,57 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  adjustment_policy:
+    const: auto_adjusted
+  calendar:
+    const: XNYS
+  data_digest:
+    format: sha256
+    type: string
+  fields:
+    items:
+      type: string
+    minItems: 1
+    type: array
+    uniqueItems: true
+  interval:
+    const: 1d
+  provider:
+    const: yahoo
+  role:
+    enum:
+      - warmup-only
+      - development
+      - quarantine
+      - historical-evaluation
+      - retrospective-execution-replay
+  schema_version:
+    const: 1
+  sessions:
+    items:
+      pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+      type: string
+    minItems: 1
+    type: array
+    uniqueItems: true
+  symbols:
+    items:
+      type: string
+    minItems: 1
+    type: array
+    uniqueItems: true
+  timezone:
+    const: America/New_York
+required:
+  - schema_version
+  - role
+  - provider
+  - symbols
+  - timezone
+  - calendar
+  - interval
+  - adjustment_policy
+  - fields
+  - sessions
+  - data_digest
+type: object

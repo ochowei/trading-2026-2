@@ -1,0 +1,39 @@
+challenge_bindings:
+  - candidate_digest
+  - evaluation_snapshot_digest
+  - fold_inventory_digest
+  - policy_set_digest
+  - qualification_spec_digest
+  - source_bundle_digest
+required_challenges:
+  - cash-benchmark
+  - simpler-family-baseline
+  - exposure-matched-random-entry
+  - parameter-perturbation
+  - delayed-entry
+  - higher-costs
+  - worse-fills
+  - missed-orders
+  - market-regime
+required_stage_evidence:
+  - development
+  - candidate-freeze
+  - historical-evaluation
+  - robustness-challenges
+  - retrospective-execution-replay
+  - independent-review
+schema_version: 1
+seed_required_challenges:
+  - exposure-matched-random-entry
+  - missed-orders
+terminal_bindings:
+  - event_chain_head_digest
+  - preregistration_digest
+  - trial_registry_digest
+  - candidate_freeze_digest
+  - historical_evaluation_digest
+  - robustness_challenges_digest
+  - retrospective_replay_digest
+  - workflow_digest
+  - policy_set_digest
+  - source_bundle_digest

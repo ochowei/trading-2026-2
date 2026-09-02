@@ -1,0 +1,26 @@
+forbidden_after_formal_failure:
+  - candidate-change
+  - strategy-tuning
+  - trial-delete-or-rewrite
+  - data-period-change
+  - session-addition-or-extension
+  - data-generation-change
+  - threshold-relaxation
+  - evidence-overwrite
+  - evidence-relabel-as-clean-or-prospective
+pause_conditions:
+  - recoverable-technical-interruption
+  - recoverable-publication-interruption
+recovery:
+  different_input_retry_allowed: false
+  exact_frozen_inputs_required: true
+  exact_prepared_bytes_required: true
+schema_version: 1
+terminal_failure_stages:
+  - development
+  - candidate-freeze
+  - historical-evaluation
+  - robustness-challenges
+  - retrospective-execution-replay
+  - independent-review
+unrecoverable_evidence_integrity_outcome: indeterminate
