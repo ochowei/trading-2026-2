@@ -26,32 +26,42 @@ python3 .agents/skills/build-strategy-study-to-freeze/scripts/check_new_study.py
 ## 不可跨越的邊界
 
 - 可以使用 warmup-only 與 Development 資料開發；不得用 quarantine、Historical Evaluation 或 replay 價格調參、選模或檢查策略績效。
-- 正式資料可依既有 immutable digest 機械複製、建立同名路徑與核對 hash，但不得在本 skill 執行策略。
+- 正式資料優先引用 repository 公用的 immutable snapshot；只有 runner 或正式 artifact 明確無法解析 reference 時，才可建立 Study 內的物化副本。資料重用本身不得在本 skill 執行策略。
 - 不得執行或發布 `historical-evaluation-completed` 及其後事件。
 - Candidate freeze 後不得修改 Source Bundle、候選、資格規格、資料綁定、選擇證據或任何 outcome-relevant 程式。
 - 任一 Development gate 失敗時保留 Trial，依 preregistered 規則凍結 registry 並走提前終止；不得調低 gate 後重跑成同一 Study。
 
-## 資料取得與既有快照重用
+## 資料取得與 shared reference-first
 
+資料重用時必須先閱讀 [references/data-reuse.md](references/data-reuse.md)。其中的
+`reference` 是「以 repository-relative path 加上內容 digest 指向既有檔案」，不是 symlink，
+也不是不帶版本的 `latest.csv`。
+
+- 既有 ticker 先查找 `research/market-data/yahoo/` 的公用快照；只有找不到完全相容的
+  公用快照時，才查找既有 Study 的內容定址快照。公用資料是預設來源，Study-local 資料是
+  fallback，不得反過來優先。
+- 比對 ticker、資料起訖日或可切出的 session range、provider、交易所日曆、`1d` 頻率、
+  auto-adjusted 設定、欄位、品質報告與實際 SHA-256。不能因檔名相近就載入，也不能把不同
+  調整方式或不同區間靜默當成相同資料。
+- 找到相容的公用快照時，workflow 的 `data-snapshot-set.yml` role entry 仍須完全符合
+  `data-snapshot.schema.yml`：保留 role、sessions 與 `data_digest` 等固定欄位，不要把
+  `data_source`、`path` 或 `view` 等額外欄位直接塞進 role entry。shared source path、source
+  digest、品質報告與每個 role 的不重疊 view，應記在 Study 的 acquisition/lineage manifest，
+  並與 Development inputs、runner 綁定；不要把相同 CSV 複製到
+  `research/<new-study-id>/data/snapshots/`。同一份公用完整快照可以由不同 role 以明確的日期
+  範圍切 view，但每個 view 都必須重新核對 XNYS session inventory 與 view digest。
+- 若只有舊 Study 有相容資料，優先把它依原 digest 不可覆寫地登錄為公用 immutable snapshot，
+  新 Study 再 reference 公用路徑；只有這個公用化流程不適用時，才直接 reference 舊 Study
+  路徑，並在 provenance 記錄原因。若 runner 無法解析 reference，才可在 Study 內物化副本，
+  並同時保存原始 source path、source digest 與物化原因。
 - 新 ticker 或既有資料覆蓋不到的新日期區間，使用 repository 共用工具
-  `research/tools/download_market_data.py` 下載 Yahoo Finance 的 1d、auto-adjusted
-  OHLCV 資料。`--start` 與 `--end` 都是含頭含尾日期；工具會先檢查交易日清單、缺值、有限數值、正價格、非負成交量，以及
-  `Low <= Open/Close <= High` 和 `Low <= High`，通過後才保存內容帶 SHA-256 的快照與
-  `.quality.yml` 報告。正式 workflow 仍以 XNYS 為交易所日曆。
-- 既有 ticker 應先查找 `research/market-data/yahoo/` 的共用快照，以及既有
-  `research/<study-id>/data/snapshots/` 的內容定址快照。只有在 ticker、資料起訖日、
-  provider、交易所日曆、`1d` 頻率、auto-adjusted 設定、欄位與品質檢查結果都相符時，才可
-  依 immutable digest 機械重用；不得因檔名相近就直接載入，也不得把不同區間或不同調整
-  方式的資料當成相同資料。
-- 重用既有快照時，必須核對實際檔案 SHA-256，並在新 Study 的同名
-  `research/<new-study-id>/` 目錄建立或機械複製所需檔案，讓新 Study 的 data binding 指向
-  自己的目錄。若日期或其他設定不吻合，就用工具下載符合設定的新快照，或明確記錄資料
-  無法重用；不能靜默混接兩份不同快照。
-- 共用完整快照只是一份可追溯的資料來源；仍須依 workflow 的固定角色切出不重疊的
+  `research/tools/download_market_data.py` 下載到 `research/market-data/yahoo/`；通過資料
+  品質檢查後，後續 Study 以 reference 使用，不預設每個 Study 各自下載一份。
+- 不論採 reference 或物化副本，仍須依 workflow 固定角色維持不重疊的
   `warmup-only`、`development`、`quarantine`、`historical-evaluation` 與
-  `retrospective-execution-replay` snapshots。Development 只能開啟允許的 warmup 與
-  Development 資料，Evaluation、quarantine 與 replay 資料在 candidate freeze 前不得用來
-  調參、選模或檢查策略績效。
+  `retrospective-execution-replay` views。Development 只能開啟允許的 warmup 與 Development
+  view，Evaluation、quarantine 與 replay 資料在 candidate freeze 前不得用來調參、選模或
+  檢查策略績效。
 
 ## 必做工作
 
@@ -62,7 +72,7 @@ python3 .agents/skills/build-strategy-study-to-freeze/scripts/check_new_study.py
 3. Source Bundle 在 Study 建立前納入所有 outcome-relevant 程式，包括 Development runner、Historical Evaluation runner、策略引擎、測試與 implementation contract；每個 contract 檔案都必須有明確路徑與 digest 綁定。
 4. Historical Evaluation runner 必須能只靠 frozen inputs 產生 schema-compliant raw evidence；本 skill 只能用合成資料測試它，不得對正式 Evaluation snapshot 執行。
 5. Development evidence 保存 preregistered 分段、leave-one-year-out、block bootstrap 或其他診斷，不得只保存摘要 pass/fail。
-6. Study 與 `research/<study-id>/` 使用同一 ID；正式 artifacts 只經 guarded writer 發布，事件只經 writer 追加。
+6. Study 與 `research/<study-id>/` 使用同一 ID；正式 artifacts 只經 guarded writer 發布，事件只經 writer 追加；raw data 預設以公用 shared reference 綁定，不因 Study ID 而複製一份。
 7. 最後執行完整測試、Ruff、Source Bundle hash 重算與 writer validator。
 
 ## CLI 前置檢查與 implementation contract

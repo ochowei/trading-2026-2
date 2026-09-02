@@ -26,8 +26,12 @@ uv run python research/tools/download_market_data.py \
 
 目前已保存的 TSM 共用快照是 [`TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv`](yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv)，共有 3,270 個 XNYS session；品質報告在同目錄的 [`.quality.yml`](yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.quality.yml)。檢查結果為通過，High 和 Low 都沒有需要校正的資料。
 
-這份共用快照是原始完整區間。`strategy-forward-replication-research--v001` 的
-正式 Study 仍須依 `warmup-only`、`development`、`quarantine`、
-`historical-evaluation` 和 `retrospective-execution-replay` 各自建立不可重疊的
-Study snapshot，並在 manifest 內綁定實際檔案的 digest；不能在正式執行時重新連線
-Yahoo 或直接使用會改變的資料指標。
+這份共用快照是原始完整區間。`strategy-forward-replication-research--v001` 的正式 Study
+應優先 reference 這類公用 immutable snapshot，不要為每個 Study 再複製一份相同 CSV。Study
+仍須在 workflow 的 `data-snapshot-set.yml` 內建立 `warmup-only`、`development`、`quarantine`、
+`historical-evaluation` 和 `retrospective-execution-replay` 五個不重疊的 role entry，並維持
+原本 `data-snapshot.schema.yml` 的固定欄位與 `data_digest`。source path、source digest、品質
+報告、XNYS session inventory 與 view digest 應另記在 Study 的 acquisition/lineage manifest。
+若 runner
+不能解析完整快照的日期 view，才先在公用資料目錄建立不可覆寫的 role snapshot；Study-local
+副本只作為相容性 fallback。不能在正式執行時重新連線 Yahoo 或自動跟隨會改變的資料。
