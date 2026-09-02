@@ -1,0 +1,22 @@
+checks:
+  - command: .venv/bin/ruff check workflows/strategy-forward-replication-research--v001
+    result: passed
+    summary: Workflow Package 的 Python 原始碼與 tests 通過 Ruff。
+  - command: .venv/bin/pytest -q workflows/strategy-forward-replication-research--v001/tests --ignore=workflows/strategy-forward-replication-research--v001/tests/test_release_candidate.py
+    result: passed
+    summary: 26 個核心、反例、完整流程與 recovery tests 全部通過。
+  - command: .venv/bin/pytest -q workflows/strategy-forward-replication-research--v001/tests
+    result: passed
+    summary: 包含 release manifest 反向重算在內的 28 個 tests 全部通過。
+  - command: .venv/bin/ruff check .
+    result: passed
+    summary: 整個 repository 通過 Ruff。
+  - command: .venv/bin/pytest -q
+    result: passed
+    summary: 整個 repository 的 29 個 tests 全部通過。
+generated_at: '2026-09-02T01:26:58Z'
+release_record_created: false
+schema_version: 1
+status: release-candidate
+workflow: strategy-forward-replication-research
+workflow_version: v001

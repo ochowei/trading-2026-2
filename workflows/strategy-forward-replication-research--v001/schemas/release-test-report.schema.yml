@@ -1,0 +1,44 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  checks:
+    items:
+      additionalProperties: false
+      properties:
+        command:
+          minLength: 1
+          type: string
+        result:
+          const: passed
+        summary:
+          minLength: 1
+          type: string
+      required:
+        - command
+        - result
+        - summary
+      type: object
+    minItems: 1
+    type: array
+  generated_at:
+    minLength: 20
+    type: string
+  release_record_created:
+    const: false
+  schema_version:
+    const: 1
+  status:
+    const: release-candidate
+  workflow:
+    const: strategy-forward-replication-research
+  workflow_version:
+    const: v001
+required:
+  - schema_version
+  - workflow
+  - workflow_version
+  - status
+  - generated_at
+  - checks
+  - release_record_created
+type: object

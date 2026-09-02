@@ -1,0 +1,83 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  challenges:
+    items:
+      additionalProperties: false
+      properties:
+        actual:
+          oneOf:
+            - type: string
+            - type: integer
+            - type: boolean
+        artifact_digest:
+          format: sha256
+          type: string
+        artifact_path:
+          minLength: 1
+          type: string
+        bindings:
+          additionalProperties: false
+          properties:
+            candidate_digest:
+              format: sha256
+              type: string
+            evaluation_snapshot_digest:
+              format: sha256
+              type: string
+            fold_inventory_digest:
+              format: sha256
+              type: string
+            policy_set_digest:
+              format: sha256
+              type: string
+            qualification_spec_digest:
+              format: sha256
+              type: string
+            source_bundle_digest:
+              format: sha256
+              type: string
+          required:
+            - candidate_digest
+            - evaluation_snapshot_digest
+            - fold_inventory_digest
+            - policy_set_digest
+            - qualification_spec_digest
+            - source_bundle_digest
+          type: object
+        challenge_id:
+          type: string
+        expected:
+          oneOf:
+            - type: string
+            - type: integer
+            - type: boolean
+        operator:
+          enum:
+            - '>'
+            - '>='
+            - <
+            - <=
+            - equals
+        seed:
+          minimum: 0
+          type: integer
+      required:
+        - challenge_id
+        - artifact_path
+        - artifact_digest
+        - bindings
+        - actual
+        - operator
+        - expected
+      type: object
+    type: array
+  schema_version:
+    const: 1
+  stage:
+    const: robustness-challenges
+required:
+  - schema_version
+  - stage
+  - challenges
+type: object

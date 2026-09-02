@@ -1,0 +1,61 @@
+historical_evaluation:
+  base_compounded_return:
+    operator: '>'
+    value: '0'
+  base_profit_factor:
+    operator: '>'
+    value: '1.1'
+  completed_trades:
+    operator: '>='
+    value: 20
+  family_wise_confidence:
+    operator: '>='
+    value: '0.90'
+  maximum_fold_positive_profit_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_fold_trade_concentration:
+    operator: <=
+    value: '0.50'
+  positive_traded_fold_ratio:
+    operator: '>='
+    value: '0.60'
+  stress_profit_factor:
+    operator: '>'
+    value: '1'
+  stress_return:
+    operator: '>'
+    value: '0'
+  traded_folds:
+    operator: '>='
+    value: 3
+numeric_policy:
+  decimal_comparison_required: true
+  infinity_allowed_only_for_positive_profit_factor_with_zero_gross_loss: true
+  nan_allowed: false
+retrospective_replay:
+  base_profit_factor:
+    operator: '>'
+    value: '1'
+  base_return:
+    operator: '>'
+    value: '0'
+  completed_simulated_fills:
+    operator: '>='
+    value: 12
+  critical_drift_passed:
+    operator: equals
+    value: true
+  expected_sessions_covered:
+    operator: equals
+    value: true
+  stress_profit_factor:
+    operator: '>'
+    value: '1'
+  stress_return:
+    operator: '>'
+    value: '0'
+schema_version: 1
+study_gate_policy:
+  may_be_looser_than_floor: false
+  may_be_stricter_than_floor: true

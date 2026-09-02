@@ -1,0 +1,35 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  artifact_digest:
+    format: sha256
+    type: string
+  artifact_path:
+    minLength: 1
+    type: string
+  artifact_size:
+    minimum: 0
+    type: integer
+  bindings:
+    additionalProperties:
+      format: sha256
+      type: string
+    type: object
+  schema_version:
+    const: 1
+  stage:
+    enum:
+      - development
+      - candidate-freeze
+      - historical-evaluation
+      - robustness-challenges
+      - retrospective-execution-replay
+      - independent-review
+required:
+  - schema_version
+  - stage
+  - artifact_path
+  - artifact_size
+  - artifact_digest
+  - bindings
+type: object
