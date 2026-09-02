@@ -1,0 +1,73 @@
+acquired_at: '2026-09-02T03:26:01Z'
+calendar_validation:
+  expected_sessions: 3270
+  extra_sessions: 0
+  missing_sessions: 0
+  null_rows: 0
+  observed_sessions: 3270
+dependencies:
+  curl_cffi: 0.16.2
+  exchange_calendars: 4.13.2
+  pandas: 3.0.5
+  yfinance: 1.7.0
+full_snapshot:
+  bytes: 248449
+  digest: 9a35638bec92921804c7ebf7c033c3c602301f6548e43bb931ac9cb36677ab70
+  first_session: '2013-01-02'
+  last_session: '2025-12-31'
+  path: data/snapshots/FXI-2013-2025-auto-adjust--sha256-9a35638bec92921804c7ebf7c033c3c602301f6548e43bb931ac9cb36677ab70.csv
+  rows: 3270
+request:
+  actions: false
+  auto_adjust: true
+  end_exclusive: '2026-01-01'
+  ignore_tz: true
+  interval: 1d
+  keepna: true
+  multi_level_index: false
+  repair: false
+  start_inclusive: '2013-01-01'
+  symbol: FXI
+  threads: false
+roles:
+  development:
+    bytes: 95546
+    digest: 708a4c2705c691af95cf68ca874d81c96ce81314dd1ead96fcffc644b59a0d86
+    end_date: '2018-12-31'
+    path: data/snapshots/FXI-development--sha256-708a4c2705c691af95cf68ca874d81c96ce81314dd1ead96fcffc644b59a0d86.csv
+    rows: 1258
+    start_date: '2014-01-01'
+  historical-evaluation:
+    bytes: 95646
+    digest: 9b2436c5fa9535abef5e281a707cc97d3d825f657103ee22db83a6ec0a7a5cf7
+    end_date: '2024-12-31'
+    path: data/snapshots/FXI-historical-evaluation--sha256-9b2436c5fa9535abef5e281a707cc97d3d825f657103ee22db83a6ec0a7a5cf7.csv
+    rows: 1258
+    start_date: '2020-01-01'
+  quarantine:
+    bytes: 19178
+    digest: b28598fe45688f419c12cc8b37a2d08e8ac25e43d751c28feb7dd63254f1d1c2
+    end_date: '2019-12-31'
+    path: data/snapshots/FXI-quarantine--sha256-b28598fe45688f419c12cc8b37a2d08e8ac25e43d751c28feb7dd63254f1d1c2.csv
+    rows: 252
+    start_date: '2019-01-01'
+  retrospective-execution-replay:
+    bytes: 19037
+    digest: 7b7fd8f8f6dbcb06814d489a565238a5045491fcbabb9555211fc6a0a5f54271
+    end_date: '2025-12-31'
+    path: data/snapshots/FXI-retrospective-execution-replay--sha256-7b7fd8f8f6dbcb06814d489a565238a5045491fcbabb9555211fc6a0a5f54271.csv
+    rows: 250
+    start_date: '2025-01-01'
+  warmup-only:
+    bytes: 19170
+    digest: 9f1c11926a7567e0ac07f175f4514b5fb0df167ef2c29d92b3916d9a1fa00588
+    end_date: '2013-12-31'
+    path: data/snapshots/FXI-warmup-only--sha256-9f1c11926a7567e0ac07f175f4514b5fb0df167ef2c29d92b3916d9a1fa00588.csv
+    rows: 252
+    start_date: '2013-01-01'
+schema_version: 1
+storage_policy:
+  filenames_include_sha256: true
+  files_read_only: true
+  formal_run_provider_access: prohibited
+  repository_root_relative_prefix: research/fxi-deep-pullback-no-closepos-cd7-v001

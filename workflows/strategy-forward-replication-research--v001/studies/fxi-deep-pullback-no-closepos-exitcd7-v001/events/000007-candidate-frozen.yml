@@ -1,0 +1,26 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 71beacfd8a5ad277f37040ceedb016047ba705b2e023fed53a587fc58876ffdd
+  workflow_digest: 6b17533c6a766bf244f63c8ad732f5cac479445cc574abcd495382dd5dded70b
+event_type: candidate-frozen
+occurred_at: '2026-09-02T04:48:51.361425Z'
+payload:
+  baseline_family: single-condition-pullback
+  baseline_id: fxi-single-condition-pullback-v001
+  baseline_objectively_simpler: true
+  candidate_digest: 7b330ea7be24ca9a64342d42b89adc8b2fa58e5a90cdef1df1a30ea0b07453eb
+  evaluation_snapshot_digest: 9b2436c5fa9535abef5e281a707cc97d3d825f657103ee22db83a6ec0a7a5cf7
+  fold_inventory_digest: 142fa9ac20ad0df32a13a5f6ad0ce1da9d14ea909c47406f3476ae7e55d65df8
+  qualification_spec_digest: 8094a50a6beae90c137f4437adae74e81dafeb99fce62d41c7d7097bfe960308
+  replay_snapshot_digest: 7b7fd8f8f6dbcb06814d489a565238a5045491fcbabb9555211fc6a0a5f54271
+  selected_candidate_id: fxi-mr-no-closepos-exitcd7-v001
+  selection_evidence_digest: 895ba65cbe597b4b318b95dd564cdd6ed4fad79903825a21a4ba5addd803fcf1
+  selection_evidence_path: evidence/selection-evidence.yml
+  snapshot_set_digest: 12285fc38a258872783f5a6edae86137b7e6190957c97f04cb5567593afb1207
+  snapshot_set_path: manifests/data-snapshot-set.yml
+  trial_registry_digest: 7a1539d2b297409060f8ef1b3e5dce4472e0f2c9c7bf8103a22cc7cb04687499
+previous_event_digest: 3954ee3d5dfe04b764f4cb5128926991139c2aa456c7fe890ea12913e86167a6
+schema_version: 1
+sequence: 7
+study_id: fxi-deep-pullback-no-closepos-exitcd7-v001
