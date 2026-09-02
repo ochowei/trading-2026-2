@@ -1,0 +1,15 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 71beacfd8a5ad277f37040ceedb016047ba705b2e023fed53a587fc58876ffdd
+  workflow_digest: 6b17533c6a766bf244f63c8ad732f5cac479445cc574abcd495382dd5dded70b
+event_type: provenance-audited
+occurred_at: '2026-09-02T04:47:57.308335Z'
+payload:
+  artifact_digest: 65aa2df345d4f2110164abacfda3d9702edd61293e6b8cccc0bd589aa61761e3
+  artifact_path: evidence/provenance.yml
+  status: verified-clean
+previous_event_digest: 7ae9f7913011b03934f6ae9d582338dfdcfabbfa3d181a13c5156728b74ff096
+schema_version: 1
+sequence: 6
+study_id: fxi-deep-pullback-no-closepos-exitcd7-v001

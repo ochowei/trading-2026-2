@@ -1,0 +1,14 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 71beacfd8a5ad277f37040ceedb016047ba705b2e023fed53a587fc58876ffdd
+  workflow_digest: 6b17533c6a766bf244f63c8ad732f5cac479445cc574abcd495382dd5dded70b
+event_type: preregistration-approved
+occurred_at: '2026-09-02T04:43:35.325603Z'
+payload:
+  preregistration_digest: de6bd82bad0ae237a2e509e6b6f947a5e615afad5a52c9891f945d554c14049c
+  preregistration_path: manifests/preregistration.yml
+previous_event_digest: eb44a766b3ac5efc9bc151af449953ffef8ce8204e8c31cd161d40e38b2932f5
+schema_version: 1
+sequence: 2
+study_id: fxi-deep-pullback-no-closepos-exitcd7-v001

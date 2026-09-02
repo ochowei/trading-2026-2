@@ -1,0 +1,18 @@
+files:
+  - digest: 50b4336af9765d807b07213648ee51a02283602c203201ac39b75a67d4cd7098
+    path: src/trading_2026_2/fxi_mean_reversion.py
+  - digest: ade8dc73ecf378e245f8f255ae94009ec69fee3d5e794496811524da9e781e18
+    path: src/trading_2026_2/fxi_mean_reversion_exit_cooldown.py
+  - digest: 1e52f5d6f68cabdca505002ccac90157dd1acc4f395bfe173a5ffcafc298ab49
+    path: tests/test_fxi_mean_reversion.py
+  - digest: 2fbb2493cd286eb763d0ed0c354954378e530ec4db2681585390a56d9b3eecfb
+    path: tests/test_fxi_mean_reversion_exit_cooldown.py
+  - digest: 2ab6c0b4f249b38eb38cd2f006a02ed966bc77c8453295e85510c5c502a314a6
+    path: research/fxi-deep-pullback-no-closepos-exitcd7-v001/run_development.py
+  - digest: de6bd82bad0ae237a2e509e6b6f947a5e615afad5a52c9891f945d554c14049c
+    path: research/fxi-deep-pullback-no-closepos-exitcd7-v001/preregistration.yml
+  - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+    path: pyproject.toml
+  - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+    path: uv.lock
+schema_version: 1
