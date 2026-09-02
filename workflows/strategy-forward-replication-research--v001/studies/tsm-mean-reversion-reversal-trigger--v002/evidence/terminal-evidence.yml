@@ -1,0 +1,16 @@
+authority: none
+bindings:
+  development_evidence_digest: 6070c36764289a47b6a4c35cfbea022df01deed5076bbfb99b10de045e3aef55
+  event_chain_head_digest: 4ddfabd7cc481ee1de812791c1a05408ec7e33fcba352b08cb43d4bf554d4de8
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  preregistration_digest: 112c4ca5dfefe4900599e84ea71e23e7373c355b25e04417802dd7ab5d177ad8
+  source_bundle_digest: b0b269b687f0cf304ecb624fe1e946a34cfafaaba8e89c812897e47976956244
+  trial_registry_digest: 0fa3d6432216f6457e511e5bf2829857ce387a6c9d3ddb0def3c44abbef9dbd1
+  workflow_digest: 3da13fbfd78f62fb4385d00299141cae9a0d429bcc8a5c1d21643f48c78462b9
+outcome: fail
+reasons:
+  - Development 完成交易數為 13，低於預先登記的至少 20 筆。
+  - 因此 Development gate completed_trades 未通過，candidate_available 必須為 false；其餘 Development gate 均通過。
+  - 同執行規則的 SMA＋RSI baseline 在 Development 的 base/stress return 分別為 0.2295473585300811 與 0.14415546468484142，候選分別為 0.09853620311440231 與 0.0710928585319416。
+recomputed: true
+schema_version: 1
