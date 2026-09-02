@@ -1,0 +1,14 @@
+authority: none
+bindings:
+  development_evidence_digest: 1da3a9c499ac3f4a09615688eb07ff48f7189305266a6dd166e48a7caf14374f
+  event_chain_head_digest: a91e2df9ae6903f2f73ab41f16593389d8881471f652dc72ce15ea0e08c04cbb
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  preregistration_digest: 2b924acadabc1eeab678184494a9ba0dd8fe37f5c6745cd20b2cb214e163b3f7
+  source_bundle_digest: 31064fcc3e7d2f7daa6c3e80d629a55f26b10412515d1397e6cca33eda0c4a0d
+  trial_registry_digest: 078e96f03c8ec63f300d6d97a2069a382701d91116852132d20d8ef489ddc2b4
+  workflow_digest: 3da13fbfd78f62fb4385d00299141cae9a0d429bcc8a5c1d21643f48c78462b9
+outcome: fail
+reasons:
+  - Development 的四項預先登記 gate 失敗，假說未通過穩健性檢驗。
+recomputed: true
+schema_version: 1

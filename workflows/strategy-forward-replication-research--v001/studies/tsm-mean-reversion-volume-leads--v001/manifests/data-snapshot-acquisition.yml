@@ -1,0 +1,73 @@
+acquired_at: '2026-09-02T08:29:11.548322Z'
+calendar_validation:
+  expected_sessions: 3270
+  extra_sessions: 0
+  missing_sessions: 0
+  null_rows: 0
+  observed_sessions: 3270
+dependencies:
+  curl_cffi: 0.16.2
+  exchange_calendars: 4.13.2
+  pandas: 3.0.5
+  yfinance: 1.7.0
+full_snapshot:
+  bytes: 311344
+  digest: c2b1081aebee84e6cda3b361a1707ed178d5455ad017c3e4876f49d68d6aae78
+  first_session: '2013-01-02'
+  last_session: '2025-12-31'
+  path: data/snapshots/TSM-2013-2025-auto-adjust--sha256-c2b1081aebee84e6cda3b361a1707ed178d5455ad017c3e4876f49d68d6aae78.csv
+  rows: 3270
+request:
+  actions: false
+  auto_adjust: true
+  end_exclusive: '2026-01-01'
+  ignore_tz: true
+  interval: 1d
+  keepna: true
+  multi_level_index: false
+  repair: false
+  start_inclusive: '2013-01-01'
+  symbol: TSM
+  threads: false
+roles:
+  development:
+    bytes: 120268
+    digest: 5b57ef60c473f3566ac91715ebde749351043673ade5ca2d8d437f3039ae745d
+    end_date: '2018-12-31'
+    path: data/snapshots/TSM-development--sha256-5b57ef60c473f3566ac91715ebde749351043673ade5ca2d8d437f3039ae745d.csv
+    rows: 1258
+    start_date: '2014-01-01'
+  historical-evaluation:
+    bytes: 119058
+    digest: eec43702dfb24b996a1b575df837fc17df92625963b0770eba6cb3104e3e5a1b
+    end_date: '2024-12-31'
+    path: data/snapshots/TSM-historical-evaluation--sha256-eec43702dfb24b996a1b575df837fc17df92625963b0770eba6cb3104e3e5a1b.csv
+    rows: 1258
+    start_date: '2020-01-01'
+  quarantine:
+    bytes: 23762
+    digest: e63cadf33225d4ea1bef0abb60328a4ec688cc376562e2194c27acb0292c26cb
+    end_date: '2019-12-31'
+    path: data/snapshots/TSM-quarantine--sha256-e63cadf33225d4ea1bef0abb60328a4ec688cc376562e2194c27acb0292c26cb.csv
+    rows: 252
+    start_date: '2019-01-01'
+  retrospective-execution-replay:
+    bytes: 23996
+    digest: db23dfc4a3ee65c8b0f3415d80e6e2073298586a0ad554a8bec6c8dcf45d38ef
+    end_date: '2025-12-31'
+    path: data/snapshots/TSM-retrospective-execution-replay--sha256-db23dfc4a3ee65c8b0f3415d80e6e2073298586a0ad554a8bec6c8dcf45d38ef.csv
+    rows: 250
+    start_date: '2025-01-01'
+  warmup-only:
+    bytes: 24388
+    digest: 7b20dd43983deb8b9210cb65cb247d8ac6877ca2f006653c8f23224ec00bb253
+    end_date: '2013-12-31'
+    path: data/snapshots/TSM-warmup-only--sha256-7b20dd43983deb8b9210cb65cb247d8ac6877ca2f006653c8f23224ec00bb253.csv
+    rows: 252
+    start_date: '2013-01-01'
+schema_version: 1
+storage_policy:
+  filenames_include_sha256: true
+  files_read_only: true
+  formal_run_provider_access: prohibited
+  repository_root_relative_prefix: research/tsm-mean-reversion-volume-leads--v001

@@ -1,0 +1,3 @@
+reason: Development source validation failed before an outcome-bearing trial could be produced; the current frozen setup is closed and a corrected Study will be created.
+stage: development
+unavailable_path: evidence/development-integrity-check.yml

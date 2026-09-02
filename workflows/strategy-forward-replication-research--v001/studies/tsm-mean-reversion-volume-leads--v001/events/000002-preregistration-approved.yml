@@ -1,0 +1,14 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: e1e71fa86b853f3ecbe6f688eb76e009ab0a2d82569accc47ebf38d57eae4063
+  workflow_digest: 3da13fbfd78f62fb4385d00299141cae9a0d429bcc8a5c1d21643f48c78462b9
+event_type: preregistration-approved
+occurred_at: '2026-09-02T08:28:21.202108Z'
+payload:
+  preregistration_digest: 2b924acadabc1eeab678184494a9ba0dd8fe37f5c6745cd20b2cb214e163b3f7
+  preregistration_path: manifests/preregistration.yml
+previous_event_digest: df106e320ee1b878d3c30b984dba9781c4843bf549a21c91f89e8555281c306a
+schema_version: 1
+sequence: 2
+study_id: tsm-mean-reversion-volume-leads--v001

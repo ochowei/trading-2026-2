@@ -1,0 +1,24 @@
+files:
+  - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+    path: src/trading_2026_2/__init__.py
+  - digest: f284d6dd235360b3940313c3d3c1d9204e2ec093f45014620e754feac6ba5b5a
+    path: src/trading_2026_2/tsm_mean_reversion_volume_leads.py
+  - digest: b5adbe34a2443349fa96dc213ea83eb7e70be3f66c0e3677b6e39d7b91b7bb57
+    path: tests/test_tsm_mean_reversion_volume_leads.py
+  - digest: 569a79b662f4eea299e9adec56aa5e9f471ef1d45970060b3a910a7d3b452a3f
+    path: research/tsm-mean-reversion-volume-leads--v001/run_development.py
+  - digest: 48a8b91a168c23767ea266ca01d78e3d079f9b6169c585b76b85073b1a455b62
+    path: research/tsm-mean-reversion-volume-leads--v001/run_historical_evaluation.py
+  - digest: 76921bf3e91dd075443c787b6102b43c918f77971b1699ee0e832a9527663bf1
+    path: research/tsm-mean-reversion-volume-leads--v001/acquire_snapshots.py
+  - digest: 2b924acadabc1eeab678184494a9ba0dd8fe37f5c6745cd20b2cb214e163b3f7
+    path: research/tsm-mean-reversion-volume-leads--v001/preregistration.yml
+  - digest: a15ecc34bee5c770d8103969aeb49ac162761a10ef8448778d24a38b241a3275
+    path: research/tsm-mean-reversion-volume-leads--v001/qualification-spec.yml
+  - digest: db8edd1e4f472eac69fb1c228d49b1d538c479cc1139ace8d8ecfff7cb277836
+    path: research/tsm-mean-reversion-volume-leads--v001/candidate-definition.yml
+  - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+    path: pyproject.toml
+  - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+    path: uv.lock
+schema_version: 1

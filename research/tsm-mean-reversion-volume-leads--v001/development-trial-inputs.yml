@@ -1,0 +1,52 @@
+candidate_id: tsm-mr-volume-lead-v001
+cost_models:
+  base:
+    fee_per_side_bps: '1'
+    slippage_per_side_bps: '5'
+  stress:
+    fee_per_side_bps: '2'
+    slippage_per_side_bps: '20'
+data_bindings:
+  development_digest: 5b57ef60c473f3566ac91715ebde749351043673ade5ca2d8d437f3039ae745d
+  development_path: research/tsm-mean-reversion-volume-leads--v001/data/snapshots/TSM-development--sha256-5b57ef60c473f3566ac91715ebde749351043673ade5ca2d8d437f3039ae745d.csv
+  warmup_digest: 7b20dd43983deb8b9210cb65cb247d8ac6877ca2f006653c8f23224ec00bb253
+  warmup_path: research/tsm-mean-reversion-volume-leads--v001/data/snapshots/TSM-warmup-only--sha256-7b20dd43983deb8b9210cb65cb247d8ac6877ca2f006653c8f23224ec00bb253.csv
+date_controls:
+  formal_provider_access: false
+  signal_end: '2018-12-31'
+  signal_start: '2014-01-01'
+  warmup_end: '2013-12-31'
+  warmup_start: '2013-01-01'
+development_diagnostics:
+  block_lengths:
+    - 3
+    - 5
+  bootstrap_seed: 20260904
+  leave_one_signal_year_out: true
+  repetitions: 50000
+  seed_application: exact-same-seed-for-each-block-length
+execution:
+  cooldown_anchor: completed-position-exit
+  cooldown_completed_session_steps_after_exit: 5
+  entry: next-XNYS-open
+  holding_sessions: 15
+  intrabar_ambiguity: adverse-stop-first
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    modeled_stop_includes_costs: true
+    risk_fraction_of_pre_entry_equity: '0.02'
+  stop_market_gtc: '-0.04'
+  target_limit_day: '0.04'
+preregistration_digest: 2b924acadabc1eeab678184494a9ba0dd8fe37f5c6745cd20b2cb214e163b3f7
+schema_version: 1
+signal:
+  mean_reversion_close_vs_sma20_gap_minimum: '0.02'
+  mean_reversion_rsi_length: 2
+  mean_reversion_rsi_maximum: '35'
+  mean_reversion_sma_length: 20
+  volume_average_length: 20
+  volume_lead_window: 5
+  volume_spike_ratio_minimum: '1.25'
+source_bundle_digest: e1e71fa86b853f3ecbe6f688eb76e009ab0a2d82569accc47ebf38d57eae4063
+strategy_engine_digest: f284d6dd235360b3940313c3d3c1d9204e2ec093f45014620e754feac6ba5b5a
+study_procedure_digest: 569a79b662f4eea299e9adec56aa5e9f471ef1d45970060b3a910a7d3b452a3f
