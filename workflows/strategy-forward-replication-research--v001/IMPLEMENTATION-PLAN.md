@@ -1,4 +1,4 @@
-# Strategy Forward Replication Research v001 修復計畫
+# Strategy Forward Replication Research v001 實作計畫與驗收紀錄
 
 狀態：implemented，已於 2026-09-02 由 trusted approver `william` 核准啟用
 交付結果：active release，已建立 `release.yml`
@@ -406,6 +406,8 @@ uv run ruff check .
 - **同一人兼任 reviewer 被誤解為人員獨立**：文件統一表述為「獨立重算」，不宣稱職責分離。
 
 ## Definition of Done
+
+以下條件記錄 release candidate 交付當下的完成標準；後續正式核准與啟用狀態請見本文件開頭。
 
 以下全部成立才算完成本計畫：
 
