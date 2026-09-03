@@ -1,0 +1,16 @@
+authority: none
+bindings:
+  development_evidence_digest: 6dd9e26b892648f356109ea906d01ef7d197b4065ef57d7ee2fd16e0a0d792d1
+  event_chain_head_digest: f6ca82530642cc906eebacfc0727604df3b76b6510509b8318e6272100361861
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  preregistration_digest: f72b71823a2f8a100add496b1cc1e62fbc04136aad2a6d9b74563d9ad37f6de7
+  source_bundle_digest: 286ec26e2ee48f312aea6025f611d8eb8c9c3d9eca8e9243581693e66a13a85c
+  trial_registry_digest: 22b01fe1ab211bcdaacda1e291e86544d2c2aab46b3dae718cb19416d64632da
+  workflow_digest: 3da13fbfd78f62fb4385d00299141cae9a0d429bcc8a5c1d21643f48c78462b9
+outcome: fail
+reasons:
+  - stress block bootstrap 的最大高於 10% 回撤比例為 0.25012，超過預先登記的 0.10 上限；最小正報酬比例為 0.60002，低於 0.80 門檻。
+  - stress leave-one-signal-year-out 的最低 profit factor 為 0.9675476497284289，低於必須嚴格大於 1.00 的門檻；最低 return 為 -0.004588353946673451，未嚴格大於 0。
+  - 雖然 29 筆完成交易、5 個訊號年度以及整體 base/stress 報酬與 profit factor gate 通過，但上述 Development 穩健性 gate 失敗，因此 candidate_available 必須為 false；本 Study 不進行 candidate freeze 或正式 Evaluation。
+recomputed: true
+schema_version: 1

@@ -1,0 +1,32 @@
+files:
+  - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+    path: pyproject.toml
+  - digest: fe7fef89ef00a6d10aca25344179c0339c6fd5269e17538c3c600d7b6febe390
+    path: research/tsm-mean-reversion-volume-lead-setup--v003/candidate-definition.yml
+  - digest: f22063efc0264a093063e7b6b347d513f3c587a9689c2755d0ae4ac3555a2d37
+    path: research/tsm-mean-reversion-volume-lead-setup--v003/data-snapshot-acquisition.yml
+  - digest: b01ad417a536f0299f456fceeaf0370c1745654b52d53c87fe509974977105f0
+    path: research/tsm-mean-reversion-volume-lead-setup--v003/data-snapshot-set.yml
+  - digest: 300a8fff4d0262962af1988f8a934a16e1eb20ffe6234fbbd10e3cd0ef463696
+    path: research/tsm-mean-reversion-volume-lead-setup--v003/implementation-contract.yml
+  - digest: f72b71823a2f8a100add496b1cc1e62fbc04136aad2a6d9b74563d9ad37f6de7
+    path: research/tsm-mean-reversion-volume-lead-setup--v003/preregistration.yml
+  - digest: 13d93d954fea0e0563153d5902f4eece96fa598e1666b8de57bb6532580a15ae
+    path: research/tsm-mean-reversion-volume-lead-setup--v003/qualification-spec.yml
+  - digest: c8a400f1905069e32385e0ab9d807dca5fa3dc14e15ccfeb16c11a363fa468ee
+    path: research/tsm-mean-reversion-volume-lead-setup--v003/run_development.py
+  - digest: 03b2a2d72d95301565959083a4dd427310cc337925a31d1a8a45040cb6d2c33e
+    path: research/tsm-mean-reversion-volume-lead-setup--v003/run_historical_evaluation.py
+  - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+    path: src/trading_2026_2/__init__.py
+  - digest: 2fd3fdf1cea0e95d4b2aa4bab869cb66ca50f14d4fdc97644a38a342acb988e7
+    path: src/trading_2026_2/tsm_mean_reversion_reversal_trigger_v001.py
+  - digest: 3efa709cfc004b75d7f1789367be353ff2715824f77f2421eedfdbe468154513
+    path: src/trading_2026_2/tsm_mean_reversion_volume_lead_setup_v003.py
+  - digest: 3257e2eccc3a7db5d2c78cd0e66709204bedb069ac815cb1fdbf83a743dc2a56
+    path: tests/test_tsm_mean_reversion_reversal_trigger_v001.py
+  - digest: 52019ee4b9636f5a49694dc8aa8f7e3c3d503075367fb423ec35ebc40a4ec675
+    path: tests/test_tsm_mean_reversion_volume_lead_setup_v003.py
+  - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+    path: uv.lock
+schema_version: 1
