@@ -1,0 +1,28 @@
+files:
+  - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+    path: pyproject.toml
+  - digest: 3898aa6ef7567d7ffdc58d7e58c72efeffd63a01542f9706eeb27b179f0c8456
+    path: research/tsm-mean-reversion-reversal-trigger--v002/candidate-definition.yml
+  - digest: f22063efc0264a093063e7b6b347d513f3c587a9689c2755d0ae4ac3555a2d37
+    path: research/tsm-mean-reversion-reversal-trigger--v002/data-snapshot-acquisition.yml
+  - digest: b01ad417a536f0299f456fceeaf0370c1745654b52d53c87fe509974977105f0
+    path: research/tsm-mean-reversion-reversal-trigger--v002/data-snapshot-set.yml
+  - digest: e52a7bb289ac654b22baa320e0e603cd3c0059aa0972cda2d0e0a55ba02a7a92
+    path: research/tsm-mean-reversion-reversal-trigger--v002/implementation-contract.yml
+  - digest: 112c4ca5dfefe4900599e84ea71e23e7373c355b25e04417802dd7ab5d177ad8
+    path: research/tsm-mean-reversion-reversal-trigger--v002/preregistration.yml
+  - digest: 886e48a04f99babdc31226b3dba83e49da7b6246d2b1df4e3e1a67892eb0788d
+    path: research/tsm-mean-reversion-reversal-trigger--v002/qualification-spec.yml
+  - digest: a93b36111ea9447f288da41fcc7f3526faf72c1af9f6a7f131aab647df7e2276
+    path: research/tsm-mean-reversion-reversal-trigger--v002/run_development.py
+  - digest: f3f0edf4b394916b3143ce04b770d277fdce3dfcb2924a4e30eb4f866014669b
+    path: research/tsm-mean-reversion-reversal-trigger--v002/run_historical_evaluation.py
+  - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+    path: src/trading_2026_2/__init__.py
+  - digest: 2fd3fdf1cea0e95d4b2aa4bab869cb66ca50f14d4fdc97644a38a342acb988e7
+    path: src/trading_2026_2/tsm_mean_reversion_reversal_trigger_v001.py
+  - digest: 3257e2eccc3a7db5d2c78cd0e66709204bedb069ac815cb1fdbf83a743dc2a56
+    path: tests/test_tsm_mean_reversion_reversal_trigger_v001.py
+  - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+    path: uv.lock
+schema_version: 1

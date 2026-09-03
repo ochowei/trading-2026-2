@@ -1,0 +1,18 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: b0b269b687f0cf304ecb624fe1e946a34cfafaaba8e89c812897e47976956244
+  workflow_digest: 3da13fbfd78f62fb4385d00299141cae9a0d429bcc8a5c1d21643f48c78462b9
+event_type: study-created
+occurred_at: '2026-09-02T14:18:24.066806Z'
+payload:
+  experiment_family: tsm-mean-reversion-volume-lead-reversal-trigger-v002
+  replay_operator: william
+  research_owner: william
+  research_round_id: tsm-mean-reversion-followup-round-002
+  source_bundle_digest: b0b269b687f0cf304ecb624fe1e946a34cfafaaba8e89c812897e47976956244
+  source_bundle_path: manifests/source-bundle.yml
+previous_event_digest: null
+schema_version: 1
+sequence: 1
+study_id: tsm-mean-reversion-reversal-trigger--v002

@@ -1,0 +1,14 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 9b6bd4484da18c49b97b41c47094ed3db4b15cc885b5353dbc44998557266a3f
+  workflow_digest: 3da13fbfd78f62fb4385d00299141cae9a0d429bcc8a5c1d21643f48c78462b9
+event_type: development-authorized
+occurred_at: '2026-09-02T14:10:54.806923Z'
+payload:
+  evidence_digest: c660c779ba613eceabe1be7d4190f7d40c31cac7f68d3fb5c5315d9e76d3bfb5
+  evidence_path: evidence/development-authorization.yml
+previous_event_digest: 1e95f5347b7bd63f4272e9fca2089f6c5b821a4d3041df463cb601b9736d40fb
+schema_version: 1
+sequence: 3
+study_id: tsm-mean-reversion-reversal-trigger--v001

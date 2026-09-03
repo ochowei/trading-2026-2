@@ -1,0 +1,34 @@
+candidate_freeze: null
+evidence:
+  development: 6070c36764289a47b6a4c35cfbea022df01deed5076bbfb99b10de045e3aef55
+lifecycle:
+  current_event: study-terminal
+  event_chain_head_digest: 2e750866f2f21a022c3d77b71db62761a0f2fe8da37bcea96eecfba284ffe4ef
+  event_count: 6
+  status: terminal
+outcome:
+  authority: none
+  status: fail
+preregistration:
+  digest: 112c4ca5dfefe4900599e84ea71e23e7373c355b25e04417802dd7ab5d177ad8
+provenance:
+  status: null
+schema_version: 1
+study:
+  identity:
+    experiment_family: tsm-mean-reversion-volume-lead-reversal-trigger-v002
+    replay_operator: william
+    research_owner: william
+    research_round_id: tsm-mean-reversion-followup-round-002
+    source_bundle_digest: b0b269b687f0cf304ecb624fe1e946a34cfafaaba8e89c812897e47976956244
+    source_bundle_path: manifests/source-bundle.yml
+  study_id: tsm-mean-reversion-reversal-trigger--v002
+trial_registry:
+  digest: 0fa3d6432216f6457e511e5bf2829857ce387a6c9d3ddb0def3c44abbef9dbd1
+  recorded_trial_count: 1
+  trial_ids:
+    - tsm-mr-volume-lead-upclose-v002
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: b0b269b687f0cf304ecb624fe1e946a34cfafaaba8e89c812897e47976956244
+  workflow_digest: 3da13fbfd78f62fb4385d00299141cae9a0d429bcc8a5c1d21643f48c78462b9
