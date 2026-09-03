@@ -1,0 +1,50 @@
+candidate_freeze:
+  baseline_family: simple-mean-reversion
+  baseline_id: tsm-mean-reversion-two-stage-baseline-v002
+  baseline_objectively_simpler: true
+  candidate_digest: d1e11c073376f50eca4dca4c6fee728f1144f0e56d439da6da071a80429c8fc6
+  development_evidence_digest: 7591cf86b1545ba7f891ef00f63a13fe7529aeb906d9316d77e12cd764198b40
+  evaluation_snapshot_digest: 41094b91da3235f2bb7d9cb97d1234e7c3581ab031a4ee3c63ded377c66c9410
+  fold_inventory_digest: 142fa9ac20ad0df32a13a5f6ad0ce1da9d14ea909c47406f3476ae7e55d65df8
+  qualification_spec_digest: 7e9a9e23365a0cac7330dc1db2e0f0bef88101d4f95f63d13fda8346593d47ec
+  replay_snapshot_digest: 29ed746f4f9f04412c305a387f02bea8aed07accba656ebd46aa01957a5265b2
+  selected_candidate_id: tsm-mr-two-stage-reversal-v002
+  selection_evidence_digest: 0e41f10b4823ca1944922cb7ed9534cb2678a5eb72d1038f511144f437d59d82
+  selection_evidence_path: evidence/selection-evidence.yml
+  snapshot_set_digest: b01ad417a536f0299f456fceeaf0370c1745654b52d53c87fe509974977105f0
+  snapshot_set_path: manifests/data-snapshot-set.yml
+  trial_registry_digest: ad1e0720d3e35f555b8e9587cee72c71d34d6840b465c27b52ff54927948eaf2
+evidence:
+  candidate-freeze: eaa68a743159fcfd7ca891d7d3a3d56139e6d4b86ad228cdea2278ddcd6fa68d
+  development: 7591cf86b1545ba7f891ef00f63a13fe7529aeb906d9316d77e12cd764198b40
+lifecycle:
+  current_event: candidate-frozen
+  event_chain_head_digest: b1fbe5681a720ae978038be369c6dfaf404dde86d712e383e70052b9ec075237
+  event_count: 7
+  status: active
+outcome:
+  authority: none
+  status: pending
+preregistration:
+  digest: 5c62b4204dad7403d277cfac34ceaeb7df51bda9611988fc0649c1e16abbce6b
+provenance:
+  status: verified-clean
+schema_version: 1
+study:
+  identity:
+    experiment_family: tsm-mean-reversion-two-stage-volume-reversal-v002
+    replay_operator: william
+    research_owner: william
+    research_round_id: 2026-09-03-tsm-two-stage-v002
+    source_bundle_digest: db8a84e2899bb7e6984826dd48f6d20f1ef16d2d3cb9651fddb6b3f49ed8f364
+    source_bundle_path: manifests/source-bundle.yml
+  study_id: tsm-mean-reversion-two-stage-volume-reversal--v002
+trial_registry:
+  digest: ad1e0720d3e35f555b8e9587cee72c71d34d6840b465c27b52ff54927948eaf2
+  recorded_trial_count: 1
+  trial_ids:
+    - tsm-mr-two-stage-reversal-v002
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: db8a84e2899bb7e6984826dd48f6d20f1ef16d2d3cb9651fddb6b3f49ed8f364
+  workflow_digest: 3da13fbfd78f62fb4385d00299141cae9a0d429bcc8a5c1d21643f48c78462b9
