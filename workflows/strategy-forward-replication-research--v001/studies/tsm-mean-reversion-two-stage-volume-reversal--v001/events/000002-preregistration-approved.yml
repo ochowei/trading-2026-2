@@ -1,0 +1,14 @@
+actor_id: codex
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 1431a80f606366fa4cfe27056895946833dd2659b38f5e7f708c3d1181e38180
+  workflow_digest: 3da13fbfd78f62fb4385d00299141cae9a0d429bcc8a5c1d21643f48c78462b9
+event_type: preregistration-approved
+occurred_at: '2026-09-03T06:45:26.955329Z'
+payload:
+  preregistration_digest: 32f294b5e3e3200f3ab5d61119680d11537705b4a3c93c133753787d4e061031
+  preregistration_path: manifests/preregistration.yml
+previous_event_digest: 6a5117f1a60894c2f0b57bcaca6a47fea062c78647ab5809dd9448dbc7a936ed
+schema_version: 1
+sequence: 2
+study_id: tsm-mean-reversion-two-stage-volume-reversal--v001
