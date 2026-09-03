@@ -1,25 +1,29 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import shutil
+import subprocess
 import sys
 from pathlib import Path
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 STUDY_ID = "tsm-mean-reversion-volume-leads--v002"
+PRECREATE_STUDY_ID = "tsm-mean-reversion-reversal-trigger--v002"
 if str(REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_ROOT))
 WORKFLOW_ROOT = REPOSITORY_ROOT / "workflows" / "strategy-forward-replication-research--v001"
 if str(WORKFLOW_ROOT) not in sys.path:
     sys.path.insert(0, str(WORKFLOW_ROOT))
 
-from validator.canonical_yaml import canonical_bytes  # noqa: E402
+from validator.canonical_yaml import canonical_bytes, canonical_digest, load_canonical  # noqa: E402
 
 from research.tools.studyctl import (  # noqa: E402
     _derived_history_sessions,
     context_for,
     run_contract,
     run_identity,
+    run_precreate,
     run_synthetic,
 )
 
@@ -49,6 +53,127 @@ def test_history_boundary_uses_prior_volume_window() -> None:
     }
 
     assert _derived_history_sessions(values, None) == 25
+
+
+def _precreate_repository(tmp_path: Path) -> tuple[Path, Path]:
+    """建立沒有 Study Event、但含有完整 research/source fixture 的暫存 repository。"""
+
+    research_root = tmp_path / "research" / PRECREATE_STUDY_ID
+    shutil.copytree(
+        REPOSITORY_ROOT / "research" / "tsm-mean-reversion-reversal-trigger--v002",
+        research_root,
+    )
+    source_bundle = load_canonical(research_root / "source-bundle.yml")
+    for item in source_bundle["files"]:
+        source = REPOSITORY_ROOT / item["path"]
+        destination = tmp_path / item["path"]
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, destination)
+    return tmp_path, research_root
+
+
+def _write_yaml(path: Path, value: dict[str, object]) -> None:
+    path.write_bytes(canonical_bytes(value))
+
+
+def test_precreate_passes_without_a_study_event(tmp_path: Path) -> None:
+    repository_root, research_root = _precreate_repository(tmp_path)
+
+    result = run_precreate(context_for(repository_root, PRECREATE_STUDY_ID))
+
+    assert result.status == "passed"
+    assert result.details["study_event_required"] is False
+    assert not (
+        repository_root
+        / "workflows"
+        / "strategy-forward-replication-research--v001"
+        / "studies"
+        / PRECREATE_STUDY_ID
+        / "events"
+    ).exists()
+    assert (research_root / "qualification-spec.yml").is_file()
+
+
+def test_precreate_rejects_stale_preregistration_binding_with_details(tmp_path: Path) -> None:
+    repository_root, research_root = _precreate_repository(tmp_path)
+    preregistration_path = research_root / "preregistration.yml"
+    preregistration = load_canonical(preregistration_path)
+    preregistration["hypothesis"] = f"{preregistration['hypothesis']}；測試變更"
+    _write_yaml(preregistration_path, preregistration)
+
+    result = run_precreate(context_for(repository_root, PRECREATE_STUDY_ID))
+
+    finding = next(
+        item for item in result.errors if item["code"] == "stale-preregistration-binding"
+    )
+    assert result.status == "failed"
+    assert finding["expected"] == canonical_digest(preregistration)
+    assert finding["actual"] == load_canonical(research_root / "qualification-spec.yml")[
+        "preregistration_digest"
+    ]
+    assert finding["path"] == f"research/{PRECREATE_STUDY_ID}/qualification-spec.yml"
+
+
+def test_precreate_rejects_drifted_same_name_study_manifest(tmp_path: Path) -> None:
+    repository_root, research_root = _precreate_repository(tmp_path)
+    manifest_root = (
+        repository_root
+        / "workflows"
+        / "strategy-forward-replication-research--v001"
+        / "studies"
+        / PRECREATE_STUDY_ID
+        / "manifests"
+    )
+    manifest_root.mkdir(parents=True)
+    preregistration = load_canonical(research_root / "preregistration.yml")
+    preregistration["hypothesis"] = f"{preregistration['hypothesis']}；manifest drift"
+    _write_yaml(manifest_root / "preregistration.yml", preregistration)
+
+    result = run_precreate(context_for(repository_root, PRECREATE_STUDY_ID))
+
+    finding = next(
+        item for item in result.errors if item["code"] == "copy-forward-artifact-drift"
+    )
+    assert finding["path"] == (
+        "workflows/strategy-forward-replication-research--v001/"
+        f"studies/{PRECREATE_STUDY_ID}/manifests/preregistration.yml"
+    )
+    assert finding["expected"] != finding["actual"]
+
+
+def test_precreate_cli_emits_json_and_exit_code_one_for_stale_binding(tmp_path: Path) -> None:
+    repository_root, research_root = _precreate_repository(tmp_path)
+    preregistration_path = research_root / "preregistration.yml"
+    preregistration = load_canonical(preregistration_path)
+    preregistration["hypothesis"] = f"{preregistration['hypothesis']}；CLI 測試變更"
+    _write_yaml(preregistration_path, preregistration)
+    studyctl = REPOSITORY_ROOT / "research" / "tools" / "studyctl.py"
+
+    completed = subprocess.run(
+        [
+            sys.executable,
+            str(studyctl),
+            "--repository-root",
+            str(repository_root),
+            "precreate",
+            PRECREATE_STUDY_ID,
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    output = json.loads(completed.stdout)
+    assert completed.returncode == 1
+    assert output["status"] == "failed"
+    assert any(
+        item["code"] == "stale-preregistration-binding"
+        and item["expected"]
+        and item["actual"]
+        and item["path"].endswith("qualification-spec.yml")
+        for check in output["checks"]
+        for item in check["errors"]
+    )
 
 
 def test_synthetic_runs_against_frozen_engine_and_contract(tmp_path: Path) -> None:
@@ -167,3 +292,17 @@ def test_synthetic_runs_against_frozen_engine_and_contract(tmp_path: Path) -> No
         for item in rejected.errors
         if item["code"] == "synthetic-case-failed"
     )
+
+
+def test_synthetic_supports_both_contract_close_directions() -> None:
+    upward = run_synthetic(
+        context_for(REPOSITORY_ROOT, "tsm-mean-reversion-reversal-trigger--v002")
+    )
+    downward = run_synthetic(
+        context_for(REPOSITORY_ROOT, "tsm-mean-reversion-volume-leads--v003")
+    )
+
+    assert upward.status == "passed"
+    assert downward.status == "passed"
+    assert upward.details["passed_cases"][-1] == "holding-cooldown"
+    assert downward.details["passed_cases"][-1] == "holding-cooldown"

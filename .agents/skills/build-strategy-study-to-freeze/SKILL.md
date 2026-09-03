@@ -89,11 +89,45 @@ preregistration，也可以內嵌，但必須由 candidate／preregistration man
 - volume lead 是否只使用前一個 session 可取得的資料；
 - stop、target、gap、同日先後順序、holding span、cooldown 等會改變 outcome 的邊界語意。
 
+建立新 Study 的硬性順序是：
+
+```text
+建立 research bundle
+→ 執行 pre-create binding preflight
+→ 所有 binding 通過
+→ 才能追加 study-created Event
+```
+
+`check_new_study.py` 仍只負責 Study ID 的唯一性與安全性；它不能取代
+`studyctl precreate`。Research 文件建立完成後，必須先執行：
+
+```bash
+uv run python research/tools/studyctl.py \
+  --repository-root . \
+  precreate <study-id>
+```
+
+`precreate` 不需要任何 Study Event，會以同名 research bundle 核對跨文件 binding、
+Source Bundle 檔案與 digest，以及已存在的同名 Study manifest copy。只有它輸出
+`status: "passed"` 且 exit code 為 0，才可以用 guarded writer 追加第一個
+`study-created` Event。Pre-create 失敗時不得建立任何 Study Event，也不得用補造
+candidate、selection 或 provenance evidence 的方式讓 CLI 通過。
+
+若 preregistration 有任何改變，必須重新計算並更新所有下游 digest，包括
+qualification、Development trial inputs、Source Bundle 及其所綁定的 evidence/input；
+不得只修改其中一個 digest。已發布的 artifact 與 Event 一律不可覆寫；有錯時保留舊檔，
+以新路徑發布修正版並由 writer 重新綁定。
+
+Development gate 失敗時仍須保留 Trial，依 preregistered 規則進入合法的
+`terminal-without-candidate`；candidate freeze 不適用，也不得為了滿足 CLI 所需欄位
+製造 candidate、selection 或 provenance evidence。
+
 執行順序如下：
 
 1. 任何寫入前先跑 `check_new_study.py`。這一步不能用 `studyctl all` 取代，因為此時新 Study 的必要檔案尚未存在。
-2. Study、同名 research bundle、preregistration、candidate、qualification、Source Bundle 與 implementation contract 已由正式 writer 發布後，至少在 `preregistration-approved` 前跑一次 `contract` 與 `synthetic`；需要定位問題時可先分開跑 `identity`。
-3. 候選選擇證據與所有 freeze 前 artifact 完成後、追加 `candidate-frozen` 前，從 repository 根目錄執行：
+2. 建立 research bundle 後先跑 `studyctl precreate`；只有 binding 全部通過，才能建立 Study 目錄或追加 `study-created` Event。
+3. Study、同名 research bundle、preregistration、candidate、qualification、Source Bundle 與 implementation contract 已由正式 writer 發布後，至少在 `preregistration-approved` 前跑一次 `contract` 與 `synthetic`；需要定位問題時可先分開跑 `identity`。
+4. 候選選擇證據與所有 freeze 前 artifact 完成後、追加 `candidate-frozen` 前，從 repository 根目錄執行：
 
 ```bash
 uv run python research/tools/studyctl.py \
