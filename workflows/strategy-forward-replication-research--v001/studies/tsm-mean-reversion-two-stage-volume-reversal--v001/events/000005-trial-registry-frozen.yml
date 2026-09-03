@@ -1,0 +1,18 @@
+actor_id: codex
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 01d28df7f4bb442d7111145daa09baff0bdf1ce38605c67f6895af8c088e4456
+  workflow_digest: 3da13fbfd78f62fb4385d00299141cae9a0d429bcc8a5c1d21643f48c78462b9
+event_type: trial-registry-frozen
+occurred_at: '2026-09-03T06:48:43.395580Z'
+payload:
+  candidate_available: true
+  complete_family_trial_ids:
+    - tsm-mr-two-stage-reversal-v001
+  maximum_trials: 1
+  recorded_trial_count: 1
+  trial_registry_digest: fb5485ee8b00abec6669edcd94d4c639c4223960581935e3223545123188c36b
+previous_event_digest: 30a6ea17fb7e5b4d960b40176a04771462cdcaada1edb96d0f0833df35f73d99
+schema_version: 1
+sequence: 5
+study_id: tsm-mean-reversion-two-stage-volume-reversal--v001

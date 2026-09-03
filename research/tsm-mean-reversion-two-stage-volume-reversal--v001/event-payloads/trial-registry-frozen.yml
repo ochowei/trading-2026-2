@@ -1,0 +1,6 @@
+candidate_available: true
+complete_family_trial_ids:
+  - tsm-mr-two-stage-reversal-v001
+maximum_trials: 1
+recorded_trial_count: 1
+trial_registry_digest: fb5485ee8b00abec6669edcd94d4c639c4223960581935e3223545123188c36b

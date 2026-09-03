@@ -1,0 +1,27 @@
+actor_id: codex
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 01d28df7f4bb442d7111145daa09baff0bdf1ce38605c67f6895af8c088e4456
+  workflow_digest: 3da13fbfd78f62fb4385d00299141cae9a0d429bcc8a5c1d21643f48c78462b9
+event_type: candidate-frozen
+occurred_at: '2026-09-03T06:51:52.808327Z'
+payload:
+  baseline_family: simple-mean-reversion
+  baseline_id: tsm-mean-reversion-two-stage-baseline-v001
+  baseline_objectively_simpler: true
+  candidate_digest: d1e11c073376f50eca4dca4c6fee728f1144f0e56d439da6da071a80429c8fc6
+  development_evidence_digest: 5b2804d5033d4dc546a6801d95c607f7f183f5e311b31941349ccde7c12cb6d1
+  evaluation_snapshot_digest: 41094b91da3235f2bb7d9cb97d1234e7c3581ab031a4ee3c63ded377c66c9410
+  fold_inventory_digest: 142fa9ac20ad0df32a13a5f6ad0ce1da9d14ea909c47406f3476ae7e55d65df8
+  qualification_spec_digest: c2133098a4e26d98ee6f9b039834346bfb31e8b9dc61dbeac3aa78b46a3482a6
+  replay_snapshot_digest: 29ed746f4f9f04412c305a387f02bea8aed07accba656ebd46aa01957a5265b2
+  selected_candidate_id: tsm-mr-two-stage-reversal-v001
+  selection_evidence_digest: 4515cfd388b6c1300cb5a8c75fa857fbf437be7c4afd5c149507c8ff340c2ec5
+  selection_evidence_path: evidence/selection-evidence.yml
+  snapshot_set_digest: b01ad417a536f0299f456fceeaf0370c1745654b52d53c87fe509974977105f0
+  snapshot_set_path: manifests/data-snapshot-set.yml
+  trial_registry_digest: fb5485ee8b00abec6669edcd94d4c639c4223960581935e3223545123188c36b
+previous_event_digest: 1a5030db01a159cdb285dbe7e5cf0ce209becd3c2c4026d34d602c5080045576
+schema_version: 1
+sequence: 7
+study_id: tsm-mean-reversion-two-stage-volume-reversal--v001
