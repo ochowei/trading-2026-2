@@ -14,6 +14,7 @@
 
 使用方式（全域參數要放在子命令前）：
 
+    python research/tools/studyctl.py --repository-root . precreate <study-id>
     python research/tools/studyctl.py --repository-root . all <study-id>
     python research/tools/studyctl.py --repository-root . identity <study-id>
     python research/tools/studyctl.py --repository-root . contract <study-id>
@@ -50,10 +51,17 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 WORKFLOW_NAME = "strategy-forward-replication-research--v001"
 STUDY_ID_PATTERN = re.compile(r"^[a-z0-9][a-z0-9-]{2,62}$")
 RESEARCH_PATH_PATTERN = re.compile(
-    r"(?:^|[\"'\s])research/(?P<name>[a-z0-9][a-z0-9-]{2,62})(?:/|$)"
+    r"(?<![A-Za-z0-9_-])research/(?P<name>[a-z0-9][a-z0-9-]{2,62})(?:/|$)"
 )
 SHARED_RESEARCH_ROOTS = {"market-data", "tools"}
 MISSING = object()
+PRECREATE_REQUIRED_DOCUMENTS = (
+    "preregistration.yml",
+    "candidate-definition.yml",
+    "qualification-spec.yml",
+    "development-trial-inputs.yml",
+    "source-bundle.yml",
+)
 
 WORKFLOW_ROOT = REPOSITORY_ROOT / "workflows" / WORKFLOW_NAME
 if str(WORKFLOW_ROOT) not in sys.path:
@@ -104,8 +112,24 @@ class CheckResult:
     def status(self) -> str:
         return "failed" if self.errors else "passed"
 
-    def error(self, code: str, message: str, *, path: Path | None = None) -> None:
-        self.errors.append(_finding(code, message, path=path))
+    def error(
+        self,
+        code: str,
+        message: str,
+        *,
+        path: Path | None = None,
+        expected: Any = MISSING,
+        actual: Any = MISSING,
+    ) -> None:
+        self.errors.append(
+            _finding(
+                code,
+                message,
+                path=path,
+                expected=expected,
+                actual=actual,
+            )
+        )
 
     def warning(self, code: str, message: str, *, path: Path | None = None) -> None:
         self.warnings.append(_finding(code, message, severity="warning", path=path))
@@ -125,12 +149,25 @@ class SyntheticFailure(RuntimeError):
     """Synthetic contract case 不符合預期。"""
 
 
+class CliArgumentError(RuntimeError):
+    """把 argparse 的使用錯誤轉成可供 CI 消費的結果。"""
+
+
+class JsonArgumentParser(argparse.ArgumentParser):
+    """保留 --help，同時讓其他 CLI 解析錯誤交給 main 輸出 JSON。"""
+
+    def error(self, message: str) -> None:
+        raise CliArgumentError(message)
+
+
 def _finding(
     code: str,
     message: str,
     *,
     severity: str = "error",
     path: Path | None = None,
+    expected: Any = MISSING,
+    actual: Any = MISSING,
 ) -> dict[str, Any]:
     value: dict[str, Any] = {
         "code": code,
@@ -139,6 +176,10 @@ def _finding(
     }
     if path is not None:
         value["path"] = str(path)
+    # precreate 的結果會直接交給 CI 或其他工具消費；沒有單一可比較值
+    # 的錯誤也保留欄位，並以 null 表示缺漏或未知。
+    value["expected"] = None if expected is MISSING else expected
+    value["actual"] = None if actual is MISSING else actual
     return value
 
 
@@ -219,6 +260,82 @@ def _load_document(
                 path=path,
             )
     return primary, primary_path
+
+
+def _display_path(context: StudyContext, path: Path) -> Path:
+    """把檢查結果中的路徑固定成 repository-relative 形式。"""
+
+    return Path(context.display_path(path))
+
+
+def _load_research_document(
+    context: StudyContext,
+    result: CheckResult,
+    name: str,
+    *,
+    required: bool = True,
+    compare_manifest: bool = True,
+) -> tuple[dict[str, Any] | None, Path | None]:
+    """只從同名 research bundle 載入文件，並核對已存在的 Study copy。"""
+
+    research_path = context.research_root / name
+    displayed_research_path = _display_path(context, research_path)
+    if not research_path.is_file():
+        if required:
+            result.error(
+                "missing-artifact",
+                f"找不到必要檔案：{name}",
+                path=displayed_research_path,
+                expected="file",
+                actual="missing",
+            )
+        return None, None
+
+    try:
+        value = load_canonical(research_path)
+    except Exception as exc:
+        result.error(
+            "invalid-canonical-yaml",
+            f"無法讀取 canonical YAML：{exc}",
+            path=displayed_research_path,
+            expected="repository-canonical YAML mapping",
+            actual=str(exc),
+        )
+        return None, research_path
+    if not isinstance(value, dict):
+        result.error(
+            "invalid-artifact-shape",
+            "artifact 最上層必須是 mapping",
+            path=displayed_research_path,
+            expected="mapping",
+            actual=type(value).__name__,
+        )
+        return None, research_path
+
+    if compare_manifest:
+        manifest_path = context.study_root / "manifests" / name
+        if manifest_path.is_file():
+            try:
+                manifest_value = load_canonical(manifest_path)
+            except Exception as exc:
+                result.error(
+                    "invalid-canonical-yaml",
+                    f"無法讀取同名 Study manifest：{exc}",
+                    path=_display_path(context, manifest_path),
+                    expected="repository-canonical YAML mapping",
+                    actual=str(exc),
+                )
+            else:
+                if manifest_value != value:
+                    result.error(
+                        "copy-forward-artifact-drift",
+                        f"同名 Study manifest 與 research 副本內容不一致：{name}",
+                        path=_display_path(context, manifest_path),
+                        expected=value,
+                        actual=manifest_value,
+                    )
+
+    return value, research_path
 
 
 def _get_path(value: Any, path: str | Iterable[str], default: Any = MISSING) -> Any:
@@ -457,14 +574,29 @@ def _engine_path(
         result.error(
             "engine-path-ambiguous",
             "無法從 Source Bundle 唯一找出策略引擎；請在 implementation contract 明寫 engine.path",
+            path=_display_path(context, context.research_root / "implementation-contract.yml"),
+            expected="one strategy engine path",
+            actual=candidates,
         )
         return None
     relative = candidates[0]
     if relative not in entries:
-        result.error("engine-not-in-source-bundle", f"策略引擎不在 Source Bundle：{relative}")
+        result.error(
+            "engine-not-in-source-bundle",
+            f"策略引擎不在 Source Bundle：{relative}",
+            path=_display_path(context, context.research_root / "source-bundle.yml"),
+            expected=relative,
+            actual=sorted(entries),
+        )
     path = _resolve_inside(context.repository_root, relative)
     if path is None:
-        result.error("engine-path-escapes-repository", f"策略引擎路徑逃出 repository：{relative}")
+        result.error(
+            "engine-path-escapes-repository",
+            f"策略引擎路徑逃出 repository：{relative}",
+            path=_display_path(context, context.research_root / "implementation-contract.yml"),
+            expected="repository-relative path",
+            actual=relative,
+        )
         return None
     if not path.is_file():
         result.error("missing-engine", f"找不到策略引擎：{relative}", path=path)
@@ -576,9 +708,21 @@ def _check_equal(
     path: Path | None = None,
 ) -> None:
     if left is MISSING or right is MISSING:
-        result.error("missing-contract-field", f"無法比較 {label}：缺少必要欄位", path=path)
+        result.error(
+            "missing-contract-field",
+            f"無法比較 {label}：缺少必要欄位",
+            path=path,
+            expected=None if right is MISSING else right,
+            actual=None if left is MISSING else left,
+        )
     elif not _semantic_equal(left, right):
-        result.error("contract-value-mismatch", f"{label} 不一致：{left!r} != {right!r}", path=path)
+        result.error(
+            "contract-value-mismatch",
+            f"{label} 不一致：{left!r} != {right!r}",
+            path=path,
+            expected=right,
+            actual=left,
+        )
 
 
 def _derived_history_sessions(values: dict[str, Any], indicator: dict[str, Any] | None) -> int:
@@ -610,6 +754,9 @@ def _check_gate_maps(
     result: CheckResult,
     preregistration: dict[str, Any],
     qualification: dict[str, Any],
+    *,
+    path: Path | None = None,
+    exact: bool = False,
 ) -> None:
     pairs = (
         (
@@ -621,10 +768,14 @@ def _check_gate_maps(
         ("replay", preregistration.get("replay_gates", {}), qualification.get("replay", {})),
     )
     for stage, registered, qualified in pairs:
-        if not _semantic_equal(registered, qualified):
+        equal = registered == qualified if exact else _semantic_equal(registered, qualified)
+        if not equal:
             result.error(
                 "gate-source-drift",
                 f"{stage} gates 沒有和 preregistration 完全一致",
+                path=path,
+                expected=registered,
+                actual=qualified,
             )
 
 
@@ -870,15 +1021,34 @@ def run_contract(context: StudyContext) -> CheckResult:
     return result
 
 
-def _make_bars(rows: int, signal_indices: Iterable[int] = ()) -> pd.DataFrame:
+def _make_bars(
+    rows: int,
+    signal_indices: Iterable[int] = (),
+    *,
+    close_direction: str | None = None,
+) -> pd.DataFrame:
+    if close_direction not in {None, "above", "below"}:
+        raise SyntheticFailure(f"不支援的 synthetic 收盤方向：{close_direction!r}")
+    signals = list(signal_indices)
     index = pd.date_range("2020-01-02", periods=rows, freq="B")
     close = np.full(rows, 100.0)
     open_price = np.full(rows, 100.0)
     high = np.full(rows, 101.0)
     low = np.full(rows, 99.0)
     volume = np.full(rows, 1_000_000.0)
-    for order, signal_index in enumerate(signal_indices):
-        close[signal_index] = 97.0 - order
+    for order, signal_index in enumerate(signals):
+        if close_direction == "above":
+            # 訊號日前一日先下跌，訊號日小幅反彈；如此同時滿足
+            # close > prior close 與仍低於平滑均線，並保留 RSI 超賣。
+            # 兩個相鄰測試訊號時，後一個訊號會把前一個訊號日當成
+            # prior close；保留原本的 100，讓後一個訊號仍有 RSI loss。
+            if signal_index + 1 not in signals:
+                close[signal_index - 1] = 96.0
+                high[signal_index - 1] = 100.0
+                low[signal_index - 1] = 95.5
+            close[signal_index] = 97.0
+        else:
+            close[signal_index] = 97.0 - order
         high[signal_index] = 100.0
         low[signal_index] = close[signal_index] - 0.5
         if signal_index >= 5:
@@ -1000,11 +1170,45 @@ def _run_exit_cases(result: CheckResult, module: ModuleType) -> None:
     result.details["intraday_exit_cases"] = len(cases)
 
 
+def _synthetic_close_direction(contract: dict[str, Any], spec: Any) -> str | None:
+    """從 contract 或 frozen engine 決定 holding case 的訊號日方向。"""
+
+    direction_values: list[str] = []
+    price_direction = contract.get("price_direction_confirmation", {})
+    if isinstance(price_direction, dict):
+        if price_direction.get("close_above_prior_close") is True:
+            direction_values.append("above")
+        if price_direction.get("close_below_prior_close") is True:
+            direction_values.append("below")
+        rule = price_direction.get("rule")
+        if isinstance(rule, str):
+            if "above" in rule:
+                direction_values.append("above")
+            if "below" in rule:
+                direction_values.append("below")
+
+    if not direction_values:
+        if getattr(spec, "require_close_above_prior_close", False) is True:
+            direction_values.append("above")
+        if getattr(spec, "require_close_below_prior_close", False) is True:
+            direction_values.append("below")
+    unique = set(direction_values)
+    if len(unique) > 1:
+        raise SyntheticFailure(
+            "implementation contract 必須明示唯一的 close-above-prior-close "
+            "或 close-below-prior-close 方向"
+        )
+    # 沒有方向條件的舊引擎仍可用一般均值回歸訊號測 holding/cooldown；
+    # 這不替它假定 above 或 below contract。
+    return next(iter(unique), None)
+
+
 def _run_holding_cooldown_case(
     result: CheckResult,
     module: ModuleType,
     spec: Any,
     cost: Any,
+    contract: dict[str, Any],
 ) -> None:
     holding = _int_value(spec.holding_sessions, "engine holding_sessions")
     cooldown = _int_value(spec.cooldown_sessions, "engine cooldown_sessions")
@@ -1019,7 +1223,11 @@ def _run_holding_cooldown_case(
     if accepted_signal not in signal_indices:
         signal_indices.append(accepted_signal)
     rows = max(180, accepted_signal + holding + 5)
-    bars = _make_bars(rows, signal_indices)
+    bars = _make_bars(
+        rows,
+        signal_indices,
+        close_direction=_synthetic_close_direction(contract, spec),
+    )
     backtest_result = _call_backtest(module, bars, spec, cost)
     trades = getattr(backtest_result, "trades", ())
     accepted = getattr(backtest_result, "accepted_signal_sessions", ())
@@ -1077,7 +1285,10 @@ def run_synthetic(context: StudyContext) -> CheckResult:
         ("rsi", lambda: _run_rsi_case(result, module, spec, indicator)),
         ("readiness", lambda: _run_readiness_case(result, module, spec, values, indicator)),
         ("intraday-exit", lambda: _run_exit_cases(result, module)),
-        ("holding-cooldown", lambda: _run_holding_cooldown_case(result, module, spec, cost)),
+        (
+            "holding-cooldown",
+            lambda: _run_holding_cooldown_case(result, module, spec, cost, contract),
+        ),
     ]
     passed: list[str] = []
     for name, case in cases:
@@ -1099,26 +1310,662 @@ def _check_source_bundle(
 ) -> None:
     if not isinstance(source_bundle, dict):
         return
+    raw_files = source_bundle.get("files")
+    if not isinstance(raw_files, list):
+        result.error(
+            "invalid-source-bundle",
+            "Source Bundle 的 files 必須是 list",
+            path=source_bundle_path,
+            expected="list",
+            actual=raw_files,
+        )
+        return
+    seen_paths: set[str] = set()
+    for index, item in enumerate(raw_files):
+        if not isinstance(item, dict):
+            result.error(
+                "invalid-source-bundle-entry",
+                f"Source Bundle 第 {index} 筆不是 mapping",
+                path=source_bundle_path,
+                expected={"path": "string", "digest": "sha256"},
+                actual=item,
+            )
+            continue
+        relative = item.get("path")
+        digest = item.get("digest")
+        if (
+            not isinstance(relative, str)
+            or not relative
+            or not isinstance(digest, str)
+            or re.fullmatch(r"[0-9a-f]{64}", digest) is None
+        ):
+            result.error(
+                "invalid-source-bundle-entry",
+                f"Source Bundle 第 {index} 筆缺少有效 path 或 SHA-256 digest",
+                path=source_bundle_path,
+                expected={"path": "non-empty string", "digest": "64 lowercase hex characters"},
+                actual=item,
+            )
+            continue
+        if relative in seen_paths:
+            result.error(
+                "duplicate-source-bundle-path",
+                f"Source Bundle 重複列出檔案：{relative}",
+                path=source_bundle_path,
+                expected="unique paths",
+                actual=relative,
+            )
+        seen_paths.add(relative)
     entries = _source_bundle_entries(source_bundle)
     if not entries:
-        result.error("empty-source-bundle", "Source Bundle 沒有任何檔案", path=source_bundle_path)
+        result.error(
+            "empty-source-bundle",
+            "Source Bundle 沒有任何檔案",
+            path=source_bundle_path,
+            expected="at least one file entry",
+            actual=source_bundle.get("files"),
+        )
         return
     verified = 0
     for relative, expected_digest in sorted(entries.items()):
         source = _resolve_inside(context.repository_root, relative)
         if source is None:
-            result.error("source-path-escapes-repository", f"Source Bundle 路徑逃出 repository：{relative}", path=source_bundle_path)
+            result.error(
+                "source-path-escapes-repository",
+                f"Source Bundle 路徑逃出 repository：{relative}",
+                path=source_bundle_path,
+                expected="repository-relative path",
+                actual=relative,
+            )
             continue
         if not source.is_file():
-            result.error("missing-source-file", f"Source Bundle 檔案不存在：{relative}", path=source)
+            result.error(
+                "missing-source-file",
+                f"Source Bundle 檔案不存在：{relative}",
+                path=_display_path(context, source),
+                expected="file",
+                actual="missing",
+            )
             continue
         actual_digest = hashlib.sha256(source.read_bytes()).hexdigest()
         if actual_digest != expected_digest:
-            result.error("source-digest-mismatch", f"Source Bundle digest 不一致：{relative}", path=source)
+            result.error(
+                "source-digest-mismatch",
+                f"Source Bundle digest 不一致：{relative}",
+                path=_display_path(context, source),
+                expected=expected_digest,
+                actual=actual_digest,
+            )
             continue
+        if source.suffix in {".yml", ".yaml"}:
+            try:
+                load_canonical(source)
+            except Exception as exc:
+                result.error(
+                    "non-canonical-source-yaml",
+                    f"Source Bundle 內的 YAML 不是 canonical：{relative}；{exc}",
+                    path=_display_path(context, source),
+                    expected="repository-canonical YAML",
+                    actual=str(exc),
+                )
+                continue
         verified += 1
     result.details["source_bundle_file_count"] = len(entries)
     result.details["source_bundle_verified_file_count"] = verified
+
+
+def _collect_keyed_values(
+    value: Any,
+    keys: set[str],
+    path: tuple[str, ...] = (),
+) -> list[tuple[tuple[str, ...], Any]]:
+    found: list[tuple[tuple[str, ...], Any]] = []
+    if isinstance(value, dict):
+        for key, item in value.items():
+            next_path = (*path, str(key))
+            if str(key) in keys:
+                found.append((next_path, item))
+            found.extend(_collect_keyed_values(item, keys, next_path))
+    elif isinstance(value, list):
+        for index, item in enumerate(value):
+            found.extend(_collect_keyed_values(item, keys, (*path, str(index))))
+    return found
+
+
+def _identity_path(context: StudyContext, path: Path | None) -> Path:
+    return _display_path(context, path) if path is not None else Path(context.display_path(context.research_root))
+
+
+def _check_precreate_identities(
+    context: StudyContext,
+    result: CheckResult,
+    documents: dict[str, dict[str, Any] | None],
+    paths: dict[str, Path | None],
+) -> None:
+    """核對尚未建立 Event 時仍可確定的 Study、family 與 Trial identity。"""
+
+    preregistration = documents.get("preregistration.yml")
+    candidate = documents.get("candidate-definition.yml")
+    qualification = documents.get("qualification-spec.yml")
+    trial_inputs = documents.get("development-trial-inputs.yml")
+    if not all(
+        isinstance(value, dict)
+        for value in (preregistration, candidate, qualification, trial_inputs)
+    ):
+        return
+
+    identity_documents = (
+        ("candidate-definition.yml", candidate),
+        ("preregistration.yml", preregistration),
+        ("qualification-spec.yml", qualification),
+        ("development-trial-inputs.yml", trial_inputs),
+    )
+    for name, document in identity_documents:
+        assert isinstance(document, dict)
+        document_path = _identity_path(context, paths.get(name))
+        for key_path, actual in _collect_keyed_values(document, {"study_id"}):
+            if actual != context.study_id:
+                result.error(
+                    "study-id-mismatch",
+                    f"{name} 的 {'.'.join(key_path)} 不是目前 Study ID",
+                    path=document_path,
+                    expected=context.study_id,
+                    actual=actual,
+                )
+
+    complete_family = preregistration.get("complete_candidate_family")
+    if not isinstance(complete_family, list) or not complete_family or not all(
+        isinstance(item, str) for item in complete_family
+    ):
+        result.error(
+            "candidate-family-mismatch",
+            "preregistration 沒有可用的 complete candidate family",
+            path=_identity_path(context, paths.get("preregistration.yml")),
+            expected="非空的 candidate ID list",
+            actual=complete_family,
+        )
+        complete_family = []
+    elif len(complete_family) != len(set(complete_family)):
+        result.error(
+            "candidate-family-mismatch",
+            "complete candidate family 含有重複的 candidate ID",
+            path=_identity_path(context, paths.get("preregistration.yml")),
+            expected="unique candidate IDs",
+            actual=complete_family,
+        )
+
+    selected = _get_path(preregistration, "selection_rule.selected_candidate_id", MISSING)
+    if selected is MISSING:
+        result.error(
+            "candidate-identity-missing",
+            "preregistration 缺少 selected candidate identity",
+            path=_identity_path(context, paths.get("preregistration.yml")),
+            expected="selection_rule.selected_candidate_id",
+            actual=None,
+        )
+    elif selected not in complete_family:
+        result.error(
+            "candidate-family-mismatch",
+            "selected candidate 不在 preregistered candidate family",
+            path=_identity_path(context, paths.get("preregistration.yml")),
+            expected=complete_family,
+            actual=selected,
+        )
+
+    expected_candidate = selected if isinstance(selected, str) else MISSING
+    candidate_id_documents = (
+        ("candidate-definition.yml", candidate, {"candidate_id", "selected_candidate_id"}),
+        ("preregistration.yml", preregistration, {"candidate_id"}),
+        ("qualification-spec.yml", qualification, {"candidate_id", "selected_candidate_id"}),
+        (
+            "development-trial-inputs.yml",
+            trial_inputs,
+            {"candidate_id", "selected_candidate_id"},
+        ),
+    )
+    for name, document, keys in candidate_id_documents:
+        assert isinstance(document, dict)
+        document_path = _identity_path(context, paths.get(name))
+        for key_path, actual in _collect_keyed_values(document, keys):
+            if expected_candidate is not MISSING and actual != expected_candidate:
+                code = (
+                    "trial-identity-mismatch"
+                    if name == "development-trial-inputs.yml"
+                    else "candidate-identity-mismatch"
+                )
+                result.error(
+                    code,
+                    f"{name} 的 {'.'.join(key_path)} 與 selected candidate 不一致",
+                    path=document_path,
+                    expected=expected_candidate,
+                    actual=actual,
+                )
+
+    trial_id_values: list[tuple[str, tuple[str, ...], str]] = []
+    for name, document in identity_documents:
+        assert isinstance(document, dict)
+        document_path = _identity_path(context, paths.get(name))
+        for key_path, actual in _collect_keyed_values(document, {"trial_id"}):
+            if not isinstance(actual, str) or not actual:
+                result.error(
+                    "invalid-trial-identity",
+                    f"{name} 的 {'.'.join(key_path)} 必須是非空 trial ID",
+                    path=document_path,
+                    expected="non-empty trial ID",
+                    actual=actual,
+                )
+                continue
+            trial_id_values.append((name, key_path, actual))
+    if trial_id_values:
+        expected_trial_id = trial_id_values[0][2]
+        for name, key_path, actual in trial_id_values[1:]:
+            if actual != expected_trial_id:
+                result.error(
+                    "trial-identity-mismatch",
+                    f"{name} 的 {'.'.join(key_path)} 與其他文件的 trial identity 不一致",
+                    path=_identity_path(context, paths.get(name)),
+                    expected=expected_trial_id,
+                    actual=actual,
+                )
+
+    trial_candidate = trial_inputs.get("candidate_id", MISSING)
+    if trial_candidate is MISSING:
+        result.error(
+            "missing-trial-identity",
+            "development-trial-inputs 缺少 candidate_id，無法辨識 Trial",
+            path=_identity_path(context, paths.get("development-trial-inputs.yml")),
+            expected=expected_candidate if expected_candidate is not MISSING else "candidate ID",
+            actual=None,
+        )
+    elif trial_candidate not in complete_family:
+        result.error(
+            "trial-identity-mismatch",
+            "development Trial 的 candidate_id 不在 preregistered candidate family",
+            path=_identity_path(context, paths.get("development-trial-inputs.yml")),
+            expected=complete_family,
+            actual=trial_candidate,
+        )
+
+    prereg_families = _collect_keyed_values(preregistration, {"candidate_family"})
+    expected_family = prereg_families[0][1] if prereg_families else MISSING
+    family_documents = (
+        ("candidate-definition.yml", candidate),
+        ("qualification-spec.yml", qualification),
+        ("development-trial-inputs.yml", trial_inputs),
+    )
+    if expected_family is not MISSING:
+        for name, document in family_documents:
+            assert isinstance(document, dict)
+            document_path = _identity_path(context, paths.get(name))
+            for key_path, actual in _collect_keyed_values(document, {"candidate_family"}):
+                if actual != expected_family:
+                    result.error(
+                        "candidate-family-mismatch",
+                        f"{name} 的 {'.'.join(key_path)} 與 preregistration family 不一致",
+                        path=document_path,
+                        expected=expected_family,
+                        actual=actual,
+                    )
+
+    for name, document in (
+        ("candidate-definition.yml", candidate),
+        ("qualification-spec.yml", qualification),
+    ):
+        assert isinstance(document, dict)
+        document_path = _identity_path(context, paths.get(name))
+        for key_path, actual in _collect_keyed_values(document, {"complete_candidate_family"}):
+            if actual != complete_family:
+                result.error(
+                    "candidate-family-mismatch",
+                    f"{name} 的 {'.'.join(key_path)} 與 preregistered family 不一致",
+                    path=document_path,
+                    expected=complete_family,
+                    actual=actual,
+                )
+
+
+def _check_precreate_research_paths(context: StudyContext, result: CheckResult) -> None:
+    """掃描 research bundle 文字，避免 copy-forward 留下另一個 Study 路徑。"""
+
+    for path in _walk_files(
+        context.research_root,
+        (".yml", ".yaml", ".py", ".md", ".json", ".toml", ".txt"),
+    ):
+        try:
+            text = path.read_text(encoding="utf-8")
+        except (OSError, UnicodeDecodeError):
+            continue
+        for match in RESEARCH_PATH_PATTERN.finditer(text):
+            other = match.group("name")
+            if other != context.study_id and other not in SHARED_RESEARCH_ROOTS:
+                result.error(
+                    "stale-research-path",
+                    f"research bundle 仍指向另一個 Study：research/{other}",
+                    path=_display_path(context, path),
+                    expected=f"research/{context.study_id}",
+                    actual=f"research/{other}",
+                )
+
+
+def _check_precreate_manifest_copies(
+    context: StudyContext,
+    result: CheckResult,
+    already_loaded: set[str],
+) -> None:
+    """核對 research 內所有已有同名 manifest 的 canonical YAML 副本。"""
+
+    for path in _walk_files(context.research_root, (".yml", ".yaml")):
+        name = path.relative_to(context.research_root).as_posix()
+        if name in already_loaded:
+            continue
+        _load_research_document(context, result, name, required=False)
+
+
+def _research_procedure_path(
+    context: StudyContext,
+    result: CheckResult,
+    trial_inputs: dict[str, Any],
+    contract: dict[str, Any] | None,
+    entries: dict[str, str],
+) -> str | None:
+    declared_values = (
+        _get_path(trial_inputs, "study_procedure_path", MISSING),
+        _get_path(trial_inputs, "procedure_path", MISSING),
+        _get_path(trial_inputs, "development_runner_path", MISSING),
+        _get_path(contract, "procedure.path", MISSING) if isinstance(contract, dict) else MISSING,
+    )
+    for declared in declared_values:
+        if declared is MISSING:
+            continue
+        if not isinstance(declared, str) or not declared:
+            result.error(
+                "invalid-procedure-path",
+                "Development procedure path 必須是非空 repository-relative 字串",
+                path=_display_path(context, context.research_root / "development-trial-inputs.yml"),
+                expected="repository-relative path",
+                actual=declared,
+            )
+            return None
+        return Path(declared).as_posix()
+
+    conventional = f"research/{context.study_id}/run_development.py"
+    if conventional in entries:
+        return conventional
+    candidates = sorted(
+        path
+        for path in entries
+        if path.startswith(f"research/{context.study_id}/")
+        and Path(path).name == "run_development.py"
+    )
+    if len(candidates) == 1:
+        return candidates[0]
+    result.error(
+        "procedure-not-in-source-bundle",
+        "Source Bundle 無法唯一找出 Development procedure",
+        path=_display_path(context, context.research_root / "source-bundle.yml"),
+        expected=conventional,
+        actual=candidates,
+    )
+    return None
+
+
+def _check_precreate_trial_bindings(
+    context: StudyContext,
+    result: CheckResult,
+    trial_inputs: dict[str, Any] | None,
+    trial_path: Path | None,
+    preregistration: dict[str, Any] | None,
+    preregistration_path: Path | None,
+    source_bundle: dict[str, Any] | None,
+    source_bundle_path: Path | None,
+    contract: dict[str, Any] | None,
+) -> None:
+    if not all(
+        isinstance(value, dict)
+        for value in (trial_inputs, preregistration, source_bundle)
+    ):
+        return
+    assert trial_path is not None
+    assert preregistration_path is not None
+    assert source_bundle_path is not None
+
+    trial_error_path = _display_path(context, trial_path)
+    expected_preregistration = canonical_digest(preregistration_path.read_bytes())
+    expected_source_bundle = canonical_digest(source_bundle_path.read_bytes())
+
+    bindings = (
+        (
+            "preregistration_digest",
+            "trial-preregistration-binding-mismatch",
+            "Development trial inputs 的 preregistration digest 不一致",
+            expected_preregistration,
+        ),
+        (
+            "source_bundle_digest",
+            "trial-source-bundle-binding-mismatch",
+            "Development trial inputs 的 Source Bundle digest 不一致",
+            expected_source_bundle,
+        ),
+    )
+    for field_name, code, message, expected in bindings:
+        actual = trial_inputs.get(field_name, MISSING)
+        if actual != expected:
+            result.error(
+                code,
+                message,
+                path=trial_error_path,
+                expected=expected,
+                actual=None if actual is MISSING else actual,
+            )
+
+    entries = _source_bundle_entries(source_bundle)
+    engine_path = _engine_path(context, source_bundle, contract, result) if contract else None
+    if engine_path is not None:
+        engine_relative = engine_path.relative_to(context.repository_root).as_posix()
+        expected_engine = entries.get(engine_relative, MISSING)
+        actual_engine = trial_inputs.get("strategy_engine_digest", MISSING)
+        if expected_engine is MISSING:
+            result.error(
+                "engine-not-in-source-bundle",
+                f"策略引擎不在 Source Bundle：{engine_relative}",
+                path=trial_error_path,
+                expected=engine_relative,
+                actual=sorted(entries),
+            )
+        elif actual_engine != expected_engine:
+            result.error(
+                "trial-strategy-engine-binding-mismatch",
+                "Development trial inputs 的 strategy engine digest 不一致",
+                path=trial_error_path,
+                expected=expected_engine,
+                actual=None if actual_engine is MISSING else actual_engine,
+            )
+
+    procedure_relative = _research_procedure_path(
+        context,
+        result,
+        trial_inputs,
+        contract,
+        entries,
+    )
+    if procedure_relative is not None:
+        expected_procedure = entries.get(procedure_relative, MISSING)
+        actual_procedure = trial_inputs.get("study_procedure_digest", MISSING)
+        if expected_procedure is MISSING:
+            result.error(
+                "procedure-not-in-source-bundle",
+                f"Development procedure 不在 Source Bundle：{procedure_relative}",
+                path=trial_error_path,
+                expected=procedure_relative,
+                actual=sorted(entries),
+            )
+        elif actual_procedure != expected_procedure:
+            result.error(
+                "trial-procedure-binding-mismatch",
+                "Development trial inputs 的 study procedure digest 不一致",
+                path=trial_error_path,
+                expected=expected_procedure,
+                actual=None if actual_procedure is MISSING else actual_procedure,
+            )
+
+    result.details["development_trial_inputs_path"] = context.display_path(trial_path)
+    result.details["development_trial_bindings"] = {
+        "preregistration_digest": expected_preregistration,
+        "source_bundle_digest": expected_source_bundle,
+        "strategy_engine_path": (
+            engine_path.relative_to(context.repository_root).as_posix()
+            if engine_path is not None
+            else None
+        ),
+        "procedure_path": procedure_relative,
+    }
+
+
+def _find_research_contract(
+    context: StudyContext,
+    result: CheckResult,
+    candidate: dict[str, Any] | None,
+    preregistration: dict[str, Any] | None,
+) -> tuple[dict[str, Any] | None, Path | None, str | None]:
+    """找 contract 時只接受 research bundle 或文件內嵌設定。"""
+
+    external, external_path = _load_research_document(
+        context,
+        result,
+        "implementation-contract.yml",
+        required=False,
+    )
+    if external_path is not None:
+        if isinstance(external, dict):
+            return external, external_path, "external"
+        result.error(
+            "invalid-implementation-contract",
+            "implementation contract 必須是 mapping",
+            path=_display_path(context, external_path),
+            expected="mapping",
+            actual=type(external).__name__ if external is not None else None,
+        )
+        return None, external_path, "external"
+
+    for label, document in (
+        ("candidate-definition", candidate),
+        ("preregistration", preregistration),
+    ):
+        if not isinstance(document, dict):
+            continue
+        if isinstance(document.get("implementation_contract"), dict):
+            return document["implementation_contract"], None, label
+        if isinstance(document.get("indicator_contract"), dict):
+            return {"indicator_contract": document["indicator_contract"]}, None, label
+        eligibility = document.get("eligibility_rules")
+        if isinstance(eligibility, dict) and isinstance(eligibility.get("indicator_contract"), dict):
+            return {"indicator_contract": eligibility["indicator_contract"]}, None, label
+    return None, None, None
+
+
+def run_precreate(context: StudyContext) -> CheckResult:
+    """在第一個 study-created Event 前，只以 research bundle 檢查跨文件 binding。"""
+
+    result = CheckResult("precreate")
+    if STUDY_ID_PATTERN.fullmatch(context.study_id) is None:
+        result.error(
+            "invalid-study-id",
+            "Study ID 必須是 3--63 個小寫英數字與連字號，且不能以連字號開頭",
+            path=_display_path(context, context.research_root),
+            expected="safe Study ID",
+            actual=context.study_id,
+        )
+        return result
+    if not context.research_root.is_dir():
+        result.error(
+            "missing-research-bundle",
+            f"找不到同名 research 目錄：{context.research_root}",
+            path=_display_path(context, context.research_root),
+            expected="directory",
+            actual="missing",
+        )
+
+    documents: dict[str, dict[str, Any] | None] = {}
+    paths: dict[str, Path | None] = {}
+    for name in PRECREATE_REQUIRED_DOCUMENTS:
+        documents[name], paths[name] = _load_research_document(context, result, name)
+    contract, contract_path, contract_source = _find_research_contract(
+        context,
+        result,
+        documents.get("candidate-definition.yml"),
+        documents.get("preregistration.yml"),
+    )
+    if contract is None:
+        result.error(
+            "implementation-contract-missing",
+            "沒有明確的 implementation contract，無法綁定 strategy engine",
+            path=_display_path(context, context.research_root / "implementation-contract.yml"),
+            expected="external implementation-contract.yml 或文件內嵌 contract",
+            actual=None,
+        )
+    result.details.update(
+        {
+            "research_root": context.display_path(context.research_root),
+            "study_event_required": False,
+            "required_documents": list(PRECREATE_REQUIRED_DOCUMENTS),
+            "contract_source": (
+                context.display_path(contract_path) if contract_path else contract_source
+            ),
+        }
+    )
+
+    _check_precreate_research_paths(context, result)
+    _check_precreate_manifest_copies(
+        context,
+        result,
+        set(PRECREATE_REQUIRED_DOCUMENTS) | {"implementation-contract.yml"},
+    )
+    preregistration = documents.get("preregistration.yml")
+    qualification = documents.get("qualification-spec.yml")
+    source_bundle = documents.get("source-bundle.yml")
+    preregistration_path = paths.get("preregistration.yml")
+    qualification_path = paths.get("qualification-spec.yml")
+    source_bundle_path = paths.get("source-bundle.yml")
+    if isinstance(preregistration, dict) and isinstance(qualification, dict):
+        if preregistration_path is not None:
+            expected_digest = canonical_digest(preregistration_path.read_bytes())
+            actual_digest = qualification.get("preregistration_digest", MISSING)
+            if actual_digest != expected_digest:
+                result.error(
+                    "stale-preregistration-binding",
+                    "qualification-spec.yml 的 preregistration digest 與目前 preregistration 不一致",
+                    path=_display_path(context, qualification_path or context.research_root / "qualification-spec.yml"),
+                    expected=expected_digest,
+                    actual=None if actual_digest is MISSING else actual_digest,
+                )
+        _check_gate_maps(
+            result,
+            preregistration,
+            qualification,
+            path=_display_path(context, qualification_path or context.research_root / "qualification-spec.yml"),
+            exact=True,
+        )
+
+    if isinstance(source_bundle, dict):
+        _check_source_bundle(
+            context,
+            result,
+            source_bundle,
+            _display_path(context, source_bundle_path or context.research_root / "source-bundle.yml"),
+        )
+    _check_precreate_identities(context, result, documents, paths)
+    _check_precreate_trial_bindings(
+        context,
+        result,
+        documents.get("development-trial-inputs.yml"),
+        paths.get("development-trial-inputs.yml"),
+        preregistration,
+        preregistration_path,
+        source_bundle,
+        source_bundle_path,
+        contract,
+    )
+    return result
 
 
 def _check_canonical_study_tree(context: StudyContext, result: CheckResult) -> None:
@@ -1215,7 +2062,9 @@ def _run_command(
     context: StudyContext,
     authority_root: Path | None,
 ) -> dict[str, Any]:
-    if command == "identity":
+    if command == "precreate":
+        checks = [run_precreate(context)]
+    elif command == "identity":
         checks = [run_identity(context)]
     elif command == "contract":
         checks = [run_contract(context)]
@@ -1247,11 +2096,11 @@ def _run_command(
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Study preflight 與 candidate freeze readiness checks")
+    parser = JsonArgumentParser(description="Study preflight 與 candidate freeze readiness checks")
     parser.add_argument("--repository-root", type=Path, default=REPOSITORY_ROOT)
     parser.add_argument("--authority-root", type=Path, default=None)
     commands = parser.add_subparsers(dest="command", required=True)
-    for name in ("identity", "contract", "synthetic", "freeze", "all"):
+    for name in ("precreate", "identity", "contract", "synthetic", "freeze", "all"):
         subparser = commands.add_parser(name)
         subparser.add_argument("study_id")
     return parser
@@ -1259,7 +2108,26 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
-    args = parser.parse_args(argv)
+    try:
+        args = parser.parse_args(argv)
+    except CliArgumentError as exc:
+        output = {
+            "command": None,
+            "study_id": None,
+            "status": "error",
+            "error_count": 1,
+            "warning_count": 0,
+            "errors": [
+                _finding(
+                    "cli-error",
+                    str(exc),
+                    expected="valid studyctl command and arguments",
+                    actual=None,
+                )
+            ],
+        }
+        print(json.dumps(output, ensure_ascii=False, sort_keys=True, indent=2))
+        return 2
     context = context_for(args.repository_root, args.study_id)
     try:
         output = _run_command(args.command, context, args.authority_root)
