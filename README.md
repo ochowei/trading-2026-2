@@ -2,10 +2,6 @@
 
 Python 3.11 project managed with uv.
 
-## 目前研究
-
-- [`fxi-deep-pullback-no-closepos-cd7-v001`](research/fxi-deep-pullback-no-closepos-cd7-v001/README.md)：FXI 深度回檔、超賣、短期波動擴張與七-session cooldown 的可否證研究。2020--2024 Historical Evaluation 未通過，Study 已正式終止為 `fail`，假說遭否證。
-
 ## 核心流程控制與資料工具（CLI）
 
 在進行量化交易策略研究時，為避免「回測過度擬合（Overfitting，即在過去歷史數據上表現完美但實盤失效）」、「看過回測結果後事後偷改參數」或「寫入檔案意外中斷導致資料損毀」，本專案提供三支核心 CLI（命令列工具），以固定的狀態流轉與資料檢驗協助研究保持客觀、可重現。
