@@ -35,7 +35,7 @@
 
 #### Studies 研究專案內部結構
 
-每個策略研究專案（如 `studies/<study-id>/`）均具備自包含且不可竄改的標準結構：
+每個策略研究專案（如 `studies/<study-id>/`）都以以下目錄與檔案作為基本結構；不同研究階段或歷史版本可能另外保留額外檔案：
 
 ```text
 studies/
@@ -43,15 +43,16 @@ studies/
     ├── events/                         # 唯一事實來源：依序發布的不可竄改事件鏈
     ├── manifests/                      # 規格清單：策略假設、參數、資格條件與程式碼指紋宣告
     ├── evidence/                       # 評估佐證：各階段開發與篩選產出的真實數據證據
-    ├── journals/                       # 作業日誌：確保安全寫入與當機復原的中繼紀錄
-    ├── study.yml                       # 現況投影摘要：由 events 自動重算的最新狀態概覽（可安全重建）
-    └── reviews/                        # （選用）封存檢討：獨立審查或盲檢討（Blind Review）報告
+    ├── journals/                       # 作業日誌：固定待發布內容，供 recover 完成同一筆操作
+    ├── study.yml                       # 現況投影摘要：由 events 與其引用資料重算的最新狀態概覽
+    ├── implementation-contract.yml     # （部分 Study）固定策略引擎、指標與執行語意的實作契約
+    └── reviews/                        # （選用）補充性封存檢討：獨立審查或盲檢討報告
 ```
 
-- **`events/`（事件鏈，唯一事實來源）**：存放以規範化格式依序記錄的研究事件（如 `000001-study-created.yml`、`000004-candidate-frozen.yml`）。每個事件都必須包含前一個事件的 SHA-256 數位指紋，串接成不可更動的事件鏈（Hash Chain）。若有人事後偷偷修改或調換事件順序，驗證工具會立即偵測出指紋斷裂並拒絕後續操作。
+- **`events/`（事件鏈，唯一事實來源）**：存放以規範化格式依序記錄的研究事件（如 `000001-study-created.yml`、`000007-candidate-frozen.yml`；序號會隨前面已發布的事件而變動）。第一個事件的 `previous_event_digest` 是 `null`，作為事件鏈的起點；從第二個事件起才會填入前一個事件的 SHA-256 數位指紋，串接成不可更動的事件鏈（Hash Chain）。若有人事後偷偷修改或調換事件順序，驗證工具會立即偵測出指紋斷裂並拒絕後續操作。
 - **`manifests/`（研究規格清單）**：存放研究在執行前預先凍結的規格定義（如 `preregistration.yml` 記錄策略假說與進退場規則、`candidate-definition.yml` 記錄策略參數、`qualification-spec.yml` 記錄篩選門檻、`source-bundle.yml` 鎖定策略程式碼的確切版本指紋），確保研究絕不會在看過回測結果後「事後偷改規則」。
-- **`evidence/`（執行佐證檔案）**：存放策略在開發與驗證過程中所產生的實際數據證據（如 `development.yml`、`selection-evidence.yml`），所有佐證均綁定資料快照的數位指紋，供客觀獨立的驗證與重算。
-- **`journals/`（兩階段寫入日誌）**：寫入工具在發布新事件時的中繼紀錄。寫入時採取兩階段提交（先寫 journal 再原子替換正式檔案），確保即使在寫入中途突然斷電或當機，系統也能自動復原或維持一致，絕不留下損壞的半成品檔案。
-- **`study.yml`（現況投影摘要）**：由寫入工具根據 `events/` 自動彙整生成的最新狀態投影檔（Projection），提供人類與腳本快速查閱目前研究推進到哪一個階段。此檔案不是事實來源，刪除後隨時能由 `events/` 完全重建，避免手動編輯造成的狀態矛盾。
-- **`reviews/`（封存式檢討報告，選用）**：當研究完成或候選策略凍結後，記錄獨立檢視或盲檢討（Blind Review，即在不偷看正式評估結果的前提下審視程式與假設）的分析結論與改進建議，作為未來新一輪研究改進的客觀依據。
-
+- **`evidence/`（執行佐證檔案）**：存放策略在開發與驗證過程中所產生的實際數據證據（如 `development.yml`、`selection-evidence.yml`）。不同階段的綁定內容不完全相同：`development.yml` 會直接記錄 warmup 與 development 資料的 digest，`selection-evidence.yml` 主要記錄選擇規則 digest；provenance 與授權檔案則記錄資料角色、控制項與聲明。Validator 會透過事件和其他 frozen inputs 交叉驗證，不是每一份 evidence 都直接包含資料快照 digest。
+- **`journals/`（兩階段寫入日誌）**：每次 Study operation 在發布前先準備 canonical YAML、確切 bytes 與 digest，再以 operation journal 固定待發布內容；正式發布依 `evidence → event → authority checkpoint` 順序完成。若中斷，必須執行 writer 的 `recover` 指令，而且只能完成同一 journal 內已凍結的 bytes，不會自行更換輸入；完成後再原子重建 `study.yml`，避免留下損壞的半成品檔案。
+- **`study.yml`（現況投影摘要）**：由寫入工具根據 `events/` 及事件引用的 frozen artifacts 彙整生成最新狀態投影檔（Projection），提供人類與腳本快速查閱目前研究推進到哪一個階段。此檔案不是事實來源；只要事件與其引用資料仍完整，刪除後即可由 validator 重算，或由 writer 驗證後重新寫回，避免手動編輯造成狀態矛盾。
+- **`implementation-contract.yml`（部分 Study 使用）**：固定策略引擎、指標計算與執行語意的實作契約，讓研究結果可以依同一組明確規則重現；沒有這份檔案的 Study，相關內容可能已由其他 manifest 或 source bundle 綁定。
+- **`reviews/`（補充性封存檢討報告，選用）**：當研究完成或候選策略凍結後，記錄獨立檢視或盲檢討（Blind Review，即在不偷看正式評估結果的前提下審視程式與假設）的分析結論與改進建議。它是補充性檢討資料，不是 stage evidence、event 或 outcome 的唯一事實來源。
