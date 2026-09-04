@@ -12,6 +12,12 @@ if str(WORKFLOW_PACKAGE_ROOT) not in sys.path:
     sys.path.insert(0, str(WORKFLOW_PACKAGE_ROOT))
 
 from validator.canonical_yaml import load_canonical  # noqa: E402
+from validator.errors import (  # noqa: E402
+    IntegrityError,
+    TransitionError,
+    ValidationError,
+    WorkflowError,
+)
 
 from writer.service import StudyService  # noqa: E402
 
@@ -51,32 +57,59 @@ def parser() -> argparse.ArgumentParser:
     return result
 
 
+def _error_code(error: WorkflowError) -> str:
+    if isinstance(error, IntegrityError):
+        return "integrity-error"
+    if isinstance(error, TransitionError):
+        return "transition-error"
+    if isinstance(error, ValidationError):
+        return "validation-error"
+    return "workflow-error"
+
+
+def _error_payload(args: argparse.Namespace, error: WorkflowError) -> dict[str, object]:
+    return {
+        "command": args.command,
+        "error": {
+            "code": _error_code(error),
+            "message": str(error),
+            "type": type(error).__name__,
+        },
+        "status": "error",
+        "study_id": getattr(args, "study_id", None),
+    }
+
+
 def main() -> int:
     args = parser().parse_args()
-    service = StudyService(args.workflow_root, args.authority_root, allow_draft=args.allow_draft)
-    if args.command == "create":
-        digest = service.create_study(
-            args.study_id,
-            args.actor,
-            research_round_id=args.research_round,
-            experiment_family=args.experiment_family,
-            research_owner=args.research_owner,
-            replay_operator=args.replay_operator,
-            source_bundle=load_canonical(args.source_bundle),
-        )
-        print(digest)
-    elif args.command == "append":
-        payload = load_canonical(args.payload)
-        print(service.append_event(args.study_id, args.event_type, args.actor, payload))
-    elif args.command == "publish-artifact":
-        value = load_canonical(args.source)
-        path, digest = service.publish_artifact(args.study_id, args.path, value)
-        print(json.dumps({"path": path, "digest": digest}, sort_keys=True))
-    elif args.command == "validate":
-        print(json.dumps(service.validate(args.study_id), ensure_ascii=False, sort_keys=True))
-    elif args.command == "recover":
-        print(json.dumps(service.recover(args.study_id), sort_keys=True))
-    return 0
+    try:
+        service = StudyService(args.workflow_root, args.authority_root, allow_draft=args.allow_draft)
+        if args.command == "create":
+            digest = service.create_study(
+                args.study_id,
+                args.actor,
+                research_round_id=args.research_round,
+                experiment_family=args.experiment_family,
+                research_owner=args.research_owner,
+                replay_operator=args.replay_operator,
+                source_bundle=load_canonical(args.source_bundle),
+            )
+            print(digest)
+        elif args.command == "append":
+            payload = load_canonical(args.payload)
+            print(service.append_event(args.study_id, args.event_type, args.actor, payload))
+        elif args.command == "publish-artifact":
+            value = load_canonical(args.source)
+            path, digest = service.publish_artifact(args.study_id, args.path, value)
+            print(json.dumps({"path": path, "digest": digest}, sort_keys=True))
+        elif args.command == "validate":
+            print(json.dumps(service.validate(args.study_id), ensure_ascii=False, sort_keys=True))
+        elif args.command == "recover":
+            print(json.dumps(service.recover(args.study_id), sort_keys=True))
+        return 0
+    except WorkflowError as error:
+        print(json.dumps(_error_payload(args, error), ensure_ascii=False, sort_keys=True))
+        return 1
 
 
 if __name__ == "__main__":

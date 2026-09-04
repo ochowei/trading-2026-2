@@ -94,6 +94,26 @@ def test_precreate_passes_without_a_study_event(tmp_path: Path) -> None:
     assert (research_root / "qualification-spec.yml").is_file()
 
 
+def test_precreate_rejects_existing_study_event(tmp_path: Path) -> None:
+    repository_root, _ = _precreate_repository(tmp_path)
+    events_root = (
+        repository_root
+        / "workflows"
+        / "strategy-forward-replication-research--v001"
+        / "studies"
+        / PRECREATE_STUDY_ID
+        / "events"
+    )
+    events_root.mkdir(parents=True)
+    _write_yaml(events_root / "000001-study-created.yml", {"schema_version": 1})
+
+    result = run_precreate(context_for(repository_root, PRECREATE_STUDY_ID))
+
+    assert result.status == "failed"
+    assert result.errors[0]["code"] == "precreate-after-study-created"
+    assert result.details["existing_event_count"] == 1
+
+
 def test_precreate_rejects_stale_preregistration_binding_with_details(tmp_path: Path) -> None:
     repository_root, research_root = _precreate_repository(tmp_path)
     preregistration_path = research_root / "preregistration.yml"
@@ -171,6 +191,44 @@ def test_precreate_cli_emits_json_and_exit_code_one_for_stale_binding(tmp_path: 
         and item["expected"]
         and item["actual"]
         and item["path"].endswith("qualification-spec.yml")
+        for check in output["checks"]
+        for item in check["errors"]
+    )
+
+
+def test_precreate_cli_rejects_existing_study_event(tmp_path: Path) -> None:
+    repository_root, _ = _precreate_repository(tmp_path)
+    events_root = (
+        repository_root
+        / "workflows"
+        / "strategy-forward-replication-research--v001"
+        / "studies"
+        / PRECREATE_STUDY_ID
+        / "events"
+    )
+    events_root.mkdir(parents=True)
+    _write_yaml(events_root / "000001-study-created.yml", {"schema_version": 1})
+    studyctl = REPOSITORY_ROOT / "research" / "tools" / "studyctl.py"
+
+    completed = subprocess.run(
+        [
+            sys.executable,
+            str(studyctl),
+            "--repository-root",
+            str(repository_root),
+            "precreate",
+            PRECREATE_STUDY_ID,
+        ],
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+
+    output = json.loads(completed.stdout)
+    assert completed.returncode == 1
+    assert output["status"] == "failed"
+    assert any(
+        item["code"] == "precreate-after-study-created"
         for check in output["checks"]
         for item in check["errors"]
     )
