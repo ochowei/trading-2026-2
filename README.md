@@ -18,7 +18,7 @@ Python 3.11 project managed with uv.
   * `--repository-root <path>`：指定專案根目錄（預設是此工具所在的專案根目錄）。從其他目錄執行時，使用它可避免讀到錯的 `research/` 或 `workflows/`。
   * `--authority-root <path>`：指定本機 authority checkpoint（權威檢查點）目錄。`freeze` 或 `all` 會用它比對 Event（研究事件）數量與 digest（內容指紋），偵測事件遺失、回退或內容不一致；它不是作業系統層級的檔案防護。
 * **子命令（Subcommands）**：
-  * `precreate <study-id>`：在第一個 `study-created` Event 前，檢查同名 `research/<study-id>/` 裡的 `preregistration.yml`、`candidate-definition.yml`、`qualification-spec.yml`、`development-trial-inputs.yml`、`source-bundle.yml` 與 implementation contract（實作契約）是否能讀取，並核對跨檔案 digest 與身份綁定。它不需要已存在 Study Event。
+  * `precreate <study-id>`：只能在第一個 `study-created` Event 前執行；若同名 Workflow Study 已存在任何 Event，工具會直接失敗。檢查同名 `research/<study-id>/` 裡的 `preregistration.yml`、`candidate-definition.yml`、`qualification-spec.yml`、`development-trial-inputs.yml`、`source-bundle.yml` 與 implementation contract（實作契約）是否能讀取，並核對跨檔案 digest 與身份綁定。它不需要已存在 Study Event。
   * `identity <study-id>`：檢查研究標識（Study ID）、研究目錄（`research/<study-id>`）與設定檔中的路徑宣告是否一致，避免複製貼上舊研究範本時殘留舊版本路徑。
   * `contract <study-id>`：核對指標實作契約（Implementation Contract），檢查移動平均線（SMA）、RSI 等指標所需的歷史暖機交易天數，以及指標未就緒時的值，避免策略偷用尚未填滿的數值。
   * `synthetic <study-id>`：使用不含正式市場資料的合成測試案例，檢查 RSI、指標 ready 邊界、價格跳空、同一交易日同時觸發停損與停利、持有期及 cooldown 行為。
@@ -93,9 +93,11 @@ Python 3.11 project managed with uv.
     * `--path`：Study 目錄內的目標相對路徑；不能穿越到 Study 外，已存在且內容不同的檔案不會被覆寫。
     * `--source`：來源檔案路徑；CLI 會以 canonical YAML 讀取它並重新保存，因此不能直接傳 CSV 或其他任意二進位檔。
   * `validate`：校驗指定研究的事件鏈、引用 artifact 與 authority checkpoint；發現不一致時只回報錯誤，不會替你修正檔案。
-    * `--study-id`：要驗證的 Study 名稱。
+    * `--study-id`：要驗證的 Study 名稱；若 Study 不存在，CLI 會輸出結構化 JSON 錯誤並以非零 exit code 結束。
   * `recover`：當寫入操作遭遇中斷（例如當機）時，從 prepared journal 恢復同一筆操作；它只能使用 journal 內已固定的 bytes，不允許換資料後重試。
     * `--study-id`：要恢復的 Study 名稱；恢復完成後應再次執行 `validate`，再繼續下一個操作。
+
+writer 遇到完整性或流程驗證錯誤時，會輸出包含 `command`、`study_id`、錯誤 `code`、類型與訊息的 JSON，並以 exit code `1` 結束，不會留下 Python traceback。
 
 ---
 

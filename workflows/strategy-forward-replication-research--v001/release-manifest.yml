@@ -67,7 +67,7 @@ files:
     path: tests/helpers.py
   - digest: a99788dfb721e34c2314b56651f4fc7cbff5c9ae6bdd780d1f2bb6b52029cfba
     path: tests/test_canonical_yaml.py
-  - digest: 02d7c159616c4f406fde14a5ccb0824b09a4a0199923af52a061e28f3538eaac
+  - digest: 319cfb8bed48ab382dedda62333fe6482b170b76993c9a860328865335ba6098
     path: tests/test_integrity_and_recovery.py
   - digest: 56ba6412aee702dcb234709ee9cfb228a4de461af36b21792f0ea5d857d6445b
     path: tests/test_metrics.py
@@ -101,16 +101,16 @@ files:
     path: writer/__init__.py
   - digest: 711081bfef8770b1ed23e8fb6273678ce3b98e5885269656de9e5f285aabbbe2
     path: writer/authority.py
-  - digest: d9eb22971afd20cfed269a302ee1478bc485ee3490d8ae5327ca57fd1ddce186
+  - digest: d3b9a10ad69ed8c7df5f28bdc203f3b6c7502373a1fdd2028046d910c24d16e8
     path: writer/cli.py
   - digest: 9757704d4b25e45f7d70083912620a89ad60f87c1e1f60ec1d75cfaaf78250d8
     path: writer/journal.py
   - digest: 394164c5d6c5cb49181425a8667a47e0294c8ef175870124b64b47e624b9d4c8
     path: writer/lock.py
-  - digest: 5d4198c69a6564786a83e583febc097700574edc4b58fa2159412d54db95ec1f
+  - digest: 946a2f68828652ba89d063f2c781f0b006b10621b7efdcd6a45187b1cae07088
     path: writer/service.py
-generated_at: '2026-09-02T06:48:22.886089Z'
+generated_at: '2026-09-04T09:50:27.240530Z'
 schema_version: 1
 workflow: strategy-forward-replication-research
-workflow_digest: 3da13fbfd78f62fb4385d00299141cae9a0d429bcc8a5c1d21643f48c78462b9
+workflow_digest: 7c07fcf673e2b51b74e76aae2bbac5e6dfb654bda2ad9ffe5f323cb21ca093ad
 workflow_version: v001

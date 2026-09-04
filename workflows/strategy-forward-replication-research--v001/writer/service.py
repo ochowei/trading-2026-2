@@ -166,7 +166,10 @@ class StudyService:
             return recovered
 
     def validate(self, study_id: str) -> dict[str, Any]:
-        projection = validate_study(self.study_root(study_id), self.rules)
+        root = self.study_root(study_id)
+        if not root.is_dir():
+            raise ValidationError(f"找不到 Study 目錄：{root}")
+        projection = validate_study(root, self.rules)
         if projection.study_id:
             self.authority.verify(study_id, projection.events)
         return projection.to_dict()

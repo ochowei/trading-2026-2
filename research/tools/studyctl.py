@@ -1876,6 +1876,24 @@ def run_precreate(context: StudyContext) -> CheckResult:
             actual=context.study_id,
         )
         return result
+    event_dir = context.study_root / "events"
+    existing_events = sorted(event_dir.glob("*.yml")) if event_dir.is_dir() else []
+    if existing_events:
+        result.error(
+            "precreate-after-study-created",
+            "Study 已經存在 Event；precreate 只能在第一個 study-created Event 前執行",
+            path=_display_path(context, existing_events[0]),
+            expected="no Study Event",
+            actual=[path.name for path in existing_events],
+        )
+        result.details.update(
+            {
+                "research_root": context.display_path(context.research_root),
+                "study_event_required": False,
+                "existing_event_count": len(existing_events),
+            }
+        )
+        return result
     if not context.research_root.is_dir():
         result.error(
             "missing-research-bundle",
