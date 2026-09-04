@@ -12,7 +12,10 @@ description: 為 strategy-forward-replication-research--v001 建立單一新 Stu
 ## 開始條件
 
 - 使用者須指定或明確授權建立一個新 Study；可以合理命名 Study ID，但要先告知使用者。
-- 在任何寫入前執行：
+- 在任何寫入前，先從 Git 取得目前 repository root 的絕對路徑，並固定設定
+  `authority_root = <repository-root>/.authority/`。不得由 Study 目錄、既有 journal 或
+  Agent 自行猜測另一個路徑；必須讓下方的 authority preflight 輸出並確認這個絕對路徑。
+- 確認 authority root 後，再在任何寫入前執行：
 
 ```bash
 python3 .agents/skills/build-strategy-study-to-freeze/scripts/check_new_study.py <study-id>
@@ -22,6 +25,16 @@ python3 .agents/skills/build-strategy-study-to-freeze/scripts/check_new_study.py
 - `check_new_study.py` 只確認 Study ID 可以建立；Study 目錄、research bundle、Source Bundle 與 implementation contract 建好後，仍必須依下方規則執行 `studyctl`。
 - 先確認目前 task 沒有看過這個候選的 Historical Evaluation、challenge 或 replay 策略結果。若已曝光，不得宣告 `verified-clean`；依 workflow 記錄實際 provenance。
 - 讀取並遵守 repository `AGENTS.md`、workflow release、guide、rules、schemas、writer 與 validator。不得使用 `--allow-draft`。
+
+## Authority root 固定規則
+
+- 新 Study 一律使用 repository-local 的 `<repository-root>/.authority/` 作為 authority root。它位於 Workflow Package 與 `workflows/.../studies/<study-id>/`、`research/<study-id>/` 之外，但刻意納入 Git；不得使用 `.study-authority/`、`/tmp`、外部路徑或其他臨時目錄。
+- 在任何 writer 操作前，先把 authority root 解析成絕對路徑，確認它就是目前 repository 的 `.authority/`，並執行唯讀的 `check_authority_root.py`。不得猜測、臨時建立、搬移、清空或改用另一個 authority root。
+- 新 Study 的 `<authority-root>/<study-id>/` 必須不存在或是空目錄；若已有任何 checkpoint 或其他檔案，必須停止並查明來源。
+- 從 `create` 到 `append`、`recover`、`validate` 及 `studyctl all`，每次都必須傳入同一個已確認的絕對路徑。執行中不得以相對路徑或另一個看似相同的目錄代替。
+- authority mismatch、checkpoint 數量不一致或 digest 不一致時，立即停止；不得刪除 checkpoint、重新 `create`、手動補 checkpoint，或換 root 重試。若有 prepared journal，只能用原本的 authority root 執行 `recover`。
+- `.authority/` 不得列入 `.gitignore`。每次 Event 發布後檢查 authority 檔案的 Git 狀態，candidate freeze 交接時記錄 authority root 絕對路徑、checkpoint 數量、最後 checkpoint digest，以及 authority 檔案是否已納入 Git。
+- 這套 repository-local 規則只適用新 Study；不得把既有 Study 的外部 authority checkpoint 自動搬入 `.authority/` 來冒充同一條 authority chain。
 
 ## 不可跨越的邊界
 
@@ -77,6 +90,22 @@ python3 .agents/skills/build-strategy-study-to-freeze/scripts/check_new_study.py
 
 ## CLI 前置檢查與 implementation contract
 
+### Authority root preflight
+
+`check_new_study.py` 只檢查 Study ID 與 Study／research 路徑唯一性，不檢查 authority root。任何新 Study 在第一次 writer 操作前都必須先執行：
+
+```bash
+uv run python .agents/skills/build-strategy-study-to-freeze/scripts/check_authority_root.py \
+  <study-id> \
+  --repository-root <repository-root-absolute-path> \
+  --authority-root <repository-root-absolute-path>/.authority \
+  --phase new
+```
+
+這個 CLI 是唯讀檢查，會確認 authority root 位於 repository 內且不在 Study 目錄，`.authority/` 沒有被 Git 忽略，並確認新 Study 的 authority 子目錄不存在或為空。只有輸出 `status: "passed"` 且 exit code 為 0，才可繼續 `check_new_study.py`、建立 research bundle 與執行 `studyctl precreate`。
+
+Study 建立後，在 `append`、`recover`、`validate` 或正式 `studyctl all` 前，以同一個已記錄的絕對路徑改跑 `--phase existing`；它必須確認 Event chain 與 authority checkpoint chain 相符。任何失敗都要停下來，不得改用其他 root。
+
 每個新 Study 都必須有一份明確的 implementation contract。優先使用
 `research/<study-id>/implementation-contract.yml`，並把它納入 Study 與 research 的
 Source Bundle；若 workflow schema 要求設定直接放在 candidate-definition 或
@@ -92,7 +121,8 @@ preregistration，也可以內嵌，但必須由 candidate／preregistration man
 建立新 Study 的硬性順序是：
 
 ```text
-建立 research bundle
+確認 repository/.authority、執行 authority preflight 與 check_new_study
+→ 建立 research bundle
 → 執行 pre-create binding preflight
 → 所有 binding 通過
 → 才能追加 study-created Event
@@ -124,15 +154,16 @@ Development gate 失敗時仍須保留 Trial，依 preregistered 規則進入合
 
 執行順序如下：
 
-1. 任何寫入前先跑 `check_new_study.py`。這一步不能用 `studyctl all` 取代，因為此時新 Study 的必要檔案尚未存在。
-2. 建立 research bundle 後先跑 `studyctl precreate`；只有 binding 全部通過，才能建立 Study 目錄或追加 `study-created` Event。
-3. Study、同名 research bundle、preregistration、candidate、qualification、Source Bundle 與 implementation contract 已由正式 writer 發布後，至少在 `preregistration-approved` 前跑一次 `contract` 與 `synthetic`；需要定位問題時可先分開跑 `identity`。
-4. 候選選擇證據與所有 freeze 前 artifact 完成後、追加 `candidate-frozen` 前，從 repository 根目錄執行：
+1. 先以 `git rev-parse --show-toplevel` 取得並記錄 repository root 絕對路徑，確認 authority root 為其 `.authority/`，執行 `check_authority_root.py --phase new`；再跑 `check_new_study.py`。這兩步都不能寫入 Study，也不能用 `studyctl all` 取代。
+2. 建立 research bundle 後先跑 `studyctl precreate`；只有 binding 全部通過，才能建立 Study 目錄或追加 `study-created` Event。writer 的 `--authority-root` 必須使用同一個已確認的絕對路徑。
+3. Study、同名 research bundle、preregistration、candidate、qualification、Source Bundle 與 implementation contract 已由正式 writer 發布後，至少在 `preregistration-approved` 前跑一次 `contract` 與 `synthetic`；需要定位問題時可先分開跑 `identity`。Historical Evaluation runner 只能用合成資料測試，不能讀取正式 Evaluation snapshot。
+4. 每次 writer 的 `append`、`recover` 或 `validate` 前都用同一個絕對路徑執行 `check_authority_root.py --phase existing`，確認仍使用同一個 authority root；若要恢復，先檢查 prepared journal 的原操作，不得用新 root 重建。
+5. 候選選擇證據與所有 freeze 前 artifact 完成後、追加 `candidate-frozen` 前，從 repository 根目錄執行：
 
 ```bash
 uv run python research/tools/studyctl.py \
   --repository-root . \
-  --authority-root <authority-root> \
+  --authority-root <repository-root-absolute-path>/.authority \
   all <study-id>
 ```
 
@@ -151,6 +182,7 @@ Development gate 失敗而 workflow 已合法進入 `terminal-without-candidate`
 - Study ID、candidate ID 與核心假說；
 - Development gates、主要結果與不確定性；
 - Source Bundle digest、event-chain head 與 authority root；
+- authority root 的絕對路徑、checkpoint 數量、最後 checkpoint digest，以及 `.authority/<study-id>/checkpoints/` 的 Git 狀態；
 - frozen Historical Evaluation runner 路徑；
 - candidate freeze 前 `studyctl all` 的通過結果，以及 implementation contract 路徑與驗證摘要；
 - 明確聲明沒有執行或讀取正式 Evaluation、challenge、replay 策略結果。

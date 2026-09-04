@@ -16,7 +16,7 @@ Python 3.11 project managed with uv.
   ```
 * **全域參數**：
   * `--repository-root <path>`：指定專案根目錄（預設是此工具所在的專案根目錄）。從其他目錄執行時，使用它可避免讀到錯的 `research/` 或 `workflows/`。
-  * `--authority-root <path>`：指定本機 authority checkpoint（權威檢查點）目錄。`freeze` 或 `all` 會用它比對 Event（研究事件）數量與 digest（內容指紋），偵測事件遺失、回退或內容不一致；它不是作業系統層級的檔案防護。
+  * `--authority-root <path>`：指定本機 authority checkpoint（權威檢查點）目錄。新 Study 固定使用 `<repository-root>/.authority/`；`freeze` 或 `all` 會用它比對 Event（研究事件）數量與 digest（內容指紋），偵測事件遺失、回退或內容不一致。它不是作業系統層級的檔案防護，但這些 checkpoint 會和 repository 一起納入 Git。
 * **子命令（Subcommands）**：
   * `precreate <study-id>`：只能在第一個 `study-created` Event 前執行；若同名 Workflow Study 已存在任何 Event，工具會直接失敗。檢查同名 `research/<study-id>/` 裡的 `preregistration.yml`、`candidate-definition.yml`、`qualification-spec.yml`、`development-trial-inputs.yml`、`source-bundle.yml` 與 implementation contract（實作契約）是否能讀取，並核對跨檔案 digest 與身份綁定。它不需要已存在 Study Event。
   * `identity <study-id>`：檢查研究標識（Study ID）、研究目錄（`research/<study-id>`）與設定檔中的路徑宣告是否一致，避免複製貼上舊研究範本時殘留舊版本路徑。
@@ -68,10 +68,10 @@ Python 3.11 project managed with uv.
   研究流程禁止手動修改已發布的檔案或任意竄改回測狀態。如果寫入過程中遇到斷電、系統當機，仍可能只完成部分檔案；因此工具用兩階段作業日誌（Journal）固定待發布的確切內容，讓 `recover` 能用同一批 bytes（檔案內容）完成中斷操作。個別檔案採原子寫入（Atomic，即單一檔案不會留下半截內容），但「發布佐證檔案、追加 Event（研究事件）、更新 projection（由事件重建的狀態摘要）」是分開的步驟，不代表整個多指令流程要嘛全部成功、要嘛完全不變。
 * **基本執行語法**：
   ```bash
-  uv run python workflows/strategy-forward-replication-research--v001/writer/cli.py --authority-root <路徑> <子命令> [參數]
+  uv run python workflows/strategy-forward-replication-research--v001/writer/cli.py --authority-root <repository-root-absolute-path>/.authority <子命令> [參數]
   ```
 * **全域參數**：
-  * `--authority-root <path>`（必要）：指定獨立於研究目錄外的本機 authority checkpoint 目錄，保存每次 Event 的 SHA-256 內容指紋。後續 `validate` 會用它偵測 Event 與 checkpoint 數量或內容不一致；它不是簽章，也不能阻止擁有檔案權限的人直接修改檔案。
+  * `--authority-root <path>`（必要）：指定 `<repository-root>/.authority/`，它位於 Study 外但在 repository 內，並保存每次 Event 的 SHA-256 內容指紋。從 `create`、`append`、`recover` 到 `validate` 都必須使用同一個絕對路徑；後續 `validate` 會用它偵測 Event 與 checkpoint 數量或內容不一致。它不是簽章，也不能阻止擁有檔案權限的人直接修改檔案。
   * `--workflow-root <path>`：指定流程套件根目錄（預設是此 CLI 所屬的套件路徑）。路徑錯誤會讓 writer 讀到錯的規則或 release。
   * `--allow-draft`：允許在尚未正式發布核准的草稿版本上進行開發與測試；正式研究不得使用，否則不會受到正式 release 檢查的保護。
 * **子命令與專屬參數**：
@@ -132,7 +132,20 @@ writer 遇到完整性或流程驗證錯誤時，會輸出包含 `command`、`st
   uv run python .agents/skills/blind-review-strategy-study/scripts/check_scope.py <study-id或目錄路徑>
   ```
 
-### 2. 新研究建立前規格檢驗腳本 (`.agents/skills/build-strategy-study-to-freeze/scripts/check_new_study.py`)
+### 2. Authority root 唯讀前置檢查腳本 (`.agents/skills/build-strategy-study-to-freeze/scripts/check_authority_root.py`)
+* **實際問題與影響**：
+  authority root 若因路徑猜測、暫存目錄或交接時改用另一個目錄而改變，writer 可能建立另一條 checkpoint chain，讓 Event 與 checkpoint 看似都存在卻無法證明是同一條鏈。這支腳本先把 root 固定在 repository 內的 `.authority/`，並在第一次 writer 操作前拒絕重用非空的 Study 子目錄。
+* **用途與功能**：唯讀確認 repository root 與 authority root 的絕對路徑、Study 目錄外的位置、`.authority/` 未被 Git 忽略，以及新 Study 的 `.authority/<study-id>/` 不存在或為空。Study 建立後使用 `--phase existing`，驗證 Event chain 與 checkpoint chain 是否相符；任何失敗都必須停止，不得換 root 或刪除 checkpoint 重試。
+* **執行範例**：
+  ```bash
+  uv run python .agents/skills/build-strategy-study-to-freeze/scripts/check_authority_root.py \
+    <study-id> \
+    --repository-root <repository-root-absolute-path> \
+    --authority-root <repository-root-absolute-path>/.authority \
+    --phase new
+  ```
+
+### 3. 新研究建立前規格檢驗腳本 (`.agents/skills/build-strategy-study-to-freeze/scripts/check_new_study.py`)
 * **實際問題與影響**：
   若研究命名重複、格式不符或在錯誤的流程環境下建立，可能導致舊有研究資料被意外覆寫，破壞研究不可竄改的承諾。
 * **用途與功能**：檢查欲建立的 Study ID 格式是否安全合規（3–63 個小寫英數字與連字號）、確認 `release.yml` 檔案存在，並確認同名 Study 與 research 目錄不存在，避免重複覆寫或冒充新研究。它不會驗證 release manifest、測試報告或 digest；那些檢查由正式 writer／validator 負責。
@@ -141,7 +154,7 @@ writer 遇到完整性或流程驗證錯誤時，會輸出包含 `command`、`st
   uv run python .agents/skills/build-strategy-study-to-freeze/scripts/check_new_study.py <study-id> [--repository-root <path>]
   ```
 
-### 3. 候選策略凍結狀態驗證腳本 (`.agents/skills/run-strategy-historical-evaluation/scripts/check_candidate_frozen.py`)
+### 4. 候選策略凍結狀態驗證腳本 (`.agents/skills/run-strategy-historical-evaluation/scripts/check_candidate_frozen.py`)
 * **實際問題與影響**：
   歷史評估（Historical Evaluation）階段是不可逆的盲測驗證。若研究者在策略尚未正式凍結時就偷跑評估，或者在評估後又回頭微調參數，研究結論將徹底失效（即資料窺探偏差 Data Snooping Bias）。
 * **用途與功能**：嚴格檢查 Study 的 `events/` 是否恰好有 7 個檔案，最後一個是 `000007-candidate-frozen.yml`，並核對 Source Bundle 列出的檔案 digest。若 Source Bundle 沒有 `run_historical_evaluation.py`，腳本仍可能回傳 `eligible`，但會標示 `runner_status: "adapter-required"`；這表示需要先建立並測試 adapter（轉接程式），不代表已有 frozen runner（已凍結的評估執行程式）。腳本也只檢查事件階段，不會掃描所有目錄來保證沒有 Evaluation artifact。
@@ -150,7 +163,7 @@ writer 遇到完整性或流程驗證錯誤時，會輸出包含 `command`、`st
   uv run python .agents/skills/run-strategy-historical-evaluation/scripts/check_candidate_frozen.py <study-id或目錄路徑> [--repository-root <path>]
   ```
 
-### 4. 歷史評估數據獨立重算工具 (`.agents/skills/run-strategy-historical-evaluation/scripts/recompute_historical_evaluation.py`)
+### 5. 歷史評估數據獨立重算工具 (`.agents/skills/run-strategy-historical-evaluation/scripts/recompute_historical_evaluation.py`)
 * **實際問題與影響**：
   傳統研究常由操作者自行填寫勝率或年化報酬等指標，容易引發作假或計算口徑不一的誠信問題。
 * **用途與功能**：基於 Workflow Validator（流程驗證器：依固定規則重新檢查資料與門檻），從指定的 canonical raw evidence（固定格式的原始評估資料）重新計算整體績效與由各 Fold（年度評估分段）組成的分布指標，再比對研究門檻（Gate）。它不採信人工或呼叫方預先填寫的 `passed` 標記；但它只重算你傳入的 evidence，完整的 Study、candidate、資料與 artifact identity（身份）綁定仍要由其他 preflight／validator 步驟完成。
@@ -162,3 +175,11 @@ writer 遇到完整性或流程驗證錯誤時，會輸出包含 `command`、`st
   # 從原始佐證重新計算指標並判定是否通過
   uv run python .agents/skills/run-strategy-historical-evaluation/scripts/recompute_historical_evaluation.py <study-id> <evidence-path>
   ```
+
+### 新 Study 開啟順序（做到 Historical Evaluation 前）
+
+1. 用 `git rev-parse --show-toplevel` 取得 repository root 絕對路徑，確認 `<repository-root>/.authority/`，執行 `check_authority_root.py --phase new`；通過後再執行 `check_new_study.py`。
+2. 建立 research bundle，執行 `studyctl precreate`；通過後才可用 writer `create` 及後續 `append` 發布 Study Event。所有 writer、`recover`、`validate` 與 `studyctl all` 都必須傳入同一個 authority root 絕對路徑。
+3. Study 建立後，在每次 writer 操作和 `studyctl all` 前執行 `check_authority_root.py --phase existing`；失敗時停止，不得刪除 checkpoint、重新 create 或換 root。
+4. 在 candidate freeze 前執行 `studyctl contract`、`studyctl synthetic`，再執行 `studyctl all`；只用合成資料測試 Historical Evaluation runner，不讀取正式 Historical Evaluation 結果。
+5. `studyctl all` 通過後才由 guarded writer 發布 `candidate-frozen`，立即 validate，然後停止；正式 Historical Evaluation 由另一個 skill 接手。

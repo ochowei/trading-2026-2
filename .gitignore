@@ -6,4 +6,5 @@ __pycache__/
 dist/
 build/
 *.egg-info/
-.study-authority/
+
+# Authority checkpoint 刻意放在 .authority/ 並納入版本控制。
