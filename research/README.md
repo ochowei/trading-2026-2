@@ -11,6 +11,41 @@ Study 的不可改寫事件鏈，請以 [`workflows/README.md`](../workflows/REA
 `studies/<study-id>/study.yml` 與 `events/`；不要只依 `research/` 中某個檔案是否存在，
 或某份 YAML 的 `outcome` 欄位，手動推導或修改 Study 狀態。
 
+## 文件新鮮度檢查
+
+這份 README 的內容會跟著研究資料夾與 Study 狀態演進。每次完成一輪檢查時，更新最後
+檢查日期與下列兩個摘要值；未來只要重新計算後有任一值不同，就應重新閱讀並更新本文件。
+
+- 最後檢查日期：`2026-09-04`
+- `research` 內容摘要（排除本 README）：`b7580db7b9b21248c8a59e3cf6c7c3577a254be386d4f564263f444fba3d4480`
+- Workflow Study 狀態摘要（所有 `study.yml`）：`eb47356853f1de7d9fbd5f684fd299166e85f90d6c30d31ad54abd906d8c1190`
+
+以下指令從 repository 根目錄執行，不需要新增 Python script。第一個摘要包含 Git 已追蹤的
+`research/` 檔案內容與路徑，但排除 `research/README.md`；第二個摘要包含每個正式 Study
+的 canonical `study.yml` 內容與路徑。執行前先確認 `git status --short`，避免漏掉尚未被 Git
+追蹤的新檔案。
+
+```bash
+git ls-files research ':(exclude)research/README.md' \
+  | LC_ALL=C sort \
+  | while IFS= read -r file_path; do
+      printf '%s\t' "$file_path"
+      sha256sum "$file_path"
+    done \
+  | sha256sum
+```
+
+```bash
+find workflows/strategy-forward-replication-research--v001/studies \
+  -type f -name study.yml \
+  | LC_ALL=C sort \
+  | while IFS= read -r file_path; do
+      printf '%s\t' "$file_path"
+      sha256sum "$file_path"
+    done \
+  | sha256sum
+```
+
 ## 目錄總覽
 
 ```text
