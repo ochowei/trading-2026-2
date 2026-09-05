@@ -34,9 +34,9 @@ Historical Evaluation 與 quarantine 在 candidate freeze 前只保存 reference
 
 不要修改已被其他 Study Source Bundle 凍結的檔案。新增獨立策略模組與測試，或在不影響舊 digest 的前提下重用既有模組。
 
-Source Bundle 至少包含策略引擎、直接依賴、測試、Development runner、Historical Evaluation runner、preregistration、qualification spec、implementation contract、`pyproject.toml` 與 lockfile。Implementation contract 應優先放在
-`research/<study-id>/implementation-contract.yml`；若內嵌在 candidate-definition 或
-preregistration，則該 manifest 必須明確綁定它。它至少要固定引擎規格常數、成本常數、各指標的 lookback／`min_periods`／not-ready 語意、RSI 的零 gain/loss 分支、volume lead 的 prior-only 語意，以及 stop、target、gap、同日先後順序、holding 與 cooldown 等 outcome 邊界。
+Source Bundle 至少包含策略引擎、直接依賴、測試、Development runner、Historical Evaluation runner、preregistration、qualification spec、implementation contract、`pyproject.toml` 與 lockfile。對本 workflow v001 的新 Study，Implementation contract 一律放在
+`research/<study-id>/implementation-contract.yml`，Source Bundle 必須綁定這個完全相同的 path 與 digest；不得再發布
+`workflows/.../studies/<study-id>/manifests/implementation-contract.yml`。`studyctl contract` 會優先解析 Study manifest 的 contract，錯誤的第二份 contract 會遮蔽 research contract，並造成 `contract-not-frozen`。它至少要固定引擎規格常數、成本常數、各指標的 lookback／`min_periods`／not-ready 語意、RSI 的零 gain/loss 分支、volume lead 的 prior-only 語意，以及 stop、target、gap、同日先後順序、holding 與 cooldown 等 outcome 邊界。
 
 Historical Evaluation runner 必須在 freeze 前完成並用合成 folds 測試：
 
@@ -61,8 +61,10 @@ assert qualification["evaluation"] == preregistration["evaluation_gates"]
 
 此外，逐一把 Evaluation gate 名稱對照 `validator/artifacts.py` 實際產生的 metrics。v001 Historical Evaluation 的 drawdown metric 名稱是 `stress_max_drawdown`；不得使用看似合理但 validator 不會產生的別名，也不得在不更新並重新 release workflow validator 的情況下加入自訂正式 metric。Freeze 前應以空白合成 evidence 跑一次 validator gate-support preflight。
 
-此外，在 implementation contract、Source Bundle 與必要 manifests 已發布後，至少在
-`preregistration-approved` 前執行 `studyctl contract` 與 `studyctl synthetic`。候選選擇與
+此外，在 writer 建立 Study 並發布必要 manifests 後，先確認 Study manifest 沒有第二份
+implementation contract，且 Source Bundle 的 contract entry 精確指向同名 research path
+與 digest；至少在 `preregistration-approved` 前執行 `studyctl contract` 與
+`studyctl synthetic`。候選選擇與
 freeze 前 artifacts 完成後，追加 `candidate-frozen` 前必須從 repository 根目錄執行：
 
 ```bash
@@ -92,7 +94,7 @@ Artifact 發布後不可覆寫。若未被事件引用的 artifact 有錯，保�
 - Source Bundle 逐檔 SHA-256 相符；
 - snapshot manifest 與實際 SHA-256 相符；
 - YAML 為 repository-canonical；
-- implementation contract 存在、已被 Source Bundle 綁定，且 `studyctl contract` 與 `studyctl synthetic` 通過；
+- implementation contract 只存在於 canonical research path、已被 Source Bundle 以相同 path/digest 綁定，Study manifest 沒有第二份 contract，且 `studyctl contract` 與 `studyctl synthetic` 通過；
 - qualification gates 與 preregistration 完全相同；
 - selection rule digest 包含 eligibility、selection 與 tie handling；
 - Candidate Freeze 綁定 registry、candidate、qualification、snapshot set、fold inventory、selection evidence；

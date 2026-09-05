@@ -111,11 +111,16 @@ uv run python .agents/skills/build-strategy-study-to-freeze/scripts/check_author
 
 Study 建立後，在 `append`、`recover`、`validate` 或正式 `studyctl all` 前，以同一個已記錄的絕對路徑改跑 `--phase existing`；它必須確認 Event chain 與 authority checkpoint chain 相符。任何失敗都要停下來，不得改用其他 root。
 
-每個新 Study 都必須有一份明確的 implementation contract。優先使用
-`research/<study-id>/implementation-contract.yml`，並把它納入 Study 與 research 的
-Source Bundle；若 workflow schema 要求設定直接放在 candidate-definition 或
-preregistration，也可以內嵌，但必須由 candidate／preregistration manifest 綁定，不能成為
-未追蹤的旁路設定。至少要說清楚：
+每個新 Study 都必須有一份明確的 implementation contract。對本 workflow
+`strategy-forward-replication-research--v001` 的新 Study，一律使用
+`research/<study-id>/implementation-contract.yml` 作為唯一 contract source，並把這個
+**完全相同的 repository-relative path 與 digest** 納入 Source Bundle。不得另外發布
+`workflows/.../studies/<study-id>/manifests/implementation-contract.yml`；Study manifest
+不得存在第二份 contract。`studyctl contract` 會優先解析 Study manifest 的 contract，若它
+存在但 Source Bundle 綁定的是 research path，就會產生 `contract-not-frozen`，而 immutable
+artifact 不能事後以覆寫方式修正。若未來 workflow schema 要求設定直接放在
+candidate-definition 或 preregistration，仍須由該 manifest 綁定同一份 contract，不能產生
+第二個未同步的 contract source。至少要說清楚：
 
 - 策略引擎路徑、`DEFAULT_SPEC`（或等價規格常數）與成本常數；
 - SMA、RSI、volume lead 的欄位、lookback、`min_periods` 與有效歷史長度；
@@ -148,6 +153,14 @@ Source Bundle 檔案與 digest，以及已存在的同名 Study manifest copy。
 `study-created` Event。Pre-create 失敗時不得建立任何 Study Event，也不得用補造
 candidate、selection 或 provenance evidence 的方式讓 CLI 通過。
 
+`study-created` 後、任何 `preregistration-approved` 或其他後續 Event 前，必須再做一次
+post-create contract guard：確認 Study 內不存在
+`manifests/implementation-contract.yml`，Source Bundle 的 implementation-contract entry
+仍精確指向 `research/<study-id>/implementation-contract.yml`，再執行
+`studyctl contract` 與 `studyctl synthetic`。如果出現 `contract-not-frozen`、path mismatch
+或 digest mismatch，立即停止這個 Study；不得刪除、覆寫或重新發布既有 immutable artifact，
+也不得進入 Development，應保留該 Study 的建立紀錄並改用新的 Study ID。
+
 若 preregistration 有任何改變，必須重新計算並更新所有下游 digest，包括
 qualification、Development trial inputs、Source Bundle 及其所綁定的 evidence/input；
 不得只修改其中一個 digest。已發布的 artifact 與 Event 一律不可覆寫；有錯時保留舊檔，
@@ -161,7 +174,7 @@ Development gate 失敗時仍須保留 Trial，依 preregistered 規則進入合
 
 1. 先以 `git rev-parse --show-toplevel` 取得並記錄 repository root 絕對路徑，確認 authority root 為其 `.authority/`，執行 `check_authority_root.py --phase new`；再跑 `check_new_study.py`。這兩步都不能寫入 Study，也不能用 `studyctl all` 取代。
 2. 建立 research bundle 後先跑 `studyctl precreate`；只有 binding 全部通過，才能建立 Study 目錄或追加 `study-created` Event。writer 的 `--authority-root` 必須使用同一個已確認的絕對路徑。
-3. Study、同名 research bundle、preregistration、candidate、qualification、Source Bundle 與 implementation contract 已由正式 writer 發布後，至少在 `preregistration-approved` 前跑一次 `contract` 與 `synthetic`；需要定位問題時可先分開跑 `identity`。Historical Evaluation runner 只能用合成資料測試，不能讀取正式 Evaluation snapshot。
+3. Study、同名 research bundle、preregistration、candidate、qualification、Source Bundle 與 implementation contract 已由正式 writer 發布後，先確認沒有 Study-level `manifests/implementation-contract.yml`，且 Source Bundle 綁定的是 research contract 的相同 path/digest；至少在 `preregistration-approved` 前跑一次 `contract` 與 `synthetic`。需要定位問題時可先分開跑 `identity`。Historical Evaluation runner 只能用合成資料測試，不能讀取正式 Evaluation snapshot。
 4. 每次 writer 的 `append`、`recover` 或 `validate` 前都用同一個絕對路徑執行 `check_authority_root.py --phase existing`，確認仍使用同一個 authority root；若要恢復，先檢查 prepared journal 的原操作，不得用新 root 重建。
 5. 候選選擇證據與所有 freeze 前 artifact 完成後、追加 `candidate-frozen` 前，從 repository 根目錄執行：
 
