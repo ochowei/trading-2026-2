@@ -7,6 +7,12 @@ description: 對 strategy-forward-replication-research--v001 中已完成 candid
 
 這是一次性 outcome 操作。只在使用者明確要求執行、且指定一個 Study ID 或直接 Study 目錄時使用。
 
+## 使用角色限制
+
+- 本 skill 只能由 **Study 歷史評估執行者** 使用。
+- 執行任何 preflight、讀取正式 Historical Evaluation 資料或發布結果前，必須確認目前對話角色就是 **Study 歷史評估執行者**。
+- 其他角色不得以本 skill 執行 Historical Evaluation、讀取正式結果或發布相關 artifact；若目前角色不符，立即停止並說明角色限制。
+
 ## 強制 preflight
 
 在讀取 Historical Evaluation 價格或執行策略前，先執行：
