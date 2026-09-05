@@ -5,7 +5,6 @@ from typing import Any
 
 import exchange_calendars as xcals
 from validator.canonical_yaml import canonical_digest
-from validator.study import WorkflowRules
 from writer.service import StudyService
 
 DIGESTS = {
@@ -15,7 +14,6 @@ DIGESTS = {
         "candidate": "b",
         "qualification": "c",
         "evaluation_snapshot": "d",
-        "replay_snapshot": "e",
         "fold_inventory": "f",
         "artifact": "1",
     }.items()
@@ -55,7 +53,6 @@ def preregistration() -> dict[str, Any]:
         "fold_warmup_sessions": 2,
         "initial_cash": "10000",
         "evaluation_gates": {},
-        "replay_gates": {},
     }
 
 
@@ -237,64 +234,6 @@ def evaluation_evidence() -> dict[str, Any]:
     }
 
 
-def challenge_evidence(bindings: dict[str, str]) -> dict[str, Any]:
-    rules = WorkflowRules(Path(__file__).resolve().parents[1])
-    seed_required = set(rules.evidence_requirements["seed_required_challenges"])
-    challenges = []
-    for index, challenge_id in enumerate(rules.evidence_requirements["required_challenges"]):
-        item = {
-            "challenge_id": challenge_id,
-            "artifact_path": f"evidence/challenges/{challenge_id}.yml",
-            "artifact_digest": canonical_digest(challenge_artifact(challenge_id)),
-            "bindings": dict(bindings),
-            "actual": "2",
-            "operator": ">",
-            "expected": "1",
-        }
-        if challenge_id in seed_required:
-            item["seed"] = 42 + index
-        challenges.append(item)
-    return {
-        "schema_version": 1,
-        "stage": "robustness-challenges",
-        "challenges": challenges,
-    }
-
-
-def challenge_artifact(challenge_id: str) -> dict[str, Any]:
-    return {"challenge_id": challenge_id, "raw_result": "fixture-result"}
-
-
-def replay_evidence() -> dict[str, Any]:
-    calendar = xcals.get_calendar("XNYS")
-    sessions = [
-        timestamp.strftime("%Y-%m-%d")
-        for timestamp in calendar.sessions_in_range("2025-01-01", "2025-12-31")
-    ]
-    fills = [
-        {
-            "fill_id": f"fill-{index}",
-            "session": sessions[10 + index],
-            "exit_session": sessions[11 + index],
-            "proposal_actionable": False,
-            "order_type": "LIMIT",
-            "base_pnl": "20",
-            "stress_pnl": "10",
-        }
-        for index in range(1, 13)
-    ]
-    return {
-        "schema_version": 1,
-        "stage": "retrospective-execution-replay",
-        "initial_cash": "10000",
-        "expected_sessions": sessions,
-        "observed_sessions": sessions,
-        "critical_drift_passed": True,
-        "stress_drawdown_limit": "0.20",
-        "fills": fills,
-    }
-
-
 def terminal_evidence(
     projection: dict[str, Any], outcome: str, reasons: list[str]
 ) -> dict[str, Any]:
@@ -312,8 +251,6 @@ def terminal_evidence(
         "development": "development_evidence_digest",
         "candidate-freeze": "candidate_freeze_digest",
         "historical-evaluation": "historical_evaluation_digest",
-        "robustness-challenges": "robustness_challenges_digest",
-        "retrospective-execution-replay": "retrospective_replay_digest",
         "evidence-unavailable": "evidence_unavailable_digest",
     }
     for evidence_name, binding_name in evidence_names.items():
@@ -341,7 +278,7 @@ def advance_to_candidate(
         research_round_id="round-1",
         experiment_family="family-a",
         research_owner="same-person",
-        replay_operator="same-person",
+        historical_evaluation_operator="same-person",
         source_bundle={
             "schema_version": 1,
             "files": [{"path": "runner.py", "digest": DIGESTS["source"]}],
@@ -425,7 +362,6 @@ def advance_to_candidate(
         "development": "8" * 64,
         "quarantine": "9" * 64,
         "historical-evaluation": DIGESTS["evaluation_snapshot"],
-        "retrospective-execution-replay": DIGESTS["replay_snapshot"],
     }
     snapshots = []
     for interval in service.rules.workflow["data_intervals"]["intervals"]:
@@ -491,7 +427,6 @@ def advance_to_candidate(
             "trial_registry_digest": registry_digest,
             "qualification_spec_digest": DIGESTS["qualification"],
             "evaluation_snapshot_digest": DIGESTS["evaluation_snapshot"],
-            "replay_snapshot_digest": DIGESTS["replay_snapshot"],
             "fold_inventory_digest": fold_inventory_digest,
             "development_evidence_digest": evidence_digest,
             "snapshot_set_path": snapshot_path,

@@ -20,7 +20,6 @@
 | Development | 2014-01-01 至 2018-12-31 | 開發、比較及選擇策略 |
 | Quarantine | 2019-01-01 至 2019-12-31 | 隔離，不得移入其他資料角色 |
 | Historical Evaluation | 2020-01-01 至 2024-12-31 | 五個互不重疊的年度 folds |
-| Retrospective execution replay | 2025-01-01 至 2025-12-31 | 依時間順序進行歷史成交重播 |
 
 不得自行更換、縮短或延長日期，不得增加、遺漏或重疊 sessions。
 
@@ -34,12 +33,11 @@
 - 唯一 research-round identity；
 - experiment family；
 - human research owner；
-- replay operator；
 - exact workflow 與 policy-set identity。
 
 ### 2. 預先登記並凍結規則
 
-查看正式 Evaluation 或 replay outcome 前，預先登記並凍結：
+查看正式 Historical Evaluation outcome 前，預先登記並凍結：
 
 - 可否證的研究假說；
 - 完整候選集合；
@@ -49,8 +47,7 @@
 - 交易、成交及持有規則；
 - base 與 stress costs；
 - 風險上限；
-- robustness challenges；
-- Evaluation、replay、pause、recovery 與 outcome 門檻。
+- Historical Evaluation、pause、recovery 與 outcome 門檻。
 
 上述規格不得依賴未明示的預設值。
 
@@ -64,7 +61,7 @@
 
 ### 4. 完成 provenance audit
 
-查看正式 Evaluation 或 replay outcome 前，必須稽核資料、策略及既有 outcome exposure 的來源，
+查看正式 Historical Evaluation outcome 前，必須稽核資料、策略及既有 outcome exposure 的來源，
 並將 asset-specific provenance 凍結為下列其中一種：
 
 - `verified-clean`；
@@ -95,52 +92,26 @@ baseline。
 
 ### 6. 產生 immutable evidence
 
-Development、candidate freeze、Evaluation、challenges、replay 與 terminal review 的正式輸入和結果，
+Development、candidate freeze、Historical Evaluation 與 terminal 的正式輸入和結果，
 都必須保存為不可覆寫的 artifacts，並透過 exact digest 相互綁定。
 
 Evidence 一旦被 digest 引用，就不得覆寫、刪除、改名或以 mutable `latest` pointer 取代。相同輸入
 的 recovery 只能恢復或完成同一 frozen operation，不得改變策略、資料、門檻或 publication decision。
 
-### 7. 執行 Historical Evaluation 與 robustness challenges
+### 7. 執行 Historical Evaluation
 
 使用凍結候選、immutable snapshots 和 offline runs，評估 2020 至 2024 五個互不重疊的年度 folds。
 每筆交易依 signal date 歸屬，並在同一 fold 內退出。
 
-至少執行下列 challenges：
+所有門檻都必須在 outcome 前登記。Historical Evaluation 完成後，必須另追加 `study-terminal`；
+不能把 Historical Evaluation event 本身當成終止事件。
 
-1. 現金基準；
-2. 不同且較簡單的 family baseline；
-3. exposure-matched 隨機進場；
-4. 預先登記的小幅參數擾動；
-5. 延後進場；
-6. 較高成本；
-7. 較差成交；
-8. 漏單；
-9. 市場 regime 檢查。
+### 8. 重算並判定結果
 
-所有門檻都必須在 outcome 前登記。任一必要 gate 失敗，本次 study 即停止。
-
-### 8. 執行 2025 historical replay
-
-只有已保存且通過 Historical Evaluation 的候選才能進入 replay。Replay 必須綁定相同 study、
-candidate freeze、plan、policy set、data generation 與完整 2025 session inventory，並依 session 順序
-產生：
-
-- non-actionable paper proposals；
-- canonical simulated fills；
-- position、cash 與 ledger events；
-- base 與 stress metrics；
-- checkpoint prefixes；
-- historical drift assessment。
-
-Replay 只產生歷史模擬 evidence，不得建立 broker order、真實成交或實際部位。
-
-### 9. 重算並判定結果
-
-Reviewer 必須從 frozen inputs、exact digests、registry 與 immutable evidence 重算所有必要結果，
+Validator 必須從 frozen inputs、exact digests、registry 與 immutable evidence 重算所有必要結果，
 不得信任執行者或 manifest 自行宣告的 `pass`，也不得在 review 時補資料、改門檻或調整策略。
-Reviewer 可以和 research owner、replay operator 或 evidence producer 是同一人；這裡的「獨立」指
-重新計算，不要求不同人員。
+這次重算的結果必須寫入 Terminal Evidence，再由 `study-terminal` 事件引用；Terminal Evidence
+是終止佐證，不是另一個評估階段。
 
 結果只能是：
 
@@ -150,7 +121,7 @@ Reviewer 可以和 research owner、replay operator 或 evidence producer 是同
 
 ## 不可變更規則
 
-Evaluation 或 replay 失敗後，不得：
+Historical Evaluation 失敗後，不得：
 
 - 更換策略或重新調參；
 - 刪除、隱藏或重寫 trial；
@@ -163,6 +134,6 @@ Evaluation 或 replay 失敗後，不得：
 ## 最短執行摘要
 
 > 預先凍結 study 規則；只用 Development 資料開發並以 append-only 方式記錄所有 trials；完成
-> provenance audit 後，以 exact digests 凍結唯一候選及全部輸入；再依序執行 Historical
-> Evaluation、robustness challenges 和 historical replay，將各階段結果保存為 immutable evidence；
-> 最後由 independent reviewer 重算。任何失敗都不得修改策略、資料或門檻後重試。
+> provenance audit 後，以 exact digests 凍結唯一候選及全部輸入；再執行 Historical Evaluation，
+> 將結果保存為 immutable evidence，由 validator 重算後產生 Terminal Evidence 並追加 Study Terminal。
+> `pass` 只代表通過 Historical Evaluation；任何失敗都不得修改策略、資料或門檻後重試。

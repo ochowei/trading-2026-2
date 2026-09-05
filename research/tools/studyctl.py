@@ -765,7 +765,6 @@ def _check_gate_maps(
             qualification.get("development", {}),
         ),
         ("evaluation", preregistration.get("evaluation_gates", {}), qualification.get("evaluation", {})),
-        ("replay", preregistration.get("replay_gates", {}), qualification.get("replay", {})),
     )
     for stage, registered, qualified in pairs:
         equal = registered == qualified if exact else _semantic_equal(registered, qualified)
@@ -800,13 +799,12 @@ def _function_dict_keys(function: Callable[..., Any], *, assignment: str | None 
     return found
 
 
-def _validator_metric_names() -> tuple[set[str], set[str], set[str]]:
-    from validator.artifacts import _recompute_development, historical_metrics, replay_metrics
+def _validator_metric_names() -> tuple[set[str], set[str]]:
+    from validator.artifacts import _recompute_development, historical_metrics
 
     return (
         _function_dict_keys(_recompute_development, assignment="actuals"),
         _function_dict_keys(historical_metrics),
-        _function_dict_keys(replay_metrics),
     )
 
 
@@ -816,14 +814,13 @@ def _check_validator_gate_support(
     qualification: dict[str, Any],
 ) -> None:
     try:
-        development, evaluation, replay = _validator_metric_names()
+        development, evaluation = _validator_metric_names()
     except (OSError, SyntaxError, TypeError) as exc:
         result.error("validator-introspection-failed", f"無法讀取 validator 的 gate metric：{exc}")
         return
     configured = (
         ("development", set(_get_path(preregistration, "eligibility_rules.development_gates", {})), development),
         ("evaluation", set(preregistration.get("evaluation_gates", {})), evaluation),
-        ("replay", set(preregistration.get("replay_gates", {})), replay),
     )
     for stage, names, supported in configured:
         unsupported = sorted(names - supported)
@@ -835,7 +832,6 @@ def _check_validator_gate_support(
     result.details["validator_metrics"] = {
         "development": sorted(development),
         "evaluation": sorted(evaluation),
-        "replay": sorted(replay),
     }
 
 
@@ -2053,7 +2049,7 @@ def run_freeze(context: StudyContext, authority_root: Path | None = None) -> Che
         }
     )
     if state == "past-freeze":
-        result.error("past-candidate-freeze", "Study 已經進入 candidate freeze 後的正式結果階段，不能再當作 freeze 前檢查")
+        result.error("past-candidate-freeze", "Study 已經進入 candidate freeze 後的正式評估或終止階段，不能再當作 freeze 前檢查")
     elif state == "terminal-without-candidate":
         result.details["candidate_freeze_required"] = False
         result.warning(

@@ -23,7 +23,7 @@ python3 .agents/skills/build-strategy-study-to-freeze/scripts/check_new_study.py
 
 - 只有輸出 `eligible` 且 exit code 0 才能繼續。不得覆寫、恢復或改名既有 Study 來冒充新 Study。
 - `check_new_study.py` 只確認 Study ID 可以建立；Study 目錄、research bundle、Source Bundle 與 implementation contract 建好後，仍必須依下方規則執行 `studyctl`。
-- 先確認目前 task 沒有看過這個候選的 Historical Evaluation、challenge 或 replay 策略結果。若已曝光，不得宣告 `verified-clean`；依 workflow 記錄實際 provenance。
+- 先確認目前 task 沒有看過這個候選的 Historical Evaluation 或 Terminal 結果。若已曝光，不得宣告 `verified-clean`；依 workflow 記錄實際 provenance。
 - 讀取並遵守 repository `AGENTS.md`、workflow release、guide、rules、schemas、writer 與 validator。不得使用 `--allow-draft`。
 
 ## Authority root 固定規則
@@ -38,7 +38,7 @@ python3 .agents/skills/build-strategy-study-to-freeze/scripts/check_new_study.py
 
 ## 不可跨越的邊界
 
-- 可以使用 warmup-only 與 Development 資料開發；不得用 quarantine、Historical Evaluation 或 replay 價格調參、選模或檢查策略績效。
+- 可以使用 warmup-only 與 Development 資料開發；不得用 quarantine 或 Historical Evaluation 價格調參、選模或檢查策略績效。
 - 正式資料優先引用 repository 公用的 immutable snapshot；只有 runner 或正式 artifact 明確無法解析 reference 時，才可建立 Study 內的物化副本。資料重用本身不得在本 skill 執行策略。
 - 不得執行或發布 `historical-evaluation-completed` 及其後事件。
 - Candidate freeze 後不得修改 Source Bundle、候選、資格規格、資料綁定、選擇證據或任何 outcome-relevant 程式。
@@ -71,17 +71,16 @@ python3 .agents/skills/build-strategy-study-to-freeze/scripts/check_new_study.py
   `research/tools/download_market_data.py` 下載到 `research/market-data/yahoo/`；通過資料
   品質檢查後，後續 Study 以 reference 使用，不預設每個 Study 各自下載一份。
 - 不論採 reference 或物化副本，仍須依 workflow 固定角色維持不重疊的
-  `warmup-only`、`development`、`quarantine`、`historical-evaluation` 與
-  `retrospective-execution-replay` views。Development 只能開啟允許的 warmup 與 Development
-  view，Evaluation、quarantine 與 replay 資料在 candidate freeze 前不得用來調參、選模或
-  檢查策略績效。
+  `warmup-only`、`development`、`quarantine` 與 `historical-evaluation` views。Development
+  只能開啟允許的 warmup 與 Development view，Evaluation 與 quarantine 資料在 candidate
+  freeze 前不得用來調參、選模或檢查策略績效。
 
 ## 必做工作
 
 完整閱讀 [references/build-method.md](references/build-method.md)，依其順序建立研究。特別確保：
 
 1. 新假說只包含能清楚歸因的有限變更，並有可否證 gate。
-2. Preregistration、qualification spec 與執行器對 Development、Evaluation、replay gate 完全一致，而且每個正式 gate 都是 workflow validator 能重算的 metric。
+2. Preregistration、qualification spec 與執行器對 Development、Evaluation gate 完全一致，而且每個正式 gate 都是 workflow validator 能重算的 metric。
 3. Source Bundle 在 Study 建立前納入所有 outcome-relevant 程式，包括 Development runner、Historical Evaluation runner、策略引擎、測試與 implementation contract；每個 contract 檔案都必須有明確路徑與 digest 綁定。
 4. Historical Evaluation runner 必須能只靠 frozen inputs 產生 schema-compliant raw evidence；本 skill 只能用合成資料測試它，不得對正式 Evaluation snapshot 執行。
 5. Development evidence 保存 preregistered 分段、leave-one-year-out、block bootstrap 或其他診斷，不得只保存摘要 pass/fail。
@@ -185,6 +184,6 @@ Development gate 失敗而 workflow 已合法進入 `terminal-without-candidate`
 - authority root 的絕對路徑、checkpoint 數量、最後 checkpoint digest，以及 `.authority/<study-id>/checkpoints/` 的 Git 狀態；
 - frozen Historical Evaluation runner 路徑；
 - candidate freeze 前 `studyctl all` 的通過結果，以及 implementation contract 路徑與驗證摘要；
-- 明確聲明沒有執行或讀取正式 Evaluation、challenge、replay 策略結果。
+- 明確聲明沒有執行或讀取正式 Historical Evaluation 結果。
 
 不要自動接續 Historical Evaluation。使用者另行要求後，交給 `$run-strategy-historical-evaluation`。

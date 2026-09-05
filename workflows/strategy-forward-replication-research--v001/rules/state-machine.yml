@@ -7,9 +7,6 @@ events:
   - provenance-audited
   - candidate-frozen
   - historical-evaluation-completed
-  - robustness-challenges-completed
-  - retrospective-replay-completed
-  - independent-review-completed
   - evidence-unavailable
   - study-paused
   - study-resumed
@@ -29,11 +26,8 @@ normal_transitions:
     - study-terminal
   historical-evaluation-completed:
     - evidence-unavailable
-    - robustness-challenges-completed
     - study-terminal
     - study-paused
-  independent-review-completed:
-    - study-terminal
   preregistration-approved:
     - evidence-unavailable
     - development-authorized
@@ -41,16 +35,6 @@ normal_transitions:
   provenance-audited:
     - evidence-unavailable
     - candidate-frozen
-    - study-terminal
-    - study-paused
-  retrospective-replay-completed:
-    - evidence-unavailable
-    - independent-review-completed
-    - study-terminal
-    - study-paused
-  robustness-challenges-completed:
-    - evidence-unavailable
-    - retrospective-replay-completed
     - study-terminal
     - study-paused
   study-created:

@@ -2,7 +2,7 @@
 
 這是一個自包含的美國股票日線回溯研究 Workflow Package。規則、schemas、policies、validator、guarded writer、tests、reference docs 與 Studies 都位於本目錄；大型或敏感 raw artifacts 以 Evidence Manifest 引用外部 content-addressed storage。
 
-目前 v001 已於 2026-09-02 由 trusted approver 核准啟用。正式研究應直接使用正式 writer，不得加上 `--allow-draft`；如果 `release.yml` 缺失、內容損壞，或與 release manifest、測試報告不一致，writer 會拒絕操作。
+v001 Lifecycle 調整已由 Trusted Approver `william` 於 2026-09-04 核准啟用。正式研究應直接使用正式 writer，不得加上 `--allow-draft`；如果 `release.yml` 缺失、內容損壞，或與 release manifest、測試報告不一致，writer 會拒絕操作。
 
 ## 使用方式
 
@@ -26,8 +26,10 @@ Study 會建立在本 package 的 `studies/<study-id>/`。本機 authority root 
 
 這套本機防護的目的，是避免誤覆寫、半完成寫入與意外回退。它信任檔案管理者，不防止擁有完整檔案權限的人同時竄改 Study 和 authority root。
 
-## Review 的意思
+## Historical Evaluation 與終止
 
-Independent Review 是從 frozen inputs 與 raw evidence 重新執行 deterministic validator。研究者、replay operator 和 reviewer 可以是同一個人；流程要求的是獨立重算，不是人員分離。
+Historical Evaluation 完成後，validator 會從 frozen inputs 與 raw evidence 重新計算結果，再由 `study-terminal` 事件結束 Study。`pass` 只代表通過 Historical Evaluation，不代表未定義的 robustness challenge、Replay 或其他外部檢查。
+
+`Terminal Evidence` 會綁定重算結果、事件鏈與必要的資料 digest；它是終止事件的佐證，不是另一個評估階段。既有 Study 可能保留舊版 replay metadata，但新 Study 不得把它當成 Lifecycle 必經步驟。
 
 實作與驗收順序請參考 [`IMPLEMENTATION-PLAN.md`](IMPLEMENTATION-PLAN.md)，操作與研究語意請參考 [`reference/strategy-forward-replication-research-v001-guide.md`](reference/strategy-forward-replication-research-v001-guide.md)，可填寫的最小骨架請參考 [`examples/README.md`](examples/README.md)。

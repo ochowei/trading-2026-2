@@ -4,14 +4,14 @@ checks:
     summary: Workflow Package 的 Python 原始碼與新增的完整性錯誤及 Study 驗證測試通過 Ruff。
   - command: .venv/bin/pytest -q workflows/strategy-forward-replication-research--v001/tests
     result: passed
-    summary: Workflow Package 的 39 個 tests 全部通過，包含完整性、journal recovery、正式 writer、事件流程與證據防竄改案例。
+    summary: Workflow Package 的 36 個 tests 全部通過，包含完整性、journal recovery、正式 writer、Historical Evaluation 後終止與證據防竄改案例。
   - command: .venv/bin/ruff check .
     result: passed
     summary: 整個 repository 通過 Ruff。
   - command: .venv/bin/pytest -q
     result: passed
-    summary: 整個 repository 的 149 個 tests 全部通過。
-generated_at: '2026-09-04T09:51:53.870799Z'
+    summary: repository 的 110 個 tests 全部通過；另有 Workflow Package 的 36 個 tests 在候選 release 環境全部通過。
+generated_at: '2026-09-04T18:34:46.930065000Z'
 release_record_created: false
 schema_version: 1
 status: release-candidate

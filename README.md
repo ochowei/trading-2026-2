@@ -81,7 +81,7 @@ Python 3.11 project managed with uv.
     * `--research-round`：所屬研究輪次標識，用來把這個 Study 和研究批次綁在一起；填錯會造成身份或稽核資料不一致。
     * `--experiment-family`：實驗家族名稱，說明候選策略屬於哪一組可比較的研究；錯誤的家族名稱會讓後續選擇與稽核難以對應。
     * `--research-owner`：研究負責人名稱，保存責任歸屬，方便交接與追查。
-    * `--replay-operator`：歷史重播／回測執行人員名稱，保存實際執行者，不等同於策略結果本身。
+    * `--historical-evaluation-operator`：Historical Evaluation 執行人員名稱；新 Study 必須使用這個參數。`--replay-operator` 僅為既有 Study 的歷史相容別名，不代表目前 Lifecycle 仍有 Replay 階段。
     * `--source-bundle`：canonical YAML（欄位順序與表示方式固定的 YAML）來源清冊，列出程式碼與設定檔及其 SHA-256 digest；內容或 digest 不一致時，後續 writer／validator 會拒絕使用這份 Study。
   * `append`：追加研究事件（Study Event，如開發完成、候選凍結、歷史評估完成等）；事件只允許依序新增，內容異常會由 hash chain（雜湊鏈）偵測。
     * `--study-id`：要追加事件的 Study；錯誤的 ID 會把事件寫到錯的研究或找不到目標。

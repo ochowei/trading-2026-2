@@ -28,9 +28,8 @@ uv run python research/tools/download_market_data.py \
 
 這份共用快照是原始完整區間。`strategy-forward-replication-research--v001` 的正式 Study
 應優先 reference 這類公用 immutable snapshot，不要為每個 Study 再複製一份相同 CSV。Study
-仍須在 workflow 的 `data-snapshot-set.yml` 內建立 `warmup-only`、`development`、`quarantine`、
-`historical-evaluation` 和 `retrospective-execution-replay` 五個不重疊的 role entry，並維持
-原本 `data-snapshot.schema.yml` 的固定欄位與 `data_digest`。source path、source digest、品質
+仍須在 workflow 的 `data-snapshot-set.yml` 內建立 `warmup-only`、`development`、`quarantine` 與
+`historical-evaluation` 四個不重疊的 role entry，並維持 `data-snapshot.schema.yml` 的固定欄位與 `data_digest`。source path、source digest、品質
 報告、XNYS session inventory 與 view digest 應另記在 Study 的 acquisition/lineage manifest。
 若 runner
 不能解析完整快照的日期 view，才先在公用資料目錄建立不可覆寫的 role snapshot；Study-local

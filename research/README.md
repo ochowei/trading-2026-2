@@ -118,7 +118,7 @@ SHA-256 digest（數位指紋），所以不應另建會隨時間變化的 `late
 部分較早的 Study 仍在自己的 `data/snapshots/` 保存 Study-local 快照；這是相容性做法，
 新的 Study 應優先引用這裡的共用快照，並在自己的資料 manifest 記錄完整檔名與 digest。
 
-每個正式 Study 的五種資料角色用途如下：
+每個新 Study 的四種資料角色用途如下：
 
 | 角色 | 實際用途 |
 | --- | --- |
@@ -126,7 +126,9 @@ SHA-256 digest（數位指紋），所以不應另建會隨時間變化的 `late
 | `development` | 用來產生 Development trial 與檢查預先登記的最低 gates。 |
 | `quarantine` | 隔離期資料；保留結構與 session 檢查，但不讓研究者把它當成開發或正式結果使用。 |
 | `historical-evaluation` | 預先固定的 2020--2024 正式歷史評估資料。 |
-| `retrospective-execution-replay` | 預先固定的 2025 歷史成交重播資料；只有前段必要 gate 通過時才可執行。 |
+
+較早 Study 可能仍保存 2025 Replay 的 manifest 或 provenance 欄位；這些是歷史相容資料，
+不屬於目前 Workflow 的必要資料角色，也不會形成新的 Lifecycle event。
 
 ## Study 內部檔案
 
@@ -135,7 +137,7 @@ SHA-256 digest（數位指紋），所以不應另建會隨時間變化的 `late
 
 ### 研究規格與身份
 
-- [`preregistration.yml`](tsm-mean-reversion-volume-leads--v003/preregistration.yml)：**預先登記**。固定假說、候選家族、baseline、訊號與成交規則、成本、日期切割、gates、robustness challenges 與亂數 seed。看過正式結果後修改它，會改變研究身份，不能當成同一 Study 的小修正。
+- [`preregistration.yml`](tsm-mean-reversion-volume-leads--v003/preregistration.yml)：**預先登記**。固定假說、候選家族、baseline、訊號與成交規則、成本、日期切割、gates 與亂數 seed。看過正式結果後修改它，會改變研究身份，不能當成同一 Study 的小修正。
 - [`candidate-definition.yml`](tsm-mean-reversion-volume-leads--v003/candidate-definition.yml)：**候選策略的精確定義**。把訊號條件、資料調整方式、停損／停利、持有期間、部位大小與 base／stress 成本寫成可執行的固定值。
 - [`qualification-spec.yml`](tsm-mean-reversion-volume-leads--v003/qualification-spec.yml)：**數值門檻**。定義交易筆數、報酬、profit factor、最大回撤、年度分布等指標要如何比較；它只說明「怎樣算通過」，不是結果本身。
 - [`implementation-contract.yml`](tsm-mean-reversion-volume-leads--v003/implementation-contract.yml)：**實作契約**。明確固定策略引擎位置、指標公式、有效歷史長度、not-ready 行為與特殊 RSI 邊界值，避免同一個欄位名稱在不同程式中代表不同意思。部分較早 Study 沒有獨立檔案，內容可能在 candidate 或其他 frozen manifest 中。
@@ -146,7 +148,7 @@ SHA-256 digest（數位指紋），所以不應另建會隨時間變化的 `late
 
 - `data-snapshot-acquisition.yml`：**原始資料取得與血緣清冊**。記錄 provider、ticker、日期範圍、原始檔案路徑與 digest、品質報告，以及由完整資料切出的角色視圖。
 - `data/snapshot-acquisition.yml`：部分較早 Study 使用的相同用途路徑；閱讀時要以該 Study 自己的 `source-bundle.yml` 和 digest 為準。
-- `data-snapshot-set.yml`：**五種資料角色的完整清單**。除了日期，也固定每個角色實際包含的 session inventory 與 `data_digest`，用來防止把開發資料誤當成 Evaluation 資料。
+- `data-snapshot-set.yml`：**四種資料角色的完整清單**。除了日期，也固定每個角色實際包含的 session inventory 與 `data_digest`，用來防止把開發資料誤當成 Historical Evaluation 資料。
 - `data/snapshots/`：**Study-local CSV 快照**。檔名通常直接包含 SHA-256；檔案不可任意替換或重新下載，否則 manifest 中的 digest 綁定會失效。
 
 ### 執行程式

@@ -61,12 +61,20 @@ data_intervals:
       role: historical-evaluation
       start_date: '2020-01-01'
       tuning_allowed: false
+  legacy_optional_intervals:
     - end_date: '2025-12-31'
       role: retrospective-execution-replay
       start_date: '2025-01-01'
       tuning_allowed: false
+  legacy_optional_roles:
+    - retrospective-execution-replay
   missing_sessions_allowed: false
   overlapping_roles_allowed: false
+  required_roles:
+    - warmup-only
+    - development
+    - quarantine
+    - historical-evaluation
 evidence_requirements_path: rules/evidence-requirements.yml
 failure_and_recovery_path: rules/failure-and-recovery.yml
 fold_policy:

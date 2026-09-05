@@ -2,11 +2,12 @@
 
 ## 文件定位
 
-本文件說明 `strategy-forward-replication-research--v001` 的操作方式。行為權威是同一 Workflow Package 內，由 `release-manifest.yml` 綁定的 `workflow.yml`、`rules/`、`schemas/`、`policies/`、`validator/` 與 `writer/`。v001 已於 2026-09-02 由 trusted approver 核准，可作為 active workflow 使用；正式研究不得使用 `--allow-draft` 規避 release 驗證。
+本文件說明 `strategy-forward-replication-research--v001` 的操作方式。行為權威是同一 Workflow Package 內，由 `release-manifest.yml` 綁定的 `workflow.yml`、`rules/`、`schemas/`、`policies/`、`validator/` 與 `writer/`。本次 Lifecycle 調整已由 Trusted Approver `william` 於 2026-09-04 重新核准，現在可作為 active workflow 使用。正式研究不得使用 `--allow-draft` 規避 release 驗證。
 
 ## 結果能代表什麼
 
 所有 outcome windows 都已結束。即使 Study 通過，也只得到 `retrospectively-supported`，不表示未來績效、Shadow 資格、broker authority 或實盤交易許可。
+`pass` 只表示通過本 Workflow 定義的 Historical Evaluation；它不代表沒有執行的 robustness challenge、Replay 或其他外部檢查也已通過。
 
 ## Study 如何保存
 
@@ -31,13 +32,10 @@ Study Created
 → Provenance Audited
 → Candidate Frozen
 → Historical Evaluation Completed
-→ Nine Challenges Completed
-→ Retrospective Replay Completed
-→ Independent Review Completed
-→ Terminal
+→ Study Terminal
 ```
 
-只有明確的提前終止路徑可以跳到 terminal。必要 evidence 在引用前就無法取得時，先記錄 `evidence-unavailable`，再以 `indeterminate` 終止；不能假裝該階段通過。可恢復技術中斷使用 `study-paused` 和 `study-resumed`，且只能恢復同一 frozen operation。
+Historical Evaluation 完成後必須另以 `study-terminal` 事件結束 Study；Historical Evaluation 事件本身不等於終止。只有明確的提前終止路徑可以在更早階段進入 terminal。必要 evidence 在引用前就無法取得時，先記錄 `evidence-unavailable`，再以 `indeterminate` 終止；不能假裝該階段通過。可恢復技術中斷使用 `study-paused` 和 `study-resumed`，且只能恢復同一 frozen operation。
 
 ## Provenance
 
@@ -55,7 +53,7 @@ Selected Candidate 必須來自完整 Candidate Family。Baseline 位於 Candida
 
 ## Data Snapshots 與 folds
 
-Warmup、Development、quarantine、Historical Evaluation 與 2025 Replay 各有固定 Session Inventory。Validator 使用 XNYS calendar 重建預期 sessions，拒絕缺漏、額外、重複、錯序或角色重疊。
+Warmup、Development、quarantine 與 Historical Evaluation 各有固定 Session Inventory。Validator 使用 XNYS calendar 重建預期 sessions，拒絕缺漏、額外、重複、錯序或角色重疊。較早 Study 可能保留 2025 Replay 的歷史欄位，但那不是目前 Lifecycle 的必要角色。
 
 每個 Evaluation Fold 都重設 position、cash、cooldown 與 ledger。指標只使用該年度開頭固定 sessions 暖機；warmup 不產生 signals、trades 或 performance，也不承接前一年或 quarantine 狀態。最大持有期和 entry cutoff 必須在 preregistration 固定。
 
@@ -72,7 +70,7 @@ Proposal 只允許 `MARKET`、`LIMIT` 與 `STOP_MARKET`，而且全部 non-actio
 
 ## Review
 
-Reviewer 可以和 research owner、replay operator 或 evidence producer 是同一人。必要條件不是人員分離，而是重新從 frozen raw evidence 計算 metrics 和 gates，不信任 caller-reported pass，也不能修改既有 evidence。只有 Terminal Evidence 完成後才能追加 outcome event。
+Validator 必須從 frozen raw evidence 重新計算 metrics 和 gates，不信任 caller-reported pass，也不能修改既有 evidence。Terminal Evidence 記錄這次重算結果與必要 digest，完成後才能追加 `study-terminal`；它是終止事件的佐證，不是另一個 post-evaluation stage。
 
 ## CLI
 

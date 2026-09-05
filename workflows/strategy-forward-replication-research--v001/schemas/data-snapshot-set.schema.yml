@@ -6,7 +6,7 @@ properties:
   snapshots:
     items:
       type: object
-    minItems: 5
+    minItems: 4
     type: array
 required:
   - schema_version

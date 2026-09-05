@@ -27,7 +27,7 @@ Development runner 只可開啟 2013 warmup-only 與 2014--2018 Development view
 接受實體 CSV，才在 Study 內物化副本，並保留 source reference、source digest 和物化原因；
 這是相容性 fallback，不是預設流程。
 
-Historical Evaluation、quarantine、replay 在 candidate freeze 前只保存 reference metadata，
+Historical Evaluation 與 quarantine 在 candidate freeze 前只保存 reference metadata，
 不得讀取內容、輸出統計或執行策略。正式 run 不得連線 provider 更新公用快照。
 
 ## 3. Outcome-relevant 程式
@@ -55,12 +55,11 @@ Runner 的 CLI 也要在檔案 docstring 或 `--help` 固定，至少明確接�
 ```python
 assert qualification["development"] == preregistration["eligibility_rules"]["development_gates"]
 assert qualification["evaluation"] == preregistration["evaluation_gates"]
-assert qualification["replay"] == preregistration["replay_gates"]
 ```
 
 執行器產生的每個 Development gate 名稱、operator 與 required value也必須逐項相同。不得靜默新增 gate。
 
-此外，逐一把 Evaluation 與 replay gate 名稱對照 `validator/artifacts.py` 實際產生的 metrics。v001 Historical Evaluation 的 drawdown metric 名稱是 `stress_max_drawdown`；不得使用看似合理但 validator 不會產生的別名，也不得在不更新並重新 release workflow validator 的情況下加入自訂正式 metric。Freeze 前應以空白合成 evidence 跑一次 validator gate-support preflight。
+此外，逐一把 Evaluation gate 名稱對照 `validator/artifacts.py` 實際產生的 metrics。v001 Historical Evaluation 的 drawdown metric 名稱是 `stress_max_drawdown`；不得使用看似合理但 validator 不會產生的別名，也不得在不更新並重新 release workflow validator 的情況下加入自訂正式 metric。Freeze 前應以空白合成 evidence 跑一次 validator gate-support preflight。
 
 此外，在 implementation contract、Source Bundle 與必要 manifests 已發布後，至少在
 `preregistration-approved` 前執行 `studyctl contract` 與 `studyctl synthetic`。候選選擇與

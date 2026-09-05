@@ -8,9 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from .artifacts import (
-    evaluate_challenges,
     evaluate_historical,
-    evaluate_replay,
     validate_development_trial,
     validate_snapshot_set,
     verified_artifact,
@@ -154,8 +152,6 @@ def _expected_terminal_bindings(projection: StudyProjection) -> dict[str, str]:
         "development": "development_evidence_digest",
         "candidate-freeze": "candidate_freeze_digest",
         "historical-evaluation": "historical_evaluation_digest",
-        "robustness-challenges": "robustness_challenges_digest",
-        "retrospective-execution-replay": "retrospective_replay_digest",
         "evidence-unavailable": "evidence_unavailable_digest",
     }
     for evidence_name, binding_name in evidence_names.items():
@@ -190,15 +186,12 @@ def _validate_event_semantics(
         raise TransitionError("已形成 terminal disposition，只能追加 study-terminal")
 
     if event_type == "study-created":
-        _require(
-            payload,
-            "research_round_id",
-            "experiment_family",
-            "research_owner",
-            "replay_operator",
-            "source_bundle_path",
-            "source_bundle_digest",
-        )
+        _require(payload, "research_round_id", "experiment_family", "research_owner")
+        if not payload.get("historical_evaluation_operator") and not payload.get(
+            "replay_operator"
+        ):
+            raise ValidationError("Study identity 必須指定 Historical Evaluation 執行者")
+        _require(payload, "source_bundle_path", "source_bundle_digest")
         source_path, source_bundle = verified_artifact(
             study_root,
             payload["source_bundle_path"],
@@ -228,10 +221,6 @@ def _validate_event_semantics(
         validate_study_gates(
             preregistration["evaluation_gates"],
             rules.floors["historical_evaluation"],
-        )
-        validate_study_gates(
-            preregistration["replay_gates"],
-            rules.floors["retrospective_replay"],
         )
         projection.preregistration = preregistration
         projection.preregistration_digest = canonical_digest(path.read_bytes())
@@ -341,7 +330,6 @@ def _validate_event_semantics(
             "trial_registry_digest",
             "qualification_spec_digest",
             "evaluation_snapshot_digest",
-            "replay_snapshot_digest",
             "fold_inventory_digest",
             "snapshot_set_path",
             "snapshot_set_digest",
@@ -393,7 +381,6 @@ def _validate_event_semantics(
             "candidate_digest",
             "qualification_spec_digest",
             "evaluation_snapshot_digest",
-            "replay_snapshot_digest",
             "fold_inventory_digest",
         ):
             _digest(payload[name], name)
@@ -408,11 +395,6 @@ def _validate_event_semantics(
             != payload["evaluation_snapshot_digest"]
         ):
             raise IntegrityError("Evaluation snapshot digest 與 Candidate Freeze 不一致")
-        if (
-            snapshots["retrospective-execution-replay"]["data_digest"]
-            != payload["replay_snapshot_digest"]
-        ):
-            raise IntegrityError("Replay snapshot digest 與 Candidate Freeze 不一致")
         expected_inventory_digest = canonical_digest(
             {"sessions": snapshots["historical-evaluation"]["sessions"]}
         )
@@ -443,67 +425,7 @@ def _validate_event_semantics(
             raise ValidationError("Historical Evaluation disposition 與重算 gates 不一致")
         projection.evidence["historical-evaluation"] = canonical_digest(path.read_bytes())
         projection.evidence["historical-evaluation-metrics"] = canonical_digest(metrics)
-        if expected != "pass":
-            projection.pending_terminal_outcome = expected
-        return
-
-    if event_type == "robustness-challenges-completed":
-        path, evidence = _validate_reference(study_root, payload)
-        rules.schema_store.validate("robustness-challenges.schema.yml", evidence)
-        failures = evaluate_challenges(
-            evidence,
-            rules.evidence_requirements["required_challenges"],
-            rules.evidence_requirements["seed_required_challenges"],
-        )
-        for challenge in evidence["challenges"]:
-            verified_artifact(
-                study_root,
-                challenge["artifact_path"],
-                challenge["artifact_digest"],
-            )
-        assert projection.candidate is not None
-        expected_bindings = {
-            "candidate_digest": projection.candidate["candidate_digest"],
-            "evaluation_snapshot_digest": projection.candidate["evaluation_snapshot_digest"],
-            "fold_inventory_digest": projection.candidate["fold_inventory_digest"],
-            "policy_set_digest": projection.bindings["policy_set_digest"],
-            "qualification_spec_digest": projection.candidate["qualification_spec_digest"],
-            "source_bundle_digest": projection.bindings["source_bundle_digest"],
-        }
-        if evidence["challenges"][0]["bindings"] != expected_bindings:
-            raise IntegrityError("Challenge bindings 與 frozen Study inputs 不一致")
-        expected = "fail" if failures else "pass"
-        if payload.get("disposition") != expected:
-            raise ValidationError("Robustness disposition 與重算 gates 不一致")
-        projection.evidence["robustness-challenges"] = canonical_digest(path.read_bytes())
-        if expected != "pass":
-            projection.pending_terminal_outcome = expected
-        return
-
-    if event_type == "retrospective-replay-completed":
-        path, evidence = _validate_reference(study_root, payload)
-        rules.schema_store.validate("retrospective-replay.schema.yml", evidence)
-        assert projection.preregistration is not None
-        gates = dict(rules.floors["retrospective_replay"])
-        gates.update(projection.preregistration["replay_gates"])
-        metrics, failures = evaluate_replay(
-            evidence,
-            gates,
-            fold_warmup_sessions=projection.preregistration["fold_warmup_sessions"],
-            maximum_holding_sessions=projection.preregistration["maximum_holding_sessions"],
-        )
-        if projection.bindings["workflow_digest"] in rules.evidence_requirements.get(
-            "legacy_metric_shape_workflow_digests", []
-        ):
-            metrics.pop("base_max_drawdown", None)
-            metrics.pop("maximum_realized_trade_loss_fraction", None)
-        expected = "fail" if failures else "pass"
-        if payload.get("disposition") != expected:
-            raise ValidationError("Replay disposition 與重算 gates 不一致")
-        projection.evidence["retrospective-execution-replay"] = canonical_digest(path.read_bytes())
-        projection.evidence["retrospective-replay-metrics"] = canonical_digest(metrics)
-        if expected != "pass":
-            projection.pending_terminal_outcome = expected
+        projection.pending_terminal_outcome = expected
         return
 
     if event_type == "evidence-unavailable":
@@ -513,34 +435,6 @@ def _validate_event_semantics(
             raise ValidationError("evidence-unavailable 只能指向目前無法取得的 artifact")
         projection.evidence["evidence-unavailable"] = canonical_digest(payload)
         projection.pending_terminal_outcome = "indeterminate"
-        return
-
-    if event_type == "independent-review-completed":
-        path, evidence = _validate_reference(study_root, payload)
-        rules.schema_store.validate("terminal-evidence.schema.yml", evidence)
-        if evidence["recomputed"] is not True:
-            raise ValidationError("Independent Review 必須重新計算")
-        if evidence["outcome"] == "pass":
-            required = {
-                "historical-evaluation",
-                "robustness-challenges",
-                "retrospective-execution-replay",
-            }
-            if not required.issubset(projection.evidence):
-                raise ValidationError("Pass 缺少必要 stage evidence")
-        expected_authority = (
-            "retrospectively-supported" if evidence["outcome"] == "pass" else "none"
-        )
-        if evidence["authority"] != expected_authority:
-            raise ValidationError("Terminal Evidence authority 與 outcome 不一致")
-        if evidence["bindings"].get("event_chain_head_digest") != projection.head_digest:
-            raise IntegrityError("Terminal Evidence 沒有綁定 review 前的 event-chain head")
-        assert projection.candidate is not None
-        expected_terminal_bindings = _expected_terminal_bindings(projection)
-        if evidence["bindings"] != expected_terminal_bindings:
-            raise IntegrityError("Terminal Evidence bindings 不完整或與 frozen Study 不一致")
-        projection.evidence["independent-review"] = canonical_digest(path.read_bytes())
-        projection.pending_terminal_outcome = evidence["outcome"]
         return
 
     if event_type == "study-paused":
@@ -583,12 +477,7 @@ def _validate_event_semantics(
         rules.schema_store.validate("terminal-evidence.schema.yml", terminal)
         if terminal["outcome"] != outcome:
             raise IntegrityError("Terminal event 與 Terminal Evidence outcome 不一致")
-        if projection.effective_event_type == "independent-review-completed":
-            if projection.evidence.get("independent-review") != payload[
-                "terminal_evidence_digest"
-            ]:
-                raise IntegrityError("Terminal event 沒有引用同一份 review evidence")
-        elif terminal["bindings"] != _expected_terminal_bindings(projection):
+        if terminal["bindings"] != _expected_terminal_bindings(projection):
             raise IntegrityError("Terminal Evidence bindings 不完整或與目前 Study 不一致")
         expected_authority = "retrospectively-supported" if outcome == "pass" else "none"
         if (

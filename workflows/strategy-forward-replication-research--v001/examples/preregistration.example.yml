@@ -12,7 +12,6 @@ hypothesis: 候選策略在固定歷史日曆與不可降低門檻下仍通過�
 initial_cash: '100000'
 maximum_holding_sessions: 10
 maximum_trials: 1
-replay_gates: {}
 selection_rule:
   metric: development-sharpe
   order: descending

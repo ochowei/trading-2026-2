@@ -20,7 +20,4 @@ terminal_failure_stages:
   - development
   - candidate-freeze
   - historical-evaluation
-  - robustness-challenges
-  - retrospective-execution-replay
-  - independent-review
 unrecoverable_evidence_integrity_outcome: indeterminate

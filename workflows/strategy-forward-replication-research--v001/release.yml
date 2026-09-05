@@ -1,9 +1,9 @@
-approved_at: '2026-09-04T09:52:30Z'
+approved_at: '2026-09-04T18:54:24.100695000Z'
 approved_by: william
-release_manifest_digest: b9b279aa283dc9ad84b81f5fa8fe892803b5d00748ba5632250d562541fa2b3a
+release_manifest_digest: df8e7d124674ac5ca105f5d2f4ae51bd202432be63ed4572cee2801241ce9820
 schema_version: 1
-test_report_digest: ea82e654d1cadb3b242f5becbf7c0331146d59d6dce49f7aa6adf0b963c7464a
+test_report_digest: df60d0969968f834d86b2c2a61e9cc1fffe03c3a1ee7f81bbdf1d0a803bf3aa9
 test_report_path: release-test-report.yml
 workflow: strategy-forward-replication-research
-workflow_digest: 7c07fcf673e2b51b74e76aae2bbac5e6dfb654bda2ad9ffe5f323cb21ca093ad
+workflow_digest: 22f1a7a1fbc89752afdc379037d37123f83c2089f5b0d86288e63ff33f01d0c3
 workflow_version: v001
