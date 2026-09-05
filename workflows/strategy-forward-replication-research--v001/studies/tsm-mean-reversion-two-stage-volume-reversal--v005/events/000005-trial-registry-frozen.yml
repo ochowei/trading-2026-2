@@ -1,0 +1,18 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 2170c05d0036eb9b2bdd2adf6ced0fa47949537b37f31dc481ae2aa3ed46e578
+  workflow_digest: 22f1a7a1fbc89752afdc379037d37123f83c2089f5b0d86288e63ff33f01d0c3
+event_type: trial-registry-frozen
+occurred_at: '2026-09-05T07:47:31.656499Z'
+payload:
+  candidate_available: true
+  complete_family_trial_ids:
+    - tsm-mr-two-stage-time-decay-v005
+  maximum_trials: 1
+  recorded_trial_count: 1
+  trial_registry_digest: 98317698c646e3fd3052f9e1eee202f277101abe809d1d0fa5f824b19d8233d5
+previous_event_digest: 9005d9d55ae038c657bec160a07ee9c8980ad59bb0b2012d27c7fe87e166c40f
+schema_version: 1
+sequence: 5
+study_id: tsm-mean-reversion-two-stage-volume-reversal--v005
