@@ -2,6 +2,15 @@
 
 本目錄保存各個自包含的 Workflow Package。每個 package 都自行管理研究規則、程式碼、設定、測試、參考文件與 Studies；個別 package 的發布狀態與防竄改 digest，請以該 package 內的 release 文件為準。
 
+## Workflow Lifecycle 與 Study Lifecycle
+
+這兩個 Lifecycle 管理的是不同層次，不能互相替代：
+
+- **Workflow Lifecycle**：管理 Workflow Package 如何建立、形成 Release Candidate、正式發布、被新版本取代與封存。規範請參考 [`docs/workflow-lifecycle.md`](../docs/workflow-lifecycle.md)。
+- **Study Lifecycle**：管理某一個 Study 如何建立、預先登記、開發、凍結候選、執行 Historical Evaluation，最後以 `study-terminal` 結束。各 Workflow 的 Study 規則以該 Package 內的 state machine 與 reference guide 為準。
+
+因此，`study-terminal` 只會終止單一 Study；它不會封存所屬 Workflow。反過來，Workflow 進入 `Superseded` 或 `Archived`，也不會改寫或終止既有 Study。
+
 ## Strategy Forward Replication Research v001
 
 詳細內容請參考 [`strategy-forward-replication-research--v001/README.md`](strategy-forward-replication-research--v001/README.md)。這個 Workflow Package 採用自包含設計，把研究規則、程式碼、設定、測試與實際案例放在同一層目錄中管理。正式 Lifecycle 會從 Study 建立一路走到 Historical Evaluation，最後以獨立的 Study Terminal 事件結束；Historical Evaluation 的 `pass` 不代表其他未定義的穩健度或回放檢查：
