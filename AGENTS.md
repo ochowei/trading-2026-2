@@ -15,4 +15,12 @@
   3. **workflow 維護者**：管理 workflow 治理的相關內容，制定 workflow 的 Lifecycle，但不執行 Lifecycle。Lifecycle 定義檔：`docs/workflow-lifecycle.md`。
   4. **workflow 執行者**：執行 workflow 維護者所定義的 Lifecycle。
   5. **study 開發者**：開發 study，或檢討 study 的 development 階段。
-  6. **Study 歷史評估執行者**：對 Study 執行 historical-evaluation。
+  6. **Study 歷史評估執行者**：對 Study 執行 historical-evaluation；只能 commit `historical-evaluation-artifacts/` 資料夾內的內容。
+
+## Historical Evaluation artifact store
+
+- `historical-evaluation-artifacts/` 是 Historical Evaluation 結果專用、納入 Git 的資料夾。
+- 只有 **超級管理者** 與 **Study 歷史評估執行者** 可以讀取或寫入這個資料夾。
+- 其他角色不得開啟、搜尋、引用其中內容，也不得根據其中內容做決策。
+- 既有 artifact 不得覆寫或刪除；新結果只能以新檔案或新版本新增。
+- 以上是 AI Agent 必須遵守的流程規範，不代表 Git 或作業系統已提供實際的檔案權限隔離。

@@ -7,6 +7,12 @@ description: 檢討 strategy-forward-replication-research--v001 的指定 Study�
 
 檢查策略為什麼在設計上可能不穩、Development 是否已經出現警訊，以及下一輪應優先驗證什麼，同時保留正式 Evaluation 作為一次性、未揭露的驗證資料。
 
+## 使用角色限制
+
+- 本 skill 只能由 **超級管理者** 或 **study 開發者** 使用。
+- 執行範圍檢查、讀取 Study 或輸出 review 前，必須確認目前對話角色是上述其中之一。
+- 其他角色不得以本 skill 執行盲檢討或寫入 review；若目前角色不符，立即停止並說明角色限制。
+
 ## 硬性範圍
 
 - 只接受 repository 內 `workflows/strategy-forward-replication-research--v001/studies/<study-id>/` 的直接子目錄。

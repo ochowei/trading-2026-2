@@ -9,6 +9,12 @@ description: 為 strategy-forward-replication-research--v001 建立單一新 Stu
 
 本 skill 必須搭配 repository 的唯讀 `research/tools/studyctl.py`。它補足人工閱讀與 writer validator 不容易及早發現的規格／實作落差，是 candidate freeze 前的硬閘門；它不會寫入 Event，也不取代 workflow writer 或 validator。
 
+## 使用角色限制
+
+- 本 skill 只能由 **study 開發者** 使用。
+- 執行任何 preflight、建立 research bundle、寫入 Study 或發布 `candidate-frozen` 前，必須確認目前對話角色就是 **study 開發者**。
+- 其他角色不得以本 skill 建立、修改或凍結 Study；若目前角色不符，立即停止並說明角色限制。
+
 ## 開始條件
 
 - 使用者須指定或明確授權建立一個新 Study；可以合理命名 Study ID，但要先告知使用者。
