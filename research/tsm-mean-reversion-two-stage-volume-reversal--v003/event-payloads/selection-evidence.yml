@@ -1,0 +1,5 @@
+ordered_eligible_trial_ids:
+  - tsm-mr-two-stage-reversal-v003
+rule_digest: 97478f7bcb13e910bdc4a92402d002bb51eea2c0f4510b02a8ed04b4cc9fffaf
+schema_version: 1
+selected_candidate_id: tsm-mr-two-stage-reversal-v003

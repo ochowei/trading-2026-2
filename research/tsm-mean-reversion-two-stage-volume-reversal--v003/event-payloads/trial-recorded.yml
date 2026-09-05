@@ -1,0 +1,6 @@
+development_evidence_digest: bb273c387c33912575fc279a7c5074de0d9828f39b6efe85420f3dc1c76bb5f6
+development_evidence_path: evidence/development.yml
+inputs_digest: 962b9aea47c7e068c86e5d9479c342bba1d13add35b51d300fe35a038dc45c2b
+inputs_path: manifests/development-trial-inputs.yml
+status: completed
+trial_id: tsm-mr-two-stage-reversal-v003
