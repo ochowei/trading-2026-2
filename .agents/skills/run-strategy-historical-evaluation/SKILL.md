@@ -1,6 +1,6 @@
 ---
 name: run-strategy-historical-evaluation
-description: 對 strategy-forward-replication-research--v001 中已完成 candidate freeze、尚未開始正式結果階段的單一 Study，執行一次性 2020--2024 Historical Evaluation、保存 immutable evidence 並追加 historical-evaluation-completed。使用者明確要求執行或接續 Historical Evaluation 時使用；不建立或調整策略，也不執行 challenge、replay 或 terminal review。
+description: 對 strategy-forward-replication-research--v001 中已完成 candidate freeze、尚未開始正式結果階段的單一 Study，執行一次性 2020--2024 Historical Evaluation、保存 immutable evidence，並完成其後的 Study Terminal。使用者明確要求執行或接續 Historical Evaluation 時使用；不建立或調整策略，也不執行 Historical Evaluation 以外的 challenge、replay 或 review。
 ---
 
 # 執行 Historical Evaluation
@@ -33,7 +33,7 @@ python3 .agents/skills/run-strategy-historical-evaluation/scripts/check_candidat
 - Source Bundle、candidate、qualification spec、snapshot set、fold inventory、selection evidence 與所有檔案 digest 必須吻合。
 - 優先使用 Source Bundle 內已凍結且 digest 吻合的 `run_historical_evaluation.py`。若舊 Study 沒有 frozen runner，preflight 必須回傳 `adapter-required`，並在開啟正式資料前建立、合成測試及固定只負責 fold orchestration／evidence serialization 的 adapter；adapter 不得重寫或替代 frozen 策略規則。若做不到，停止。
 - Preregistration 與 qualification spec 的 Evaluation gates 必須完全相同，且不得比 workflow floors 寬鬆。
-- 正式 runner 不得連網，不得開啟 quarantine 或 replay，不得修改程式、候選、成本、資料、fold、gate 或 entry cutoff。
+- 正式 runner 不得連網，不得開啟 quarantine，不得修改程式、候選、成本、資料、fold、gate 或 entry cutoff。
 
 ## 一次性執行
 
@@ -46,13 +46,14 @@ python3 .agents/skills/run-strategy-historical-evaluation/scripts/check_candidat
 3. Runner 只產生 raw evidence，不以自報 pass/fail 取代 validator。
 4. Evidence 產生後立即以新檔保存，不得覆寫；用 workflow validator 重算 metrics 和 gates。
 5. 只經 guarded writer 發布 artifact、追加 `historical-evaluation-completed`，然後再次 validate。
-6. 本 skill 到 event 8 停止，不執行 robustness challenges。
+6. 依 validator 重算的 disposition 產生 Terminal Evidence，再經 guarded writer 追加 `study-terminal`；Historical Evaluation 與 Study Terminal 是兩個不同事件。
+7. 再次 validate，確認 Study 已 terminal；本 skill 不執行 robustness challenges、replay 或 Independent Review。
 
 ## 結果與停止條件
 
-- `pass`：回報 metrics、gate margins、evidence digest 與 event head；下一階段是九項 robustness challenges，但不要自動執行。
-- `fail`：保存並發布完整失敗 evidence，回報 failed gates；不得改參數、換 runner 或重跑。下一事件應由另一個明確請求處理 terminal。
+- `pass`：回報 Historical Evaluation 的 metrics、gate margins、evidence digest 與 Study Terminal event head；這只代表通過歷史評估，不代表其他未定義的穩健度或回放檢查。
+- `fail`：保存並發布完整失敗 evidence，回報 failed gates，並以同一份重算結果完成 Study Terminal；不得改參數、換 runner 或重跑。
 - 技術中斷：只允許同一 frozen operation、相同 inputs、runner digest 與已產生 bytes 的 recovery。不得刪除輸出後當成第一次執行。
 - Evidence 或 identity 無法可信取得：依 workflow 記錄 `evidence-unavailable`／`indeterminate`；不要推測結果。
 
-結尾明確列出實際讀取與發布的正式檔案，並聲明沒有讀取 quarantine、challenge 或 replay outcome。
+結尾明確列出實際讀取與發布的正式檔案，並聲明沒有執行 Historical Evaluation 以外的 challenge、replay 或 review。

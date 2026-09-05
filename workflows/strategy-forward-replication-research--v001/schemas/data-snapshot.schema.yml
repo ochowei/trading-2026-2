@@ -19,6 +19,7 @@ properties:
   provider:
     const: yahoo
   role:
+    description: 舊版 Study 可保留 retrospective-execution-replay；目前新 Study 的必要資料角色只有前四種。
     enum:
       - warmup-only
       - development

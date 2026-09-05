@@ -1,9 +1,9 @@
 # Strategy Forward Replication Research v001 實作計畫與驗收紀錄
 
-狀態：implemented，已於 2026-09-02 由 trusted approver `william` 核准啟用
-交付結果：active release，已建立 `release.yml`
+狀態：已完成 Lifecycle 調整，v001 已由 trusted approver 重新核准
+交付結果：已更新 workflow、validator、測試與文件，並以新的 manifest 與測試報告更新 `release.yml`
 
-實作結果：validator、guarded writer、local authority store、canonical YAML、四份本地 policy releases、完整事件流程、反例 tests、文件、release manifest 與 test report 均已建立。Release candidate 經 trusted approver 核准後，已建立 `release.yml` 並通過正式模式驗證。
+實作結果：本紀錄保留原始建置歷程；目前有效事件流程為 Candidate Freeze、Historical Evaluation 與 Study Terminal。既有 Study 的舊版 replay metadata 只作相容資料，不再是新 Lifecycle 的必要階段。
 
 ## 目標
 
@@ -20,7 +20,7 @@
 - 不依賴 Git；Git 只可作為選用的備份與 review 工具。
 - 使用簡化的本機 append-only authority store，只防誤操作與意外回退，不防惡意檔案管理者。
 - 信任檔案填寫者，不使用數位簽章。
-- Independent Review 指使用 frozen inputs 與 raw evidence 重新計算；同一人可以兼任所有角色。
+- Historical Evaluation 後由 validator 從 frozen inputs 與 raw evidence 重算，Terminal Evidence 只負責記錄這次終止判定。
 - 外部 runner 產生 signals、trades、fills 與 ledger；本專案負責治理、驗證與 metrics 重算，不重建完整策略引擎。
 - 最終只交付 release candidate；必須另經 trusted approver 核准才能建立 `release.yml`。
 
@@ -29,7 +29,7 @@
 ## 不在本次範圍
 
 - 任意策略的 signal engine。
-- 九項 challenges 的完整資料產生器。
+- robustness challenges、Replay 與 Independent Review 的 Lifecycle event、門檻與完整資料產生器。
 - 真實券商連線、下單或部位管理。
 - Trailing stop、stop-limit 或其他未允許的 Proposal Order Types。
 - 數位簽章、金鑰管理、WORM storage 或外部 transparency log。
@@ -83,7 +83,7 @@ workflows/strategy-forward-replication-research--v001/
    - `known-contaminated` 終止為 `fail`。
    - `provenance-unknown` 終止為 `indeterminate`。
 4. 明確定義 `fail`、`indeterminate`、`paused` 與 recovery。
-5. 將 failure policy 擴大到 Development eligibility、candidate freeze、Evaluation、九項 challenges、Replay 與 review integrity。
+5. 將 failure policy 覆蓋 Development eligibility、candidate freeze、Historical Evaluation 與 terminal integrity。
 
 ### 交付物
 
@@ -114,7 +114,7 @@ workflows/strategy-forward-replication-research--v001/
    - workflow definition、policy release 與 release manifest。
    - event envelope 和每種 event payload。
    - preregistration、Trial、Candidate Freeze、Data Snapshot、Evidence Manifest。
-   - Evaluation、Challenge Evidence、Replay、Terminal Evidence 與 Study projection。
+   - Historical Evaluation、Terminal Evidence 與 Study projection。
 4. 統一 SHA-256 表示法為 64 個小寫十六進位字元。
 5. repository-relative paths 必須正規化，禁止絕對路徑、`..`、symlink escape 與 mutable `latest` pointer。
 
@@ -181,10 +181,7 @@ Study Created
 → Provenance Audited
 → Candidate Frozen
 → Historical Evaluation Completed
-→ Nine Challenges Completed
-→ Retrospective Replay Completed
-→ Independent Review Completed
-→ Terminal
+→ Study Terminal
 ```
 
 ### 工作
@@ -194,7 +191,7 @@ Study Created
 3. 實作 guarded writer commands：
    - create Study、approve preregistration、authorize Development。
    - record Trial、freeze registry、record provenance、freeze candidate。
-   - publish evidence、complete stage、review、terminate、recover。
+   - publish evidence、complete Historical Evaluation、terminate、recover。
    - rebuild projection、validate Study。
 4. 每次寫入前重新驗證完整 chain 和前置條件，成功後才追加 event。
 5. `study.yml` 永遠由 events 重建；手動修改不影響權威結果，且 validator 會報 projection mismatch。
@@ -240,10 +237,10 @@ Study Created
 
 ### Data Snapshots
 
-- Development、quarantine、Historical Evaluation、2025 Replay 使用分開的 snapshots。
+- Development、quarantine 與 Historical Evaluation 使用分開的 snapshots。
 - 每份 snapshot 綁定 provider、symbols、timezone、calendar、fields、adjustment policy、ordered Session Inventory 與 digest。
 - Development 階段只能取得 Development snapshot。
-- Evaluation／Replay snapshots 在 candidate freeze 前不得交給研究者使用。
+- Historical Evaluation snapshot 在 candidate freeze 前不得交給研究者使用。
 - Frozen snapshot 可讀但缺 session、重複、額外或重疊時是 `fail`；artifact 無法取得或驗證時是 `indeterminate`。
 
 ### Evaluation Folds
@@ -253,22 +250,7 @@ Study Created
 - 不使用前一年或 2019 quarantine 暖機。
 - Strategy 必須固定最大持有期；年末以 entry cutoff 避免建立無法正常完成的交易，不臨時強制平倉。
 
-### Nine Challenges
-
-- 九項各自發布一份 Challenge Evidence。
-- 每份綁定相同 candidate、Evaluation snapshot、fold inventories、policy set、qualification spec 和 Source Bundle。
-- 隨機進場與漏單 challenge 的 seed 必須 preregistered。
-- Challenge IDs 必須完整、唯一且剛好等於正式九項；缺失、重複、binding 不同或 gate failure 都是 `fail`。
-
-### 2025 Replay
-
-- 以 preregistered initial cash 開始，不承接 2024 state。
-- 只使用 2025 期間內 Fold Warmup。
-- Warmup 不產生 proposal、fill 或 performance。
-- 沿用最大持有期與 entry cutoff。
-- Broker access 和 real orders 永遠禁止。
-
-## 階段 7：Metrics、Workflow Floors 與 terminal review
+## 階段 7：Metrics、Workflow Floors 與 Study Terminal
 
 ### 工作
 
@@ -283,20 +265,14 @@ Study Created
    - Stress drawdown 不超過 preregistered limit。
    - 任一 fold 不超過總交易或總正獲利的 `50%`。
    - Complete-family family-wise confidence `>= 90%`。
-   - 2025 Replay 覆蓋完整 sessions、completed simulated fills `>= 12`。
-   - Replay base／stress return `> 0`、profit factor `> 1`、drawdown 合規且 critical drift 通過。
 4. Study Gates 可以比 floors 嚴格，不能更寬鬆。
 5. 交易／fills 不足為 `fail`；缺 artifact、digest mismatch 或無法重算為 `indeterminate`。
 6. 拒絕 NaN 與一般 infinity；正毛利且零毛損的 profit factor 可為正無限，但仍必須通過最低交易數。
-7. Independent Review 可以由同一人執行，但必須：
-   - 只讀 frozen inputs 與 raw evidence。
-   - 重新執行 deterministic validator。
-   - 不修改既有 evidence。
-   - 發布 Terminal Evidence 後才追加 outcome event。
+7. Historical Evaluation 重算完成後，必須發布 Terminal Evidence，並以 `study-terminal` 事件記錄 outcome；Terminal Evidence 綁定評估結果、事件鏈與必要 digests。
 
 ### 完成條件
 
-- `pass` 必須具有所有必要 stage evidence、九項 challenge evidence、Replay evidence 與 Terminal Evidence。
+- `pass` 必須具有 Development、candidate freeze、Historical Evaluation 與 Terminal Evidence。
 - Terminal Evidence 綁定完整 event-chain head 和所有必要 digests。
 - 手動建立一個看似通過的 `study.yml` 不會得到任何 authority。
 
@@ -317,7 +293,7 @@ Study Created
 - Candidate 不在 family、Baseline 冒充 candidate 或事後更換。
 - Provenance contaminated／unknown 卻繼續。
 - 任一 Workflow Floor 邊界值錯誤。
-- 九項 challenge 缺失、重複、錯 binding 或錯 seed。
+- Historical Evaluation 缺失、錯 binding 或 caller 自行填寫 pass。
 - Fold carry state、使用 quarantine warmup、年末臨時強制平倉。
 - Session 缺失、多出、重疊、順序錯誤或 snapshot digest drift。
 - 未允許 Proposal Order Type。
@@ -352,10 +328,10 @@ uv run ruff check .
    - 如何建立與驗證 Study。
    - authority root 如何設定、備份與恢復。
    - Trusted Operator 與本機 authority store 的威脅模型。
-   - Independent Review 不要求不同人，但一定要重算。
+   - Historical Evaluation 重算後如何產生 Terminal Evidence 與 Study Terminal。
 6. 產生 `release-manifest.yml`，列出 definition、schemas、rules、policies、validators、writers 與 maintained tests 的 exact digests，明確排除 `studies/`。
 7. 產生 release test report。
-8. Release candidate 交付時先確認沒有 `release.yml`，再交給 trusted approver；此步驟完成後，已由 `william` 核准並建立正式 release。
+8. Release candidate 已交由 trusted approver 核准；核准完成後已更新與新 manifest、測試報告匹配的 `release.yml`。
 
 ### 完成條件
 
@@ -363,7 +339,7 @@ uv run ruff check .
 - Workflow Package 不依賴原專案路徑、Git、網路或 broker。
 - 所有 tests 與 Ruff 通過。
 - `release-manifest.yml` 可重算且沒有包含 `studies/`。
-- Release candidate 交付當下沒有 `release.yml`；後續正式核准另以 release record 留痕。
+- Release candidate 已完成正式核准，`release.yml` 已與新的 manifest、測試報告及 workflow digest 綁定。
 
 ## 原始缺陷與修復對照
 
@@ -374,7 +350,7 @@ uv run ruff check .
 | Trial／candidate 完整性不足 | Registry 重算、budget、membership、digest bindings | 超額、隱藏、錯 membership 測試 |
 | Provenance 不影響 outcome | 三態固定 disposition | contaminated／unknown 提前終止 |
 | Gate 可過度寬鬆 | Workflow Floors＋Study Gate 不得放寬 | 所有門檻邊界測試 |
-| 九項 challenges 沒有逐項證據 | Exact ID set＋每項獨立 artifact | 缺失、重複、錯 binding 測試 |
+| Historical Evaluation 可能被誤當成終止 | Separate Terminal Evidence＋`study-terminal` event | 評估後必須另追加 terminal 測試 |
 | Fold 初始狀態不明 | 年度 reset＋in-fold warmup＋entry cutoff | carry／跨年反例被拒絕 |
 | 版本權威混亂 | 自包含 v001＋immutable release record | v011 完整移除 |
 | Failure policy 漏階段 | 所有正式 gates 共用終止政策 | 每階段 failure path 測試 |
@@ -389,7 +365,7 @@ uv run ruff check .
   → validator foundations
   → events / writer / projection
   → authority / journal / recovery
-  → evidence / metrics / terminal review
+  → evidence / metrics / Study Terminal
   → end-to-end fixtures
   → docs cleanup / release candidate
 ```
@@ -418,4 +394,4 @@ uv run ruff check .
 5. v011 guide 與失效引用已移除，v001 文件和實作一致。
 6. `uv run pytest` 與 `uv run ruff check .` 全部通過。
 7. Release manifest 與 test report 已產生。
-8. `release.yml` 尚未建立，等待 trusted approver 另行核准。
+8. `release.yml` 已以新的 manifest 與測試報告重新核准，正式 writer 可依新 Lifecycle 執行。

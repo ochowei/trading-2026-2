@@ -31,15 +31,15 @@
 - preregistration、candidate definition、qualification spec、Development inputs/evidence、provenance 與 Source Bundle 的對應副本；
 - 檔名及 manifest 角色都明確標示為 `warmup-only` 或 `development` 的快照。
 
-即使路徑來自 manifest，也必須拒絕 full snapshot、quarantine、historical-evaluation 與 retrospective-replay 資料。所有績效統計的 signal、entry 與 exit 都必須落在 Development 期間；warmup 不得計入績效。
+即使路徑來自 manifest，也必須拒絕 full snapshot、quarantine 與 historical-evaluation 資料。所有績效統計的 signal、entry 與 exit 都必須落在 Development 期間；warmup 不得計入績效。
 
 ### 一律禁止
 
 - `study.yml`，因為它會揭露目前 disposition 或 outcome。
 - Study 或 research 副本的 `README.md`。
-- `evidence/historical-evaluation*`、`evidence/terminal-evidence.yml`、robustness challenge 與 replay evidence。
-- `events/000008-*` 及其後事件、`journals/`、terminal payload、evaluation payload、challenge payload 與 replay payload。
-- full、quarantine、historical-evaluation、retrospective-replay 原始價格快照。
+- `evidence/historical-evaluation*`、`evidence/terminal-evidence.yml`。
+- `events/000008-*` 及其後事件、`journals/`、terminal payload 與 evaluation payload。
+- full、quarantine 與 historical-evaluation 原始價格快照。
 - 可能間接揭露上述內容的 repository 根目錄 README、全域文字搜尋、Git log/show/diff、測試快照或先前生成的報告。
 - 網路搜尋、外部市場資料、券商資料與 connector。
 

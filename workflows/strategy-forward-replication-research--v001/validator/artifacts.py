@@ -184,114 +184,6 @@ def evaluate_historical(
     return metrics, failures
 
 
-def replay_metrics(
-    value: dict[str, Any],
-    *,
-    fold_warmup_sessions: int,
-    maximum_holding_sessions: int,
-) -> dict[str, Any]:
-    fills = value["fills"]
-    _validate_unique(fills, "fill_id")
-    initial_cash = decimal_value(value["initial_cash"])
-    base_pnls: list[Decimal] = []
-    stress_pnls: list[Decimal] = []
-    base_equity = initial_cash
-    stress_equity = initial_cash
-    maximum_realized_loss_fraction = Decimal("0")
-    calendar = xcals.get_calendar("XNYS")
-    expected_sessions = [
-        timestamp.strftime("%Y-%m-%d")
-        for timestamp in calendar.sessions_in_range("2025-01-01", "2025-12-31")
-    ]
-    if value["expected_sessions"] != expected_sessions:
-        raise ValidationError("Replay expected_sessions 必須是完整固定 2025 XNYS inventory")
-    for fill in fills:
-        if fill["proposal_actionable"] is not False:
-            raise ValidationError("Replay proposal 必須是 non-actionable")
-        if fill["order_type"] not in ALLOWED_ORDER_TYPES:
-            raise ValidationError(f"不允許的 Proposal Order Type: {fill['order_type']}")
-        try:
-            entry_index = expected_sessions.index(fill["session"])
-            exit_index = expected_sessions.index(fill["exit_session"])
-        except ValueError as exc:
-            raise ValidationError(f"fill {fill['fill_id']} 使用非 XNYS session") from exc
-        if entry_index < fold_warmup_sessions:
-            raise ValidationError(f"fill {fill['fill_id']} 在 Replay Warmup 期間產生")
-        if exit_index < entry_index or exit_index - entry_index > maximum_holding_sessions:
-            raise ValidationError(f"fill {fill['fill_id']} 違反最大持有期")
-        if entry_index + maximum_holding_sessions >= len(expected_sessions):
-            raise ValidationError(f"fill {fill['fill_id']} 違反 2025 entry cutoff")
-        base_pnl = decimal_value(fill["base_pnl"])
-        stress_pnl = decimal_value(fill["stress_pnl"])
-        base_pnls.append(base_pnl)
-        stress_pnls.append(stress_pnl)
-        if base_pnl < 0 and base_equity > 0:
-            maximum_realized_loss_fraction = max(
-                maximum_realized_loss_fraction, -base_pnl / base_equity
-            )
-        if stress_pnl < 0 and stress_equity > 0:
-            maximum_realized_loss_fraction = max(
-                maximum_realized_loss_fraction, -stress_pnl / stress_equity
-            )
-        base_equity += base_pnl
-        stress_equity += stress_pnl
-    return {
-        "base_max_drawdown": _maximum_drawdown(initial_cash, base_pnls),
-        "base_profit_factor": _profit_factor(base_pnls),
-        "base_return": _return(initial_cash, base_pnls),
-        "completed_simulated_fills": len(fills),
-        "critical_drift_passed": value["critical_drift_passed"],
-        "expected_sessions_covered": value["expected_sessions"] == value["observed_sessions"],
-        "maximum_realized_trade_loss_fraction": str(maximum_realized_loss_fraction),
-        "stress_max_drawdown": _maximum_drawdown(initial_cash, stress_pnls),
-        "stress_profit_factor": _profit_factor(stress_pnls),
-        "stress_return": _return(initial_cash, stress_pnls),
-    }
-
-
-def evaluate_replay(
-    value: dict[str, Any],
-    rules: dict[str, dict[str, Any]],
-    *,
-    fold_warmup_sessions: int = 1,
-    maximum_holding_sessions: int = 1,
-) -> tuple[dict[str, Any], list[str]]:
-    metrics = replay_metrics(
-        value,
-        fold_warmup_sessions=fold_warmup_sessions,
-        maximum_holding_sessions=maximum_holding_sessions,
-    )
-    failures = [failure.metric for failure in evaluate_rules(metrics, rules)]
-    if decimal_value(metrics["stress_max_drawdown"]) > decimal_value(
-        value["stress_drawdown_limit"]
-    ):
-        failures.append("stress_max_drawdown")
-    return metrics, failures
-
-
-def evaluate_challenges(
-    value: dict[str, Any],
-    required_ids: list[str],
-    seed_required: list[str],
-) -> list[str]:
-    challenges = value["challenges"]
-    ids = [item["challenge_id"] for item in challenges]
-    if len(ids) != len(set(ids)) or set(ids) != set(required_ids):
-        raise ValidationError("Challenge IDs 必須完整、唯一且剛好等於正式九項")
-    binding_sets = {tuple(sorted(item["bindings"].items())) for item in challenges}
-    if len(binding_sets) != 1:
-        raise IntegrityError("九項 challenges 的 frozen bindings 不一致")
-    failures: list[str] = []
-    for item in challenges:
-        if item["challenge_id"] in seed_required and "seed" not in item:
-            raise ValidationError(f"{item['challenge_id']} 缺少 preregistered seed")
-        if not compare(
-            item["actual"], item["operator"], item["expected"], metric=item["challenge_id"]
-        ):
-            failures.append(item["challenge_id"])
-    return failures
-
-
 def _development_text(value: float) -> str:
     return str(float(value))
 
@@ -788,11 +680,30 @@ def validate_snapshot_set(
     schema_store.validate("data-snapshot-set.schema.yml", value)
     snapshots = value["snapshots"]
     roles = [snapshot.get("role") for snapshot in snapshots]
-    expected_intervals = {
+    data_intervals = workflow["data_intervals"]
+    required_intervals = {
         interval["role"]: interval for interval in workflow["data_intervals"]["intervals"]
     }
-    if len(roles) != len(set(roles)) or set(roles) != set(expected_intervals):
-        raise ValidationError("Data Snapshot roles 必須完整、唯一且等於固定資料角色")
+    optional_intervals = {
+        interval["role"]: interval
+        for interval in data_intervals.get("legacy_optional_intervals", [])
+    }
+    required_roles = set(data_intervals.get("required_roles", required_intervals))
+    optional_roles = set(
+        data_intervals.get("legacy_optional_roles", optional_intervals)
+    )
+    expected_intervals = {**required_intervals, **optional_intervals}
+    expected_roles = required_roles | optional_roles
+    actual_roles = set(roles)
+    if (
+        len(roles) != len(actual_roles)
+        or not required_roles.issubset(actual_roles)
+        or not actual_roles.issubset(expected_roles)
+    ):
+        raise ValidationError(
+            "Data Snapshot roles 必須完整、唯一；目前流程必須包含四種固定資料角色，"
+            "舊版 replay role 僅可選擇性保留"
+        )
     occupied_sessions: set[str] = set()
     result: dict[str, dict[str, Any]] = {}
     for snapshot in snapshots:

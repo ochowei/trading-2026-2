@@ -4,7 +4,7 @@
 
 ## Strategy Forward Replication Research v001
 
-詳細內容請參考 [`strategy-forward-replication-research--v001/README.md`](strategy-forward-replication-research--v001/README.md)。這個 Workflow Package 採用自包含設計，把研究規則、程式碼、設定、測試與實際案例放在同一層目錄中管理：
+詳細內容請參考 [`strategy-forward-replication-research--v001/README.md`](strategy-forward-replication-research--v001/README.md)。這個 Workflow Package 採用自包含設計，把研究規則、程式碼、設定、測試與實際案例放在同一層目錄中管理。正式 Lifecycle 會從 Study 建立一路走到 Historical Evaluation，最後以獨立的 Study Terminal 事件結束；Historical Evaluation 的 `pass` 不代表其他未定義的穩健度或回放檢查：
 
 ### 核心設定與發布紀錄
 

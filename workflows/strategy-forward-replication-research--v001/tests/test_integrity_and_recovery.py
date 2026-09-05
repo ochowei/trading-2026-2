@@ -6,8 +6,7 @@ import sys
 from pathlib import Path
 
 import pytest
-from helpers import DIGESTS, challenge_evidence, service
-from validator.artifacts import evaluate_challenges
+from helpers import DIGESTS, service
 from validator.canonical_yaml import canonical_bytes
 from validator.errors import IntegrityError, ValidationError
 from validator.study import PROVENANCE_DISPOSITIONS
@@ -23,7 +22,7 @@ def _create(study_service: StudyService, study_id: str) -> None:
         research_round_id="round-1",
         experiment_family="family-a",
         research_owner="same-person",
-        replay_operator="same-person",
+        historical_evaluation_operator="same-person",
         source_bundle={
             "schema_version": 1,
             "files": [{"path": "runner.py", "digest": DIGESTS["source"]}],
@@ -37,28 +36,6 @@ def test_provenance_dispositions_are_fail_closed() -> None:
         "known-contaminated": "fail",
         "provenance-unknown": "indeterminate",
     }
-
-
-def test_challenge_set_cannot_be_partial(workflow_root: Path) -> None:
-    from validator.study import WorkflowRules
-
-    rules = WorkflowRules(workflow_root)
-    bindings = {
-        "candidate_digest": "1" * 64,
-        "evaluation_snapshot_digest": "2" * 64,
-        "fold_inventory_digest": "3" * 64,
-        "policy_set_digest": "4" * 64,
-        "qualification_spec_digest": "5" * 64,
-        "source_bundle_digest": "6" * 64,
-    }
-    evidence = challenge_evidence(bindings)
-    evidence["challenges"].pop()
-    with pytest.raises(ValidationError, match="Challenge IDs"):
-        evaluate_challenges(
-            evidence,
-            rules.evidence_requirements["required_challenges"],
-            rules.evidence_requirements["seed_required_challenges"],
-        )
 
 
 def test_pause_resume_requires_same_frozen_operation(workflow_root: Path, tmp_path: Path) -> None:

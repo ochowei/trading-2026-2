@@ -29,6 +29,7 @@ properties:
     minimum: 1
     type: integer
   replay_gates:
+    description: 舊版 Study 的歷史相容欄位；目前 Lifecycle 不再執行 Replay，因此新 Study 不應填寫。
     type: object
   selection_rule:
     type: object
@@ -46,5 +47,4 @@ required:
   - fold_warmup_sessions
   - initial_cash
   - evaluation_gates
-  - replay_gates
 type: object

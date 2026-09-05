@@ -61,8 +61,9 @@ class StudyService:
         research_round_id: str,
         experiment_family: str,
         research_owner: str,
-        replay_operator: str,
         source_bundle: dict[str, Any],
+        historical_evaluation_operator: str | None = None,
+        replay_operator: str | None = None,
     ) -> str:
         self.rules.schema_store.validate("source-bundle.schema.yml", source_bundle)
         source_bundle_path, source_bundle_digest = self.publish_artifact(
@@ -70,11 +71,14 @@ class StudyService:
             "manifests/source-bundle.yml",
             source_bundle,
         )
+        operator = historical_evaluation_operator or replay_operator
+        if not operator:
+            raise ValidationError("Study identity 必須指定 Historical Evaluation 執行者")
         payload = {
             "research_round_id": research_round_id,
             "experiment_family": experiment_family,
             "research_owner": research_owner,
-            "replay_operator": replay_operator,
+            "historical_evaluation_operator": operator,
             "source_bundle_path": source_bundle_path,
             "source_bundle_digest": source_bundle_digest,
         }

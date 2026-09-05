@@ -6,19 +6,16 @@ import pytest
 from helpers import (
     DIGESTS,
     advance_to_candidate,
-    challenge_artifact,
-    challenge_evidence,
     development_evidence,
     development_inputs,
     evaluation_evidence,
-    replay_evidence,
     service,
     terminal_evidence,
 )
 from validator.errors import IntegrityError, TransitionError, ValidationError
 
 
-def test_complete_pass_allows_same_person_reviewer(workflow_root: Path, tmp_path: Path) -> None:
+def test_historical_evaluation_pass_requires_terminal(workflow_root: Path, tmp_path: Path) -> None:
     study_service = service(workflow_root, tmp_path)
     study_id = "passing-study"
     advance_to_candidate(study_service, study_id)
@@ -38,96 +35,25 @@ def test_complete_pass_allows_same_person_reviewer(workflow_root: Path, tmp_path
             "disposition": "pass",
         },
     )
-    candidate = study_service.validate(study_id)["candidate_freeze"]
+    before_terminal = study_service.validate(study_id)
+    assert before_terminal["lifecycle"]["current_event"] == "historical-evaluation-completed"
+    assert before_terminal["outcome"]["status"] == "pending"
+    assert "robustness-challenges" not in before_terminal["evidence"]
+    assert "retrospective-execution-replay" not in before_terminal["evidence"]
 
-    challenge_bindings = {
-        "candidate_digest": DIGESTS["candidate"],
-        "evaluation_snapshot_digest": DIGESTS["evaluation_snapshot"],
-        "fold_inventory_digest": candidate["fold_inventory_digest"],
-        "policy_set_digest": study_service.policy_set_digest,
-        "qualification_spec_digest": DIGESTS["qualification"],
-        "source_bundle_digest": study_service.validate(study_id)["workflow_binding"][
-            "source_bundle_digest"
-        ],
-    }
-    challenge_value = challenge_evidence(challenge_bindings)
-    for challenge in challenge_value["challenges"]:
-        study_service.publish_artifact(
-            study_id,
-            challenge["artifact_path"],
-            challenge_artifact(challenge["challenge_id"]),
-        )
-    challenge_path, challenge_digest = study_service.publish_artifact(
-        study_id,
-        "evidence/robustness-challenges.yml",
-        challenge_value,
-    )
-    study_service.append_event(
-        study_id,
+    for event_type in (
         "robustness-challenges-completed",
-        "same-person",
-        {
-            "evidence_path": challenge_path,
-            "evidence_digest": challenge_digest,
-            "disposition": "pass",
-        },
-    )
-
-    replay_path, replay_digest = study_service.publish_artifact(
-        study_id,
-        "evidence/retrospective-replay.yml",
-        replay_evidence(),
-    )
-    study_service.append_event(
-        study_id,
         "retrospective-replay-completed",
-        "same-person",
-        {
-            "evidence_path": replay_path,
-            "evidence_digest": replay_digest,
-            "disposition": "pass",
-        },
-    )
+        "independent-review-completed",
+    ):
+        with pytest.raises(ValidationError):
+            study_service.append_event(study_id, event_type, "same-person", {})
 
-    before_review = study_service.validate(study_id)
-    terminal_value = {
-        "schema_version": 1,
-        "outcome": "pass",
-        "authority": "retrospectively-supported",
-        "recomputed": True,
-        "bindings": {
-            "event_chain_head_digest": before_review["lifecycle"]["event_chain_head_digest"],
-            "preregistration_digest": before_review["preregistration"]["digest"],
-            "trial_registry_digest": before_review["trial_registry"]["digest"],
-            "candidate_freeze_digest": before_review["evidence"]["candidate-freeze"],
-            "development_evidence_digest": before_review["evidence"]["development"],
-            "historical_evaluation_digest": before_review["evidence"][
-                "historical-evaluation"
-            ],
-            "robustness_challenges_digest": before_review["evidence"][
-                "robustness-challenges"
-            ],
-            "retrospective_replay_digest": before_review["evidence"][
-                "retrospective-execution-replay"
-            ],
-            "workflow_digest": before_review["workflow_binding"]["workflow_digest"],
-            "policy_set_digest": before_review["workflow_binding"]["policy_set_digest"],
-            "source_bundle_digest": before_review["workflow_binding"][
-                "source_bundle_digest"
-            ],
-        },
-        "reasons": [],
-    }
+    terminal_value = terminal_evidence(before_terminal, "pass", [])
     terminal_path, terminal_digest = study_service.publish_artifact(
         study_id,
         "evidence/terminal-evidence.yml",
         terminal_value,
-    )
-    study_service.append_event(
-        study_id,
-        "independent-review-completed",
-        "same-person",
-        {"evidence_path": terminal_path, "evidence_digest": terminal_digest},
     )
     study_service.append_event(
         study_id,
@@ -141,6 +67,8 @@ def test_complete_pass_allows_same_person_reviewer(workflow_root: Path, tmp_path
         },
     )
     projection = study_service.validate(study_id)
+    assert projection["lifecycle"]["event_count"] == 9
+    assert projection["lifecycle"]["current_event"] == "study-terminal"
     assert projection["outcome"] == {
         "status": "pass",
         "authority": "retrospectively-supported",
@@ -155,7 +83,7 @@ def test_cannot_skip_candidate_freeze(workflow_root: Path, tmp_path: Path) -> No
         research_round_id="round",
         experiment_family="family",
         research_owner="owner",
-        replay_operator="owner",
+        historical_evaluation_operator="owner",
         source_bundle={
             "schema_version": 1,
             "files": [{"path": "runner.py", "digest": DIGESTS["source"]}],
@@ -188,7 +116,7 @@ def test_registry_count_cannot_be_forged(workflow_root: Path, tmp_path: Path) ->
         research_round_id="round",
         experiment_family="family-a",
         research_owner="owner",
-        replay_operator="owner",
+        historical_evaluation_operator="owner",
         source_bundle={
             "schema_version": 1,
             "files": [{"path": "runner.py", "digest": DIGESTS["source"]}],
@@ -270,7 +198,7 @@ def test_trial_rejects_unregistered_bootstrap_seed(
         research_round_id="round",
         experiment_family="family-a",
         research_owner="owner",
-        replay_operator="owner",
+        historical_evaluation_operator="owner",
         source_bundle={
             "schema_version": 1,
             "files": [{"path": "runner.py", "digest": DIGESTS["source"]}],
@@ -347,7 +275,7 @@ def test_trial_rejects_tampered_development_raw_evidence(
         research_round_id="round",
         experiment_family="family-a",
         research_owner="owner",
-        replay_operator="owner",
+        historical_evaluation_operator="owner",
         source_bundle={
             "schema_version": 1,
             "files": [{"path": "runner.py", "digest": DIGESTS["source"]}],
@@ -467,7 +395,7 @@ def test_missing_evidence_terminates_as_indeterminate(
         research_round_id="round",
         experiment_family="family",
         research_owner="same-person",
-        replay_operator="same-person",
+        historical_evaluation_operator="same-person",
         source_bundle={
             "schema_version": 1,
             "files": [{"path": "runner.py", "digest": DIGESTS["source"]}],

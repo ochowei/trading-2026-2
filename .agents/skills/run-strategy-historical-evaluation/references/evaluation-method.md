@@ -60,7 +60,8 @@ Canonicalize 後執行：
 1. guarded writer `publish-artifact` 至 `evidence/historical-evaluation.yml`；
 2. 產生只含 `artifact_path`、`artifact_digest`、`disposition` 的 canonical payload；
 3. guarded writer 追加 `historical-evaluation-completed`；
-4. guarded writer `validate`，確認 event count 8、current event 正確、重算 disposition 一致。
+4. guarded writer `validate`，確認 Historical Evaluation event 已追加、current event 正確、重算 disposition 一致。
+5. 依同一份 validator disposition 產生並發布 `terminal-evidence.yml`，追加 `study-terminal`，再 validate 確認 Study 已 terminal；不得新增其他結果階段。
 
 如果正式 artifact path 已存在，不得覆寫。先確認它是否為本次同一 operation 的 exact bytes；否則停止並調查。
 
@@ -78,4 +79,4 @@ Canonicalize 後執行：
 
 回報 validator 重算的總交易數、base/stress return、PF、最大回撤、traded folds、正報酬 fold 比例、交易與獲利集中度、family-wise confidence 及所有 failed gates。不得只說 pass/fail。
 
-明確記錄 runner、evaluation snapshot、raw evidence、canonical artifact、payload、event digest 和 authority validation。不得開啟或執行 challenge、quarantine 或 replay。
+明確記錄 runner、evaluation snapshot、raw evidence、canonical artifact、payload、event digest 和 authority validation。不得開啟或執行 Historical Evaluation 以外的 challenge、quarantine、replay 或 review。

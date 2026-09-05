@@ -31,9 +31,6 @@ properties:
       - provenance-audited
       - candidate-frozen
       - historical-evaluation-completed
-      - robustness-challenges-completed
-      - retrospective-replay-completed
-      - independent-review-completed
       - evidence-unavailable
       - study-paused
       - study-resumed

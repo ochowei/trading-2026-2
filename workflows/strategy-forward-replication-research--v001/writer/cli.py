@@ -35,7 +35,12 @@ def parser() -> argparse.ArgumentParser:
     create.add_argument("--research-round", required=True)
     create.add_argument("--experiment-family", required=True)
     create.add_argument("--research-owner", required=True)
-    create.add_argument("--replay-operator", required=True)
+    operators = create.add_mutually_exclusive_group(required=True)
+    operators.add_argument("--historical-evaluation-operator")
+    operators.add_argument(
+        "--replay-operator",
+        help="舊版 Study 建立參數；新 Study 請使用 --historical-evaluation-operator",
+    )
     create.add_argument("--source-bundle", type=Path, required=True)
 
     append = commands.add_parser("append")
@@ -91,6 +96,7 @@ def main() -> int:
                 research_round_id=args.research_round,
                 experiment_family=args.experiment_family,
                 research_owner=args.research_owner,
+                historical_evaluation_operator=args.historical_evaluation_operator,
                 replay_operator=args.replay_operator,
                 source_bundle=load_canonical(args.source_bundle),
             )
