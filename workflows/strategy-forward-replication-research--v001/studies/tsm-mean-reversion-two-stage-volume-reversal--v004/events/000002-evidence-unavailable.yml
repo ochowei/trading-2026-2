@@ -1,0 +1,15 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 0bb81bfe45784976262e1b1c743929977c39cbc5fb49c7c030a12112413a78eb
+  workflow_digest: 22f1a7a1fbc89752afdc379037d37123f83c2089f5b0d86288e63ff33f01d0c3
+event_type: evidence-unavailable
+occurred_at: '2026-09-05T08:09:56.695414Z'
+payload:
+  reason: v004 在 Development 前的 implementation contract preflight 失敗：Study manifest 的 implementation contract path 不在 immutable Source Bundle 內；目前 frozen setup 已關閉，修正版本改由 v005 建立。
+  stage: development
+  unavailable_path: evidence/development-integrity-check.yml
+previous_event_digest: eb75ef6cbf575a475a97bb63682ca0614f6c02d233f71b59b6cdc3b73ce2e57e
+schema_version: 1
+sequence: 2
+study_id: tsm-mean-reversion-two-stage-volume-reversal--v004

@@ -105,3 +105,12 @@ Artifact 發布後不可覆寫。若未被事件引用的 artifact 有錯，保�
 若 Development gate 失敗且 projection 已是合法的 `terminal-without-candidate`，candidate freeze
 不適用，不得為了滿足上述 candidate artifact 清單而製造候選證據；此時核對 terminal state、
 authority 與既有 artifact 的必要錯誤後，依提前終止規則交接。
+
+若 `study-created` 後、尚未產生 outcome-bearing trial 前發現不可修復的 contract、Source
+Bundle 或 evidence integrity mismatch，不能只在工作紀錄中寫「停止」。必須用 guarded writer
+依序追加 `evidence-unavailable`（`stage: development`，`unavailable_path` 指向不存在的
+path），發布綁定當時 event chain head 的 `evidence/terminal-evidence.yml`，再追加
+`study-terminal`，其 `outcome` 為 `indeterminate`、`authority` 為 `none`。這類 setup failure
+不是 measured gate failure，不應標成 `fail`；完成 terminal event 後不得再進入 Development、
+candidate freeze 或 Historical Evaluation。每一步都要先以同一 authority root 執行
+`check_authority_root.py --phase existing`，並以 writer validate 與終止狀態檢查交接。

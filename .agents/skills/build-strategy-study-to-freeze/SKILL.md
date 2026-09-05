@@ -49,6 +49,7 @@ python3 .agents/skills/build-strategy-study-to-freeze/scripts/check_new_study.py
 - 不得執行或發布 `historical-evaluation-completed` 及其後事件。
 - Candidate freeze 後不得修改 Source Bundle、候選、資格規格、資料綁定、選擇證據或任何 outcome-relevant 程式。
 - 任一 Development gate 失敗時保留 Trial，依 preregistered 規則凍結 registry 並走提前終止；不得調低 gate 後重跑成同一 Study。
+- `study-created` 之後若發現 implementation contract、Source Bundle 或其他 frozen binding 的完整性錯誤，且尚未產生 outcome-bearing trial，必須走 `evidence-unavailable` → `study-terminal` 的提前終止鏈；不得只在對話中宣告「停止」。
 
 ## 資料取得與 shared reference-first
 
@@ -159,7 +160,9 @@ post-create contract guard：確認 Study 內不存在
 仍精確指向 `research/<study-id>/implementation-contract.yml`，再執行
 `studyctl contract` 與 `studyctl synthetic`。如果出現 `contract-not-frozen`、path mismatch
 或 digest mismatch，立即停止這個 Study；不得刪除、覆寫或重新發布既有 immutable artifact，
-也不得進入 Development，應保留該 Study 的建立紀錄並改用新的 Study ID。
+也不得進入 Development。因為 `study-created` 已經存在，必須依「提前終止與封存」規則追加
+`evidence-unavailable`，再追加 `study-terminal`（`outcome: indeterminate`、
+`authority: none`），完成原 Study 的可稽核封存後，才改用新的 Study ID。
 
 若 preregistration 有任何改變，必須重新計算並更新所有下游 digest，包括
 qualification、Development trial inputs、Source Bundle 及其所綁定的 evidence/input；
@@ -169,6 +172,28 @@ qualification、Development trial inputs、Source Bundle 及其所綁定的 evid
 Development gate 失敗時仍須保留 Trial，依 preregistered 規則進入合法的
 `terminal-without-candidate`；candidate freeze 不適用，也不得為了滿足 CLI 所需欄位
 製造 candidate、selection 或 provenance evidence。
+
+### 提前終止與封存
+
+若 `study-created` 後發生不可修復的 setup、contract、Source Bundle 或 evidence integrity
+錯誤，且尚未產生可判讀策略結果，正式紀錄必須是：
+
+1. 用 guarded writer 追加 `evidence-unavailable`，payload 至少包含
+   `stage: development`、具體 `reason` 與一個目前不存在的 `unavailable_path`；不要為了
+   滿足 path 欄位而建立假的 evidence artifact。
+2. 以 `evidence-unavailable` event 的新 chain head 與 payload digest 建立并發布
+   `evidence/terminal-evidence.yml`，其中 `outcome` 為 `indeterminate`、`authority` 為
+   `none`、`recomputed` 為 `true`，並綁定目前已存在的 workflow、policy、Source Bundle
+   以及（若已存在）preregistration、trial registry 與其他 evidence digest。
+3. 用 guarded writer 追加 `study-terminal`，payload 使用
+   `outcome: indeterminate`、`authority: none`，並綁定 terminal evidence 的 path/digest。
+4. 追加每個 Event、發布 terminal evidence、`validate` 與終止狀態檢查前，都使用同一個
+   `check_authority_root.py --phase existing` 與同一個絕對 authority root。終止後不得再追加
+   Development、candidate freeze 或 Historical Evaluation 事件。
+
+這種尚未產生 outcome-bearing trial 的 setup failure 應標記為 `indeterminate`，不是把沒有
+績效結果的 Study 誤標成 `fail`。`study-paused` 只保留給可恢復的 technical/publication
+interruption，不取代正式終止。
 
 執行順序如下：
 
@@ -206,3 +231,8 @@ Development gate 失敗而 workflow 已合法進入 `terminal-without-candidate`
 - 明確聲明沒有執行或讀取正式 Historical Evaluation 結果。
 
 不要自動接續 Historical Evaluation。使用者另行要求後，交給 `$run-strategy-historical-evaluation`。
+
+若 Study 依提前終止規則封存，交接時改為確認目前事件是 `study-terminal`、outcome 是
+`indeterminate`、terminal evidence 已發布且 authority chain 通過；回報終止原因、
+`evidence-unavailable` 與 `study-terminal` 的 event head、terminal evidence path/digest，
+並明確說明沒有產生 Development outcome、candidate 或正式 Historical Evaluation 結果。

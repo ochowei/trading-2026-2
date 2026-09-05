@@ -1,13 +1,14 @@
 candidate_freeze: null
-evidence: {}
+evidence:
+  evidence-unavailable: e79b6a92ea224890fcb0d5b9970d6e96152a2ffff1453416ec6817a97da9db14
 lifecycle:
-  current_event: study-created
-  event_chain_head_digest: eb75ef6cbf575a475a97bb63682ca0614f6c02d233f71b59b6cdc3b73ce2e57e
-  event_count: 1
-  status: active
+  current_event: study-terminal
+  event_chain_head_digest: 9718b1245bbc4bea2e9aac3183eee0f1f61e78aadaa9f77f1dd1ae479f7a30b0
+  event_count: 3
+  status: terminal
 outcome:
   authority: none
-  status: pending
+  status: indeterminate
 preregistration:
   digest: null
 provenance:
