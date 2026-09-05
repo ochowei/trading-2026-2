@@ -104,6 +104,7 @@ cooldown（冷卻期）與每筆交易風險預算。
 | [`tsm-mean-reversion-reversal-trigger--v002`](tsm-mean-reversion-reversal-trigger--v002/) | 反轉觸發條件的另一個獨立版本；Study、candidate 與 source bundle 都各自綁定。 | `terminal / fail`；[Study 狀態](../workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-reversal-trigger--v002/study.yml) |
 | [`tsm-mean-reversion-two-stage-volume-reversal--v001`](tsm-mean-reversion-two-stage-volume-reversal--v001/) | 兩階段確認：先觀察異常成交量，再用反彈價格與 RSI(2) 條件確認止跌，避免在暴跌途中接刀。 | `candidate-frozen / pending`；[Study 狀態](../workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v001/study.yml) |
 | [`tsm-mean-reversion-two-stage-volume-reversal--v002`](tsm-mean-reversion-two-stage-volume-reversal--v002/) | 兩階段成交量反轉條件的另一個獨立版本，保留自己的規格、程式 digest 與 evidence。 | `candidate-frozen / pending`；[Study 狀態](../workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v002/study.yml) |
+| [`tsm-mean-reversion-two-stage-volume-reversal--v003`](tsm-mean-reversion-two-stage-volume-reversal--v003/) | 完全沿用 v002 的兩階段成交量反轉策略與 Development 規格，依現行流程重新建立獨立的 Study、Source Bundle 與 authority chain。 | `candidate-frozen / pending`；[Study 狀態](../workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v003/study.yml) |
 
 ## 共用市場資料
 

@@ -1,0 +1,24 @@
+assessed_at: '2026-09-05T06:38:16.837090000Z'
+assessment: 研究擁有者確認，這組確切策略、參數與選擇規則在凍結前完全沒有查看 2020--2025 的策略績效結果；資料取得與 session/hash 檢查沒有計算 Evaluation 或 replay outcome。
+assets:
+  - exposure_status: development-only
+    role: warmup-only
+  - exposure_status: development-only
+    role: development
+  - exposure_status: structurally-checked-no-strategy-outcome
+    role: quarantine
+  - exposure_status: structurally-checked-no-strategy-outcome
+    role: historical-evaluation
+  - exposure_status: structurally-checked-no-strategy-outcome
+    role: retrospective-execution-replay
+controls:
+  candidate_family_frozen_before_evaluation: true
+  evaluation_strategy_outcome_accessed: false
+  replay_strategy_outcome_accessed: false
+  trial_registry_frozen: true
+declaration:
+  actor_id: william
+  confirmed: true
+  statement: 我確認這組確切策略與參數在提出及凍結前，完全沒有看過其 2020--2025 策略績效結果。
+schema_version: 1
+status: verified-clean
