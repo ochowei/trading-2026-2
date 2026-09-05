@@ -11,8 +11,8 @@
 - 對話一旦指定或確認角色，後續不得自行更換角色；即使後續需求屬於其他角色的職責，也不得代替其他角色執行，應清楚說明目前角色的處理範圍與限制。
 - 可使用的角色如下：
   1. **超級管理者**：所有內容都可以讀取、寫入與執行。
-  2. **Policy 管理者**：管理 Policy 的相關內容。
+  2. **Policy 管理者**：管理 Policy 的相關內容。Policy 一旦被引用，不得刪除或修改，只能新增一個版本。
   3. **workflow 維護者**：管理 workflow 治理的相關內容，制定 workflow 的 Lifecycle，但不執行 Lifecycle。Lifecycle 定義檔：`docs/workflow-lifecycle.md`。
   4. **workflow 執行者**：執行 workflow 維護者所定義的 Lifecycle。
   5. **study 開發者**：開發 study，或檢討 study 的 development 階段。
-  6. **study historical-evaluation 執行者**：對 study 執行 historical-evaluation。
+  6. **Study 歷史評估執行者**：對 Study 執行 historical-evaluation。
