@@ -1,0 +1,160 @@
+family_wise_confidence: '0.90'
+initial_cash: '100000'
+schema_version: 1
+stage: historical-evaluation
+stress_drawdown_limit: '0.10'
+trades:
+  - base_pnl: '1882.4769642168103'
+    exit_date: '2020-03-04'
+    fold: 2020
+    order_type: MARKET
+    signal_date: '2020-02-28'
+    stress_pnl: '1601.8576826578355'
+    trade_id: evaluation-001
+  - base_pnl: '1918.2955924132111'
+    exit_date: '2020-03-16'
+    fold: 2020
+    order_type: MARKET
+    signal_date: '2020-03-13'
+    stress_pnl: '1627.7735536532418'
+    trade_id: evaluation-002
+  - base_pnl: '1953.436811288033'
+    exit_date: '2020-06-03'
+    fold: 2020
+    order_type: MARKET
+    signal_date: '2020-05-29'
+    stress_pnl: '1654.0168662591168'
+    trade_id: evaluation-003
+  - base_pnl: '-1997.8750688954024'
+    exit_date: '2021-03-08'
+    fold: 2021
+    order_type: MARKET
+    signal_date: '2021-03-05'
+    stress_pnl: '-1998.5558609272994'
+    trade_id: evaluation-004
+  - base_pnl: '-1957.2257758629712'
+    exit_date: '2021-03-18'
+    fold: 2021
+    order_type: MARKET
+    signal_date: '2021-03-15'
+    stress_pnl: '-1955.841134710805'
+    trade_id: evaluation-005
+  - base_pnl: '1806.5618226882507'
+    exit_date: '2021-03-26'
+    fold: 2021
+    order_type: MARKET
+    signal_date: '2021-03-25'
+    stress_pnl: '1537.6200047748134'
+    trade_id: evaluation-006
+  - base_pnl: '1961.4918334610993'
+    exit_date: '2021-05-21'
+    fold: 2021
+    order_type: MARKET
+    signal_date: '2021-05-11'
+    stress_pnl: '1672.6183460737957'
+    trade_id: evaluation-007
+  - base_pnl: '1877.344479677704'
+    exit_date: '2021-07-06'
+    fold: 2021
+    order_type: MARKET
+    signal_date: '2021-06-22'
+    stress_pnl: '1589.9889843923884'
+    trade_id: evaluation-008
+  - base_pnl: '2906.618925215851'
+    exit_date: '2021-08-25'
+    fold: 2021
+    order_type: MARKET
+    signal_date: '2021-08-19'
+    stress_pnl: '2531.3134631639114'
+    trade_id: evaluation-009
+  - base_pnl: '1969.6706327359425'
+    exit_date: '2021-10-19'
+    fold: 2021
+    order_type: MARKET
+    signal_date: '2021-09-30'
+    stress_pnl: '1656.6178710119857'
+    trade_id: evaluation-010
+  - base_pnl: '-1999.5383970726398'
+    exit_date: '2022-03-04'
+    fold: 2022
+    order_type: MARKET
+    signal_date: '2022-03-01'
+    stress_pnl: '-1995.5727540597145'
+    trade_id: evaluation-011
+  - base_pnl: '-1957.0644710618362'
+    exit_date: '2022-04-25'
+    fold: 2022
+    order_type: MARKET
+    signal_date: '2022-04-18'
+    stress_pnl: '-1959.4626905317418'
+    trade_id: evaluation-012
+  - base_pnl: '-1919.4622034835338'
+    exit_date: '2022-05-09'
+    fold: 2022
+    order_type: MARKET
+    signal_date: '2022-05-02'
+    stress_pnl: '-1919.749778014666'
+    trade_id: evaluation-013
+  - base_pnl: '-1881.1028064128477'
+    exit_date: '2022-06-23'
+    fold: 2022
+    order_type: MARKET
+    signal_date: '2022-06-14'
+    stress_pnl: '-1879.513346167514'
+    trade_id: evaluation-014
+  - base_pnl: '-1842.057213595166'
+    exit_date: '2022-09-22'
+    fold: 2022
+    order_type: MARKET
+    signal_date: '2022-09-14'
+    stress_pnl: '-1844.2763486781041'
+    trade_id: evaluation-015
+  - base_pnl: '1700.31634246686'
+    exit_date: '2022-10-05'
+    fold: 2022
+    order_type: MARKET
+    signal_date: '2022-10-03'
+    stress_pnl: '1447.998204157746'
+    trade_id: evaluation-016
+  - base_pnl: '1733.7503779344988'
+    exit_date: '2022-10-13'
+    fold: 2022
+    order_type: MARKET
+    signal_date: '2022-10-12'
+    stress_pnl: '1471.5267792991945'
+    trade_id: evaluation-017
+  - base_pnl: '1810.8034107809508'
+    exit_date: '2022-11-01'
+    fold: 2022
+    order_type: MARKET
+    signal_date: '2022-10-27'
+    stress_pnl: '1536.4454294116586'
+    trade_id: evaluation-018
+  - base_pnl: '1882.0217903113808'
+    exit_date: '2023-10-06'
+    fold: 2023
+    order_type: MARKET
+    signal_date: '2023-09-22'
+    stress_pnl: '1600.904748722358'
+    trade_id: evaluation-019
+  - base_pnl: '2379.443883996122'
+    exit_date: '2023-11-02'
+    fold: 2023
+    order_type: MARKET
+    signal_date: '2023-10-30'
+    stress_pnl: '2053.560488331801'
+    trade_id: evaluation-020
+  - base_pnl: '1881.1105093101505'
+    exit_date: '2024-04-25'
+    fold: 2024
+    order_type: MARKET
+    signal_date: '2024-04-22'
+    stress_pnl: '1600.3601074305188'
+    trade_id: evaluation-021
+  - base_pnl: '-2037.32909328831'
+    exit_date: '2024-07-24'
+    fold: 2024
+    order_type: MARKET
+    signal_date: '2024-07-18'
+    stress_pnl: '-2031.7116029038589'
+    trade_id: evaluation-022

@@ -17,14 +17,16 @@ candidate_freeze:
 evidence:
   candidate-freeze: 023276395b0eef2f7a4d8bf45ced3d0aa2ddfc1a0ccc3fd99000d7ff02b8d50a
   development: bb273c387c33912575fc279a7c5074de0d9828f39b6efe85420f3dc1c76bb5f6
+  historical-evaluation: c645a79f0feb8e3cfa684e892143f11e98b6690550aadae5f0922bbe6b4301fe
+  historical-evaluation-metrics: 5f9b09a6db00ebe7fb7e3c3bb7403779c9c25bdf203e741c7a15b04fac6519ed
 lifecycle:
-  current_event: candidate-frozen
-  event_chain_head_digest: dc0caae762f64e9fee68ab8d2d174a2437b3cb6ec8391522711ec8d5f90de3a3
-  event_count: 7
-  status: active
+  current_event: study-terminal
+  event_chain_head_digest: d9037e970cfe2b1cb6d19064b437c3e82cb3afa4f1c7f81ae6b13679f11e62bf
+  event_count: 9
+  status: terminal
 outcome:
-  authority: none
-  status: pending
+  authority: retrospectively-supported
+  status: pass
 preregistration:
   digest: a6da86096ca71b068a722f3717aad6d5153d42ae8117d7f6886499b1717ab6c3
 provenance:
