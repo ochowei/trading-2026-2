@@ -1,0 +1,5 @@
+ordered_eligible_trial_ids:
+  - tsm-mr-two-stage-time-decay-v006
+rule_digest: e0238fa47e67742dc80765cc697e0cf3297cb3f7d8a1b75668e07daea7a3c2d3
+schema_version: 1
+selected_candidate_id: tsm-mr-two-stage-time-decay-v006

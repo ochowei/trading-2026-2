@@ -1,0 +1,18 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: e790875db830e20dd4c05c53b085573b1ba4917011ba311c1a025f563289e00b
+  workflow_digest: 22f1a7a1fbc89752afdc379037d37123f83c2089f5b0d86288e63ff33f01d0c3
+event_type: study-created
+occurred_at: '2026-09-06T16:21:08.867965Z'
+payload:
+  experiment_family: tsm-mean-reversion-two-stage-time-decay-v006
+  historical_evaluation_operator: william
+  research_owner: william
+  research_round_id: 2026-09-07-tsm-two-stage-v006
+  source_bundle_digest: e790875db830e20dd4c05c53b085573b1ba4917011ba311c1a025f563289e00b
+  source_bundle_path: manifests/source-bundle.yml
+previous_event_digest: null
+schema_version: 1
+sequence: 1
+study_id: tsm-mean-reversion-two-stage-volume-reversal--v006
