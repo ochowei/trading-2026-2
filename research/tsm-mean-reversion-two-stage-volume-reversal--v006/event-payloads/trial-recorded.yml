@@ -1,0 +1,6 @@
+development_evidence_digest: c9ca325bc3565e5518e2bcc65eae34f6a153a33393b99292dc7d8473840fbfa2
+development_evidence_path: evidence/development.yml
+inputs_digest: 3d40972e671a7ecd58dae401d76cd48ed1c05db1223700297bd1699f259e91d4
+inputs_path: manifests/development-trial-inputs.yml
+status: completed
+trial_id: tsm-mr-two-stage-time-decay-v006

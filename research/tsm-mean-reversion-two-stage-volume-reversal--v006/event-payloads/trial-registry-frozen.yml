@@ -1,0 +1,6 @@
+candidate_available: true
+complete_family_trial_ids:
+  - tsm-mr-two-stage-time-decay-v006
+maximum_trials: 1
+recorded_trial_count: 1
+trial_registry_digest: 7137b6995994c20612eb178cff75ab9c4fb25cc258dfc761e37d30930f152c5d
