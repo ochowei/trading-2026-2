@@ -1,0 +1,26 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 2170c05d0036eb9b2bdd2adf6ced0fa47949537b37f31dc481ae2aa3ed46e578
+  workflow_digest: 22f1a7a1fbc89752afdc379037d37123f83c2089f5b0d86288e63ff33f01d0c3
+event_type: candidate-frozen
+occurred_at: '2026-09-05T07:50:59.848287Z'
+payload:
+  baseline_family: simple-mean-reversion
+  baseline_id: tsm-mean-reversion-two-stage-baseline-v005
+  baseline_objectively_simpler: true
+  candidate_digest: 8d9bdfc56a0ec30343587299f009b92552235ecaabbdd1399fba30ff465e80b8
+  development_evidence_digest: ed84dc3110e8f8f57ebe8cae7c20577771aff2c8b146ab0fb69a9945526f89ea
+  evaluation_snapshot_digest: 41094b91da3235f2bb7d9cb97d1234e7c3581ab031a4ee3c63ded377c66c9410
+  fold_inventory_digest: 142fa9ac20ad0df32a13a5f6ad0ce1da9d14ea909c47406f3476ae7e55d65df8
+  qualification_spec_digest: fc2b728d3a70f495140fca43c5a39d7803d5dd9f3b6f5959fcd6c9a95cb21895
+  selected_candidate_id: tsm-mr-two-stage-time-decay-v005
+  selection_evidence_digest: e1be50fd8eaf24b329ffb4bd6fb64ba0f341e10112fe1150843a664fca14409c
+  selection_evidence_path: evidence/selection-evidence.yml
+  snapshot_set_digest: b01ad417a536f0299f456fceeaf0370c1745654b52d53c87fe509974977105f0
+  snapshot_set_path: manifests/data-snapshot-set.yml
+  trial_registry_digest: 98317698c646e3fd3052f9e1eee202f277101abe809d1d0fa5f824b19d8233d5
+previous_event_digest: 6d082b2aa88704a390d8b1b7977dbfec3fb7d5fdd8ff1a013e59004ea6fb36fc
+schema_version: 1
+sequence: 7
+study_id: tsm-mean-reversion-two-stage-volume-reversal--v005

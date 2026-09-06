@@ -1,0 +1,16 @@
+authority: retrospectively-supported
+bindings:
+  candidate_freeze_digest: 023276395b0eef2f7a4d8bf45ced3d0aa2ddfc1a0ccc3fd99000d7ff02b8d50a
+  development_evidence_digest: bb273c387c33912575fc279a7c5074de0d9828f39b6efe85420f3dc1c76bb5f6
+  event_chain_head_digest: 39e11273892c95518152cd79a5d9970cd9257720f098c6e95dddc161db92b99a
+  historical_evaluation_digest: c645a79f0feb8e3cfa684e892143f11e98b6690550aadae5f0922bbe6b4301fe
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  preregistration_digest: a6da86096ca71b068a722f3717aad6d5153d42ae8117d7f6886499b1717ab6c3
+  source_bundle_digest: 3e246cdf69600d091aaf01e17eba6b03808cfcdbcce969c2898e338e866548e8
+  trial_registry_digest: 66ebb4ea300a114a2e2e84f0c010e5b2f8c7fbf5979ef71141a53d86606e621e
+  workflow_digest: 22f1a7a1fbc89752afdc379037d37123f83c2089f5b0d86288e63ff33f01d0c3
+outcome: pass
+reasons:
+  - Validator 已從 frozen raw evidence 重新計算所有預先登記的 Historical Evaluation gates，全部通過。
+recomputed: true
+schema_version: 1

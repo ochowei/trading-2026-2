@@ -1,0 +1,3 @@
+reason: v004 在 Development 前的 implementation contract preflight 失敗：Study manifest 的 implementation contract path 不在 immutable Source Bundle 內；目前 frozen setup 已關閉，修正版本改由 v005 建立。
+stage: development
+unavailable_path: evidence/development-integrity-check.yml

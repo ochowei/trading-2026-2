@@ -1,0 +1,89 @@
+challenge_requirements:
+  - cash-benchmark
+  - simpler-family-baseline
+  - exposure-matched-random-entry
+  - parameter-perturbation
+  - delayed-entry
+  - higher-costs
+  - worse-fills
+  - missed-orders
+  - market-regime
+development:
+  base_profit_factor:
+    operator: '>'
+    value: '1.10'
+  base_return:
+    operator: '>'
+    value: '0'
+  completed_trades:
+    operator: '>='
+    value: 20
+  maximum_realized_trade_loss_fraction:
+    operator: <=
+    value: '0.04'
+  maximum_stress_block_bootstrap_drawdown_above_10pct_ratio:
+    operator: <=
+    value: '0.10'
+  maximum_stress_leave_one_year_out_drawdown:
+    operator: <=
+    value: '0.10'
+  minimum_stress_block_bootstrap_positive_return_ratio:
+    operator: '>='
+    value: '0.80'
+  minimum_stress_leave_one_year_out_profit_factor:
+    operator: '>'
+    value: '1.00'
+  minimum_stress_leave_one_year_out_return:
+    operator: '>'
+    value: '0'
+  stress_maximum_drawdown:
+    operator: <=
+    value: '0.10'
+  stress_profit_factor:
+    operator: '>'
+    value: '1.00'
+  stress_return:
+    operator: '>'
+    value: '0'
+  traded_years:
+    operator: '>='
+    value: 3
+evaluation:
+  base_compounded_return:
+    operator: '>'
+    value: '0'
+  base_profit_factor:
+    operator: '>'
+    value: '1.10'
+  completed_trades:
+    operator: '>='
+    value: 20
+  family_wise_confidence:
+    operator: '>='
+    value: '0.90'
+  maximum_fold_positive_profit_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_fold_trade_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_realized_trade_loss_fraction:
+    operator: <=
+    value: '0.04'
+  positive_traded_fold_ratio:
+    operator: '>='
+    value: '0.60'
+  stress_max_drawdown:
+    operator: <=
+    value: '0.10'
+  stress_profit_factor:
+    operator: '>'
+    value: '1.00'
+  stress_return:
+    operator: '>'
+    value: '0'
+  traded_folds:
+    operator: '>='
+    value: 3
+preregistration_digest: 13ff1f1663da80e875e8fd42fc88a582cccabaa08737af6dc240c518c7a9325f
+schema_version: 1

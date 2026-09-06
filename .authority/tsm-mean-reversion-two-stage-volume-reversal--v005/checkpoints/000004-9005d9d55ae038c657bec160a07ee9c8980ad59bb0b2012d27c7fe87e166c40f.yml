@@ -1,0 +1,6 @@
+created_at: '2026-09-05T07:46:19.619288Z'
+event_digest: 9005d9d55ae038c657bec160a07ee9c8980ad59bb0b2012d27c7fe87e166c40f
+previous_checkpoint_digest: 42874b4487ae65b79e078c90145e2646e7915af1b8b41e1d552816a6092961f8
+schema_version: 1
+sequence: 4
+study_id: tsm-mean-reversion-two-stage-volume-reversal--v005
