@@ -38,6 +38,7 @@
 ### 研究專案與參考資源
 
 - [`studies/`](strategy-forward-replication-research--v001/studies)：**策略研究專案庫**。保存每一個策略研究的完整歷程（如台積電 ADR 或中國 ETF 策略），每個專案內部都各自維護不可竄改的事件鏈與證據檔案。
+- [`../historical-evaluation-artifacts/`](../historical-evaluation-artifacts/)：**正式 Historical Evaluation 結果庫**。新的正式評估與 Terminal Evidence 依 Study ID 分目錄保存；Writer 與 Validator 使用相同的 repository-relative path，既有 Study 的舊 evidence 路徑則原地保留並繼續支援。
 - [`tests/`](strategy-forward-replication-research--v001/tests)：**自動化測試套件**。包含指標計算、寫入恢復、政策合規與端到端完整流程的測試。
 - [`examples/`](strategy-forward-replication-research--v001/examples)：**填寫範例**。提供預先登記（Preregistration）與原始資料包（Source Bundle）的格式範本，供新研究起手參考。
 - [`reference/`](strategy-forward-replication-research--v001/reference)：**參考指南與手冊**。包含研究流程的操作規範指引與最小可執行研究的說明文件。
@@ -61,6 +62,7 @@ studies/
 - **`events/`（事件鏈，唯一事實來源）**：存放以規範化格式依序記錄的研究事件（如 `000001-study-created.yml`、`000007-candidate-frozen.yml`；序號會隨前面已發布的事件而變動）。第一個事件的 `previous_event_digest` 是 `null`，作為事件鏈的起點；從第二個事件起才會填入前一個事件的 SHA-256 數位指紋，串接成不可更動的事件鏈（Hash Chain）。若有人事後偷偷修改或調換事件順序，驗證工具會立即偵測出指紋斷裂並拒絕後續操作。
 - **`manifests/`（研究規格清單）**：存放研究在執行前預先凍結的規格定義（如 `preregistration.yml` 記錄策略假說與進退場規則、`candidate-definition.yml` 記錄策略參數、`qualification-spec.yml` 記錄篩選門檻、`source-bundle.yml` 鎖定策略程式碼的確切版本指紋），確保研究絕不會在看過回測結果後「事後偷改規則」。
 - **`evidence/`（執行佐證檔案）**：存放策略在開發與驗證過程中所產生的實際數據證據（如 `development.yml`、`selection-evidence.yml`）。不同階段的綁定內容不完全相同：`development.yml` 會直接記錄 warmup 與 development 資料的 digest，`selection-evidence.yml` 主要記錄選擇規則 digest；provenance 與授權檔案則記錄資料角色、控制項與聲明。Validator 會透過事件和其他 frozen inputs 交叉驗證，不是每一份 evidence 都直接包含資料快照 digest。
+- **`historical-evaluation-artifacts/<study-id>/`（正式結果佐證）**：保存新的 `historical-evaluation.yml`、可選的詳細報告與 `terminal-evidence.yml`。這些檔案位於 Workflow Package 外，但仍在同一個 repository 內；Event 保存完整路徑與 digest，Validator 會重新計算結果，不接受檔案自行宣稱的 pass/fail。
 - **`journals/`（兩階段寫入日誌）**：每次 Study operation 在發布前先準備 canonical YAML、確切 bytes 與 digest，再以 operation journal 固定待發布內容；正式發布依 `evidence → event → authority checkpoint` 順序完成。若中斷，必須執行 writer 的 `recover` 指令，而且只能完成同一 journal 內已凍結的 bytes，不會自行更換輸入；完成後再原子重建 `study.yml`，避免留下損壞的半成品檔案。
 - **`study.yml`（現況投影摘要）**：由寫入工具根據 `events/` 及事件引用的 frozen artifacts 彙整生成最新狀態投影檔（Projection），提供人類與腳本快速查閱目前研究推進到哪一個階段。此檔案不是事實來源；只要事件與其引用資料仍完整，刪除後即可由 validator 重算，或由 writer 驗證後重新寫回，避免手動編輯造成狀態矛盾。
 - **`implementation-contract.yml`（部分 Study 使用）**：固定策略引擎、指標計算與執行語意的實作契約，讓研究結果可以依同一組明確規則重現；沒有這份檔案的 Study，相關內容可能已由其他 manifest 或 source bundle 綁定。

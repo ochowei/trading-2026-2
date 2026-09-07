@@ -57,11 +57,14 @@ Canonicalize 後執行：
 
 以輸出的 `failures` 決定 event payload disposition。接著：
 
-1. guarded writer `publish-artifact` 至 `evidence/historical-evaluation.yml`；
+1. guarded writer `publish-artifact` 至
+   `historical-evaluation-artifacts/<study-id>/historical-evaluation.yml`；
 2. 產生只含 `artifact_path`、`artifact_digest`、`disposition` 的 canonical payload；
 3. guarded writer 追加 `historical-evaluation-completed`；
 4. guarded writer `validate`，確認 Historical Evaluation event 已追加、current event 正確、重算 disposition 一致。
-5. 依同一份 validator disposition 產生並發布 `terminal-evidence.yml`，追加 `study-terminal`，再 validate 確認 Study 已 terminal；不得新增其他結果階段。
+5. 依同一份 validator disposition 產生並發布
+   `historical-evaluation-artifacts/<study-id>/terminal-evidence.yml`，追加
+   `study-terminal`，再 validate 確認 Study 已 terminal；不得新增其他結果階段。
 
 如果正式 artifact path 已存在，不得覆寫。先確認它是否為本次同一 operation 的 exact bytes；否則停止並調查。
 

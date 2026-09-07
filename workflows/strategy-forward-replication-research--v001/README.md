@@ -1,8 +1,8 @@
 # Strategy Forward Replication Research v001
 
-這是一個自包含的美國股票日線回溯研究 Workflow Package。規則、schemas、policies、validator、guarded writer、tests、reference docs 與 Studies 都位於本目錄；大型或敏感 raw artifacts 以 Evidence Manifest 引用外部 content-addressed storage。
+這是一個自包含的美國股票日線回溯研究 Workflow Package。規則、schemas、policies、validator、guarded writer、tests、reference docs 與 Studies 都位於本目錄；正式 Historical Evaluation 與 Terminal Evidence 由 Writer 發布到 repository 根目錄的 `historical-evaluation-artifacts/<study-id>/`，其他階段 artifact 仍在 Study 內保存。
 
-v001 Lifecycle 調整已由 Trusted Approver `william` 於 2026-09-04 核准啟用。正式研究應直接使用正式 writer，不得加上 `--allow-draft`；如果 `release.yml` 缺失、內容損壞，或與 release manifest、測試報告不一致，writer 會拒絕操作。
+v001 Lifecycle 調整與 Historical Evaluation artifact store 整合已由 Trusted Approver `william` 於 2026-09-07 核准啟用。正式研究應直接使用正式 writer，不得加上 `--allow-draft`；如果 `release.yml` 缺失、內容損壞，或與 release manifest、測試報告不一致，writer 會拒絕操作。
 
 ## 使用方式
 
@@ -14,7 +14,7 @@ uv run pytest -q workflows/strategy-forward-replication-research--v001/tests
 uv run ruff check workflows/strategy-forward-replication-research--v001
 ```
 
-Study 會建立在本 package 的 `studies/<study-id>/`。本機 authority root 必須另外指定；它保存每次事件發布後的 head checkpoint，用來發現事件被意外刪除或退回舊版本。它不依賴 Git，也不需要網路或券商連線。
+Study 會建立在本 package 的 `studies/<study-id>/`。本機 authority root 必須另外指定；它保存每次事件發布後的 head checkpoint，用來發現事件被意外刪除或退回舊版本。Historical Evaluation 的正式結果則由 Writer 以不可覆寫方式保存到 `historical-evaluation-artifacts/<study-id>/`，再由 Validator 依 Event 內的 repository-relative path 驗證。它不依賴 Git，也不需要網路或券商連線。
 
 正式 writer 只接受已有 `release-manifest.yml`，且經 trusted approver 建立有效 `release.yml` 的版本。`--allow-draft` 只供尚未發布版本的開發與測試，不能用來建立正式研究。
 

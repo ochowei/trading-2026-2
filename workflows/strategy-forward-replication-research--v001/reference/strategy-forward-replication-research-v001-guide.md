@@ -84,6 +84,10 @@ python -m writer.cli --authority-root <authority-root> validate ...
 python -m writer.cli --authority-root <authority-root> recover ...
 ```
 
+新的 Historical Evaluation 與 Terminal Evidence 要發布到
+`historical-evaluation-artifacts/<study-id>/...`；其他 manifests 與 Development evidence
+仍使用 Study 目錄內的相對路徑。既有事件若引用 `evidence/...`，Validator 仍會依舊路徑驗證。
+
 `--allow-draft` 只供 tests 和 release preparation。正式 writer 沒有有效 `release.yml` 時會拒絕操作。
 
 ## Release 與後續修改

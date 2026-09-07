@@ -20,10 +20,13 @@ def test_historical_evaluation_pass_requires_terminal(workflow_root: Path, tmp_p
     study_id = "passing-study"
     advance_to_candidate(study_service, study_id)
 
-    evaluation_path, evaluation_digest = study_service.publish_artifact(
+    evaluation_path, evaluation_digest = study_service.publish_historical_evaluation_artifact(
         study_id,
-        "evidence/historical-evaluation.yml",
+        "historical-evaluation.yml",
         evaluation_evidence(),
+    )
+    assert evaluation_path == (
+        "historical-evaluation-artifacts/passing-study/historical-evaluation.yml"
     )
     study_service.append_event(
         study_id,
@@ -50,10 +53,13 @@ def test_historical_evaluation_pass_requires_terminal(workflow_root: Path, tmp_p
             study_service.append_event(study_id, event_type, "same-person", {})
 
     terminal_value = terminal_evidence(before_terminal, "pass", [])
-    terminal_path, terminal_digest = study_service.publish_artifact(
+    terminal_path, terminal_digest = study_service.publish_historical_evaluation_artifact(
         study_id,
-        "evidence/terminal-evidence.yml",
+        "terminal-evidence.yml",
         terminal_value,
+    )
+    assert terminal_path == (
+        "historical-evaluation-artifacts/passing-study/terminal-evidence.yml"
     )
     study_service.append_event(
         study_id,

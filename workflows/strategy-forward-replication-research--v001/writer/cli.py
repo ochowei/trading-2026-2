@@ -25,6 +25,12 @@ from writer.service import StudyService  # noqa: E402
 def parser() -> argparse.ArgumentParser:
     result = argparse.ArgumentParser(description="strategy-forward-replication-research v001")
     result.add_argument("--workflow-root", type=Path, default=WORKFLOW_PACKAGE_ROOT)
+    result.add_argument(
+        "--repository-root",
+        type=Path,
+        default=None,
+        help="repository 根目錄；預設由 workflow package 位置推導",
+    )
     result.add_argument("--authority-root", type=Path, required=True)
     result.add_argument("--allow-draft", action="store_true")
     commands = result.add_subparsers(dest="command", required=True)
@@ -88,7 +94,12 @@ def _error_payload(args: argparse.Namespace, error: WorkflowError) -> dict[str, 
 def main() -> int:
     args = parser().parse_args()
     try:
-        service = StudyService(args.workflow_root, args.authority_root, allow_draft=args.allow_draft)
+        service = StudyService(
+            args.workflow_root,
+            args.authority_root,
+            repository_root=args.repository_root,
+            allow_draft=args.allow_draft,
+        )
         if args.command == "create":
             digest = service.create_study(
                 args.study_id,

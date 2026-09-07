@@ -16,7 +16,7 @@ from .artifacts import (
 from .canonical_yaml import canonical_bytes, canonical_digest, load_canonical
 from .errors import IntegrityError, TransitionError, ValidationError
 from .metrics import validate_study_gates
-from .paths import resolve_inside
+from .paths import resolve_inside, validate_repository_relative_path
 from .schema_validation import SHA256_PATTERN, SchemaStore
 
 EVENT_FILE_PATTERN = re.compile(r"^(?P<sequence>[0-9]{6})-(?P<event>[a-z0-9-]+)\.yml$")
@@ -98,13 +98,37 @@ class StudyProjection:
 
 
 class WorkflowRules:
-    def __init__(self, workflow_root: Path | str):
-        self.root = Path(workflow_root)
+    def __init__(self, workflow_root: Path | str, *, repository_root: Path | str | None = None):
+        self.root = Path(workflow_root).resolve()
+        self.repository_root = (
+            Path(repository_root).resolve()
+            if repository_root is not None
+            else (
+                self.root.parent.parent
+                if self.root.parent.name == "workflows"
+                else self.root.parent
+            )
+        )
         self.workflow = load_canonical(self.root / "workflow.yml")
         self.state_machine = load_canonical(self.root / self.workflow["state_machine_path"])
         self.floors = load_canonical(self.root / self.workflow["workflow_floors_path"])
         self.evidence_requirements = load_canonical(
             self.root / self.workflow["evidence_requirements_path"]
+        )
+        configured_store_path = self.workflow["storage"].get(
+            "historical_evaluation_artifacts_path"
+        )
+        if not isinstance(configured_store_path, str):
+            raise ValidationError(
+                "Workflow storage 必須設定 historical_evaluation_artifacts_path"
+            )
+        self.historical_evaluation_artifacts_path = validate_repository_relative_path(
+            configured_store_path
+        ).as_posix()
+        self.historical_evaluation_artifacts_root = resolve_inside(
+            self.repository_root,
+            self.historical_evaluation_artifacts_path,
+            must_exist=False,
         )
         self.schema_store = SchemaStore(self.root / "schemas")
         self.schema_store.validate("workflow.schema.yml", self.workflow)
@@ -126,6 +150,24 @@ def _digest(value: Any, field_name: str) -> str:
     if not isinstance(value, str) or SHA256_PATTERN.fullmatch(value) is None:
         raise ValidationError(f"{field_name} 必須是 SHA-256")
     return value
+
+
+def _verified_artifact(
+    study_root: Path,
+    rules: WorkflowRules,
+    relative_path: str,
+    expected_digest: str,
+    *,
+    allow_historical_evaluation_store: bool = False,
+) -> tuple[Path, Any]:
+    return verified_artifact(
+        study_root,
+        relative_path,
+        expected_digest,
+        repository_root=rules.repository_root,
+        historical_evaluation_artifacts_path=rules.historical_evaluation_artifacts_path,
+        allow_historical_evaluation_store=allow_historical_evaluation_store,
+    )
 
 
 def _event_source(projection: StudyProjection) -> str | None:
@@ -162,14 +204,20 @@ def _expected_terminal_bindings(projection: StudyProjection) -> dict[str, str]:
 
 def _validate_reference(
     study_root: Path,
+    rules: WorkflowRules,
     payload: dict[str, Any],
     *,
     path_field: str = "evidence_path",
     digest_field: str = "evidence_digest",
+    allow_historical_evaluation_store: bool = False,
 ) -> tuple[Path, Any]:
     _require(payload, path_field, digest_field)
-    return verified_artifact(
-        study_root, payload[path_field], _digest(payload[digest_field], digest_field)
+    return _verified_artifact(
+        study_root,
+        rules,
+        payload[path_field],
+        _digest(payload[digest_field], digest_field),
+        allow_historical_evaluation_store=allow_historical_evaluation_store,
     )
 
 
@@ -192,8 +240,9 @@ def _validate_event_semantics(
         ):
             raise ValidationError("Study identity 必須指定 Historical Evaluation 執行者")
         _require(payload, "source_bundle_path", "source_bundle_digest")
-        source_path, source_bundle = verified_artifact(
+        source_path, source_bundle = _verified_artifact(
             study_root,
+            rules,
             payload["source_bundle_path"],
             payload["source_bundle_digest"],
         )
@@ -213,6 +262,7 @@ def _validate_event_semantics(
     if event_type == "preregistration-approved":
         path, preregistration = _validate_reference(
             study_root,
+            rules,
             payload,
             path_field="preregistration_path",
             digest_field="preregistration_digest",
@@ -227,7 +277,7 @@ def _validate_event_semantics(
         return
 
     if event_type == "development-authorized":
-        _validate_reference(study_root, payload)
+        _validate_reference(study_root, rules, payload)
         return
 
     if event_type == "trial-recorded":
@@ -252,11 +302,15 @@ def _validate_event_semantics(
                 "development_evidence_path",
                 "development_evidence_digest",
             )
-            inputs_path, inputs = verified_artifact(
-                study_root, payload["inputs_path"], payload["inputs_digest"]
-            )
-            evidence_path, evidence = verified_artifact(
+            inputs_path, inputs = _verified_artifact(
                 study_root,
+                rules,
+                payload["inputs_path"],
+                payload["inputs_digest"],
+            )
+            evidence_path, evidence = _verified_artifact(
+                study_root,
+                rules,
                 payload["development_evidence_path"],
                 _digest(payload["development_evidence_digest"], "development_evidence_digest"),
             )
@@ -314,7 +368,12 @@ def _validate_event_semantics(
         status = payload["status"]
         if status not in PROVENANCE_DISPOSITIONS:
             raise ValidationError("未知 provenance status")
-        verified_artifact(study_root, payload["artifact_path"], payload["artifact_digest"])
+        _verified_artifact(
+            study_root,
+            rules,
+            payload["artifact_path"],
+            payload["artifact_digest"],
+        )
         projection.provenance_status = status
         projection.pending_terminal_outcome = PROVENANCE_DISPOSITIONS[status]
         return
@@ -357,8 +416,9 @@ def _validate_event_semantics(
             raise ValidationError("Baseline 必須符合 preregistered simpler rule")
         if payload["trial_registry_digest"] != projection.trial_registry_digest:
             raise IntegrityError("Candidate Freeze 沒有綁定同一 frozen registry")
-        _, selection_evidence = verified_artifact(
+        _, selection_evidence = _verified_artifact(
             study_root,
+            rules,
             payload["selection_evidence_path"],
             payload["selection_evidence_digest"],
         )
@@ -384,8 +444,9 @@ def _validate_event_semantics(
             "fold_inventory_digest",
         ):
             _digest(payload[name], name)
-        _, snapshot_set = verified_artifact(
+        _, snapshot_set = _verified_artifact(
             study_root,
+            rules,
             payload["snapshot_set_path"],
             payload["snapshot_set_digest"],
         )
@@ -405,7 +466,12 @@ def _validate_event_semantics(
         return
 
     if event_type == "historical-evaluation-completed":
-        path, evidence = _validate_reference(study_root, payload)
+        path, evidence = _validate_reference(
+            study_root,
+            rules,
+            payload,
+            allow_historical_evaluation_store=True,
+        )
         rules.schema_store.validate("historical-evaluation.schema.yml", evidence)
         assert projection.preregistration is not None
         gates = dict(rules.floors["historical_evaluation"])
@@ -469,10 +535,12 @@ def _validate_event_semantics(
             raise ValidationError("Terminal outcome 不合法")
         if projection.pending_terminal_outcome != outcome:
             raise ValidationError("Terminal outcome 與前一階段重算 disposition 不一致")
-        _, terminal = verified_artifact(
+        _, terminal = _verified_artifact(
             study_root,
+            rules,
             payload["terminal_evidence_path"],
             payload["terminal_evidence_digest"],
+            allow_historical_evaluation_store=True,
         )
         rules.schema_store.validate("terminal-evidence.schema.yml", terminal)
         if terminal["outcome"] != outcome:
