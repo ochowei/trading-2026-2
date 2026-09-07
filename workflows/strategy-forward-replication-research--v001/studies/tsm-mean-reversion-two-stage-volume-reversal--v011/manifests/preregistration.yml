@@ -1,0 +1,305 @@
+baseline_definition:
+  baseline_id: tsm-mean-reversion-two-stage-baseline-v011
+  candidate_family: tsm-mean-reversion-two-stage-calibrated-volume-v011
+  execution_is_identical: true
+  family: simple-mean-reversion
+  objectively_simpler_because: 只要求收盤價低於 20 日均線至少 1.5% 且 RSI(2) 不高於 50，移除候選的成交量先行與訊號日方向條件；成交、成本、風險預算、停損、停利、持有期與冷卻規則完全相同。
+  simpler_rule: adjusted Close <= SMA(20) * (1 - 0.015) 且 RSI(2) <= 50，不使用成交量先行或訊號日方向條件。
+complete_candidate_family:
+  - tsm-mr-two-stage-calibrated-volume-v011
+eligibility_rules:
+  accepted_signal:
+    cooldown:
+      clock_anchor: completed-position-exit
+      minimum_completed_session_steps_after_exit: 5
+      position_must_be_flat: true
+    decision_time: completed-session-close
+    indicator_contract:
+      rsi_formula: simple-rolling-mean
+      rsi_not_ready: null
+      volume_lead_is_disabled_for_candidate: false
+    mean_reversion:
+      close_vs_sma20_gap_minimum: '0.015'
+      close_vs_sma20_operator: '>='
+      rsi_length: 2
+      rsi_operator: <=
+      rsi_value: '50'
+      sma_length: 20
+    price_direction_confirmation:
+      close_above_prior_close: true
+    symbol: TSM
+    two_stage_confirmation:
+      delayed_confirmation: first_close_above_prior_close_and_below_sma20
+      enabled: true
+      qualification_valid_sessions: 3
+      qualification_validity_boundary: qualification_session_through_qualification_session_plus_three_sessions_inclusive
+      same_day_confirmation: v009_same_day_signal_is_retained
+      waiting_state: new_qualification_ignored_without_reset_or_extension
+    volume_leads_price:
+      enabled: true
+      prior_session_window: 5
+      volume_average_length: 20
+      volume_ratio_operator: '>='
+      volume_ratio_value: '1.05'
+      volume_shock_is_before_signal: true
+  challenge_plan:
+    cash-benchmark:
+      gate: 候選 base 與 stress return 均嚴格大於 0，亦即嚴格勝過零報酬現金。
+    delayed-entry:
+      gate: 延後一個 XNYS session 進場後，base/stress return > 0、profit factor > 1、stress drawdown <= 10%、單筆實現虧損 <= 4%。
+      perturbation: 原 next-open 改成再晚一個 session open。
+    exposure-matched-random-entry:
+      family_adjustment: Bonferroni 使用完整候選 family 數一個，未調整與調整後 p-value 都必須 <= 0.10。
+      gate: 候選 stress return 必須嚴格高於至少 90% 的隨機結果。
+      repetitions: 10000
+      seed: 20260904
+    higher-costs:
+      gate: return > 0、profit factor > 1、maximum drawdown <= 10%、單筆實現虧損 <= 4%。
+      per_side_fee_bps: '4'
+      per_side_slippage_bps: '40'
+    market-regime:
+      definition: 以每個 fold 內已完成 session 的 adjusted Close 相對 SMA(20) 分為 above 與 at-or-below。
+      gate: 兩種 regime 均至少一筆完成交易、stress 合計 PnL >= 0，且整體 stress gates 仍通過。
+    missed-orders:
+      drop_probability: '0.10'
+      gate: 1000 組固定亂數路徑中，第 5 百分位 return > 0、中位 profit factor > 1、maximum drawdown <= 10%、單筆實現虧損 <= 4%。
+      repetitions: 1000
+      seed: 20260905
+    parameter-perturbation:
+      full_family_selection_adjustment: 與 exposure-matched random-entry 共用完整 family 與 Bonferroni gate，不得只報未調整 p-value。
+      gate: 六個預先登記的單一參數變體各自 base/stress return > 0、profit factor > 1、stress drawdown <= 10%、單筆實現虧損 <= 4%，且 family adjustment 通過；任一失敗即本 challenge 失敗。
+      mean_reversion_gap_variants:
+        - '0.010'
+        - '0.020'
+      rsi_variants:
+        - 45
+        - 55
+      volume_ratio_variants:
+        - '1.00'
+        - '1.15'
+    simpler-family-baseline:
+      gate: 候選 base 與 stress return 均嚴格高於已凍結、相同風險預算的簡單均值回歸 baseline。
+    worse-fills:
+      gate: return > 0、profit factor > 1、maximum drawdown <= 10%、單筆實現虧損 <= 4%。
+      rule: 在 stress 成本外，entry 再不利 10 bps、exit 再不利 10 bps；gap 仍按實際 open，stop/target 同觸仍 stop-first。
+  costs:
+    base:
+      fee_per_side_bps: '1'
+      slippage_per_side_bps: '5'
+    stress:
+      fee_per_side_bps: '2'
+      slippage_per_side_bps: '20'
+  development_diagnostics:
+    block_bootstrap:
+      block_lengths:
+        - 3
+        - 5
+      maximum_stress_drawdown_above_10pct_ratio: '0.10'
+      minimum_stress_positive_return_ratio: '0.80'
+      repetitions: 50000
+      seed: 20260902
+      seed_application: exact-same-seed-for-each-block-length
+    calendar_block_bootstrap:
+      block_sessions:
+        - 63
+        - 126
+      maximum_stress_drawdown_above_10pct_ratio: descriptive-only
+      repetitions: 10000
+      seed: 20260906
+      seed_application: exact-same-seed-for-each-block-length
+    leave_one_signal_year_out:
+      maximum_stress_drawdown: '0.10'
+      minimum_stress_profit_factor: '1.00'
+      minimum_stress_return: '0'
+    signal_year_breakdown: true
+  development_gates:
+    base_profit_factor:
+      operator: '>'
+      value: '1.10'
+    base_return:
+      operator: '>'
+      value: '0'
+    completed_trades:
+      operator: '>'
+      value: 29
+    maximum_realized_trade_loss_fraction:
+      operator: <=
+      value: '0.04'
+    maximum_stress_block_bootstrap_drawdown_above_10pct_ratio:
+      operator: <=
+      value: '0.10'
+    maximum_stress_leave_one_year_out_drawdown:
+      operator: <=
+      value: '0.10'
+    minimum_stress_block_bootstrap_positive_return_ratio:
+      operator: '>='
+      value: '0.80'
+    minimum_stress_leave_one_year_out_profit_factor:
+      operator: '>'
+      value: '1.00'
+    minimum_stress_leave_one_year_out_return:
+      operator: '>'
+      value: '0'
+    stress_maximum_drawdown:
+      operator: <=
+      value: '0.10'
+    stress_profit_factor:
+      operator: '>'
+      value: '1.00'
+    stress_return:
+      operator: '>'
+      value: '0'
+    traded_years:
+      operator: '>='
+      value: 3
+  execution:
+    drawdown_definition:
+      formal_gate: stress_maximum_drawdown
+      formal_gate_semantics: 只由已完成交易 PnL 累積的 realized trade-equity curve 計算。
+      mark_to_market_diagnostic: 每個持倉 session 以當日 Low 的成本後可清算價估值；這個診斷不改變 formal gate。
+    entry: 下一個 XNYS session open，以 MARKET proposal 模擬。
+    gap_fill: stop gap 以較差 open、target gap 以 open 價格改善成交，再套用成本。
+    holding_period: 進場 session 算第一個完整 session；完成第 10 個 session 後於下一 open 退出。
+    intrabar_ambiguity: target 與 stop 同 session 觸及時先算 stop。
+    position_sizing:
+      cash_cap: 不得超過可用現金，不借款、不加碼、最多一個部位。
+      modeled_stop_loss: 以 raw entry 的 -4% stop，納入指定成本模型的進出場滑價與費用。
+      risk_fraction_of_pre_entry_equity: '0.02'
+      shares: 同時符合現金上限與 stop 風險預算的最大整數股數。
+    signal_state:
+      delayed_confirmation: 第一次收盤高於前一日且低於當日 SMA(20)。
+      qualification: 收盤低於 SMA(20) 至少 1.5%、RSI(2) <= 50，且前五個交易日內量比至少 1.05。
+      qualification_valid_sessions: 3
+      qualification_validity_boundary: 資格日以及其後第一、第二、第三個 XNYS session 收盤，含資格日共四個檢查日。
+      requalification_after_expiry: 逾期後才可依當日條件重新建立，不回溯、不延長舊資格。
+      same_day_confirmation: 保留 v009 同日訊號；同一資格最多排程一次下一開盤進場。
+      waiting_conflict_order: 先處理持倉退出、再處理既有確認／資格失效，最後才建立新資格；持倉或冷卻中不建立資格。
+    stop:
+      level_from_raw_entry_open: '-0.040'
+      order: STOP_MARKET
+      time_in_force: GTC
+    target:
+      level_from_raw_entry_open: '0.040'
+      order: LIMIT
+      reissued_each_open_position_session: true
+      time_in_force: DAY
+  fixed_quality_floor:
+    base_profit_factor:
+      operator: '>'
+      value: '1.10'
+    rationale: PF 低於此線代表扣除成本後的獲利交易不足以支持穩定性主張；stress PF 與回撤底線則檢查成本與路徑風險，而非只看單一累積報酬。
+    stress_maximum_drawdown:
+      operator: <=
+      value: '0.10'
+    stress_profit_factor:
+      operator: '>'
+      value: '1.00'
+  gate_policy: Development gates 或本輪預先登記的三項 research targets 任一失敗即否證假說並終止 Study；不得為了 candidate freeze 放寬門檻、追加候選或搜尋有效期參數。
+  mechanism_ablation:
+    arms:
+      price_only:
+        close_above_prior_close: true
+        volume_lead_enabled: false
+      simple_baseline:
+        close_above_prior_close: false
+        volume_lead_enabled: false
+      two_stage_candidate:
+        close_above_prior_close: true
+        delayed_confirmation: true
+        volume_lead_enabled: true
+      volume_only:
+        close_above_prior_close: false
+        volume_lead_enabled: true
+    execution_is_identical: true
+    fixed_before_development: true
+    selection_use: descriptive-diagnostic-only
+  reference_controls:
+    data_comparability:
+      acquisition_manifest_digest: f22063efc0264a093063e7b6b347d513f3c587a9689c2755d0ae4ac3555a2d37
+      development_view_digest: 4e443b4c7db125967ef936d615b6d2283da8ba0bccc62239a5770daf176eccc3
+      method: identical_shared_source_snapshot_and_XNYS_warmup_development_boundaries
+      snapshot_set_digest: b01ad417a536f0299f456fceeaf0370c1745654b52d53c87fe509974977105f0
+      warmup_view_digest: 81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847
+    v007:
+      candidate_completed_trades: 25
+      development_evidence_digest: bc88188fd1c7b629cb8531c2a2a1f89153414c4685d14bea25f0f630f8f00953
+      reference_study: tsm-mean-reversion-two-stage-volume-reversal--v007
+    v009:
+      candidate_completed_trades: 24
+      development_evidence_digest: d8f51a7a1f2f5024d1a778fd5c0d42a70b549aa258723869b2a4567cfee4a618
+      reference_study: tsm-mean-reversion-two-stage-volume-reversal--v009
+    v010:
+      candidate_completed_trades: 29
+      development_evidence_digest: 155ed4173455746a3fc44d1ea5ce144b4381f1e20eef890d201e5bb67601262a
+      reference_study: tsm-mean-reversion-two-stage-volume-reversal--v010
+  research_targets:
+    delayed_added_post_cost_positive:
+      operator: '>'
+      require_both_cost_models: true
+      scope: candidate_added_trades_with_delayed_confirmation_and_false_v009_same_day_signal_at_confirmation
+    higher_cost_return_above_v009:
+      comparison: cumulative_return_using_unrounded_pnl
+      cost_model: stress
+      operator: '>'
+      reference_candidate_id: tsm-mr-two-stage-calibrated-volume-v009
+      reference_study: tsm-mean-reversion-two-stage-volume-reversal--v009
+    trade_count_above_v010:
+      operator: '>'
+      reference_candidate_id: tsm-mr-two-stage-calibrated-volume-v010
+      reference_completed_trades: 29
+      reference_study: tsm-mean-reversion-two-stage-volume-reversal--v010
+  source_and_adjustment:
+    adjustment_policy: Yahoo auto_adjust，OHLC 全部使用同一調整基礎。
+    calendar: XNYS
+    interval: 1d
+    provider: yahoo
+    timezone: America/New_York
+evaluation_gates:
+  base_compounded_return:
+    operator: '>'
+    value: '0'
+  base_profit_factor:
+    operator: '>'
+    value: '1.10'
+  completed_trades:
+    operator: '>='
+    value: 20
+  family_wise_confidence:
+    operator: '>='
+    value: '0.90'
+  maximum_fold_positive_profit_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_fold_trade_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_realized_trade_loss_fraction:
+    operator: <=
+    value: '0.04'
+  positive_traded_fold_ratio:
+    operator: '>='
+    value: '0.60'
+  stress_max_drawdown:
+    operator: <=
+    value: '0.10'
+  stress_profit_factor:
+    operator: '>'
+    value: '1.00'
+  stress_return:
+    operator: '>'
+    value: '0'
+  traded_folds:
+    operator: '>='
+    value: 3
+fold_warmup_sessions: 25
+hypothesis: TSM 出現具有成交量確認的短線跌深後，未來三個交易日內首次收盤回升，仍可能具有均值回歸機會。主候選把「跌深資格」與「止跌確認」拆成前後兩個階段：資格日收盤低於 20 日均線至少 1.5%、RSI(2) 不高於 50，且前五個 XNYS 交易日內符合 v009 的 1.05 倍成交量確認；保留 v009 同日收盤回升，若當日未確認則資格保留到後續第三個交易日收盤，期間第一次收盤高於前一天且仍低於當日 20 日均線時於下一交易日開盤進場。等待中的新資格不重設或延長，每次資格最多使用一次，只有空倉且已滿足五日冷卻才能建立資格；資格逾期或使用後清除。三日有效期是本輪事先指定的唯一設定，不放寬其他門檻、不搜尋有效期最佳參數。v009 作為執行規則一致的機制控制組，v010 的 Development 29 筆作為交易數比較對象；另保留 workflow 要求的簡單均值回歸 baseline。若候選交易數未嚴格超過 v010、stress 成本模型下累積報酬未嚴格高於 v009，或延後確認且不符合原 v009 同日訊號的新增交易在 base 與 stress 成本後合計損益未同時為正，即否證本輪主張。訊號、資料分段、年度邊界、資格失效後重新建立、交易衝突順序、部位大小、成本、停損停利、跳空、同日 stop/target 與十個完整交易日持有規則均在本文件固定。
+initial_cash: '100000'
+maximum_holding_sessions: 11
+maximum_trials: 1
+selection_rule:
+  eligible_candidate: 唯一 Trial 必須通過全部 Development gates 與三項預先登記的 research targets；任一未通過時 candidate_available=false 並終止，不追加 Trial。
+  family_selection_adjustment: 完整 family 僅有預先指定的一個 Trial；Evaluation random-entry 仍須以 family size 1 完成 Bonferroni adjustment。
+  method: fixed-single-candidate-no-outcome-ranking
+  selected_candidate_id: tsm-mr-two-stage-calibrated-volume-v011
+tie_handling:
+  method: not-applicable-single-candidate

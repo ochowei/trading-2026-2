@@ -1,0 +1,34 @@
+candidate_freeze: null
+evidence:
+  development: 6eb62f6c642da5e168d0bd67d68773d018ae047df8cf6541132f9c39b84cfb39
+lifecycle:
+  current_event: study-terminal
+  event_chain_head_digest: 1ec3d82335965161a29c5dbb6a74e732ecabdd7731bfb01d9fa319ee254a8310
+  event_count: 6
+  status: terminal
+outcome:
+  authority: none
+  status: fail
+preregistration:
+  digest: 533739cb0af1f2dd8bbd1975e357591dafc9f7907a3fe20affca6853cdff5ae0
+provenance:
+  status: null
+schema_version: 1
+study:
+  identity:
+    experiment_family: tsm-mean-reversion-two-stage-delayed-confirmation-v011
+    historical_evaluation_operator: william
+    research_owner: william
+    research_round_id: strategy-forward-replication-research--v001-tsm-v011
+    source_bundle_digest: ac2dc74af1b2c491246b6fe2c0200bf91d198346c97f2bb400a9ba8119d17e76
+    source_bundle_path: manifests/source-bundle.yml
+  study_id: tsm-mean-reversion-two-stage-volume-reversal--v011
+trial_registry:
+  digest: 74348063537424945e588e6843a84dc1f33cea78ca5ca6ccfe18df69966c96ab
+  recorded_trial_count: 1
+  trial_ids:
+    - tsm-mr-two-stage-calibrated-volume-v011
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: ac2dc74af1b2c491246b6fe2c0200bf91d198346c97f2bb400a9ba8119d17e76
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4

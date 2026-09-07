@@ -1,0 +1,18 @@
+authority: none
+bindings:
+  development_evidence_digest: 6eb62f6c642da5e168d0bd67d68773d018ae047df8cf6541132f9c39b84cfb39
+  event_chain_head_digest: ee2408cc12d7df4b9ce99ce3f9bf9a736ab2c0e01ebdd5ebb865f7a620bf4b58
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  preregistration_digest: 533739cb0af1f2dd8bbd1975e357591dafc9f7907a3fe20affca6853cdff5ae0
+  source_bundle_digest: ac2dc74af1b2c491246b6fe2c0200bf91d198346c97f2bb400a9ba8119d17e76
+  trial_registry_digest: 74348063537424945e588e6843a84dc1f33cea78ca5ca6ccfe18df69966c96ab
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+outcome: fail
+reasons:
+  - Development 的正式 gates 雖然全部通過，但不能覆蓋預先登記的研究目標政策。
+  - higher_cost_return_above_v009 未通過：候選 stress 累積報酬 0.17162021252799239827 低於 v009 的 0.26523169150385627475。
+  - delayed_added_post_cost_positive 未通過：18 筆延後確認新增交易的 base 合計損益為 2772.67126822668084，但 stress 合計損益為 -385.10417433422157。
+  - trade_count_above_v010 通過：候選 35 筆，高於預先登記的 29 筆比較基準。
+  - 未記錄 candidate freeze，且未讀取或執行 Historical Evaluation。
+recomputed: true
+schema_version: 1
