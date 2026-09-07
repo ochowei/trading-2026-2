@@ -16,17 +16,47 @@ import numpy as np
 from .canonical_yaml import canonical_digest, load_canonical
 from .errors import EvidenceUnavailable, IntegrityError, ValidationError
 from .metrics import compare, decimal_value, evaluate_rules
-from .paths import resolve_inside
+from .paths import (
+    is_within_repository_path,
+    resolve_historical_evaluation_artifact,
+    resolve_inside,
+)
 from .schema_validation import SchemaStore
 
 ALLOWED_ORDER_TYPES = {"MARKET", "LIMIT", "STOP_MARKET"}
 
 
 def verified_artifact(
-    study_root: Path, relative_path: str, expected_digest: str
+    study_root: Path,
+    relative_path: str,
+    expected_digest: str,
+    *,
+    repository_root: Path | None = None,
+    historical_evaluation_artifacts_path: str | None = None,
+    allow_historical_evaluation_store: bool = False,
 ) -> tuple[Path, Any]:
     try:
-        path = resolve_inside(study_root, relative_path)
+        in_historical_store = bool(
+            historical_evaluation_artifacts_path
+            and is_within_repository_path(
+                relative_path, historical_evaluation_artifacts_path
+            )
+        )
+        if in_historical_store:
+            if not allow_historical_evaluation_store:
+                raise ValidationError(
+                    "只有 Historical Evaluation 與 Study Terminal 可以引用外部 artifact store"
+                )
+            if repository_root is None or historical_evaluation_artifacts_path is None:
+                raise ValidationError("未設定 Historical Evaluation artifact store root")
+            path = resolve_historical_evaluation_artifact(
+                study_root,
+                repository_root,
+                historical_evaluation_artifacts_path,
+                relative_path,
+            )
+        else:
+            path = resolve_inside(study_root, relative_path)
     except (FileNotFoundError, ValidationError) as exc:
         raise EvidenceUnavailable(f"無法取得 artifact: {relative_path}") from exc
     data = path.read_bytes()

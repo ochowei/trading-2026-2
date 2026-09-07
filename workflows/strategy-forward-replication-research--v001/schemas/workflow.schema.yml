@@ -35,6 +35,12 @@ properties:
     pattern: ^rules/[a-z0-9-]+\.yml$
     type: string
   storage:
+    properties:
+      historical_evaluation_artifacts_path:
+        pattern: ^[a-zA-Z0-9_-]+(?:/[a-zA-Z0-9_-]+)*$
+        type: string
+    required:
+      - historical_evaluation_artifacts_path
     type: object
   title:
     minLength: 1

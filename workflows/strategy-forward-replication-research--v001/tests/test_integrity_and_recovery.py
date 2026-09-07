@@ -8,7 +8,7 @@ from pathlib import Path
 import pytest
 from helpers import DIGESTS, service
 from validator.canonical_yaml import canonical_bytes
-from validator.errors import IntegrityError, ValidationError
+from validator.errors import EvidenceUnavailable, IntegrityError, ValidationError
 from validator.study import PROVENANCE_DISPOSITIONS
 from writer.service import StudyService
 
@@ -191,5 +191,44 @@ def test_projection_cannot_be_used_to_forge_pass(workflow_root: Path, tmp_path: 
 
 def test_artifact_path_cannot_escape_study(workflow_root: Path, tmp_path: Path) -> None:
     study_service = service(workflow_root, tmp_path)
-    with pytest.raises(ValidationError, match="Study 目錄"):
+    with pytest.raises(ValidationError, match="不安全的 repository-relative path"):
         study_service.publish_artifact("path-study", "../outside.yml", {"unsafe": True})
+
+
+def test_historical_evaluation_store_is_repository_relative_and_study_scoped(
+    workflow_root: Path, tmp_path: Path
+) -> None:
+    study_service = service(workflow_root, tmp_path)
+    path, digest = study_service.publish_historical_evaluation_artifact(
+        "store-study", "historical-evaluation.yml", {"value": "frozen"}
+    )
+
+    assert path == "historical-evaluation-artifacts/store-study/historical-evaluation.yml"
+    assert digest
+    assert (
+        tmp_path / path
+    ).read_text(encoding="utf-8") == "value: frozen\n"
+    with pytest.raises(ValidationError, match="目前 Study"):
+        study_service.publish_artifact(
+            "store-study",
+            "historical-evaluation-artifacts/another-study/historical-evaluation.yml",
+            {"value": "wrong-study"},
+        )
+
+
+def test_non_historical_event_cannot_reference_external_store(
+    workflow_root: Path, tmp_path: Path
+) -> None:
+    study_service = service(workflow_root, tmp_path)
+    _create(study_service, "external-reference-study")
+    path, digest = study_service.publish_historical_evaluation_artifact(
+        "external-reference-study", "not-preregistration.yml", {"value": "wrong-stage"}
+    )
+
+    with pytest.raises(EvidenceUnavailable, match="無法取得 artifact"):
+        study_service.append_event(
+            "external-reference-study",
+            "preregistration-approved",
+            "same-person",
+            {"preregistration_path": path, "preregistration_digest": digest},
+        )

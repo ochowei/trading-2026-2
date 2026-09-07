@@ -14,6 +14,12 @@ from validator.canonical_yaml import (
     canonical_digest,
 )
 from validator.errors import IntegrityError, ValidationError
+from validator.paths import (
+    is_within_repository_path,
+    resolve_historical_evaluation_artifact,
+    resolve_inside,
+    validate_repository_relative_path,
+)
 from validator.release import policy_set_digest, validate_release_record, workflow_digest
 from validator.study import WorkflowRules, apply_event, validate_study
 
@@ -28,12 +34,14 @@ class StudyService:
         workflow_root: Path | str,
         authority_root: Path | str,
         *,
+        repository_root: Path | str | None = None,
         allow_draft: bool = False,
     ):
         self.workflow_root = Path(workflow_root).resolve()
         self.authority = AuthorityStore(authority_root)
         self.allow_draft = allow_draft
-        self.rules = WorkflowRules(self.workflow_root)
+        self.rules = WorkflowRules(self.workflow_root, repository_root=repository_root)
+        self.repository_root = self.rules.repository_root
         self.workflow_digest = workflow_digest(self.workflow_root, allow_draft=allow_draft)
         self.policy_set_digest = policy_set_digest(self.workflow_root)
         if not allow_draft:
@@ -44,14 +52,48 @@ class StudyService:
             raise ValidationError("不安全的 study_id")
         return self.workflow_root / "studies" / study_id
 
-    def publish_artifact(self, study_id: str, relative_path: str, value: Any) -> tuple[str, str]:
-        if relative_path.startswith("/") or ".." in Path(relative_path).parts:
-            raise ValidationError("Artifact path 必須位於 Study 目錄內")
+    def _artifact_destination(self, study_id: str, relative_path: str) -> tuple[str, Path]:
         root = self.study_root(study_id)
-        destination = root / relative_path
+        normalized = validate_repository_relative_path(relative_path).as_posix()
+        if is_within_repository_path(
+            normalized, self.rules.historical_evaluation_artifacts_path
+        ):
+            destination = resolve_historical_evaluation_artifact(
+                root,
+                self.repository_root,
+                self.rules.historical_evaluation_artifacts_path,
+                normalized,
+                must_exist=False,
+            )
+        else:
+            destination = resolve_inside(root, normalized, must_exist=False)
+        return normalized, destination
+
+    def publish_artifact(self, study_id: str, relative_path: str, value: Any) -> tuple[str, str]:
+        normalized, destination = self._artifact_destination(study_id, relative_path)
         data = canonical_bytes(value)
         atomic_create(destination, data)
-        return relative_path, canonical_digest(data)
+        return normalized, canonical_digest(data)
+
+    def publish_historical_evaluation_artifact(
+        self, study_id: str, relative_path: str, value: Any
+    ) -> tuple[str, str]:
+        """將正式 Historical Evaluation 相關 artifact 發布到 repository store。"""
+
+        artifact_path = validate_repository_relative_path(relative_path)
+        if is_within_repository_path(
+            artifact_path.as_posix(), self.rules.historical_evaluation_artifacts_path
+        ):
+            raise ValidationError(
+                "publish_historical_evaluation_artifact 只接受 store 內的檔案相對路徑"
+            )
+        store_path = validate_repository_relative_path(
+            self.rules.historical_evaluation_artifacts_path
+        )
+        full_path = "/".join(
+            (*store_path.parts, self.study_root(study_id).name, *artifact_path.parts)
+        )
+        return self.publish_artifact(study_id, full_path, value)
 
     def create_study(
         self,

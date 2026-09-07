@@ -162,9 +162,9 @@ SHA-256 digest（數位指紋），所以不應另建會隨時間變化的 `late
 
 - `development.yml` 或 `development-evidence.yml`：**Development 結果**。保存實際交易、base／stress 指標、bootstrap 或 leave-one-year-out 診斷、每個 gate 的實際值與所有輸入 digest；Development 通過不代表正式 Evaluation 一定通過。
 - `selection-evidence.yml`：**候選選擇證據**。保存完整 candidate family、排序規則與唯一入選 candidate 的可重算依據。
-- `historical-evaluation.yml`：**Historical Evaluation 的原始結果**，通常包含交易與分段資料。
+- `historical-evaluation.yml`：**Historical Evaluation 的原始結果**，通常包含交易與分段資料。新的正式結果位於 repository 根目錄的 `historical-evaluation-artifacts/<study-id>/`；較早 Study 可能仍在 `workflows/.../studies/<study-id>/evidence/`。
 - `historical-evaluation-report.yml`：**Historical Evaluation 的詳細重算報告**，包含結果指標、失敗 gates、輸入綁定與必要的交易明細。
-- `terminal-evidence.yml`：**Study 終止證據**。由完整 frozen inputs 與必要 evidence 重算最終 `fail` 或 `indeterminate`，並說明為何停止；它不是可以手填的狀態欄位。
+- `terminal-evidence.yml`：**Study 終止證據**。新的正式檔案位於 `historical-evaluation-artifacts/<study-id>/`，由完整 frozen inputs 與必要 evidence 重算最終 `fail` 或 `indeterminate`，並說明為何停止；它不是可以手填的狀態欄位。
 - `provenance.yml`：**來源可信狀態證據**。記錄在正式結果揭露前是否受到後段結果影響，以及資料取得時執行了哪些隔離控制。
 - `development-authorization.yml`：**Development 執行授權範圍**，例如只能使用 warmup 與 development role、不得連網。
 - `*-approved.payload.yml`、`*-authorized.payload.yml`、`trial-recorded.payload.yml`、`trial-registry-frozen.payload.yml`、`candidate-frozen.payload.yml`、`historical-evaluation-completed.payload.yml` 與 `study-terminal.payload.yml`：**待發布的事件 payload**。它們保存一次流程操作要發布的欄位與 evidence digest；正式事件鏈仍在 Workflow Package 的 `events/`，不應直接改這些 payload 來改變狀態。

@@ -73,6 +73,7 @@ Python 3.11 project managed with uv.
 * **全域參數**：
   * `--authority-root <path>`（必要）：指定 `<repository-root>/.authority/`，它位於 Study 外但在 repository 內，並保存每次 Event 的 SHA-256 內容指紋。從 `create`、`append`、`recover` 到 `validate` 都必須使用同一個絕對路徑；後續 `validate` 會用它偵測 Event 與 checkpoint 數量或內容不一致。它不是簽章，也不能阻止擁有檔案權限的人直接修改檔案。
   * `--workflow-root <path>`：指定流程套件根目錄（預設是此 CLI 所屬的套件路徑）。路徑錯誤會讓 writer 讀到錯的規則或 release。
+  * `--repository-root <path>`：指定 repository 根目錄；預設由 workflow package 位置推導，用來定位 `historical-evaluation-artifacts/`。若 workflow package 放在非標準目錄，應明確傳入此參數。
   * `--allow-draft`：允許在尚未正式發布核准的草稿版本上進行開發與測試；正式研究不得使用，否則不會受到正式 release 檢查的保護。
 * **子命令與專屬參數**：
   * `create`：正式建立全新研究個案（Study）。
@@ -90,7 +91,7 @@ Python 3.11 project managed with uv.
     * `--payload`：事件資料檔案路徑；內容必須是 canonical YAML（欄位順序與表示方式固定的 YAML），且必須符合該事件的 schema，否則寫入會失敗。
   * `publish-artifact`：發布研究佐證檔案（Artifact，如回測原始數據），並計算其 SHA-256 數位指紋。
     * `--study-id`：目標研究名稱，決定 artifact 寫入哪個 Study。
-    * `--path`：Study 目錄內的目標相對路徑；不能穿越到 Study 外，已存在且內容不同的檔案不會被覆寫。
+    * `--path`：一般 artifact 使用 Study 目錄內的相對路徑；正式 Historical Evaluation 與 Terminal Evidence 使用 `historical-evaluation-artifacts/<study-id>/...` 的 repository-relative path。兩種路徑都不能穿越允許的根目錄，已存在且內容不同的檔案不會被覆寫。
     * `--source`：來源檔案路徑；CLI 會以 canonical YAML 讀取它並重新保存，因此不能直接傳 CSV 或其他任意二進位檔。
   * `validate`：校驗指定研究的事件鏈、引用 artifact 與 authority checkpoint；發現不一致時只回報錯誤，不會替你修正檔案。
     * `--study-id`：要驗證的 Study 名稱；若 Study 不存在，CLI 會輸出結構化 JSON 錯誤並以非零 exit code 結束。

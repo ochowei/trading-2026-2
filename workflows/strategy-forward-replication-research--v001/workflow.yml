@@ -124,6 +124,7 @@ storage:
   authority_checkpoint_required: true
   canonical_format: repository-canonical-yaml-v1
   event_digest_chain_required: true
+  historical_evaluation_artifacts_path: historical-evaluation-artifacts
   large_artifacts_external: true
   mutable_latest_pointer_allowed: false
   studies_path: studies
