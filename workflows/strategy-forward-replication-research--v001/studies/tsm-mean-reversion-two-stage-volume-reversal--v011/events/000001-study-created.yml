@@ -1,0 +1,18 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: ac2dc74af1b2c491246b6fe2c0200bf91d198346c97f2bb400a9ba8119d17e76
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: study-created
+occurred_at: '2026-09-07T09:23:07.311735Z'
+payload:
+  experiment_family: tsm-mean-reversion-two-stage-delayed-confirmation-v011
+  historical_evaluation_operator: william
+  research_owner: william
+  research_round_id: strategy-forward-replication-research--v001-tsm-v011
+  source_bundle_digest: ac2dc74af1b2c491246b6fe2c0200bf91d198346c97f2bb400a9ba8119d17e76
+  source_bundle_path: manifests/source-bundle.yml
+previous_event_digest: null
+schema_version: 1
+sequence: 1
+study_id: tsm-mean-reversion-two-stage-volume-reversal--v011
