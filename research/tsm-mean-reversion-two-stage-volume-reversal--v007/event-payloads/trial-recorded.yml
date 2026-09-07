@@ -1,0 +1,6 @@
+development_evidence_digest: bc88188fd1c7b629cb8531c2a2a1f89153414c4685d14bea25f0f630f8f00953
+development_evidence_path: evidence/development.yml
+inputs_digest: 644167f5cb00864aa4e6fc082b7eb41c089cef25d4120c50b85dfee6c0209a2f
+inputs_path: manifests/development-trial-inputs.yml
+status: completed
+trial_id: tsm-mr-price-reversal-time-decay-v007

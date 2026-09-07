@@ -1,0 +1,5 @@
+ordered_eligible_trial_ids:
+  - tsm-mr-price-reversal-time-decay-v007
+rule_digest: aeafc601bc935b8cd75a2f3e8f89d375a17753b51014218791277e0b15bfa60a
+schema_version: 1
+selected_candidate_id: tsm-mr-price-reversal-time-decay-v007
