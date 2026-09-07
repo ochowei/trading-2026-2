@@ -1,0 +1,6 @@
+candidate_available: true
+complete_family_trial_ids:
+  - tsm-mr-two-stage-calibrated-volume-v010
+maximum_trials: 1
+recorded_trial_count: 1
+trial_registry_digest: cbd7b8888df51c2b3835ba3a96e1fc184ff53c0751526ec0fc88d614f9463721
