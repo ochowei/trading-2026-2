@@ -1,0 +1,15 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: c398153c78b52e3c4cc03e83fa5b97656175507d20101439f5b9883d6549cc12
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: evidence-unavailable
+occurred_at: '2026-09-07T06:51:07.895908Z'
+payload:
+  reason: Source Bundle 內凍結之 run_development.py 在 Development 執行時缺少 PRICE_ONLY_SPEC 符號定義，無法產出 development evidence。
+  stage: development
+  unavailable_path: evidence/development.yml
+previous_event_digest: c4f9bcb3c97a70c70018c582fe86277e856918f6d8d96f9aa84b291698c033d6
+schema_version: 1
+sequence: 4
+study_id: tsm-mean-reversion-two-stage-volume-reversal--v008

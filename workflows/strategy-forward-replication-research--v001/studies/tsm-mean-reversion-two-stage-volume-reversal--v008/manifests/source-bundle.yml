@@ -1,0 +1,28 @@
+files:
+  - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+    path: pyproject.toml
+  - digest: 5089e75da2dd9c9bc15313e4ecc5263174805add99a9ed766cf58b8c2949f792
+    path: research/tsm-mean-reversion-two-stage-volume-reversal--v008/candidate-definition.yml
+  - digest: f22063efc0264a093063e7b6b347d513f3c587a9689c2755d0ae4ac3555a2d37
+    path: research/tsm-mean-reversion-two-stage-volume-reversal--v008/data-snapshot-acquisition.yml
+  - digest: b01ad417a536f0299f456fceeaf0370c1745654b52d53c87fe509974977105f0
+    path: research/tsm-mean-reversion-two-stage-volume-reversal--v008/data-snapshot-set.yml
+  - digest: 0dd74f59377864de43889a9c0b5027065b14ba5f3734b60fc1cde925aef84e98
+    path: research/tsm-mean-reversion-two-stage-volume-reversal--v008/implementation-contract.yml
+  - digest: 61b9a83a7f5bd5b56c15b51010e39490025dba8748fb3fa4b6188251f9fc139f
+    path: research/tsm-mean-reversion-two-stage-volume-reversal--v008/preregistration.yml
+  - digest: 9b6014e7f69e53156346de06ce60dd2813ec5e1445e6cbf0837f1a814d9da4ae
+    path: research/tsm-mean-reversion-two-stage-volume-reversal--v008/qualification-spec.yml
+  - digest: 840be2ba16e7378a7d1b18081f4e999810ec455cd6bb758a56a9e1f816e1b2cb
+    path: research/tsm-mean-reversion-two-stage-volume-reversal--v008/run_development.py
+  - digest: 4e62bcdfd0ba922630ff48df1303088e7abb611a88b7dcf07c24b8259ac5a02f
+    path: research/tsm-mean-reversion-two-stage-volume-reversal--v008/run_historical_evaluation.py
+  - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+    path: src/trading_2026_2/__init__.py
+  - digest: e2f53414042e7b6d47af739b9a2a94b4595c8ef6e30c858d126da5a390a1ada6
+    path: src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v008.py
+  - digest: 3e2386127499299c1515d085f0465181b77a29c819e8be29438f9ce08f02d971
+    path: tests/test_tsm_mean_reversion_two_stage_volume_reversal_v008.py
+  - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+    path: uv.lock
+schema_version: 1

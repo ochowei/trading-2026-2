@@ -1,0 +1,6 @@
+development_evidence_digest: d8f51a7a1f2f5024d1a778fd5c0d42a70b549aa258723869b2a4567cfee4a618
+development_evidence_path: evidence/development.yml
+inputs_digest: 1fd26f79dee85705ea3dbdda007c1070f0efa44f5d7818fd0c5d6ba9b54c7f8e
+inputs_path: manifests/development-trial-inputs.yml
+status: completed
+trial_id: tsm-mr-two-stage-calibrated-volume-v009

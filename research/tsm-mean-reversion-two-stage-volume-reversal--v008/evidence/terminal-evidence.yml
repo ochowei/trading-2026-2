@@ -1,0 +1,14 @@
+authority: none
+bindings:
+  event_chain_head_digest: 10f540a03a744ed2fe8e946e0f67fb6ceb4f77bfb7352cca4b82bf126a6fa885
+  evidence_unavailable_digest: 4a4482f2a166bec0cc363043575f1a22dc64dc0c823ec155a82a1c27f754af6b
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  preregistration_digest: 61b9a83a7f5bd5b56c15b51010e39490025dba8748fb3fa4b6188251f9fc139f
+  source_bundle_digest: c398153c78b52e3c4cc03e83fa5b97656175507d20101439f5b9883d6549cc12
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+outcome: indeterminate
+reasons:
+  - Source Bundle 內凍結之 run_development.py 在 Development 執行時缺少 PRICE_ONLY_SPEC 符號定義，無法產出 development evidence。
+  - '依治理規則執行提前終止與封存（outcome: indeterminate），改由新 Study 接手。'
+recomputed: true
+schema_version: 1
