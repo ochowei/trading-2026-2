@@ -1,0 +1,26 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 54ca77d6a803c97a628cab8ecb3efde7ab562a0d7c1dc9fbd4048c5133abd895
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: candidate-frozen
+occurred_at: '2026-09-07T06:26:44.026798Z'
+payload:
+  baseline_family: simple-mean-reversion
+  baseline_id: tsm-mean-reversion-two-stage-baseline-v007
+  baseline_objectively_simpler: true
+  candidate_digest: 14965a3910b176356243c617276d9a7d3e4743b8ed29484034fe720c346b8e39
+  development_evidence_digest: bc88188fd1c7b629cb8531c2a2a1f89153414c4685d14bea25f0f630f8f00953
+  evaluation_snapshot_digest: 41094b91da3235f2bb7d9cb97d1234e7c3581ab031a4ee3c63ded377c66c9410
+  fold_inventory_digest: 142fa9ac20ad0df32a13a5f6ad0ce1da9d14ea909c47406f3476ae7e55d65df8
+  qualification_spec_digest: 9a1f20f35998b918f19acaf2212c71849ed36fd01a238f73715d77f2593901a7
+  selected_candidate_id: tsm-mr-price-reversal-time-decay-v007
+  selection_evidence_digest: bb61255a5605755962ae3064049910e9c842861b2b11550ab1d8f1d8dbe52532
+  selection_evidence_path: evidence/selection-evidence.yml
+  snapshot_set_digest: b01ad417a536f0299f456fceeaf0370c1745654b52d53c87fe509974977105f0
+  snapshot_set_path: manifests/data-snapshot-set.yml
+  trial_registry_digest: fe0e7e585b0b3dea4e4a5f915bb39e8ff113850f6c1898532b714ff64eb2f6b9
+previous_event_digest: 7cef1b3130d3a3e8c0659ab4425d2348ce972db50ff61dda39226332cb043032
+schema_version: 1
+sequence: 7
+study_id: tsm-mean-reversion-two-stage-volume-reversal--v007

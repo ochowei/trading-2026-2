@@ -1,0 +1,18 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 54ca77d6a803c97a628cab8ecb3efde7ab562a0d7c1dc9fbd4048c5133abd895
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: trial-recorded
+occurred_at: '2026-09-07T06:26:40.882722Z'
+payload:
+  development_evidence_digest: bc88188fd1c7b629cb8531c2a2a1f89153414c4685d14bea25f0f630f8f00953
+  development_evidence_path: evidence/development.yml
+  inputs_digest: 644167f5cb00864aa4e6fc082b7eb41c089cef25d4120c50b85dfee6c0209a2f
+  inputs_path: manifests/development-trial-inputs.yml
+  status: completed
+  trial_id: tsm-mr-price-reversal-time-decay-v007
+previous_event_digest: 111190e0466e610df4742fb539684bb897d2638cbc9241f01107ce2290b3f6e3
+schema_version: 1
+sequence: 4
+study_id: tsm-mean-reversion-two-stage-volume-reversal--v007

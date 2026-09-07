@@ -1,0 +1,49 @@
+candidate_freeze:
+  baseline_family: simple-mean-reversion
+  baseline_id: tsm-mean-reversion-two-stage-baseline-v007
+  baseline_objectively_simpler: true
+  candidate_digest: 14965a3910b176356243c617276d9a7d3e4743b8ed29484034fe720c346b8e39
+  development_evidence_digest: bc88188fd1c7b629cb8531c2a2a1f89153414c4685d14bea25f0f630f8f00953
+  evaluation_snapshot_digest: 41094b91da3235f2bb7d9cb97d1234e7c3581ab031a4ee3c63ded377c66c9410
+  fold_inventory_digest: 142fa9ac20ad0df32a13a5f6ad0ce1da9d14ea909c47406f3476ae7e55d65df8
+  qualification_spec_digest: 9a1f20f35998b918f19acaf2212c71849ed36fd01a238f73715d77f2593901a7
+  selected_candidate_id: tsm-mr-price-reversal-time-decay-v007
+  selection_evidence_digest: bb61255a5605755962ae3064049910e9c842861b2b11550ab1d8f1d8dbe52532
+  selection_evidence_path: evidence/selection-evidence.yml
+  snapshot_set_digest: b01ad417a536f0299f456fceeaf0370c1745654b52d53c87fe509974977105f0
+  snapshot_set_path: manifests/data-snapshot-set.yml
+  trial_registry_digest: fe0e7e585b0b3dea4e4a5f915bb39e8ff113850f6c1898532b714ff64eb2f6b9
+evidence:
+  candidate-freeze: 66ac898dc9a39f5c1be99b1e7738d70d7f52d9a04fb426fa6fa731181e6bfd90
+  development: bc88188fd1c7b629cb8531c2a2a1f89153414c4685d14bea25f0f630f8f00953
+lifecycle:
+  current_event: candidate-frozen
+  event_chain_head_digest: b16340d6ae322cfdf25ade8e71cde229cc3d307a5b60b636a0adbc4147bbc80d
+  event_count: 7
+  status: active
+outcome:
+  authority: none
+  status: pending
+preregistration:
+  digest: 36c15ec63871bccf33b2ab1821c1b80b0facf17b2eea37098560cfd18de83cef
+provenance:
+  status: verified-clean
+schema_version: 1
+study:
+  identity:
+    experiment_family: tsm-mean-reversion-price-reversal-time-decay-v007
+    historical_evaluation_operator: william
+    research_owner: william
+    research_round_id: 2026-09-07-tsm-two-stage-v007
+    source_bundle_digest: 54ca77d6a803c97a628cab8ecb3efde7ab562a0d7c1dc9fbd4048c5133abd895
+    source_bundle_path: manifests/source-bundle.yml
+  study_id: tsm-mean-reversion-two-stage-volume-reversal--v007
+trial_registry:
+  digest: fe0e7e585b0b3dea4e4a5f915bb39e8ff113850f6c1898532b714ff64eb2f6b9
+  recorded_trial_count: 1
+  trial_ids:
+    - tsm-mr-price-reversal-time-decay-v007
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 54ca77d6a803c97a628cab8ecb3efde7ab562a0d7c1dc9fbd4048c5133abd895
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4

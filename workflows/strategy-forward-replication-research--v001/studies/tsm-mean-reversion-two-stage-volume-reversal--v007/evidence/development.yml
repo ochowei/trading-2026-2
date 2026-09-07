@@ -1,0 +1,976 @@
+accepted_signal_count: 25
+baseline_comparison:
+  baseline:
+    base:
+      completed_trades: 44
+      maximum_drawdown: '0.0769100254768982'
+      profit_factor: '1.247305314370226'
+      return: '0.09113122128677932'
+      traded_years: 5
+    stress:
+      completed_trades: 44
+      maximum_drawdown: '0.07693718976647576'
+      profit_factor: '1.0504211448647236'
+      return: '0.01804056486521673'
+      traded_years: 5
+  baseline_id: tsm-mean-reversion-two-stage-baseline-v007
+  baseline_is_excluded_from_candidate_family: true
+  candidate:
+    base:
+      completed_trades: 25
+      maximum_drawdown: '0.020269548580738803'
+      profit_factor: '3.8607674022180363'
+      return: '0.30967351821106787'
+      traded_years: 5
+    stress:
+      completed_trades: 25
+      maximum_drawdown: '0.021193312757407923'
+      profit_factor: '3.2490900351163656'
+      return: '0.23961331822807144'
+      traded_years: 5
+  candidate_id: tsm-mr-price-reversal-time-decay-v007
+  candidate_minus_baseline:
+    base_return: '0.21854229692428856'
+    stress_return: '0.2215727533628547'
+  execution_is_identical: true
+bindings:
+  acquisition_manifest_digest: f22063efc0264a093063e7b6b347d513f3c587a9689c2755d0ae4ac3555a2d37
+  development_data_digest: 4e443b4c7db125967ef936d615b6d2283da8ba0bccc62239a5770daf176eccc3
+  preregistration_digest: 36c15ec63871bccf33b2ab1821c1b80b0facf17b2eea37098560cfd18de83cef
+  source_bundle_digest: 54ca77d6a803c97a628cab8ecb3efde7ab562a0d7c1dc9fbd4048c5133abd895
+  strategy_engine_digest: 327867d0c822303313463d2c1c33ae58c33d6588be73f02b436af941f4334207
+  trial_inputs_digest: 644167f5cb00864aa4e6fc082b7eb41c089cef25d4120c50b85dfee6c0209a2f
+  warmup_data_digest: 81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847
+candidate_id: tsm-mr-price-reversal-time-decay-v007
+diagnostics:
+  block_bootstrap:
+    base:
+      - block_length: 3
+        drawdown_above_10pct_ratio: '0.0'
+        maximum_drawdown_q05_q50_q95:
+          - '0.019995375827511572'
+          - '0.020269548580738844'
+          - '0.03985962716652449'
+        positive_return_ratio: '1.0'
+        profit_factor_above_one_ratio: '1.0'
+        profit_factor_q05_q50_q95:
+          - '2.223568004847121'
+          - '4.073693899121954'
+          - '10.114575891974717'
+        repetitions: 50000
+        return_q05_q50_q95:
+          - '0.17945368834875783'
+          - '0.30923147185962074'
+          - '0.4600250090294378'
+        seed: 20260902
+      - block_length: 5
+        drawdown_above_10pct_ratio: '0.0'
+        maximum_drawdown_q05_q50_q95:
+          - '0.019995375827511565'
+          - '0.020269548580738813'
+          - '0.03959199426382948'
+        positive_return_ratio: '1.0'
+        profit_factor_above_one_ratio: '1.0'
+        profit_factor_q05_q50_q95:
+          - '2.412749359203992'
+          - '4.048482606840485'
+          - '8.610249401196718'
+        repetitions: 50000
+        return_q05_q50_q95:
+          - '0.19572958839774834'
+          - '0.30993442784239145'
+          - '0.43403275634605076'
+        seed: 20260902
+    gating: true
+    stress:
+      - block_length: 3
+        drawdown_above_10pct_ratio: '0.0'
+        maximum_drawdown_q05_q50_q95:
+          - '0.01999679646567507'
+          - '0.021191076556524864'
+          - '0.03984047777111604'
+        positive_return_ratio: '0.99996'
+        profit_factor_above_one_ratio: '0.99996'
+        profit_factor_q05_q50_q95:
+          - '1.8613772410068448'
+          - '3.3832297557455'
+          - '8.152906892889769'
+        repetitions: 50000
+        return_q05_q50_q95:
+          - '0.12463960178861411'
+          - '0.23923205989842422'
+          - '0.37139205948622583'
+        seed: 20260902
+      - block_length: 5
+        drawdown_above_10pct_ratio: '0.0'
+        maximum_drawdown_q05_q50_q95:
+          - '0.01999679646567507'
+          - '0.021193312757407778'
+          - '0.04008278500447243'
+        positive_return_ratio: '1.0'
+        profit_factor_above_one_ratio: '1.0'
+        profit_factor_q05_q50_q95:
+          - '2.0186734501403794'
+          - '3.371085901273954'
+          - '6.896384523730512'
+        repetitions: 50000
+        return_q05_q50_q95:
+          - '0.1390182822101846'
+          - '0.23985518707030773'
+          - '0.3487592813209529'
+        seed: 20260902
+  by_signal_year:
+    '2014':
+      base_pnl: '8442.900507296406'
+      stress_pnl: '6895.756160698569'
+      trades: 6
+    '2015':
+      base_pnl: '8434.642351203904'
+      stress_pnl: '6891.0893398457265'
+      trades: 5
+    '2016':
+      base_pnl: '4633.522405943106'
+      stress_pnl: '3340.5308587463805'
+      trades: 5
+    '2017':
+      base_pnl: '1388.8572277071362'
+      stress_pnl: '903.006167873391'
+      trades: 2
+    '2018':
+      base_pnl: '8067.429328956234'
+      stress_pnl: '5930.949295643077'
+      trades: 7
+  leave_one_signal_year_out:
+    base:
+      '2014':
+        maximum_drawdown: '0.020269548580738744'
+        omitted_trades: 6
+        profit_factor: '3.08081131520832'
+        remaining_trades: 19
+        return: '0.20770793854130498'
+      '2015':
+        maximum_drawdown: '0.020269548580738754'
+        omitted_trades: 5
+        profit_factor: '3.7375438566542827'
+        remaining_trades: 20
+        return: '0.21515897373328863'
+      '2016':
+        maximum_drawdown: '0.02026954858073876'
+        omitted_trades: 5
+        profit_factor: '4.15594588584811'
+        remaining_trades: 20
+        return: '0.2597323743498505'
+      '2017':
+        maximum_drawdown: '0.020269548580738813'
+        omitted_trades: 2
+        profit_factor: '3.988572584272212'
+        remaining_trades: 23
+        return: '0.29487326858666085'
+      '2018':
+        maximum_drawdown: '0.019996455070673904'
+        omitted_trades: 7
+        profit_factor: '5.078205971177607'
+        remaining_trades: 18
+        return: '0.2289992249215056'
+    gating: true
+    stress:
+      '2014':
+        maximum_drawdown: '0.021193312757407864'
+        omitted_trades: 6
+        profit_factor: '2.621720956050222'
+        remaining_trades: 19
+        return: '0.1596468959577173'
+      '2015':
+        maximum_drawdown: '0.020246349843223273'
+        omitted_trades: 5
+        profit_factor: '3.0938387285879445'
+        remaining_trades: 20
+        return: '0.16454061465504344'
+      '2016':
+        maximum_drawdown: '0.020246349843223314'
+        omitted_trades: 5
+        profit_factor: '3.49404169973315'
+        remaining_trades: 20
+        return: '0.20425893165194475'
+      '2017':
+        maximum_drawdown: '0.021193312757407923'
+        omitted_trades: 2
+        profit_factor: '3.3867083294236977'
+        remaining_trades: 23
+        return: '0.2301295018735805'
+      '2018':
+        maximum_drawdown: '0.021193312757407923'
+        omitted_trades: 7
+        profit_factor: '4.165195906669948'
+        remaining_trades: 18
+        return: '0.18030382527164068'
+disposition: pass
+failed_gates: []
+gates:
+  - actual: '3.8607674022180363'
+    gate: base_profit_factor
+    operator: '>'
+    passed: true
+    required: '1.10'
+  - actual: '0.30967351821106787'
+    gate: base_return
+    operator: '>'
+    passed: true
+    required: '0'
+  - actual: 25
+    gate: completed_trades
+    operator: '>='
+    passed: true
+    required: 20
+  - actual: '0.020269548580738803'
+    gate: maximum_realized_trade_loss_fraction
+    operator: <=
+    passed: true
+    required: '0.04'
+  - actual: '0.0'
+    gate: maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+    operator: <=
+    passed: true
+    required: '0.10'
+  - actual: '0.021193312757407923'
+    gate: maximum_stress_leave_one_year_out_drawdown
+    operator: <=
+    passed: true
+    required: '0.10'
+  - actual: '0.99996'
+    gate: minimum_stress_block_bootstrap_positive_return_ratio
+    operator: '>='
+    passed: true
+    required: '0.80'
+  - actual: '2.621720956050222'
+    gate: minimum_stress_leave_one_year_out_profit_factor
+    operator: '>'
+    passed: true
+    required: '1.00'
+  - actual: '0.1596468959577173'
+    gate: minimum_stress_leave_one_year_out_return
+    operator: '>'
+    passed: true
+    required: '0'
+  - actual: '0.021193312757407923'
+    gate: stress_maximum_drawdown
+    operator: <=
+    passed: true
+    required: '0.10'
+  - actual: '3.2490900351163656'
+    gate: stress_profit_factor
+    operator: '>'
+    passed: true
+    required: '1.00'
+  - actual: '0.23961331822807144'
+    gate: stress_return
+    operator: '>'
+    passed: true
+    required: '0'
+  - actual: 5
+    gate: traded_years
+    operator: '>='
+    passed: true
+    required: 3
+mechanism_ablation:
+  full_two_stage:
+    accepted_signal_count: 20
+    base:
+      completed_trades: 20
+      maximum_drawdown: '0.019998411856486906'
+      profit_factor: '6.119170784536043'
+      return: '0.28102138809071225'
+      traded_years: 5
+    stress:
+      completed_trades: 20
+      maximum_drawdown: '0.021186542266392456'
+      profit_factor: '4.995151650901457'
+      return: '0.2231454331577204'
+      traded_years: 5
+  interpretation: 事前固定的描述性消融，不參與 candidate selection；四組使用相同成本、部位與生命週期規則。
+  price_only_candidate:
+    accepted_signal_count: 25
+    base:
+      completed_trades: 25
+      maximum_drawdown: '0.020269548580738803'
+      profit_factor: '3.8607674022180363'
+      return: '0.30967351821106787'
+      traded_years: 5
+    stress:
+      completed_trades: 25
+      maximum_drawdown: '0.021193312757407923'
+      profit_factor: '3.2490900351163656'
+      return: '0.23961331822807144'
+      traded_years: 5
+  volume_only:
+    accepted_signal_count: 36
+    base:
+      completed_trades: 36
+      maximum_drawdown: '0.05795285957692922'
+      profit_factor: '1.5468906808142804'
+      return: '0.1365696148705526'
+      traded_years: 5
+    stress:
+      completed_trades: 36
+      maximum_drawdown: '0.060715779758081706'
+      profit_factor: '1.2797144750540752'
+      return: '0.06950684207849642'
+      traded_years: 5
+metrics:
+  base:
+    completed_trades: 25
+    maximum_drawdown: '0.020269548580738803'
+    maximum_realized_trade_loss_fraction: '0.020269548580738803'
+    profit_factor: '3.8607674022180363'
+    return: '0.30967351821106787'
+    traded_years: 5
+  stress:
+    completed_trades: 25
+    maximum_drawdown: '0.021193312757407923'
+    maximum_realized_trade_loss_fraction: '0.020246349843223318'
+    profit_factor: '3.2490900351163656'
+    return: '0.23961331822807144'
+    traded_years: 5
+  trade_count_by_signal_year:
+    '2014': 6
+    '2015': 5
+    '2016': 5
+    '2017': 2
+    '2018': 7
+network_access_during_run: false
+risk_diagnostics:
+  calendar_block_bootstrap:
+    base:
+      - block_sessions: 63
+        drawdown_above_10pct_ratio: '0.0'
+        maximum_drawdown_q05_q50_q95:
+          - '0.019995375827511555'
+          - '0.021008194829377713'
+          - '0.04164376226191678'
+        positive_return_ratio: '0.9999'
+        profit_factor_above_one_ratio: '0.9999'
+        profit_factor_q05_q50_q95:
+          - '2.2140982818422366'
+          - '4.0955317006806435'
+          - '10.870679598618404'
+        repetitions: 10000
+        return_q05_q50_q95:
+          - '0.16374190344484715'
+          - '0.30734196820324655'
+          - '0.47984228266157264'
+        seed: 20260906
+      - block_sessions: 126
+        drawdown_above_10pct_ratio: '0.0'
+        maximum_drawdown_q05_q50_q95:
+          - '0.019995375827511562'
+          - '0.020269548580738834'
+          - '0.03985962716652445'
+        positive_return_ratio: '1.0'
+        profit_factor_above_one_ratio: '1.0'
+        profit_factor_q05_q50_q95:
+          - '2.2737176739149723'
+          - '4.047939131239887'
+          - '9.906715429773543'
+        repetitions: 10000
+        return_q05_q50_q95:
+          - '0.1641527221759999'
+          - '0.30563549349367714'
+          - '0.4872414893378998'
+        seed: 20260906
+    gating: false
+    interpretation: 這是保留原始日期群聚的風險診斷，不取代既有 trade-block gates。
+    stress:
+      - block_sessions: 63
+        drawdown_above_10pct_ratio: '0.0'
+        maximum_drawdown_q05_q50_q95:
+          - '0.019996796465675055'
+          - '0.02389062709600092'
+          - '0.04601252727619071'
+        positive_return_ratio: '0.9997'
+        profit_factor_above_one_ratio: '0.9997'
+        profit_factor_q05_q50_q95:
+          - '1.8583324395454153'
+          - '3.4037355078757265'
+          - '8.690250224119085'
+        repetitions: 10000
+        return_q05_q50_q95:
+          - '0.11561372044684481'
+          - '0.23832379851652463'
+          - '0.38222492497276367'
+        seed: 20260906
+      - block_sessions: 126
+        drawdown_above_10pct_ratio: '0.0'
+        maximum_drawdown_q05_q50_q95:
+          - '0.019996796465675055'
+          - '0.02024634984322338'
+          - '0.039838284171910585'
+        positive_return_ratio: '0.9999'
+        profit_factor_above_one_ratio: '0.9999'
+        profit_factor_q05_q50_q95:
+          - '1.8987478718765245'
+          - '3.375070303914945'
+          - '7.950873938188758'
+        repetitions: 10000
+        return_q05_q50_q95:
+          - '0.11677405297903154'
+          - '0.23641859248274522'
+          - '0.3870711849585636'
+        seed: 20260906
+  candidate_mark_to_market:
+    base_maximum_drawdown: '0.0329899995801625'
+    definition: 持倉 session 以當日 Low、成本後可清算價估值；stop/target 成交前先記錄，time exit 於下一個 open 成交。
+    stress_maximum_drawdown: '0.035290814219358035'
+  realized_drawdown_gate_definition: 正式 gate 的 maximum_drawdown 只由已完成交易 PnL 資金曲線重算。
+schema_version: 1
+stage: development
+trades:
+  - base:
+      executed_entry_price: '12.397035716527572'
+      executed_exit_price: '13.001698837738791'
+      fees: '9.953764071816988'
+      pnl: '2359.7210079549404'
+      pnl_fraction_of_pre_entry_equity: '0.023597210079549406'
+      shares: 3919
+    entry_session: '2014-01-08'
+    exit_reason: target-gap
+    exit_session: '2014-01-16'
+    held_sessions: 7
+    raw_entry_price: '12.390840296379384'
+    raw_exit_price: '13.008202939208395'
+    signal_session: '2014-01-07'
+    stress:
+      executed_entry_price: '12.415621976972142'
+      executed_exit_price: '12.982186533329978'
+      fees: '18.499763718904063'
+      pnl: '2044.9283505363273'
+      pnl_fraction_of_pre_entry_equity: '0.020449283505363274'
+      shares: 3642
+    trade_id: development-001
+  - base:
+      executed_entry_price: '14.373588247023493'
+      executed_exit_price: '14.933590715658154'
+      fees: '10.14028392108785'
+      pnl: '1927.4682575548359'
+      pnl_fraction_of_pre_entry_equity: '0.018830339107753544'
+      shares: 3460
+    entry_session: '2014-05-06'
+    exit_reason: target
+    exit_session: '2014-05-08'
+    held_sessions: 3
+    raw_entry_price: '14.366405044501244'
+    raw_exit_price: '14.941061246281294'
+    signal_session: '2014-05-05'
+    stress:
+      executed_entry_price: '14.395137854590246'
+      executed_exit_price: '14.911179123788731'
+      fees: '18.785349183140923'
+      pnl: '1635.1269185980054'
+      pnl_fraction_of_pre_entry_equity: '0.016023598085944578'
+      shares: 3205
+    trade_id: development-002
+  - base:
+      executed_entry_price: '15.246877183892785'
+      executed_exit_price: '15.261328241373423'
+      fees: '10.137876662815962'
+      pnl: '37.882987345336005'
+      pnl_fraction_of_pre_entry_equity: '0.0003632563847213092'
+      shares: 3323
+    entry_session: '2014-07-21'
+    exit_reason: time
+    exit_session: '2014-08-04'
+    held_sessions: 10
+    raw_entry_price: '15.239257555115229'
+    raw_exit_price: '15.26896272273479'
+    signal_session: '2014-07-18'
+    stress:
+      executed_entry_price: '15.26973607022546'
+      executed_exit_price: '15.23842479728932'
+      fees: '18.732010772654075'
+      pnl: '-114.85761868661211'
+      pnl_fraction_of_pre_entry_equity: '-0.0011078082316648354'
+      shares: 3070
+    trade_id: development-003
+  - base:
+      executed_entry_price: '14.80849466008509'
+      executed_exit_price: '15.385441308610947'
+      fees: '10.335384282084654'
+      pnl: '1964.5529936219245'
+      pnl_fraction_of_pre_entry_equity: '0.018831072446903192'
+      shares: 3423
+    entry_session: '2014-09-29'
+    exit_reason: target
+    exit_session: '2014-10-03'
+    held_sessions: 5
+    raw_entry_price: '14.801094113028578'
+    raw_exit_price: '15.393137877549721'
+    signal_session: '2014-09-26'
+    stress:
+      executed_entry_price: '14.830696301254635'
+      executed_exit_price: '15.362351601794622'
+      fees: '19.069929055565915'
+      pnl: '1659.8975100497046'
+      pnl_fraction_of_pre_entry_equity: '0.016027560876696968'
+      shares: 3158
+    trade_id: development-004
+  - base:
+      executed_entry_price: '14.778771584318125'
+      executed_exit_price: '15.354560206363825'
+      fees: '10.531599460843342'
+      pnl: '2001.8496345888707'
+      pnl_fraction_of_pre_entry_equity: '0.01883391375166432'
+      shares: 3495
+    entry_session: '2014-10-14'
+    exit_reason: target
+    exit_session: '2014-10-16'
+    held_sessions: 3
+    raw_entry_price: '14.77138589137244'
+    raw_exit_price: '15.362241327027338'
+    signal_session: '2014-10-13'
+    stress:
+      executed_entry_price: '14.800928663155185'
+      executed_exit_price: '15.331516844373283'
+      fees: '19.375162461340807'
+      pnl: '1686.4658401548513'
+      pnl_fraction_of_pre_entry_equity: '0.016027220860028907'
+      shares: 3215
+    trade_id: development-005
+  - base:
+      executed_entry_price: '16.38370487646764'
+      executed_exit_price: '16.434130379243054'
+      fees: '10.541088684134275'
+      pnl: '151.4256262304989'
+      pnl_fraction_of_pre_entry_equity: '0.0013983153004131328'
+      shares: 3212
+    entry_session: '2014-12-18'
+    exit_reason: time
+    exit_session: '2015-01-05'
+    held_sessions: 10
+    raw_entry_price: '16.375517117908686'
+    raw_exit_price: '16.442351555020565'
+    signal_session: '2014-12-17'
+    stress:
+      executed_entry_price: '16.408268152144505'
+      executed_exit_price: '16.409466851910523'
+      fees: '19.33620946438922'
+      pnl: '-15.804839953707415'
+      pnl_fraction_of_pre_entry_equity: '-0.00014783097174692818'
+      shares: 2946
+    trade_id: development-006
+  - base:
+      executed_entry_price: '15.343467378337778'
+      executed_exit_price: '16.768161921081987'
+      fees: '11.027133501420748'
+      pnl: '4881.373926282191'
+      pnl_fraction_of_pre_entry_equity: '0.04501331026233253'
+      shares: 3434
+    entry_session: '2015-01-14'
+    exit_reason: target-gap
+    exit_session: '2015-01-15'
+    held_sessions: 2
+    raw_entry_price: '15.33579947859848'
+    raw_exit_price: '16.776550196180075'
+    signal_session: '2015-01-13'
+    stress:
+      executed_entry_price: '15.366471077555676'
+      executed_exit_price: '16.742997095787715'
+      fees: '20.203277374667664'
+      pnl: '4310.347575983324'
+      pnl_fraction_of_pre_entry_equity: '0.04032290645386792'
+      shares: 3146
+    trade_id: development-007
+  - base:
+      executed_entry_price: '17.022708829923534'
+      executed_exit_price: '17.68592241332226'
+      fees: '11.228242207190014'
+      pnl: '2134.2677000876865'
+      pnl_fraction_of_pre_entry_equity: '0.018833279195964493'
+      shares: 3235
+    entry_session: '2015-03-27'
+    exit_reason: target
+    exit_session: '2015-04-02'
+    held_sessions: 5
+    raw_entry_price: '17.014201729059007'
+    raw_exit_price: '17.69476979822137'
+    signal_session: '2015-03-26'
+    stress:
+      executed_entry_price: '17.048230132517126'
+      executed_exit_price: '17.659380258624925'
+      fees: '20.47749013077381'
+      pnl: '1782.4153818872292'
+      pnl_fraction_of_pre_entry_equity: '0.016028035530385103'
+      shares: 2950
+    trade_id: development-008
+  - base:
+      executed_entry_price: '17.126726376644246'
+      executed_exit_price: '17.82219849019672'
+      fees: '11.4492677863771'
+      pnl: '2266.9173762115242'
+      pnl_fraction_of_pre_entry_equity: '0.019634037762118244'
+      shares: 3276
+    entry_session: '2015-06-10'
+    exit_reason: target-gap
+    exit_session: '2015-06-23'
+    held_sessions: 10
+    raw_entry_price: '17.118167292997747'
+    raw_exit_price: '17.83111404722033'
+    signal_session: '2015-06-09'
+    stress:
+      executed_entry_price: '17.15240362758374'
+      executed_exit_price: '17.795451819125887'
+      fees: '20.821932275149596'
+      pnl: '1894.8186303288967'
+      pnl_fraction_of_pre_entry_equity: '0.016770010308219823'
+      shares: 2979
+    trade_id: development-009
+  - base:
+      executed_entry_price: '16.912167803078972'
+      executed_exit_price: '16.219453523648514'
+      fees: '11.205114332699235'
+      pnl: '-2353.964807366501'
+      pnl_fraction_of_pre_entry_equity: '-0.019995375827511555'
+      shares: 3382
+    entry_session: '2015-07-24'
+    exit_reason: stop
+    exit_session: '2015-08-06'
+    held_sessions: 10
+    raw_entry_price: '16.90371594510642'
+    raw_exit_price: '16.227567307302163'
+    signal_session: '2015-07-23'
+    stress:
+      executed_entry_price: '16.937523376996634'
+      executed_exit_price: '16.19511217268756'
+      fees: '20.32355864617628'
+      pnl: '-2297.298722262116'
+      pnl_fraction_of_pre_entry_equity: '-0.01999679646567504'
+      shares: 3067
+    trade_id: development-010
+  - base:
+      executed_entry_price: '17.188163898286568'
+      executed_exit_price: '17.653484357497'
+      fees: '11.361861496211022'
+      pnl: '1506.0481559890031'
+      pnl_fraction_of_pre_entry_equity: '0.013053901744728117'
+      shares: 3261
+    entry_session: '2015-12-15'
+    exit_reason: time
+    exit_session: '2015-12-30'
+    held_sessions: 10
+    raw_entry_price: '17.179574111230952'
+    raw_exit_price: '17.662315515254626'
+    signal_session: '2015-12-14'
+    stress:
+      executed_entry_price: '17.213933259453412'
+      executed_exit_price: '17.626990884224117'
+      fees: '20.60492253857089'
+      pnl: '1200.806473908393'
+      pnl_fraction_of_pre_entry_equity: '0.01066567830514317'
+      shares: 2957
+    trade_id: development-011
+  - base:
+      executed_entry_price: '16.27585253102155'
+      executed_exit_price: '16.63487119779159'
+      fees: '11.482551508982905'
+      pnl: '1241.1335768516874'
+      pnl_fraction_of_pre_entry_equity: '0.010619093681275331'
+      shares: 3489
+    entry_session: '2016-01-12'
+    exit_reason: time
+    exit_session: '2016-01-27'
+    held_sessions: 10
+    raw_entry_price: '16.267718671685707'
+    raw_exit_price: '16.643192794188682'
+    signal_session: '2016-01-11'
+    stress:
+      executed_entry_price: '16.300254109029076'
+      executed_exit_price: '16.609906408600306'
+      fees: '20.772893318727668'
+      pnl: '956.4897641280841'
+      pnl_fraction_of_pre_entry_equity: '0.008405978388103823'
+      shares: 3156
+    trade_id: development-012
+  - base:
+      executed_entry_price: '19.304101437318696'
+      executed_exit_price: '18.513414703784143'
+      fees: '11.243147548749874'
+      pnl: '-2361.9548063469847'
+      pnl_fraction_of_pre_entry_equity: '-0.019996455070673904'
+      shares: 2973
+    entry_session: '2016-04-22'
+    exit_reason: stop
+    exit_session: '2016-04-28'
+    held_sessions: 5
+    raw_entry_price: '19.29445421021359'
+    raw_exit_price: '18.522676041805045'
+    signal_session: '2016-04-21'
+    stress:
+      executed_entry_price: '19.333043118634016'
+      executed_exit_price: '18.485630689721436'
+      fees: '20.301064100325206'
+      pnl: '-2294.7560233016848'
+      pnl_fraction_of_pre_entry_equity: '-0.019999035395027454'
+      shares: 2684
+    trade_id: development-013
+  - base:
+      executed_entry_price: '17.908810951460072'
+      executed_exit_price: '18.863569141990528'
+      fees: '11.550204587352834'
+      pnl: '2987.345271868806'
+      pnl_fraction_of_pre_entry_equity: '0.02580709983687263'
+      shares: 3141
+    entry_session: '2016-05-11'
+    exit_reason: target-gap
+    exit_session: '2016-05-23'
+    held_sessions: 9
+    raw_entry_price: '17.899861020949597'
+    raw_exit_price: '18.873005644812935'
+    signal_session: '2016-05-10'
+    stress:
+      executed_entry_price: '17.935660742991498'
+      executed_exit_price: '18.835259633523307'
+      fees: '20.849111853483898'
+      pnl: '2529.5137428041926'
+      pnl_fraction_of_pre_entry_equity: '0.022494848399770312'
+      shares: 2835
+    trade_id: development-014
+  - base:
+      executed_entry_price: '23.289873329935368'
+      executed_exit_price: '23.504991771304304'
+      fees: '11.591088085577066'
+      pnl: '521.2572911852913'
+      pnl_fraction_of_pre_entry_equity: '0.004389754408701791'
+      shares: 2477
+    entry_session: '2016-11-14'
+    exit_reason: time
+    exit_session: '2016-11-29'
+    held_sessions: 10
+    raw_entry_price: '23.278234212828956'
+    raw_exit_price: '23.516750146377493'
+    signal_session: '2016-11-11'
+    stress:
+      executed_entry_price: '23.324790681254612'
+      executed_exit_price: '23.469716646084738'
+      fees: '20.860991366527884'
+      pnl: '302.1789842398284'
+      pnl_fraction_of_pre_entry_equity: '0.0026281439915812406'
+      shares: 2229
+    trade_id: development-015
+  - base:
+      executed_entry_price: '23.067159078871224'
+      executed_exit_price: '23.965867585512306'
+      fees: '11.814696298093143'
+      pnl: '2245.741072384306'
+      pnl_fraction_of_pre_entry_equity: '0.018829790532979'
+      shares: 2512
+    entry_session: '2016-12-27'
+    exit_reason: target
+    exit_session: '2017-01-10'
+    held_sessions: 10
+    raw_entry_price: '23.055631263239604'
+    raw_exit_price: '23.97785651376919'
+    signal_session: '2016-12-23'
+    stress:
+      executed_entry_price: '23.101742525766085'
+      executed_exit_price: '23.929900800741652'
+      fees: '21.220677468920293'
+      pnl: '1847.1043908759602'
+      pnl_fraction_of_pre_entry_equity: '0.01602272756072299'
+      shares: 2256
+    trade_id: development-016
+  - base:
+      executed_entry_price: '25.262514516133763'
+      executed_exit_price: '26.246755211624915'
+      fees: '12.037716335377203'
+      pnl: '2288.132789027455'
+      pnl_fraction_of_pre_entry_equity: '0.01883065368612984'
+      shares: 2337
+    entry_session: '2017-04-18'
+    exit_reason: target
+    exit_session: '2017-04-25'
+    held_sessions: 6
+    raw_entry_price: '25.24988957134809'
+    raw_exit_price: '26.259885154202014'
+    signal_session: '2017-04-17'
+    stress:
+      executed_entry_price: '25.300389350490786'
+      executed_exit_price: '26.20736538389361'
+      fees: '21.56114613181331'
+      pnl: '1876.739691780298'
+      pnl_fraction_of_pre_entry_equity: '0.016023066085108572'
+      shares: 2093
+    trade_id: development-017
+  - base:
+      executed_entry_price: '32.812392591011196'
+      executed_exit_price: '32.32830351751222'
+      fees: '11.940289596692342'
+      pnl: '-899.275561320319'
+      pnl_fraction_of_pre_entry_equity: '-0.007263985352569952'
+      shares: 1833
+    entry_session: '2017-12-01'
+    exit_reason: time
+    exit_session: '2017-12-15'
+    held_sessions: 10
+    raw_entry_price: '32.79599459371434'
+    raw_exit_price: '32.34447575538991'
+    signal_session: '2017-11-30'
+    stress:
+      executed_entry_price: '32.86158658290177'
+      executed_exit_price: '32.27978680387913'
+      fees: '21.327285646832067'
+      pnl: '-973.7335239069071'
+      pnl_fraction_of_pre_entry_equity: '-0.008182351638064573'
+      shares: 1637
+    trade_id: development-018
+  - base:
+      executed_entry_price: '34.5207673721023'
+      executed_exit_price: '35.86571441074753'
+      fees: '12.17686134843302'
+      pnl: '2314.581515507816'
+      pnl_fraction_of_pre_entry_equity: '0.018833059196238674'
+      shares: 1730
+    entry_session: '2018-02-12'
+    exit_reason: target
+    exit_session: '2018-02-15'
+    held_sessions: 4
+    raw_entry_price: '34.503515614295154'
+    raw_exit_price: '35.88365623886696'
+    signal_session: '2018-02-09'
+    stress:
+      executed_entry_price: '34.57252264552374'
+      executed_exit_price: '35.81188892638923'
+      fees: '21.720629411092343'
+      pnl: '1890.6215419643559'
+      pnl_fraction_of_pre_entry_equity: '0.016018092134279405'
+      shares: 1543
+    trade_id: development-019
+  - base:
+      executed_entry_price: '36.032012993657354'
+      executed_exit_price: '34.53549067293613'
+      fees: '11.911794618920979'
+      pnl: '-2538.0414719963446'
+      pnl_fraction_of_pre_entry_equity: '-0.020269548580738803'
+      shares: 1688
+    entry_session: '2018-04-10'
+    exit_reason: stop-gap
+    exit_session: '2018-04-17'
+    held_sessions: 6
+    raw_entry_price: '36.01400599066203'
+    raw_exit_price: '34.552767056464354'
+    signal_session: '2018-04-09'
+    stress:
+      executed_entry_price: '36.08603400264335'
+      executed_exit_price: '34.483661522351426'
+      fees: '21.199136535708433'
+      pnl: '-2427.9626019341813'
+      pnl_fraction_of_pre_entry_equity: '-0.020246349843223318'
+      shares: 1502
+    trade_id: development-020
+  - base:
+      executed_entry_price: '31.210771001223094'
+      executed_exit_price: '32.46779225568249'
+      fees: '12.162605582068966'
+      pnl: '2388.7479904353822'
+      pnl_fraction_of_pre_entry_equity: '0.019471934070001192'
+      shares: 1910
+    entry_session: '2018-05-04'
+    exit_reason: target-gap
+    exit_session: '2018-05-10'
+    held_sessions: 5
+    raw_entry_price: '31.19517341451584'
+    raw_exit_price: '32.484034272818896'
+    signal_session: '2018-05-03'
+    stress:
+      executed_entry_price: '31.25756376134487'
+      executed_exit_price: '32.41906620427326'
+      fees: '21.637318862317038'
+      pnl: '1951.755331673019'
+      pnl_fraction_of_pre_entry_equity: '0.016611667442603208'
+      shares: 1699
+    trade_id: development-021
+  - base:
+      executed_entry_price: '31.48182017356701'
+      executed_exit_price: '32.70836824989449'
+      fees: '12.38870636572807'
+      pnl: '2354.849080946311'
+      pnl_fraction_of_pre_entry_equity: '0.01882896987132104'
+      shares: 1930
+    entry_session: '2018-05-31'
+    exit_reason: target
+    exit_session: '2018-06-04'
+    held_sessions: 3
+    raw_entry_price: '31.46608713000201'
+    raw_exit_price: '32.72473061520209'
+    signal_session: '2018-05-30'
+    stress:
+      executed_entry_price: '31.529019304262015'
+      executed_exit_price: '32.65928115397168'
+      fees: '21.990911736990867'
+      pnl: '1914.1476368156727'
+      pnl_fraction_of_pre_entry_equity: '0.016025374801707775'
+      shares: 1713
+    trade_id: development-022
+  - base:
+      executed_entry_price: '30.904928018496292'
+      executed_exit_price: '32.20937101136527'
+      fees: '12.64179409568127'
+      pnl: '2600.15752062088'
+      pnl_fraction_of_pre_entry_equity: '0.020406186660401976'
+      shares: 2003
+    entry_session: '2018-06-25'
+    exit_reason: target-gap
+    exit_session: '2018-07-09'
+    held_sessions: 10
+    raw_entry_price: '30.889483276857867'
+    raw_exit_price: '32.22548375324189'
+    signal_session: '2018-06-22'
+    stress:
+      executed_entry_price: '30.951262243411584'
+      executed_exit_price: '32.16103278573541'
+      fees: '22.379619817335524'
+      pnl: '2122.543551722818'
+      pnl_fraction_of_pre_entry_equity: '0.0174897990551303'
+      shares: 1773
+    trade_id: development-023
+  - base:
+      executed_entry_price: '31.117774182823023'
+      executed_exit_price: '32.9068066362495'
+      fees: '12.996989906271722'
+      pnl: '3618.738890549488'
+      pnl_fraction_of_pre_entry_equity: '0.027832124653324575'
+      shares: 2030
+    entry_session: '2018-10-26'
+    exit_reason: target-gap
+    exit_session: '2018-10-31'
+    held_sessions: 4
+    raw_entry_price: '31.10222307128738'
+    raw_exit_price: '32.92326827038469'
+    signal_session: '2018-10-25'
+    stress:
+      executed_entry_price: '31.164427517429957'
+      executed_exit_price: '32.85742173384392'
+      fees: '22.932626401806303'
+      pnl: '3009.2200151956204'
+      pnl_fraction_of_pre_entry_equity: '0.024369806877469275'
+      shares: 1791
+    trade_id: development-024
+  - base:
+      executed_entry_price: '32.522543014140034'
+      executed_exit_price: '31.190435255299995'
+      fees: '12.71711046258023'
+      pnl: '-2671.604197107299'
+      pnl_fraction_of_pre_entry_equity: '-0.01999120822781029'
+      shares: 1996
+    entry_session: '2018-11-14'
+    exit_reason: stop
+    exit_session: '2018-11-16'
+    held_sessions: 3
+    raw_entry_price: '32.50628986920543'
+    raw_exit_price: '31.206038274437212'
+    signal_session: '2018-11-13'
+    stress:
+      executed_entry_price: '32.57130244894384'
+      executed_exit_price: '31.143626197888338'
+      fees: '22.37668294076746'
+      pnl: '-2529.376179794228'
+      pnl_fraction_of_pre_entry_equity: '-0.019996537451132057'
+      shares: 1756
+    trade_id: development-025
