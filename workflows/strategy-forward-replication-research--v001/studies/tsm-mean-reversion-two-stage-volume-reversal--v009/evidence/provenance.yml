@@ -1,0 +1,24 @@
+assessed_at: '2026-09-07T07:00:00.000000Z'
+assessment: 研究擁有者確認，v009 這組確切策略、參數與選擇規則在候選人凍結前沒有查看正式 Historical Evaluation 或 retrospective replay 的策略績效結果；本輪只使用 warmup 與 Development 角色資料，並以資料結構與雜湊檢查確認其他角色資料的隔離狀態。
+assets:
+  - exposure_status: development-only
+    role: warmup-only
+  - exposure_status: development-only
+    role: development
+  - exposure_status: structurally-checked-no-strategy-outcome
+    role: quarantine
+  - exposure_status: structurally-checked-no-strategy-outcome
+    role: historical-evaluation
+  - exposure_status: structurally-checked-no-strategy-outcome
+    role: retrospective-execution-replay
+controls:
+  candidate_family_frozen_before_evaluation: true
+  evaluation_strategy_outcome_accessed: false
+  replay_strategy_outcome_accessed: false
+  trial_registry_frozen: true
+declaration:
+  actor_id: william
+  confirmed: true
+  statement: 我確認 v009 這組確切策略、參數與選擇規則在候選人凍結前，沒有看過正式 Historical Evaluation 或 retrospective replay 的策略績效結果。
+schema_version: 1
+status: verified-clean

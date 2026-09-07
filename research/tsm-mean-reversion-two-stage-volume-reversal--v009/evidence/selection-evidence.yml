@@ -1,0 +1,5 @@
+ordered_eligible_trial_ids:
+  - tsm-mr-two-stage-calibrated-volume-v009
+rule_digest: 97e7298e2ebb5ba094fd5ef38300e5a2bbfd2bac47a9c68193d7ae5934ef4a23
+schema_version: 1
+selected_candidate_id: tsm-mr-two-stage-calibrated-volume-v009
