@@ -1,0 +1,4 @@
+interface:
+  display_name: "Study Development 成果卡"
+  short_description: "只用 Development 證據撰寫 Study 成果卡"
+  default_prompt: "使用 $study-development-note-authoring 為指定 Study 撰寫 Development 成果卡，並嚴格不讀取正式 Evaluation 結果。"
