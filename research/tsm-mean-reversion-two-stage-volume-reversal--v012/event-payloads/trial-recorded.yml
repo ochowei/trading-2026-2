@@ -1,0 +1,6 @@
+development_evidence_digest: 6f4ac4a198003d535380901a3f50e57d1be9274a3923c4c0f30947b5fee561eb
+development_evidence_path: evidence/development.yml
+inputs_digest: c28c20459359ed9fda7b02e2b752b81c9c83f0e3ba16cd80a27c614149bb83c8
+inputs_path: manifests/development-trial-inputs.yml
+status: completed
+trial_id: tsm-mr-two-stage-intraday-reversal-v012

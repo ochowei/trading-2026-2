@@ -1,0 +1,34 @@
+candidate_freeze: null
+evidence:
+  development: 6f4ac4a198003d535380901a3f50e57d1be9274a3923c4c0f30947b5fee561eb
+lifecycle:
+  current_event: study-terminal
+  event_chain_head_digest: 94ce8359d9ab6aa8917d982f2b07a06f5254c1b5477542355f43304a5c697f84
+  event_count: 6
+  status: terminal
+outcome:
+  authority: none
+  status: fail
+preregistration:
+  digest: 6ab7175ab65f5eeeda43ada45859ddd08f7b551d887761f4d275b24981ab6ebb
+provenance:
+  status: null
+schema_version: 1
+study:
+  identity:
+    experiment_family: tsm-mean-reversion-two-stage-intraday-reversal-v012
+    historical_evaluation_operator: william
+    research_owner: william
+    research_round_id: research-round-2026-09-07-v012
+    source_bundle_digest: adb190ab1ed6dd305dfbdf382e8f4c2c35e11180963193003fb17e6f94726764
+    source_bundle_path: manifests/source-bundle.yml
+  study_id: tsm-mean-reversion-two-stage-volume-reversal--v012
+trial_registry:
+  digest: 3671f8b40a9c89a5447feb7c434851c919565742b7eb32d94b65992bd4b9b4f3
+  recorded_trial_count: 1
+  trial_ids:
+    - tsm-mr-two-stage-intraday-reversal-v012
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: adb190ab1ed6dd305dfbdf382e8f4c2c35e11180963193003fb17e6f94726764
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4

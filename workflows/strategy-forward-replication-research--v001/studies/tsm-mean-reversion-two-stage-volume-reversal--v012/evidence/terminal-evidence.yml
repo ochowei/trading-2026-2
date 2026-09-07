@@ -1,0 +1,17 @@
+authority: none
+bindings:
+  development_evidence_digest: 6f4ac4a198003d535380901a3f50e57d1be9274a3923c4c0f30947b5fee561eb
+  event_chain_head_digest: e9f165094f2464818e49fb9dca12fa66255130fbcc5723028b5f128059c93e70
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  preregistration_digest: 6ab7175ab65f5eeeda43ada45859ddd08f7b551d887761f4d275b24981ab6ebb
+  source_bundle_digest: adb190ab1ed6dd305dfbdf382e8f4c2c35e11180963193003fb17e6f94726764
+  trial_registry_digest: 3671f8b40a9c89a5447feb7c434851c919565742b7eb32d94b65992bd4b9b4f3
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+outcome: fail
+reasons:
+  - Development completed_trades 為 28，未達事前登記的至少 30 筆。
+  - 成本壓力後 stress_return 為 0.15380394903099456，未嚴格高於 v009 的 0.2652316915038563 與 v010 的 0.2659041478161517。
+  - 成本壓力後 stress_profit_factor 為 1.848829980370082，低於事前登記的 v010 精確對照值 3.205582905549011。
+  - 相對 v009 以 exact-lifecycle-key 配對的 6 筆真正新增交易，在 base 與 stress 的合計 PnL 均小於零。
+recomputed: true
+schema_version: 1
