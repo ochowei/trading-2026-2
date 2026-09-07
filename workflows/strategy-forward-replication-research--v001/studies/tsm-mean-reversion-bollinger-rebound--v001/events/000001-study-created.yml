@@ -1,0 +1,18 @@
+actor_id: codex-study-developer
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 10aed0264a5ee5e90dcd615c8cee046b8b7e0c3159ef82de17c3cc8dedb3f215
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: study-created
+occurred_at: '2026-09-07T17:51:56.409873Z'
+payload:
+  experiment_family: tsm-bollinger-volume-close-rebound-v001
+  historical_evaluation_operator: study-historical-evaluation-executor-pending-separate-authorization
+  research_owner: william
+  research_round_id: tsm-bollinger-rebound-20260908
+  source_bundle_digest: 10aed0264a5ee5e90dcd615c8cee046b8b7e0c3159ef82de17c3cc8dedb3f215
+  source_bundle_path: manifests/source-bundle.yml
+previous_event_digest: null
+schema_version: 1
+sequence: 1
+study_id: tsm-mean-reversion-bollinger-rebound--v001

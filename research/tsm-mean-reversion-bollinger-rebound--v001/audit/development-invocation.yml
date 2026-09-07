@@ -1,0 +1,31 @@
+command:
+  - /Users/william/gitRepo/trading-2026-2/.venv/bin/python
+  - /Users/william/.codex/worktrees/994f/trading-2026-2/research/tsm-mean-reversion-bollinger-rebound--v001/run_development.py
+  - --warmup
+  - /Users/william/.codex/worktrees/994f/trading-2026-2/research/market-data/yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv
+  - --development
+  - /Users/william/.codex/worktrees/994f/trading-2026-2/research/market-data/yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv
+  - --preregistration
+  - /Users/william/.codex/worktrees/994f/trading-2026-2/research/tsm-mean-reversion-bollinger-rebound--v001/preregistration.yml
+  - --trial-inputs
+  - /Users/william/.codex/worktrees/994f/trading-2026-2/research/tsm-mean-reversion-bollinger-rebound--v001/development-trial-inputs.yml
+  - --output
+  - /Users/william/.codex/worktrees/994f/trading-2026-2/research/tsm-mean-reversion-bollinger-rebound--v001/evidence/development.yml
+  - --acquisition-digest
+  - 8368783455f8ede0208bbd510ff5b5b9aaba80854e5d5aa1a1dd416f069bb5b8
+  - --source-bundle-digest
+  - 10aed0264a5ee5e90dcd615c8cee046b8b7e0c3159ef82de17c3cc8dedb3f215
+  - --strategy-engine-digest
+  - 86248b0db69e41dff4a07aac707b289a850aec90ab8ade85201b684e2c1c568e
+  - --trial-inputs-digest
+  - 307424e62e908d785d26f2ba8c062617d112e4e407a36d2aa4283d0505a727c0
+  - --preregistration-digest
+  - 3540c3c01eb5e1a6eb08574e5e0387e7e029034ce98d8a964444b2b5a402e67f
+  - --warmup-digest
+  - 81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847
+  - --development-digest
+  - 4e443b4c7db125967ef936d615b6d2283da8ba0bccc62239a5770daf176eccc3
+data_roles:
+  - warmup-only
+  - development
+network_access: false

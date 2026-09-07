@@ -1,0 +1,6 @@
+created_at: '2026-09-07T17:55:09.267823Z'
+event_digest: 1118e4a15118b944b203947bcbf7433eabc91056f4baa796a62559708b25d00c
+previous_checkpoint_digest: 4ed8a6b79df0ca64f76b0edccf193f9d90e338c2bdcb977c2901b9230fbf525a
+schema_version: 1
+sequence: 6
+study_id: tsm-mean-reversion-bollinger-rebound--v001

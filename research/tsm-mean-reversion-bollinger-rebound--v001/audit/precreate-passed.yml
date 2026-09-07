@@ -1,0 +1,30 @@
+checks:
+  - details:
+      contract_source: research/tsm-mean-reversion-bollinger-rebound--v001/implementation-contract.yml
+      development_trial_bindings:
+        preregistration_digest: 3540c3c01eb5e1a6eb08574e5e0387e7e029034ce98d8a964444b2b5a402e67f
+        procedure_path: research/tsm-mean-reversion-bollinger-rebound--v001/run_development.py
+        source_bundle_digest: 10aed0264a5ee5e90dcd615c8cee046b8b7e0c3159ef82de17c3cc8dedb3f215
+        strategy_engine_path: src/trading_2026_2/tsm_mean_reversion_bollinger_rebound_v001.py
+      development_trial_inputs_path: research/tsm-mean-reversion-bollinger-rebound--v001/development-trial-inputs.yml
+      engine_path: src/trading_2026_2/tsm_mean_reversion_bollinger_rebound_v001.py
+      required_documents:
+        - preregistration.yml
+        - candidate-definition.yml
+        - qualification-spec.yml
+        - development-trial-inputs.yml
+        - source-bundle.yml
+      research_root: research/tsm-mean-reversion-bollinger-rebound--v001
+      source_bundle_file_count: 17
+      source_bundle_verified_file_count: 17
+      study_event_required: false
+    errors: []
+    name: precreate
+    status: passed
+    study_id: tsm-mean-reversion-bollinger-rebound--v001
+    warnings: []
+command: precreate
+error_count: 0
+status: passed
+study_id: tsm-mean-reversion-bollinger-rebound--v001
+warning_count: 0

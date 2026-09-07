@@ -1,0 +1,9 @@
+authorization_basis: 使用者指定 study 開發者，要求依開發筆記建立新的 TSM 均值回歸假說並嘗試改善績效與交易數。
+authorized_at: '2026-09-07T17:47:46.813717Z'
+authorized_by: codex-study-developer
+data_roles:
+  - warmup-only
+  - development
+network_access: false
+scope: development-only
+study_id: tsm-mean-reversion-bollinger-rebound--v001

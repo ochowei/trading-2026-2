@@ -1,0 +1,6 @@
+development_evidence_digest: 79d40459e7376dbcf29b97cde9a4beb62c8585166187f2ed532312d2e74a30d4
+development_evidence_path: evidence/development.yml
+inputs_digest: 307424e62e908d785d26f2ba8c062617d112e4e407a36d2aa4283d0505a727c0
+inputs_path: manifests/development-trial-inputs.yml
+status: failed
+trial_id: tsm-mr-bollinger-rebound-v001

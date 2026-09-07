@@ -1,0 +1,28 @@
+checks:
+  - details:
+      accepted_signal_count: 2
+      cooldown_sessions: 5
+      engine_path: src/trading_2026_2/tsm_mean_reversion_bollinger_rebound_v001.py
+      first_ready_index: 25
+      holding_sessions: 10
+      indicator_columns:
+        rsi: rsi_2
+        sma: sma_20
+        volume_lead: prior_volume_spike_ratio
+      intraday_exit_cases: 4
+      passed_cases:
+        - rsi
+        - readiness
+        - intraday-exit
+        - holding-cooldown
+      rsi_case: passed
+    errors: []
+    name: synthetic
+    status: passed
+    study_id: tsm-mean-reversion-bollinger-rebound--v001
+    warnings: []
+command: synthetic
+error_count: 0
+status: passed
+study_id: tsm-mean-reversion-bollinger-rebound--v001
+warning_count: 0

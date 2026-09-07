@@ -1,0 +1,34 @@
+candidate_freeze: null
+evidence:
+  development: 79d40459e7376dbcf29b97cde9a4beb62c8585166187f2ed532312d2e74a30d4
+lifecycle:
+  current_event: study-terminal
+  event_chain_head_digest: 1118e4a15118b944b203947bcbf7433eabc91056f4baa796a62559708b25d00c
+  event_count: 6
+  status: terminal
+outcome:
+  authority: none
+  status: fail
+preregistration:
+  digest: 3540c3c01eb5e1a6eb08574e5e0387e7e029034ce98d8a964444b2b5a402e67f
+provenance:
+  status: null
+schema_version: 1
+study:
+  identity:
+    experiment_family: tsm-bollinger-volume-close-rebound-v001
+    historical_evaluation_operator: study-historical-evaluation-executor-pending-separate-authorization
+    research_owner: william
+    research_round_id: tsm-bollinger-rebound-20260908
+    source_bundle_digest: 10aed0264a5ee5e90dcd615c8cee046b8b7e0c3159ef82de17c3cc8dedb3f215
+    source_bundle_path: manifests/source-bundle.yml
+  study_id: tsm-mean-reversion-bollinger-rebound--v001
+trial_registry:
+  digest: c2fd8b382beb823d7ddbda6a49836b4e0d6acb44db9171d1574f2b6e896080fa
+  recorded_trial_count: 1
+  trial_ids:
+    - tsm-mr-bollinger-rebound-v001
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 10aed0264a5ee5e90dcd615c8cee046b8b7e0c3159ef82de17c3cc8dedb3f215
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4

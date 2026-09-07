@@ -1,0 +1,20 @@
+authorized_data_roles:
+  - warmup-only
+  - development
+candidate_trials_planned: 1
+development_design_status: development-informed
+formal_outcome_exposure: false
+frozen_source_policy: 保留既有引擎不變；新候選建立獨立檔案；兩個 runner 均在建立 Study 前納入 Source Bundle。
+meaning: verified-clean 限指此 task 未接觸正式評估或隔離價格／結果；Development 設計已受舊筆記啟發。
+network_during_development: false
+notes_digest_before_this_study: e49f72316c5119f1a0244b57fdf6ef06c3debf039dd467b32a61266149556a38
+notes_path: .study-developer/development-note/TSM.md
+public_sources:
+  - url: https://www.bollingerbands.com/bollinger-bands
+    use: 只查公式：20 日均線、母體標準差與兩倍通道。
+  - url: https://www.bollingerbands.com/bollinger-band-rules
+    use: 只查指標使用原則；接觸軌道本身不代表反轉，保留收盤止跌確認。
+quarantine_price_exposure: false
+schema_version: 1
+status: verified-clean
+study_id: tsm-mean-reversion-bollinger-rebound--v001

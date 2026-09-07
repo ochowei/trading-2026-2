@@ -1,0 +1,17 @@
+authority: none
+bindings:
+  development_evidence_digest: 79d40459e7376dbcf29b97cde9a4beb62c8585166187f2ed532312d2e74a30d4
+  event_chain_head_digest: ed19e77059d183ef2a79afdf4be8e7a3f06db29b192c50688d3e18a8ec666feb
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  preregistration_digest: 3540c3c01eb5e1a6eb08574e5e0387e7e029034ce98d8a964444b2b5a402e67f
+  source_bundle_digest: 10aed0264a5ee5e90dcd615c8cee046b8b7e0c3159ef82de17c3cc8dedb3f215
+  trial_registry_digest: c2fd8b382beb823d7ddbda6a49836b4e0d6acb44db9171d1574f2b6e896080fa
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+outcome: fail
+reasons:
+  - Development 完成交易 25 筆，未達預先要求的至少 30 筆。
+  - Development stress 獲利因子 3.0877986978661824，低於事前 v010 基準 3.205582905549011。
+  - Development stress 報酬 0.2098800598483425，未嚴格高於事前 v010 基準 0.2659041478161517。
+  - 唯一 Trial 已記錄為 failed，registry 完整凍結且 candidate_available=false；不放寬門檻、不產生候選、不執行正式歷史評估。
+recomputed: true
+schema_version: 1
