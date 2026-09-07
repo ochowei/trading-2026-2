@@ -1,0 +1,17 @@
+authority: retrospectively-supported
+bindings:
+  candidate_freeze_digest: edb23a4bd37969474407df4b34dbe8afce14e649e14fb9d8206181c92a58d062
+  development_evidence_digest: d8f51a7a1f2f5024d1a778fd5c0d42a70b549aa258723869b2a4567cfee4a618
+  event_chain_head_digest: 5a87ca2524a10ebb02405e42f9a8d267e13ec422c00ef01451fd371eefd3330d
+  historical_evaluation_digest: 6bb5a01cc62b72e3286cb8466d35d97b553e4dc093d471c8831b91c6a2aebb4b
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  preregistration_digest: b0d527be8d09c66e61fec507a65e9cd186a3bc5ef0fee75298546700aaec7cfb
+  source_bundle_digest: 9871f13ff528786ed67341a2c7bfda3c3df1ce2b91644ac441135dd551ac2aeb
+  trial_registry_digest: 0ab6d283e3ea5e8b4030c38b4b85c81778822852ae84f762f41bd5465b6339ec
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+outcome: pass
+reasons:
+  - Historical Evaluation validator 重新計算 28 筆交易，5 個年度 fold 均有交易，全部 preregistered gates 通過。
+  - Base compounded return 為 14.9033%，stress return 為 9.7261%；stress 最大回撤為 9.0699%，未超過 10% 門檻。
+recomputed: true
+schema_version: 1

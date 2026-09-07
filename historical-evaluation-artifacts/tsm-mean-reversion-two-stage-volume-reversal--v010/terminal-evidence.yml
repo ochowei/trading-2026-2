@@ -1,0 +1,18 @@
+authority: none
+bindings:
+  candidate_freeze_digest: 4ed8aeb7c8f765c96bd6fc05874d82dc3d1a64981546970bc21e59205410a3bf
+  development_evidence_digest: 155ed4173455746a3fc44d1ea5ce144b4381f1e20eef890d201e5bb67601262a
+  event_chain_head_digest: 9a712a0f7e96cb68aa70fff9bd26bab8f5900e8f4f7a7e2bd50c3039a00cecc3
+  historical_evaluation_digest: f88c7befbe11a139c4d056c34821656e004b3f26ae379a5ae6b2990b67bda1a2
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  preregistration_digest: 9f0e1ee9ff56a7d27b702505f63166b0378165d47434e1a88fc7727716d8db6e
+  source_bundle_digest: 1af7b8269243bd849c08c7e67ac4fc04619e2f186a2426a1923eead309f9313a
+  trial_registry_digest: cbd7b8888df51c2b3835ba3a96e1fc184ff53c0751526ec0fc88d614f9463721
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+outcome: fail
+reasons:
+  - Historical Evaluation validator 重新計算 30 筆交易，5 個年度 fold 均有交易。
+  - 未通過門檻：stress_max_drawdown (11.27% > 10.00%)。
+  - 依據預先登記規則與流程規範，評估結果判定為 fail，Study 予以終止（Terminal），不執行後續 challenge 或 replay。
+recomputed: true
+schema_version: 1
