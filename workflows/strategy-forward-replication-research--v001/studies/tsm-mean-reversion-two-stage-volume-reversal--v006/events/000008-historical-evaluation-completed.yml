@@ -1,0 +1,15 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: e790875db830e20dd4c05c53b085573b1ba4917011ba311c1a025f563289e00b
+  workflow_digest: 22f1a7a1fbc89752afdc379037d37123f83c2089f5b0d86288e63ff33f01d0c3
+event_type: historical-evaluation-completed
+occurred_at: '2026-09-07T04:54:05.341528Z'
+payload:
+  disposition: pass
+  evidence_digest: 565b08403c4f818643cf656b8e8427ec5b956e1f8d778da9be0c3365485323e2
+  evidence_path: historical-evaluation-artifacts/tsm-mean-reversion-two-stage-volume-reversal--v006/historical-evaluation.yml
+previous_event_digest: b1a9e243da914ace6ca890bae626db0784f3ecb130b9da7e7bf5c44ceb572452
+schema_version: 1
+sequence: 8
+study_id: tsm-mean-reversion-two-stage-volume-reversal--v006
