@@ -1,0 +1,38 @@
+baseline_comparison:
+  baseline_id: tsm-mr-bollinger-simple-baseline-v002
+  baseline_is_excluded_from_candidate_family: true
+  candidate_id: tsm-mr-bollinger-event-rebound-v002
+  execution_is_identical: true
+candidate_family: tsm-bollinger-event-rebound-v002
+candidate_id: tsm-mr-bollinger-event-rebound-v002
+cost_models:
+  base:
+    fee_per_side_bps: '1'
+    slippage_per_side_bps: '5'
+  stress:
+    fee_per_side_bps: '2'
+    slippage_per_side_bps: '20'
+data_bindings:
+  development_digest: 4e443b4c7db125967ef936d615b6d2283da8ba0bccc62239a5770daf176eccc3
+  development_path: research/market-data/yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv
+  warmup_digest: 81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847
+  warmup_path: research/market-data/yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv
+date_controls:
+  formal_provider_access: false
+  signal_end: '2018-12-31'
+  signal_start: '2014-01-01'
+  warmup_end: '2013-12-31'
+  warmup_start: '2013-01-01'
+development_diagnostics:
+  block_lengths:
+    - 3
+    - 5
+  bootstrap_seed: 20260902
+  leave_one_signal_year_out: true
+  repetitions: 50000
+  seed_application: exact-same-seed-for-each-block-length
+preregistration_digest: 2f0899a91ac38ebb9ca438c24b4fd9eec13254b6569e37259a55384fd2cb586c
+schema_version: 1
+source_bundle_digest: 9fad75fe2b50cf62220f27b520231b09c32cc80f6ee3ac299d274407630bc0d4
+strategy_engine_digest: ec4347092024a7ebf5f0b988052f3b5160ae99bd41a64f85c902af0459cd16f0
+study_procedure_digest: e19ef2973fb872e5293b914628e9f5eca9caf3bd9bcdbd09810cceb2767efe7c

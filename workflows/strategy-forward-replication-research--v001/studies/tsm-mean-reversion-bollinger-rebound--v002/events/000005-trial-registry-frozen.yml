@@ -1,0 +1,18 @@
+actor_id: codex-study-developer
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 9fad75fe2b50cf62220f27b520231b09c32cc80f6ee3ac299d274407630bc0d4
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: trial-registry-frozen
+occurred_at: '2026-09-08T01:55:19.947902Z'
+payload:
+  candidate_available: false
+  complete_family_trial_ids:
+    - tsm-mr-bollinger-event-rebound-v002
+  maximum_trials: 1
+  recorded_trial_count: 1
+  trial_registry_digest: 2bb0c4d36c7df8efee8628a75bd5dfe5f654ca6db36109a8b5967349d2d92a42
+previous_event_digest: 0dae1a345dc0fb2046e02dda303f9ea04b76803adbeb19976d673b0645a1411d
+schema_version: 1
+sequence: 5
+study_id: tsm-mean-reversion-bollinger-rebound--v002

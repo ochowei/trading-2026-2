@@ -1,0 +1,239 @@
+baseline_definition:
+  baseline_id: tsm-mr-bollinger-simple-baseline-v002
+  candidate_family: tsm-bollinger-event-rebound-v002
+  execution_is_identical: true
+  family: simple-bollinger-mean-reversion
+  objectively_simpler_because: 只用同一 Bollinger 計算下的 %B <= 0.25，移除事件記憶、縮量守低與回升確認；成交、成本、部位風險、停損、停利、持有期與冷卻完全相同。
+  simpler_rule: adjusted Close 的 20 日 Bollinger %B <= 0.25，下一個 XNYS session open 進場；不使用成交量、事件記憶、縮量守低或 RSI。
+complete_candidate_family:
+  - tsm-mr-bollinger-event-rebound-v002
+eligibility_rules:
+  accepted_signal:
+    cooldown:
+      clock_anchor: completed-position-exit
+      minimum_completed_session_steps_after_exit: 5
+      position_must_be_flat: true
+    decision_time: completed-session-close
+    event_state:
+      confirmation_close_above_prior_close: true
+      confirmation_sma_gap_minimum: '0.015'
+      confirmation_sma_gap_operator: '>='
+      confirmation_uses_bollinger_percent_b: false
+      confirmation_uses_rsi: false
+      event_low_comparison: close_must_be_greater_than_or_equal_to_event_day_low
+      event_observation_sessions: 5
+      event_trigger_percent_b_maximum: '0.25'
+      event_trigger_percent_b_operator: <=
+      event_trigger_volume_average_excludes_event_day: true
+      event_trigger_volume_average_sessions: 20
+      event_trigger_volume_ratio_minimum: '1.05'
+      invalidation_checked_before_quiet_hold_and_confirmation: true
+      new_event_after_same_day_invalidation_forbidden: true
+      new_event_does_not_reset_active_event: true
+      same_day_event_quiet_hold_forbidden: true
+      same_day_quiet_hold_and_confirmation_allowed: true
+    indicator_contract:
+      bollinger_ddof: 0
+      bollinger_std_multiplier: '2.0'
+      rsi_formula: simple-rolling-mean
+      rsi_not_ready: null
+      rsi_used_at_confirmation: false
+      volume_average_excludes_event_day: true
+    mean_reversion:
+      close_vs_sma20_gap_minimum: '0.015'
+      close_vs_sma20_operator: '>='
+      rsi_length: 2
+      rsi_maximum: '50'
+      rsi_operator: <=
+      rsi_role: diagnostic-only
+      rsi_value: '50'
+      sma_length: 20
+    price_direction_confirmation:
+      close_above_prior_close: true
+    symbol: TSM
+    volume_leads_price:
+      enabled: true
+      prior_session_window: 5
+      volume_average_length: 20
+      volume_ratio_operator: '>='
+      volume_ratio_value: '1.05'
+      volume_shock_is_before_signal: false
+  costs:
+    base:
+      fee_per_side_bps: '1'
+      slippage_per_side_bps: '5'
+    stress:
+      fee_per_side_bps: '2'
+      slippage_per_side_bps: '20'
+  development_diagnostics:
+    block_bootstrap:
+      block_lengths:
+        - 3
+        - 5
+      maximum_stress_drawdown_above_10pct_ratio: '0.10'
+      minimum_stress_positive_return_ratio: '0.80'
+      repetitions: 50000
+      seed: 20260902
+      seed_application: exact-same-seed-for-each-block-length
+    leave_one_signal_year_out:
+      maximum_stress_drawdown: '0.10'
+      minimum_stress_profit_factor: '1.00'
+      minimum_stress_return: '0'
+    signal_year_breakdown: true
+  development_gates:
+    base_profit_factor:
+      operator: '>'
+      value: '1.10'
+    base_return:
+      operator: '>'
+      value: '0'
+    completed_trades:
+      operator: '>='
+      value: 20
+    maximum_realized_trade_loss_fraction:
+      operator: <=
+      value: '0.04'
+    maximum_stress_block_bootstrap_drawdown_above_10pct_ratio:
+      operator: <=
+      value: '0.10'
+    maximum_stress_leave_one_year_out_drawdown:
+      operator: <=
+      value: '0.10'
+    minimum_stress_block_bootstrap_positive_return_ratio:
+      operator: '>='
+      value: '0.80'
+    minimum_stress_leave_one_year_out_profit_factor:
+      operator: '>'
+      value: '1.00'
+    minimum_stress_leave_one_year_out_return:
+      operator: '>'
+      value: '0'
+    stress_maximum_drawdown:
+      operator: <=
+      value: '0.10'
+    stress_profit_factor:
+      operator: '>'
+      value: '1.00'
+    stress_return:
+      operator: '>'
+      value: '0'
+    traded_years:
+      operator: '>='
+      value: 3
+  execution:
+    drawdown_definition:
+      formal_gate: stress_maximum_drawdown
+      formal_gate_semantics: 只由已完成交易 PnL 累積的 realized trade-equity curve 計算。
+      mark_to_market_diagnostic: 每個持倉 session 以當日 Low 的成本後可清算價估值；不改變 formal gate。
+    entry: 回升確認收盤後下一個 XNYS session open，以 MARKET proposal 模擬。
+    gap_fill: stop gap 用較差的 open，target gap 用 open 價格成交，再套用成本。
+    holding_period: 進場 session 算第一個完整持有 session；完成第 10 個 session 後於下一個 open time exit。
+    intrabar_ambiguity: target 與 stop 同日觸及時 stop-first；先檢查 gap，再檢查當日 High/Low。
+    position_sizing:
+      cash_cap: 不超過可用現金、不借款、最多一個部位。
+      modeled_stop_loss: raw entry -4% stop，納入當成本模型的滑價與費用。
+      risk_fraction_of_pre_entry_equity: '0.02'
+      shares: 同時符合現金上限及 stop 風險預算的最大整數股數。
+    stop:
+      level_from_raw_entry_open: '-0.040'
+      order: STOP_MARKET
+      time_in_force: GTC
+    target:
+      level_from_raw_entry_open: '0.040'
+      order: LIMIT
+      reissued_each_open_position_session: true
+      time_in_force: DAY
+  mechanism_ablation:
+    arms:
+      full_candidate:
+        event_memory_enabled: true
+        quiet_hold_required: true
+      remembered_event_without_quiet_hold:
+        event_memory_enabled: true
+        quiet_hold_required: false
+      same_day_event_without_memory:
+        event_memory_enabled: false
+        quiet_hold_required: false
+    execution_is_identical: true
+    fixed_before_development: true
+    selection_use: descriptive-diagnostic-only
+  research_targets:
+    base_drawdown_not_above_v009:
+      operator: <=
+      reference_maximum_drawdown: '0.0199981006057067'
+      reference_study: tsm-mean-reversion-two-stage-volume-reversal--v009
+    base_return_not_below_v009:
+      operator: '>='
+      reference_return: '0.33676149802998756'
+      reference_study: tsm-mean-reversion-two-stage-volume-reversal--v009
+    minimum_completed_trades:
+      operator: '>='
+      reason: 使用者明定至少 30 筆完成交易。
+      value: 30
+    more_completed_trades_than_v009:
+      operator: '>'
+      reference_completed_trades: 24
+      reference_study: tsm-mean-reversion-two-stage-volume-reversal--v009
+    stress_drawdown_not_above_v009:
+      operator: <=
+      reference_maximum_drawdown: '0.021193312757407923'
+      reference_study: tsm-mean-reversion-two-stage-volume-reversal--v009
+    stress_return_not_below_v009:
+      operator: '>='
+      reference_return: '0.2652316915038563'
+      reference_study: tsm-mean-reversion-two-stage-volume-reversal--v009
+  source_and_adjustment:
+    adjustment_policy: Yahoo auto_adjust，OHLC 全部使用同一調整基礎。
+    calendar: XNYS
+    interval: 1d
+    provider: yahoo
+    timezone: America/New_York
+evaluation_gates:
+  base_compounded_return:
+    operator: '>'
+    value: '0'
+  base_profit_factor:
+    operator: '>'
+    value: '1.10'
+  completed_trades:
+    operator: '>='
+    value: 20
+  family_wise_confidence:
+    operator: '>='
+    value: '0.90'
+  maximum_fold_positive_profit_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_fold_trade_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_realized_trade_loss_fraction:
+    operator: <=
+    value: '0.04'
+  positive_traded_fold_ratio:
+    operator: '>='
+    value: '0.60'
+  stress_max_drawdown:
+    operator: <=
+    value: '0.10'
+  stress_profit_factor:
+    operator: '>'
+    value: '1.00'
+  stress_return:
+    operator: '>'
+    value: '0'
+  traded_folds:
+    operator: '>='
+    value: 3
+fold_warmup_sessions: 25
+hypothesis: 布林低檔放量後，若在接下來五個 XNYS session 內縮量且收盤守住事件日 Low，再出現收盤高於前日、但仍低於 SMA20 至少 1.5% 的回升，可能比直接捕捉低檔反彈更能辨認賣壓減弱並保留均值回歸空間；成交量只作條件，不解釋成吸籌證據。這是待驗證假說。候選不在確認日使用 %B <= 0.25，也不使用 RSI；v009 的部位大小、成本、停損、停利、10 個完整持有 session、冷卻五個完成 session 與成交順序全部固定沿用。
+initial_cash: '100000'
+maximum_holding_sessions: 11
+maximum_trials: 1
+selection_rule:
+  eligible_candidate: 唯一 Trial 必須同時通過全部 Workflow Development gates 與本次事前登記的研究目標；否則 candidate_available=false 並終止，不放寬門檻、不繼續搜尋。
+  family_selection_adjustment: 完整候選 family 只有預先指定的一個 Trial；不依結果挑選另一個門檻或參數。
+  method: fixed-single-candidate-all-gates-and-research-targets
+  selected_candidate_id: tsm-mr-bollinger-event-rebound-v002
+tie_handling:
+  method: not-applicable-single-candidate
