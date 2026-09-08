@@ -1,0 +1,17 @@
+authority: none
+bindings:
+  development_evidence_digest: 60b2896815b8edc8fd106dcc436dfb3cbc07af4371cdc243a648974839ca881f
+  event_chain_head_digest: dd50b34a5ea8d504b3594bc0a382e6fd0c3e4f8b05eda2354238732fa8649ae0
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  preregistration_digest: 2b96b517ae9a09ff455d23b7b0a8ae3494d3fd6d05810dbf9a4fb436a782ee63
+  source_bundle_digest: 23b93df2570d91c0d7859fe834644df5af89cd1a0c679befe8c181f3a68a8b57
+  trial_registry_digest: b59c0ec7c24bb9c0b0f91b19481c2c01ccbf72a422bae0c6b21848878f28e614
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+outcome: fail
+reasons:
+  - Development 完成交易 27 筆，雖高於 v009 的 24 筆與 Workflow gate 的 20 筆，但未達事前登記研究目標要求之至少 30 筆。
+  - 補充路徑實際產生 4 筆新增交易（2015-08-25、2015-09-30、2018-02-09、2018-04-25），未達事前登記研究目標要求之至少 5 筆。
+  - 雖然策略在 base 報酬（38.73% vs 33.68%）與 profit factor（5.97 vs 5.04）顯著提升且回撤受控，且機制消融確認成交量轉折條件之必要性，但因樣本筆數未達預先承諾門檻，依 selection rule 裁定為未通過。
+  - 完整 Candidate Family（唯一 Trial）已記錄為 completed，registry 已凍結且 candidate_available=false；嚴格禁止放寬門檻、事後搜尋或強行 freeze，Study 依規範合法終止，不執行 Historical Evaluation。
+recomputed: true
+schema_version: 1

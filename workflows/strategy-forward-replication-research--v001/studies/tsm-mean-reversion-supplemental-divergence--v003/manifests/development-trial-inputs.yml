@@ -1,0 +1,45 @@
+baseline_comparison:
+  baseline_id: tsm-mean-reversion-supplemental-divergence-baseline-v003
+  baseline_is_excluded_from_candidate_family: true
+  candidate_id: tsm-mr-supplemental-divergence-v003
+  execution_is_identical: true
+candidate_family: tsm-mean-reversion-supplemental-divergence-v003
+candidate_id: tsm-mr-supplemental-divergence-v003
+cost_models:
+  base:
+    fee_per_side_bps: '1'
+    slippage_per_side_bps: '5'
+  stress:
+    fee_per_side_bps: '2'
+    slippage_per_side_bps: '20'
+data_bindings:
+  development_digest: 4e443b4c7db125967ef936d615b6d2283da8ba0bccc62239a5770daf176eccc3
+  development_path: research/market-data/yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv
+  warmup_digest: 81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847
+  warmup_path: research/market-data/yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv
+date_controls:
+  formal_provider_access: false
+  signal_end: '2018-12-31'
+  signal_start: '2014-01-01'
+  warmup_end: '2013-12-31'
+  warmup_start: '2013-01-01'
+development_diagnostics:
+  block_lengths:
+    - 3
+    - 5
+  bootstrap_seed: 20260902
+  calendar_block_bootstrap:
+    block_sessions:
+      - 63
+      - 126
+    bootstrap_seed: 20260906
+    repetitions: 10000
+    seed_application: exact-same-seed-for-each-block-length
+  leave_one_signal_year_out: true
+  repetitions: 50000
+  seed_application: exact-same-seed-for-each-block-length
+preregistration_digest: 3af416d7f99c03a5300cbfb953f60fad6f31395fb358a1ab9e2c9421ec21952d
+schema_version: 1
+source_bundle_digest: 9187a0fcda00c3c8cfe1c0a7a55831602c9cbdee7ee8a07c74c04f4d735e7f2b
+strategy_engine_digest: cae8aa38dbe8bd40036d69f54bc5a7fd5fc87f774017b0f49a538af3c96e7384
+study_procedure_digest: 0c67790cf1abc8c2dbec3e85e5a5733dd253ebc89c1a4a6e656696f16b5dc901

@@ -1,0 +1,14 @@
+authority: none
+bindings:
+  event_chain_head_digest: d597711bf4efc0e6d4dad24b29e9c4a4915d057f27d543112c4b8420a9117ef5
+  evidence_unavailable_digest: d477febef4580cf606ea71143f8c9038e082f1e9af64c23b8ba88bcd741bc98b
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  preregistration_digest: 0a7daa7c816b487160d5282eec3f712f0c57ccb4547efb08b866598294a69ee0
+  source_bundle_digest: 31b4512f9429a5346e0c5852d698a4e6e48db90982d3fb13399945583cb7f5e2
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+outcome: indeterminate
+reasons:
+  - Source Bundle 內凍結之 run_development.py 在 Development 執行時因浮點數未轉換為 canonical string 導致 ValidationError，無法產出 development evidence。
+  - '依治理規則執行提前終止與封存（outcome: indeterminate），改由新 Study 接手。'
+recomputed: true
+schema_version: 1

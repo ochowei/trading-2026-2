@@ -1,0 +1,15 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 9187a0fcda00c3c8cfe1c0a7a55831602c9cbdee7ee8a07c74c04f4d735e7f2b
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: evidence-unavailable
+occurred_at: '2026-09-08T03:41:42.782732Z'
+payload:
+  reason: Source Bundle 內凍結之 run_development.py 產出之 leave_one_signal_year_out 診斷結構與 validator 重算格式不一致，無法產出合規之 development evidence。
+  stage: development
+  unavailable_path: evidence/development.yml
+previous_event_digest: 44aa81bb717ef36dc958adf9f5b8fe4aba1c3e3b93476e007ad7dedc3ab67f99
+schema_version: 1
+sequence: 4
+study_id: tsm-mean-reversion-supplemental-divergence--v003

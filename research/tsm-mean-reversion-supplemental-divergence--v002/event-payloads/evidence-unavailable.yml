@@ -1,0 +1,3 @@
+reason: Source Bundle 內凍結之 run_development.py 在 Development 執行時因浮點數未轉換為 canonical string 導致 ValidationError，無法產出 development evidence。
+stage: development
+unavailable_path: evidence/development.yml
