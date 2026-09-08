@@ -1,0 +1,245 @@
+baseline_definition:
+  baseline_id: tsm-mean-reversion-supplemental-divergence-baseline-v004
+  candidate_family: tsm-mean-reversion-supplemental-divergence-v004
+  execution_is_identical: true
+  family: simple-mean-reversion
+  objectively_simpler_because: 只要求收盤價低於 20 日均線至少 1.5% 且 RSI(2) 不高於 50，移除候選的成交量先行、訊號日方向確認與低檔量價背離補充路徑；成交、成本、風險預算、停損、停利、持有期與冷卻規則完全相同。
+  simpler_rule: adjusted Close <= SMA(20) * (1 - 0.015) 且 RSI(2) <= 50，不使用成交量先行、訊號日方向或補充路徑條件。
+complete_candidate_family:
+  - tsm-mr-supplemental-divergence-v004
+eligibility_rules:
+  accepted_signal:
+    cooldown:
+      clock_anchor: completed-position-exit
+      minimum_completed_session_steps_after_exit: 5
+      position_must_be_flat: true
+    decision_time: completed-session-close
+    indicator_contract:
+      rsi_formula: simple-rolling-mean
+      rsi_not_ready: null
+      volume_lead_is_disabled_for_candidate: false
+    mean_reversion:
+      close_vs_sma20_gap_minimum: '0.015'
+      close_vs_sma20_operator: '>='
+      rsi_length: 2
+      rsi_operator: <=
+      rsi_value: '50'
+      sma_length: 20
+    price_direction_confirmation:
+      close_above_prior_close: true
+    supplemental_path:
+      atr_distance_multiplier: '1.0'
+      atr_lookback: 20
+      bollinger_ddof: 0
+      bollinger_lookback: 20
+      bollinger_percent_b_max: '0.25'
+      bollinger_recent_window: 5
+      bollinger_standard_deviation_multiplier: '2.0'
+      enabled: true
+      event_reference_low_type: window_3d_low
+      observation_window_sessions: 5
+      pullback_low_lookback: 10
+      retest_volume_lookback: 20
+      volume_score_window: 3
+    symbol: TSM
+    volume_leads_price:
+      enabled: true
+      prior_session_window: 5
+      volume_average_length: 20
+      volume_ratio_operator: '>='
+      volume_ratio_value: '1.05'
+      volume_shock_is_before_signal: true
+  costs:
+    base:
+      fee_per_side_bps: '1'
+      slippage_per_side_bps: '5'
+    stress:
+      fee_per_side_bps: '2'
+      slippage_per_side_bps: '20'
+  development_diagnostics:
+    block_bootstrap:
+      block_lengths:
+        - 3
+        - 5
+      maximum_stress_drawdown_above_10pct_ratio: '0.10'
+      minimum_stress_positive_return_ratio: '0.80'
+      repetitions: 50000
+      seed: 20260902
+      seed_application: exact-same-seed-for-each-block-length
+    calendar_block_bootstrap:
+      block_sessions:
+        - 63
+        - 126
+      maximum_stress_drawdown_above_10pct_ratio: descriptive-only
+      repetitions: 10000
+      seed: 20260906
+      seed_application: exact-same-seed-for-each-block-length
+    leave_one_signal_year_out:
+      maximum_stress_drawdown: '0.10'
+      minimum_stress_profit_factor: '1.00'
+      minimum_stress_return: '0'
+    signal_year_breakdown: true
+  development_gates:
+    base_profit_factor:
+      operator: '>'
+      value: '1.10'
+    base_return:
+      operator: '>'
+      value: '0'
+    completed_trades:
+      operator: '>='
+      value: 20
+    maximum_realized_trade_loss_fraction:
+      operator: <=
+      value: '0.04'
+    maximum_stress_block_bootstrap_drawdown_above_10pct_ratio:
+      operator: <=
+      value: '0.10'
+    maximum_stress_leave_one_year_out_drawdown:
+      operator: <=
+      value: '0.10'
+    minimum_stress_block_bootstrap_positive_return_ratio:
+      operator: '>='
+      value: '0.80'
+    minimum_stress_leave_one_year_out_profit_factor:
+      operator: '>'
+      value: '1.00'
+    minimum_stress_leave_one_year_out_return:
+      operator: '>'
+      value: '0'
+    stress_maximum_drawdown:
+      operator: <=
+      value: '0.10'
+    stress_profit_factor:
+      operator: '>'
+      value: '1.00'
+    stress_return:
+      operator: '>'
+      value: '0'
+    traded_years:
+      operator: '>='
+      value: 3
+  execution:
+    drawdown_definition:
+      formal_gate: stress_maximum_drawdown
+      formal_gate_semantics: 只由已完成交易 PnL 累積的 realized trade-equity curve 計算。
+      mark_to_market_diagnostic: 每個持倉 session 以當日 Low 的成本後可清算價估值；這個診斷不改變 formal gate。
+    entry: 下一個 XNYS session open，以 MARKET proposal 模擬。
+    gap_fill: stop gap 以較差 open、target gap 以 open 價格改善成交，再套用成本。
+    holding_period: 進場 session 算第一個完整 session；完成第 10 個 session 後於下一 open 退出。
+    intrabar_ambiguity: target 與 stop 同 session 觸及時先算 stop。
+    position_sizing:
+      cash_cap: 不得超過可用現金，不借款、不加碼、最多一個部位。
+      modeled_stop_loss: 以 raw entry 的 -4% stop，納入指定成本模型的進出場滑價與費用。
+      risk_fraction_of_pre_entry_equity: '0.02'
+      shares: 同時符合現金上限與 stop 風險預算的最大整數股數。
+    stop:
+      level_from_raw_entry_open: '-0.040'
+      order: STOP_MARKET
+      time_in_force: GTC
+    target:
+      level_from_raw_entry_open: '0.040'
+      order: LIMIT
+      reissued_each_open_position_session: true
+      time_in_force: DAY
+  mechanism_ablation:
+    arms:
+      full_candidate:
+        description: 原有 v009 進場路徑加上完整補充路徑（量能先改善 + 縮量回測 + 價格回升確認）。
+        supplemental_path_enabled: true
+        volume_lead_turnaround_enabled: true
+      v009_primary_only:
+        description: 僅使用原有 v009 兩階段量先價行進場路徑。
+        supplemental_path_enabled: false
+        volume_lead_turnaround_enabled: false
+      without_volume_lead:
+        description: 原有 v009 進場路徑加上移除「量能先改善」條件的補充路徑，其餘條件保持可比較。
+        supplemental_path_enabled: true
+        volume_lead_turnaround_enabled: false
+    execution_is_identical: true
+    fixed_before_development: true
+    selection_use: descriptive-diagnostic-only
+  research_targets:
+    base_drawdown_not_above_v009:
+      operator: <=
+      reference_maximum_drawdown: '0.0199981006057067'
+      reference_study: tsm-mean-reversion-two-stage-volume-reversal--v009
+    base_return_not_below_v009:
+      operator: '>='
+      reference_return: '0.33676149802998756'
+      reference_study: tsm-mean-reversion-two-stage-volume-reversal--v009
+    minimum_completed_trades:
+      operator: '>='
+      reason: 使用者明定完成交易至少 30 筆。
+      value: 30
+    more_completed_trades_than_v009:
+      operator: '>'
+      reference_completed_trades: 24
+      reference_study: tsm-mean-reversion-two-stage-volume-reversal--v009
+    stress_drawdown_not_above_v009:
+      operator: <=
+      reference_maximum_drawdown: '0.021193312757407923'
+      reference_study: tsm-mean-reversion-two-stage-volume-reversal--v009
+    stress_return_not_below_v009:
+      operator: '>='
+      reference_return: '0.2652316915038563'
+      reference_study: tsm-mean-reversion-two-stage-volume-reversal--v009
+    supplemental_trades_positive_net_pnl:
+      operator: '>'
+      reason: 真正新增交易的合計損益，在基本及壓力成本下皆為正。
+      value: '0'
+  source_and_adjustment:
+    adjustment_policy: Yahoo auto_adjust，OHLC 全部使用同一調整基礎。
+    calendar: XNYS
+    interval: 1d
+    provider: yahoo
+    timezone: America/New_York
+evaluation_gates:
+  base_compounded_return:
+    operator: '>'
+    value: '0'
+  base_profit_factor:
+    operator: '>'
+    value: '1.10'
+  completed_trades:
+    operator: '>='
+    value: 20
+  family_wise_confidence:
+    operator: '>='
+    value: '0.90'
+  maximum_fold_positive_profit_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_fold_trade_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_realized_trade_loss_fraction:
+    operator: <=
+    value: '0.04'
+  positive_traded_fold_ratio:
+    operator: '>='
+    value: '0.60'
+  stress_max_drawdown:
+    operator: <=
+    value: '0.10'
+  stress_profit_factor:
+    operator: '>'
+    value: '1.00'
+  stress_return:
+    operator: '>'
+    value: '0'
+  traded_folds:
+    operator: '>='
+    value: 3
+fold_warmup_sessions: 25
+hypothesis: 保留 v009 的兩階段量先價行原有進場路徑，並增加一條補充型均值回歸路徑：當 TSM 價格仍處於相對低檔（最近 5 日曾出現 20 日布林通道 %B <= 0.25 且確認日收盤仍低於 20 日均線），但成交量加權收盤位置已先改善（3 日累積量能分數由非正轉正，且價格接近 10 日回檔低點在 1.0 ATR 內），之後出現縮量回測（成交量低於此前 20 日均量且收盤守住事件參考低點）與價格回升（Close > prior Close），可能代表賣壓減弱。這類機會即使不符合 v009 的固定跌幅（>= 1.5%）或短期 RSI（<= 50）條件，仍可能提供成本後有利潤的均值回歸交易。目標是在相同成本與風險設定下，取得不低於 v009 的報酬，同時增加完成交易數量；這是待驗證的目標，不是已成立的結論。
+initial_cash: '100000'
+maximum_holding_sessions: 11
+maximum_trials: 1
+selection_rule:
+  eligible_candidate: 唯一 Trial 必須同時通過全部 Workflow Development gates 與本次事前登記的研究目標；否則 candidate_available=false 並終止，不放寬門檻、不繼續搜尋。
+  family_selection_adjustment: 完整候選 family 只有預先指定的一個 Trial；不依結果挑選另一個門檻或參數。
+  method: fixed-single-candidate-all-gates-and-research-targets
+  selected_candidate_id: tsm-mr-supplemental-divergence-v004
+tie_handling:
+  method: not-applicable-single-candidate

@@ -1,0 +1,3 @@
+reason: Source Bundle 內凍結之 run_development.py 產出之 leave_one_signal_year_out 診斷結構與 validator 重算格式不一致，無法產出合規之 development evidence。
+stage: development
+unavailable_path: evidence/development.yml

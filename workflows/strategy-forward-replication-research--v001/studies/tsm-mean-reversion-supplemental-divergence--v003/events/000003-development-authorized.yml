@@ -1,0 +1,14 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 9187a0fcda00c3c8cfe1c0a7a55831602c9cbdee7ee8a07c74c04f4d735e7f2b
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: development-authorized
+occurred_at: '2026-09-08T03:37:41.985977Z'
+payload:
+  evidence_digest: 519c01c2033c6969eb900e3c2aa647b41f24c87bd58ba5ff5434625f9cd8529f
+  evidence_path: evidence/development-authorization.yml
+previous_event_digest: 3d9c46e317ff7e9f6bb715146fdf4b2476dacef80add46326c1da87a713b32ad
+schema_version: 1
+sequence: 3
+study_id: tsm-mean-reversion-supplemental-divergence--v003

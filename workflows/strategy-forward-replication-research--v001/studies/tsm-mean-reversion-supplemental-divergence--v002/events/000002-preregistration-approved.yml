@@ -1,0 +1,14 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 31b4512f9429a5346e0c5852d698a4e6e48db90982d3fb13399945583cb7f5e2
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: preregistration-approved
+occurred_at: '2026-09-08T03:35:17.231731Z'
+payload:
+  preregistration_digest: 0a7daa7c816b487160d5282eec3f712f0c57ccb4547efb08b866598294a69ee0
+  preregistration_path: manifests/preregistration.yml
+previous_event_digest: 70081f5fcff2c0d8403f91d69cf8703c7ebdb62953edc44fa3739b3a1f1011a3
+schema_version: 1
+sequence: 2
+study_id: tsm-mean-reversion-supplemental-divergence--v002

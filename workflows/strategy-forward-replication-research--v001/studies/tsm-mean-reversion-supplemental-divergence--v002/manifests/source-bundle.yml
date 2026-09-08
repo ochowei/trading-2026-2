@@ -1,0 +1,28 @@
+files:
+  - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+    path: pyproject.toml
+  - digest: ced82e7d4bd3fd4020001caaa9c277b3e293ef090d6629b2c1b4d12073a4cff2
+    path: research/tsm-mean-reversion-supplemental-divergence--v002/candidate-definition.yml
+  - digest: f22063efc0264a093063e7b6b347d513f3c587a9689c2755d0ae4ac3555a2d37
+    path: research/tsm-mean-reversion-supplemental-divergence--v002/data-snapshot-acquisition.yml
+  - digest: b01ad417a536f0299f456fceeaf0370c1745654b52d53c87fe509974977105f0
+    path: research/tsm-mean-reversion-supplemental-divergence--v002/data-snapshot-set.yml
+  - digest: 6b545948d4e6d9d3a8ef3f1912d26fc1420358e1bf975ddb4df4a2de76b2e2f1
+    path: research/tsm-mean-reversion-supplemental-divergence--v002/implementation-contract.yml
+  - digest: 0a7daa7c816b487160d5282eec3f712f0c57ccb4547efb08b866598294a69ee0
+    path: research/tsm-mean-reversion-supplemental-divergence--v002/preregistration.yml
+  - digest: a725396f6681dcd521be39499a3ef869254033619b09ee8c00c6c4cc9003dc7e
+    path: research/tsm-mean-reversion-supplemental-divergence--v002/qualification-spec.yml
+  - digest: 5b804051b3b9298640837baa1574d5380c16b405c8363db44267a2b6a696db32
+    path: research/tsm-mean-reversion-supplemental-divergence--v002/run_development.py
+  - digest: f80bd92aafbe31893f8e6c1fd4bad1708dd5a7ada6b1c586fbe5c32a911f3dcd
+    path: research/tsm-mean-reversion-supplemental-divergence--v002/run_historical_evaluation.py
+  - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+    path: src/trading_2026_2/__init__.py
+  - digest: cae8aa38dbe8bd40036d69f54bc5a7fd5fc87f774017b0f49a538af3c96e7384
+    path: src/trading_2026_2/tsm_mean_reversion_supplemental_divergence_v002.py
+  - digest: f2a11848be97e88c491646cf2527b7a137d3d45465831cdbea7b38e06a8370d0
+    path: tests/test_tsm_mean_reversion_supplemental_divergence_v002.py
+  - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+    path: uv.lock
+schema_version: 1

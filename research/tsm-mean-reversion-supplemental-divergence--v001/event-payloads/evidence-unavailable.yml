@@ -1,0 +1,3 @@
+reason: Source Bundle 內凍結之 run_development.py 在 Development 執行時因 trade_items 構建之索引偏差導致 IndexError，無法產出 development evidence。
+stage: development
+unavailable_path: evidence/development.yml

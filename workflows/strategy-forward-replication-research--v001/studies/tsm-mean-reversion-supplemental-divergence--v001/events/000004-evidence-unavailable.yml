@@ -1,0 +1,15 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: a90e73d349b4c1c45d1aa028765ce0649a7ccafb1885e016f79267c7acefe666
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: evidence-unavailable
+occurred_at: '2026-09-08T03:32:35.961033Z'
+payload:
+  reason: Source Bundle 內凍結之 run_development.py 在 Development 執行時因 trade_items 構建之索引偏差導致 IndexError，無法產出 development evidence。
+  stage: development
+  unavailable_path: evidence/development.yml
+previous_event_digest: c4bf92e3dec01034e6bb920ff78dbd158c9d36ee95c52f2810ffa1854090e01c
+schema_version: 1
+sequence: 4
+study_id: tsm-mean-reversion-supplemental-divergence--v001

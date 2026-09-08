@@ -1,0 +1,14 @@
+authority: none
+bindings:
+  event_chain_head_digest: 50d48ca0012611dcc4f79060f2dbb49578a759c21ee9f62afa043d6bc88f883b
+  evidence_unavailable_digest: 2e32f24fd476c039d22951848ce1d1f471d06cc8c3e3bf0e10a52accae410830
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  preregistration_digest: 088f58eb85320c09215b61f92ff780753892fa6acd0b6c1bffce97025a483fd8
+  source_bundle_digest: a90e73d349b4c1c45d1aa028765ce0649a7ccafb1885e016f79267c7acefe666
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+outcome: indeterminate
+reasons:
+  - Source Bundle 內凍結之 run_development.py 在 Development 執行時因 trade_items 構建之索引偏差導致 IndexError，無法產出 development evidence。
+  - '依治理規則執行提前終止與封存（outcome: indeterminate），改由新 Study 接手。'
+recomputed: true
+schema_version: 1

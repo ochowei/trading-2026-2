@@ -1,0 +1,6 @@
+development_evidence_digest: 60b2896815b8edc8fd106dcc436dfb3cbc07af4371cdc243a648974839ca881f
+development_evidence_path: evidence/development.yml
+inputs_digest: 50048bd806fd90113250ab5c6b1210d6705c165ce1b8f82e6a3a6c5a4b2391ec
+inputs_path: manifests/development-trial-inputs.yml
+status: completed
+trial_id: tsm-mr-supplemental-divergence-v004

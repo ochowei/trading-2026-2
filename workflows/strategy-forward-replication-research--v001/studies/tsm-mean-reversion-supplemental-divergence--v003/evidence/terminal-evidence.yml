@@ -1,0 +1,14 @@
+authority: none
+bindings:
+  event_chain_head_digest: 075ca0d03cc4f55ac6efb19c2ef5080708f346ae717aa8c390d81ec2afb22629
+  evidence_unavailable_digest: 59ee8e61047a68af7c6ba9600f15c898a8262c256dd666c3da1e03d96a2c636a
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  preregistration_digest: 3af416d7f99c03a5300cbfb953f60fad6f31395fb358a1ab9e2c9421ec21952d
+  source_bundle_digest: 9187a0fcda00c3c8cfe1c0a7a55831602c9cbdee7ee8a07c74c04f4d735e7f2b
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+outcome: indeterminate
+reasons:
+  - Source Bundle 內凍結之 run_development.py 產出之 leave_one_signal_year_out 診斷結構與 validator 重算格式不一致，無法產出合規之 development evidence。
+  - '依治理規則執行提前終止與封存（outcome: indeterminate），改由新 Study 接手。'
+recomputed: true
+schema_version: 1

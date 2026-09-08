@@ -1,0 +1,34 @@
+candidate_freeze: null
+evidence:
+  development: 60b2896815b8edc8fd106dcc436dfb3cbc07af4371cdc243a648974839ca881f
+lifecycle:
+  current_event: study-terminal
+  event_chain_head_digest: 99953761423fcff57b6afedf6015aa843898694997bd4b15c1c0a31208f89125
+  event_count: 6
+  status: terminal
+outcome:
+  authority: none
+  status: fail
+preregistration:
+  digest: 2b96b517ae9a09ff455d23b7b0a8ae3494d3fd6d05810dbf9a4fb436a782ee63
+provenance:
+  status: null
+schema_version: 1
+study:
+  identity:
+    experiment_family: tsm-mean-reversion-supplemental-divergence-v004
+    historical_evaluation_operator: william
+    research_owner: william
+    research_round_id: 2026-09-08-tsm-supplemental-divergence-v004
+    source_bundle_digest: 23b93df2570d91c0d7859fe834644df5af89cd1a0c679befe8c181f3a68a8b57
+    source_bundle_path: manifests/source-bundle.yml
+  study_id: tsm-mean-reversion-supplemental-divergence--v004
+trial_registry:
+  digest: b59c0ec7c24bb9c0b0f91b19481c2c01ccbf72a422bae0c6b21848878f28e614
+  recorded_trial_count: 1
+  trial_ids:
+    - tsm-mr-supplemental-divergence-v004
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 23b93df2570d91c0d7859fe834644df5af89cd1a0c679befe8c181f3a68a8b57
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4

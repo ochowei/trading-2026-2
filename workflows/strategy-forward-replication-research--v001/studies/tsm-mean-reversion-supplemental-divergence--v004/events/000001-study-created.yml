@@ -1,0 +1,18 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 23b93df2570d91c0d7859fe834644df5af89cd1a0c679befe8c181f3a68a8b57
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: study-created
+occurred_at: '2026-09-08T03:43:45.414382Z'
+payload:
+  experiment_family: tsm-mean-reversion-supplemental-divergence-v004
+  historical_evaluation_operator: william
+  research_owner: william
+  research_round_id: 2026-09-08-tsm-supplemental-divergence-v004
+  source_bundle_digest: 23b93df2570d91c0d7859fe834644df5af89cd1a0c679befe8c181f3a68a8b57
+  source_bundle_path: manifests/source-bundle.yml
+previous_event_digest: null
+schema_version: 1
+sequence: 1
+study_id: tsm-mean-reversion-supplemental-divergence--v004
