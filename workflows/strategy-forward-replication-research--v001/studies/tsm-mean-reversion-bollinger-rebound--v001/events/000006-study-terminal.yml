@@ -1,0 +1,16 @@
+actor_id: codex-study-developer
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 10aed0264a5ee5e90dcd615c8cee046b8b7e0c3159ef82de17c3cc8dedb3f215
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: study-terminal
+occurred_at: '2026-09-07T17:55:09.267823Z'
+payload:
+  authority: none
+  outcome: fail
+  terminal_evidence_digest: d4cef0043ea5fd299f2e46b193ce109bc24cd7c4d2e89e02f34ac9ca89be5cdd
+  terminal_evidence_path: evidence/development-terminal-evidence.yml
+previous_event_digest: ed19e77059d183ef2a79afdf4be8e7a3f06db29b192c50688d3e18a8ec666feb
+schema_version: 1
+sequence: 6
+study_id: tsm-mean-reversion-bollinger-rebound--v001

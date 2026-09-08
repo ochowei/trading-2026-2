@@ -1,0 +1,82 @@
+engine:
+  baseline_spec_constant: BASELINE_SPEC
+  cost_constant: BASE_COST
+  path: src/trading_2026_2/tsm_mean_reversion_bollinger_rebound_v001.py
+  spec_constant: DEFAULT_SPEC
+execution:
+  cooldown:
+    anchor: completed-position-exit
+    boundary: exit 的 index 為 e，第一個可接受訊號為 e+5 的已完成收盤；禁止持倉重疊。
+    minimum_completed_session_steps_after_exit: 5
+  decision:
+    entry: next-session-open
+    signal: completed-session-close
+  drawdown:
+    formal_gate_definition: realized-trade-equity-drawdown
+    formal_gate_metric: stress_maximum_drawdown
+    mark_to_market_diagnostic: holding-session-low-after-costs
+  exits:
+    gap_fill: stop-gap-at-open-target-gap-at-open
+    holding_exit: next-open-after-10-complete-sessions
+    same_session_ambiguity: adverse-stop-first
+    stop_return: '-0.04'
+    target_return: '0.04'
+    time_exit_priority: time-exit-at-scheduled-open-before-intraday-stop-target-check
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    modeled_stop_includes_entry_exit_costs: true
+    risk_fraction_of_pre_entry_equity: '0.02'
+    shares: maximum-integer-shares-within-risk-and-cash-caps
+  price_direction_confirmation:
+    close_above_prior_close: true
+    rule: close-above-prior-close
+indicator_contract:
+  bollinger:
+    lookback: 20
+    min_periods: 20
+    percent_b_maximum: '0.25'
+    percent_b_operator: <=
+    standard_deviation_ddof: 0
+    standard_deviation_multiplier: '2'
+    zero_bandwidth_signal: false
+  bollinger_semantics:
+    close_field: auto-adjusted Close
+    ddof: 0
+    formula: '%b = (Close - (SMA20 - 2*std20)) / (4*std20)'
+    nan_signal: false
+    no_clipping_of_percent_b: true
+    not_ready: null
+    std_type: population
+    threshold_inclusive: true
+    threshold_role: 只使用 %b <= 0.25；固定均線偏離與 RSI 門檻停用。
+    window_includes_completed_signal_session: true
+    zero_bandwidth: null
+  columns:
+    bollinger: bollinger_percent_b
+    rsi: rsi_2
+    sma: sma_20
+    volume_lead: prior_volume_spike_ratio
+  required_history_sessions: 25
+  rsi:
+    formula: simple-rolling-mean
+    length: 2
+    min_periods: 2
+    not_ready: null
+    used_for_signal: false
+    zero_gain_and_loss: 50
+    zero_gain_only: 0
+    zero_loss_only: 100
+  sma:
+    lookback: 20
+    min_periods: 20
+    not_ready: null
+  volume_lead:
+    average_min_periods: 20
+    enabled: true
+    lead_min_periods: 5
+    prior_session_window: 5
+    uses_prior_sessions_only: true
+    volume_average_length: 20
+procedure:
+  path: research/tsm-mean-reversion-bollinger-rebound--v001/run_development.py
+schema_version: 1

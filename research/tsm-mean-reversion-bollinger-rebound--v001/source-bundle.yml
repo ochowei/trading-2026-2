@@ -1,0 +1,36 @@
+files:
+  - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+    path: pyproject.toml
+  - digest: b921cfe6e19e2c35337723ae8a02aea6443e1d0c460fa4a5e2b8163ac5c1b370
+    path: research/tsm-mean-reversion-bollinger-rebound--v001/candidate-definition.yml
+  - digest: 8368783455f8ede0208bbd510ff5b5b9aaba80854e5d5aa1a1dd416f069bb5b8
+    path: research/tsm-mean-reversion-bollinger-rebound--v001/data-snapshot-acquisition.yml
+  - digest: 02dd970c0c10228532860b4a7026143a8130d616ca904e82c828843c859725e6
+    path: research/tsm-mean-reversion-bollinger-rebound--v001/data-snapshot-set.yml
+  - digest: b219f455de4adc3ffa577902338263f6b4553ab9d2e1f4b1fea73add2adbb590
+    path: research/tsm-mean-reversion-bollinger-rebound--v001/implementation-contract.yml
+  - digest: 3540c3c01eb5e1a6eb08574e5e0387e7e029034ce98d8a964444b2b5a402e67f
+    path: research/tsm-mean-reversion-bollinger-rebound--v001/preregistration.yml
+  - digest: 73fcbe4cafebb27b79886fba54a4dbb328b0303b2a7c2e5d5e23e6d272ee33b2
+    path: research/tsm-mean-reversion-bollinger-rebound--v001/provenance-declaration.yml
+  - digest: 1a5830465cdb079b884690d7375de4a9e65755e6c519c272db9f76180d617176
+    path: research/tsm-mean-reversion-bollinger-rebound--v001/qualification-spec.yml
+  - digest: 3afb23c2363e24f8e379751491ec9bff7173c825749e6eecb88793c186058dc4
+    path: research/tsm-mean-reversion-bollinger-rebound--v001/run_development.py
+  - digest: 1b64d3cefa34688b1d6c6a4d238e2a70b46682782a39d3b3a450e0e892b12080
+    path: research/tsm-mean-reversion-bollinger-rebound--v001/run_historical_evaluation.py
+  - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+    path: src/trading_2026_2/__init__.py
+  - digest: 8552cb3011c6c46b794a3702bfa9c10303cd1b9545548111ac3ce761d37f81e7
+    path: src/trading_2026_2/frozen_ohlcv_views_v001.py
+  - digest: 86248b0db69e41dff4a07aac707b289a850aec90ab8ade85201b684e2c1c568e
+    path: src/trading_2026_2/tsm_mean_reversion_bollinger_rebound_v001.py
+  - digest: f3163c9b92046d0397ce1daf0cfb320a302c9e994875a4be0e93057a83cef7c4
+    path: src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v009.py
+  - digest: 951bc32637482d3516a243a5150a7c7b2142fae0c96bee784bf1223c2ad49675
+    path: src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v010.py
+  - digest: aaecb0d72fd1d60ac62527466c658c57e62d2c70eb714005b524baaf8b468df5
+    path: tests/test_tsm_mean_reversion_bollinger_rebound_v001.py
+  - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+    path: uv.lock
+schema_version: 1

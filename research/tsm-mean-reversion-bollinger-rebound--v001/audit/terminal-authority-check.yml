@@ -1,0 +1,17 @@
+authority_root: /Users/william/.codex/worktrees/994f/trading-2026-2/.authority
+command: check-authority-root
+details:
+  authority_root_relative: .authority
+  checkpoint_count: 6
+  checkpoint_head_digest: 464ac4e946968c214641950a35f429ac128c39d570b1012c40eb92d3ca2daaa2
+  event_chain_head_digest: 1118e4a15118b944b203947bcbf7433eabc91056f4baa796a62559708b25d00c
+  event_count: 6
+  expected_authority_root: /Users/william/.codex/worktrees/994f/trading-2026-2/.authority
+  git_tracking: tracked
+  study_authority_state: valid
+errors: []
+phase: existing
+repository_root: /Users/william/.codex/worktrees/994f/trading-2026-2
+status: passed
+study_id: tsm-mean-reversion-bollinger-rebound--v001
+warnings: []

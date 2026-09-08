@@ -1,0 +1,55 @@
+checks:
+  - details:
+      authority_validation: passed
+      candidate_freeze_required: false
+      canonical_yaml_file_count: 30
+      current_event: study-terminal
+      event_count: 6
+      source_bundle_file_count: 17
+      source_bundle_verified_file_count: 17
+      state: terminal-without-candidate
+      validator_metrics:
+        development:
+          - base_profit_factor
+          - base_return
+          - completed_trades
+          - maximum_realized_trade_loss_fraction
+          - maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+          - maximum_stress_leave_one_year_out_drawdown
+          - minimum_stress_block_bootstrap_positive_return_ratio
+          - minimum_stress_leave_one_year_out_profit_factor
+          - minimum_stress_leave_one_year_out_return
+          - stress_maximum_drawdown
+          - stress_profit_factor
+          - stress_return
+          - traded_years
+        evaluation:
+          - base_compounded_return
+          - base_profit_factor
+          - completed_trades
+          - family_wise_confidence
+          - maximum_fold_positive_profit_concentration
+          - maximum_fold_trade_concentration
+          - maximum_realized_trade_loss_fraction
+          - positive_traded_fold_ratio
+          - stress_max_drawdown
+          - stress_profit_factor
+          - stress_return
+          - traded_folds
+      workflow_release: passed
+      workflow_validation: passed
+    errors: []
+    name: freeze
+    status: passed
+    study_id: tsm-mean-reversion-bollinger-rebound--v001
+    warnings:
+      - actual: null
+        code: candidate-freeze-not-applicable
+        expected: null
+        message: Study 已依失敗或不可判定規則合法 terminal，且沒有 candidate；不把缺少 provenance/selection evidence 當成缺陷
+        severity: warning
+command: freeze
+error_count: 0
+status: passed
+study_id: tsm-mean-reversion-bollinger-rebound--v001
+warning_count: 1

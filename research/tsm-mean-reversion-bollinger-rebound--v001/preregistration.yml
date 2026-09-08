@@ -1,0 +1,246 @@
+baseline_definition:
+  baseline_id: tsm-mr-bollinger-simple-baseline-v001
+  candidate_family: tsm-bollinger-volume-close-rebound-v001
+  execution_is_identical: true
+  family: simple-bollinger-mean-reversion
+  objectively_simpler_because: 只要求布林位置 %b <= 0.25，移除成交量與收盤止跌兩個條件；同一 20 日中線、母體標準差、執行、成本與風險設定。
+  simpler_rule: 20 日、正負 2 個母體標準差通道，%b <= 0.25；通道寬度為零或尚未就緒不產生訊號。
+complete_candidate_family:
+  - tsm-mr-bollinger-rebound-v001
+eligibility_rules:
+  accepted_signal:
+    bollinger:
+      lookback: 20
+      min_periods: 20
+      percent_b_maximum: '0.25'
+      percent_b_operator: <=
+      standard_deviation_ddof: 0
+      standard_deviation_multiplier: '2'
+      zero_bandwidth_signal: false
+    cooldown:
+      clock_anchor: completed-position-exit
+      minimum_completed_session_steps_after_exit: 5
+      position_must_be_flat: true
+    decision_time: completed-session-close
+    indicator_contract:
+      rsi_formula: simple-rolling-mean
+      rsi_not_ready: null
+      rsi_used_for_signal: false
+      volume_lead_is_disabled_for_candidate: false
+    mean_reversion:
+      close_vs_sma20_gap_minimum: '0.015'
+      close_vs_sma20_operator: '>='
+      legacy_oversold_filter_enabled: false
+      purpose: SMA 是布林中線；固定跌幅與 RSI 僅保留為診斷，兩個門檻不參與入場。
+      rsi_length: 2
+      rsi_operator: <=
+      rsi_value: '50'
+      sma_length: 20
+    price_direction_confirmation:
+      close_above_prior_close: true
+    symbol: TSM
+    volume_leads_price:
+      enabled: true
+      prior_session_window: 5
+      volume_average_length: 20
+      volume_ratio_operator: '>='
+      volume_ratio_value: '1.05'
+      volume_shock_is_before_signal: true
+  costs:
+    base:
+      fee_per_side_bps: '1'
+      slippage_per_side_bps: '5'
+    stress:
+      fee_per_side_bps: '2'
+      slippage_per_side_bps: '20'
+  development_diagnostics:
+    block_bootstrap:
+      block_lengths:
+        - 3
+        - 5
+      maximum_stress_drawdown_above_10pct_ratio: '0.10'
+      minimum_stress_positive_return_ratio: '0.80'
+      repetitions: 50000
+      seed: 20260902
+      seed_application: exact-same-seed-for-each-block-length
+    calendar_block_bootstrap:
+      block_sessions:
+        - 63
+        - 126
+      maximum_stress_drawdown_above_10pct_ratio: descriptive-only
+      repetitions: 10000
+      seed: 20260906
+      seed_application: exact-same-seed-for-each-block-length
+    leave_one_signal_year_out:
+      maximum_stress_drawdown: '0.10'
+      minimum_stress_profit_factor: '1.00'
+      minimum_stress_return: '0'
+    signal_year_breakdown: true
+  development_gates:
+    base_profit_factor:
+      operator: '>'
+      value: '1.10'
+    base_return:
+      operator: '>'
+      value: '0'
+    completed_trades:
+      operator: '>='
+      value: 30
+    maximum_realized_trade_loss_fraction:
+      operator: <=
+      value: '0.04'
+    maximum_stress_block_bootstrap_drawdown_above_10pct_ratio:
+      operator: <=
+      value: '0.10'
+    maximum_stress_leave_one_year_out_drawdown:
+      operator: <=
+      value: '0.10'
+    minimum_stress_block_bootstrap_positive_return_ratio:
+      operator: '>='
+      value: '0.80'
+    minimum_stress_leave_one_year_out_profit_factor:
+      operator: '>'
+      value: '1.00'
+    minimum_stress_leave_one_year_out_return:
+      operator: '>'
+      value: '0'
+    stress_maximum_drawdown:
+      operator: <=
+      value: '0.10'
+    stress_profit_factor:
+      operator: '>='
+      value: '3.205582905549011'
+    stress_return:
+      operator: '>'
+      value: '0.2659041478161517'
+    traded_years:
+      operator: '>='
+      value: 3
+  execution:
+    drawdown_definition:
+      formal_gate: stress_maximum_drawdown
+      formal_gate_semantics: 只由已完成交易 PnL 累積的 realized trade-equity curve 計算。
+      mark_to_market_diagnostic: 每個持倉 session 以當日 Low 的成本後可清算價估值；這個診斷不改變 formal gate。
+    entry: 下一個 XNYS session open，以 MARKET proposal 模擬。
+    gap_fill: stop gap 以較差 open、target gap 以 open 價格改善成交，再套用成本。
+    holding_period: 進場 session 算第一個完整 session；完成第 10 個 session 後於下一 open 退出。
+    intrabar_ambiguity: target 與 stop 同 session 觸及時先算 stop。
+    position_sizing:
+      cash_cap: 不得超過可用現金，不借款、不加碼、最多一個部位。
+      modeled_stop_loss: 以 raw entry 的 -4% stop，納入指定成本模型的進出場滑價與費用。
+      risk_fraction_of_pre_entry_equity: '0.02'
+      shares: 同時符合現金上限與 stop 風險預算的最大整數股數。
+    stop:
+      level_from_raw_entry_open: '-0.040'
+      order: STOP_MARKET
+      time_in_force: GTC
+    target:
+      level_from_raw_entry_open: '0.040'
+      order: LIMIT
+      reissued_each_open_position_session: true
+      time_in_force: DAY
+  gate_policy: Development 任一正式門檻失敗，或相對 v009 真正新增交易的 base/stress 合計損益任一不大於零，即否證本輪改善假說並終止；不調參、不放寬門檻、不新增同 Study Trial。通過時只凍結候選，正式歷史評估須另行授權。
+  mechanism_ablation:
+    arms:
+      bollinger_rebound_candidate: 布林跌深加既有成交量與收盤止跌。
+      simple_baseline: 布林 %b <= 0.25，不用成交量與方向確認。
+      v009_original_confirmation: 固定 1.5% 跌幅、RSI 50、volume 1.05、5 日冷卻；同一其餘執行條件。
+      v010_reference_control: 既有容量組合：1.2% 跌幅、RSI 55、volume 1.05、3 日冷卻；不作新候選。
+    execution_difference: 候選、v009 與簡單 baseline 均為 5 日冷卻；v010 的既有規格為 3 日，故只用作績效比較，不把差異歸因於單一因素。
+    fixed_before_development: true
+    selection_use: descriptive-diagnostic-only
+  research_design:
+    development_knowledge: development-informed：已閱讀 TSM Development 成果卡；v009/v010 數值是事前比較基準，30 筆表示嚴格超過已知 29 筆。
+    evaluation_exposure: 本 task 未讀取或執行 quarantine、Historical Evaluation 或正式結果。
+    indicator_source: https://www.bollingerbands.com/bollinger-bands
+    interpretation_source: https://www.bollingerbands.com/bollinger-band-rules
+    multiple_testing_limit: 本 Study 僅一個候選，但同一 Development 期間已被多個舊 Study 使用；本輪 family size 1 不抵銷累積研究偏誤。
+    parameter_choice_before_trial: 20 日與正負 2 個標準差採指標常見定義；%b=0.25 是中線與下軌的中點，相當於低於中線 1 個標準差，以測試中度回落容量。不根據本次候選績效挑值。
+    preflight_coverage: 現有 studyctl 核對既有 SMA/RSI/volume 欄位與成交邊界；新布林語義另由納入 Source Bundle 的合成測試核對。RSI 明示為診斷，不暗中保留其入場門檻。
+    primary_change: 以波動標準化的布林位置取代固定跌幅與 RSI 超跌偵測；其他 v009 條件固定。
+  research_targets:
+    candidate_selection:
+      added_trade_pnl:
+        comparison_baseline: tsm-mr-two-stage-calibrated-volume-v009
+        lifecycle_key:
+          - signal_session
+          - entry_session
+          - exit_session
+          - exit_reason
+        matching_method: exact-lifecycle-key; candidate trades absent from v009 are truly added; candidate trades sharing a lifecycle key are retained; v009-only keys are displaced
+        required_aggregate_pnl:
+          base: '> 0'
+          stress: '> 0'
+      minimum_completed_trades: 30
+      stress_profit_factor_at_least:
+        baseline_id: tsm-mr-two-stage-calibrated-volume-v010
+        value: '3.205582905549011'
+      stress_return_strictly_above:
+        - baseline_id: tsm-mr-two-stage-calibrated-volume-v009
+          value: '0.2652316915038563'
+        - baseline_id: tsm-mr-two-stage-calibrated-volume-v010
+          value: '0.2659041478161517'
+    comparison_controls:
+      - tsm-mr-two-stage-calibrated-volume-v009
+      - tsm-mr-two-stage-calibrated-volume-v010
+    diagnostics:
+      - annual_trade_count_and_pnl
+      - leave_one_signal_year_out
+      - trade_clustering
+      - mark_to_market_drawdown_including_open_position_loss
+      - bollinger_vs_v009_exact_lifecycle_added_retained_displaced
+  source_and_adjustment:
+    adjustment_policy: Yahoo auto_adjust，OHLC 全部使用同一調整基礎。
+    calendar: XNYS
+    interval: 1d
+    provider: yahoo
+    timezone: America/New_York
+evaluation_gates:
+  base_compounded_return:
+    operator: '>'
+    value: '0'
+  base_profit_factor:
+    operator: '>'
+    value: '1.10'
+  completed_trades:
+    operator: '>='
+    value: 20
+  family_wise_confidence:
+    operator: '>='
+    value: '0.90'
+  maximum_fold_positive_profit_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_fold_trade_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_realized_trade_loss_fraction:
+    operator: <=
+    value: '0.04'
+  positive_traded_fold_ratio:
+    operator: '>='
+    value: '0.60'
+  stress_max_drawdown:
+    operator: <=
+    value: '0.10'
+  stress_profit_factor:
+    operator: '>'
+    value: '1.00'
+  stress_return:
+    operator: '>'
+    value: '0'
+  traded_folds:
+    operator: '>='
+    value: 3
+fold_warmup_sessions: 25
+hypothesis: TSM 的跌深應相對近期波動判斷。將 v009 的固定 1.5% 均線偏離與 RSI(2) 上限聯合篩選，整體替換為 20 日、上下兩個母體標準差的布林通道位置 %b <= 0.25；仍需收盤高於前收與前五日成交量比率至少 1.05。這可能納入低波動時被固定跌幅漏掉的回落，同時排除高波動時尚不算跌深的情況。只變更跌深偵測方式，持有期、冷卻、成本與部位規則固定。要求完成交易至少 30、stress 報酬超過 v010 的 26.5904%、stress 獲利因子不低於 v010，且真正新增交易在兩種成本下合計損益皆正；任一失敗即保留失敗 Trial 並停止。這是已知 Development 筆記啟發的研究，不是新資料的獨立驗證。
+initial_cash: '100000'
+maximum_holding_sessions: 11
+maximum_trials: 1
+selection_rule:
+  eligible_candidate: 唯一 Trial 必須通過全部 Development gates，且相對 v009 的真正新增交易在 base 與 stress 的 exact-lifecycle-key 配對後合計 PnL 均嚴格大於零；未通過任一項時 candidate_available=false 並終止。
+  family_selection_adjustment: 完整 family 僅有預先指定的一個 Trial；Evaluation random-entry 仍須以 family size 1 完成 Bonferroni adjustment。
+  method: fixed-single-candidate-no-outcome-ranking
+  selected_candidate_id: tsm-mr-bollinger-rebound-v001
+tie_handling:
+  method: not-applicable-single-candidate

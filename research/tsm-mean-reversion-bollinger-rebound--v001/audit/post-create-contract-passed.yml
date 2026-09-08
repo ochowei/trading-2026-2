@@ -1,0 +1,46 @@
+checks:
+  - details:
+      contract_source: research/tsm-mean-reversion-bollinger-rebound--v001/implementation-contract.yml
+      derived_required_history_sessions: 25
+      engine_path: src/trading_2026_2/tsm_mean_reversion_bollinger_rebound_v001.py
+      engine_spec_constant: DEFAULT_SPEC
+      source_bundle_file_count: 17
+      source_bundle_path: workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-bollinger-rebound--v001/manifests/source-bundle.yml
+      validator_metrics:
+        development:
+          - base_profit_factor
+          - base_return
+          - completed_trades
+          - maximum_realized_trade_loss_fraction
+          - maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+          - maximum_stress_leave_one_year_out_drawdown
+          - minimum_stress_block_bootstrap_positive_return_ratio
+          - minimum_stress_leave_one_year_out_profit_factor
+          - minimum_stress_leave_one_year_out_return
+          - stress_maximum_drawdown
+          - stress_profit_factor
+          - stress_return
+          - traded_years
+        evaluation:
+          - base_compounded_return
+          - base_profit_factor
+          - completed_trades
+          - family_wise_confidence
+          - maximum_fold_positive_profit_concentration
+          - maximum_fold_trade_concentration
+          - maximum_realized_trade_loss_fraction
+          - positive_traded_fold_ratio
+          - stress_max_drawdown
+          - stress_profit_factor
+          - stress_return
+          - traded_folds
+    errors: []
+    name: contract
+    status: passed
+    study_id: tsm-mean-reversion-bollinger-rebound--v001
+    warnings: []
+command: contract
+error_count: 0
+status: passed
+study_id: tsm-mean-reversion-bollinger-rebound--v001
+warning_count: 0

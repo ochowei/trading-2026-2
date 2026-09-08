@@ -1,0 +1,7 @@
+candidate_available: false
+failed_gates:
+  - completed_trades
+  - stress_profit_factor
+  - stress_return
+status: passed
+validator: validate_development_trial
