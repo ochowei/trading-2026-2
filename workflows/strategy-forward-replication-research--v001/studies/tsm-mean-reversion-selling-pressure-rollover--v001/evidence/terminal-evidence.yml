@@ -1,0 +1,14 @@
+authority: none
+bindings:
+  event_chain_head_digest: 8bd712ce003e486c52763a21577fc1b63b73501d6ab0b15214461378912ef914
+  evidence_unavailable_digest: 27cb5168a1c95228ceaff345b963350eed3bcfc1e6e203f36776410d3fda49fd
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  preregistration_digest: bf59a0fcfd641625d55b0d45155197ee58f031fee657c8eced7de795fbbc16d3
+  source_bundle_digest: 02ac047d1578b9a17a00316525e091f19eea7ddb6d6913ee418c7a2a9958ad49
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+outcome: indeterminate
+reasons:
+  - Development runner 的 disposition 與 workflow validator 對正式 Development gates 的重算語意不一致。
+  - 尚未有可合法驗證的 outcome-bearing Development trial，因此沒有 candidate freeze 或正式 Historical Evaluation 結果。
+recomputed: true
+schema_version: 1

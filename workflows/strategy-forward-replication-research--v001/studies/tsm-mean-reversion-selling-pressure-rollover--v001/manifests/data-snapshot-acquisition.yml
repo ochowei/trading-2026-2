@@ -1,0 +1,91 @@
+acquisition_mode: shared-public-immutable-reference
+calendar_validation:
+  expected_sessions: 3270
+  extra_sessions: 0
+  missing_sessions: 0
+  null_rows: 0
+  observed_sessions: 3270
+dependencies:
+  exchange_calendars: 4.13.2
+  pandas: 3.0.5
+  yfinance: 1.7.0
+full_snapshot:
+  bytes: 311430
+  digest: 50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95
+  first_session: '2013-01-02'
+  last_session: '2025-12-31'
+  path: research/market-data/yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv
+  rows: 3270
+quality_report:
+  digest: 196426ba6078fd3bd81a1c4411eb78f81b2b063a6ab9a71e0404d8fb8e02e734
+  path: research/market-data/yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.quality.yml
+request:
+  actions: false
+  auto_adjust: true
+  end_exclusive: '2026-01-01'
+  ignore_tz: true
+  interval: 1d
+  keepna: true
+  multi_level_index: false
+  repair: false
+  start_inclusive: '2013-01-01'
+  symbol: TSM
+  threads: false
+roles:
+  development:
+    data_digest: 4e443b4c7db125967ef936d615b6d2283da8ba0bccc62239a5770daf176eccc3
+    end_date: '2018-12-31'
+    first_session: '2014-01-02'
+    last_session: '2018-12-31'
+    rows: 1258
+    source_digest: 50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95
+    source_path: research/market-data/yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv
+    start_date: '2014-01-01'
+    view: inclusive-date-filter-preserving-source-lines
+  historical-evaluation:
+    data_digest: 41094b91da3235f2bb7d9cb97d1234e7c3581ab031a4ee3c63ded377c66c9410
+    end_date: '2024-12-31'
+    first_session: '2020-01-02'
+    last_session: '2024-12-31'
+    rows: 1258
+    source_digest: 50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95
+    source_path: research/market-data/yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv
+    start_date: '2020-01-01'
+    view: inclusive-date-filter-preserving-source-lines
+  quarantine:
+    data_digest: 23572185b225f3eb79857192ca98be35831a2f0fb37cbc3198f18eb5d9abd58e
+    end_date: '2019-12-31'
+    first_session: '2019-01-02'
+    last_session: '2019-12-31'
+    rows: 252
+    source_digest: 50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95
+    source_path: research/market-data/yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv
+    start_date: '2019-01-01'
+    view: inclusive-date-filter-preserving-source-lines
+  retrospective-execution-replay:
+    data_digest: 29ed746f4f9f04412c305a387f02bea8aed07accba656ebd46aa01957a5265b2
+    end_date: '2025-12-31'
+    first_session: '2025-01-02'
+    last_session: '2025-12-31'
+    rows: 250
+    source_digest: 50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95
+    source_path: research/market-data/yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv
+    start_date: '2025-01-01'
+    view: inclusive-date-filter-preserving-source-lines
+  warmup-only:
+    data_digest: 81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847
+    end_date: '2013-12-31'
+    first_session: '2013-01-02'
+    last_session: '2013-12-31'
+    rows: 252
+    source_digest: 50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95
+    source_path: research/market-data/yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv
+    start_date: '2013-01-01'
+    view: inclusive-date-filter-preserving-source-lines
+schema_version: 1
+storage_policy:
+  filenames_include_sha256: true
+  files_read_only: true
+  formal_run_provider_access: prohibited
+  repository_root_relative_prefix: research/market-data/yahoo
+  reuse_without_copy: true

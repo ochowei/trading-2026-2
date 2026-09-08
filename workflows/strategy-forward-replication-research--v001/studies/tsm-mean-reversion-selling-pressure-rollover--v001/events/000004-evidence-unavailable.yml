@@ -1,0 +1,15 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 02ac047d1578b9a17a00316525e091f19eea7ddb6d6913ee418c7a2a9958ad49
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: evidence-unavailable
+occurred_at: '2026-09-08T05:35:47.749642Z'
+payload:
+  reason: Development runner 產出的 disposition 與 workflow validator 對正式 Development gates 的重算語意不一致；因此沒有可合法發布的 Development evidence。
+  stage: development
+  unavailable_path: evidence/development.yml
+previous_event_digest: 0acc15bcdffc3f0bb51d9c22ab19aba0eab81805c2efe8313ad2f3aeaab56bab
+schema_version: 1
+sequence: 4
+study_id: tsm-mean-reversion-selling-pressure-rollover--v001

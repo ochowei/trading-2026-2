@@ -1,0 +1,6 @@
+development_evidence_digest: 0
+development_evidence_path: evidence/development.yml
+inputs_digest: 0
+inputs_path: manifests/development-trial-inputs.yml
+status: completed
+trial_id: trial-tsm-mr-selling-pressure-rollover-v001
