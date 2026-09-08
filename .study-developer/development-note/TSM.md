@@ -919,3 +919,310 @@
 - Development evidence：`research/tsm-mean-reversion-volume-leads--v003/development.yml`
 - 程式／測試：`research/tsm-mean-reversion-volume-leads--v003/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_volume_leads_v003.py`、`tests/test_tsm_mean_reversion_volume_leads_v003.py`
 - 詳細盲檢討：無
+
+---
+
+# `tsm-mean-reversion-bollinger-rebound--v001`：Study Development 成果卡
+
+- Development 判定：`未通過`
+- Provenance（來源可信狀態）：`verified-clean`
+- 前一個 Study：無（布林反彈系列第一份）
+- 記錄日期：`2026-09-08`
+
+## 結論
+
+> 在 2014–2018、base 每邊 1 bps 費用／5 bps 滑價與 stress 每邊 2 bps 費用／20 bps 滑價下，本 Study 的 Development 結果不支持布林下軌超跌反彈候選進入 freeze：雖然 25 筆交易取得正報酬（base 27.59%／stress 20.99%）與良好獲利因子（3.766／3.088），但未能跨過事前設定的 30 筆完成交易、stress PF 3.2056 與 stress 報酬 26.59% 的較高選擇門檻，共有三個 formal gates 失敗。
+
+## 研究變更
+
+- 研究問題或假說：將均值回歸的超跌條件由固定均線偏離改為動態布林通道下軌（%b ≤ 0.25），並搭配前五日成交量比率 ≥ 1.05 與訊號日收盤反轉，檢驗能否改善極端行情下的進場品質。
+- 相較上一個 Study 只改：本系列首份 Study；引進動態布林通道下軌作為超跌資格，同時保留成交量先行與收盤確認。
+- 保持不變或比較基準：20 日、±2 倍標準差通道的布林 baseline；10-session 持有、退場後 5-session cooldown、2% risk budget、-4%／+4% stop-target 與相同成本。
+
+## 主要結果
+
+| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Development / base | 25 | 27.59% | 3.766 | 2.58% | 未通過 |
+| Development / stress | 25 | 20.99% | 3.088 | 2.54% | 未通過 |
+
+- 交易年度覆蓋：5（2014–2018）
+- 失敗 gate：`completed_trades` 25 < 30 失敗；`stress_profit_factor` 3.0878 < 3.20558 失敗；`stress_return` 0.20988 < 0.26590 失敗。
+- 未執行項目與原因：無；正式 Development evidence 已完整產出。
+
+## 主要發現
+
+- 已確認：候選在兩套成本模型下均為正報酬且最大回撤僅約 2.5%，bootstrap 正報酬比例達 99.88% 以上；但未能達成事前針對容量與超越基準所設定的較高選擇門檻。
+- 可能原因：動態布林下軌加上成交量與價格反轉的三重約束過於嚴苛，大幅過濾了進場機會，致使交易樣本僅有 25 筆，限制了整體報酬積累。
+- 尚不能判斷：無法確認動態布林相較於固定均線偏離的真實邊際貢獻，亦無法確定若放寬觀察窗口能否在不犧牲品質下增加交易數。
+
+## 下一輪
+
+- 建議處置：建立有限 follow-up，嘗試引入事件觀察期以捕捉延後確認的反彈機會。
+- 下一個 Study 只測：將同日布林條件拆分為事件觸發與 5 個 session 內的延後確認，其他風險與執行規則固定。
+- 成功／失敗條件：完成交易至少 30 筆，且 stress 報酬、PF 與回撤符合事前 gate；任一失敗即否證。
+- 不得沿用的問題：不得因策略為正報酬就事後放寬交易數或績效門檻。
+
+## 證據連結
+
+- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-bollinger-rebound--v001/manifests/preregistration.yml`
+- Candidate definition：`research/tsm-mean-reversion-bollinger-rebound--v001/candidate-definition.yml`
+- Development evidence：`research/tsm-mean-reversion-bollinger-rebound--v001/evidence/development.yml`
+- 程式／測試：`research/tsm-mean-reversion-bollinger-rebound--v001/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_bollinger_rebound_v001.py`、`tests/test_tsm_mean_reversion_bollinger_rebound_v001.py`
+- 詳細盲檢討：無
+
+---
+
+# `tsm-mean-reversion-bollinger-rebound--v002`：Study Development 成果卡
+
+- Development 判定：`未通過`
+- Provenance（來源可信狀態）：`provenance-unknown`
+- 前一個 Study：`tsm-mean-reversion-bollinger-rebound--v001`
+- 記錄日期：`2026-09-08`
+
+## 結論
+
+> 在 2014–2018 與相同 base/stress 成本下，本 Study 將布林條件改為事件記憶架構後，Development 結果不支持候選假說：完成交易僅 16 筆，不僅未達研究目標（30 筆）與 Workflow gate（20 筆），且 base/stress 報酬（10.89%／7.57%）與回撤均未達事前設定之比較目標，多項候選資格 gate 失敗。
+
+## 研究變更
+
+- 研究問題或假說：布林下軌跌深與爆量觸發後，若在後續 5 個 session 內守住事件日低點且出現收盤反轉，是否能捕捉更多延後止跌的反彈交易並維持品質。
+- 相較上一個 Study 只改：將同日條件改為「事件記憶（5 個 session 觀察期）」與「縮量守低後反轉確認」兩階段架構。
+- 保持不變或比較基準：10-session 持有、退場後 5-session cooldown、2% risk budget、-4%／+4% stop-target、base（1/5 bps）與 stress（2/20 bps）成本。
+
+## 主要結果
+
+| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Development / base | 16 | 10.89% | 2.868 | 2.58% | 未通過 |
+| Development / stress | 16 | 7.57% | 2.240 | 2.54% | 未通過 |
+
+- 交易年度覆蓋：5（2014–2018，但 2017 僅 1 筆）
+- 失敗 gate：`completed_trades` 16 < 20（Workflow 最低門檻）與 16 < 30 失敗；`more_completed_trades_than_v009`、`base_return_not_below_v009`、`stress_return_not_below_v009` 等事前目標均失敗。
+- 未執行項目與原因：無；正式 Development evidence 已完整產出。
+
+## 主要發現
+
+- 已確認：事件漏斗過窄，60 個事件中高達 56.7%（34 個）在觀察期跌破事件低點失效，僅 16 個事件最終進場；且 8 筆交易以 10-session 到期平倉（time exit），顯示反轉動能未如預期展開。
+- 可能原因：加入守住事件日低點的條件進一步加劇了訊號稀疏問題，使得交易機會由 v001 的 25 筆降至 16 筆；盲檢討亦指出事件到期邊界與未對齊的成交量參數可能增加過濾雜訊。
+- 尚不能判斷：由於樣本過少且 2018 年少數交易貢獻近半獲利，無法由 16 筆交易判斷事件記憶結構是否具備真實因果優勢。
+
+## 下一輪
+
+- 建議處置：停止本事件記憶與縮量守低假說，不在此 Study 放寬門檻。
+- 下一個 Study 只測：若需繼續布林研究，應簡化觸發條件或改進持有期配對，不再疊加事件觀察與守低狀態機。
+- 成功／失敗條件：完成交易至少 20 筆（優先滿足流程底線），stress PF > 1.10、報酬 > 0 且通過各年度穩健性檢查。
+- 不得沿用的問題：不得在未修正事件到期與未對齊參數的情況下沿用此複雜事件狀態機。
+
+## 證據連結
+
+- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-bollinger-rebound--v002/manifests/preregistration.yml`
+- Candidate definition：`research/tsm-mean-reversion-bollinger-rebound--v002/candidate-definition.yml`
+- Development evidence：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-bollinger-rebound--v002/evidence/development.yml`
+- 程式／測試：`research/tsm-mean-reversion-bollinger-rebound--v002/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_bollinger_rebound_v002.py`、`tests/test_tsm_mean_reversion_bollinger_rebound_v002.py`
+- 詳細盲檢討：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-bollinger-rebound--v002/reviews/001-first-review.md`
+
+---
+
+# `tsm-mean-reversion-supplemental-divergence--v001`：Study Development 成果卡
+
+- Development 判定：`未完成`
+- Provenance（來源可信狀態）：`provenance-unknown`
+- 前一個 Study：無（補充量價背離系列第一份）
+- 記錄日期：`2026-09-08`
+
+## 結論
+
+> 規格預計在 2014–2018、base 每邊 1/5 bps 與 stress 每邊 2/20 bps 下，測試在原有均值回歸之外新增「量價背離補充進場路徑」的效果；但允許讀取範圍內沒有 outcome-bearing Development evidence，因此本 Study 的 Development 結果不可判定，不能支持或否證原始假說。
+
+## 研究變更
+
+- 研究問題或假說：TSM 在既有跌深反彈條件之外，若在低檔出現價格破底但成交量未創高的量價背離現象，補充進場能否增加有效交易機會。
+- 相較上一個 Study 只改：本系列首份候選；新增量價背離補充觸發路徑（ATR 距離、近 3 日低點比對與成交量分數）。
+- 保持不變或比較基準：10-session 持有、退場後 5-session cooldown、2% risk budget、-4%／+4% stop-target 與相同成本。
+
+## 主要結果
+
+| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Development / base | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
+| Development / stress | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
+
+- 交易年度覆蓋：未執行（規格規劃 2014–2018）
+- 失敗 gate：未執行；缺少 Development evidence。
+- 未執行項目與原因：整體 Development trial 未產出可核對的 outcome-bearing evidence；base、stress 與各項診斷均未執行。
+
+## 主要發現
+
+- 已確認：規格、Development authorization、runner、策略程式與測試均存在於允許路徑，但沒有可供核對的結果 evidence。
+- 可能原因：Study 可能停在驗證或授權階段，尚未正式封存 trial 結果；這是依檔案現況的推論，無法由證據證實具體停頓原因。
+- 尚不能判斷：無法判斷補充背離路徑的交易數、報酬、PF、回撤或 gate 是否通過。
+
+## 下一輪
+
+- 建議處置：補齊固定規格的 Development trial 證據，不修改候選規則。
+- 下一個 Study 只測：產出已登記候選的完整 Development evidence 與 bindings。
+- 成功／失敗條件：依 preregistration 的完整 gates 檢查完成交易（至少 20 筆）、年度覆蓋、base/stress 報酬與 PF；任一 gate 失敗即否證。
+- 不得沿用的問題：不得以程式或授權存在代替實際 outcome-bearing evidence。
+
+## 證據連結
+
+- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-supplemental-divergence--v001/manifests/preregistration.yml`
+- Candidate definition：`research/tsm-mean-reversion-supplemental-divergence--v001/candidate-definition.yml`
+- Development evidence：無（允許路徑未找到）
+- 程式／測試：`research/tsm-mean-reversion-supplemental-divergence--v001/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_supplemental_divergence_v001.py`、`tests/test_tsm_mean_reversion_supplemental_divergence_v001.py`
+- 詳細盲檢討：無
+
+---
+
+# `tsm-mean-reversion-supplemental-divergence--v002`：Study Development 成果卡
+
+- Development 判定：`未完成`
+- Provenance（來源可信狀態）：`provenance-unknown`
+- 前一個 Study：`tsm-mean-reversion-supplemental-divergence--v001`
+- 記錄日期：`2026-09-08`
+
+## 結論
+
+> 本 Study 延續相同的量價背離補充路徑規格，更新 Study 與 candidate 版本識別；但允許讀取範圍內仍未產出 outcome-bearing Development evidence。因此本 Study 尚未完成，無法判定補充路徑是否有效。
+
+## 研究變更
+
+- 研究問題或假說：維持 TSM 均線偏離 1.5%、RSI(2)≤50、成交量先行 1.05 與量價背離補充路徑的雙重觸發設計。
+- 相較上一個 Study 只改：規格中僅見 candidate family 與版本識別更新；未見策略進出場、成本或風控語義變更。
+- 保持不變或比較基準：10-session 持有、5-session cooldown、2% risk budget、-4%／+4% stop-target 與相同成本。
+
+## 主要結果
+
+| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Development / base | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
+| Development / stress | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
+
+- 交易年度覆蓋：未執行（規格規劃 2014–2018）
+- 失敗 gate：未執行；無 Development evidence。
+- 未執行項目與原因：未產出結果檔，base、stress、年度分段與 bootstrap 均未執行。
+
+## 主要發現
+
+- 已確認：v002 規格與程式測試齊全，但結果檔不存在於允許路徑。
+- 可能原因：可能是為了排解前一版本的執行或註冊流程問題，但仍未完成結果封存；現有資料無法斷定。
+- 尚不能判斷：無法判斷策略表現、交易容量或是否通過任何事前 gates。
+
+## 下一輪
+
+- 建議處置：只執行一次固定規格的 Development trial 並封存 evidence，不再改動訊號。
+- 下一個 Study 只測：同一量價背離候選的 Development evidence 產出。
+- 成功／失敗條件：完整 gates 均有 actual 且通過門檻；缺漏任何一項即未完成。
+- 不得沿用的問題：不得以版本號遞增代替實際結果。
+
+## 證據連結
+
+- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-supplemental-divergence--v002/manifests/preregistration.yml`
+- Candidate definition：`research/tsm-mean-reversion-supplemental-divergence--v002/candidate-definition.yml`
+- Development evidence：無（允許路徑未找到）
+- 程式／測試：`research/tsm-mean-reversion-supplemental-divergence--v002/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_supplemental_divergence_v002.py`、`tests/test_tsm_mean_reversion_supplemental_divergence_v002.py`
+- 詳細盲檢討：無
+
+---
+
+# `tsm-mean-reversion-supplemental-divergence--v003`：Study Development 成果卡
+
+- Development 判定：`未完成`
+- Provenance（來源可信狀態）：`provenance-unknown`
+- 前一個 Study：`tsm-mean-reversion-supplemental-divergence--v002`
+- 記錄日期：`2026-09-08`
+
+## 結論
+
+> 本 Study 再次保留相同的量價背離補充架構，進行第三次程序版本更新；但允許讀取範圍內依然缺少 Development evidence。故無法判定任何 base 或 stress 指標，本 Study 處於未完成狀態。
+
+## 研究變更
+
+- 研究問題或假說：確認量價背離補充路徑在 TSM 均值回歸中的表現。
+- 相較上一個 Study 只改：Study 及 candidate 版本識別更新；未見訊號、成本或執行規則變更。
+- 保持不變或比較基準：10-session 持有、5-session cooldown、2% risk budget、-4%／+4% stop-target 與相同成本。
+
+## 主要結果
+
+| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Development / base | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
+| Development / stress | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
+
+- 交易年度覆蓋：未執行（規格規劃 2014–2018）
+- 失敗 gate：未執行；無結果 evidence。
+- 未執行項目與原因：缺少 Development evidence，不能填入任何預期值。
+
+## 主要發現
+
+- 已確認：v003 仍維持相同策略架構與檔案結構，但無可核對的結果檔。
+- 可能原因：版本更迭可能涉及 runner 或環境調校，但尚未產生正式 evidence。
+- 尚不能判斷：無法評估背離補充路徑的實際交易次數與獲利能力。
+
+## 下一輪
+
+- 建議處置：專注產出完整的 Development evidence，避免持續同規則重發。
+- 下一個 Study 只測：產出本策略的完整 evidence 與資料綁定。
+- 成功／失敗條件：完成交易至少 20 筆、stress 報酬大於 0、PF > 1.0、最大回撤在限度內且重抽樣 gate 全數通過。
+- 不得沿用的問題：不得在未產出 evidence 前宣稱策略具備重現性。
+
+## 證據連結
+
+- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-supplemental-divergence--v003/manifests/preregistration.yml`
+- Candidate definition：`research/tsm-mean-reversion-supplemental-divergence--v003/candidate-definition.yml`
+- Development evidence：無（允許路徑未找到）
+- 程式／測試：`research/tsm-mean-reversion-supplemental-divergence--v003/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_supplemental_divergence_v003.py`、`tests/test_tsm_mean_reversion_supplemental_divergence_v003.py`
+- 詳細盲檢討：無
+
+---
+
+# `tsm-mean-reversion-supplemental-divergence--v004`：Study Development 成果卡
+
+- Development 判定：`通過`
+- Provenance（來源可信狀態）：`provenance-unknown`
+- 前一個 Study：`tsm-mean-reversion-supplemental-divergence--v003`
+- 記錄日期：`2026-09-08`
+
+## 結論
+
+> 在 2014–2018、base 每邊 1/5 bps 與 stress 每邊 2/20 bps 成本下，本 Study 的 Development 結果支持「均值回歸搭配量價背離補充路徑」的候選假說：完成交易 27 筆覆蓋五年，base 報酬 38.73%（PF 5.967）、stress 報酬 30.40%（PF 4.831），且最大回撤僅 2.00%，事前登記事前 gates 全數通過。
+
+## 研究變更
+
+- 研究問題或假說：TSM 低於 SMA(20) 1.5%、RSI(2)≤50 且成交量比率≥1.05 時，加入量價背離補充路徑是否能捕捉更優質的反彈時機。
+- 相較上一個 Study 只改：完成並封存可核對之正式 Development evidence；策略進出場與風控規則維持同一設定。
+- 保持不變或比較基準：10-session 持有、5-session cooldown、2% risk budget、-4%／+4% stop-target、base／stress 成本。
+
+## 主要結果
+
+| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Development / base | 27 | 38.73% | 5.967 | 2.00% | 通過 |
+| Development / stress | 27 | 30.40% | 4.831 | 2.00% | 通過 |
+
+- 交易年度覆蓋：5（2014–2018）
+- 失敗 gate：無；所有事前 Development gates（包含報酬、獲利因子、回撤、交易數與逐年剔除）全數通過。
+- 未執行項目與原因：無；正式 evidence 完整。
+
+## 主要發現
+
+- 已確認：27 筆交易跨足五年（各年 2 至 7 筆），stress block bootstrap 正報酬比例為 100%、回撤超標比例為 0%，leave-one-year-out 逐年剔除後最低 stress 報酬仍有 19.73%、PF 3.792。
+- 可能原因：低檔量價背離補充條件成功提供第二條有效過濾路徑，在未過度限制樣本的情況下提升了整體交易勝率與盈虧比；但背離條件與主路徑的邊際貢獻仍需進一步消融分析。
+- 尚不能判斷：無獨立的 provenance declaration，來源可信狀態仍屬未確認；此外，背離各項參數（ATR 倍數、lookback 窗口）是否過度擬合尚無法從單一資料集得出定論。
+
+## 下一輪
+
+- 建議處置：建立有限 follow-up Study，對量價背離補充路徑進行單一參數敏感度測試或消融驗證。
+- 下一個 Study 只測：單獨關閉或調整量價背離補充路徑中的觀察窗口（例如由 5 個 session 改為 3 個），其他參數不變。
+- 成功／失敗條件：完成交易至少 20 筆，base/stress 報酬與 PF 維持通過，stress 回撤不超過 5%；任何 gate 失敗即否證該參數變更。
+- 不得沿用的問題：不得在未做單一機制消融前，斷言量價背離為績效改善的唯一原因。
+
+## 證據連結
+
+- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-supplemental-divergence--v004/manifests/preregistration.yml`
+- Candidate definition：`research/tsm-mean-reversion-supplemental-divergence--v004/candidate-definition.yml`
+- Development evidence：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-supplemental-divergence--v004/evidence/development.yml`
+- 程式／測試：`research/tsm-mean-reversion-supplemental-divergence--v004/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_supplemental_divergence_v004.py`、`tests/test_tsm_mean_reversion_supplemental_divergence_v004.py`
+- 詳細盲檢討：無
+
