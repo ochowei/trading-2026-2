@@ -1,0 +1,64 @@
+engine:
+  cost_constant: BASE_COST
+  path: src/trading_2026_2/tsm_mean_reversion_bollinger_rebound_v002.py
+  spec_constant: DEFAULT_SPEC
+execution_contract:
+  cooldown:
+    anchor: completed-position-exit
+    completed_session_steps: 5
+  entry:
+    decision_bar_must_be_complete: true
+    order: MARKET
+    timing: next-XNYS-open
+  intraday:
+    gap_stop_uses_open: true
+    gap_target_uses_open: true
+    same_session_stop_and_target: stop-first
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    risk_fraction_of_pre_entry_equity: '0.02'
+    stop_risk_includes_costs: true
+  time_exit:
+    exit_timing: following-open
+    held_complete_sessions: 10
+indicator_contract:
+  bollinger:
+    ddof: 0
+    percent_b_zero_bandwidth: not-ready-nan
+    standard_deviation_multiplier: '2.0'
+    window: 20
+  columns:
+    bollinger_percent_b: bollinger_percent_b
+    event_volume_ratio: event_volume_ratio
+    rebound_confirmation: rebound_confirmation_signal
+    rsi: rsi_2
+    sma: sma_20
+    volume_lead: prior_volume_spike_ratio
+  event_volume:
+    average_excludes_event_day: true
+    average_length: 20
+    current_volume_is_compared: true
+    ratio_minimum: '1.05'
+  required_history_sessions: 25
+  rsi:
+    formula: simple-rolling-mean
+    length: 2
+    min_periods: 2
+    not_ready: null
+    zero_gain_and_loss: 50
+    zero_gain_only: 0
+    zero_loss_only: 100
+  sma:
+    lookback: 20
+    min_periods: 20
+    not_ready: null
+  volume_lead:
+    average_min_periods: 20
+    lead_min_periods: 5
+    prior_session_window: 5
+    uses_prior_sessions_only: true
+    volume_average_length: 20
+schema_version: 1
+synthetic_contract_case:
+  production_data_not_used: true
+  purpose: studyctl-boundary-smoke-only

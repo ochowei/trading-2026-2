@@ -1,0 +1,9 @@
+authorization_basis: 使用者指定 study 開發者，要求依事前登記的「布林低檔放量後，縮量守低，再確認回升」假說執行一次 Development；只開啟 warmup-only 與 Development view，不執行正式 Historical Evaluation。
+authorized_at: '2026-09-08T00:00:00Z'
+authorized_by: codex-study-developer
+data_roles:
+  - warmup-only
+  - development
+network_access: false
+scope: development-only
+study_id: tsm-mean-reversion-bollinger-rebound--v002

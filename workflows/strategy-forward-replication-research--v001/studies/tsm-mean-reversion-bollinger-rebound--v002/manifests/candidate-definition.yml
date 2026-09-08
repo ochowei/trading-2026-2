@@ -1,0 +1,74 @@
+baseline_id: tsm-mr-bollinger-simple-baseline-v002
+candidate_id: tsm-mr-bollinger-event-rebound-v002
+costs:
+  base:
+    fee_per_side_bps: '1'
+    slippage_per_side_bps: '5'
+  stress:
+    fee_per_side_bps: '2'
+    slippage_per_side_bps: '20'
+execution:
+  held_complete_sessions: 10
+  maximum_holding_session_span_for_validator: 11
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    modeled_stop_includes_costs: true
+    risk_fraction_of_pre_entry_equity: '0.02'
+    shares: maximum-integer-under-cash-and-stop-risk-budgets
+  stop:
+    level_from_raw_entry_open: '-0.040'
+    order: STOP_MARKET
+    time_in_force: GTC
+  target:
+    level_from_raw_entry_open: '0.040'
+    order: LIMIT
+    reissued_each_open_position_session: true
+    time_in_force: DAY
+experiment_family: tsm-bollinger-event-rebound-v002
+fold_policy:
+  evaluation_fold_warmup_sessions: 25
+  signal_cutoff: require-entry-and-exit-within-active-period
+implementation:
+  engine_spec_constant: DEFAULT_SPEC
+  strategy_engine_path: src/trading_2026_2/tsm_mean_reversion_bollinger_rebound_v002.py
+schema_version: 1
+signal:
+  bollinger:
+    close_column: Close
+    ddof: 0
+    percent_b_maximum: '0.25'
+    percent_b_operator: <=
+    standard_deviation_multiplier: '2.0'
+    window: 20
+  confirmation:
+    close_above_prior_close: true
+    close_vs_sma20_gap_minimum: '0.015'
+    close_vs_sma20_gap_operator: '>='
+    uses_bollinger_percent_b: false
+    uses_rsi: false
+  cooldown:
+    clock_anchor: completed-position-exit
+    completed_session_steps_after_exit: 5
+  decision_time: completed-session-close
+  event:
+    additional_event_volume_spikes_do_not_reset_window: true
+    event_day_low_is_reference_low: true
+    event_day_volume_excluded_from_average: true
+    event_observation_sessions: 5
+    invalidation_close_below_event_day_low: true
+    trigger_percent_b_maximum: '0.25'
+    trigger_volume_average_sessions: 20
+    trigger_volume_ratio_minimum: '1.05'
+  mean_reversion:
+    rsi_length: 2
+    rsi_maximum: '50'
+    rsi_role: diagnostic-only
+    sma_length: 20
+  symbol: TSM
+  volume_leads_price:
+    event_day_current_volume: true
+    prior_session_window: 5
+    volume_average_length: 20
+    volume_ratio_minimum: '1.05'
+    volume_shock_is_before_signal: false
+source_study: tsm-mean-reversion-bollinger-rebound--v001
