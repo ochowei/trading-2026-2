@@ -7,6 +7,17 @@ description: 檢討 strategy-forward-replication-research--v001 的指定 Study�
 
 檢查策略為什麼在設計上可能不穩、Development 是否已經出現警訊，以及下一輪應優先驗證什麼，同時保留正式 Evaluation 作為一次性、未揭露的驗證資料。
 
+## Blind review 與 Historical Evaluation 的狀態獨立
+
+`blind_review_status`／`blind_review_eligible` 只由「正式 Evaluation 結果是否已曝光」和「帶有結果的 Terminal 內容是否已曝光」判定。不得讀取或使用 `historical_evaluation_status` 推導資格；Historical Evaluation `not_started` 不會阻止盲檢討，Study 已 terminal 也不會單獨阻止盲檢討。只有結果確實暴露、因而無法維持盲性時，才設為 `blocked-by-exposed-outcome`。
+
+Development evidence 是盲檢討可用的證據來源，不是盲檢討的必要資格條件。缺少
+`evidence/development.yml` 時，scope checker 必須回報
+`blind_review_status: eligible-with-development-evidence-unavailable`，明確標示
+`development_evidence_status: unavailable`，仍可檢查設計、程式與可取得的 Development
+警訊；報告要寫明沒有足夠 Development evidence，不能把它誤稱為 Historical Evaluation
+尚未執行，也不能因此拒絕整個 review。
+
 ## 使用角色限制
 
 - 本 skill 只能由 **超級管理者** 或 **study 開發者** 使用。
@@ -22,13 +33,17 @@ description: 檢討 strategy-forward-replication-research--v001 的指定 Study�
 
 ## 開始前的停止條件
 
-先檢查目前對話內容與本 task 已取得的資訊。如果已經出現目標 Study 的正式 Historical Evaluation 或 Terminal 結果，包括 pass/fail、交易、指標、年度表現或失敗 gate：
+先檢查目前對話內容與本 task 已取得的資訊。如果已經出現目標 Study 的正式 Historical Evaluation 結果，或帶有 outcome 的 Terminal 內容，包括 pass/fail、交易、指標、年度表現或失敗 gate：
 
 1. 不得進行封存式檢討，也不得假裝忽略已知結果。
 2. 告知使用者目前 task 已受到結果資訊影響。
 3. 請使用者在沒有帶入結果的新 task 重新呼叫本 skill。
 
-只知道 Study ID、資料期間、session 清冊或內容 digest，不算策略結果曝光。
+只知道 Study ID、資料期間、session 清冊、內容 digest、Historical Evaluation
+`not_started`，或「Study 已 terminal」但沒有 outcome-bearing 內容，不算結果曝光。若呼叫
+scope checker 的程式已由上游明確確認結果曝光，才使用相應的
+`--formal-evaluation-exposed` 或 `--outcome-bearing-terminal-exposed` 旗標；不要自行讀取
+被禁止的結果檔案來判斷旗標。
 
 ## 必做的範圍檢查
 
@@ -40,6 +55,11 @@ python3 .agents/skills/blind-review-strategy-study/scripts/check_scope.py <study
 
 只有輸出 `eligible` 且 exit code 為 0 才能繼續。檢查失敗時直接回報拒絕原因，不要先列檔、搜尋內容或嘗試繞過檢查。
 
+只有明確知道結果已曝光時才加上對應旗標；scope checker 不會查看
+`historical_evaluation_status` 或 Study terminal 狀態，也不會因此拒絕盲檢討。若有正式
+Evaluation 結果或帶結果 Terminal 內容的曝光資訊，checker 應回報
+`blind_review_status: blocked-by-exposed-outcome` 並停止。
+
 範圍通過後，完整閱讀 [references/review-method.md](references/review-method.md)，並嚴格遵守其中的讀取白名單、禁止清單、分析方法和報告格式。
 
 ## 執行原則
@@ -49,7 +69,7 @@ python3 .agents/skills/blind-review-strategy-study/scripts/check_scope.py <study
 - 不得執行涵蓋 Historical Evaluation 或 quarantine 日期的回測；Development 前資料只能作為指標 warmup。
 - 不得把設計弱點寫成已證明的 Evaluation 失敗原因，也不得保證建議能改善正式結果。
 - 發現實作與 preregistration 不一致時，清楚區分「程式錯誤」與「策略假說本身可能無效」。
-- 若必要檔案缺失或角色不明，停止該項分析並說明限制，不要擴大讀取範圍。
+- 若角色不明或 preregistration／candidate definition 缺失，停止該項分析並說明限制，不要擴大讀取範圍。Development evidence 缺失或無法驗證時，不停止整個 blind review；只把 Development 證據狀態標為 `unavailable`／`needs-repair`，並限制相關結論。
 
 ## Review 結果輸出
 

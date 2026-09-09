@@ -1,0 +1,86 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  candidate_freeze_eligibility:
+    additionalProperties: false
+    properties:
+      eligible:
+        type: boolean
+      reasons:
+        items:
+          minLength: 1
+          type: string
+        type: array
+      status:
+        enum:
+          - eligible
+          - ineligible
+        type: string
+    required:
+      - status
+      - eligible
+      - reasons
+    type: object
+  development_evidence_validity:
+    additionalProperties: false
+    properties:
+      reason:
+        minLength: 1
+        type: string
+      status:
+        enum:
+          - valid
+          - invalid
+          - blocked
+          - needs-repair
+          - unavailable
+        type: string
+      validated:
+        type: boolean
+    required:
+      - status
+      - validated
+    type: object
+  formal_development_gates:
+    additionalProperties: false
+    properties:
+      failed:
+        items:
+          minLength: 1
+          type: string
+        type: array
+      status:
+        enum:
+          - passed
+          - failed
+          - not_available
+        type: string
+    required:
+      - status
+      - failed
+    type: object
+  research_targets:
+    additionalProperties: false
+    properties:
+      failed:
+        items:
+          minLength: 1
+          type: string
+        type: array
+      status:
+        enum:
+          - passed
+          - failed
+          - not_registered
+          - not_available
+        type: string
+    required:
+      - status
+      - failed
+    type: object
+required:
+  - formal_development_gates
+  - research_targets
+  - development_evidence_validity
+  - candidate_freeze_eligibility
+type: object

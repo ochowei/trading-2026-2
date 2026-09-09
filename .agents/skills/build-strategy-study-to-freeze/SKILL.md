@@ -9,6 +9,34 @@ description: 為 strategy-forward-replication-research--v001 建立單一新 Stu
 
 本 skill 必須搭配 repository 的唯讀 `research/tools/studyctl.py`。它補足人工閱讀與 writer validator 不容易及早發現的規格／實作落差，是 candidate freeze 前的硬閘門；它不會寫入 Event，也不取代 workflow writer 或 validator。
 
+## 階段狀態必須分開記錄
+
+Development 的「正式 gates 是否通過」、research targets 是否達標、evidence 是否可驗證、blind review 是否仍可盲檢、Historical Evaluation 的生命週期，以及 candidate freeze 是否具備資格，是六個不同問題。不得用其中一個欄位代替另一個欄位，也不得用 `historical_evaluation_status` 或 Study 的 terminal 狀態推導 `blind_review_eligible`。
+
+新 Development runner 應以 `research/tools/development_status.py` 及其
+`development-status.schema.yml` 產出並驗證 `development_status`，至少保留下列獨立欄位：
+
+| 欄位 | 實際代表的問題 | 失敗時的影響 |
+| --- | --- | --- |
+| `formal_development_gates` | 預先登記、會由 validator 重算的正式門檻是否通過 | 決定 Development 的正式 `disposition`；不會把 evidence 自動變成無效 |
+| `research_targets` | 研究用途的目標是否達標 | 只影響 `candidate_freeze_eligibility`；不得混入 `failed_gates` 或 `disposition` |
+| `development_evidence_validity` | raw trades、metrics、bindings 與狀態表是否可驗證 | `valid` 以外不得凍結候選；可修復問題使用 `needs-repair`／`blocked`，不直接宣告 Study terminal |
+| `blind_review` | 在沒有結果洩漏時是否可做盲檢討 | 只有明確暴露正式 Evaluation 結果或帶結果的 Terminal 內容才可設為 blocked |
+| `historical_evaluation` | 正式 Evaluation 自己的狀態 | 不參與 blind review eligibility 的推導 |
+| `candidate_freeze_eligibility` | 是否同時具備凍結候選的條件 | 可因正式 gates、research targets 或 evidence validity 不合格而為 ineligible |
+
+正式 gates 通過而 research targets 失敗時，仍須產出合法、可重算、可驗證的
+`evidence/development.yml`：`disposition: pass`、`failed_gates: []`，並分開保存 target
+失敗與 candidate freeze 不合格原因。不得把 target 失敗塞進 `workflow_failures`，也不得為了
+讓既有 Study 通過而補造或回填 evidence。Development evidence 缺失時，交接狀態要明示
+`development_evidence_validity: unavailable`，但不因此把 blind review 誤判成 Historical
+Evaluation 尚未執行而拒絕。
+
+blind review 的判定只接受明確的 outcome exposure 輸入：正式 Evaluation 結果曝光，或帶有
+結果的 Terminal 內容曝光。Historical Evaluation `not_started`、`running` 或尚未執行，以及
+Study 已 terminal 但沒有結果曝光，都不能單獨拒絕 blind review。這套狀態契約是新增 runner
+的相容層；已發布的 v001 workflow package 與既有 Study 不在本 skill 中回填或改寫。
+
 ## 使用角色限制
 
 - 本 skill 只能由 **study 開發者** 使用。
@@ -48,8 +76,9 @@ python3 .agents/skills/build-strategy-study-to-freeze/scripts/check_new_study.py
 - 正式資料優先引用 repository 公用的 immutable snapshot；只有 runner 或正式 artifact 明確無法解析 reference 時，才可建立 Study 內的物化副本。資料重用本身不得在本 skill 執行策略。
 - 不得執行或發布 `historical-evaluation-completed` 及其後事件。
 - Candidate freeze 後不得修改 Source Bundle、候選、資格規格、資料綁定、選擇證據或任何 outcome-relevant 程式。
-- 任一 Development gate 失敗時保留 Trial，依 preregistered 規則凍結 registry 並走提前終止；不得調低 gate 後重跑成同一 Study。
-- `study-created` 之後若發現 implementation contract、Source Bundle 或其他 frozen binding 的完整性錯誤，且尚未產生 outcome-bearing trial，必須走 `evidence-unavailable` → `study-terminal` 的提前終止鏈；不得只在對話中宣告「停止」。
+- 任一 Development gate 失敗時保留合法 Trial evidence，依 preregistered 規則判定 candidate freeze 是否不適用；若規則要求 terminal-without-candidate，才走對應的提前終止鏈，不得調低 gate 後重跑成同一 Study。
+- research target 失敗不是 evidence failure；只會讓 `candidate_freeze_eligibility` 為 ineligible，仍可保留 Trial 並交給 blind review 檢查設計、程式與 Development 警訊。
+- `study-created` 之後若發現 implementation contract、Source Bundle 或其他 frozen binding 的完整性錯誤，先區分是否只是可修復的 evidence 問題。可修復問題以 `needs-repair`／`blocked` 交接，不得直接 `study-terminal`；只有 workflow 明定的不可修復且尚未產生 outcome-bearing trial 情況，才走 `evidence-unavailable` → `study-terminal` 的提前終止鏈；不得只在對話中宣告「停止」。
 
 ## 資料取得與 shared reference-first
 
@@ -90,7 +119,7 @@ python3 .agents/skills/build-strategy-study-to-freeze/scripts/check_new_study.py
 2. Preregistration、qualification spec 與執行器對 Development、Evaluation gate 完全一致，而且每個正式 gate 都是 workflow validator 能重算的 metric。
 3. Source Bundle 在 Study 建立前納入所有 outcome-relevant 程式，包括 Development runner、Historical Evaluation runner、策略引擎、測試與 implementation contract；每個 contract 檔案都必須有明確路徑與 digest 綁定。
 4. Historical Evaluation runner 必須能只靠 frozen inputs 產生 schema-compliant raw evidence；本 skill 只能用合成資料測試它，不得對正式 Evaluation snapshot 執行。
-5. Development evidence 保存 preregistered 分段、leave-one-year-out、block bootstrap 或其他診斷，不得只保存摘要 pass/fail。
+5. Development evidence 保存 preregistered 分段、leave-one-year-out、block bootstrap 或其他診斷，不得只保存摘要 pass/fail；runner 另須分開寫出 formal gates 與 research targets，並由 `development_status` 固定 evidence validity 與 candidate freeze eligibility。
 6. Study 與 `research/<study-id>/` 使用同一 ID；正式 artifacts 只經 guarded writer 發布，事件只經 writer 追加；raw data 預設以公用 shared reference 綁定，不因 Study ID 而複製一份。
 7. 最後執行完整測試、Ruff、Source Bundle hash 重算與 writer validator。
 
@@ -169,9 +198,10 @@ qualification、Development trial inputs、Source Bundle 及其所綁定的 evid
 不得只修改其中一個 digest。已發布的 artifact 與 Event 一律不可覆寫；有錯時保留舊檔，
 以新路徑發布修正版並由 writer 重新綁定。
 
-Development gate 失敗時仍須保留 Trial，依 preregistered 規則進入合法的
+Development gate 失敗時仍須保留可驗證的 Trial evidence，依 preregistered 規則進入合法的
 `terminal-without-candidate`；candidate freeze 不適用，也不得為了滿足 CLI 所需欄位
-製造 candidate、selection 或 provenance evidence。
+製造 candidate、selection 或 provenance evidence。這是正式 gate 的 lifecycle 結果，不等於
+evidence 無效，也不會自動成為 blind review 的拒絕理由。
 
 ### 提前終止與封存
 
@@ -195,6 +225,11 @@ Development gate 失敗時仍須保留 Trial，依 preregistered 規則進入合
 績效結果的 Study 誤標成 `fail`。`study-paused` 只保留給可恢復的 technical/publication
 interruption，不取代正式終止。
 
+若錯誤只是 evidence 尚未完整寫出、digest 可重新計算、輸出路徑暫時被占用或其他可修復
+問題，不得套用上述 terminal 流程。Development runner 應停止發布、保留原始錯誤、交接
+`development_evidence_validity.status: needs-repair`（必要時為 `blocked`），修復後從原始
+輸入重新產出，不得修改既有 immutable artifact。
+
 執行順序如下：
 
 1. 先以 `git rev-parse --show-toplevel` 取得並記錄 repository root 絕對路徑，確認 authority root 為其 `.authority/`，執行 `check_authority_root.py --phase new`；再跑 `check_new_study.py`。這兩步都不能寫入 Study，也不能用 `studyctl all` 取代。
@@ -214,7 +249,7 @@ uv run python research/tools/studyctl.py \
 
 `all` 會依序檢查 identity、contract、synthetic 與 freeze。以下任一類問題都必須先修正或依 preregistered 規則終止 Study：舊 Study 路徑殘留、candidate／preregistration／qualification 不一致、validator 不支援的 gate、warmup 太短、指標尚未 ready 就被使用、RSI／交易邊界語意不明、Source Bundle 或 authority digest 不符，以及 workflow validator 拒絕。
 
-Development gate 失敗而 workflow 已合法進入 `terminal-without-candidate` 時，candidate freeze 不適用；不要為了讓 CLI 通過而補造 candidate、selection 或 provenance evidence。此分支應核對 `studyctl freeze` 回報的 terminal state 與 authority，然後依提前終止規則交接；若 CLI 回報的是已存在 artifact 的實際錯誤，仍須修正或記錄。
+Development gate 失敗而 workflow 已合法進入 `terminal-without-candidate` 時，candidate freeze 不適用；不要為了讓 CLI 通過而補造 candidate、selection 或 provenance evidence。此分支應核對 `studyctl freeze` 回報的 terminal state 與 authority，然後依提前終止規則交接；若 CLI 回報的是已存在 artifact 的實際錯誤，仍須修正或記錄。若只是 research target 失敗，不能把它當成這個 terminal 分支；先保留合法 Development evidence，讓 blind review 繼續依設計、程式與 Development 警訊檢查。
 
 `studyctl` 是檢查器，不是事件發布器。通過後仍只能用 guarded writer 追加 `candidate-frozen`，並立即重新執行 writer validator；CLI 的命令、Study ID、status、contract 路徑、derived history、Source Bundle digest 與 authority 驗證結果要記入交接摘要或既有 audit 紀錄。
 
