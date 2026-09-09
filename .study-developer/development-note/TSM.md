@@ -1226,3 +1226,57 @@
 - 程式／測試：`research/tsm-mean-reversion-supplemental-divergence--v004/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_supplemental_divergence_v004.py`、`tests/test_tsm_mean_reversion_supplemental_divergence_v004.py`
 - 詳細盲檢討：無
 
+---
+
+# `tsm-mean-reversion-selling-pressure-rollover--v001`：Study Development 成果卡
+
+- 成果卡狀態：`evidence-unavailable`
+- Development gate：`尚不能判斷`
+- Provenance（來源可信狀態）：`verified-clean`
+- candidate_freeze_status：`已完成`
+- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v009`（Path A 明示來源）
+- 記錄日期：`2026-09-09`
+
+## 結論
+
+> 本 Study 預先設定 2014–2018、base 每邊 1 bps 費用／5 bps 滑價、stress 每邊 2／20 bps，並要求至少 20 筆交易、3 個交易年度及正報酬與 PF 門檻。但必要的 Development evidence 不存在，因此無法判定新增「賣壓翻轉」Path B 是否改善成本後的均值回歸，也不能判定任何 gate 通過或失敗。
+
+## 研究變更
+
+- 研究問題或假說：TSM 超跌時，價格尚未反轉，但賣方成交量可能已先衰退。若三個 session 的 Signed Volume Balance（依漲跌方向加總成交量的賣壓指標）由前五個 session 的極負值回升，可能增加可接受的均值回歸交易。
+- 相較上一個 Study 只改：保留 v009 的 Path A，新增不要求訊號日收盤上漲的 Path B；Path B 要求目前 SVB3 ≥ -0.15，且前五個 session 的最低值 ≤ -0.50。
+- 保持不變或比較基準：SMA(20) 超跌 1.5%、RSI(2)≤50、下一個開盤進場、持有 10 個完整 session、5-session cooldown、2% risk budget、-4% stop／+4% target，以及簡單超跌 baseline。
+
+## 主要結果
+
+| 條件 | 狀態 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | gate／備註 |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| Development / base | 證據不可用：`evidence/development.yml` 不存在 | — | — | — | — | 停止分析 |
+| Development / stress | 證據不可用：`evidence/development.yml` 不存在 | — | — | — | — | 停止分析 |
+
+- 交易年度覆蓋：證據不可用，無法確認。
+- 失敗 gate：停止分析；沒有合法 evidence，不能判定通過或失敗。
+- 未執行項目與原因：base／stress 指標、年度分段、bootstrap、逐年剔除與 gate 判定均無法核對；不得填零或推測。
+
+## 主要發現
+
+- 已確認：規格、Development inputs、runner、策略程式與測試路徑均存在；provenance declaration 為 `verified-clean`，並明確記載 candidate freeze 已完成。
+- 可能原因：Development evidence 可能未產出或未發布；這只是低強度推論，現有資料無法確認實際原因。
+- 尚不能判斷：交易數、報酬、PF、回撤、假說是否成立，以及任何 Development gate 狀態。
+- 證據缺口與影響：缺少 `workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-selling-pressure-rollover--v001/evidence/development.yml`，因此程式、測試與輸入檔不能代替實際結果證據。
+
+## 下一輪
+
+- 建議處置：修正 Development evidence 的產製與 validator 綁定流程，不調整策略參數。
+- 下一個 Study 只測：以相同凍結候選補齊可驗證的 base／stress Development evidence。
+- 成功／失敗條件：validator 接受合法 evidence，且兩種成本情境都含實際交易數、報酬、PF、回撤、年度與必要 diagnostics；否則仍為 `evidence-unavailable`。
+- 不得沿用的問題：不得以程式存在、測試通過、輸入檔存在或 provenance 狀態推論策略結果。
+
+## 允許讀取的 repository-relative 來源
+
+- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-selling-pressure-rollover--v001/manifests/preregistration.yml`
+- Candidate definition：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-selling-pressure-rollover--v001/manifests/candidate-definition.yml`
+- Development evidence：無；上述 `evidence/development.yml` 不存在
+- 程式／測試：`research/tsm-mean-reversion-selling-pressure-rollover--v001/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_selling_pressure_rollover_v001.py`、`tests/test_tsm_mean_reversion_selling_pressure_rollover_v001.py`
+- Provenance：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-selling-pressure-rollover--v001/evidence/provenance.yml`
+- 詳細盲檢討：無
