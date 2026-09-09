@@ -24,15 +24,18 @@
 
 # `<study-id>`：Study Development 成果卡
 
-- Development 判定：`通過`／`未通過`／`不可判定`／`未完成`
+- 成果卡狀態：`complete`／`failed`／`partial`／`evidence-unavailable`／`indeterminate`
+- Development gate：`通過`／`失敗`／`尚不能判斷`／`未執行或部分執行`
 - Provenance（來源可信狀態）：`verified-clean`／`known-contaminated`／`provenance-unknown`／`未確認`
+- candidate_freeze_status：`已完成`／`未完成`／`不適用`／`尚不能判斷`
 - 前一個 Study：`<study-id>`／無
 - 記錄日期：`<YYYY-MM-DD>`
 
 ## 結論
 
-> 在 `<資料期間、成本與主要門檻>` 下，本 Study 的 Development 結果
-> `<支持／不支持／無法判定>` 原始假說：`<一句話結論>`。
+> 在 `<可確認的資料期間、成本與主要門檻>` 下，本成果卡狀態為
+> `<complete／failed／partial／evidence-unavailable／indeterminate>`；對原始假說
+> `<支持／不支持／無法判定>`：`<一句話結論；證據不可用時改寫為缺口、影響與限制>`。
 
 ## 研究變更
 
@@ -42,13 +45,14 @@
 
 ## 主要結果
 
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base |  |  |  |  |  |
-| Development / stress |  |  |  |  |  |
+| 條件 | 狀態 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | gate／備註 |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| Development / base | `<已完成／未執行：原因／證據不可用：原因／尚不能判斷：原因>` |  |  |  |  |  |
+| Development / stress | `<已完成／未執行：原因／證據不可用：原因／尚不能判斷：原因>` |  |  |  |  |  |
 
-- 交易年度覆蓋：`<數量>`
-- 失敗 gate：`<actual>` 對 `<threshold>`
+- 填寫規則：只有合法且完整的 evidence 才填數值；「未執行」與「證據不可用」必須分開並附原因；資料存在但不足以判定時寫「尚不能判斷」，不得填零、猜測或重建數值。
+- 交易年度覆蓋：`<數量；不可用時寫「證據不可用：原因」>`
+- 失敗 gate：`<actual 對 threshold；evidence 不可用時寫「停止分析：原因」>`
 - 未執行項目與原因：`<沒有則填無>`
 
 ## 主要發現
@@ -56,18 +60,20 @@
 - 已確認：`<直接由 Development evidence 支持的事實>`
 - 可能原因：`<推論及其證據強度>`
 - 尚不能判斷：`<目前證據無法回答的問題>`
+- 已確認的證據缺口、影響與限制：`<沒有則填無；evidence 不可用時必填>`
 
 ## 下一輪
 
-- 建議處置：`<停止假說／修正可重現性問題／建立有限 follow-up Study>`
+- 建議處置：`<停止假說／修正可重現性問題／修正證據產製或 validator 流程／建立有限 follow-up Study>`
 - 下一個 Study 只測：`<單一主要變更>`
 - 成功／失敗條件：`<事前可判定的條件>`
 - 不得沿用的問題：`<錯誤、未驗證假設或資料問題>`
 
-## 證據連結
+## 允許讀取的 repository-relative 來源
 
 - Preregistration：`<repository-relative path>`
 - Candidate definition：`<repository-relative path>`
 - Development evidence：`<repository-relative path>`
 - 程式／測試：`<repository-relative path>`
 - 詳細盲檢討：`<repository-relative path／無>`
+- 來源限制：只列 Development-only 白名單來源；不得列出或引用 Historical Evaluation、Terminal Evidence、正式交易明細、正式結果或 `historical-evaluation-artifacts/`。
