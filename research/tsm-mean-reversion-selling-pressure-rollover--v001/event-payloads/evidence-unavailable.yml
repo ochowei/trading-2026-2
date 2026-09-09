@@ -1,0 +1,3 @@
+reason: Development runner 產出的 disposition 與 workflow validator 對正式 Development gates 的重算語意不一致；因此沒有可合法發布的 Development evidence。
+stage: development
+unavailable_path: evidence/development.yml

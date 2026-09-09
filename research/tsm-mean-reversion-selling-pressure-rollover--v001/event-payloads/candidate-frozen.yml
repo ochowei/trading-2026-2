@@ -1,0 +1,14 @@
+baseline_family: simple-mean-reversion
+baseline_id: tsm-mr-selling-pressure-baseline-v001
+baseline_objectively_simpler: true
+candidate_digest: 0
+development_evidence_digest: 0
+evaluation_snapshot_digest: 0
+fold_inventory_digest: 0
+qualification_spec_digest: 0
+selected_candidate_id: tsm-mr-selling-pressure-rollover-v001
+selection_evidence_digest: 0
+selection_evidence_path: evidence/selection-evidence.yml
+snapshot_set_digest: 0
+snapshot_set_path: manifests/data-snapshot-set.yml
+trial_registry_digest: 0

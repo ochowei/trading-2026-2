@@ -1,0 +1,24 @@
+assessed_at: '2026-09-08T00:00:00Z'
+assessment: 凍結前只讀取 warmup、Development 與公開資料的結構及 digest metadata；沒有讀取或計算本 Study 的 Historical Evaluation、quarantine 或 replay 策略結果。
+assets:
+  - exposure_status: development-only
+    role: warmup-only
+  - exposure_status: development-only
+    role: development
+  - exposure_status: metadata-only-no-strategy-outcome
+    role: quarantine
+  - exposure_status: metadata-only-no-strategy-outcome
+    role: historical-evaluation
+  - exposure_status: metadata-only-no-strategy-outcome
+    role: retrospective-execution-replay
+controls:
+  candidate_family_frozen_before_evaluation: true
+  evaluation_strategy_outcome_accessed: false
+  replay_strategy_outcome_accessed: false
+  trial_registry_frozen: true
+declaration:
+  actor_id: william
+  confirmed: true
+  statement: 我確認本 Study 在 candidate freeze 前沒有查看或執行本候選的正式 Historical Evaluation、quarantine 或 replay 策略結果。
+schema_version: 1
+status: verified-clean

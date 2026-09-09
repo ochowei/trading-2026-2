@@ -1,0 +1,33 @@
+candidate_freeze: null
+evidence:
+  evidence-unavailable: 27cb5168a1c95228ceaff345b963350eed3bcfc1e6e203f36776410d3fda49fd
+lifecycle:
+  current_event: study-terminal
+  event_chain_head_digest: a76ec2f0b7680798ee12cb98b01088dbf8e6530691b7cd624e318b9ae3e5a690
+  event_count: 5
+  status: terminal
+outcome:
+  authority: none
+  status: indeterminate
+preregistration:
+  digest: bf59a0fcfd641625d55b0d45155197ee58f031fee657c8eced7de795fbbc16d3
+provenance:
+  status: null
+schema_version: 1
+study:
+  identity:
+    experiment_family: tsm-mean-reversion-selling-pressure-rollover
+    historical_evaluation_operator: william
+    research_owner: william
+    research_round_id: '1'
+    source_bundle_digest: 02ac047d1578b9a17a00316525e091f19eea7ddb6d6913ee418c7a2a9958ad49
+    source_bundle_path: manifests/source-bundle.yml
+  study_id: tsm-mean-reversion-selling-pressure-rollover--v001
+trial_registry:
+  digest: null
+  recorded_trial_count: 0
+  trial_ids: []
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 02ac047d1578b9a17a00316525e091f19eea7ddb6d6913ee418c7a2a9958ad49
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
