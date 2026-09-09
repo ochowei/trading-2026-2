@@ -1,0 +1,213 @@
+baseline_definition:
+  baseline_id: tsm-mr-selling-pressure-baseline-v002
+  candidate_family: tsm-mean-reversion-selling-pressure-rollover-v002
+  execution_is_identical: true
+  family: simple-mean-reversion
+  objectively_simpler_because: baseline 只保留共同的 base oversold 條件與相同執行規則，移除 Path A 的量能與價格確認以及 Path B 的 SVB3 條件。
+  simpler_rule: adjusted Close <= SMA(20) * 0.985 且 RSI(2) <= 50，不使用成交量先行、訊號日價格方向或 SVB3 supplemental path。
+complete_candidate_family:
+  - tsm-mr-selling-pressure-rollover-v002
+eligibility_rules:
+  accepted_signal:
+    cooldown:
+      clock_anchor: completed-position-exit
+      minimum_completed_session_steps_after_exit: 5
+      position_must_be_flat: true
+    decision_time: completed-session-close
+    mean_reversion:
+      close_vs_sma20_gap_minimum: '0.015'
+      close_vs_sma20_operator: '>='
+      rsi_length: 2
+      rsi_operator: <=
+      rsi_value: '50'
+      sma_length: 20
+    path_a:
+      close_above_prior_close_required: true
+      condition: v009-primary-path-exact
+      prior_volume_lead_required: true
+    path_b:
+      close_above_prior_close_required: false
+      condition: base-oversold-and-svb3-rollover
+      current_svb3_minimum: '-0.15'
+      prior_svb3_minimum: '-0.50'
+      prior_svb3_window: t-5-through-t-1
+      same_day_path_deduplication: one-signal-one-trade
+    price_direction_confirmation:
+      applies_to: path-a-only
+      close_above_prior_close: true
+    symbol: TSM
+    volume_leads_price:
+      enabled: true
+      prior_session_window: 5
+      volume_average_length: 20
+      volume_ratio_operator: '>='
+      volume_ratio_value: '1.05'
+      volume_shock_is_before_signal: true
+  costs:
+    base:
+      fee_per_side_bps: '1'
+      slippage_per_side_bps: '5'
+    stress:
+      fee_per_side_bps: '2'
+      slippage_per_side_bps: '20'
+  development_diagnostics:
+    block_bootstrap:
+      block_lengths:
+        - 3
+        - 5
+      maximum_stress_drawdown_above_10pct_ratio: '0.10'
+      minimum_stress_positive_return_ratio: '0.80'
+      repetitions: 10000
+      seed: 20260908
+      seed_application: exact-same-seed-for-each-block-length
+    calendar_block_bootstrap:
+      block_sessions:
+        - 63
+        - 126
+      gating: descriptive-only
+      repetitions: 5000
+      seed: 20260908
+      seed_application: exact-same-seed-for-each-block-length
+    leave_one_signal_year_out:
+      maximum_stress_drawdown: '0.10'
+      minimum_stress_profit_factor: '1.00'
+      minimum_stress_return: '0'
+    signal_year_breakdown: true
+  development_gates:
+    base_profit_factor:
+      operator: '>'
+      value: '1.10'
+    base_return:
+      operator: '>'
+      value: '0'
+    completed_trades:
+      operator: '>='
+      value: 20
+    maximum_realized_trade_loss_fraction:
+      operator: <=
+      value: '0.04'
+    maximum_stress_block_bootstrap_drawdown_above_10pct_ratio:
+      operator: <=
+      value: '0.10'
+    maximum_stress_leave_one_year_out_drawdown:
+      operator: <=
+      value: '0.10'
+    minimum_stress_block_bootstrap_positive_return_ratio:
+      operator: '>='
+      value: '0.80'
+    minimum_stress_leave_one_year_out_profit_factor:
+      operator: '>'
+      value: '1.00'
+    minimum_stress_leave_one_year_out_return:
+      operator: '>'
+      value: '0'
+    stress_maximum_drawdown:
+      operator: <=
+      value: '0.10'
+    stress_profit_factor:
+      operator: '>'
+      value: '1.00'
+    stress_return:
+      operator: '>'
+      value: '0'
+    traded_years:
+      operator: '>='
+      value: 3
+  execution:
+    entry: 下一個 XNYS session open，以 MARKET proposal 模擬。
+    gap_fill: stop gap 以較差 open，target gap 以 open 價格成交，再套用成本。
+    holding_period: 進場 session 算第一個完整 session；完成第 10 個 session 後於下一個 open 退出。
+    intrabar_ambiguity: 同一 session 同時觸及 stop 與 target 時先算 adverse stop。
+    position_sizing:
+      cash_cap: 不借款且最多一個部位。
+      risk_fraction_of_pre_entry_equity: '0.02'
+      shares: 同時符合現金上限與成本內含 stop 風險預算的最大整數股數。
+    stop:
+      level_from_raw_entry_open: '-0.04'
+      order: STOP_MARKET
+      time_in_force: GTC
+    target:
+      level_from_raw_entry_open: '0.04'
+      order: LIMIT
+      time_in_force: DAY
+  research_targets:
+    evaluation_years:
+      operator: equals
+      role: fixed-workflow-window
+      value:
+        - 2020
+        - 2021
+        - 2022
+        - 2023
+        - 2024
+    maximum_stress_drawdown:
+      operator: <=
+      role: secondary-development-objective-and-selection-condition
+      value: '0.03'
+    minimum_completed_trades:
+      operator: '>='
+      role: secondary-development-objective-and-selection-condition
+      value: 30
+    minimum_stress_profit_factor:
+      operator: '>='
+      role: secondary-development-objective-and-selection-condition
+      value: '4.0'
+    minimum_stress_return:
+      operator: '>'
+      role: secondary-development-objective-and-selection-condition
+      value: '0.3040'
+  source_and_adjustment:
+    adjustment_policy: Yahoo auto_adjust，OHLC 使用同一調整基礎。
+    calendar: XNYS
+    interval: 1d
+    provider: yahoo
+    timezone: America/New_York
+evaluation_gates:
+  base_compounded_return:
+    operator: '>'
+    value: '0'
+  base_profit_factor:
+    operator: '>'
+    value: '1.10'
+  completed_trades:
+    operator: '>='
+    value: 30
+  family_wise_confidence:
+    operator: '>='
+    value: '0.90'
+  maximum_fold_positive_profit_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_fold_trade_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_realized_trade_loss_fraction:
+    operator: <=
+    value: '0.04'
+  positive_traded_fold_ratio:
+    operator: '>='
+    value: '0.60'
+  stress_max_drawdown:
+    operator: <=
+    value: '0.03'
+  stress_profit_factor:
+    operator: '>'
+    value: '4.0'
+  stress_return:
+    operator: '>'
+    value: '0.3040'
+  traded_folds:
+    operator: '>='
+    value: 3
+fold_warmup_sessions: 25
+hypothesis: TSM 處於超跌狀態時，價格可能尚未正式反轉，但下跌日承擔的成交量已先開始衰退。若 3-session Signed Volume Balance 從過去五個已完成 session 的極負值回升至不低於 -0.15，賣方主動性可能正在消失；因此，在保留既有高品質 Path A 的前提下，新增不等待價格上漲確認的 Path B，應能增加成本後可接受的均值回歸交易，同時維持風險邊界。這是可被 Development 與後續固定 Evaluation 否證的假說，不是已成立的結論。
+initial_cash: '100000'
+maximum_holding_sessions: 11
+maximum_trials: 1
+selection_rule:
+  eligible_candidate: 唯一 Trial 必須通過全部 Workflow Development gates 與全部事前登記 research_targets；任一失敗就 candidate_available=false 並終止，不調低門檻、不繼續搜尋。
+  family_selection_adjustment: 完整 Candidate Family 只有事前指定的一個 Trial，不依結果擴大或改寫 family。
+  method: fixed-single-candidate-all-development-gates-and-research-targets
+  selected_candidate_id: tsm-mr-selling-pressure-rollover-v002
+tie_handling:
+  method: not-applicable-single-candidate

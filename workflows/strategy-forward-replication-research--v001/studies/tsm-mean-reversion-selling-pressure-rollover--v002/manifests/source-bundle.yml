@@ -1,0 +1,40 @@
+files:
+  - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+    path: pyproject.toml
+  - digest: 2789ff23794fcbd78649def874b0315fd7f10432be9cc1fec896ffaaf1a7894e
+    path: research/tools/development-status.schema.yml
+  - digest: f4b2171dcfa6e3e25b3915fe56eae553972ae5d24baa4565ccbf3d3f25d268de
+    path: research/tools/development_status.py
+  - digest: 8de1b0be7192d87a09c8df825cab61ed3e99bd77b26082bc2f2dde780dcdc233
+    path: research/tsm-mean-reversion-selling-pressure-rollover--v002/candidate-definition.yml
+  - digest: f22063efc0264a093063e7b6b347d513f3c587a9689c2755d0ae4ac3555a2d37
+    path: research/tsm-mean-reversion-selling-pressure-rollover--v002/data-snapshot-acquisition.yml
+  - digest: b01ad417a536f0299f456fceeaf0370c1745654b52d53c87fe509974977105f0
+    path: research/tsm-mean-reversion-selling-pressure-rollover--v002/data-snapshot-set.yml
+  - digest: e425e3718a030c2498ff6c7845155e9262c9b04b08a890b66ed6e078d86c7f93
+    path: research/tsm-mean-reversion-selling-pressure-rollover--v002/implementation-contract.yml
+  - digest: 45fbad606bf6456634704136213624a8885be66fec8da3fa1f8c1b6733793c37
+    path: research/tsm-mean-reversion-selling-pressure-rollover--v002/preregistration.yml
+  - digest: a50aa6aab8efe654cfee23705dfe82bf0bb5e54340fb222e7835f21dc413fd10
+    path: research/tsm-mean-reversion-selling-pressure-rollover--v002/provenance.yml
+  - digest: 07de2ad0a0b20136f2ee44e968bd2ded34e88a5d322e825fbf1c22f1196369e1
+    path: research/tsm-mean-reversion-selling-pressure-rollover--v002/qualification-spec.yml
+  - digest: a27dc1906e3632b6373f8d3aadc2416fd2f2187c73cd1bc30e1e8fca625957ed
+    path: research/tsm-mean-reversion-selling-pressure-rollover--v002/run_development.py
+  - digest: 4142976d4d3595d0beca4989f022d2d1b766877a1ced6b3071d4811a59022e4e
+    path: research/tsm-mean-reversion-selling-pressure-rollover--v002/run_historical_evaluation.py
+  - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+    path: src/trading_2026_2/__init__.py
+  - digest: 0e889edc447d5a87c08aa507dcfe1a219e377c2ba6b27cd4bf14951d439df72d
+    path: src/trading_2026_2/tsm_mean_reversion_selling_pressure_rollover_v001.py
+  - digest: f3163c9b92046d0397ce1daf0cfb320a302c9e994875a4be0e93057a83cef7c4
+    path: src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v009.py
+  - digest: 91bceb4e2f482f581634a0598cb3b4336c54b4a933e1dbf83d199a8171dbc99a
+    path: tests/test_development_status.py
+  - digest: 91eb643847fcbf495566f6e35bf72c147845245c7683dbadadd9b4d65cb8a320
+    path: tests/test_tsm_mean_reversion_selling_pressure_rollover_v001.py
+  - digest: 09f67f35a3c60e070d9a85da9851a310bfd6a58fd4552e6eef3691d9a7208f08
+    path: tests/test_tsm_mean_reversion_selling_pressure_rollover_v002.py
+  - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+    path: uv.lock
+schema_version: 1

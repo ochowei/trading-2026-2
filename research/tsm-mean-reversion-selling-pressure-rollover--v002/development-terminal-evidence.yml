@@ -1,0 +1,15 @@
+authority: none
+bindings:
+  development_evidence_digest: 429dd30a853952faece34c34a5b44bbe255e798f8f19c55943b0e65fbe35302a
+  event_chain_head_digest: 8a377029c2d5e469c88ad91e0055588728309c0bd801107d4d89d3a5c67f2f2d
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  preregistration_digest: 45fbad606bf6456634704136213624a8885be66fec8da3fa1f8c1b6733793c37
+  source_bundle_digest: 5f25238917a25c5a4434355e3def54e15df56b7f74227e63b7f5a81cee7ed365
+  trial_registry_digest: fcf9681cc1e0f6b8cd57623a6daf9ee8e61d2f94dd3eb476b7dd11130de12a4a
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+outcome: fail
+reasons:
+  - 研究目標 minimum_completed_trades 未達成，唯一 Trial 不具候選資格。
+  - 研究目標 minimum_stress_return 未達成，唯一 Trial 不具候選資格。
+recomputed: true
+schema_version: 1
