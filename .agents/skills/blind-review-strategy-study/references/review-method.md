@@ -2,6 +2,18 @@
 
 本方法只回答三件事：策略設計有哪些可事前識別的風險、Development 是否已經顯示不穩定，以及下一輪應驗證哪些有限而明確的調整。它不能回答正式 Evaluation 為什麼失敗，因為那需要使用被封存的結果。
 
+## 狀態與盲性判定
+
+本方法把下列狀態分開記錄：Development formal gates、research targets、Development
+evidence validity、blind review status、Historical Evaluation status，以及 candidate freeze
+eligibility。盲檢討資格只看明確的 outcome exposure：正式 Evaluation 結果或帶有結果的
+Terminal 內容是否已曝光；不看 `historical_evaluation_status`，也不因 Study terminal
+本身停止。Historical Evaluation `not_started` 時仍可盲檢討。
+
+Development evidence 缺失、無法驗證或處於 `needs-repair` 時，仍可完成設計與程式的範圍內
+檢查；將 `development_evidence_validity` 標為相應狀態，列出「Development 證據不可用」
+的限制，不把它當成 Historical Evaluation 未執行，也不把 blind review 整體標成 rejected。
+
 ## 讀取邊界
 
 ### Study 內可讀檔案
@@ -14,7 +26,7 @@
 - `manifests/development-trial-inputs.yml`
 - `manifests/source-bundle.yml`
 - `manifests/data-snapshot-acquisition.yml`，只可檢查資料來源、日期、完整性與角色，不可沿路開啟非 Development 價格資料
-- `evidence/development.yml`
+- `evidence/development.yml`（可用時讀取；缺失或無法驗證時明確記錄 unavailable／needs-repair，不因此停止整個 blind review）
 - `evidence/development-authorization.yml`
 - `evidence/provenance.yml`
 - `evidence/selection-evidence.yml`
@@ -55,6 +67,7 @@
 - 目標 Study ID；
 - Development 與 warmup 的角色和日期；
 - 本次沒有回答、也不會推測正式 Evaluation 表現。
+- 記錄 `blind_review_status` 與其 eligibility basis；若 Development evidence 不可用，另記錄 `development_evidence_validity: unavailable` 或 `needs-repair`，但不把它與 Historical Evaluation 狀態合併。
 
 ### 2. 假說與規則對照
 
@@ -113,6 +126,7 @@
 4. **Development 穩健度**：提供可重算數據及不確定性。
 5. **調整優先順序**：使用上述三種依據分類。
 6. **不能得出的結論**：明示無法判斷正式 Evaluation 的失敗原因。
-7. **讀取紀錄**：列出實際讀取的所有檔案，聲明沒有使用禁止證據。
+7. **狀態判定**：分別列出 formal gates、research targets、Development evidence validity、blind review status、Historical Evaluation status 與 candidate freeze eligibility；若 evidence 不可用，說明它只限制 Development 結論。
+8. **讀取紀錄**：列出實際讀取的所有檔案，聲明沒有使用禁止證據。
 
-若因對話已曝光結果、scope checker 拒絕或必要 Development 證據缺失而停止，報告只需說明停止原因與安全的下一步，不要提供推測性檢討。
+若因對話已曝光結果或 scope checker 拒絕而停止，報告只需說明停止原因與安全的下一步，不要提供推測性檢討。Development evidence 缺失不屬於整個 blind review 的停止條件；此時仍須交付可驗證的設計／程式檢查，並標示 Development evidence 不可用。

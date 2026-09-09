@@ -83,6 +83,32 @@ CLI 必須 exit code 0 且輸出 `status: "passed"`；`--authority-root` 省略�
 
 Development evidence 至少保存 base/stress 逐筆交易、pre-entry equity 比例、主要 metrics、signal-year 分段、preregistered leave-one-year-out、block bootstrap、完整 gates、network access 與全部 frozen digests。由 raw trades 重算摘要，不信任 runner 自報 disposition。
 
+### Development runner 的狀態輸出契約
+
+Runner 完成 raw trades、metrics、diagnostics 與 frozen bindings 後，先確認每個正式 gate
+都有可重算的 `gate` record，再以 `research/tools/development_status.py` 的
+`finalize_development_evidence` 補上 `development_status`。有 research targets 時，另以
+`research_target_records` 保存每個 target 的 `actual`、operator、required 與 `passed`；
+target record 不得混進正式 `gates`。
+
+這個 helper 的固定語意是：`disposition` 與 `failed_gates` 只反映 formal Development
+gates；`research_target_failures`、`candidate_selection_eligible` 與
+`candidate_selection_ineligibility_reasons` 另行保存 target 和 freeze 判定。正式 gates
+通過而 targets 失敗時，`development.yml` 仍須是 canonical、可由 workflow validator
+重算的合法 evidence，且 `development_evidence_validity.status` 仍為 `valid`；target
+失敗只能使 candidate freeze `ineligible`。
+
+發布前須以 `validate_development_status_table` 驗證
+`research/tools/development-status.schema.yml`，再以既有 workflow validator 重算 raw
+evidence。所有 evidence 都必須透過不可覆寫的 atomic publish；不能為了補齊欄位而回填、捏造
+交易、metrics、target record 或 development.yml。
+
+若 raw evidence 產生、digest、schema 或重算失敗，runner 不得發布一份看似完整的
+`development.yml`。把問題交接為獨立的 `development_evidence_validity`：可修復時使用
+`needs-repair`，等待外部條件時使用 `blocked`，無法取得時使用 `unavailable`，並保存具體
+原因。這些狀態不會自動變成 `study-terminal`，也不會把 blind review 設為拒絕；blind
+review 只另行根據明確的正式 Evaluation／帶結果 Terminal exposure 判定。
+
 ## 6. Writer 事件鏈
 
 只使用 workflow writer，依序發布：`study-created`、`preregistration-approved`、`development-authorized`、`trial-recorded`、`trial-registry-frozen`、`provenance-audited`、`candidate-frozen`。Candidate freeze 前的 CLI 通過不會自行追加事件；必須在 CLI 通過後仍由 writer 發布最後事件。
