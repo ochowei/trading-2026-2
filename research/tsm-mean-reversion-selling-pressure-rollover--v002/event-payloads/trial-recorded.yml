@@ -1,0 +1,6 @@
+development_evidence_digest: 429dd30a853952faece34c34a5b44bbe255e798f8f19c55943b0e65fbe35302a
+development_evidence_path: evidence/development.yml
+inputs_digest: d7e2a1491e46dd6ab67f15bfe056d43f6efa1439fa4d5b9a5e398b8b860f1439
+inputs_path: manifests/development-trial-inputs.yml
+status: completed
+trial_id: tsm-mr-selling-pressure-rollover-v002

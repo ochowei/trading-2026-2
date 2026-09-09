@@ -1,0 +1,92 @@
+development_status:
+  candidate_eligibility_field: candidate_selection_eligible
+  disposition_scope: formal_development_gates_only
+  helper_path: research/tools/development_status.py
+  research_target_failures_field: research_target_failures
+  research_target_records_field: research_target_records
+  schema_path: research/tools/development-status.schema.yml
+  validation_function: validate_development_status_table
+engine:
+  baseline_spec_constant: BASELINE_SPEC
+  cost_constant: BASE_COST
+  path: src/trading_2026_2/tsm_mean_reversion_selling_pressure_rollover_v001.py
+  path_a_reference:
+    digest: f3163c9b92046d0397ce1daf0cfb320a302c9e994875a4be0e93057a83cef7c4
+    path: src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v009.py
+    semantics: v009 原有 base oversold、訊號日前 5 session prior-volume lead >= 1.05、Close > prior Close；此檔案只作 frozen reference，不修改。
+  spec_constant: DEFAULT_SPEC
+execution:
+  cooldown:
+    anchor: completed-position-exit
+    minimum_completed_session_steps_after_exit: 5
+  decision:
+    entry: next-XNYS-session-open
+    signal: completed-session-close
+  drawdown:
+    formal_gate_definition: realized-trade-equity-drawdown
+    formal_gate_metric: stress_max_drawdown
+    mark_to_market_diagnostic: holding-session-low-after-costs
+  exits:
+    gap_fill: stop-gap-at-open-target-gap-at-open
+    holding_exit: next-open-after-10-complete-sessions
+    same_session_ambiguity: adverse-stop-first
+    stop_return: '-0.04'
+    target_return: '0.04'
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    modeled_stop_includes_entry_exit_costs: true
+    risk_fraction_of_pre_entry_equity: '0.02'
+    shares: maximum-integer-shares-within-risk-and-cash-caps
+indicators:
+  columns:
+    rsi: rsi_2
+    sma: sma_20
+    svb3: svb3
+    svb3_prior_minimum: prior_svb3_min_5
+    volume_lead: prior_volume_spike_ratio
+  required_history_sessions: 25
+  rsi:
+    formula: simple-rolling-mean
+    length: 2
+    min_periods: 2
+    not_ready: null
+    zero_gain_and_loss: 50
+    zero_gain_only: 0
+    zero_loss_only: 100
+  sma:
+    lookback: 20
+    min_periods: 20
+    not_ready: null
+  svb3:
+    denominator_zero: null
+    lookback: 3
+    min_periods: 3
+    not_ready: null
+    prior_min_periods: 5
+    prior_session_window: 5
+    prior_window: t-5-through-t-1
+    sign_down: -1
+    sign_flat: 0
+    sign_up: 1
+    uses_future_data: false
+    uses_signal_day_close_and_volume: true
+  volume_lead:
+    average_min_periods: 20
+    enabled: true
+    lead_min_periods: 5
+    prior_session_window: 5
+    uses_prior_sessions_only: true
+    volume_average_length: 20
+procedure:
+  path: research/tsm-mean-reversion-selling-pressure-rollover--v002/run_development.py
+schema_version: 1
+signal_paths:
+  combination: path_a_or_path_b_deduplicated_by_signal_session
+  path_a:
+    close_above_prior_close_required: true
+    condition: base-oversold-and-prior-volume-lead-and-close-above-prior-close
+  path_b:
+    close_above_prior_close_required: false
+    condition: base-oversold-and-svb3-rollover
+    current_svb3_minimum: '-0.15'
+    prior_svb3_minimum: '-0.50'

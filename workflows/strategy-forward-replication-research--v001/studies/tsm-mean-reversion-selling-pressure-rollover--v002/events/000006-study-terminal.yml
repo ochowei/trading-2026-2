@@ -1,0 +1,16 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 5f25238917a25c5a4434355e3def54e15df56b7f74227e63b7f5a81cee7ed365
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: study-terminal
+occurred_at: '2026-09-09T09:23:34.801758Z'
+payload:
+  authority: none
+  outcome: fail
+  terminal_evidence_digest: 412c3772306ef3ec70b9083881ecb599cfdb8202062f91691021ced058d720ef
+  terminal_evidence_path: evidence/development-terminal-evidence.yml
+previous_event_digest: 8a377029c2d5e469c88ad91e0055588728309c0bd801107d4d89d3a5c67f2f2d
+schema_version: 1
+sequence: 6
+study_id: tsm-mean-reversion-selling-pressure-rollover--v002

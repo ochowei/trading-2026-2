@@ -1,0 +1,35 @@
+baseline_comparison:
+  baseline_id: tsm-mr-selling-pressure-baseline-v002
+  baseline_is_excluded_from_candidate_family: true
+  candidate_id: tsm-mr-selling-pressure-rollover-v002
+  execution_is_identical: true
+candidate_family: tsm-mean-reversion-selling-pressure-rollover-v002
+candidate_id: tsm-mr-selling-pressure-rollover-v002
+data_bindings:
+  development_digest: 4e443b4c7db125967ef936d615b6d2283da8ba0bccc62239a5770daf176eccc3
+  development_path: research/market-data/yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv
+  warmup_digest: 81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847
+  warmup_path: research/market-data/yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv
+date_controls:
+  formal_provider_access: false
+  signal_end: '2018-12-31'
+  signal_start: '2014-01-01'
+  warmup_end: '2013-12-31'
+  warmup_start: '2013-01-01'
+development_diagnostics:
+  block_lengths:
+    - 3
+    - 5
+  bootstrap_seed: 20260908
+  leave_one_signal_year_out: true
+  repetitions: 10000
+  seed_application: exact-same-seed-for-each-block-length
+preregistration_digest: 45fbad606bf6456634704136213624a8885be66fec8da3fa1f8c1b6733793c37
+schema_version: 1
+selected_candidate_id: tsm-mr-selling-pressure-rollover-v002
+source_bundle_digest: 5f25238917a25c5a4434355e3def54e15df56b7f74227e63b7f5a81cee7ed365
+strategy_engine_digest: 0e889edc447d5a87c08aa507dcfe1a219e377c2ba6b27cd4bf14951d439df72d
+study_id: tsm-mean-reversion-selling-pressure-rollover--v002
+study_procedure_digest: a27dc1906e3632b6373f8d3aadc2416fd2f2187c73cd1bc30e1e8fca625957ed
+study_procedure_path: research/tsm-mean-reversion-selling-pressure-rollover--v002/run_development.py
+trial_id: trial-tsm-mr-selling-pressure-rollover-v002
