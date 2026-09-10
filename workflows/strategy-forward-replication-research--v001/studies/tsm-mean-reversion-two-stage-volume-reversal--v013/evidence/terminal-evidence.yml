@@ -1,0 +1,25 @@
+authority: none
+bindings:
+  development_evidence_digest: b068d72514453b11af7be628e66a7d4ccd8c95a9833a2b479ff1e46620e6bd30
+  event_chain_head_digest: d5ccadf5c901b69b36c7583523fe750a23d2e30b757e34a3e05471a741295ff0
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  preregistration_digest: 7ee77aa2875272712246c140feec381a72583bf92d22b8a4a7b5e2524d9e7133
+  source_bundle_digest: 79c17a8a75b5d2248590c29899d78c896e70d9ef97db28dda8e81979420a46b2
+  trial_registry_digest: 497ce00f48f27789c6345648acab6531bd6317f511757dd2fab062ee41e23751
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+outcome: fail
+reasons:
+  - completed_trades_at_least_30
+  - stress_return_not_below_v009
+  - stress_profit_factor_not_below_v009
+  - base_realized_drawdown_not_above_v009
+  - stress_realized_drawdown_not_above_v009
+  - stress_mark_to_market_drawdown_not_above_v009
+  - net_new_minus_displaced_base_pnl_positive
+  - net_new_minus_displaced_stress_pnl_positive
+  - max_new_trade_signal_year_share
+  - new_trade_signal_years_at_least_three
+  - candidate_freeze_not_eligible
+  - historical_evaluation_not_started
+recomputed: true
+schema_version: 1

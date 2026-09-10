@@ -1,0 +1,18 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 79c17a8a75b5d2248590c29899d78c896e70d9ef97db28dda8e81979420a46b2
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: trial-recorded
+occurred_at: '2026-09-10T03:20:47.280296Z'
+payload:
+  development_evidence_digest: b068d72514453b11af7be628e66a7d4ccd8c95a9833a2b479ff1e46620e6bd30
+  development_evidence_path: evidence/development.yml
+  inputs_digest: 8be5bb61548c63053527d5e9128065a3ea1af50ec6d0a6dcdc00bf7548d7b183
+  inputs_path: manifests/development-trial-inputs.yml
+  status: completed
+  trial_id: tsm-mr-two-stage-cooldown-reset-v013
+previous_event_digest: 92ba623b106eaa81a38cbc963f2812bdfa966281ceb6f1d90073fd32d97a2330
+schema_version: 1
+sequence: 4
+study_id: tsm-mean-reversion-two-stage-volume-reversal--v013
