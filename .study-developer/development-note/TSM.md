@@ -1335,3 +1335,58 @@
 - 程式／測試：`src/trading_2026_2/tsm_mean_reversion_selling_pressure_rollover_v001.py`、`tests/test_tsm_mean_reversion_selling_pressure_rollover_v001.py`
 - 詳細盲檢討：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-selling-pressure-rollover--v002/reviews/001-first-review.md`
 - 來源限制：本成果卡只整理 Development 階段，沒有讀取或引用正式 Historical Evaluation、Terminal 或 `historical-evaluation-artifacts/`。
+
+---
+
+# `tsm-mean-reversion-two-stage-volume-reversal--v013`：Study Development 成果卡
+
+- 成果卡狀態：`complete`
+- Development gate：`通過`
+- Provenance（來源可信狀態）：`verified-clean`
+- candidate_freeze_status：`未完成`
+- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v009`
+- 記錄日期：`2026-09-10`
+
+## 結論
+
+> 在 2014–2018 Development、base 每邊 1／5 bps、stress 每邊 2／20 bps 下，evidence 完整、formal gates 通過，成果卡為 `complete`；但提前解禁相對 v009 的改善假說不受本輪支持，candidate freeze 未完成。
+
+## 研究變更
+
+- 研究問題或假說：退場後放量事件若在三個 session 內獲得原有反轉條件確認，能否提前恢復交易。
+- 唯一變更：加入提前冷卻重設；其餘訊號、執行、成本、風控與持有期沿用 v009。
+- 比較基準：固定 v009 two-stage candidate。
+
+## 主要結果
+
+| 條件 | 狀態 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | gate／備註 |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| Development / base | 已完成 | 25 | 24.399% | 3.353 | 2.362% | formal gates 通過 |
+| Development / stress | 已完成 | 25 | 18.167% | 2.742 | 2.596% | formal gates 通過 |
+
+- 交易年度覆蓋：5 年（2014–2018）；formal gates 無失敗，research targets 失敗 10 項，故 freeze 未完成。
+- 未執行項目與原因：pytest 未執行，因環境缺少 pandas／pytest。
+
+## 主要發現
+
+- 已確認：新增 3 筆提前交易（2015–2016），base／stress PnL 為 -210.07／-677.31，並取代兩筆 v009 獲利交易；總交易數只增 1 筆，績效變差。
+- 可能原因：放量 1.05 倍加一次收盤上漲，可能仍在同一下跌波段重入；這仍是推論。
+- 尚不能判斷：正式 Historical Evaluation 的表現或失敗原因。
+- 證據限制：evidence 可驗證，但 pytest 因環境缺 pandas／pytest 未執行。
+
+## 下一輪
+
+- 建議處置：停止本 Study freeze，建立有限 follow-up Study。
+- 下一個 Study 只測：只禁止上一筆交易以 stop、stop-gap 或 stop-same-session 結束後啟動提前重設。
+- 成功／失敗條件：formal gates 全通過，新增減被取代的 base／stress PnL >0，且 stress 報酬／PF／回撤不劣於 v009；任一失敗即停止。
+- 不得沿用的問題：不得在原 Study 內事後改規則或把 formal gate 通過當成 freeze 通過。
+
+## 允許讀取的 repository-relative 來源
+
+- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v013/manifests/preregistration.yml`
+- Candidate definition：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v013/manifests/candidate-definition.yml`
+- Development evidence：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v013/evidence/development.yml`
+- Provenance：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v013/evidence/provenance.yml`
+- 程式／測試：`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v013.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v009.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v013.py`
+- 詳細盲檢討：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v013/reviews/001-blind-review.md`
+- 來源限制：本成果卡只整理 Development 階段，沒有讀取或引用正式 Historical Evaluation、Terminal 或 `historical-evaluation-artifacts/`。
