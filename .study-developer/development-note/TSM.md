@@ -1280,3 +1280,58 @@
 - 程式／測試：`research/tsm-mean-reversion-selling-pressure-rollover--v001/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_selling_pressure_rollover_v001.py`、`tests/test_tsm_mean_reversion_selling_pressure_rollover_v001.py`
 - Provenance：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-selling-pressure-rollover--v001/evidence/provenance.yml`
 - 詳細盲檢討：無
+
+---
+
+# `tsm-mean-reversion-selling-pressure-rollover--v002`：Study Development 成果卡
+
+- 成果卡狀態：`complete`
+- Development gate：`通過`
+- Provenance（來源可信狀態）：`provenance-unknown`
+- candidate_freeze_status：`未完成`
+- 前一個 Study：`tsm-mean-reversion-selling-pressure-rollover--v001`
+- 記錄日期：`2026-09-10`
+
+## 結論
+
+> 在 2014–2018 Development 期間、base 每邊 1／5 bps、stress 每邊 2／20 bps 下，本 Study 的 Development evidence 完整，正式 Development gates 全部通過，對「加入賣壓翻轉 Path B 可改善均值回歸」提供有限支持；但完成交易數與 stress return 未達事前 research targets，因此 candidate freeze 尚未完成。
+
+## 研究變更
+
+- 研究問題或假說：在 SMA(20) 超跌 1.5%、RSI(2)≤50 時，若前三日 SVB3 從前五日的極負值回升，是否能在不等待收盤上漲確認下增加有效交易。
+- 主要變更：保留既有 v009 Path A，新增不要求訊號日上漲的 Path B。
+- 保持不變：下一個 session open 進場、10-session 持有、5-session cooldown、2% risk budget、-4%／+4% stop-target 與相同成本模型。
+
+## 主要結果
+
+| 條件 | 狀態 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | gate／備註 |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| Development / base | 已完成 | 26 | 37.52% | 5.391 | 2.00% | 正式 gates 通過 |
+| Development / stress | 已完成 | 26 | 29.53% | 4.498 | 2.00% | 正式 gates 通過 |
+
+- 交易年度覆蓋：5 年（2014–2018）。
+- Research targets 失敗：完成交易 26 少於 30；stress return 29.53% 低於 30.40%。
+- 未執行項目與原因：無。
+
+## 主要發現
+
+- 已確認：正式 Development gates 全部通過，且逐年剔除後 stress 結果仍維持正報酬。
+- 可能原因：Path B 可能帶來額外機會，但目前只有 5 筆交易且全部獲利；同時它排擠了 3 筆既有 v009 交易，因此淨增量仍需更嚴格驗證。
+- 尚不能判斷：Path B 在後續固定 Evaluation 中是否能維持優勢。
+- 已確認的證據缺口、影響與限制：Provenance 尚無獨立聲明；realized drawdown 約 2.00%，但保守 mark-to-market stress drawdown 約 3.42%。
+
+## 下一輪
+
+- 建議處置：建立一個只測 Path B capacity／crowding 的 follow-up Study。
+- 下一個 Study 只測：固定 Path A／Path B 優先順序，並扣除被排擠的既有交易後重新評估淨增量。
+- 成功／失敗條件：完成交易至少 30 筆、stress return >30.40%，且 Path B 扣除被排擠交易後的淨增量仍為正。
+- 不得沿用的問題：不得把 5 筆全正交易視為機制已被證明。
+
+## 允許讀取的 repository-relative 來源
+
+- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-selling-pressure-rollover--v002/manifests/preregistration.yml`
+- Candidate definition：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-selling-pressure-rollover--v002/manifests/candidate-definition.yml`
+- Development evidence：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-selling-pressure-rollover--v002/evidence/development.yml`
+- 程式／測試：`src/trading_2026_2/tsm_mean_reversion_selling_pressure_rollover_v001.py`、`tests/test_tsm_mean_reversion_selling_pressure_rollover_v001.py`
+- 詳細盲檢討：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-selling-pressure-rollover--v002/reviews/001-first-review.md`
+- 來源限制：本成果卡只整理 Development 階段，沒有讀取或引用正式 Historical Evaluation、Terminal 或 `historical-evaluation-artifacts/`。
