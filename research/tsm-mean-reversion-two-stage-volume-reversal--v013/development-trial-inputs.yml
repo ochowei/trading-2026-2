@@ -1,0 +1,69 @@
+baseline_comparison:
+  baseline_id: tsm-mean-reversion-two-stage-baseline-v009
+  baseline_is_excluded_from_candidate_family: true
+  candidate_id: tsm-mr-two-stage-cooldown-reset-v013
+  execution_is_identical: true
+candidate_family: tsm-mean-reversion-two-stage-cooldown-reset-v013
+candidate_id: tsm-mr-two-stage-cooldown-reset-v013
+cost_models:
+  base:
+    fee_per_side_bps: '1'
+    slippage_per_side_bps: '5'
+  stress:
+    fee_per_side_bps: '2'
+    slippage_per_side_bps: '20'
+data_bindings:
+  comparison_control_digest: d8f51a7a1f2f5024d1a778fd5c0d42a70b549aa258723869b2a4567cfee4a618
+  comparison_control_path: research/tsm-mean-reversion-two-stage-volume-reversal--v013/comparison-control-development.yml
+  development_digest: 4e443b4c7db125967ef936d615b6d2283da8ba0bccc62239a5770daf176eccc3
+  development_path: research/market-data/yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv
+  warmup_digest: 81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847
+  warmup_path: research/market-data/yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv
+date_controls:
+  formal_provider_access: false
+  signal_end: '2018-12-31'
+  signal_start: '2014-01-01'
+  warmup_end: '2013-12-31'
+  warmup_start: '2013-01-01'
+development_diagnostics:
+  block_lengths:
+    - 3
+    - 5
+  bootstrap_seed: 20260902
+  calendar_block_bootstrap:
+    block_sessions:
+      - 63
+      - 126
+    bootstrap_seed: 20260906
+    repetitions: 10000
+    seed_application: exact-same-seed-for-each-block-length
+  leave_one_signal_year_out: true
+  repetitions: 50000
+  seed_application: exact-same-seed-for-each-block-length
+execution:
+  cooldown_anchor: completed-position-exit
+  cooldown_completed_session_steps_after_exit: 5
+  entry: next-XNYS-open
+  holding_sessions: 10
+  intrabar_ambiguity: adverse-stop-first
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    modeled_stop_includes_costs: true
+    risk_fraction_of_pre_entry_equity: '0.02'
+  stop_market_gtc: '-0.04'
+  target_limit_day: '0.04'
+preregistration_digest: 7ee77aa2875272712246c140feec381a72583bf92d22b8a4a7b5e2524d9e7133
+schema_version: 1
+signal:
+  mean_reversion_close_vs_sma20_gap_minimum: '0.015'
+  mean_reversion_rsi_length: 2
+  mean_reversion_rsi_maximum: '50'
+  mean_reversion_sma_length: 20
+  price_direction_confirmation_close_above_prior_close: true
+  volume_average_length: 20
+  volume_lead_enabled: true
+  volume_lead_window: 5
+  volume_spike_ratio_minimum: '1.05'
+source_bundle_digest: 79c17a8a75b5d2248590c29899d78c896e70d9ef97db28dda8e81979420a46b2
+strategy_engine_digest: 394ebd0e9418ed55eb12daf7aa4caf34061460b5e8c2aec3bcb3a8d760a39044
+study_procedure_digest: 1537b2feacdfd068b713097cb614352cee8c0d9bcdcced2a95cef364a2013d89

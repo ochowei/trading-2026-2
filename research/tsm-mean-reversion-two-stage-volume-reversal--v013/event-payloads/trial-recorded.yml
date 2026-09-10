@@ -1,0 +1,6 @@
+development_evidence_digest: b068d72514453b11af7be628e66a7d4ccd8c95a9833a2b479ff1e46620e6bd30
+development_evidence_path: evidence/development.yml
+inputs_digest: 8be5bb61548c63053527d5e9128065a3ea1af50ec6d0a6dcdc00bf7548d7b183
+inputs_path: manifests/development-trial-inputs.yml
+status: completed
+trial_id: tsm-mr-two-stage-cooldown-reset-v013
