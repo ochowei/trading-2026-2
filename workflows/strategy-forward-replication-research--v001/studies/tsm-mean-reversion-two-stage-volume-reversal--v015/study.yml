@@ -1,0 +1,32 @@
+candidate_freeze: null
+evidence: {}
+lifecycle:
+  current_event: study-created
+  event_chain_head_digest: 9bc1190749f7afe6dec3cafcf1d53aa76dcd899e291f4075792e2ea82396f66b
+  event_count: 1
+  status: active
+outcome:
+  authority: none
+  status: pending
+preregistration:
+  digest: null
+provenance:
+  status: null
+schema_version: 1
+study:
+  identity:
+    experiment_family: tsm-mean-reversion-two-stage-volume-reversal-retest-v015
+    historical_evaluation_operator: william
+    research_owner: william
+    research_round_id: 2026-09-10-tsm-two-stage-v015
+    source_bundle_digest: 80a12993fe71d5c8fcf68bb7b4e04f5a53f7a334f44164fc74f75bf6ea101047
+    source_bundle_path: manifests/source-bundle.yml
+  study_id: tsm-mean-reversion-two-stage-volume-reversal--v015
+trial_registry:
+  digest: null
+  recorded_trial_count: 0
+  trial_ids: []
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 80a12993fe71d5c8fcf68bb7b4e04f5a53f7a334f44164fc74f75bf6ea101047
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4

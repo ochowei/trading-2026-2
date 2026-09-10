@@ -1,0 +1,42 @@
+files:
+  - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+    path: pyproject.toml
+  - digest: 2789ff23794fcbd78649def874b0315fd7f10432be9cc1fec896ffaaf1a7894e
+    path: research/tools/development-status.schema.yml
+  - digest: f4b2171dcfa6e3e25b3915fe56eae553972ae5d24baa4565ccbf3d3f25d268de
+    path: research/tools/development_status.py
+  - digest: 273fccfbe795ccd3d5401ba5ea76045647d91c0062881e992b24a8be9b4c25f3
+    path: research/tsm-mean-reversion-two-stage-volume-reversal--v017/candidate-definition.yml
+  - digest: d8f51a7a1f2f5024d1a778fd5c0d42a70b549aa258723869b2a4567cfee4a618
+    path: research/tsm-mean-reversion-two-stage-volume-reversal--v017/comparison-control-development.yml
+  - digest: f22063efc0264a093063e7b6b347d513f3c587a9689c2755d0ae4ac3555a2d37
+    path: research/tsm-mean-reversion-two-stage-volume-reversal--v017/data-snapshot-acquisition.yml
+  - digest: b01ad417a536f0299f456fceeaf0370c1745654b52d53c87fe509974977105f0
+    path: research/tsm-mean-reversion-two-stage-volume-reversal--v017/data-snapshot-set.yml
+  - digest: d9db2277e8c8236debeb3e0e955710f95a87fba1cd532464b8d3c7f42a831cce
+    path: research/tsm-mean-reversion-two-stage-volume-reversal--v017/implementation-contract.yml
+  - digest: 92c92b971708687857800853455eb6c4027c2e5409e308924044fa705d315abb
+    path: research/tsm-mean-reversion-two-stage-volume-reversal--v017/preregistration.yml
+  - digest: 4d9bd3b25afb1cefcc4d4d1e5f3cee404d153df084ff12add5848231152e0283
+    path: research/tsm-mean-reversion-two-stage-volume-reversal--v017/qualification-spec.yml
+  - digest: 9b0f9b267b244c7f1a857326cbfbf944b75c7c9488fe85ac813777f35beeb929
+    path: research/tsm-mean-reversion-two-stage-volume-reversal--v017/run_development.py
+  - digest: 933bb0bb63f9a8683ed6d70b4d120b04931c1685034e7cf5dc9e9480bded2e44
+    path: research/tsm-mean-reversion-two-stage-volume-reversal--v017/run_historical_evaluation.py
+  - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+    path: src/trading_2026_2/__init__.py
+  - digest: f3163c9b92046d0397ce1daf0cfb320a302c9e994875a4be0e93057a83cef7c4
+    path: src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v009.py
+  - digest: 9264d114635c430e9eef077a04432563a8b15c7daf87b0dccd113d29b1a1d702
+    path: src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v017.py
+  - digest: 96fbae8c23dcb85d2cc51a19aa20196c1819d5beb6238746381cc7889556c476
+    path: tests/test_tsm_mean_reversion_two_stage_volume_reversal_v017.py
+  - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+    path: uv.lock
+  - digest: c0e6125eba53da58cd28c5f9502b77739ded8889c7b1f6a383a272016806284f
+    path: workflows/strategy-forward-replication-research--v001/validator/canonical_yaml.py
+  - digest: 6aebe36c5167880510c21ee9ccf15c22f29271d78585d95dec0dd00298177120
+    path: workflows/strategy-forward-replication-research--v001/validator/errors.py
+  - digest: 55f44d6003cd402c4bfec2742101f8b1e7de02467299dc41d4baa249e5056d7a
+    path: workflows/strategy-forward-replication-research--v001/validator/metrics.py
+schema_version: 1

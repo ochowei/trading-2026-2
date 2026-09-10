@@ -1,0 +1,6 @@
+candidate_available: false
+complete_family_trial_ids:
+  - tsm-mr-two-stage-volume-reversal-retest-v017
+maximum_trials: 1
+recorded_trial_count: 1
+trial_registry_digest: 0a4128e7ae3e9e708c59a7b7c06490ecf6bf314011835250ca684f74a080e086

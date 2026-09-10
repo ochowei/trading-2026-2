@@ -1,0 +1,55 @@
+baseline_comparison:
+  baseline_id: tsm-mean-reversion-two-stage-baseline-v009
+  baseline_is_excluded_from_candidate_family: true
+  candidate_id: tsm-mr-two-stage-volume-reversal-retest-v014
+  execution_is_identical: true
+candidate_family: tsm-mean-reversion-two-stage-volume-reversal-retest-v014
+candidate_id: tsm-mr-two-stage-volume-reversal-retest-v014
+data_bindings:
+  comparison_control_digest: d8f51a7a1f2f5024d1a778fd5c0d42a70b549aa258723869b2a4567cfee4a618
+  comparison_control_path: research/tsm-mean-reversion-two-stage-volume-reversal--v014/comparison-control-development.yml
+  development_digest: 4e443b4c7db125967ef936d615b6d2283da8ba0bccc62239a5770daf176eccc3
+  development_path: research/market-data/yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv
+  warmup_digest: 81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847
+  warmup_path: research/market-data/yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv
+date_controls:
+  formal_provider_access: false
+  signal_end: '2018-12-31'
+  signal_start: '2014-01-01'
+  warmup_end: '2013-12-31'
+  warmup_start: '2013-01-01'
+development_diagnostics:
+  block_lengths:
+    - 3
+    - 5
+  bootstrap_seed: 20260902
+  calendar_block_bootstrap:
+    block_sessions:
+      - 63
+      - 126
+    bootstrap_seed: 20260906
+    repetitions: 10000
+    seed_application: exact-same-seed-for-each-block-length
+  leave_one_signal_year_out: true
+  repetitions: 50000
+  seed_application: exact-same-seed-for-each-block-length
+execution:
+  cooldown_anchor: completed-position-exit
+  cooldown_completed_session_steps_after_exit: 5
+  entry: next-XNYS-open
+  holding_sessions: 10
+  intrabar_ambiguity: adverse-stop-first
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    modeled_stop_includes_costs: true
+    risk_fraction_of_pre_entry_equity: '0.02'
+  stop_market_gtc: '-0.04'
+  target_limit_day: '0.04'
+preregistration_digest: 07372f948c982f586aa3f03f0b1dba5c4389c1059f0d2ba57b0f4cab384e75dd
+schema_version: 1
+selected_candidate_id: tsm-mr-two-stage-volume-reversal-retest-v014
+source_bundle_digest: 75bf73d1976355ff60dc599a4b10f09b7892b09ed1805df8f7c602bd6b6f92a0
+strategy_engine_digest: 9264d114635c430e9eef077a04432563a8b15c7daf87b0dccd113d29b1a1d702
+study_procedure_digest: f73e1a715d22d14e2a3a8b4102f364f48b16c1d14d9636ed94ddd1a967d39013
+study_procedure_path: research/tsm-mean-reversion-two-stage-volume-reversal--v014/run_development.py
+trial_id: tsm-mr-two-stage-volume-reversal-retest-v014
