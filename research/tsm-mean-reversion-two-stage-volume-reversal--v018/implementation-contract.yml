@@ -1,0 +1,78 @@
+engine:
+  baseline_spec_constant: BASELINE_SPEC
+  cost_constant: BASE_COST
+  original_only_spec_constant: V009_ONLY_SPEC
+  path: src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v018.py
+  spec_constant: DEFAULT_SPEC
+  supplemental_only_spec_constant: SUPPLEMENTAL_ONLY_SPEC
+execution:
+  cooldown:
+    anchor: completed-position-exit
+    minimum_completed_session_steps_after_exit: 5
+  decision:
+    entry: next-session-open
+    signal: completed-session-close
+  drawdown:
+    formal_gate_definition: realized-trade-equity-drawdown
+    formal_gate_metric: stress_maximum_drawdown
+    mark_to_market_diagnostic: holding-session-low-after-costs
+  exits:
+    gap_fill: stop-gap-at-open-target-gap-at-open
+    holding_exit: next-open-after-10-complete-sessions
+    same_session_ambiguity: adverse-stop-first
+    stop_return: '-0.04'
+    target_return: '0.04'
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    modeled_stop_includes_entry_exit_costs: true
+    risk_fraction_of_pre_entry_equity: '0.02'
+    shares: maximum-integer-shares-within-risk-and-cash-caps
+  price_direction_confirmation:
+    close_above_prior_close: true
+    rule: close-above-prior-close
+indicator_contract:
+  columns:
+    rsi: rsi_2
+    sma: sma_20
+    supplemental_close: close_above_prior_close
+    supplemental_low_t_minus_1: low_t_minus_1
+    supplemental_low_t_minus_2: low_t_minus_2
+    supplemental_return_t_minus_1: return_t_minus_1
+    supplemental_return_t_minus_2: return_t_minus_2
+    supplemental_volume_t_minus_1: volume_ratio_t_minus_1
+    supplemental_volume_t_minus_2: volume_ratio_t_minus_2
+    volume_lead: prior_volume_spike_ratio
+  required_history_sessions: 25
+  rsi:
+    formula: simple-rolling-mean
+    length: 2
+    min_periods: 2
+    not_ready: null
+    zero_gain_and_loss: 50
+    zero_gain_only: 0
+    zero_loss_only: 100
+  sma:
+    lookback: 20
+    min_periods: 20
+    not_ready: null
+  supplemental_path:
+    close_confirmation: close_t_gt_close_t_minus_1
+    gap_lower_inclusive: '0.010'
+    gap_upper_exclusive: '0.015'
+    low_rule: low_t_minus_1 >= low_t_minus_2
+    price_return_rule: return_t_minus_2 < return_t_minus_1 <= 0
+    rsi_maximum: '50'
+    volume_average_excludes_current_day: true
+    volume_average_length: 20
+    volume_rule: volume_ratio_t_minus_2 >= 1.05 and volume_ratio_t_minus_1 >= 1.05
+  volume_lead:
+    average_min_periods: 20
+    enabled: true
+    lead_min_periods: 5
+    prior_session_window: 5
+    uses_prior_sessions_only: true
+    volume_average_length: 20
+procedure:
+  historical_evaluation_path: research/tsm-mean-reversion-two-stage-volume-reversal--v018/run_historical_evaluation.py
+  path: research/tsm-mean-reversion-two-stage-volume-reversal--v018/run_development.py
+schema_version: 1

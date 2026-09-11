@@ -1,0 +1,18 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: be86234a3cb38eb5c614cd3493ad416986e4819df03361960ba41dc5b2d7050b
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: trial-registry-frozen
+occurred_at: '2026-09-11T07:52:57.004870Z'
+payload:
+  candidate_available: true
+  complete_family_trial_ids:
+    - tsm-mr-two-stage-volume-reversal-shallow-reversal-v018
+  maximum_trials: 1
+  recorded_trial_count: 1
+  trial_registry_digest: 7d6b6b265d7b96cf5913aa0f1d1e00edd0737d0e3cf426c3f6c483cd6ebc8ae1
+previous_event_digest: cd8b00def5d2bf7edd0bc9e87dad80b5c9a2dc2f4ec44e58f54980ea0a30f351
+schema_version: 1
+sequence: 5
+study_id: tsm-mean-reversion-two-stage-volume-reversal--v018

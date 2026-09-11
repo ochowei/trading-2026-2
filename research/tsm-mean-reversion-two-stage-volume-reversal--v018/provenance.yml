@@ -1,0 +1,19 @@
+assessed_at: '2026-09-11T00:00:00.000000Z'
+assessment: 本 Study 開發階段只使用 warmup-only、Development 以及事前固定的 v009 Development 比較摘要；未讀取或執行任何正式 Historical Evaluation 結果，亦未使用其結果調整規格。
+assets:
+  - exposure_status: development-only
+    role: warmup-only
+  - exposure_status: development-only
+    role: development
+controls:
+  candidate_freeze_before_evaluation: false
+  evaluation_strategy_outcome_accessed: false
+  replay_strategy_outcome_accessed: false
+  trial_registry_frozen: true
+declaration:
+  actor_id: william
+  confirmed: true
+  statement: 我確認本 Study 的 Development 與候選資格判定沒有查看正式 Historical Evaluation 結果；研究目標失敗後不再進行調參、重跑或候選凍結。
+schema_version: 1
+status: verified-clean
+study_id: tsm-mean-reversion-two-stage-volume-reversal--v018

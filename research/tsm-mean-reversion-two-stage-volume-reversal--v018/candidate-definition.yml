@@ -1,0 +1,94 @@
+baseline_comparison:
+  baseline_id: tsm-mean-reversion-two-stage-baseline-v009
+  baseline_is_excluded_from_candidate_family: true
+  candidate_id: tsm-mr-two-stage-volume-reversal-shallow-reversal-v018
+  execution_is_identical: true
+candidate_family: tsm-mean-reversion-two-stage-volume-reversal-shallow-reversal-v018
+candidate_id: tsm-mr-two-stage-volume-reversal-shallow-reversal-v018
+complete_candidate_family:
+  - tsm-mr-two-stage-volume-reversal-shallow-reversal-v018
+cost_models:
+  base:
+    fee_per_side_bps: '1'
+    slippage_per_side_bps: '5'
+  stress:
+    fee_per_side_bps: '2'
+    slippage_per_side_bps: '20'
+date_controls:
+  formal_provider_access: false
+  signal_end: '2018-12-31'
+  signal_start: '2014-01-01'
+  warmup_end: '2013-12-31'
+  warmup_start: '2013-01-01'
+execution:
+  cooldown_anchor: completed-position-exit
+  cooldown_completed_session_steps_after_exit: 5
+  entry: next-XNYS-open
+  gap_fill: stop-gap-at-open-target-gap-at-open
+  held_complete_sessions: 10
+  intrabar_ambiguity: adverse-stop-first
+  maximum_holding_session_span_for_validator: 11
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    modeled_stop_includes_costs: true
+    risk_fraction_of_pre_entry_equity: '0.02'
+    shares: maximum-integer-shares-within-risk-and-cash-caps
+  stop:
+    level_from_raw_entry_open: '-0.04'
+    order_type: STOP_MARKET
+    time_in_force: GTC
+  target:
+    level_from_raw_entry_open: '0.04'
+    order_type: LIMIT
+    reissued_each_session: true
+    time_in_force: DAY
+fold_policy:
+  evaluation_fold_warmup_sessions: 25
+  indicator_state_carried_between_folds: false
+  portfolio_state_reset_each_fold: true
+  replay_warmup_sessions: 25
+schema_version: 1
+selected_candidate_id: tsm-mr-two-stage-volume-reversal-shallow-reversal-v018
+signal:
+  accepted_only_when_flat: true
+  cooldown:
+    clock_anchor: completed-position-exit
+    completed_session_steps_after_exit: 5
+  decision_time: completed-session-close
+  mean_reversion:
+    close_vs_sma20_gap_minimum: '0.015'
+    rsi_length: 2
+    rsi_maximum: '50'
+    sma_length: 20
+  original_path:
+    close_above_prior_close: true
+    gap_operator: '>='
+    gap_value: '0.015'
+    volume_lead_enabled: true
+    volume_lead_window: 5
+    volume_ratio_minimum: '1.05'
+  price_direction_confirmation:
+    close_above_prior_close: true
+  supplemental_path:
+    close_above_prior_close: true
+    gap_lower_inclusive: '0.010'
+    gap_upper_exclusive: '0.015'
+    low_t_minus_1_operator: '>='
+    low_t_minus_2_reference: true
+    price_return_t_minus_1_operator: <=
+    price_return_t_minus_2_operator: <
+    rsi_maximum: '50'
+    volume_average_excludes_current_day: true
+    volume_average_length: 20
+    volume_ratio_minimum: '1.05'
+    volume_t_minus_1_operator: '>='
+    volume_t_minus_2_operator: '>='
+  symbol: TSM
+  volume_leads_price:
+    enabled: true
+    prior_session_window: 5
+    volume_average_length: 20
+    volume_ratio_minimum: '1.05'
+    volume_ratio_operator: '>='
+    volume_ratio_value: '1.05'
+    volume_shock_is_before_signal: true
