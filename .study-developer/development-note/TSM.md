@@ -1390,3 +1390,59 @@
 - 程式／測試：`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v013.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v009.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v013.py`
 - 詳細盲檢討：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v013/reviews/001-blind-review.md`
 - 來源限制：本成果卡只整理 Development 階段，沒有讀取或引用正式 Historical Evaluation、Terminal 或 `historical-evaluation-artifacts/`。
+
+---
+
+# `tsm-mean-reversion-two-stage-volume-reversal--v017`：Study Development 成果卡
+
+- 成果卡狀態：`complete`
+- Development gate：`通過`
+- Provenance（來源可信狀態）：`provenance-unknown`
+- candidate_freeze_status：`未完成`
+- 前一個 Study：無（v017 規格未明示前版；Development 比較基準為 `tsm-mean-reversion-two-stage-volume-reversal--v009`）
+- 記錄日期：`2026-09-11`
+
+## 結論
+
+> 在 2014–2018、base 每邊 1／5 bps、stress 每邊 2／20 bps、2% risk budget、10-session 持有與相同停損停利規則下，本成果卡狀態為 `complete`，formal Development gates 全部通過；但對「加入放量事件後的縮量淺回測，可在 v009 原有路徑之外增加成本後有優勢交易」的假說，本輪不支持。補充路徑實際接受 0 筆訊號，所有 24 筆交易都來自原有路徑，因此 candidate freeze 未完成。
+
+## 研究變更
+
+- 研究問題或假說：訊號日前第 2–5 個交易日若先有成交量至少為前 20 日均量 1.25 倍、收盤守住區間上半部的放量事件，之後出現不破事件低點的縮量收跌回測，是否能讓原本只需低於 SMA(20) 1.0%（含）至未滿 1.5% 的淺超跌訊號形成有效均值回歸機會。
+- 相較比較基準只改：保留 v009 原有量先與收盤上漲路徑，新增一次性、最新事件優先的「放量→縮量回測→收盤反轉」補充路徑。
+- 保持不變：下一個 XNYS session open 進場、10-session 持有、退場後 5-session cooldown、2% risk budget、-4%／+4% stop-target 與成本模型。
+
+## 主要結果
+
+| 條件 | 狀態 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | gate／備註 |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| Development / base | 已完成 | 24 | 33.676% | 5.036 | 2.000% | formal gates 通過；freeze research targets 未全數通過 |
+| Development / stress | 已完成 | 24 | 26.523% | 4.204 | 2.119% | formal gates 通過；stress 30.40% 目標失敗 |
+
+- 交易年度覆蓋：5 年（2014–2018）。
+- 失敗 gate：無 formal Development gate 失敗；但 research targets 有 7 項失敗，包括完成交易 24<30、相對 v009 未增加交易（24 不大於 24）、新增交易數 0<1、新增交易年度 0<3、兩套成本下淨新增減被排擠損益均為 0，以及 stress 報酬 26.523%<30.40%。
+- 未執行項目與原因：無；交易區塊 bootstrap、calendar block bootstrap 與 leave-one-signal-year-out 均有 evidence。
+
+## 主要發現
+
+- 已確認：`evidence/development.yml` 通過 Development validator；base／stress 報酬與 PF 均為正，stress block bootstrap 正報酬比例最低為 99.998%，逐年剔除後最低 stress 報酬 18.030%、PF 3.409，formal gates 全數通過。
+- 已確認：補充路徑建立 164 個放量事件，但接受的補充確認與補充交易都是 0；v017 與 v009 的交易數、報酬、PF、回撤完全一致，顯示本輪沒有量到新增機制的邊際效果。
+- 可能原因：嚴格的 2–5 session 事件窗口、低點不可跌破與單次消耗規則，可能讓事件在完成回測與訊號確認前過期、失效或被新事件取代；evidence 只支持這個可能性，不能分辨主因。
+- 尚不能判斷：不能由本輪結果判斷補充路徑在較寬時間窗口下是否有效，也不能把原有路徑的正報酬歸因於新增路徑。
+- 已確認的證據缺口、影響與限制：允許讀取資料沒有獨立 provenance declaration，故來源可信狀態仍為 `provenance-unknown`；24 筆交易也低於 freeze 所要求的 30 筆，正報酬不能抵銷上述新增交易目標失敗。
+
+## 下一輪
+
+- 建議處置：停止 v017 candidate freeze，不在原 Study 內調參或重跑。
+- 下一個 Study 只測：若仍要延伸，只把補充事件的有效觀察窗口（含 expiry）由 5 個 session 延長至 7 個 session；其餘訊號、成本、執行與風控固定。
+- 成功／失敗條件：formal Development gates 全部通過，且補充路徑至少產生 1 筆交易、分布於至少 3 個 signal years、總交易至少 30 筆、stress 報酬至少 30.40%，兩套成本下淨新增減被排擠損益都嚴格大於 0；任一條件失敗即停止。
+- 不得沿用的問題：不得用本輪與 v009 完全相同的 aggregate metrics 宣稱縮量淺回測機制已被驗證，也不得把 0 筆新增交易當成可估計的增量效果。
+
+## 允許讀取的 repository-relative 來源
+
+- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v017/manifests/preregistration.yml`
+- Candidate definition：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v017/manifests/candidate-definition.yml`
+- Development evidence：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v017/evidence/development.yml`
+- 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v017/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v017.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v017.py`、`research/tools/development_status.py`
+- 詳細盲檢討：無
+- 來源限制：本成果卡只整理 Development 階段，沒有讀取或引用正式 Historical Evaluation、Terminal 或 `historical-evaluation-artifacts/`。
