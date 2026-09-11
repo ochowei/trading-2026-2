@@ -1446,3 +1446,169 @@
 - 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v017/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v017.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v017.py`、`research/tools/development_status.py`
 - 詳細盲檢討：無
 - 來源限制：本成果卡只整理 Development 階段，沒有讀取或引用正式 Historical Evaluation、Terminal 或 `historical-evaluation-artifacts/`。
+
+---
+
+# `tsm-mean-reversion-two-stage-volume-reversal--v014`：Study Development 成果卡
+
+- 成果卡狀態：`evidence-unavailable`
+- Development gate：`尚不能判斷`
+- Provenance（來源可信狀態）：`未確認`
+- candidate_freeze_status：`尚不能判斷`
+- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v013`
+- 記錄日期：`2026-09-11`
+
+## 結論
+
+> 在事前規格的 2014–2018、base 每邊 1／5 bps、stress 每邊 2／20 bps 成本下，本成果卡狀態為 `evidence-unavailable`。v014 的規格與程式路徑可以確認，但找不到可驗證的 `evidence/development.yml`，因此不能判定 base／stress 的交易、報酬、PF、回撤、Development gate 或 candidate freeze，也不能以程式與輸入檔代替結果證據。
+
+## 研究變更
+
+- 研究問題或假說：訊號日前第 2–5 個交易日若先有成交量至少為前 20 日均量 1.25 倍的放量事件，之後出現收跌、量縮至事件量 80% 以下且不跌破事件低點的淺回測，是否能在原本 1.5% 超跌門檻之外，形成扣除成本後有優勢的均值回歸機會。
+- 相較上一個 Study 只改：移除 v013 的退場冷卻提前重設，改加入獨立的「放量事件→縮量回測→訊號日收盤上漲」補充路徑；它與 v009 原有路徑並存，原路徑優先。
+- 保持不變或比較基準：v009 的資料、進場與退場、2% 風險預算、10 個完整持有 session、停損停利、冷卻與成本口徑。
+
+## 主要結果
+
+| 條件 | 狀態 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | gate／備註 |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| Development / base | 證據不可用：缺少 `evidence/development.yml` |  |  |  |  | 停止分析 |
+| Development / stress | 證據不可用：缺少 `evidence/development.yml` |  |  |  |  | 停止分析 |
+
+- 交易年度覆蓋：證據不可用：沒有合法 Development evidence。
+- 失敗 gate：停止分析：缺少可被 validator 驗證的 `evidence/development.yml`，不判定 gate 失敗或通過。
+- 未執行項目與原因：尚不能判斷；目前無法區分 Development 未執行、證據未保存或路徑未對齊。
+
+## 主要發現
+
+- 已確認：v014 的 preregistration 與 implementation contract 已固定補充路徑、成本、執行與比較 v009 的規格；但允許讀取範圍內沒有候選結果 evidence。
+- 可能原因：結果檔可能尚未產製、未封存，或產出路徑與 workflow 期待不一致；這只是流程層面的可能解釋，沒有證據支持其中任何一項。
+- 尚不能判斷：補充路徑是否產生交易、base／stress 是否通過門檻、研究目標是否達成，以及 candidate 是否可 freeze。
+- 已確認的證據缺口、影響與限制：缺少 `evidence/development.yml` 使所有數值與 gate 分析停止；不得用 runner、程式或 input 重建數值。
+
+## 下一輪
+
+- 建議處置：修正 Development evidence 的產製、驗證與封存流程；不要在 v014 內補跑或調整策略參數。
+- 下一個 Study 只測：只驗證同一候選能否產出一份被 validator 接受、同時包含 base／stress 與 status table 的 `evidence/development.yml`。
+- 成功／失敗條件：檔案存在、validator 接受、base／stress 結果完整且 status 與 gates／research targets 一致即成功；缺檔、無法驗證或任一情境缺資料即失敗。
+- 不得沿用的問題：不得把規格存在、測試通過或 runner 可執行解讀成策略結果，也不得在證據缺失時宣稱假說有效或失敗。
+
+## 允許讀取的 repository-relative 來源
+
+- Preregistration：`research/tsm-mean-reversion-two-stage-volume-reversal--v014/preregistration.yml`
+- Candidate definition：`research/tsm-mean-reversion-two-stage-volume-reversal--v014/candidate-definition.yml`
+- Development evidence：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v014/evidence/development.yml`（缺失）
+- 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v014/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v014.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v014.py`
+- 詳細盲檢討：無
+- 來源限制：本成果卡只整理 Development 階段，沒有讀取或引用正式 Historical Evaluation、Terminal 或 `historical-evaluation-artifacts/`。
+
+---
+
+# `tsm-mean-reversion-two-stage-volume-reversal--v015`：Study Development 成果卡
+
+- 成果卡狀態：`evidence-unavailable`
+- Development gate：`尚不能判斷`
+- Provenance（來源可信狀態）：`未確認`
+- candidate_freeze_status：`尚不能判斷`
+- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v014`
+- 記錄日期：`2026-09-11`
+
+## 結論
+
+> 在同一套 2014–2018、base 每邊 1／5 bps、stress 每邊 2／20 bps 成本規格下，本成果卡狀態為 `evidence-unavailable`。v015 的 workflow 與 research 目錄目前只有 Development authorization，沒有可被驗證的 `evidence/development.yml`；因此不能判定任何 base／stress 結果、Development gate、研究目標或 candidate freeze，也不能把 v014 的結果假設沿用到 v015。
+
+## 研究變更
+
+- 研究問題或假說：延續 v014 的放量後縮量淺回測補充路徑，檢驗訊號日只需低於 SMA(20) 1.0%（含）但未達 1.5% 時，是否能形成成本後有優勢的均值回歸交易。
+- 相較上一個 Study 只改：明確綁定 v009 Study-local comparison control，並將同一套候選與 Development runner／證據路徑版本化；v014 與 v015 的策略 source diff 為空，因此沒有可確認的策略規則變更。
+- 保持不變或比較基準：補充路徑條件、v009 原有路徑、資料期間、成本、2% 風險預算、10-session 持有、停損停利與冷卻規則。
+
+## 主要結果
+
+| 條件 | 狀態 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | gate／備註 |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| Development / base | 證據不可用：沒有 `evidence/development.yml`；目前僅有 authorization |  |  |  |  | 停止分析 |
+| Development / stress | 證據不可用：沒有 `evidence/development.yml`；目前僅有 authorization |  |  |  |  | 停止分析 |
+
+- 交易年度覆蓋：證據不可用：沒有合法 Development evidence。
+- 失敗 gate：停止分析：缺少可被 validator 驗證的 `evidence/development.yml`，不判定 gate 失敗或通過。
+- 未執行項目與原因：尚不能判斷；authorization 只能確認 Development scope，不能證明結果已產出或完整。
+
+## 主要發現
+
+- 已確認：v015 preregistration 已固定 v009 comparison control 與同一個補充路徑假說；策略 source 與 v014 相同，版本差異主要在 Study／runner／比較控制封裝。
+- 可能原因：證據可能尚未產製、未封存，或只保留 authorization 而未完成結果發布；目前資料不能在這些解釋之間做選擇。
+- 尚不能判斷：v015 是否實際執行 base／stress、補充路徑是否新增交易、任何報酬或回撤，以及 candidate 是否可 freeze。
+- 已確認的證據缺口、影響與限制：workflow 與 research 的 evidence 目錄都沒有 `development.yml`；因此不能用 v014、v009 或程式輸出補足 v015 結果。
+
+## 下一輪
+
+- 建議處置：修正 Development evidence 產製、validator 驗證與封存鏈；保持策略規則不變，不在 v015 內重跑或調參。
+- 下一個 Study 只測：只驗證候選結果能否產出並封存一份與 v009 control 綁定、可被 validator 接受的 `evidence/development.yml`。
+- 成功／失敗條件：evidence 存在且合法、base／stress 完整、status table 與 gates／research targets 一致即成功；任一缺失或不一致即失敗。
+- 不得沿用的問題：不得把 authorization、source diff 為空或程式可執行當成 Development outcome，也不得在證據缺失時宣稱機制有效。
+
+## 允許讀取的 repository-relative 來源
+
+- Preregistration：`research/tsm-mean-reversion-two-stage-volume-reversal--v015/preregistration.yml`
+- Candidate definition：`research/tsm-mean-reversion-two-stage-volume-reversal--v015/candidate-definition.yml`
+- Development evidence：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v015/evidence/development.yml`（缺失；目前僅有 `development-authorization.yml`）
+- 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v015/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v015.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v015.py`
+- 詳細盲檢討：無
+- 來源限制：本成果卡只整理 Development 階段，沒有讀取或引用正式 Historical Evaluation、Terminal 或 `historical-evaluation-artifacts/`。
+
+---
+
+# `tsm-mean-reversion-two-stage-volume-reversal--v016`：Study Development 成果卡
+
+- 成果卡狀態：`complete`
+- Development gate：`通過`
+- Provenance（來源可信狀態）：`provenance-unknown`
+- candidate_freeze_status：`未完成`
+- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v015`
+- 記錄日期：`2026-09-11`
+
+## 結論
+
+> 在 2014–2018、base 每邊 1／5 bps、stress 每邊 2／20 bps、2% risk budget、10 個完整持有 session 與既定停損停利規則下，`evidence/development.yml` 已通過 validator，且 formal Development gates 全部通過；本成果卡狀態為 `complete`。但 7 項預先登記 research targets 失敗：v016 只有 24 筆、沒有補充路徑新增交易，stress 報酬為 26.523% 未達 30.40%，所以 candidate freeze 未完成，不能把補充機制視為已被支持。
+
+## 研究變更
+
+- 研究問題或假說：放量事件後的縮量、不破低點淺回測，是否能在原 v009 路徑外增加扣除成本後有優勢的均值回歸機會；補充路徑只在訊號日前 2–5 個交易日有效，且與原路徑並存但不增加持倉。
+- 相較上一個 Study 只改：策略 source 與 v015 相同；v016 主要是同一候選的版本化 Study／runner 與獨立 Development evidence，沒有新的策略參數變更。
+- 保持不變或比較基準：v009 原有路徑、資料與 2014–2018 期間、base／stress 成本、2% 風險預算、10-session 持有、5-session 冷卻、停損停利與進出場口徑。
+
+## 主要結果
+
+| 條件 | 狀態 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | gate／備註 |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| Development / base | 已完成 | 24 | 33.676% | 5.036 | 2.000% | formal gates 通過；研究目標未全數通過 |
+| Development / stress | 已完成 | 24 | 26.523% | 4.204 | 2.119% | formal gates 通過；30.40% 研究目標失敗 |
+
+- 交易年度覆蓋：5 年（2014–2018）。
+- 失敗 gate：無 formal Development gate 失敗；research targets 失敗包括完成交易至少 30、交易數多於 v009、新增交易至少 1 筆且分布至少 3 年、base／stress 淨新增減被排擠損益嚴格大於 0，以及 stress 報酬至少 30.40%。實際新增交易為 0、兩套成本下淨新增損益為 0。
+- 未執行項目與原因：無；交易區塊 bootstrap 與 leave-one-signal-year-out evidence 已存在並通過正式 Development gate，calendar block bootstrap 為描述性診斷。
+
+## 主要發現
+
+- 已確認：validator 接受 evidence；base／stress 報酬、PF 均為正，最大回撤分別為 2.000% 與 2.119%，formal gates 全數通過。
+- 已確認：建立 164 個放量事件，但補充確認與補充交易均為 0；24 筆交易全部來自 original path，v016 combined 與 v009 original path 的交易數、報酬、PF、回撤完全一致。因此本輪沒有量到補充機制的邊際效果。
+- 可能原因：2–5 session 事件窗口、5-session expiry，以及事件被 invalidated／replaced 的規則可能過於嚴格；evidence 只支持這個可能性，不能分辨哪一項是主因。
+- 尚不能判斷：若放寬有效窗口，補充路徑是否會產生可重現且不排擠原路徑的增量效果；也不能把原有路徑的正報酬歸因於補充機制。
+- 已確認的證據缺口、影響與限制：沒有獨立 provenance declaration，來源可信狀態仍為 `provenance-unknown`；新增交易為 0，使增量效果無法估計，且研究目標失敗阻止 candidate freeze。
+
+## 下一輪
+
+- 建議處置：停止 v016 candidate freeze；若要延伸，建立有限 follow-up Study，不在原 Study 內調參或重跑。
+- 下一個 Study 只測：只把補充事件的有效觀察窗口／expiry 從 5 個 session 延長到 7 個 session，其餘訊號、成本、執行與風控固定。
+- 成功／失敗條件：formal Development gates 全通過，補充路徑至少新增 1 筆交易且分布於至少 3 個 signal years，總交易至少 30 筆，stress 報酬至少 30.40%，兩套成本下淨新增減被排擠損益都嚴格大於 0；任一條件失敗即停止。
+- 不得沿用的問題：不得用與 v009 完全相同的 aggregate metrics 宣稱補充機制已驗證，也不得把 0 筆新增交易當成可估計的增量效果。
+
+## 允許讀取的 repository-relative 來源
+
+- Preregistration：`research/tsm-mean-reversion-two-stage-volume-reversal--v016/preregistration.yml`
+- Candidate definition：`research/tsm-mean-reversion-two-stage-volume-reversal--v016/candidate-definition.yml`
+- Development evidence：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v016/evidence/development.yml`
+- 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v016/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v016.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v016.py`、`research/tools/development_status.py`
+- 詳細盲檢討：無
+- 來源限制：本成果卡只整理 Development 階段，沒有讀取或引用正式 Historical Evaluation、Terminal 或 `historical-evaluation-artifacts/`。
