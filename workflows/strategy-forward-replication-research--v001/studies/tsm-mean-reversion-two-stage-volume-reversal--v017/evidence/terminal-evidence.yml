@@ -1,0 +1,22 @@
+authority: none
+bindings:
+  development_evidence_digest: 5de6a1247446e5f57c80b0b9ddf91a4da7c5b3f4fe8da1fc394e45e364bb5095
+  event_chain_head_digest: e998f365d5d4aefba621b9b36be93e686bec11d1bc9a2f30e2fde9a458d10bf2
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  preregistration_digest: 92c92b971708687857800853455eb6c4027c2e5409e308924044fa705d315abb
+  source_bundle_digest: 7095e12aec7684dd097b0d6b7dec0d5b71fe84edb484d4a67a5c978ac88c7e85
+  trial_registry_digest: 0a4128e7ae3e9e708c59a7b7c06490ecf6bf314011835250ca684f74a080e086
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+outcome: fail
+reasons:
+  - completed_trades_at_least_30
+  - completed_trades_more_than_v009
+  - net_new_minus_displaced_base_pnl_positive
+  - net_new_minus_displaced_stress_pnl_positive
+  - new_trade_count_at_least_one
+  - new_trade_signal_years_at_least_three
+  - stress_return_at_least_30_40_percent
+  - candidate_freeze_not_eligible
+  - historical_evaluation_not_started
+recomputed: true
+schema_version: 1

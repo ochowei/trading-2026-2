@@ -1,0 +1,6 @@
+development_evidence_digest: 0846d4a97bf53b6daa47a094de984b28675224b30fe14e4c969c41345851315e
+development_evidence_path: evidence/development.yml
+inputs_digest: a02a2885d2562d1c579e7d8e3bbd1507454f8a583ed5f60b5bf27cf7b19aff16
+inputs_path: manifests/development-trial-inputs.yml
+status: completed
+trial_id: tsm-mr-two-stage-volume-reversal-retest-v016
