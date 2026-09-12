@@ -1612,3 +1612,59 @@
 - 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v016/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v016.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v016.py`、`research/tools/development_status.py`
 - 詳細盲檢討：無
 - 來源限制：本成果卡只整理 Development 階段，沒有讀取或引用正式 Historical Evaluation、Terminal 或 `historical-evaluation-artifacts/`。
+
+---
+
+# `tsm-mean-reversion-two-stage-volume-reversal--v018`：Study Development 成果卡
+
+- 成果卡狀態：`complete`
+- Development gate：`通過`
+- Provenance（來源可信狀態）：`verified-clean`
+- candidate_freeze_status：`未完成`
+- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v017`
+- 記錄日期：`2026-09-11`
+
+## 結論
+
+> 在 2014–2018、base 每邊 1／5 bps、stress 每邊 2／20 bps、2% risk budget、4% stop／target 與 10-session 持有下，本成果卡狀態為 `complete`，且 formal Development gates 全部通過；但 v018 想驗證的淺回落補充路徑沒有產生任何 raw signal 或交易。24 筆交易全部來自 v009 原有路徑，因此本次無法支持 v018 的增量假說，candidate freeze 未完成。
+
+## 研究變更
+
+- 研究問題或假說：連續兩日放量、跌幅收斂、低點守住，若訊號日只比 SMA(20) 低 1.0% 至未滿 1.5% 且收盤轉強，是否能增加成本後有優勢的均值回歸交易。
+- 相較上一個 Study 只改：在 v009 原有訊號路徑上加入事前固定的淺回落補充路徑；原路徑、成本、風險、停損停利、持有期與冷卻規則維持不變。
+- 保持不變或比較基準：v009 comparison control、2013 warmup／2014–2018 Development、下一個 XNYS open 進場與單一部位執行口徑。
+
+## 主要結果
+
+| 條件 | 狀態 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | gate／備註 |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| Development / base | 已完成 | 24 | 33.676% | 5.036 | 2.000% | formal gate 通過；research targets 未全數通過 |
+| Development / stress | 已完成 | 24 | 26.523% | 4.204 | 2.119% | formal gate 通過；research targets 未全數通過 |
+
+- 交易年度覆蓋：5 年（2014–2018）。
+- 失敗 gate：無 formal Development gate 失敗；research targets 失敗包括交易至少 30 筆、交易數多於 v009、新增交易至少 1 筆且分布至少 3 年，以及 base／stress 淨新增減被排擠損益大於 0。實際新增交易與淨新增損益均為 0。
+- 未執行項目與原因：無；bootstrap、leave-one-signal-year-out 與成本壓力結果均已產出。限制是補充路徑本身沒有觀測值。
+
+## 主要發現
+
+- 已確認：Development evidence 已被 validator 接受，base／stress 結果完整，formal gates 通過；補充路徑 raw signal、accepted signal 與 completed trade 均為 0，v018 combined 的 24 筆交易與 v009 原路徑相同。
+- 可能原因：補充路徑把兩日成交量、跌幅收斂、低點守住、淺 gap、RSI 與收盤轉強全部串成必要條件，交集可能過窄；也可能被單一部位與 cooldown 擋下，但現有 evidence 不能分辨主因。
+- 尚不能判斷：補充機制在其他資料期間是否有效，也不能把既有 v009 交易的正報酬歸因於 v018。
+- 已確認的證據缺口、影響與限制：Development 只有 24 筆交易，且全數是原路徑；因此本卡能判定 gate 與既有路徑表現，不能估計 v018 的增量效果。
+
+## 下一輪
+
+- 建議處置：停止 v018 candidate freeze，不在原 Study 內調參或重跑。
+- 下一個 Study 只測：另建一個 follow-up，只放寬一項事前有機制理由的補充條件；原 v009 路徑、成本、執行、風控與比較控制全部固定。
+- 成功／失敗條件：formal Development gates 全部通過，補充路徑至少有 1 筆新增交易且分布於至少 3 個 signal years，總交易至少 30 筆，base／stress 淨新增減被排擠損益均嚴格大於 0；任一條件失敗即停止。
+- 不得沿用的問題：不得用本輪 v009 原路徑的 24 筆交易宣稱 v018 補充機制已被驗證，也不得依本輪結果在原 Study 事後挑參數。
+
+## 允許讀取的 repository-relative 來源
+
+- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v018/manifests/preregistration.yml`
+- Candidate definition：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v018/manifests/candidate-definition.yml`
+- Development evidence：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v018/evidence/development.yml`
+- Provenance：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v018/evidence/provenance.yml`
+- 程式／測試：`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v018.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v018.py`、`research/tools/development_status.py`
+- 詳細盲檢討：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v018/reviews/001-first-review.md`
+- 來源限制：本成果卡只整理 Development 階段，沒有讀取或引用正式 Historical Evaluation、Terminal 或 `historical-evaluation-artifacts/`。
