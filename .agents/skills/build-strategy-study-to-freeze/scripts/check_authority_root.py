@@ -261,6 +261,136 @@ def _check_new_study_state(
         )
 
 
+def _check_staged_study_state(
+    repository: Path,
+    authority_study: Path,
+    study_id: str,
+    result: dict[str, Any],
+) -> None:
+    """檢查 research bundle 已備妥、但 writer 尚未建立任何 Event 的階段。"""
+
+    workflow_study = repository / "workflows" / WORKFLOW_NAME / "studies" / study_id
+    research_study = repository / "research" / study_id
+    if research_study.is_symlink():
+        result["errors"].append(
+            _finding(
+                "research-bundle-symlink",
+                "staged mode 的 research bundle 不得是 symlink",
+                expected="real non-empty directory",
+                actual=str(research_study),
+            )
+        )
+    elif not research_study.is_dir():
+        result["errors"].append(
+            _finding(
+                "missing-research-bundle",
+                "staged mode 要求同名 research bundle 已存在",
+                expected=str(research_study),
+                actual="missing",
+            )
+        )
+    else:
+        entries = sorted(path.name for path in research_study.iterdir())
+        result["details"]["research_bundle_state"] = "non-empty" if entries else "empty"
+        if not entries:
+            result["errors"].append(
+                _finding(
+                    "empty-research-bundle",
+                    "staged mode 不接受空的 research bundle",
+                    expected="non-empty directory",
+                    actual=entries,
+                )
+            )
+
+    if workflow_study.is_symlink():
+        result["errors"].append(
+            _finding(
+                "study-tree-symlink",
+                "staged mode 的 Workflow Study 路徑不得是 symlink",
+                expected="absent or real directory without Events",
+                actual=str(workflow_study),
+            )
+        )
+    elif not workflow_study.exists():
+        result["details"]["workflow_study_state"] = "absent"
+    elif not workflow_study.is_dir():
+        result["errors"].append(
+            _finding(
+                "study-tree-not-directory",
+                "staged mode 的 Workflow Study 路徑不是目錄",
+                expected="directory without Events",
+                actual=str(workflow_study),
+            )
+        )
+    else:
+        event_root = workflow_study / "events"
+        event_entries = (
+            sorted(path.name for path in event_root.iterdir())
+            if event_root.is_dir()
+            else []
+        )
+        # staged phase 必須沒有任何 Event；隱藏檔也不能被當成可忽略的
+        # checkpoint 或暫存 Event，否則 writer 前的狀態就不是乾淨的 staged。
+        event_files = event_entries
+        if event_files:
+            result["errors"].append(
+                _finding(
+                    "study-events-already-exist",
+                    "staged mode 要求 Workflow Study 尚未有任何 Event",
+                    expected="no Event files",
+                    actual=event_files,
+                )
+            )
+        unexpected = sorted(
+            path.name
+            for path in workflow_study.iterdir()
+            if path.name != "events" and not path.name.startswith(".")
+        )
+        if unexpected:
+            result["errors"].append(
+                _finding(
+                    "study-tree-not-staged",
+                    "writer 前的 Workflow Study 不應已有 manifest 或 artifact",
+                    expected="only optional empty events directory",
+                    actual=unexpected,
+                )
+            )
+        result["details"]["workflow_study_state"] = "no-events"
+
+    if authority_study.is_symlink():
+        result["errors"].append(
+            _finding(
+                "study-authority-path-symlink",
+                "staged mode 的 authority 子目錄不得是 symlink",
+                expected="absent or real empty directory",
+                actual=str(authority_study),
+            )
+        )
+    elif not authority_study.exists():
+        result["details"]["study_authority_state"] = "absent"
+    elif not authority_study.is_dir():
+        result["errors"].append(
+            _finding(
+                "study-authority-path-not-directory",
+                "staged mode 的 authority 子目錄不是目錄",
+                expected="directory",
+                actual=str(authority_study),
+            )
+        )
+    else:
+        entries = sorted(path.name for path in authority_study.iterdir())
+        result["details"]["study_authority_state"] = "empty" if not entries else "non-empty"
+        if entries:
+            result["errors"].append(
+                _finding(
+                    "study-authority-path-not-empty",
+                    "staged mode 的 authority 子目錄必須不存在或為空",
+                    expected="empty directory or absent",
+                    actual=entries,
+                )
+            )
+
+
 def _check_existing_study_state(
     repository: Path,
     authority: Path,
@@ -333,9 +463,12 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("study_id")
     parser.add_argument(
         "--phase",
-        choices=("new", "existing"),
+        choices=("new", "staged", "existing"),
         default="new",
-        help="new 檢查第一個 writer 操作前的空間；existing 驗證既有 Event/checkpoint chain。",
+        help=(
+            "new 檢查尚未建立 research bundle 的空間；staged 檢查 research bundle 已存在但尚未有 Event；"
+            "existing 驗證既有 Event/checkpoint chain。"
+        ),
     )
     parser.add_argument("--repository-root", type=Path, default=repository_root())
     parser.add_argument(
@@ -406,6 +539,8 @@ def main(argv: list[str] | None = None) -> int:
         authority_study = _check_authority_location(repository, authority, args.study_id, result)
         if args.phase == "new":
             _check_new_study_state(repository, authority_study, args.study_id, result)
+        elif args.phase == "staged":
+            _check_staged_study_state(repository, authority_study, args.study_id, result)
         else:
             _check_existing_study_state(repository, authority, args.study_id, result)
         _check_git_inclusion(repository, authority, result)

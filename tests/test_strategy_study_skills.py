@@ -15,6 +15,14 @@ NEW_STUDY_CHECKER = (
     / "scripts"
     / "check_new_study.py"
 )
+AUTHORITY_CHECKER = (
+    REPOSITORY_ROOT
+    / ".agents"
+    / "skills"
+    / "build-strategy-study-to-freeze"
+    / "scripts"
+    / "check_authority_root.py"
+)
 FROZEN_CHECKER = (
     REPOSITORY_ROOT
     / ".agents"
@@ -48,6 +56,18 @@ def minimal_repository(tmp_path: Path) -> Path:
     workflow = root / "workflows" / "strategy-forward-replication-research--v001"
     workflow.mkdir(parents=True)
     (workflow / "release.yml").write_text("schema_version: 1\n", encoding="utf-8")
+    return root
+
+
+def staged_repository(tmp_path: Path, study_id: str = "staged-study-v001") -> Path:
+    root = minimal_repository(tmp_path)
+    subprocess.run(["git", "init", "-q"], cwd=root, check=True)
+    authority = root / ".authority"
+    authority.mkdir()
+    (authority / "README.md").write_text("repository-local authority\n", encoding="utf-8")
+    research = root / "research" / study_id
+    research.mkdir(parents=True)
+    (research / "preregistration.yml").write_text("schema_version: 1\n", encoding="utf-8")
     return root
 
 
@@ -112,6 +132,61 @@ def test_new_study_checker_rejects_existing_research(tmp_path: Path) -> None:
     )
     assert returncode == 2
     assert result["status"] == "rejected"
+
+
+def test_authority_checker_staged_accepts_bundle_before_first_event(tmp_path: Path) -> None:
+    root = staged_repository(tmp_path)
+    returncode, result = run(
+        AUTHORITY_CHECKER,
+        "staged-study-v001",
+        "--repository-root",
+        str(root),
+        "--authority-root",
+        str(root / ".authority"),
+        "--phase",
+        "staged",
+    )
+
+    assert returncode == 0
+    assert result["status"] == "passed"
+    assert result["details"]["research_bundle_state"] == "non-empty"
+    assert result["details"]["workflow_study_state"] == "absent"
+    assert result["details"]["study_authority_state"] == "absent"
+
+
+def test_authority_checker_staged_rejects_event_or_authority_checkpoint(tmp_path: Path) -> None:
+    root = staged_repository(tmp_path)
+    study_id = "staged-study-v001"
+    events = (
+        root
+        / "workflows"
+        / "strategy-forward-replication-research--v001"
+        / "studies"
+        / study_id
+        / "events"
+    )
+    events.mkdir(parents=True)
+    (events / "000001-study-created.yml").write_text("schema_version: 1\n", encoding="utf-8")
+    authority_study = root / ".authority" / study_id
+    authority_study.mkdir()
+    (authority_study / "checkpoint.json").write_text("{}\n", encoding="utf-8")
+
+    returncode, result = run(
+        AUTHORITY_CHECKER,
+        study_id,
+        "--repository-root",
+        str(root),
+        "--authority-root",
+        str(root / ".authority"),
+        "--phase",
+        "staged",
+    )
+
+    assert returncode == 1
+    assert result["status"] == "rejected"
+    codes = {item["code"] for item in result["errors"]}
+    assert "study-events-already-exist" in codes
+    assert "study-authority-path-not-empty" in codes
 
 
 def test_frozen_checker_accepts_exact_candidate_freeze(tmp_path: Path) -> None:

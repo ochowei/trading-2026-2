@@ -139,6 +139,20 @@ uv run python .agents/skills/build-strategy-study-to-freeze/scripts/check_author
 
 這個 CLI 是唯讀檢查，會確認 authority root 位於 repository 內且不在 Study 目錄，`.authority/` 沒有被 Git 忽略，並確認新 Study 的 authority 子目錄不存在或為空。只有輸出 `status: "passed"` 且 exit code 為 0，才可繼續 `check_new_study.py`、建立 research bundle 與執行 `studyctl precreate`。
 
+Research bundle 建好、但尚未有任何 Event 時，必須再執行 staged phase：
+
+```bash
+uv run python .agents/skills/build-strategy-study-to-freeze/scripts/check_authority_root.py \
+  <study-id> \
+  --repository-root <repository-root-absolute-path> \
+  --authority-root <repository-root-absolute-path>/.authority \
+  --phase staged
+```
+
+`staged` 會確認同名 research bundle 已存在且非空、Workflow Study 尚未有 Event、以及
+`.authority/<study-id>/` 不存在或為空。它不是 `new` 的別名，也不會建立目錄或 checkpoint；
+只有 `status: "passed"` 才能交給既有 writer 的 `create`。
+
 Study 建立後，在 `append`、`recover`、`validate` 或正式 `studyctl all` 前，以同一個已記錄的絕對路徑改跑 `--phase existing`；它必須確認 Event chain 與 authority checkpoint chain 相符。任何失敗都要停下來，不得改用其他 root。
 
 每個新 Study 都必須有一份明確的 implementation contract。對本 workflow
@@ -161,11 +175,13 @@ candidate-definition 或 preregistration，仍須由該 manifest 綁定同一份
 建立新 Study 的硬性順序是：
 
 ```text
-確認 repository/.authority、執行 authority preflight 與 check_new_study
+authority new
+→ check_new_study
 → 建立 research bundle
-→ 執行 pre-create binding preflight
-→ 所有 binding 通過
-→ 才能追加 study-created Event
+→ studyctl precreate（完整 contract + synthetic）
+→ authority staged
+→ 既有 writer create
+→ post-create 僅做防禦性 binding 檢查
 ```
 
 `check_new_study.py` 仍只負責 Study ID 的唯一性與安全性；它不能取代
@@ -177,21 +193,44 @@ uv run python research/tools/studyctl.py \
   precreate <study-id>
 ```
 
-`precreate` 不需要任何 Study Event，會以同名 research bundle 核對跨文件 binding、
-Source Bundle 檔案與 digest，以及已存在的同名 Study manifest copy。只有它輸出
-`status: "passed"` 且 exit code 為 0，才可以用 guarded writer 追加第一個
-`study-created` Event。Pre-create 失敗時不得建立任何 Study Event，也不得用補造
-candidate、selection 或 provenance evidence 的方式讓 CLI 通過。
+`precreate` 不需要任何 Study Event，會在 writer 建立 `study-created` 前一次完成 canonical
+YAML 與 artifact shape、Study/candidate/trial/candidate family identity、preregistration／
+qualification／trial inputs／Source Bundle digest、implementation contract、所有
+outcome-relevant 參數，以及 holding、cooldown、stop、target、gap、indicator readiness 和
+synthetic contract checks。每個失敗都要輸出 `expected`、`actual`、`path` 與穩定的 error
+`code`；synthetic 結果還要列出 raw、accepted、rejected signals、拒絕原因與 trades。
+只有它輸出 `status: "passed"` 且 exit code 為 0，才可以進入 `authority staged` 和使用
+guarded writer 追加第一個 `study-created` Event。Pre-create 失敗時不得建立任何 Study
+Event，也不得用補造 candidate、selection 或 provenance evidence 的方式讓 CLI 通過。
 
-`study-created` 後、任何 `preregistration-approved` 或其他後續 Event 前，必須再做一次
-post-create contract guard：確認 Study 內不存在
-`manifests/implementation-contract.yml`，Source Bundle 的 implementation-contract entry
-仍精確指向 `research/<study-id>/implementation-contract.yml`，再執行
-`studyctl contract` 與 `studyctl synthetic`。如果出現 `contract-not-frozen`、path mismatch
-或 digest mismatch，立即停止這個 Study；不得刪除、覆寫或重新發布既有 immutable artifact，
-也不得進入 Development。因為 `study-created` 已經存在，必須依「提前終止與封存」規則追加
-`evidence-unavailable`，再追加 `study-terminal`（`outcome: indeterminate`、
-`authority: none`），完成原 Study 的可稽核封存後，才改用新的 Study ID。
+三段持有期欄位是硬性契約：`execution.held_complete_sessions` 是 signal 後完成的持有
+session 數；`engine.holding_sessions` 必須與它相同；
+`preregistration.maximum_holding_sessions` 則是 signal-to-exit 的最大 span，因此預設關係為
+`signal_to_exit_session_span = 1 + held_complete_sessions`。若 contract 採用不同的 entry
+或 exit 邊界，`precreate` 必須把完整推導關係寫在輸出，不能默默接受 +1 或少一天。
+
+若 preregistration、qualification、trial inputs 或 Source Bundle 有修改，先使用唯讀
+diagnostic：
+
+```bash
+uv run python research/tools/studyctl.py \
+  --repository-root . diagnose <study-id>
+```
+
+診斷會列出非 canonical YAML、expected/actual digest、需要更新的下游欄位、可在
+`study-created` 前修正的 research 檔案，以及既有 Event、Study artifact、authority
+checkpoint 等 immutable 檔案。它不會放寬 canonical 規則、自動改 digest，也不會覆寫或刪除
+immutable artifact。
+
+`study-created` 後、任何 `preregistration-approved` 或其他後續 Event 前，只做防禦性 binding
+檢查：確認 Study 內不存在 `manifests/implementation-contract.yml`，Source Bundle 的
+implementation-contract entry 仍精確指向 `research/<study-id>/implementation-contract.yml`，
+且 path/digest 與事件一致。不得把首次完整 contract 或 synthetic 執行延後到
+`study-created` 後；若此防禦性檢查仍發現錯誤，立即停止這個 Study，不得刪除、覆寫或重新
+發布既有 immutable artifact，也不得進入 Development。因為 `study-created` 已經存在，必須
+依「提前終止與封存」規則追加 `evidence-unavailable`，再追加 `study-terminal`
+（`outcome: indeterminate`、`authority: none`），完成原 Study 的可稽核封存後，才改用新的
+Study ID。
 
 若 preregistration 有任何改變，必須重新計算並更新所有下游 digest，包括
 qualification、Development trial inputs、Source Bundle 及其所綁定的 evidence/input；
@@ -208,14 +247,16 @@ evidence 無效，也不會自動成為 blind review 的拒絕理由。
 若 `study-created` 後發生不可修復的 setup、contract、Source Bundle 或 evidence integrity
 錯誤，且尚未產生可判讀策略結果，正式紀錄必須是：
 
-1. 用 guarded writer 追加 `evidence-unavailable`，payload 至少包含
+1. 先執行唯讀的 `research/tools/termination_preflight.py`，驗證 authority root、Study ID、
+   event type、canonical payload 與路徑條件；再用 guarded writer 追加 `evidence-unavailable`，payload 至少包含
    `stage: development`、具體 `reason` 與一個目前不存在的 `unavailable_path`；不要為了
    滿足 path 欄位而建立假的 evidence artifact。
-2. 以 `evidence-unavailable` event 的新 chain head 與 payload digest 建立并發布
+2. 以 `evidence-unavailable` event 的新 chain head 與 payload digest 建立並發布
    `evidence/terminal-evidence.yml`，其中 `outcome` 為 `indeterminate`、`authority` 為
    `none`、`recomputed` 為 `true`，並綁定目前已存在的 workflow、policy、Source Bundle
    以及（若已存在）preregistration、trial registry 與其他 evidence digest。
-3. 用 guarded writer 追加 `study-terminal`，payload 使用
+3. 先以同一個 termination preflight 驗證 terminal evidence 的 canonical bytes、path、digest、
+   outcome、bindings 與 pending transition，再用 guarded writer 追加 `study-terminal`，payload 使用
    `outcome: indeterminate`、`authority: none`，並綁定 terminal evidence 的 path/digest。
 4. 追加每個 Event、發布 terminal evidence、`validate` 與終止狀態檢查前，都使用同一個
    `check_authority_root.py --phase existing` 與同一個絕對 authority root。終止後不得再追加
@@ -225,6 +266,12 @@ evidence 無效，也不會自動成為 blind review 的拒絕理由。
 績效結果的 Study 誤標成 `fail`。`study-paused` 只保留給可恢復的 technical/publication
 interruption，不取代正式終止。
 
+`research/tools/termination_preflight.py` 是唯讀前置檢查，不呼叫 writer。它會檢查
+`unavailable_path` 確實不存在、terminal evidence 的 canonical YAML／SHA-256／schema／
+bindings、路徑與 Study ID/event type 一致，並以結構化欄位呈現 writer error contract。既有
+writer 沒有修改，因此 payload、artifact publish 與 Event append 仍是分開操作；不得宣稱
+termination 已具備跨步驟 atomicity。writer 失敗時只接受其結構化錯誤與既有 `recover` 流程。
+
 若錯誤只是 evidence 尚未完整寫出、digest 可重新計算、輸出路徑暫時被占用或其他可修復
 問題，不得套用上述 terminal 流程。Development runner 應停止發布、保留原始錯誤、交接
 `development_evidence_validity.status: needs-repair`（必要時為 `blocked`），修復後從原始
@@ -233,8 +280,8 @@ interruption，不取代正式終止。
 執行順序如下：
 
 1. 先以 `git rev-parse --show-toplevel` 取得並記錄 repository root 絕對路徑，確認 authority root 為其 `.authority/`，執行 `check_authority_root.py --phase new`；再跑 `check_new_study.py`。這兩步都不能寫入 Study，也不能用 `studyctl all` 取代。
-2. 建立 research bundle 後先跑 `studyctl precreate`；只有 binding 全部通過，才能建立 Study 目錄或追加 `study-created` Event。writer 的 `--authority-root` 必須使用同一個已確認的絕對路徑。
-3. Study、同名 research bundle、preregistration、candidate、qualification、Source Bundle 與 implementation contract 已由正式 writer 發布後，先確認沒有 Study-level `manifests/implementation-contract.yml`，且 Source Bundle 綁定的是 research contract 的相同 path/digest；至少在 `preregistration-approved` 前跑一次 `contract` 與 `synthetic`。需要定位問題時可先分開跑 `identity`。Historical Evaluation runner 只能用合成資料測試，不能讀取正式 Evaluation snapshot。
+2. 建立 research bundle 後執行 `studyctl precreate`；只有完整 contract、synthetic 與所有 binding 通過，才能執行 `check_authority_root.py --phase staged`。直接繞過 `studyctl precreate` 不受 CLI 層保護，不能視為已完成前置檢查。
+3. `authority staged` 通過後，才可用同一個絕對 authority root、既有 writer 的 `create` 建立 Study。writer 建立後只做防禦性 binding 檢查，不把 contract／synthetic 的首次執行留到 `study-created` 之後。Historical Evaluation runner 只能用合成資料測試，不能讀取正式 Evaluation snapshot。
 4. 每次 writer 的 `append`、`recover` 或 `validate` 前都用同一個絕對路徑執行 `check_authority_root.py --phase existing`，確認仍使用同一個 authority root；若要恢復，先檢查 prepared journal 的原操作，不得用新 root 重建。
 5. 候選選擇證據與所有 freeze 前 artifact 完成後、追加 `candidate-frozen` 前，從 repository 根目錄執行：
 
@@ -248,6 +295,14 @@ uv run python research/tools/studyctl.py \
 `--authority-root` 是正式 freeze 流程的必要參數；若只是本地開發定位問題可以省略，但不能把未核對 authority checkpoints 的結果當成正式 freeze 通過。CLI 輸出必須是 `status: "passed"` 且 exit code 0；所有 warning 都要檢查，正式 freeze 不得留下 `authority-not-checked`。不要用 `--allow-draft`、忽略 exit code，或修改 CLI 來掩蓋失敗。
 
 `all` 會依序檢查 identity、contract、synthetic 與 freeze。以下任一類問題都必須先修正或依 preregistered 規則終止 Study：舊 Study 路徑殘留、candidate／preregistration／qualification 不一致、validator 不支援的 gate、warmup 太短、指標尚未 ready 就被使用、RSI／交易邊界語意不明、Source Bundle 或 authority digest 不符，以及 workflow validator 拒絕。
+
+synthetic fixture failure 必須先看 `raw_signals`、`accepted_signals`、`rejected_signals`、
+拒絕原因與 trades：若資料沒有依 implementation contract 形成候選，回報
+`synthetic-fixture-invalid`；若 raw signal 已由有效資料形成但 engine 沒有接受，才回報
+策略實作問題。不得放寬 hard guard，也不得把失敗降成 warning 或只用交易筆數掩蓋原因。
+
+v019、v020 已 terminal，不能重用、補修或回填；任何新設計都必須使用新的 Study ID，並從
+上述 staged 流程重新開始。
 
 Development gate 失敗而 workflow 已合法進入 `terminal-without-candidate` 時，candidate freeze 不適用；不要為了讓 CLI 通過而補造 candidate、selection 或 provenance evidence。此分支應核對 `studyctl freeze` 回報的 terminal state 與 authority，然後依提前終止規則交接；若 CLI 回報的是已存在 artifact 的實際錯誤，仍須修正或記錄。若只是 research target 失敗，不能把它當成這個 terminal 分支；先保留合法 Development evidence，讓 blind review 繼續依設計、程式與 Development 警訊檢查。
 
