@@ -61,11 +61,12 @@ assert qualification["evaluation"] == preregistration["evaluation_gates"]
 
 此外，逐一把 Evaluation gate 名稱對照 `validator/artifacts.py` 實際產生的 metrics。v001 Historical Evaluation 的 drawdown metric 名稱是 `stress_max_drawdown`；不得使用看似合理但 validator 不會產生的別名，也不得在不更新並重新 release workflow validator 的情況下加入自訂正式 metric。Freeze 前應以空白合成 evidence 跑一次 validator gate-support preflight。
 
-此外，在 writer 建立 Study 並發布必要 manifests 後，先確認 Study manifest 沒有第二份
-implementation contract，且 Source Bundle 的 contract entry 精確指向同名 research path
-與 digest；至少在 `preregistration-approved` 前執行 `studyctl contract` 與
-`studyctl synthetic`。候選選擇與
-freeze 前 artifacts 完成後，追加 `candidate-frozen` 前必須從 repository 根目錄執行：
+此外，在 writer 建立 Study 前，先以 `studyctl precreate` 完成 implementation contract、
+Source Bundle path/digest、outcome-relevant 參數、indicator readiness 與 synthetic contract
+checks；再用 `check_authority_root.py --phase staged` 確認 research bundle 已存在而 Study
+尚未有 Event。writer 建立後只做防禦性 binding 檢查，不得把首次 contract 或 synthetic
+檢查延後到 `study-created` 之後。候選選擇與 freeze 前 artifacts 完成後，追加
+`candidate-frozen` 前必須從 repository 根目錄執行：
 
 ```bash
 uv run python research/tools/studyctl.py \
@@ -76,6 +77,12 @@ uv run python research/tools/studyctl.py \
 
 CLI 必須 exit code 0 且輸出 `status: "passed"`；`--authority-root` 省略時只能作為本地
 定位，不能作為正式 freeze 的完成證據。CLI 只讀取與檢查，不得取代 writer 或 validator。
+
+若需要修正 preregistration 後的 canonical 或 digest drift，使用
+`studyctl diagnose <study-id>`。它只顯示非 canonical 檔案、expected/actual digest、可在
+`study-created` 前修正的檔案與 immutable 邊界，不會自動覆寫 artifact。Synthetic 檢查若
+沒有形成 raw signal，先標成 `synthetic-fixture-invalid`；不能藉由降低 hard guard 或改成
+warning 讓 contract 通過。
 
 ## 5. Development
 
@@ -139,4 +146,9 @@ path），發布綁定當時 event chain head 的 `evidence/terminal-evidence.ym
 `study-terminal`，其 `outcome` 為 `indeterminate`、`authority` 為 `none`。這類 setup failure
 不是 measured gate failure，不應標成 `fail`；完成 terminal event 後不得再進入 Development、
 candidate freeze 或 Historical Evaluation。每一步都要先以同一 authority root 執行
-`check_authority_root.py --phase existing`，並以 writer validate 與終止狀態檢查交接。
+`check_authority_root.py --phase existing`，並以 writer validate 與終止狀態檢查交接。每個
+termination payload 與 terminal evidence 在交給既有 writer 前，先執行唯讀的
+`research/tools/termination_preflight.py`，檢查 canonical YAML、Study ID、event type、
+路徑不存在、digest、schema 與 chain bindings；writer 的失敗則以其結構化 JSON error
+contract 交接。因為不修改既有 writer，artifact publish 與 Event append 仍不是跨步驟
+atomic transaction，不能宣稱 termination 已具備原子性。
