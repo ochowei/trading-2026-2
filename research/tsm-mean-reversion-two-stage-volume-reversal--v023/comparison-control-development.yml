@@ -1,0 +1,18 @@
+candidate_id: tsm-mr-two-stage-calibrated-volume-v009
+control_validation: 使用同一份合法 v009 Development evidence 所載的完整精度；本摘要不讀取也不引用 Historical Evaluation 結果。
+metrics:
+  base:
+    completed_trades: 24
+    maximum_drawdown: '0.0199981006057067'
+    profit_factor: '5.0364481922857465'
+    return: '0.33676149802998756'
+    traded_years: 5
+  stress:
+    completed_trades: 24
+    maximum_drawdown: '0.021193312757407923'
+    profit_factor: '4.204178313326042'
+    return: '0.2652316915038563'
+    traded_years: 5
+schema_version: 1
+source_development_evidence_digest: d8f51a7a1f2f5024d1a778fd5c0d42a70b549aa258723869b2a4567cfee4a618
+source_study_id: tsm-mean-reversion-two-stage-volume-reversal--v009

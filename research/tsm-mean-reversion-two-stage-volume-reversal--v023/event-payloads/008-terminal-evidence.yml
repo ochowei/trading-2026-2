@@ -1,0 +1,15 @@
+authority: none
+bindings:
+  development_evidence_digest: dea2563a23f655019a803a9d2a2dd3027d11553de7240bf5bf14fc4b659364e2
+  event_chain_head_digest: 30632015958fbc73221e9cec75e16482ffe5c12009fda99c18f90ea13ca06f71
+  evidence_unavailable_digest: 10bb2e36be3d91117743f3c2d08673778d599d79c43ca4e65bb61b511ee4fee6
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  preregistration_digest: 308b0b01961772061431f792cc609b2494649516efbade845919a258bcff7ff1
+  source_bundle_digest: 7486e98391a3a898e061a06c3818f9215e1683536e9eeccbdd80ad11ea4877a8
+  trial_registry_digest: 1c21b12ab0e7f71adf9059a73af3bca3b29ed1df4717a0d41a8fa46461bb0108
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+outcome: indeterminate
+reasons:
+  - v023 在 Study 建立後發現第二份 implementation contract，既有 Development 結果不具備可凍結的 immutable contract binding；本 Study 以 indeterminate 封存，修正版改由新的 Study ID 接手。
+recomputed: true
+schema_version: 1

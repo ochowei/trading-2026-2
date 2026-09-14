@@ -1,0 +1,15 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 7486e98391a3a898e061a06c3818f9215e1683536e9eeccbdd80ad11ea4877a8
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: evidence-unavailable
+occurred_at: '2026-09-14T05:22:55.578151Z'
+payload:
+  reason: studyctl all 在 Study 建立後發現 workflow manifest 產生第二份 implementation contract，導致 immutable Study contract binding 不完整；既有 Development 結果不作為本 Study 的可凍結結果。
+  stage: development
+  unavailable_path: evidence/development-outcome-repair-required.yml
+previous_event_digest: 9eb1052b7b6d9e5a4d9ef8e42289763a477f7c8787e290c5a4464152eb3d85b7
+schema_version: 1
+sequence: 7
+study_id: tsm-mean-reversion-two-stage-volume-reversal--v023

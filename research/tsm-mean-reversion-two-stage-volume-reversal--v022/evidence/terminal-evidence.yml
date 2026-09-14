@@ -1,0 +1,12 @@
+authority: none
+bindings:
+  event_chain_head_digest: 941e186834c93fb0ea46d64c488cc9922765bca7056a1eb8563d776961fda568
+  evidence_unavailable_digest: 108885aace03b59d6cfd500efd7c8c206765de842423f144f25ec92fa905f0aa
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: edf489634bba90f2dee6fa8924020ed94ad0eb2444c22d062dc47fbd6c50a6ad
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+outcome: indeterminate
+reasons:
+  - v022 在 Development evidence 產生前發生 Source Bundle immutable binding drift，未產生 outcome-bearing trial；後續修正版改由新 Study 建立。
+recomputed: true
+schema_version: 1

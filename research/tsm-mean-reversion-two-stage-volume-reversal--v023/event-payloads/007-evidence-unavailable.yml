@@ -1,0 +1,3 @@
+reason: studyctl all 在 Study 建立後發現 workflow manifest 產生第二份 implementation contract，導致 immutable Study contract binding 不完整；既有 Development 結果不作為本 Study 的可凍結結果。
+stage: development
+unavailable_path: evidence/development-outcome-repair-required.yml
