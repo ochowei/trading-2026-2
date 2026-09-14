@@ -1,0 +1,89 @@
+baseline_comparison:
+  baseline_id: tsm-mean-reversion-two-stage-baseline-v009
+  baseline_is_excluded_from_candidate_family: true
+  candidate_id: tsm-mr-two-stage-volume-atr-distance-v021
+  execution_is_identical: true
+candidate_family: tsm-mean-reversion-two-stage-volume-atr-distance-v021
+candidate_id: tsm-mr-two-stage-volume-atr-distance-v021
+complete_candidate_family:
+  - tsm-mr-two-stage-volume-atr-distance-v021
+cost_models:
+  base:
+    fee_per_side_bps: '1'
+    slippage_per_side_bps: '5'
+  stress:
+    fee_per_side_bps: '2'
+    slippage_per_side_bps: '20'
+engine:
+  baseline_spec_constant: BASELINE_SPEC
+  cost_constant: BASE_COST
+  original_only_spec_constant: V009_ONLY_SPEC
+  path: src/trading_2026_2/tsm_mean_reversion_two_stage_volume_atr_distance_v021.py
+  spec_constant: DEFAULT_SPEC
+execution:
+  cooldown:
+    anchor: completed-position-exit
+    minimum_completed_session_steps_after_exit: 5
+  decision:
+    entry: next-session-open
+    signal: completed-session-close
+  drawdown:
+    formal_gate_definition: realized-trade-equity-drawdown
+    formal_gate_metric: stress_maximum_drawdown
+    mark_to_market_diagnostic: holding-session-low-after-costs
+  exits:
+    gap_fill: stop-gap-at-open-target-gap-at-open
+    holding_exit: next-open-after-10-complete-sessions
+    same_session_ambiguity: adverse-stop-first
+    stop_return: '-0.04'
+    target_return: '0.04'
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    modeled_stop_includes_entry_exit_costs: true
+    risk_fraction_of_pre_entry_equity: '0.02'
+    shares: maximum-integer-shares-within-risk-and-cash-caps
+  price_direction_confirmation:
+    close_above_prior_close: true
+    rule: close-above-prior-close
+indicator_contract:
+  atr:
+    denominator: previous-completed-atr14
+    initialization: first-ATR-value-is-arithmetic-mean-of-first-14-TR-values
+    lookback: 14
+    min_periods: 14
+    not_ready: null
+    smoothing: Wilder-RMA
+    true_range: max(high-low, abs(high-prior-close), abs(low-prior-close)); first-session-high-low
+  columns:
+    atr: atr_14
+    atr_distance: atr_distance
+    prior_atr: prior_atr_14
+    raw_signal: raw_signal
+    rsi: rsi_2
+    sma: sma_20
+    volume_lead: prior_volume_spike_ratio
+  required_history_sessions: 25
+  rsi:
+    formula: simple-rolling-mean
+    length: 2
+    min_periods: 2
+    not_ready: null
+    zero_gain_and_loss: 50
+    zero_gain_only: 0
+    zero_loss_only: 100
+  sma:
+    includes_signal_close: true
+    lookback: 20
+    min_periods: 20
+    not_ready: null
+  volume_lead:
+    average_min_periods: 20
+    enabled: true
+    lead_min_periods: 5
+    prior_session_window: 5
+    uses_prior_sessions_only: true
+    volume_average_length: 20
+procedure:
+  historical_evaluation_path: research/tsm-mean-reversion-two-stage-volume-reversal--v021/run_historical_evaluation.py
+  path: research/tsm-mean-reversion-two-stage-volume-reversal--v021/run_development.py
+schema_version: 1
