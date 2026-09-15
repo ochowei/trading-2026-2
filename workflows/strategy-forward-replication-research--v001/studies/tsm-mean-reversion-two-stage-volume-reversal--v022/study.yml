@@ -1,0 +1,33 @@
+candidate_freeze: null
+evidence:
+  evidence-unavailable: 108885aace03b59d6cfd500efd7c8c206765de842423f144f25ec92fa905f0aa
+lifecycle:
+  current_event: study-terminal
+  event_chain_head_digest: 5d09ec8d7b3527e4916691d1f52edb71dc9d2db611a00245fec6f484ea719872
+  event_count: 5
+  status: terminal
+outcome:
+  authority: none
+  status: indeterminate
+preregistration:
+  digest: 505c605d4dc4a50cc53d7b45ca0e02f77c0e10cac20e673898c3d7eaff48ff5f
+provenance:
+  status: null
+schema_version: 1
+study:
+  identity:
+    experiment_family: tsm-mean-reversion-two-stage-volume-reversal-uptrend-breakout-v022
+    historical_evaluation_operator: william
+    research_owner: william
+    research_round_id: 2026-09-14-tsm-two-stage-v022
+    source_bundle_digest: edf489634bba90f2dee6fa8924020ed94ad0eb2444c22d062dc47fbd6c50a6ad
+    source_bundle_path: manifests/source-bundle.yml
+  study_id: tsm-mean-reversion-two-stage-volume-reversal--v022
+trial_registry:
+  digest: null
+  recorded_trial_count: 0
+  trial_ids: []
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: edf489634bba90f2dee6fa8924020ed94ad0eb2444c22d062dc47fbd6c50a6ad
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4

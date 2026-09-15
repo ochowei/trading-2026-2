@@ -1,0 +1,6 @@
+development_evidence_digest: 47abab8abdc6e138673126e597a2fb062541903b249d7c11adfeca07ea578399
+development_evidence_path: evidence/development.yml
+inputs_digest: 087fce20f61b30d5d9d1cee9550cfe74dd7700ce39a25dd9b1e10b7882983752
+inputs_path: manifests/development-trial-inputs.yml
+status: completed
+trial_id: tsm-mr-two-stage-volume-reversal-uptrend-breakout-v024

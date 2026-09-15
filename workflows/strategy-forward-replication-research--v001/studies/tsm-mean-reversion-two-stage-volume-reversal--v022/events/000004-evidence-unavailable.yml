@@ -1,0 +1,15 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: edf489634bba90f2dee6fa8924020ed94ad0eb2444c22d062dc47fbd6c50a6ad
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: evidence-unavailable
+occurred_at: '2026-09-14T05:02:21.943959Z'
+payload:
+  reason: v022 在 Development evidence 產生前發現，修正 MTM 型別相容性會改變已由 study-created 綁定的 immutable Source Bundle；依治理規則不能事後改寫該 bundle，因此本 Study 不再執行 Development，改由新的 Study 接手修正版設定。
+  stage: development
+  unavailable_path: evidence/development-integrity-check.yml
+previous_event_digest: fc72c690aac1199209bfb76a71c995d8bc282adb8c450170a27b6a35488ecc77
+schema_version: 1
+sequence: 4
+study_id: tsm-mean-reversion-two-stage-volume-reversal--v022

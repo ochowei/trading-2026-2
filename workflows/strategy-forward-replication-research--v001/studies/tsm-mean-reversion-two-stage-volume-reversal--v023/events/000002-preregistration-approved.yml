@@ -1,0 +1,14 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 7486e98391a3a898e061a06c3818f9215e1683536e9eeccbdd80ad11ea4877a8
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: preregistration-approved
+occurred_at: '2026-09-14T05:10:32.981508Z'
+payload:
+  preregistration_digest: 308b0b01961772061431f792cc609b2494649516efbade845919a258bcff7ff1
+  preregistration_path: manifests/preregistration.yml
+previous_event_digest: 4a8a2efc12563dbbf97151a8b7ee5683424969d05894b5f7a97160067ab569ec
+schema_version: 1
+sequence: 2
+study_id: tsm-mean-reversion-two-stage-volume-reversal--v023

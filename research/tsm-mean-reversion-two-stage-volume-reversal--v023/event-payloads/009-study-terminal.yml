@@ -1,0 +1,4 @@
+authority: none
+outcome: indeterminate
+terminal_evidence_digest: de80ac303d1684e6c4210fda25ad5c1a1bc74cb62af5a65499e0e60b1bf761f3
+terminal_evidence_path: evidence/terminal-evidence.yml

@@ -1,0 +1,15 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: bafae1f19132a7425012f3dddbcf58d54490020c8a6a304b0519d7bff8bfc2a8
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: provenance-audited
+occurred_at: '2026-09-14T05:32:36.963099Z'
+payload:
+  artifact_digest: 36d62bd742d83343149ee6d5718d55a2a06dddaafcc0ae5cd4f8f7629a9667a5
+  artifact_path: evidence/provenance.yml
+  status: verified-clean
+previous_event_digest: ffc409cb6d8e93d29b59b8c9ff3de7869d9b43057b2fa1d4d79c35f0b0daabf4
+schema_version: 1
+sequence: 6
+study_id: tsm-mean-reversion-two-stage-volume-reversal--v024

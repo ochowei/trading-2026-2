@@ -1,0 +1,93 @@
+engine:
+  baseline_spec_constant: BASELINE_SPEC
+  cost_constant: BASE_COST
+  original_only_spec_constant: V009_ONLY_SPEC
+  path: src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v022.py
+  spec_constant: DEFAULT_SPEC
+  supplemental_only_spec_constant: SUPPLEMENTAL_ONLY_SPEC
+execution:
+  cooldown:
+    anchor: completed-position-exit
+    minimum_completed_session_steps_after_exit: 5
+    tracking_continues_during_cooldown: true
+  decision:
+    entry: next-session-open
+    signal: completed-session-close
+  drawdown:
+    formal_gate_definition: realized-trade-equity-drawdown
+    formal_gate_metric: stress_maximum_drawdown
+    mark_to_market_diagnostic: holding-session-low-after-costs
+  exits:
+    gap_fill: stop-gap-at-open-target-gap-at-open
+    holding_exit: next-open-after-10-complete-sessions
+    same_session_ambiguity: adverse-stop-first
+    stop_return: '-0.04'
+    target_return: '0.04'
+  path_priority:
+    original_over_supplemental_on_same_session: true
+    supplemental_does_not_bypass_cooldown_or_position: true
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    modeled_stop_includes_entry_exit_costs: true
+    risk_fraction_of_pre_entry_equity: '0.02'
+    shares: maximum-integer-shares-within-risk-and-cash-caps
+indicator_contract:
+  columns:
+    event_close_ceiling: event_close_ceiling_pass
+    event_volume_ratio: event_volume_ratio
+    fixed_breakout_price: fixed_breakout_price
+    original_raw_signal: v009_raw_signal
+    previous_five_high: previous_five_high
+    prior_volume_average: prior_volume_average
+    rsi: rsi_2
+    sma: sma_20
+    sma_five_sessions_ago: sma_20_five_sessions_ago
+    supplemental_raw_signal: supplemental_raw_signal
+    trend_condition: trend_condition
+    volume_event: volume_event
+    volume_event_threshold: event_volume_threshold_pass
+    volume_lead: prior_volume_spike_ratio
+  momentum_path:
+    confirmation_close_operator: '>'
+    confirmation_window_sessions: 5
+    confirmation_window_starts_after_event: true
+    event_close_ceiling_operator: <=
+    event_high_included_in_fixed_breakout: true
+    event_low_invalidation_operator: <
+    event_volume_ratio_minimum: '1.25'
+    event_volume_ratio_operator: '>='
+    event_window_observation_starts_at_close: true
+    fifth_session_confirmation_precedes_expiry: true
+    fixed_breakout_formula: max(previous_five_session_high,event_day_high)
+    previous_five_high_lookback: 5
+    trend_close_operator: '>'
+    trend_sma_lag_sessions: 5
+    trend_sma_lookback: 20
+    trend_sma_operator: '>'
+    volume_average_excludes_current_day: true
+    volume_average_length: 20
+    volume_event_requires_trend: true
+  required_history_sessions: 25
+  rsi:
+    formula: simple-rolling-mean
+    length: 2
+    min_periods: 2
+    not_ready: null
+    zero_gain_and_loss: 50
+    zero_gain_only: 0
+    zero_loss_only: 100
+  sma:
+    lookback: 20
+    min_periods: 20
+    not_ready: null
+  volume_lead:
+    average_min_periods: 20
+    enabled: true
+    lead_min_periods: 5
+    prior_session_window: 5
+    uses_prior_sessions_only: true
+    volume_average_length: 20
+procedure:
+  historical_evaluation_path: research/tsm-mean-reversion-two-stage-volume-reversal--v022/run_historical_evaluation.py
+  path: research/tsm-mean-reversion-two-stage-volume-reversal--v022/run_development.py
+schema_version: 1

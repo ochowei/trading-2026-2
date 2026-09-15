@@ -1,0 +1,18 @@
+actor_id: william
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: bafae1f19132a7425012f3dddbcf58d54490020c8a6a304b0519d7bff8bfc2a8
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: trial-registry-frozen
+occurred_at: '2026-09-14T05:31:57.104029Z'
+payload:
+  candidate_available: true
+  complete_family_trial_ids:
+    - tsm-mr-two-stage-volume-reversal-uptrend-breakout-v024
+  maximum_trials: 1
+  recorded_trial_count: 1
+  trial_registry_digest: 5bb1e4050b1dc3ab0947b7fa0c710c937589e924088a4db1c8fe0acb190a0d6a
+previous_event_digest: 85c07424013ffb9fe139df8499570317c3fe4463fb3608a5b399107434368cd9
+schema_version: 1
+sequence: 5
+study_id: tsm-mean-reversion-two-stage-volume-reversal--v024
