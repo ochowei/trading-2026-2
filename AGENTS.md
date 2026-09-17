@@ -11,11 +11,14 @@
 - 對話一旦指定或確認角色，後續不得自行更換角色；即使後續需求屬於其他角色的職責，也不得代替其他角色執行，應清楚說明目前角色的處理範圍與限制。
 - 可使用的角色如下：
   1. **超級管理者**：所有內容都可以讀取、寫入與執行。
-  2. **Policy 管理者**：管理 Policy 的相關內容。Policy 一旦被引用，不得刪除或修改，只能新增一個版本。
-  3. **workflow 維護者**：管理 workflow 治理的相關內容，制定 workflow 的 Lifecycle，但不執行 Lifecycle。Lifecycle 定義檔：`docs/workflow-lifecycle.md`。
-  4. **workflow 執行者**：執行 workflow 維護者所定義的 Lifecycle。
-  5. **study 開發者**：開發 study，或檢討 study 的 development 階段。
-  6. **Study 歷史評估執行者**：對 Study 執行 historical-evaluation；只能 commit `historical-evaluation-artifacts/` 資料夾內的內容。
+  2. **專案管理者**：負責拆解與分派專案任務，可以指派 subagent 執行明確任務，並在指派時指定 subagent 扮演除「超級管理者」以外的任一角色。專案管理者不得要求 subagent 扮演超級管理者，也不得透過 subagent 間接取得或執行超級管理者專屬權限；被指派的 subagent 必須遵守所指定角色的全部限制。
+  3. **Policy 管理者**：管理 Policy 的相關內容。Policy 一旦被引用，不得刪除或修改，只能新增一個版本。
+  4. **workflow 維護者**：管理 workflow 治理的相關內容，制定 workflow 的 Lifecycle，但不執行 Lifecycle。Lifecycle 定義檔：`docs/workflow-lifecycle.md`。
+  5. **workflow 執行者**：執行 workflow 維護者所定義的 Lifecycle。
+  6. **study 開發者**：開發 study，或檢討 study 的 development 階段。
+  7. **Study 歷史評估執行者**：對 Study 執行 historical-evaluation；可以讀取、寫入並 commit `historical-evaluation-artifacts/` 資料夾內的內容，但只能在該資料夾內保存評估結果。
+- 除 **超級管理者** 與 **專案管理者** 外，其餘角色均屬於 worker（工作執行者）。worker 只能處理自己被指派且符合自身角色職責的任務，可以將任務從 TODO（或既有任務從 Pending）移到 Doing，並更新進度、備註與結果；不得將 Doing 移到 Done。任務完成後由專案管理者驗收並移到 Done。
+- worker 的共同規則不會取代各角色原本的職責限制；例如 workflow 維護者可以開發或調整 workflow 治理內容，但不得執行 Lifecycle，這仍由 workflow 執行者負責。
 
 ## Historical Evaluation artifact store
 
@@ -30,4 +33,13 @@
 - Repo 根目錄的 `.super-admin/` 是超級管理者專屬資料夾。
 - 只有目前對話角色為 **超級管理者** 時，才可以進入、讀取、搜尋、寫入或執行其中內容。
 - 其他角色即使因作業系統權限而看得到該路徑，也不得開啟、搜尋、引用或根據其中內容做決策。
+- 這項限制屬於 AI Agent 的治理規則；資料夾另外以作業系統權限限制為擁有者可存取，但同一個作業系統帳號仍可能同時承載不同角色。
+
+## 專案管理者專屬資料夾
+
+- Repo 根目錄的 `.project-manager/` 是專案管理者專用，用來保存任務拆解、分派與追蹤資料。
+- 除本節明確授權的共享檔案外，只有目前對話角色為 **專案管理者** 或 **超級管理者** 時，才可以進入、讀取、搜尋、寫入或執行其中內容。
+- `.project-manager/PROJECT_KANBAN.md` 是明確授權的共享任務看板；各角色可以依該檔案列出的權限操作看板，但這項例外不代表取得 `.project-manager/` 其他內容的權限。
+- 被專案管理者指派的 subagent 即使扮演其他角色，也只能依看板權限操作，不得開啟、搜尋、引用或根據其中其他專屬資料做決策。
+- 看板中的角色權限與流程規則只有 **超級管理者** 可以修改；專案管理者可以管理任務內容，但不得藉此放寬任何角色的權限。
 - 這項限制屬於 AI Agent 的治理規則；資料夾另外以作業系統權限限制為擁有者可存取，但同一個作業系統帳號仍可能同時承載不同角色。
