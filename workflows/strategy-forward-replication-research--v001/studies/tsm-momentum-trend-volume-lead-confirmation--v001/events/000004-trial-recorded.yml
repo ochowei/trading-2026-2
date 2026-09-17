@@ -1,0 +1,18 @@
+actor_id: sagan
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: dfc50e658b25744e0a711161b575c042aad23c04b371b269635848988afb6dbf
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: trial-recorded
+occurred_at: '2026-09-17T05:17:02.526209Z'
+payload:
+  development_evidence_digest: 7343f6caf33d8ae7124c118a3145cb908091c05ad4bb036e1394cd69c0cbecd0
+  development_evidence_path: evidence/development.yml
+  inputs_digest: f7def7343f48056f525ecfa39ac2b0a2e28fa802a3e686de9e43a0b0e66bd4d7
+  inputs_path: manifests/development-trial-inputs.yml
+  status: completed
+  trial_id: tsm-momentum-trend-volume-lead-confirmation-v001
+previous_event_digest: 030af14a51966794b590a876f76b37b153ff28ef739c624afbd71b195fb0dd57
+schema_version: 1
+sequence: 4
+study_id: tsm-momentum-trend-volume-lead-confirmation--v001

@@ -1,0 +1,18 @@
+actor_id: sagan
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: dfc50e658b25744e0a711161b575c042aad23c04b371b269635848988afb6dbf
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: study-created
+occurred_at: '2026-09-17T05:09:52.806410Z'
+payload:
+  experiment_family: tsm-momentum-trend-volume-lead-confirmation
+  historical_evaluation_operator: william
+  research_owner: sagan
+  research_round_id: 2026-09-17-tsm-momentum-v001
+  source_bundle_digest: dfc50e658b25744e0a711161b575c042aad23c04b371b269635848988afb6dbf
+  source_bundle_path: manifests/source-bundle.yml
+previous_event_digest: null
+schema_version: 1
+sequence: 1
+study_id: tsm-momentum-trend-volume-lead-confirmation--v001

@@ -1,0 +1,34 @@
+candidate_freeze: null
+evidence:
+  development: 7343f6caf33d8ae7124c118a3145cb908091c05ad4bb036e1394cd69c0cbecd0
+lifecycle:
+  current_event: trial-recorded
+  event_chain_head_digest: be82e4c8cd6335f33f34d2c5b6fc2d18a5c518a5844274d661f9bf9021c281f7
+  event_count: 4
+  status: active
+outcome:
+  authority: none
+  status: pending
+preregistration:
+  digest: fb7cd91c0f86d3dc68878c54fd0038aa50f761b41e0d6f1481313dd55ed8acd9
+provenance:
+  status: null
+schema_version: 1
+study:
+  identity:
+    experiment_family: tsm-momentum-trend-volume-lead-confirmation
+    historical_evaluation_operator: william
+    research_owner: sagan
+    research_round_id: 2026-09-17-tsm-momentum-v001
+    source_bundle_digest: dfc50e658b25744e0a711161b575c042aad23c04b371b269635848988afb6dbf
+    source_bundle_path: manifests/source-bundle.yml
+  study_id: tsm-momentum-trend-volume-lead-confirmation--v001
+trial_registry:
+  digest: null
+  recorded_trial_count: 1
+  trial_ids:
+    - tsm-momentum-trend-volume-lead-confirmation-v001
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: dfc50e658b25744e0a711161b575c042aad23c04b371b269635848988afb6dbf
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4

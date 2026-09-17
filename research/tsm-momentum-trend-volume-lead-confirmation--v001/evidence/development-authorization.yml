@@ -1,0 +1,12 @@
+authorization_basis: 依事前登記的單一路徑順勢動能假說執行一次 Development trial；只允許使用固定的 warmup-only 與 Development 資料 view。
+authorized_at: '2026-09-17T05:20:00.000000Z'
+authorized_by: sagan
+candidate_freeze_required_before_historical_evaluation: true
+data_roles:
+  - warmup-only
+  - development
+formal_historical_evaluation_authorized: false
+historical_evaluation_results_accessed: false
+network_access: false
+scope: development-only
+study_id: tsm-momentum-trend-volume-lead-confirmation--v001

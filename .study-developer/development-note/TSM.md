@@ -1338,6 +1338,64 @@
 
 ---
 
+# `tsm-momentum-trend-volume-lead-confirmation--v001`：Study Development 成果卡
+
+- 成果卡狀態：`complete-with-gate-failure`
+- candidate：`tsm-momentum-trend-volume-lead-confirmation-v001`
+- Development trial：`tsm-momentum-trend-volume-lead-confirmation-v001`
+- 記錄日期：`2026-09-17`
+- Development evidence validity：`valid（development_status 已由 validator 驗證）；另有 mechanism diagnostic warning`
+- formal Development gates：`未通過`
+- research targets：`通過（3/3）`
+- blind review：`未執行，待後續盲檢討者`
+- candidate_freeze_status：`不具資格；不得凍結`
+
+## 結論
+
+> 本 Study 提出的是單一路徑的順勢動能假說：先在未下彎的 SMA(20) 趨勢中看到成交量擴張，再等待之後的收盤價格確認。固定的 2014–2018 Development trial 確實觀察到量能事件與後續價格確認，但 base、stress 及壓力診斷未達事前登記的 formal gates，因此假說在本 Development window 不支持 candidate freeze。這個結果只代表固定規格下的 Development 結果，不是正式 Historical Evaluation 結果。
+
+## 研究假說與事前規格
+
+- 趨勢狀態：只在前一個已完成 session 的 SMA(20) 不低於五個 session 前 SMA(20)，且事件日收盤不低於當日 SMA(20) 時觀察量能。
+- 量先價行：事件日的成交量必須至少是前 20 個已完成 session 平均量的 1.10 倍；這個平均量排除事件日當日，事件日只負責 arm，不得同日確認或進場。
+- 價格確認：事件後第 1 至第 5 個 XNYS session，只有收盤嚴格高於前一 session 收盤才算確認；事件下跌到事件收盤的 85% 以下即失效，窗口結束即過期。新的未確認量能事件會取代舊事件，確認仍在有效窗口內可被 portfolio 狀態重新考慮。
+- 執行與風控：確認後下一個 XNYS open 做多；4% stop、4% target、10 個完整持有 session、退出後 5 個完整 session 冷卻、2% risk budget；base 為每邊 5/1 bps，stress 為每邊 20/2 bps。所有訊號只使用當日及之前的資料。
+- RSI(2) 只做 ready 與有限值檢查，不是超跌或均值回歸交易條件；本 Study 沒有 v024 的均值回歸主路徑，也沒有在 v009 原路徑上加補充突破路徑。
+
+## 相較 `tsm-mean-reversion-two-stage-volume-reversal--v024` 的實質差異
+
+- v024 以均值回歸為主，並在同一 Study 內並存原有路徑與上升趨勢放量突破補充路徑；本 Study 從零建立新的 `momentum-trend-volume-lead-confirmation` family，只有「趨勢 → 量能事件 → 之後價格確認」這條順勢狀態機。
+- 本 Study 不使用低於 SMA 的負偏離、RSI 超跌、v009 原始均值回歸訊號或事後加上的突破補充分支；baseline 只是關閉量能事件觀察的客觀簡化對照，不屬於 candidate family。
+- 參數、資料 cutoff、進出場、成本、風險、持有期與冷卻期均在 preregistration 與 contract 中一次固定；本輪沒有依 Development、quarantine 或 Historical Evaluation 結果調參。
+
+## 主要 Development 結果
+
+| 條件 | 狀態 | 完成交易 | 報酬 | PF（獲利因子） | 最大回撤 | 備註 |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| Development / base | 已完成 | 48 | -1.2509% | 0.9649 | 19.0850% | formal gates 未通過 |
+| Development / stress | 已完成 | 48 | -7.7469% | 0.7808 | 20.4127% | formal gates 未通過 |
+
+- 交易年度覆蓋：5 年（2014–2018）；最大已實現單筆損失比例為 2.1008%，這一項本身低於 4% 門檻。
+- 失敗 formal gates：`base_profit_factor`、`base_return`、`maximum_stress_block_bootstrap_drawdown_above_10pct_ratio`、`maximum_stress_leave_one_year_out_drawdown`、`minimum_stress_block_bootstrap_positive_return_ratio`、`minimum_stress_leave_one_year_out_profit_factor`、`minimum_stress_leave_one_year_out_return`、`stress_maximum_drawdown`、`stress_profit_factor`、`stress_return`。
+- 研究 targets 與 formal gates 分開記錄：Development 觀察到 175 個量能事件、211 個後續價格確認，且 211 個確認都來自不同 session；3/3 research targets 通過，但這不能抵銷 formal gate 失敗。
+- 證據保存了 base/stress raw trade、leave-one-signal-year-out 與 50,000 次 block bootstrap（block length 3、5、固定 seed 20260917）。Evidence 經 workflow validator 可重算；另外 runner 的 `event_day_confirmation_forbidden` diagnostic 以「當日有量能事件且有任何確認」的保守重疊判斷呈現 warning，實際 `event_origin_index` 沒有把確認指向同日事件，後續盲檢討應核對這個 diagnostic 表達。
+
+## 目前判定與交接
+
+- Development evidence 已發布於 `workflows/strategy-forward-replication-research--v001/studies/tsm-momentum-trend-volume-lead-confirmation--v001/evidence/development.yml`，並由 `trial-recorded` Event 綁定；正式 gates 失敗，candidate freeze 不適用。
+- `trial-registry-frozen`、provenance、selection 與 candidate-frozen 尚未追加；這是因為本角色只處理 study development，且不能用失敗結果補造 freeze 證據。後續 workflow／專責角色應依 Lifecycle 處理 terminal-without-candidate 或其他合法交接，不得在本 Study 內調參重跑。
+- 尚未執行 blind review；盲檢討可檢查設計、程式、資料邊界與上述 diagnostic warning，但不得開啟正式 Historical Evaluation 結果。
+
+## 允許讀取的 repository-relative 來源
+
+- Preregistration／candidate／qualification／contract：`research/tsm-momentum-trend-volume-lead-confirmation--v001/`
+- Source Bundle：`research/tsm-momentum-trend-volume-lead-confirmation--v001/source-bundle.yml`
+- Study Event／Development evidence：`workflows/strategy-forward-replication-research--v001/studies/tsm-momentum-trend-volume-lead-confirmation--v001/`
+- 程式／測試：`src/trading_2026_2/tsm_momentum_trend_volume_lead_confirmation_v001.py`、`tests/test_tsm_momentum_trend_volume_lead_confirmation_v001.py`
+- 來源限制：本成果卡只整理本 Study 的 Development 階段，沒有執行、讀取或引用正式 Historical Evaluation、quarantine 結果、Terminal 結果或 `historical-evaluation-artifacts/`。
+
+---
+
 # `tsm-mean-reversion-two-stage-volume-reversal--v013`：Study Development 成果卡
 
 - 成果卡狀態：`complete`

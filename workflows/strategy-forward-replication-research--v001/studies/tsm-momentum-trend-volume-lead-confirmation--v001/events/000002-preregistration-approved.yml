@@ -1,0 +1,14 @@
+actor_id: sagan
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: dfc50e658b25744e0a711161b575c042aad23c04b371b269635848988afb6dbf
+  workflow_digest: 38ed43098d135b9024ecf316bfabc6517e6bc913b38c3e234c55e61bf92a7be4
+event_type: preregistration-approved
+occurred_at: '2026-09-17T05:13:46.982226Z'
+payload:
+  preregistration_digest: fb7cd91c0f86d3dc68878c54fd0038aa50f761b41e0d6f1481313dd55ed8acd9
+  preregistration_path: manifests/preregistration-approved.yml
+previous_event_digest: 816029d1f2d598d8415adb7da0599c9e920ce63d2049d78f2b1616aab1231900
+schema_version: 1
+sequence: 2
+study_id: tsm-momentum-trend-volume-lead-confirmation--v001

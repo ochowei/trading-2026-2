@@ -1,0 +1,82 @@
+engine:
+  baseline_spec_constant: BASELINE_SPEC
+  cost_constant: BASE_COST
+  path: src/trading_2026_2/tsm_momentum_trend_volume_lead_confirmation_v001.py
+  spec_constant: DEFAULT_SPEC
+execution:
+  cooldown:
+    anchor: completed-position-exit
+    minimum_completed_session_steps_after_exit: 5
+    tracking_continues_during_cooldown: true
+  decision:
+    entry: next-session-open
+    signal: completed-session-close
+  drawdown:
+    formal_gate_definition: realized-trade-equity-drawdown
+    formal_gate_metric: stress_maximum_drawdown
+    mark_to_market_diagnostic: holding-session-low-after-costs
+  exits:
+    gap_fill: stop-gap-at-open-target-gap-at-open
+    holding_exit: next-open-after-10-complete-sessions
+    same_session_ambiguity: adverse-stop-first
+    stop_return: '-0.04'
+    target_return: '0.04'
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    modeled_stop_includes_entry_exit_costs: true
+    risk_fraction_of_pre_entry_equity: '0.02'
+    shares: maximum-integer-shares-within-risk-and-cash-caps
+indicator_contract:
+  columns:
+    confirmation_delay: confirmation_delay_sessions
+    price_confirmation: price_confirmation
+    raw_signal: momentum_raw_signal
+    rsi: rsi_2
+    sma: sma_20
+    trend_state: trend_state
+    volume_event: volume_event
+    volume_event_ratio: volume_event_ratio
+    volume_lead: prior_volume_spike_ratio
+  momentum_trend:
+    close_at_or_above_sma_operator: '>='
+    price_confirmation_close_operator: '>'
+    price_confirmation_window_first_session: 1
+    price_confirmation_window_last_session: 5
+    trend_sma_lag_sessions: 5
+    trend_sma_lookback: 20
+    trend_sma_operator: '>='
+    volume_event_requires_close_at_or_above_sma: true
+    volume_event_requires_trend: true
+    volume_event_uses_current_session_volume: true
+  price_direction_confirmation:
+    close_above_prior_close: true
+    confirmation_remains_available_until_window_end: true
+    event_day_confirmation_forbidden: true
+    uses_only_current_and_prior_sessions: true
+  required_history_sessions: 25
+  rsi:
+    formula: simple-rolling-mean
+    length: 2
+    min_periods: 2
+    not_ready: null
+    zero_gain_and_loss: 50
+    zero_gain_only: 0
+    zero_loss_only: 100
+  sma:
+    lookback: 20
+    min_periods: 20
+    not_ready: null
+  volume_lead:
+    average_min_periods: 20
+    enabled: true
+    event_day_excluded_from_average: true
+    lead_min_periods: 5
+    prior_session_window: 5
+    uses_prior_sessions_only: true
+    volume_average_length: 20
+    volume_ratio_minimum: '1.10'
+    volume_ratio_value: '1.10'
+procedure:
+  historical_evaluation_path: research/tsm-momentum-trend-volume-lead-confirmation--v001/run_historical_evaluation.py
+  path: research/tsm-momentum-trend-volume-lead-confirmation--v001/run_development.py
+schema_version: 1

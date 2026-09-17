@@ -1,0 +1,201 @@
+baseline_definition:
+  baseline_id: tsm-momentum-trend-price-confirmation-baseline-v001
+  candidate_family: tsm-momentum-trend-volume-lead-confirmation
+  execution_is_identical: true
+  family: momentum-trend-price-confirmation
+  objectively_simpler_because: 同樣沿用趨勢、價格確認、進出場、成本、風險與冷卻語意，但不觀察或追蹤成交量事件；因此只作較簡單的描述性基準，不加入 candidate family，也不依結果選參數。
+  simpler_rule: 不啟用 volume_lead_enabled；其餘 execution 與資料 cutoff 固定相同。
+complete_candidate_family:
+  - tsm-momentum-trend-volume-lead-confirmation-v001
+eligibility_rules:
+  accepted_signal:
+    cooldown:
+      clock_anchor: completed-position-exit
+      minimum_completed_session_steps_after_exit: 5
+      position_must_be_flat: true
+    decision_time: completed-session-close
+    indicator_contract:
+      rsi_formula: simple-rolling-mean
+      rsi_not_ready: null
+      volume_lead_is_disabled_for_candidate: false
+    mean_reversion:
+      close_vs_sma20_gap_minimum: '0'
+      close_vs_sma20_operator: '>='
+      rsi_length: 2
+      rsi_operator: <=
+      rsi_value: '100'
+      sma_length: 20
+      use_as_trading_route: false
+    momentum_trend:
+      close_at_or_above_sma20_on_volume_event: true
+      price_confirmation_after_event_only: true
+      rsi_role: readiness-and-finite-bound-check-only
+      trend_sma_lag_sessions: 5
+      trend_sma_lookback: 20
+      trend_sma_operator: '>='
+    price_direction_confirmation:
+      close_above_prior_close: true
+      event_day_confirmation_forbidden: true
+    state_machine:
+      confirmation_remains_available_until_window_end: true
+      event_latest_unresolved_replaces_previous: true
+      event_tracking_starts_after_event_close: true
+      maximum_concurrent_events: 1
+      no_delayed_entry_after_expiry_or_invalidation: true
+      volume_event_expires_after_post_event_session: 5
+      volume_event_invalidated_when_close_below_event_close_fraction: '0.85'
+    volume_leads_price:
+      enabled: true
+      event_day_excluded_from_prior_average: true
+      price_confirmation_window_first_session: 1
+      price_confirmation_window_last_session: 5
+      prior_session_window: 5
+      volume_average_length: 20
+      volume_ratio_minimum: '1.10'
+      volume_ratio_operator: '>='
+      volume_ratio_value: '1.10'
+      volume_shock_is_before_signal: true
+  development_diagnostics:
+    block_bootstrap:
+      block_lengths:
+        - 3
+        - 5
+      maximum_stress_drawdown_above_10pct_ratio: '0.10'
+      minimum_stress_positive_return_ratio: '0.80'
+      repetitions: 50000
+      seed: 20260917
+      seed_application: exact-same-seed-for-each-block-length
+    leave_one_signal_year_out:
+      maximum_stress_drawdown: '0.10'
+      minimum_stress_profit_factor: '1.00'
+      minimum_stress_return: '0'
+    signal_year_breakdown: true
+  development_gates:
+    base_profit_factor:
+      operator: '>'
+      value: '1.10'
+    base_return:
+      operator: '>'
+      value: '0'
+    completed_trades:
+      operator: '>='
+      value: 20
+    maximum_realized_trade_loss_fraction:
+      operator: <=
+      value: '0.04'
+    maximum_stress_block_bootstrap_drawdown_above_10pct_ratio:
+      operator: <=
+      value: '0.10'
+    maximum_stress_leave_one_year_out_drawdown:
+      operator: <=
+      value: '0.10'
+    minimum_stress_block_bootstrap_positive_return_ratio:
+      operator: '>='
+      value: '0.80'
+    minimum_stress_leave_one_year_out_profit_factor:
+      operator: '>'
+      value: '1.00'
+    minimum_stress_leave_one_year_out_return:
+      operator: '>'
+      value: '0'
+    stress_maximum_drawdown:
+      operator: <=
+      value: '0.10'
+    stress_profit_factor:
+      operator: '>'
+      value: '1.00'
+    stress_return:
+      operator: '>'
+      value: '0'
+    traded_years:
+      operator: '>='
+      value: 3
+  execution:
+    drawdown_definition:
+      formal_gate: stress_maximum_drawdown
+      formal_gate_semantics: 只由已完成交易 PnL 累積的 realized trade-equity curve 計算。
+      mark_to_market_diagnostic: 每個持倉 session 以當日 Low 的成本後可清算價估值；此診斷不改變 formal gate。
+    entry: 下一個 XNYS session open，以 MARKET proposal 模擬。
+    gap_fill: stop gap 以較差 open、target gap 以 open 價格改善成交，再套用成本。
+    holding_period: 進場 session 算第一個完整 session；完成第 10 個 session 後於下一 open 退出。
+    intrabar_ambiguity: target 與 stop 同 session 觸及時先算 stop。
+    position_sizing:
+      cash_cap: 不得超過可用現金，不借款、不加碼、最多一個部位。
+      modeled_stop_loss: 以 raw entry 的 -4% stop，納入指定成本模型的進出場滑價與費用。
+      risk_fraction_of_pre_entry_equity: '0.02'
+      shares: 同時符合現金上限與 stop 風險預算的最大整數股數。
+    stop:
+      level_from_raw_entry_open: '-0.04'
+      order: STOP_MARKET
+      time_in_force: GTC
+    target:
+      level_from_raw_entry_open: '0.04'
+      order: LIMIT
+      reissued_each_open_position_session: true
+      time_in_force: DAY
+  research_targets:
+    price_confirmation_after_volume_event_observed:
+      operator: '>='
+      value: 1
+    volume_event_and_price_confirmation_are_separate_sessions:
+      operator: '>='
+      value: 1
+    volume_event_observed:
+      operator: '>='
+      value: 1
+  source_and_adjustment:
+    adjustment_policy: Yahoo auto_adjust，OHLC 全部使用同一調整基礎。
+    calendar: XNYS
+    interval: 1d
+    provider: yahoo
+    timezone: America/New_York
+evaluation_gates:
+  base_compounded_return:
+    operator: '>'
+    value: '0'
+  base_profit_factor:
+    operator: '>'
+    value: '1.10'
+  completed_trades:
+    operator: '>='
+    value: 20
+  family_wise_confidence:
+    operator: '>='
+    value: '0.90'
+  maximum_fold_positive_profit_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_fold_trade_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_realized_trade_loss_fraction:
+    operator: <=
+    value: '0.04'
+  positive_traded_fold_ratio:
+    operator: '>='
+    value: '0.60'
+  stress_max_drawdown:
+    operator: <=
+    value: '0.10'
+  stress_profit_factor:
+    operator: '>'
+    value: '1.00'
+  stress_return:
+    operator: '>'
+    value: '0'
+  traded_folds:
+    operator: '>='
+    value: 3
+fold_warmup_sessions: 25
+hypothesis: 在已成立且未下彎的 SMA(20) 順勢狀態中，當日成交量若至少是前 20 個已完成 session 平均量的 1.10 倍，代表動能可能先由量能啟動；策略不在事件日進場，只把事件記錄下來，並在事件後第 1 至第 5 個 XNYS session 等待收盤高於前一個 session 的價格確認。若確認成立，於下一個 XNYS open 建立多頭部位。這條單一路徑預期捕捉順勢延續，不以均值回歸超跌作為交易條件；事件日以前、事件日當日及確認日以前的資料均不得使用未來值。
+initial_cash: '100000'
+maximum_holding_sessions: 11
+maximum_trials: 1
+schema_version: 1
+selection_rule:
+  eligible_candidate: 唯一 Trial 必須通過全部 formal Development gates 與全部事前登記 research targets；任一失敗即不得 candidate freeze，且不得以調參或重跑取代失敗結果。
+  family_selection_adjustment: candidate family 只有一個事前指定 Trial；本 Study 不以結果排名或事後挑選參數。
+  method: fixed-single-candidate-no-outcome-ranking
+  selected_candidate_id: tsm-momentum-trend-volume-lead-confirmation-v001
+tie_handling:
+  policy: 單一 candidate 不產生平手；若未來 workflow 需要比較，必須建立新的 Study 並重新預先登記。

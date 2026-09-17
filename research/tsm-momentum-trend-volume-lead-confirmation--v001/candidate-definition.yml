@@ -1,0 +1,93 @@
+baseline_comparison:
+  baseline_id: tsm-momentum-trend-price-confirmation-baseline-v001
+  baseline_is_excluded_from_candidate_family: true
+  candidate_id: tsm-momentum-trend-volume-lead-confirmation-v001
+  execution_is_identical: true
+  mechanism_difference: baseline 不啟用成交量事件追蹤；只作事前固定的較簡單描述性基準，不是 candidate 的第二條交易路徑。
+candidate_family: tsm-momentum-trend-volume-lead-confirmation
+candidate_id: tsm-momentum-trend-volume-lead-confirmation-v001
+complete_candidate_family:
+  - tsm-momentum-trend-volume-lead-confirmation-v001
+cost_models:
+  base:
+    fee_per_side_bps: '1'
+    slippage_per_side_bps: '5'
+  stress:
+    fee_per_side_bps: '2'
+    slippage_per_side_bps: '20'
+date_controls:
+  formal_provider_access: false
+  signal_end: '2018-12-31'
+  signal_start: '2014-01-01'
+  warmup_end: '2013-12-31'
+  warmup_start: '2013-01-01'
+execution:
+  cooldown_anchor: completed-position-exit
+  cooldown_completed_session_steps_after_exit: 5
+  entry: next-XNYS-open
+  gap_fill: stop-gap-at-open-target-gap-at-open
+  held_complete_sessions: 10
+  intrabar_ambiguity: adverse-stop-first
+  maximum_holding_session_span_for_validator: 11
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    modeled_stop_includes_costs: true
+    risk_fraction_of_pre_entry_equity: '0.02'
+    shares: maximum-integer-shares-within-risk-and-cash-caps
+  stop:
+    level_from_raw_entry_open: '-0.04'
+    order_type: STOP_MARKET
+    time_in_force: GTC
+  target:
+    level_from_raw_entry_open: '0.04'
+    order_type: LIMIT
+    reissued_each_session: true
+    time_in_force: DAY
+fold_policy:
+  evaluation_fold_warmup_sessions: 25
+  indicator_state_carried_between_folds: false
+  portfolio_state_reset_each_fold: true
+initial_cash: '100000'
+schema_version: 1
+signal:
+  accepted_only_when_flat: true
+  cooldown:
+    clock_anchor: completed-position-exit
+    completed_session_steps_after_exit: 5
+  decision_time: completed-session-close
+  mean_reversion:
+    close_vs_sma20_gap_minimum: '0'
+    close_vs_sma20_operator: '>='
+    readiness_only: true
+    rsi_length: 2
+    rsi_maximum: '100'
+    sma_length: 20
+  momentum_trend:
+    close_at_or_above_sma20_on_volume_event: true
+    price_confirmation_after_event_only: true
+    rsi_role: readiness-and-finite-bound-check-only
+    trend_sma_lag_sessions: 5
+    trend_sma_lookback: 20
+    trend_sma_operator: '>='
+  price_direction_confirmation:
+    close_above_prior_close: true
+    event_day_confirmation_forbidden: true
+  state_machine:
+    confirmation_remains_available_until_window_end: true
+    event_latest_unresolved_replaces_previous: true
+    event_tracking_starts_after_event_close: true
+    maximum_concurrent_events: 1
+    no_delayed_entry_after_expiry_or_invalidation: true
+    volume_event_expires_after_post_event_session: 5
+    volume_event_invalidated_when_close_below_event_close_fraction: '0.85'
+  volume_leads_price:
+    enabled: true
+    event_day_excluded_from_prior_average: true
+    price_confirmation_window_first_session: 1
+    price_confirmation_window_last_session: 5
+    prior_session_window: 5
+    volume_average_length: 20
+    volume_ratio_minimum: '1.10'
+    volume_ratio_operator: '>='
+    volume_ratio_value: '1.10'
+    volume_shock_is_before_signal: true
