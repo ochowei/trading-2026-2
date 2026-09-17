@@ -1668,3 +1668,60 @@
 - 程式／測試：`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v018.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v018.py`、`research/tools/development_status.py`
 - 詳細盲檢討：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v018/reviews/001-first-review.md`
 - 來源限制：本成果卡只整理 Development 階段，沒有讀取或引用正式 Historical Evaluation、Terminal 或 `historical-evaluation-artifacts/`。
+
+---
+
+# `tsm-mean-reversion-two-stage-volume-reversal--v024`：Study Development 成果卡
+
+- 成果卡狀態：`complete`
+- Development gate：`通過`
+- Provenance（來源可信狀態）：`verified-clean`
+- candidate_freeze_status：`未完成`
+- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v023`
+- 記錄日期：`2026-09-17`
+
+## 結論
+
+> 在 2014–2018、base 每邊 1／5 bps、stress 每邊 2／20 bps、2% 風險預算、4% 停損／停利與 10-session 持有下，Development evidence 完整，formal Development gates 全部通過，因此成果卡狀態為 `complete`。但 v024 的四項研究目標失敗：相較 v009，base／stress 回撤變差、stress 報酬變低，且 stress 淨新增損益為負；所以原始「增加交易且維持高成本表現」假說不獲支持，candidate freeze 未完成。
+
+## 研究變更
+
+- 研究問題或假說：上升趨勢中的放量蓄勢，若在事件後五個交易日內突破固定價位，能否補足 v009 均值回歸的交易空窗，同時增加交易並維持 stress 表現。
+- 相較上一個 Study 只改：在 v009 原有路徑上加入完整補充路徑：收盤高於 SMA(20) 且均線上行、成交量至少為前 20 日均量 1.25 倍、事件收盤不高於前五日高點，之後五日內首次嚴格突破固定價；事件失效、單事件追蹤與原路徑優先順序均事前固定。
+- 保持不變或比較基準：v009 原路徑、2014–2018 資料範圍、下一個 XNYS open 進場、base／stress 成本、2% 風險、4% 停損／停利、10-session 持有與 5-session 冷卻。
+
+## 主要結果
+
+| 條件 | 狀態 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | gate／備註 |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| Development / base | 已完成 | 35 | 33.874% | 2.806 | 5.880% | formal gate 通過；相對 v009 回撤目標失敗 |
+| Development / stress | 已完成 | 35 | 24.715% | 2.348 | 5.880% | formal gate 通過；stress 報酬、回撤與淨新增損益目標失敗 |
+
+- 交易年度覆蓋：5 年（2014–2018）。
+- 失敗 gate：無 formal Development gate 失敗。研究目標失敗為：base 最大回撤 5.8799% > v009 的 1.9998%；stress 報酬 24.7146% < v009 的 26.5232%；stress 最大回撤 5.8797% > v009 的 2.1193%；淨新增 stress PnL 為 -1,598.34，未大於 0。
+- 未執行項目與原因：無；base／stress、50,000 次 block bootstrap、leave-one-signal-year-out、交易配對與路徑診斷均有 evidence。
+
+## 主要發現
+
+- 已確認：evidence 內的狀態表為 valid／validated，provenance 為 `verified-clean`，formal gates 全數通過；base 與 stress 各有 35 筆完成交易，覆蓋五個 signal years。
+- 已確認：相較 v009 的 24 筆交易，v024 增加交易量，且有 11 筆完成交易來自 supplemental path；base 報酬略高，但回撤顯著變大；stress 報酬與回撤均劣於 v009，保守計算的淨新增 stress PnL 也為負。
+- 可能原因：補充訊號的進場時點與原路徑交易產生排擠或成本敏感性，使新增交易在 stress 成本下不足以補償風險；這是由交易配對與壓力結果支持的合理推論，不能歸因到趨勢、放量或五日突破中的單一條件。
+- 尚不能判斷：目前不能知道哪一個補充條件主導 stress 惡化，也不能把本次結果外推到其他資料期間。
+- 已確認的證據缺口、影響與限制：沒有發現 Development evidence 缺口；但研究目標失敗使 candidate freeze 不具資格，本卡只能支持 Development 階段判斷。
+
+## 下一輪
+
+- 建議處置：停止 v024 candidate freeze，不在原 Study 內調參或重跑，並停止這組「上升趨勢放量突破」增量假說。
+- 下一個 Study 只測：無；不建立 v024 同機制的參數 follow-up。若另起研究，必須另行事前登記全新假說，不得用本輪失敗結果反向放寬門檻。
+- 成功／失敗條件：本輪停止處置的成功條件是保留合法 evidence、凍結失敗結論且不事後調參；若未來另立 Study，須事前要求 formal gates 全通過、stress 報酬不低於 v009、stress 回撤不高於 v009，且淨新增 stress PnL 嚴格大於 0。
+- 不得沿用的問題：不得把 formal gate 通過解讀成研究目標通過，也不得把 base 的小幅增益或新增交易數當成 stress 下的增量優勢證明。
+
+## 允許讀取的 repository-relative 來源
+
+- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v024/manifests/preregistration.yml`
+- Candidate definition：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v024/manifests/candidate-definition.yml`
+- Development evidence：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v024/evidence/development.yml`
+- Provenance：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v024/evidence/provenance.yml`
+- 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v024/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v024.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v024.py`、`research/tools/development_status.py`
+- 詳細盲檢討：無
+- 來源限制：本成果卡只整理 Development 階段，沒有讀取或引用正式 Historical Evaluation、Terminal 或 `historical-evaluation-artifacts/`。
