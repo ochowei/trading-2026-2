@@ -1,0 +1,19 @@
+legacy_development_binding_exempt_workflow_digests:
+  - 6b17533c6a766bf244f63c8ad732f5cac479445cc574abcd495382dd5dded70b
+legacy_metric_shape_workflow_digests:
+  - 6b17533c6a766bf244f63c8ad732f5cac479445cc574abcd495382dd5dded70b
+required_stage_evidence:
+  - development
+  - candidate-freeze
+  - historical-evaluation
+schema_version: 1
+terminal_bindings:
+  - event_chain_head_digest
+  - development_evidence_digest
+  - preregistration_digest
+  - trial_registry_digest
+  - candidate_freeze_digest
+  - historical_evaluation_digest
+  - workflow_digest
+  - policy_set_digest
+  - source_bundle_digest

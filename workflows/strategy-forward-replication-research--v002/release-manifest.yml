@@ -1,0 +1,148 @@
+files:
+  - digest: 0994e0a88cf516148fcec4352e3d045cde36649a2185e4bd22928f23b0ed31af
+    path: README.md
+  - digest: bb4e5d568ac9ebfba74b3535447787866ef13ec8f779068aa75f83021e8daee3
+    path: examples/README.md
+  - digest: b3318dabdbc8ef286d873473e50e7815ffbe95571fc8fd50f5990e2ff116bfdd
+    path: examples/preregistration.example.yml
+  - digest: 9a5aa16684f2a2e5751d023c15f9d68cf0ddc037c58bc9b4aa0648a420b05b99
+    path: examples/runner-contract.example.yml
+  - digest: b2a14cfeb132771604b2322f03a04f754c27b9cbba0a8cb59e877eec1df208f8
+    path: examples/source-bundle.example.yml
+  - digest: dd7f9b6c9543f154a6b906e4514c83e4a20adbcfc70f88bbc005fb1792ba8d92
+    path: operations/__init__.py
+  - digest: 52478c1eb1020d5e4bd66e11f68c366cdee70d686946f37dc044fa144592a9b9
+    path: operations/cli.py
+  - digest: f0623079caecc59254a757076c94c5b532a5b4a6c09ee7bd5f5804684cb0ab9d
+    path: operations/launch.py
+  - digest: ea0fbf69bac3b82939ec25ba1b40b52b531581c38120f1fb61c71e3928792b44
+    path: operations/legacy_checks.py
+  - digest: 018f355e6032b79f3b24c93bae7952113c0f4a00842e1ea0fbdc803fd2ca1b8c
+    path: operations/preflight.py
+  - digest: 890595e6e91245cbc2b1a2fbc5decce1468395e948035667604f70bb05ca3037
+    path: operations/service.py
+  - digest: 0e0254fd535fceb63567b56b55d5752b6ffc1287356bc0e9b74218bd91b85200
+    path: policies/canonical-execution--v001/policy.yml
+  - digest: 7a5eca96848c0b855bb6ffd26864f7289b0615154d1cd75ac61159d7e90b814a
+    path: policies/paper-proposal-orders--v001/policy.yml
+  - digest: edd8fc4d1130504a405c48e210b947e6242ea4d82bb3be52c0de5057a31b4756
+    path: policies/portfolio-risk--v001/policy.yml
+  - digest: c804ff09e982df695c55c8ee528127be5093bc3ba5aebc9c9c019b38316ea69f
+    path: policies/us-equity-market--v002/policy.yml
+  - digest: ea3ce9b109045ac4b44523e23beb17e4c9cbcd7195556c262517afa27ccfd9ab
+    path: reference/minimal-executable-study.md
+  - digest: ccba25268fa18796d727887a385836fd1725e7b2dfc661ff6246552628af5cfe
+    path: reference/operations.md
+  - digest: 6bdb8812ad0ffd68ccfb2c91e5a5b4f3883f478bad33429457f1126df51d4ce6
+    path: reference/strategy-forward-replication-research-v002-guide.md
+  - digest: b957a0b8ffcd2cd05dba7d53b4fa991fb545935ad73a6bdee31ac682621b0aaf
+    path: rules/evidence-requirements.yml
+  - digest: 1d36272eefa8d5ebf52ab53f96b09105cda78f1d0fd5b96f4c8af07f820ead7d
+    path: rules/failure-and-recovery.yml
+  - digest: 028538731533cec191bd9dafc36ee324fb3aff0a592d71b05356190a0bf1479e
+    path: rules/state-machine.yml
+  - digest: 27eef8c69d74552da7293fb45967d95399c4257351687dcfe023e5a194aec42d
+    path: rules/workflow-floors.yml
+  - digest: f61cb67d409fe2ff2c91edaf5abec83854afeb12c35913a7348146f9efde9a8d
+    path: schemas/data-snapshot-set.schema.yml
+  - digest: bf6b1a2bce663af56ecd6d5ec21c7581b6b5544fe94ddd2753e4f5a57a28078b
+    path: schemas/data-snapshot.schema.yml
+  - digest: 9b3931adf2e95804a45ce56e663beba1cb9b999321b0267a729e49fb1f0a506d
+    path: schemas/event.schema.yml
+  - digest: b755143e7b8e13186cc05c4dc0e54be274fce9b064dc69156b61b9ec094af7f7
+    path: schemas/evidence-manifest.schema.yml
+  - digest: 1ef8cd4c5bc3ec58a47aa28841a20fddadf2c65eac6212ca2ba547ca6ef1140a
+    path: schemas/historical-evaluation.schema.yml
+  - digest: 7868906d4666b44b7acd8601f065b667d1278a7e557b24927dfb331379f31642
+    path: schemas/policy-release.schema.yml
+  - digest: c94260bf55341d2fcbe4a5f6ec6a962aacdae47ae9ecf8a18f9b10e6ccec8a51
+    path: schemas/policy.schema.yml
+  - digest: 1ee2523f44792aa22c9a40b7191ad90e10ebaaea15806e11a30a0ca032570992
+    path: schemas/preregistration.schema.yml
+  - digest: 1e22d45de7912af031185e87c87a104508ca422d7416d3b0ce5f11295b294d29
+    path: schemas/release-manifest.schema.yml
+  - digest: 0b14bd1357095b1c9e83f852586c12d73399584d2b3c2f564da635853112d7d3
+    path: schemas/release-test-report.schema.yml
+  - digest: 09d71f6f56a4b7bddcb96aaccffb3496bda59c9b081a1e8fbf1044254e3723a9
+    path: schemas/release.schema.yml
+  - digest: 94a69b5cddc33173fe225c0ecc2e021e5da327b3da656e581b0b1197284d91d1
+    path: schemas/runner-contract.schema.yml
+  - digest: 9c04b8ddeff81677ce1032dedf57fe503071e061005596a160cb0f6c6bead8a3
+    path: schemas/runner-report.schema.yml
+  - digest: b5386179f2aeebf06753cb22beec592cfcd9209db6d415ad09d539a6bafa8369
+    path: schemas/selection-evidence.schema.yml
+  - digest: 36da5c53ff03fa1e6c96f632fb9275b5ac8b9c7992b811d13ac553e0bbf32c62
+    path: schemas/source-bundle.schema.yml
+  - digest: e4a718012c2d96635dcd87a218fe0d1bb1854a8bc966a92c5cb2fb49cdc91c6e
+    path: schemas/terminal-evidence.schema.yml
+  - digest: 37f0f1a8daa1436e94cca9bb0586e2b654bad865addefb8283a62145402897cc
+    path: schemas/workflow.schema.yml
+  - digest: a4a72b8c3ab86eec4c963fa313e581d7dd2ce0efbdea0b0f9adc76589b4c1bf1
+    path: tests/conftest.py
+  - digest: 3898aa6ef7567d7ffdc58d7e58c72efeffd63a01542f9706eeb27b179f0c8456
+    path: tests/fixtures/contract/candidate-definition.yml
+  - digest: cea220f4c7767f7fe424c9bc8b6420a106df538534d71c3f42c58d1ab120b603
+    path: tests/fixtures/contract/development-trial-inputs.yml
+  - digest: 2fd3fdf1cea0e95d4b2aa4bab869cb66ca50f14d4fdc97644a38a342acb988e7
+    path: tests/fixtures/contract/engine.py
+  - digest: e52a7bb289ac654b22baa320e0e603cd3c0059aa0972cda2d0e0a55ba02a7a92
+    path: tests/fixtures/contract/implementation-contract.yml
+  - digest: 112c4ca5dfefe4900599e84ea71e23e7373c355b25e04417802dd7ab5d177ad8
+    path: tests/fixtures/contract/preregistration.yml
+  - digest: 886e48a04f99babdc31226b3dba83e49da7b6246d2b1df4e3e1a67892eb0788d
+    path: tests/fixtures/contract/qualification-spec.yml
+  - digest: a6ce18030f071b3b0830d6b1160853e09138a617566ca5f28f25207e72e0fbcc
+    path: tests/fixtures/runner.py
+  - digest: 41dd57e3210fb088ef243063492b517fd00d3f013b449f81854c64b8c189d474
+    path: tests/helpers.py
+  - digest: a99788dfb721e34c2314b56651f4fc7cbff5c9ae6bdd780d1f2bb6b52029cfba
+    path: tests/test_canonical_yaml.py
+  - digest: a627ff76cc3955d87089b91987a4085d12fefa6dc6d28711442c4dacbff79cb9
+    path: tests/test_integrity_and_recovery.py
+  - digest: 956a76d7ca9eeeb8b6da782f7e9d51a4bd4a5f1064900dc3e5951a5f98671878
+    path: tests/test_metrics.py
+  - digest: 9654e5f6feb492ec3348f7d67a81c218350c9859ab8a95b6fe820bba86dd64e9
+    path: tests/test_operations.py
+  - digest: d6662c3b8314d2ff79eb1f0c36c37a4676ab2a9e27130ebb45828649c48d67d2
+    path: tests/test_policy_conformance.py
+  - digest: da6ce3c515a10c355ce90d9191a9fb1a5f3bace913ab459f1d2c135c1db133b9
+    path: tests/test_release_candidate.py
+  - digest: 328e276af52d7a4d69ea9bd72a46475944935bb0906d028caf2cb1f8305cfe7c
+    path: tests/test_study_end_to_end.py
+  - digest: f61295b0118b47162f4adfdd3af6842545a425d855849ff6a890a5cbf6e41e75
+    path: validator/__init__.py
+  - digest: cc78b28b59199ff8e067d7a6f7bf0dccfbbdcbfd356cc22f6494fcbc95df445f
+    path: validator/artifacts.py
+  - digest: c0e6125eba53da58cd28c5f9502b77739ded8889c7b1f6a383a272016806284f
+    path: validator/canonical_yaml.py
+  - digest: 6aebe36c5167880510c21ee9ccf15c22f29271d78585d95dec0dd00298177120
+    path: validator/errors.py
+  - digest: 55f44d6003cd402c4bfec2742101f8b1e7de02467299dc41d4baa249e5056d7a
+    path: validator/metrics.py
+  - digest: 9faa2ef4e11cb18689f622f77264d584b90c0f717a4f7d81e1fb2d14a98ea319
+    path: validator/paths.py
+  - digest: b549471fa1268130546f4a70d53c65a8148cfa5ea9d4483b19679ba1e3428c66
+    path: validator/release.py
+  - digest: aed0484052452d8c6d871147206731fe1682f71f205a750d1ade94ba5efb72bf
+    path: validator/schema_validation.py
+  - digest: 16cfeb46e71543a38cc6a0bcc4cd5b766496da5c2bf80a13739909aed18ee09e
+    path: validator/study.py
+  - digest: 226b2d8f6097396c00a45c678bbfea895527fa4031c1c644c10d88bcfdc0597e
+    path: workflow.yml
+  - digest: aa421e2571bbfca761db922387af7676b39323f16309aac385a23d94a062975f
+    path: writer/__init__.py
+  - digest: 711081bfef8770b1ed23e8fb6273678ce3b98e5885269656de9e5f285aabbbe2
+    path: writer/authority.py
+  - digest: e208bc0cb81ab6722844fefc851178f0378eb414d33944066914acb5df789927
+    path: writer/cli.py
+  - digest: 9757704d4b25e45f7d70083912620a89ad60f87c1e1f60ec1d75cfaaf78250d8
+    path: writer/journal.py
+  - digest: 394164c5d6c5cb49181425a8667a47e0294c8ef175870124b64b47e624b9d4c8
+    path: writer/lock.py
+  - digest: a6066ac709f7056be82be42f5bc9c1642004456bb710dac9400fbfbb9653cc21
+    path: writer/service.py
+generated_at: '2026-09-18T07:58:22.657317Z'
+schema_version: 1
+workflow: strategy-forward-replication-research
+workflow_digest: f63b5e7d7ebd6804e094c53dbb95c74641f0f715b79682ac061e0c10ca271507
+workflow_version: v002
