@@ -68,7 +68,7 @@ def passed_report(repository, package, study_id, authority):
 def plan_for(study_id, research):
     def approval(scope):
         return {"decision": "approved", "actor_id": "fixture-approver", "role": "trusted-approver",
-                "approved_at": "2000-01-01T00:00:00.000000Z", "basis": "isolated-test-only", "scope": scope}
+                "approved_at": "2000-01-01T00:00:00.000000Z", "basis": "isolated-test-only", "scope": scope, "bindings": {"study_id": study_id, "workflow_version": "v002", "source_bundle_digest": canonical_digest(load_canonical(research / "source-bundle.yml")), "preregistration_digest": canonical_digest(load_canonical(research / "preregistration.yml"))}}
     return {"study_id": study_id, "creator": "fixture-creator",
             "identity": {"research_round_id": "round-1", "experiment_family": "family-1",
                          "research_owner": "fixture-owner", "historical_evaluation_operator": "fixture-evaluator"},
@@ -203,32 +203,6 @@ def test_complete_prepare_then_create_without_skipping_contract(tmp_path):
     result = create_authorize(StudyService(package, authority, repository_root=repository, allow_draft=True), plan_for(study_id, research), report)
     assert result["completed"][-1] == "development-authorized"
 
-
-def test_freeze_readiness_uses_actual_transition_without_writing(workflow_root, tmp_path, monkeypatch):
-    from helpers import advance_to_candidate
-    from operations.service import freeze_readiness
-
-    # 此 fixture 只準備 Development 事件；runner/create 已由前面的完整入口測試涵蓋。
-    monkeypatch.setattr(StudyService, "_verify_prepared", lambda *args: None)
-    monkeypatch.setattr(StudyService, "_verify_approval", lambda *args: None)
-    service = StudyService(workflow_root, tmp_path / "authority", allow_draft=True)
-    original = service.append_event
-    frozen = {}
-
-    def hold(study_id, event_type, actor, payload, **kwargs):
-        if event_type == "candidate-frozen":
-            frozen.update(payload)
-            return "fixture-unpublished"
-        return original(study_id, event_type, actor, payload, **kwargs)
-
-    monkeypatch.setattr(service, "append_event", hold)
-    advance_to_candidate(service)
-    before = service.validate("study-1")
-    assert freeze_readiness(service, "study-1", frozen, "same-person")["status"] == "passed"
-    assert service.validate("study-1") == before
-    bad = dict(frozen, selected_candidate_id="not-in-family")
-    with pytest.raises((ValidationError, IntegrityError)):
-        freeze_readiness(service, "study-1", bad, "same-person")
 
 
 def test_batch_rejects_missing_approval_without_first_event(tmp_path):

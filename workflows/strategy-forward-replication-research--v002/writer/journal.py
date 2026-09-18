@@ -13,6 +13,7 @@ from validator.canonical_yaml import (
     load_canonical,
 )
 from validator.errors import IntegrityError
+from validator.paths import resolve_inside
 
 
 class JournalPublisher:
@@ -56,19 +57,23 @@ class JournalPublisher:
         return operation_id
 
     def _complete(self, journal: dict[str, Any]) -> None:
-        event_path = self.study_root / journal["event_path"]
-        checkpoint_path = self.authority_root / journal["checkpoint_path"]
+        event_path = resolve_inside(self.study_root, journal["event_path"], must_exist=False)
+        checkpoint_path = resolve_inside(
+            self.authority_root, journal["checkpoint_path"], must_exist=False
+        )
         event_bytes = base64.b64decode(journal["event_bytes_base64"], validate=True)
         checkpoint_bytes = base64.b64decode(journal["checkpoint_bytes_base64"], validate=True)
         atomic_create(event_path, event_bytes)
         atomic_create(checkpoint_path, checkpoint_bytes)
 
-    def recover(self) -> list[str]:
+    def recover(self, *, validate_pending=None) -> list[str]:
         recovered: list[str] = []
         journal_dir = self.study_root / "journals"
         if not journal_dir.exists():
             return recovered
-        for prepared_path in sorted(journal_dir.glob("*.prepared.yml")):
+        for prepared_path in sorted(
+            journal_dir.glob("*.prepared.yml"), key=lambda path: load_canonical(path)["event_path"]
+        ):
             operation_id = prepared_path.name.removesuffix(".prepared.yml")
             completed_path = journal_dir / f"{operation_id}.completed.yml"
             if completed_path.exists():
@@ -76,6 +81,9 @@ class JournalPublisher:
             journal = load_canonical(prepared_path)
             if canonical_digest(journal) != operation_id:
                 raise IntegrityError("Prepared journal identity 不正確")
+            if validate_pending is None:
+                raise IntegrityError("recover 必須提供原 journal 語意驗證")
+            validate_pending(journal)
             self._complete(journal)
             atomic_create(
                 completed_path,

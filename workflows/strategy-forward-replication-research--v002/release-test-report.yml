@@ -1,20 +1,26 @@
 checks:
-  - command: /Users/william/gitRepo/trading-2026-2/.venv/bin/python -m pytest -q workflows/strategy-forward-replication-research--v002/tests
+  - command: /Users/william/gitRepo/trading-2026-2/.venv/bin/python -m pytest workflows/strategy-forward-replication-research--v002/tests -q --maxfail=2
     result: passed
-    summary: 57 passed，30.41 秒；9 個既有 NumPy 無窮大分位數警告。含完整 prepare、兩階段真正 runner subprocess、故障攔截、無交易／gate fail、報告過期、三事件恢復、freeze-readiness、提前終止與不可覆寫。
-  - command: /Users/william/gitRepo/trading-2026-2/.venv/bin/python -m pytest -q workflows/strategy-forward-replication-research--v001/tests tests/test_studyctl.py tests/test_termination_preflight.py tests/test_package.py
+    summary: 91 passed，9 個既有 NumPy infinity quantile RuntimeWarnings；完整 CLI prepare 至 freeze 使用同一 frozen engine，不略過 guards。
+  - command: /Users/william/gitRepo/trading-2026-2/.venv/bin/python -m pytest workflows/strategy-forward-replication-research--v002/tests/test_operations.py workflows/strategy-forward-replication-research--v002/tests/test_repairs.py -q -k 'stale_report or cross_study_approval or hard_exit_batch or forged_selection_order or cli_prepare_to_freeze or failed_freeze_readiness or high_level_early_terminal'
     result: passed
-    summary: 58 passed，17.27 秒；8 個既有 NumPy 警告。以獨立 process 驗證 v001 相容行為，未修改共用工具。
-  - command: /Users/william/gitRepo/trading-2026-2/.venv/bin/ruff check workflows/strategy-forward-replication-research--v002
+    summary: 最後錯誤上下文／恢復細節修改後，16 passed、36 deselected。
+  - command: /Users/william/gitRepo/trading-2026-2/.venv/bin/python -m pytest workflows/strategy-forward-replication-research--v002/tests/test_repairs.py -q -k development_hard_exit
     result: passed
-    summary: All checks passed。
-  - command: load_canonical(definition_files); SchemaStore.validate(workflow.schema.yml, runner-contract.schema.yml); policy_set_digest
+    summary: 最後新增 2 個案例均 passed（34 deselected）：Development candidate artifact 發布後、Trial Event 後 os._exit，使用原輸出恢復，不重跑 runner。與完整 suite 合計 93 個不同案例。
+  - command: /Users/william/gitRepo/trading-2026-2/.venv/bin/python -m pytest workflows/strategy-forward-replication-research--v001/tests tests/test_studyctl.py tests/test_termination_preflight.py tests/test_package.py tests/test_strategy_study_skills.py tests/test_development_status.py -q
     result: passed
-    summary: 34 個 definition YAML 通過 canonical 驗證；Workflow 與 runner contract schema、Policy release 與 conformance 指紋通過。
-  - command: git diff --exit-code HEAD -- workflows/strategy-forward-replication-research--v001 research/tools docs/workflow-lifecycle.md .project-manager/PROJECT_KANBAN.md
+    summary: 74 passed，8 個既有 NumPy warnings；獨立 process 驗證 v001、共用工具、舊 skills，相容行為保留。
+  - command: ruff check workflows/strategy-forward-replication-research--v002; git diff --check
     result: passed
-    summary: 既有版本、共用工具、外部 Lifecycle 與共享看板未變更。逐檔確認 vendored Policies 與 v001 相同；v002 無 Studies 與正式 release.yml。
-generated_at: '2026-09-18T07:58:22.657317Z'
+    summary: Ruff 與 diff whitespace 檢查均通過。
+  - command: skill-creator/scripts/quick_validate.py .agents/skills/build-strategy-study-v002; skill-creator/scripts/quick_validate.py .agents/skills/run-strategy-evaluation-v002
+    result: passed
+    summary: 兩個新增技能驗證通過，與 package 內受版本控管的 SKILL.md bytes 一致；既有 v001 skills 未修改。
+  - command: definition_files + load_canonical + SchemaStore + policy_set_digest + exact vendored-policy comparison + validate_release_manifest + validate_release_record rejection
+    result: passed
+    summary: 全部 YAML canonical、workflow/schema、Policy release 與 conformance 指紋通過；Policy bytes 與 v001 一致。沒有正式 Studies 或 release.yml。環境 Python 3.11.15；僅隔離合成 fixtures，未下載依賴。
+generated_at: '2026-09-18T15:47:50.702251Z'
 release_record_created: false
 schema_version: 1
 status: release-candidate

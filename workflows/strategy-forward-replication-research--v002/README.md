@@ -1,6 +1,6 @@
 # 策略前瞻複製研究 v002
 
-本版改善 Study 建立前的檢查與日常操作入口。研究目的、固定資料區間、事件種類、結果權限、trial 完整性、provenance（資料與既有結果接觸歷史）及候選凍結規則延續前版。新增的是在第一個事件前實際執行完整 runner 的檢查，以及可接續的三事件建立操作。
+本版改善 Study 建立前的檢查與日常操作入口。研究目的、固定資料區間、事件種類、結果權限、trial 完整性、provenance（資料與既有結果接觸歷史）及候選凍結規則延續前版。建立前會實際執行完整 runner 與正式 Trial 消費路徑；日常流程為 prepare → create-authorize → development → freeze，提供角色分離的 skills 與可恢復 CLI。
 
 此 Package 的交付終點是 Release Candidate。只有 manifest 與測試報告不代表已啟用；沒有 Trusted Approver 建立的 `release.yml`，正式 writer 仍拒絕寫入。v001 與既有 Study 原地保留。
 
@@ -12,8 +12,9 @@
 | --- | --- | --- |
 | 建立前 | precreate／identity／contract／synthetic 等分散檢查；runner 的完整啟動與輸出未涵蓋 | 一次 `prepare`，合併規格、策略合成檢查、完整 Development 與 Historical runner 合成執行及證據重算 |
 | 建立與授權 | 人工串接 create、preregistration-approved、development-authorized | 一次 `create-authorize`；逐一寫入相同三事件，必須提供各自核准依據 |
-| 凍結前 | `all` 名稱容易被誤認為完整流程已檢查 | `freeze-readiness` 模擬真正 candidate-frozen 事件，通過才進行凍結 |
-| 中斷 | 依 journal 完成原 bytes | 保留原 journal；相同 plan 與 report 重試，不重複追加已完成事件 |
+| Development | 人工拆 evidence、發布 artifact、組 Trial | 一次 `development` 保存 candidate／baseline、重算並登錄；執行完成與資格分開 |
+| 凍結前 | 人工串 registry、provenance、selection、freeze | 一次 `freeze` 先模擬完整 readiness，再逐事件發布；不合格不能凍結 |
+| 中斷 | 依 journal 完成原 bytes | `resume` 接續原 operation／journal；OS 持鎖在程序死亡後釋放，不重複事件或重跑已執行 runner |
 
 ## 開發驗證
 

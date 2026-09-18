@@ -2,6 +2,9 @@
 
 from __future__ import annotations
 
+import base64
+import shutil
+import tempfile
 from copy import deepcopy
 from datetime import UTC, datetime
 from pathlib import Path
@@ -12,6 +15,7 @@ from validator.canonical_yaml import (
     atomic_replace,
     canonical_bytes,
     canonical_digest,
+    load_canonical,
 )
 from validator.errors import IntegrityError, ValidationError
 from validator.paths import (
@@ -55,9 +59,7 @@ class StudyService:
     def _artifact_destination(self, study_id: str, relative_path: str) -> tuple[str, Path]:
         root = self.study_root(study_id)
         normalized = validate_repository_relative_path(relative_path).as_posix()
-        if is_within_repository_path(
-            normalized, self.rules.historical_evaluation_artifacts_path
-        ):
+        if is_within_repository_path(normalized, self.rules.historical_evaluation_artifacts_path):
             destination = resolve_historical_evaluation_artifact(
                 root,
                 self.repository_root,
@@ -100,8 +102,9 @@ class StudyService:
 
         if report is None:
             raise ValidationError("第一個 Event 前必須提供 prepare 報告")
-        verify_report(report, self.repository_root, study_id, self.authority.root,
-                      self.workflow_root)
+        verify_report(
+            report, self.repository_root, study_id, self.authority.root, self.workflow_root
+        )
 
     def _verify_approval(self, event_type: str, actor: str, payload: dict, root: Path) -> None:
         from operations.service import approval
@@ -115,8 +118,11 @@ class StudyService:
         path = resolve_inside(root, payload[f"{prefix}_path"])
         if canonical_digest(path.read_bytes()) != payload[f"{prefix}_digest"]:
             raise IntegrityError("核准依據 digest 不一致")
-        approval(load_canonical(path), actor,
-                 "preregistration" if prefix == "approval" else "development-only")
+        approval(
+            load_canonical(path),
+            actor,
+            "preregistration" if prefix == "approval" else "development-only",
+        )
 
     def create_study(
         self,
@@ -130,10 +136,15 @@ class StudyService:
         historical_evaluation_operator: str | None = None,
         replay_operator: str | None = None,
         prepare_report: dict | None = None,
+        create_plan: dict | None = None,
+        occurred_at: str | None = None,
     ) -> str:
         self._verify_prepared(study_id, prepare_report)
         self.rules.schema_store.validate("source-bundle.schema.yml", source_bundle)
-        if prepare_report is not None and source_bundle != prepare_report["binding"]["source_bundle"]:
+        if (
+            prepare_report is not None
+            and source_bundle != prepare_report["binding"]["source_bundle"]
+        ):
             raise IntegrityError("create Source Bundle 與 prepare 不一致")
         source_bundle_path, source_bundle_digest = self.publish_artifact(
             study_id,
@@ -151,6 +162,9 @@ class StudyService:
             "source_bundle_path": source_bundle_path,
             "source_bundle_digest": source_bundle_digest,
         }
+        if create_plan is not None:
+            path, digest = self.publish_artifact(study_id, "manifests/create-plan.yml", create_plan)
+            payload.update(create_plan_path=path, create_plan_digest=digest)
         return self.append_event(
             study_id,
             "study-created",
@@ -158,6 +172,7 @@ class StudyService:
             payload,
             source_bundle_digest=source_bundle_digest,
             prepare_report=prepare_report,
+            occurred_at=occurred_at,
         )
 
     def append_event(
@@ -174,12 +189,17 @@ class StudyService:
         if event_type == "study-created":
             self._verify_prepared(study_id, prepare_report)
             if prepare_report is not None:
-                if canonical_digest(prepare_report["binding"]["source_bundle"]) != source_bundle_digest:
+                if (
+                    canonical_digest(prepare_report["binding"]["source_bundle"])
+                    != source_bundle_digest
+                ):
                     raise IntegrityError("prepare 與建立事件 Source Bundle 不一致")
                 report_path, report_digest = self.publish_artifact(
-                    study_id, "manifests/prepare-report.yml", prepare_report)
-                payload = dict(payload, prepare_report_path=report_path,
-                               prepare_report_digest=report_digest)
+                    study_id, "manifests/prepare-report.yml", prepare_report
+                )
+                payload = dict(
+                    payload, prepare_report_path=report_path, prepare_report_digest=report_digest
+                )
         root = self.study_root(study_id)
         self._verify_approval(event_type, actor_id, payload, root)
         root.mkdir(parents=True, exist_ok=True)
@@ -244,7 +264,49 @@ class StudyService:
     def recover(self, study_id: str) -> list[str]:
         root = self.study_root(study_id)
         with StudyLock(root / ".writer.lock"):
-            recovered = JournalPublisher(root, self.authority.root).recover()
+
+            def validate_pending(journal):
+                # 先在隔離副本驗證原 bytes；任何佐證損壞都不得先補發正式 Event。
+                with tempfile.TemporaryDirectory(prefix="study-recover-") as temp:
+                    staged = Path(temp) / "study"
+                    shutil.copytree(root, staged, symlinks=True)
+                    authority = Path(temp) / "authority"
+                    checkpoints = self.authority.root / study_id
+                    if checkpoints.exists():
+                        shutil.copytree(checkpoints, authority / study_id)
+                    pending = []
+                    for path in (root / "journals").glob("*.prepared.yml"):
+                        if path.with_name(
+                            path.name.replace(".prepared.yml", ".completed.yml")
+                        ).exists():
+                            continue
+                        value = load_canonical(path)
+                        if canonical_digest(value) != path.name.removesuffix(".prepared.yml"):
+                            raise IntegrityError("Prepared journal identity 不正確")
+                        pending.append(value)
+                    for value in pending:
+                        if not value["event_path"].startswith("events/") or not value[
+                            "checkpoint_path"
+                        ].startswith(f"{study_id}/checkpoints/"):
+                            raise IntegrityError("Journal 目的地不屬於原 Study")
+                        event_bytes = base64.b64decode(value["event_bytes_base64"], validate=True)
+                        checkpoint_bytes = base64.b64decode(
+                            value["checkpoint_bytes_base64"], validate=True
+                        )
+                        atomic_create(
+                            resolve_inside(staged, value["event_path"], must_exist=False),
+                            event_bytes,
+                        )
+                        atomic_create(
+                            resolve_inside(authority, value["checkpoint_path"], must_exist=False),
+                            checkpoint_bytes,
+                        )
+                    projected = validate_study(staged, self.rules, check_projection=False)
+                    AuthorityStore(authority).verify(study_id, projected.events)
+
+            recovered = JournalPublisher(root, self.authority.root).recover(
+                validate_pending=validate_pending
+            )
             projection = validate_study(root, self.rules, check_projection=False)
             self.authority.verify(study_id, projection.events)
             atomic_replace(root / "study.yml", canonical_bytes(projection.to_dict()))

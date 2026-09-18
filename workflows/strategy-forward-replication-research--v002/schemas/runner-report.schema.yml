@@ -2,6 +2,29 @@ $schema: https://json-schema.org/draft/2020-12/schema
 additionalProperties: false
 properties:
   binding:
+    additionalProperties: false
+    properties:
+      authority_root:
+        minLength: 1
+        type: string
+      environment:
+        type: object
+      repository:
+        minLength: 1
+        type: string
+      settings:
+        additionalProperties:
+          format: sha256
+          type: string
+        type: object
+      source_bundle:
+        type: object
+      study_id:
+        minLength: 1
+        type: string
+      workflow_digest:
+        format: sha256
+        type: string
     required:
       - study_id
       - repository

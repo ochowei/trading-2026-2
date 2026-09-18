@@ -7,6 +7,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
 
+from .approvals import approval, historical_report
 from .artifacts import (
     evaluate_historical,
     validate_development_trial,
@@ -17,6 +18,7 @@ from .canonical_yaml import canonical_bytes, canonical_digest, load_canonical
 from .errors import IntegrityError, TransitionError, ValidationError
 from .metrics import validate_study_gates
 from .paths import resolve_inside, validate_repository_relative_path
+from .qualification import assess, ordered_eligible, validate_supported
 from .schema_validation import SHA256_PATTERN, SchemaStore
 
 EVENT_FILE_PATTERN = re.compile(r"^(?P<sequence>[0-9]{6})-(?P<event>[a-z0-9-]+)\.yml$")
@@ -47,6 +49,7 @@ class StudyProjection:
     preregistration: dict[str, Any] | None = None
     preregistration_digest: str | None = None
     trials: dict[str, dict[str, Any]] = field(default_factory=dict)
+    trial_assessments: dict[str, dict[str, Any]] = field(default_factory=dict)
     trial_registry_digest: str | None = None
     provenance_status: str | None = None
     candidate: dict[str, Any] | None = None
@@ -84,6 +87,7 @@ class StudyProjection:
             "trial_registry": {
                 "recorded_trial_count": len(self.trials),
                 "trial_ids": sorted(self.trials),
+                "assessments": self.trial_assessments,
                 "digest": self.trial_registry_digest,
             },
             "preregistration": {"digest": self.preregistration_digest},
@@ -115,13 +119,9 @@ class WorkflowRules:
         self.evidence_requirements = load_canonical(
             self.root / self.workflow["evidence_requirements_path"]
         )
-        configured_store_path = self.workflow["storage"].get(
-            "historical_evaluation_artifacts_path"
-        )
+        configured_store_path = self.workflow["storage"].get("historical_evaluation_artifacts_path")
         if not isinstance(configured_store_path, str):
-            raise ValidationError(
-                "Workflow storage 必須設定 historical_evaluation_artifacts_path"
-            )
+            raise ValidationError("Workflow storage 必須設定 historical_evaluation_artifacts_path")
         self.historical_evaluation_artifacts_path = validate_repository_relative_path(
             configured_store_path
         ).as_posix()
@@ -235,9 +235,7 @@ def _validate_event_semantics(
 
     if event_type == "study-created":
         _require(payload, "research_round_id", "experiment_family", "research_owner")
-        if not payload.get("historical_evaluation_operator") and not payload.get(
-            "replay_operator"
-        ):
+        if not payload.get("historical_evaluation_operator") and not payload.get("replay_operator"):
             raise ValidationError("Study identity 必須指定 Historical Evaluation 執行者")
         _require(payload, "source_bundle_path", "source_bundle_digest")
         source_path, source_bundle = _verified_artifact(
@@ -249,6 +247,28 @@ def _validate_event_semantics(
         rules.schema_store.validate("source-bundle.schema.yml", source_bundle)
         if canonical_digest(source_path.read_bytes()) != event["bindings"]["source_bundle_digest"]:
             raise IntegrityError("Source Bundle artifact 與 Study binding 不一致")
+        _, report = _validate_reference(
+            study_root,
+            rules,
+            payload,
+            path_field="prepare_report_path",
+            digest_field="prepare_report_digest",
+        )
+        historical_report(report, event, rules)
+        if "create_plan_path" in payload:
+            _, plan = _validate_reference(
+                study_root,
+                rules,
+                payload,
+                path_field="create_plan_path",
+                digest_field="create_plan_digest",
+            )
+            if (
+                plan["study_id"] != event["study_id"]
+                or plan["creator"] != event["actor_id"]
+                or any(payload.get(k) != v for k, v in plan["identity"].items())
+            ):
+                raise IntegrityError("create plan 與原建立事件不一致")
         projection.study_id = event["study_id"]
         projection.bindings = dict(event["bindings"])
         projection.identity = dict(payload)
@@ -272,17 +292,50 @@ def _validate_event_semantics(
             preregistration["evaluation_gates"],
             rules.floors["historical_evaluation"],
         )
+        validate_supported(preregistration)
+        _, proof = _validate_reference(
+            study_root, rules, payload, path_field="approval_path", digest_field="approval_digest"
+        )
+        approval(
+            proof,
+            event["actor_id"],
+            "preregistration",
+            study_id=projection.study_id,
+            source_digest=projection.bindings["source_bundle_digest"],
+            prereg_digest=canonical_digest(preregistration),
+        )
+        _, report = _validate_reference(
+            study_root,
+            rules,
+            projection.identity,
+            path_field="prepare_report_path",
+            digest_field="prepare_report_digest",
+        )
+        if report["binding"]["settings"]["preregistration.yml"] != canonical_digest(
+            preregistration
+        ):
+            raise IntegrityError("預先登記與 prepare 不一致")
         projection.preregistration = preregistration
         projection.preregistration_digest = canonical_digest(path.read_bytes())
         return
 
     if event_type == "development-authorized":
-        _validate_reference(study_root, rules, payload)
+        _, proof = _validate_reference(study_root, rules, payload)
+        approval(
+            proof,
+            event["actor_id"],
+            "development-only",
+            study_id=projection.study_id,
+            source_digest=projection.bindings["source_bundle_digest"],
+            prereg_digest=projection.preregistration_digest,
+        )
         return
 
     if event_type == "trial-recorded":
         _require(payload, "trial_id", "inputs_digest", "status")
         trial_id = payload["trial_id"]
+        if trial_id not in projection.preregistration["complete_candidate_family"]:
+            raise ValidationError("Trial 不在預先登記的 Candidate Family")
         if trial_id in projection.trials:
             raise ValidationError(f"Trial ID 重複: {trial_id}")
         _digest(payload["inputs_digest"], "inputs_digest")
@@ -325,6 +378,22 @@ def _validate_event_semantics(
                 preregistration_digest=projection.preregistration_digest,
                 source_bundle_digest=projection.bindings["source_bundle_digest"],
             )
+            _, prepared = _validate_reference(
+                study_root,
+                rules,
+                projection.identity,
+                path_field="prepare_report_path",
+                digest_field="prepare_report_digest",
+            )
+            frozen_inputs = set(prepared["binding"]["settings"].values()) | {
+                item["digest"] for item in prepared["binding"]["source_bundle"]["files"]
+            }
+            if payload["inputs_digest"] not in frozen_inputs:
+                raise IntegrityError("Trial inputs 未被 prepare／Source Bundle 凍結")
+            from operations.publication import validate_publication
+
+            validate_publication(study_root, rules, payload, projection)
+            projection.trial_assessments[trial_id] = assess(evidence, projection.preregistration)
             projection.evidence["development"] = canonical_digest(evidence_path.read_bytes())
         projection.trials[trial_id] = dict(payload)
         return
@@ -357,6 +426,8 @@ def _validate_event_semantics(
         if payload["trial_registry_digest"] != expected_digest:
             raise IntegrityError("trial_registry_digest 不正確")
         projection.trial_registry_digest = expected_digest
+        if payload["candidate_available"] is not bool(ordered_eligible(projection)):
+            raise ValidationError("candidate_available 與重算資格不一致")
         if payload["candidate_available"] is False:
             projection.pending_terminal_outcome = "fail"
         elif payload["candidate_available"] is not True:
@@ -368,12 +439,14 @@ def _validate_event_semantics(
         status = payload["status"]
         if status not in PROVENANCE_DISPOSITIONS:
             raise ValidationError("未知 provenance status")
-        _verified_artifact(
+        _, provenance = _verified_artifact(
             study_root,
             rules,
             payload["artifact_path"],
             payload["artifact_digest"],
         )
+        if provenance.get("status") != status or not provenance.get("sources"):
+            raise IntegrityError("provenance 狀態與來源佐證不一致")
         projection.provenance_status = status
         projection.pending_terminal_outcome = PROVENANCE_DISPOSITIONS[status]
         return
@@ -404,10 +477,21 @@ def _validate_event_semantics(
         selected_trial = projection.trials[selected]
         if "development_evidence_digest" in selected_trial:
             _require(payload, "development_evidence_digest")
-            if payload["development_evidence_digest"] != selected_trial[
-                "development_evidence_digest"
-            ]:
-                raise IntegrityError("Candidate Freeze 沒有綁定 selected Trial 的 Development evidence")
+            if (
+                payload["development_evidence_digest"]
+                != selected_trial["development_evidence_digest"]
+            ):
+                raise IntegrityError(
+                    "Candidate Freeze 沒有綁定 selected Trial 的 Development evidence"
+                )
+        for name in ("baseline_id", "baseline_family"):
+            if (
+                payload[name]
+                != projection.preregistration["baseline_definition"][
+                    "family" if name == "baseline_family" else name
+                ]
+            ):
+                raise ValidationError("Baseline 與預先登記不一致")
         if payload["baseline_id"] in projection.trials:
             raise ValidationError("Baseline 必須位於 Candidate Family 之外")
         if payload["baseline_family"] == projection.identity["experiment_family"]:
@@ -424,6 +508,8 @@ def _validate_event_semantics(
         )
         rules.schema_store.validate("selection-evidence.schema.yml", selection_evidence)
         eligible_ids = selection_evidence["ordered_eligible_trial_ids"]
+        if eligible_ids != ordered_eligible(projection):
+            raise ValidationError("Selection Evidence 合格名單／排序與 raw evidence 重算不一致", path=payload["selection_evidence_path"], expected=ordered_eligible(projection), actual=eligible_ids)
         if not set(eligible_ids).issubset(projection.trials):
             raise ValidationError("Selection Evidence 包含未登記的 Trial")
         if selection_evidence["selected_candidate_id"] != selected or eligible_ids[0] != selected:
@@ -437,6 +523,19 @@ def _validate_event_semantics(
         )
         if selection_evidence["rule_digest"] != expected_rule_digest:
             raise IntegrityError("Selection Evidence 沒有綁定 preregistered selection rules")
+        _, prepared = _validate_reference(
+            study_root,
+            rules,
+            projection.identity,
+            path_field="prepare_report_path",
+            digest_field="prepare_report_digest",
+        )
+        for field, filename in (
+            ("candidate_digest", "candidate-definition.yml"),
+            ("qualification_spec_digest", "qualification-spec.yml"),
+        ):
+            if payload[field] != prepared["binding"]["settings"].get(filename):
+                raise IntegrityError("Candidate Freeze 設定與 prepare 綁定不一致")
         for name in (
             "candidate_digest",
             "qualification_spec_digest",
@@ -466,6 +565,28 @@ def _validate_event_semantics(
         return
 
     if event_type == "historical-evaluation-completed":
+        if "authorization_path" in payload or "authorization_digest" in payload:
+            _, proof = _validate_reference(
+                study_root,
+                rules,
+                payload,
+                path_field="authorization_path",
+                digest_field="authorization_digest",
+                allow_historical_evaluation_store=True,
+            )
+            approval(
+                proof,
+                proof["actor_id"],
+                "historical-evaluation-only",
+                study_id=projection.study_id,
+                source_digest=projection.bindings["source_bundle_digest"],
+                prereg_digest=projection.preregistration_digest,
+            )
+            if (
+                proof.get("candidate_freeze_digest") != projection.evidence["candidate-freeze"]
+                or event["actor_id"] != projection.identity["historical_evaluation_operator"]
+            ):
+                raise IntegrityError("Evaluation 授權／操作者與 frozen candidate 不一致")
         path, evidence = _validate_reference(
             study_root,
             rules,

@@ -42,7 +42,7 @@ def preregistration() -> dict[str, Any]:
             },
             "minimum_history": "fixed-calendar",
         },
-        "selection_rule": {"metric": "development-sharpe", "order": "descending"},
+        "selection_rule": {"metric": "base_return", "order": "descending"},
         "tie_handling": {"method": "stable-trial-id"},
         "baseline_definition": {
             "baseline_id": "cash-baseline",
