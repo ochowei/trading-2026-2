@@ -1,0 +1,22 @@
+checks:
+  - command: /Users/william/gitRepo/trading-2026-2/.venv/bin/python -m pytest workflows/strategy-forward-replication-research--v003/tests -q -n 4
+    result: passed
+    summary: 99 passed, 1 warning in 167.53s (0:02:47)；全部使用隔離暫存資料。包含無核准 CLI 至 freeze／評估 pass、fail、indeterminate、舊契約拒絕、派工／角色／讀取邊界、資格反例、create 與評估硬中斷、並行及局部輸出刪除。NumPy 合成 fixture 出現一次 invalid value encountered in subtract 警告。測試 stdout SHA-256：2ae9cd55876ec6e740bb5deffb81b3b6fb499542af29622fff2fb9227e7ed93a
+  - command: /Users/william/gitRepo/trading-2026-2/.venv/bin/ruff check workflows/strategy-forward-replication-research--v003
+    result: passed
+    summary: All checks passed!
+  - command: /Users/william/gitRepo/trading-2026-2/.venv/bin/python workflows/strategy-forward-replication-research--v003/operations/release_candidate.py
+    result: passed
+    summary: 全部 canonical YAML、JSON Schema 定義、workflow schema、Policy release 與 conformance digest 通過；94 個定義檔。
+  - command: PYTHONPATH=workflows/strategy-forward-replication-research--v002 /Users/william/gitRepo/trading-2026-2/.venv/bin/python -c 'from validator.release import validate_release_record; validate_release_record("workflows/strategy-forward-replication-research--v002"); print("v002 release passed")'
+    result: passed
+    summary: v002 的 94 個檔案逐 byte 指紋完全相同；原 Release validator 獨立通過，workflow digest aff336a2a1c69a6228ab94ea19809b96bc957bce2782f3dc8db40196282f2aa1。未修改既有 Study、Policy 或治理文件。
+  - command: /Users/william/gitRepo/trading-2026-2/.venv/bin/python workflows/strategy-forward-replication-research--v003/operations/release_candidate.py --candidate
+    result: passed
+    summary: 重算 release manifest、驗證測試報告 schema，確認沒有正式 release.yml。
+generated_at: '2026-09-19T07:48:46.736887Z'
+release_record_created: false
+schema_version: 1
+status: release-candidate
+workflow: strategy-forward-replication-research
+workflow_version: v003
