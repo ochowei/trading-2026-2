@@ -1,21 +1,22 @@
-# Workflow Lifecycle：strategy-forward-replication-research（v001／v002）
+# Workflow Lifecycle：strategy-forward-replication-research（v001／v002／v003）
 
 ## 文件目的
 
 本文件定義 Workflow Package（流程套件）的生命週期，處理的是研究流程本身如何建立、發布、取代與封存；它與 Study Lifecycle（單一研究個案從建立到終止的流程）不同。
 
-本文件目前適用於 `strategy-forward-replication-research--v001` 與 `strategy-forward-replication-research--v002`。它位於 Workflow Package 外部，是專案治理文件，不列入任何 Workflow Package 的 release digest。這樣可以記錄 Workflow 的治理狀態，而不會因為在已發布的 Package 內新增文件，意外改變既有 Release Record。
+本文件目前適用於 `strategy-forward-replication-research--v001`、`strategy-forward-replication-research--v002` 與 `strategy-forward-replication-research--v003`。它位於 Workflow Package 外部，是專案治理文件，不列入任何 Workflow Package 的 release digest。這樣可以記錄 Workflow 的治理狀態，而不會因為在已發布的 Package 內新增文件，意外改變既有 Release Record。
 
 ## 目前狀態
 
-截至 2026-09-19T03:02:44.000000Z：
+截至 2026-09-19T16:38:39.747194Z：
 
 | Version | Status | Release Record | 核准者／核准時間 |
 | --- | --- | --- | --- |
-| `v002` | `Active` | `workflows/strategy-forward-replication-research--v002/release.yml` | `william`／`2026-09-19T03:02:44.000000Z` |
+| `v003` | `Active` | `workflows/strategy-forward-replication-research--v003/release.yml` | `ochowei`／`2026-09-19T16:38:39.747194Z` |
+| `v002` | `Superseded` | `workflows/strategy-forward-replication-research--v002/release.yml` | 原始 Release Record 保留；於 `2026-09-19T16:38:39.747194Z` 停止接受新的 Study |
 | `v001` | `Superseded` | `workflows/strategy-forward-replication-research--v001/release.yml` | 原始 Release Record 保留；於 `2026-09-19T03:02:44.000000Z` 停止接受新的 Study |
 
-本次切換的原因是 v002 已通過 Release Candidate 的完整驗證並建立新的 Release Record，正式取代 v001 接受新的 Study。v001 的 Package、Release Record、既有 Study 與 evidence 均原地保留，不代表既有研究結果失效。
+本次切換的原因是 v003 已通過 Release Candidate 的完整驗證，Trusted Approver `ochowei` 依當下的 manifest、測試報告與 digest 建立新的 Release Record，正式取代 v002 接受新的 Study。v002 的 Package、原始 Release Record、既有 Study、evidence 與 authority 均原地保留，且原 Release Record 可獨立驗證；v001 也維持原地保留。`Superseded` 不代表既有研究結果失效。
 
 ## Lifecycle 狀態
 
@@ -143,7 +144,7 @@ Trusted Approver 必須檢視 Release Candidate 的規則、測試報告、manif
 
 2026-09-19 制定 [以明確派工取代 Study 人工核准](plans/study-explicit-assignment-lifecycle.md)。後繼版本應移除 Study 的預先登記核准、Development 授權及歷史評估核准文件，改以登記事實、執行開始事件與既有明確派工驅動；不得自動填入 approved。預先登記、內容指紋、角色與資料隔離、候選資格及一次性歷史評估限制全部保留。
 
-這項規格不改變上表的發布狀態，不修改已發布 v002，也不取消 Workflow Release 核准。由 workflow 執行者依規格建立後繼版本並完成驗證與發布流程，既有 Study 留在原版。
+這項規格支援 v003 的明確派工流程；本次切換不修改已發布 v002，也不取消 Workflow Release 核准。v002 的既有 Study 留在原版，v003 僅接受新的 Study。
 
 - [Workflow Package 說明](../workflows/README.md)
 - [v001 Workflow Package README](../workflows/strategy-forward-replication-research--v001/README.md)

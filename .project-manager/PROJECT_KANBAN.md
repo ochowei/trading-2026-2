@@ -48,8 +48,6 @@
 
 > 已由專案管理者建立並排序，等待負責角色接手的任務。
 
-（目前沒有 TODO 任務）
-
 ---
 
 ## 🔨 Doing
@@ -72,4 +70,20 @@
 
 > 已完成工作並由專案管理者驗收確認的任務。
 
-（目前沒有 Done 任務）
+### [TASK-001] 啟用 v003 並將 v002 標記為 Superseded
+- **狀態**：Done
+- **優先級**：高
+- **負責角色**：workflow 執行者
+- **執行者**：Chandrasekhar（subagent `01a0ba86-7d4e-7321-92e1-7efff6bd1078`）
+- **建立日期**：2026-09-20
+- **更新日期**：2026-09-20
+- **依賴／阻塞**：無
+- **驗收條件**：
+  - v003 已確認 Release Candidate manifest、測試報告與 digest，並建立且通過有效的 `workflows/strategy-forward-replication-research--v003/release.yml` 驗證。
+  - v002 原有 `release.yml`、Package、既有 Study、evidence 與 authority 仍保留，且原 Release Record 可獨立驗證。
+  - `docs/workflow-lifecycle.md` 與 `workflows/README.md` 已更新目前狀態：v003 為 Active、v002 為 Superseded。
+  - 沒有刪除或修改 v002 的不可變內容。
+  - 沒有建立新 Study，也沒有執行 Historical Evaluation。
+  - 完成 `git diff --check`。
+- **摘要**：依 Release Candidate 證據重新計算 digest，由 Trusted Approver `ochowei` 建立 v003 Release Record，並更新 Workflow 治理狀態；v002 的 Package、Release Record、既有 Study、evidence 與 authority 均原地保留。
+- **進度／備註**：workflow 執行者回報並由專案管理者驗收：v003 `release.yml` 的 `approved_at` 為實際 UTC `2026-09-19T16:38:39.747194Z`；manifest digest 為 `cf4a0918e76b49c508bddfb008ac8507db94b37878d024d121c336bceed3fee7`，test report digest 為 `2c960acaa8c9dbc8a5c9e88f4aebf74f5f7663a640d94c481594989235bd8157`，Workflow digest 為 `8b1425a9b418db86b6db2c162478b3cb9ff14042324ac185d7aaeddf019a5b95`。v003 與 v002 的 release validator 均通過，v002 無 diff，`git diff --check` 通過；未建立新 Study，未執行 Historical Evaluation。治理文件已更新為 v003 Active、v002 Superseded。
