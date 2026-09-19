@@ -1,0 +1,9 @@
+approved_at: '2026-09-19T03:02:44.000000Z'
+approved_by: william
+release_manifest_digest: d79d3036538445803f18034e5f20eefceae18ec85e1a557bc8ab21cb7249b1b2
+schema_version: 1
+test_report_digest: e8d44800a834e13fc0ea7b3cde428b327984fd8976750bb006588f64a1a38848
+test_report_path: release-test-report.yml
+workflow: strategy-forward-replication-research
+workflow_digest: aff336a2a1c69a6228ab94ea19809b96bc957bce2782f3dc8db40196282f2aa1
+workflow_version: v002

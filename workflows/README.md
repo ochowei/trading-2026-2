@@ -11,7 +11,17 @@
 
 因此，`study-terminal` 只會終止單一 Study；它不會封存所屬 Workflow。反過來，Workflow 進入 `Superseded` 或 `Archived`，也不會改寫或終止既有 Study。
 
-## Strategy Forward Replication Research v001
+## Strategy Forward Replication Research v002（目前 Active）
+
+詳細內容請參考 [`strategy-forward-replication-research--v002/README.md`](strategy-forward-replication-research--v002/README.md)。這是目前接受新 Study 的 Workflow Package；它以自己的 rules、schemas、validator、writer、policies、tests 與 Release Record 綁定完整研究語意。
+
+- [`release.yml`](strategy-forward-replication-research--v002/release.yml)：Trusted Approver 建立的正式啟用紀錄。
+- [`release-manifest.yml`](strategy-forward-replication-research--v002/release-manifest.yml)：v002 權威檔案與 SHA-256 數位指紋清單。
+- [`release-test-report.yml`](strategy-forward-replication-research--v002/release-test-report.yml)：v002 發布前測試與完整性驗證報告。
+
+既有 v001 Study 不會自動搬遷或重跑；v001 已停止接受新的 Study，狀態為 `Superseded`。
+
+## Strategy Forward Replication Research v001（Superseded）
 
 詳細內容請參考 [`strategy-forward-replication-research--v001/README.md`](strategy-forward-replication-research--v001/README.md)。這個 Workflow Package 採用自包含設計，把研究規則、程式碼、設定、測試與實際案例放在同一層目錄中管理。正式 Lifecycle 會從 Study 建立一路走到 Historical Evaluation，最後以獨立的 Study Terminal 事件結束；Historical Evaluation 的 `pass` 不代表其他未定義的穩健度或回放檢查：
 
