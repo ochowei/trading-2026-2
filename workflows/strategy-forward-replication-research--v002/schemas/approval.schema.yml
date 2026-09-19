@@ -1,0 +1,55 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  actor_id:
+    minLength: 1
+    type: string
+  approved_at:
+    minLength: 1
+    type: string
+  basis:
+    minLength: 1
+    type: string
+  bindings:
+    additionalProperties: false
+    properties:
+      preregistration_digest:
+        format: sha256
+        type: string
+      source_bundle_digest:
+        format: sha256
+        type: string
+      study_id:
+        minLength: 1
+        type: string
+      workflow_version:
+        const: v002
+    required:
+      - study_id
+      - workflow_version
+      - source_bundle_digest
+      - preregistration_digest
+    type: object
+  candidate_freeze_digest:
+    format: sha256
+    type: string
+  decision:
+    const: approved
+  role:
+    enum:
+      - trusted-approver
+      - 超級管理者
+  scope:
+    enum:
+      - preregistration
+      - development-only
+      - historical-evaluation-only
+required:
+  - decision
+  - actor_id
+  - role
+  - approved_at
+  - basis
+  - scope
+  - bindings
+type: object

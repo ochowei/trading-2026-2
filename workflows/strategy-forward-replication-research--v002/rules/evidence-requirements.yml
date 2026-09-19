@@ -1,0 +1,26 @@
+legacy_development_binding_exempt_workflow_digests: []
+legacy_metric_shape_workflow_digests: []
+required_creation_proofs:
+  - prepare-report
+  - preregistration-approval
+  - development-authorization
+required_stage_evidence:
+  - development
+  - candidate-freeze
+  - historical-evaluation
+required_trial_artifacts:
+  - inputs
+  - candidate
+  - baseline
+  - publication
+schema_version: 1
+terminal_bindings:
+  - event_chain_head_digest
+  - development_evidence_digest
+  - preregistration_digest
+  - trial_registry_digest
+  - candidate_freeze_digest
+  - historical_evaluation_digest
+  - workflow_digest
+  - policy_set_digest
+  - source_bundle_digest
