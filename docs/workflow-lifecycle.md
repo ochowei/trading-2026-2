@@ -139,6 +139,12 @@ Trusted Approver 必須檢視 Release Candidate 的規則、測試報告、manif
 
 ## 相關權威文件
 
+### Study 核准機制的後繼版變更
+
+2026-09-19 制定 [以明確派工取代 Study 人工核准](plans/study-explicit-assignment-lifecycle.md)。後繼版本應移除 Study 的預先登記核准、Development 授權及歷史評估核准文件，改以登記事實、執行開始事件與既有明確派工驅動；不得自動填入 approved。預先登記、內容指紋、角色與資料隔離、候選資格及一次性歷史評估限制全部保留。
+
+這項規格不改變上表的發布狀態，不修改已發布 v002，也不取消 Workflow Release 核准。由 workflow 執行者依規格建立後繼版本並完成驗證與發布流程，既有 Study 留在原版。
+
 - [Workflow Package 說明](../workflows/README.md)
 - [v001 Workflow Package README](../workflows/strategy-forward-replication-research--v001/README.md)
 - [Workflow 定義](../workflows/strategy-forward-replication-research--v001/workflow.yml)
