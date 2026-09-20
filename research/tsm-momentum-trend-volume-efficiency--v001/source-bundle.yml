@@ -1,0 +1,26 @@
+files:
+  - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+    path: pyproject.toml
+  - digest: 3d22864157fa66e4110936162815657acb68e9c4d1da1d2388a85a3a73c7ed84
+    path: research/tsm-momentum-trend-volume-efficiency--v001/assignment.yml
+  - digest: 18c2da05db61018da9742e071611140c5dee22f049ddbb367bdb25d3127842fe
+    path: research/tsm-momentum-trend-volume-efficiency--v001/candidate-definition.yml
+  - digest: f21638bae4fed24061934d378e40fdb47527bbd2c8b3844d4a9c9b411fbe6142
+    path: research/tsm-momentum-trend-volume-efficiency--v001/implementation-contract.yml
+  - digest: e1e9d471d21cee4c730891d65bf7a6ca2df5a54e4e4ff37697aaeab12dec2fa4
+    path: research/tsm-momentum-trend-volume-efficiency--v001/preregistration.yml
+  - digest: 7f674ae75d7874bd23cef8630e8545a34f37cd2e9911d8740b236d091a05cc5e
+    path: research/tsm-momentum-trend-volume-efficiency--v001/qualification-spec.yml
+  - digest: 0d2e4bea963d65ddc71a3f429abd99f8f98e2ff3f5f820da2340b952a6fa3eb6
+    path: research/tsm-momentum-trend-volume-efficiency--v001/run_development.py
+  - digest: 7cdb0f3d0db68aedc5cc3ae8fec5e4aa6b14553b693b646f93a57e2abfc2ff55
+    path: research/tsm-momentum-trend-volume-efficiency--v001/runner-contract.yml
+  - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+    path: src/trading_2026_2/__init__.py
+  - digest: 72e11ed0d0d5f2a9ff194b62cc005332d3e7d412032426afcf1a03f1ef8f4027
+    path: src/trading_2026_2/tsm_momentum_trend_volume_efficiency_v001.py
+  - digest: 8f7444b70e3976749bd367745d9a6c7eb0c45ce1f6601f349f9a3008e9877b66
+    path: tests/test_tsm_momentum_trend_volume_efficiency_v001.py
+  - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+    path: uv.lock
+schema_version: 1

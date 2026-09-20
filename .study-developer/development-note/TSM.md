@@ -1797,3 +1797,19 @@
 **下一輪（單一主要變更）**：不在本 Study 內調參或重跑；若要續研，只建立一個事前固定的「吸收狀態覆蓋」新 Study，先保留 1.20 倍與 0.5% 定義，僅改變吸收觀察窗口或另立明確替代機制。成功條件是 evidence valid、candidate 至少 20 筆且覆蓋 3 年、全部 formal gates 通過，並要求 stress bootstrap 正報酬比至少 0.80、每個 leave-one-year-out 的 stress PF>1.00 且報酬>0；任一失敗即停止 freeze。不得以本輪 5 筆正報酬反向選門檻。
 
 **來源與盲讀聲明**：實際讀取 `workflows/strategy-forward-replication-research--v003/studies/tsm-momentum-trend-volume-absorption--v001/manifests/preregistration.yml`、`manifests/source-bundle.yml`、`manifests/prepare-report.yml`；`evidence/trials/tsm-momentum-trend-volume-absorption-v001/{publication,candidate,baseline,inputs}.yml`；`research/tsm-momentum-trend-volume-absorption--v001/{assignment,candidate-definition,development-plan,freeze-plan,implementation-contract,preregistration,qualification-spec,development-trial-inputs,runner-contract,source-bundle}.yml`、`research/tsm-momentum-trend-volume-absorption--v001/run_development.py`；`src/trading_2026_2/tsm_momentum_trend_volume_absorption_v001.py`；`tests/test_tsm_momentum_trend_volume_absorption_v001.py`。未讀取或使用 `historical-evaluation-artifacts/`、任何正式 Evaluation／Terminal 結果、`study.yml`、events、journals、operations/runtime 或 Git 歷史；未驗證完整事件鏈及實際凍結狀態。未執行 Historical Evaluation、Terminal、challenge 或 replay。
+
+## `tsm-momentum-trend-volume-efficiency--v001`｜`2026-09-20`
+
+- 成果卡：`failed`；唯一 Development Trial evidence 為 `valid`，但候選只完成 6 筆交易，未達 20 筆 formal gate。
+- 假說與變更：上升趨勢中，訊號日前五個已完成 session 的成交量若集中在較大的日內高低價活動，成交量加權日內區間／未加權日內區間至少 1.15，應先於當日價格加速；baseline 固定同一價格、成本、風險與執行規則，只關閉此量價效率條件。這不同於既有五日分散量能壓力、三日量能脈衝、吸收型高量小收盤變動與事件後固定價突破。
+
+| Trial／模型 | 情境 | evidence／交易數／年度 | 報酬 | PF | 最大回撤 | formal gates／targets |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| candidate | Development/base | valid／6／3（2015、2016、2018） | 5.208% | 3.427 | 1.999% | 只失敗 `completed_trades`；targets 未登記 |
+| candidate | Development/stress | valid／6／3 | 3.930% | 2.853 | 2.000% | 其餘 formal gates 通過；targets 未登記 |
+| baseline | Development/base | valid／16／5（2014–2018） | -0.573% | 0.956 | 4.548% | 報酬、PF、交易數及多項 stress 穩健性 gate 失敗 |
+| baseline | Development/stress | valid／16／5 | -2.793% | 0.780 | 4.832% | 報酬、PF、交易數及多項 stress gate 失敗 |
+
+- 結論與限制：候選的正報酬、PF、回撤、單筆損失、bootstrap 與 leave-one-year-out 結果均通過相關門檻，但樣本數不足使 formal Development gates 失敗；不能把三個年度的正結果宣稱為穩健優勢。candidate freeze qualification 不具資格（6<20），freeze-readiness 與 freeze 均未完成；checker 回報 candidate freeze status 為「尚不能判斷」。Provenance 只完成 prepare、source bundle、trial input 與 publication binding 驗證，未形成凍結 provenance 事件。
+- 下一輪：停止本 Study，不在原 Study 內調參或重跑；若續研，另立新 Study，只能事前固定一個新的量價效率機制，其餘價格、成本、風控、持倉、執行與 baseline 固定，並要求至少 20 筆、3 個年度及全部 formal gates 通過。
+- 來源與盲讀聲明：實際讀取 `research/tsm-momentum-trend-volume-efficiency--v001/{assignment,candidate-definition,implementation-contract,preregistration,qualification-spec,development-plan,development-trial-inputs,runner-contract,source-bundle}.yml`、`research/tsm-momentum-trend-volume-efficiency--v001/run_development.py`、`workflows/strategy-forward-replication-research--v003/studies/tsm-momentum-trend-volume-efficiency--v001/manifests/{preregistration,source-bundle,prepare-report}.yml`、`evidence/trials/tsm-momentum-trend-volume-efficiency-v001/{publication,candidate,baseline,inputs}.yml`、`src/trading_2026_2/tsm_momentum_trend_volume_efficiency_v001.py` 與 `tests/test_tsm_momentum_trend_volume_efficiency_v001.py`。未讀取或引用 `historical-evaluation-artifacts/`、正式 Evaluation／Terminal 結果、study.yml、events、journals 或 operations/runtime；未執行 Historical Evaluation、Terminal、challenge 或 replay。

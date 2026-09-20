@@ -1,0 +1,18 @@
+actor_id: codex-study-developer-task-006
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 21ff55a26918e5d36885c8ebb9c7c0c7a5396231a9d488528daf7e9aaa9d3b4a
+  workflow_digest: 8b1425a9b418db86b6db2c162478b3cb9ff14042324ac185d7aaeddf019a5b95
+event_type: preregistration-recorded
+execution:
+  assignment_digest: 3d22864157fa66e4110936162815657acb68e9c4d1da1d2388a85a3a73c7ed84
+  assignment_path: manifests/assignments/3d22864157fa66e4110936162815657acb68e9c4d1da1d2388a85a3a73c7ed84.yml
+  role: study 開發者
+occurred_at: '2026-09-20T08:38:08.123716Z'
+payload:
+  preregistration_digest: e1e9d471d21cee4c730891d65bf7a6ca2df5a54e4e4ff37697aaeab12dec2fa4
+  preregistration_path: manifests/preregistration.yml
+previous_event_digest: 1221a839ca1908fa7dc580aa243e429fe046a0e1162b00d7ecdfa6687f8f08b8
+schema_version: 1
+sequence: 2
+study_id: tsm-momentum-trend-volume-efficiency--v001
