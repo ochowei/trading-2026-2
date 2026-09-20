@@ -1,0 +1,24 @@
+actor_id: codex-study-developer-task-007
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 826681fb7fb5c7c75fc0ac4d1fb0ef8f83acadb8a62cf64395f59f5c9389da9f
+  workflow_digest: 8b1425a9b418db86b6db2c162478b3cb9ff14042324ac185d7aaeddf019a5b95
+event_type: trial-recorded
+execution:
+  assignment_digest: b7360cf59029c07aab5c35286d99ad9eb8b0701e253afcc338bd1c0fd70be716
+  assignment_path: manifests/assignments/b7360cf59029c07aab5c35286d99ad9eb8b0701e253afcc338bd1c0fd70be716.yml
+  role: study 開發者
+occurred_at: '2026-09-20T09:37:26.613603Z'
+payload:
+  development_evidence_digest: e99f66bf8479d9a377346d18b09735fa8844d03456146cebe9129d267f9203a8
+  development_evidence_path: evidence/trials/tsm-momentum-trend-volume-close-acceptance-v001/candidate.yml
+  inputs_digest: be0ce76a2d29a8430f428b8ecd2acc08cb6d7bda7d3a45a21bd145d1497ee50e
+  inputs_path: evidence/trials/tsm-momentum-trend-volume-close-acceptance-v001/inputs.yml
+  publication_digest: 24b283c847ec3572d1e7562dfa6d2f91b800bb05ff249f3d7f776270df603b92
+  publication_path: evidence/trials/tsm-momentum-trend-volume-close-acceptance-v001/publication.yml
+  status: completed
+  trial_id: tsm-momentum-trend-volume-close-acceptance-v001
+previous_event_digest: 4fc53354c09ee883f4acf0f3388833960015c8c1d9d7e2d7fe73b719db4c8ccf
+schema_version: 1
+sequence: 4
+study_id: tsm-momentum-trend-volume-close-acceptance--v001

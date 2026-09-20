@@ -1,0 +1,26 @@
+actor_id: codex-study-developer-task-007
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 826681fb7fb5c7c75fc0ac4d1fb0ef8f83acadb8a62cf64395f59f5c9389da9f
+  workflow_digest: 8b1425a9b418db86b6db2c162478b3cb9ff14042324ac185d7aaeddf019a5b95
+event_type: study-created
+execution:
+  assignment_digest: b7360cf59029c07aab5c35286d99ad9eb8b0701e253afcc338bd1c0fd70be716
+  assignment_path: manifests/assignments/b7360cf59029c07aab5c35286d99ad9eb8b0701e253afcc338bd1c0fd70be716.yml
+  role: study 開發者
+occurred_at: '2026-09-20T09:37:24.654831Z'
+payload:
+  create_plan_digest: b6158a749983c735b751a5cd8ac25390abc0d03e82d1aac2a7422f35d390be88
+  create_plan_path: manifests/create-plan.yml
+  experiment_family: tsm-momentum-trend-volume-close-acceptance
+  historical_evaluation_operator: not-assigned-development-scope
+  prepare_report_digest: 1fc3fc442a4f6626a0fafb05aa8ed42bec096db9d98e59d3c1324957807e2f32
+  prepare_report_path: manifests/prepare-report.yml
+  research_owner: codex-study-developer-task-007
+  research_round_id: strategy-forward-replication-research-v003-tsm-2026-09-task-007
+  source_bundle_digest: 826681fb7fb5c7c75fc0ac4d1fb0ef8f83acadb8a62cf64395f59f5c9389da9f
+  source_bundle_path: manifests/source-bundle.yml
+previous_event_digest: null
+schema_version: 1
+sequence: 1
+study_id: tsm-momentum-trend-volume-close-acceptance--v001

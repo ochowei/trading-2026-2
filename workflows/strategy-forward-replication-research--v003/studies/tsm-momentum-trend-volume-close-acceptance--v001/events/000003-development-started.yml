@@ -1,0 +1,17 @@
+actor_id: codex-study-developer-task-007
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 826681fb7fb5c7c75fc0ac4d1fb0ef8f83acadb8a62cf64395f59f5c9389da9f
+  workflow_digest: 8b1425a9b418db86b6db2c162478b3cb9ff14042324ac185d7aaeddf019a5b95
+event_type: development-started
+execution:
+  assignment_digest: b7360cf59029c07aab5c35286d99ad9eb8b0701e253afcc338bd1c0fd70be716
+  assignment_path: manifests/assignments/b7360cf59029c07aab5c35286d99ad9eb8b0701e253afcc338bd1c0fd70be716.yml
+  role: study 開發者
+occurred_at: '2026-09-20T09:37:24.654831Z'
+payload:
+  operation_id: cfbfeea47e77d8c3e5301a14e3ed8ee181a94af6a83a5b28b5ea0d1156a0d777
+previous_event_digest: c049641f2fba0e2addcbd166530b853902c6a1156202d275ad211ff15472738a
+schema_version: 1
+sequence: 3
+study_id: tsm-momentum-trend-volume-close-acceptance--v001

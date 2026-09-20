@@ -1,0 +1,27 @@
+actor: codex-study-developer-task-007
+provenance:
+  note: 僅記錄 Development-to-freeze 所接觸的固定程式、設定、離線資料與 bindings；未讀取或引用 historical-evaluation-artifacts，亦未執行 Historical Evaluation、Terminal、challenge 或 replay。
+  sources:
+    - digest: b7b22cc038ce690f2123fa900d57258b7ea0b62a11e7c2480b761cdd6424aa54
+      path: research/tsm-momentum-trend-volume-close-acceptance--v001/preregistration.yml
+      purpose: 固定 preregistration、策略機制與 Development gates
+    - digest: d78ca271661db90fca213dac09d773113ab8a6a9a5cb986b0699916a30e2e55d
+      path: research/tsm-momentum-trend-volume-close-acceptance--v001/candidate-definition.yml
+      purpose: 固定 candidate、baseline 與共同執行邊界
+    - digest: 6ef478a80fac4fa306cd14b4c9b09ab1da33b61481eab1a5388158054d9bc3d5
+      path: research/tsm-momentum-trend-volume-close-acceptance--v001/implementation-contract.yml
+      purpose: 固定指標、lookback、先前 session 邊界與 runner 實作對照
+    - digest: 826681fb7fb5c7c75fc0ac4d1fb0ef8f83acadb8a62cf64395f59f5c9389da9f
+      path: research/tsm-momentum-trend-volume-close-acceptance--v001/source-bundle.yml
+      purpose: 固定 Source Bundle 與 digest bindings
+    - digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+      path: research/tsm-momentum-trend-volume-close-acceptance--v001/data/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+      purpose: 固定 Development warmup／performance input；只含 2013 warmup 與 2014–2018 Development
+  status: verified-clean
+snapshot_set:
+  schema_version: 1
+  snapshots:
+    - role: warmup-only
+    - role: development
+    - role: quarantine
+    - role: historical-evaluation

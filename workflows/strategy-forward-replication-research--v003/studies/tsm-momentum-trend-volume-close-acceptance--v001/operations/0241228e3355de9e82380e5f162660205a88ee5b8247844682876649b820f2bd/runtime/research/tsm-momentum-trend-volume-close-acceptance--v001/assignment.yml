@@ -1,0 +1,9 @@
+assignee: codex-study-developer-task-007
+assigner: 專案管理者（TASK-007）
+instruction: 根據 .study-developer/development-note/TSM.md，在 strategy-forward-replication-research--v003 中提出一個過去未嘗試的「動能趨勢＋量先價行」假說，固定 preregistration、candidate／baseline、implementation、runner、data bindings 與 provenance，完成唯一 Development trial、evidence validation 及規則允許的 freeze-readiness／freeze 嘗試；只做 Development-to-freeze，不執行 Historical Evaluation、Terminal、challenge 或 replay，並在完成後將 Development 成果卡以繁體中文 append 至 TSM.md。
+role: study 開發者
+schema_version: 1
+scope: development-to-freeze
+source_id: PROJECT_KANBAN:TASK-007
+study_id: tsm-momentum-trend-volume-close-acceptance--v001
+workflow_version: v003

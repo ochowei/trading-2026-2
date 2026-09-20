@@ -1,0 +1,202 @@
+creator: codex-study-developer-task-007
+development_actor: codex-study-developer-task-007
+identity:
+  experiment_family: tsm-momentum-trend-volume-close-acceptance
+  historical_evaluation_operator: not-assigned-development-scope
+  research_owner: codex-study-developer-task-007
+  research_round_id: strategy-forward-replication-research-v003-tsm-2026-09-task-007
+preregistration:
+  baseline_definition:
+    baseline_id: tsm-momentum-trend-volume-close-acceptance-baseline-v001
+    candidate_family: tsm-momentum-trend-volume-close-acceptance-v001
+    execution_is_identical: true
+    family: trend-momentum-volume-close-acceptance
+    objectively_simpler_because: baseline 保留相同的趨勢、價格加速、RSI、持倉、成本、風險、停損停利與冷卻規則，但關閉「訊號日前五個 session 的量能加權收盤承接」條件；因此它是同一價格路徑下不使用本量價先行機制的明確控制組。
+    simpler_rule: 收盤相對 SMA(20) 不低於固定下限、SMA(20) 相對五個 session 前不下彎、價格加速至少 2%、RSI(2) <= 70，且符合相同執行規則；不要求量能加權收盤承接。
+  complete_candidate_family:
+    - tsm-momentum-trend-volume-close-acceptance-v001
+  eligibility_rules:
+    accepted_signal:
+      cooldown:
+        clock_anchor: completed-position-exit
+        minimum_completed_session_steps_after_exit: 5
+        position_must_be_flat: true
+      decision_time: completed-session-close
+      mean_reversion:
+        close_vs_sma20_gap_minimum: '-0.10'
+        close_vs_sma20_operator: '>='
+        rsi_length: 2
+        rsi_operator: <=
+        rsi_value: '70'
+        sma_length: 20
+      momentum_trend:
+        price_acceleration_lookback: 1
+        price_acceleration_minimum: '0.02'
+        price_to_sma_floor: '0.90'
+        trend_sma_lag_sessions: 5
+        trend_sma_ratio_floor: '0.95'
+      price_direction_confirmation:
+        close_above_prior_close: true
+      symbol: TSM
+      volume_close_acceptance:
+        close_location_formula: (Close-Low)/(High-Low), zero-range=0.5
+        close_location_spread_minimum: '0.01'
+        enabled: true
+        lookback_sessions: 5
+        uses_prior_sessions_only: true
+        volume_weighted_close_location_formula: sum(Volume*close_location)/sum(Volume)
+        volume_weighted_close_location_minimum: '0.48'
+      volume_leads_price:
+        close_acceptance_is_before_signal: true
+        enabled: true
+        prior_session_window: 5
+        volume_average_length: 20
+        volume_ratio_minimum: '1.05'
+        volume_ratio_operator: '>='
+        volume_ratio_value: '1.05'
+    costs:
+      base:
+        fee_per_side_bps: '1'
+        slippage_per_side_bps: '5'
+      stress:
+        fee_per_side_bps: '2'
+        slippage_per_side_bps: '20'
+    development_diagnostics:
+      block_bootstrap:
+        block_lengths:
+          - 3
+          - 5
+        maximum_stress_drawdown_above_10pct_ratio: '0.10'
+        minimum_stress_positive_return_ratio: '0.80'
+        repetitions: 50000
+        seed: 20260902
+        seed_application: exact-same-seed-for-each-block-length
+      leave_one_signal_year_out:
+        maximum_stress_drawdown: '0.10'
+        minimum_stress_profit_factor: '1.00'
+        minimum_stress_return: '0'
+      signal_year_breakdown: true
+    development_gates:
+      base_profit_factor:
+        operator: '>'
+        value: '1.10'
+      base_return:
+        operator: '>'
+        value: '0'
+      completed_trades:
+        operator: '>='
+        value: 20
+      maximum_realized_trade_loss_fraction:
+        operator: <=
+        value: '0.04'
+      maximum_stress_block_bootstrap_drawdown_above_10pct_ratio:
+        operator: <=
+        value: '0.10'
+      maximum_stress_leave_one_year_out_drawdown:
+        operator: <=
+        value: '0.10'
+      minimum_stress_block_bootstrap_positive_return_ratio:
+        operator: '>='
+        value: '0.80'
+      minimum_stress_leave_one_year_out_profit_factor:
+        operator: '>'
+        value: '1.00'
+      minimum_stress_leave_one_year_out_return:
+        operator: '>'
+        value: '0'
+      stress_maximum_drawdown:
+        operator: <=
+        value: '0.10'
+      stress_profit_factor:
+        operator: '>'
+        value: '1.00'
+      stress_return:
+        operator: '>'
+        value: '0'
+      traded_years:
+        operator: '>='
+        value: 3
+    execution:
+      cooldown:
+        anchor: completed-position-exit
+        minimum_completed_session_steps_after_exit: 5
+      decision_time: completed-session-close
+      entry: next-XNYS-open
+      gap_fill: stop-gap-at-open-target-gap-at-open
+      holding_period: next-open-after-10-complete-sessions
+      intrabar_ambiguity: adverse-stop-first
+      position_sizing:
+        cash_cap: available-cash-no-borrowing
+        modeled_stop_includes_costs: true
+        risk_fraction_of_pre_entry_equity: '0.02'
+        shares: maximum-integer-shares-within-risk-and-cash-caps
+      stop:
+        level_from_raw_entry_open: '-0.04'
+        order: STOP_MARKET
+        time_in_force: GTC
+      target:
+        level_from_raw_entry_open: '0.04'
+        order: LIMIT
+        reissued_each_open_position_session: true
+        time_in_force: DAY
+    gate_policy: formal Development gates 與研究目標分開判定；任一 formal gate 或事前登記的新穎性識別條件失敗，都保留合法 evidence 並停止在 Development，不得看結果後調參或強行凍結候選。
+    novelty_and_identifiability:
+      development_identifiability: 指標合約明定收盤位置、成交量與量價差值只讀取訊號日前資料；候選與 baseline 使用同一份 warmup／Development OHLCV、同一成本和持倉規則，且 baseline 只關閉量能加權收盤承接。逐筆 raw trade、年度分布、bootstrap 與 leave-one-year-out 可用來識別本機制，而不是資料、成交或事後調參造成的差異。
+      mechanism_difference: volume-lead 是五日總量集中加上上漲／持平日量能占比，volume-ramp 是三日內至少一次相對二十日均量的量能脈衝，volume-absorption 是高量但收盤絕對變動很小的吸收狀態，volume-efficiency 是高量日承擔較大日內高低價活動的比率；本候選改測成交量是否先集中在「收盤位於日內區間高端」的 session，使用量能加權收盤位置減去未加權收盤位置，並不要求大日內振幅或低收盤變動。它也不同於 v024 的單次事件狀態與事件後固定價突破。
+      this_study_path: 本 Study 在訊號日前五個已完成 session 計算 close_location=(Close-Low)/(High-Low)，要求成交量加權 close_location 至少 0.65、量能加權與未加權位置差至少 0.10，且五日平均相對此前二十日量至少 1.05；當日再以固定趨勢、均線下限、RSI、收紅與至少 2% 價格加速確認，下一日 open 進場。所有量價承接欄位只讀取先前 session。
+      v024_registered_path: v024 已登記上升趨勢中的單次放量事件，事件後五日內首次嚴格突破 max(previous_five_session_high,event_day_high) 固定價位；本候選不建立事件狀態、不使用事件日高點，也不等待固定價突破。
+    source_and_adjustment:
+      adjustment_policy: Yahoo auto_adjust，OHLC 全部使用同一調整基礎。
+      calendar: XNYS
+      interval: 1d
+      provider: yahoo
+      timezone: America/New_York
+  evaluation_gates:
+    base_compounded_return:
+      operator: '>'
+      value: '0'
+    base_profit_factor:
+      operator: '>'
+      value: '1.10'
+    completed_trades:
+      operator: '>='
+      value: 20
+    family_wise_confidence:
+      operator: '>='
+      value: '0.90'
+    maximum_fold_positive_profit_concentration:
+      operator: <=
+      value: '0.50'
+    maximum_fold_trade_concentration:
+      operator: <=
+      value: '0.50'
+    maximum_realized_trade_loss_fraction:
+      operator: <=
+      value: '0.04'
+    positive_traded_fold_ratio:
+      operator: '>='
+      value: '0.60'
+    stress_max_drawdown:
+      operator: <=
+      value: '0.10'
+    stress_profit_factor:
+      operator: '>'
+      value: '1.00'
+    stress_return:
+      operator: '>'
+      value: '0'
+    traded_folds:
+      operator: '>='
+      value: 3
+  fold_warmup_sessions: 25
+  hypothesis: 在 TSM 的上升趨勢中，若訊號日前五個已完成 XNYS session 的成交量先集中在日內收盤位置偏高的 session，且成交量加權 close_location 至少 0.65、加權與未加權收盤位置差至少 0.10，這種「量能加權收盤承接」應先於價格釋放；當日趨勢仍在、價格相對均線未低於固定下限、收盤高於前收並出現至少 2% 的一日價格加速時，下一個 session open 進場並持有最多十個完整 session，可能捕捉動能延續。這不是 volume-lead 的五日分散量能壓力與上漲量占比，不是 volume-ramp 的三日單次量能脈衝，不是 volume-absorption 的高量小收盤變動，也不是 volume-efficiency 的成交量加權日內高低價活動比率；同樣不建立 v024 的單次事件狀態或事件後固定價突破。baseline 保留完全相同的價格、成本、風險、持倉與退出規則，只關閉量能加權收盤承接。這個差異、量能只使用先前 session、共同輸入與共同執行均在 Study 開始前固定，故可由 Development raw trades 與事前登記診斷識別。formal gates 或研究目標任一失敗即否證本假說並停止，不得以結果回頭調參。
+  initial_cash: '100000'
+  maximum_holding_sessions: 11
+  maximum_trials: 1
+  selection_rule:
+    eligible_candidate: 唯一 Trial 必須通過全部 Development gates；未通過時不得凍結候選。
+    method: fixed-single-candidate-no-outcome-ranking
+    selected_candidate_id: tsm-momentum-trend-volume-close-acceptance-v001
+  tie_handling:
+    method: not-applicable-single-candidate
+study_id: tsm-momentum-trend-volume-close-acceptance--v001
