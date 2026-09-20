@@ -1813,3 +1813,35 @@
 - 結論與限制：候選的正報酬、PF、回撤、單筆損失、bootstrap 與 leave-one-year-out 結果均通過相關門檻，但樣本數不足使 formal Development gates 失敗；不能把三個年度的正結果宣稱為穩健優勢。candidate freeze qualification 不具資格（6<20），freeze-readiness 與 freeze 均未完成；checker 回報 candidate freeze status 為「尚不能判斷」。Provenance 只完成 prepare、source bundle、trial input 與 publication binding 驗證，未形成凍結 provenance 事件。
 - 下一輪：停止本 Study，不在原 Study 內調參或重跑；若續研，另立新 Study，只能事前固定一個新的量價效率機制，其餘價格、成本、風控、持倉、執行與 baseline 固定，並要求至少 20 筆、3 個年度及全部 formal gates 通過。
 - 來源與盲讀聲明：實際讀取 `research/tsm-momentum-trend-volume-efficiency--v001/{assignment,candidate-definition,implementation-contract,preregistration,qualification-spec,development-plan,development-trial-inputs,runner-contract,source-bundle}.yml`、`research/tsm-momentum-trend-volume-efficiency--v001/run_development.py`、`workflows/strategy-forward-replication-research--v003/studies/tsm-momentum-trend-volume-efficiency--v001/manifests/{preregistration,source-bundle,prepare-report}.yml`、`evidence/trials/tsm-momentum-trend-volume-efficiency-v001/{publication,candidate,baseline,inputs}.yml`、`src/trading_2026_2/tsm_momentum_trend_volume_efficiency_v001.py` 與 `tests/test_tsm_momentum_trend_volume_efficiency_v001.py`。未讀取或引用 `historical-evaluation-artifacts/`、正式 Evaluation／Terminal 結果、study.yml、events、journals 或 operations/runtime；未執行 Historical Evaluation、Terminal、challenge 或 replay。
+
+---
+
+## `tsm-momentum-trend-volume-close-acceptance--v001`｜`2026-09-20`
+
+- 成果卡：`failed`，原因：唯一 Trial 的 candidate／baseline Development evidence 完整且 `valid`，但 candidate 的 `completed_trades` gate 失敗。
+- Formal gates：candidate 僅失敗 `completed_trades`（4<20）；baseline 失敗 base／stress 報酬與 PF、交易數，以及 stress bootstrap 正報酬比與 leave-one-year-out PF／報酬。Research targets：`not_registered`。
+- Evidence validity：Trial `tsm-momentum-trend-volume-close-acceptance-v001` 的 publication、candidate、baseline、inputs 綁定可驗證，candidate／baseline 均有 base 與 stress evidence。
+- Candidate freeze eligibility：candidate `不具資格`，原因為 4 筆完成交易未達 20 筆；baseline 為控制組、不適用 candidate 資格；`candidate_freeze_status`：`尚不能判斷`。
+- Provenance：prepare、Source Bundle、固定 Development input、runner、engine 與 Trial publication bindings 已由 v003 checker 驗證；成果卡只作 Development 文件記載，未以此宣稱已完成 provenance 事件或實際凍結。
+
+**研究問題與主要變更**：本 Study 測試量能是否先集中在訊號日前五個已完成 session 的收盤位置，形成「量能加權收盤承接」再接上當日價格加速。結構化 preregistration 與 implementation contract 固定 `weighted close location >= 0.48`、加權減未加權位置差 `>= 0.01`，另要求五日平均量能比至少 1.05；baseline 保留同一價格、成本、風險、持倉與退出規則，只關閉此承接條件。它不同於 volume-lead 的總量壓力與上漲量占比、volume-ramp 的單次量能脈衝、volume-absorption 的高量小變動、volume-efficiency 的日內區間效率，也不建立 v024 的事件狀態與固定價突破；承接欄位只讀取訊號日前資料。
+
+| Trial／模型 | 情境 | 證據狀態／原因 | 交易數／年度 | 報酬 | PF（獲利因子） | 最大回撤 | formal gate／target |
+| --- | --- | --- | ---: | ---: | ---: | ---: | --- |
+| `tsm-momentum-trend-volume-close-acceptance-v001`／candidate | Development/base | valid；完整 evidence | 4／4（2014、2015、2016、2018） | 2.7972% | 2.3142 | 2.1284% | 僅 `completed_trades` 失敗；target `not_registered` |
+| `tsm-momentum-trend-volume-close-acceptance-v001`／candidate | Development/stress | valid；同一 Trial 的壓力成本 evidence | 4／4 | 2.0084% | 1.9478 | 2.1191% | 僅 `completed_trades` 失敗；target `not_registered` |
+| `tsm-momentum-trend-volume-close-acceptance-v001`／baseline | Development/base | valid；控制組完整產出 | 16／5（2014–2018） | -0.5729% | 0.9556 | 4.5483% | base 報酬、PF、交易數失敗；target `not_registered` |
+| `tsm-momentum-trend-volume-close-acceptance-v001`／baseline | Development/stress | valid；控制組壓力 evidence | 16／5 | -2.7935% | 0.7800 | 4.8322% | 交易數、stress 報酬／PF、bootstrap 正報酬比、leave-one-year-out PF／報酬失敗；target `not_registered` |
+
+**主要發現（最多 3 項）**：已確認 candidate 的 base／stress 報酬、PF、回撤、單筆損失與其餘穩健性 gate 通過，但 4 筆交易不足以取得 freeze 資格。已確認 baseline 在同一價格路徑下有 16 筆、5 年交易，卻未通過核心報酬與 stress 穩健性門檻，因此本輪不能把 candidate 的正報酬直接解讀為新增機制的因果優勢。已確認量能承接規則與 baseline 差異可由共同 input、逐筆交易及事前 runner bindings 識別；尚不能判斷小樣本結果能否跨期間重現。
+
+**限制（最多 2 項）**：candidate 只有 4 筆交易，形式上無法滿足 20 筆門檻；targets 未登記，不能補寫成研究目標通過。另有一項規格一致性限制：immutable preregistration 的文字敘述仍留有原草案的 `0.65／0.10`，而結構化欄位、implementation contract 與實際 runner 使用 `0.48／0.01`；本 Study 已發布 evidence，不能回寫或重跑修正。
+
+**下一輪（單一主要變更）**：不在本 Study 內調參或重跑；若續研，另立 Study，只改動量能收盤承接門檻家族，並在同一份 preregistration 文字與結構化欄位中保持一致，其餘價格、成本、執行與 baseline 固定。成功條件是 evidence valid、至少 20 筆且 3 個交易年度、全部 formal gates 通過；任一 gate 失敗或 evidence 無效即否證並停止 freeze。
+
+**來源與盲讀聲明**：實際讀取 `workflows/strategy-forward-replication-research--v003/studies/tsm-momentum-trend-volume-close-acceptance--v001/manifests/{preregistration,source-bundle,prepare-report}.yml`、`evidence/trials/tsm-momentum-trend-volume-close-acceptance-v001/{publication,candidate,baseline,inputs}.yml`、`research/tsm-momentum-trend-volume-close-acceptance--v001/{assignment,candidate-definition,implementation-contract,preregistration,qualification-spec,development-plan,development-trial-inputs,runner-contract,source-bundle,create-plan,continuous-plan,freeze-plan}.yml`、`research/tsm-momentum-trend-volume-close-acceptance--v001/run_development.py`、`src/trading_2026_2/tsm_momentum_trend_volume_close_acceptance_v001.py` 與 `tests/test_tsm_momentum_trend_volume_close_acceptance_v001.py`。未讀取或引用 `historical-evaluation-artifacts/`、正式 Historical Evaluation／Terminal 結果；未以 events、journals 或 runtime 內容替代 evidence，未執行 Historical Evaluation、Terminal、challenge 或 replay。
+
+### Parent review 回修更正（2026-09-20）
+
+- 本 Trial 的 canonical tested rule 是結構化 `eligibility_rules.accepted_signal.volume_close_acceptance`、candidate-definition、implementation contract 與 runner／engine 所固定的 `weighted close location >= 0.48`、加權減未加權位置差 `>= 0.01`；evidence bindings 也綁定同一份 preregistration、engine 與 procedure digest。candidate 實際以這組門檻執行，baseline 則關閉該條件。
+- immutable preregistration 的 `novelty_and_identifiability.this_study_path` 與 `hypothesis` 仍寫 `0.65／0.10`；這兩個數字只存在於已發布文字敘述，未被本 Trial 執行。因此本成果與 4 筆 candidate 結果絕不能表述成 `0.65／0.10` 假說的測試結果；該 immutable mismatch 只能保留為限制，不能回寫或藉重跑修正。

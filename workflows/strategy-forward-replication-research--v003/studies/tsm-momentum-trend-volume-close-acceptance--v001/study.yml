@@ -1,0 +1,68 @@
+candidate_freeze: null
+evidence:
+  development: e99f66bf8479d9a377346d18b09735fa8844d03456146cebe9129d267f9203a8
+lifecycle:
+  current_event: trial-recorded
+  event_chain_head_digest: 1b578b648566674b169074f92388a56fa8c33980c8f501d47c68a02ffd5d1ace
+  event_count: 4
+  status: active
+outcome:
+  authority: none
+  status: pending
+preregistration:
+  digest: b7b22cc038ce690f2123fa900d57258b7ea0b62a11e7c2480b761cdd6424aa54
+provenance:
+  status: null
+schema_version: 1
+study:
+  identity:
+    create_plan_digest: b6158a749983c735b751a5cd8ac25390abc0d03e82d1aac2a7422f35d390be88
+    create_plan_path: manifests/create-plan.yml
+    experiment_family: tsm-momentum-trend-volume-close-acceptance
+    historical_evaluation_operator: not-assigned-development-scope
+    prepare_report_digest: 1fc3fc442a4f6626a0fafb05aa8ed42bec096db9d98e59d3c1324957807e2f32
+    prepare_report_path: manifests/prepare-report.yml
+    research_owner: codex-study-developer-task-007
+    research_round_id: strategy-forward-replication-research-v003-tsm-2026-09-task-007
+    source_bundle_digest: 826681fb7fb5c7c75fc0ac4d1fb0ef8f83acadb8a62cf64395f59f5c9389da9f
+    source_bundle_path: manifests/source-bundle.yml
+  study_id: tsm-momentum-trend-volume-close-acceptance--v001
+trial_registry:
+  assessments:
+    tsm-momentum-trend-volume-close-acceptance-v001:
+      actuals:
+        base_profit_factor: '2.314222412749657'
+        base_return: '0.02797155261067639'
+        completed_trades: 4
+        maximum_realized_trade_loss_fraction: '0.02128372818734192'
+        maximum_stress_block_bootstrap_drawdown_above_10pct_ratio: '0.0'
+        maximum_stress_leave_one_year_out_drawdown: '0.02119080115810153'
+        minimum_stress_block_bootstrap_positive_return_ratio: '0.812'
+        minimum_stress_leave_one_year_out_profit_factor: '1.1015791708569085'
+        minimum_stress_leave_one_year_out_return: '0.0021525440114333882'
+        stress_maximum_drawdown: '0.02119080115810153'
+        stress_profit_factor: '1.9477687881097454'
+        stress_return: '0.020083979932688435'
+        traded_years: 4
+      candidate_freeze_eligibility:
+        eligible: false
+        reasons:
+          - completed_trades
+      development_evidence_validity:
+        status: valid
+        validated: true
+      formal_development_gates:
+        failed:
+          - completed_trades
+        status: failed
+      research_targets:
+        failed: []
+        status: not_registered
+  digest: null
+  recorded_trial_count: 1
+  trial_ids:
+    - tsm-momentum-trend-volume-close-acceptance-v001
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 826681fb7fb5c7c75fc0ac4d1fb0ef8f83acadb8a62cf64395f59f5c9389da9f
+  workflow_digest: 8b1425a9b418db86b6db2c162478b3cb9ff14042324ac185d7aaeddf019a5b95

@@ -1,0 +1,42 @@
+actor: codex-study-developer-task-007
+data_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+data_path: research/tsm-momentum-trend-volume-close-acceptance--v001/data/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+trial_inputs:
+  candidate_family: tsm-momentum-trend-volume-close-acceptance-v001
+  candidate_id: tsm-momentum-trend-volume-close-acceptance-v001
+  data_bindings:
+    development_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+    development_path: research/tsm-momentum-trend-volume-close-acceptance--v001/data/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+    warmup_digest: 81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847
+  date_controls:
+    formal_provider_access: false
+    signal_end: '2018-12-31'
+    signal_start: '2014-01-01'
+    warmup_end: '2013-12-31'
+    warmup_start: '2013-01-01'
+  development_diagnostics:
+    block_lengths:
+      - 3
+      - 5
+    bootstrap_seed: 20260902
+    repetitions: 50000
+    seed_application: exact-same-seed-for-each-block-length
+  execution:
+    cooldown_anchor: completed-position-exit
+    cooldown_completed_session_steps_after_exit: 5
+    entry: next-XNYS-open
+    holding_sessions: 10
+    intrabar_ambiguity: adverse-stop-first
+    position_sizing:
+      modeled_stop_includes_costs: true
+      risk_fraction: '0.02'
+    stop_market_gtc: '-0.04'
+    target_limit_day: '0.04'
+  preregistration_digest: b7b22cc038ce690f2123fa900d57258b7ea0b62a11e7c2480b761cdd6424aa54
+  schema_version: 1
+  selected_candidate_id: tsm-momentum-trend-volume-close-acceptance-v001
+  source_bundle_digest: 826681fb7fb5c7c75fc0ac4d1fb0ef8f83acadb8a62cf64395f59f5c9389da9f
+  strategy_engine_digest: 7b6f0078ecbfc7e1356203ae339c99187b91ba3024d3b5a1a806f1c84e700886
+  study_procedure_digest: a488a1e7a3ad708651b4b8f29c6ca55b2718e99fec1c4806591eadadc908c79f
+  study_procedure_path: research/tsm-momentum-trend-volume-close-acceptance--v001/run_development.py
+  trial_id: tsm-momentum-trend-volume-close-acceptance-v001

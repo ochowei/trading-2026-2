@@ -1,0 +1,16 @@
+artifacts:
+  baseline:
+    digest: 12d9b3002be5acf04f7a9ecfd55ef33ee87270eef5eeff0f493ccdf9e0b665b2
+    path: evidence/trials/tsm-momentum-trend-volume-close-acceptance-v001/baseline.yml
+  candidate:
+    digest: e99f66bf8479d9a377346d18b09735fa8844d03456146cebe9129d267f9203a8
+    path: evidence/trials/tsm-momentum-trend-volume-close-acceptance-v001/candidate.yml
+  inputs:
+    digest: be0ce76a2d29a8430f428b8ecd2acc08cb6d7bda7d3a45a21bd145d1497ee50e
+    path: evidence/trials/tsm-momentum-trend-volume-close-acceptance-v001/inputs.yml
+envelope_digest: abee69e90388a62dbfc45e9d0a8d9db70a781259d3e18f4a02d8bcbae2833cfe
+preregistration_digest: b7b22cc038ce690f2123fa900d57258b7ea0b62a11e7c2480b761cdd6424aa54
+schema_version: 1
+source_bundle_digest: 826681fb7fb5c7c75fc0ac4d1fb0ef8f83acadb8a62cf64395f59f5c9389da9f
+study_id: tsm-momentum-trend-volume-close-acceptance--v001
+trial_id: tsm-momentum-trend-volume-close-acceptance-v001
