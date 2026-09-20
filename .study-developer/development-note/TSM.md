@@ -1845,3 +1845,35 @@
 
 - 本 Trial 的 canonical tested rule 是結構化 `eligibility_rules.accepted_signal.volume_close_acceptance`、candidate-definition、implementation contract 與 runner／engine 所固定的 `weighted close location >= 0.48`、加權減未加權位置差 `>= 0.01`；evidence bindings 也綁定同一份 preregistration、engine 與 procedure digest。candidate 實際以這組門檻執行，baseline 則關閉該條件。
 - immutable preregistration 的 `novelty_and_identifiability.this_study_path` 與 `hypothesis` 仍寫 `0.65／0.10`；這兩個數字只存在於已發布文字敘述，未被本 Trial 執行。因此本成果與 4 筆 candidate 結果絕不能表述成 `0.65／0.10` 假說的測試結果；該 immutable mismatch 只能保留為限制，不能回寫或藉重跑修正。
+
+## `tsm-momentum-trend-volume-return-alignment--v001`｜`2026-09-20`
+
+- 成果卡：`failed`；唯一 Trial 的 Development evidence 為 `valid`，但 candidate 與 baseline 均未通過全部 formal gates。
+- Formal gates：candidate 失敗 `completed_trades`、stress bootstrap 正報酬比、stress leave-one-year-out PF／報酬、stress PF／報酬；baseline 另失敗 base PF／報酬。Research targets：`not_registered`。
+- Candidate freeze eligibility：`不具資格`；`candidate_freeze_status`：`尚不能判斷`。Provenance 已核對 prepare／Source Bundle／固定資料／Trial publication bindings；兩次凍結相關嘗試因無合格候選失敗，未產生 candidate-frozen 或完整 provenance 事件。
+
+**研究問題與主要變更**：本 Study 測試「量能加權的五日已完成 session 收盤報酬，是否相對未加權報酬更一致，並先於當日價格加速」；固定加權報酬下限 -2%、加權減未加權至少 0.05 個百分點，baseline 只關閉此條件。它不是既有總量壓力／上漲量占比、三日量能脈衝、高量小變動吸收、日內區間效率、收盤位置承接，也不建立 v024 的事件後固定價突破；所有量價欄位只取訊號日前資料，且 ready index 固定為 25。
+
+| Trial／模型 | 情境 | evidence／交易數／年度 | 報酬 | PF | 最大回撤 | formal gate／target |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| `tsm-momentum-trend-volume-return-alignment-v001`／candidate | Development/base | valid／5／4（2014、2015、2016、2018） | 0.7410% | 1.1797 | 2.2588% | base 核心及回撤 gate 通過；交易數失敗；target 未登記 |
+| 同上／candidate | Development/stress | valid／5／4 | -0.0308% | 0.9925 | 2.5202% | stress PF／報酬、bootstrap 正報酬比 0、leave-one-year-out PF 0.5647／報酬 -1.7882% 失敗 |
+| 同上／baseline | Development/base | valid／16／5（2014–2018） | -0.5729% | 0.9556 | 4.5483% | base 報酬、PF、交易數失敗；target 未登記 |
+| 同上／baseline | Development/stress | valid／16／5 | -2.7935% | 0.7800 | 4.8322% | stress 報酬、PF、bootstrap 與 leave-one-year-out PF／報酬失敗 |
+
+**主要發現（最多 3 項）**：candidate base 為正但只有 5 筆交易，stress 已轉負且 PF 低於 1；因此不足以支持量能報酬一致性的穩健優勢。baseline 在相同價格與執行規則下交易較多，仍全面偏弱，不能把 candidate 的 base 差異當成因果證明。可識別性與 evidence bindings 通過，但樣本量與壓力結果不足以凍結。
+
+**限制（最多 2 項）**：targets 未登記；candidate 未達 20 筆且 freeze 未完成，不能外推正式 Evaluation 或其他期間。下一輪單一主要變更：停止本 Study，不回寫或重跑；若續研，另立 Study，只事前固定一個量能－報酬對齊的明確替代機制，其餘價格、成本、執行與 baseline 固定；任一 formal gate 失敗即停止 freeze。
+
+**來源與盲讀聲明**：實際讀取本 Study 的 `research/tsm-momentum-trend-volume-return-alignment--v001/{assignment,candidate-definition,implementation-contract,preregistration,qualification-spec,development-trial-inputs,runner-contract,source-bundle,create-plan,development-plan,freeze-plan}.yml`、`run_development.py`、新 engine／test，以及 v003 Study 的 `manifests/{preregistration,source-bundle}.yml`、Trial `publication/candidate/baseline/inputs.yml`；另只使用既有 development-only freeze-plan 的 snapshot metadata。未讀取或引用 `historical-evaluation-artifacts/`、正式 Evaluation／Terminal 結果、`study.yml`、events、journals、operations/runtime；未執行 Evaluation、Terminal、challenge 或 replay。requested skill path 的 `build-strategy-study-v003/reference/operations.md` 不存在，改讀同 workflow reference。
+
+### 驗證補充（2026-09-20）
+
+- Trial 完成後的 frozen test bytes 保持不變，以免破壞已發布 Source Bundle／evidence binding；因此完整該 test file 目前有 1 個舊夾具 assertion 不符合本 Trial 登記的 `-0.02` 下限，未藉此修改或重跑 Trial。其餘 3 個直接測試通過；v003 `test_operations.py`／`test_metrics.py` 共 18 項通過。Ruff 的 engine／test 通過，runner 只剩 `I001` import 排序；以 `--ignore I001` 檢查通過。
+
+### Parent review correction（2026-09-20；TASK-008）
+
+- Parent 重新執行 Source Bundle 綁定的直接 pytest，結果為 **3 passed、1 failed**。失敗檔案為 `tests/test_tsm_momentum_trend_volume_return_alignment_v001.py`，測試為 `test_baseline_is_same_price_path_without_return_alignment`：`candidate.iloc[40].volume_return_alignment_lead` 實際為 `True`，但舊 fixture assertion 要求 `False`。這是測試 fixture／測試規格問題，不宣稱完整 pytest 通過，也不改判為 evidence 無效；v003 evidence checker 仍判定 `valid`。
+- Parent 重新執行 Ruff：engine 與 test 通過，但 `research/tsm-momentum-trend-volume-return-alignment--v001/run_development.py` 有 `I001` import 排序錯誤，只有加 `--ignore I001` 才通過；因此不能宣稱 full Ruff passed。事後修正 runner 會改變已綁定 Source Bundle，本 Study 不修正、不改綁定、不重跑。
+- immutable preregistration 的 `novelty_and_identifiability.this_study_path`／`hypothesis` 文字寫的是量能加權五日收盤報酬至少 `0.20%`（`0.002`）；但 candidate-definition、implementation-contract、實際 runner 與已發布 evidence 綁定的 canonical tested rule 是 `volume_weighted_return_minimum=-0.02`，以及 `weighted-minus-unweighted >= 0.0005`。因此本結果不能表述為 `0.20%` 門檻假說的測試結果；此 mismatch 只能列為 immutable 限制，不能回寫 preregistration 或藉重跑修正。
+- 本回修保留成果卡 `failed`、evidence `valid`、candidate freeze `不具資格`、`candidate_freeze_status=尚不能判斷`、targets `not_registered`，且未執行 Evaluation／Terminal／challenge／replay。上述兩項測試／Ruff 驗證缺失與一項 immutable 規格 mismatch 均列為未修復限制；它們不影響已產出的 Development evidence binding，但限制 parent 對「完整測試通過」及「`0.20%` 假說」的結論。未修改任何已發布 source bundle、preregistration、candidate／baseline evidence、manifests、authority、events 或既有 Study 檔案，亦未重跑任何 Trial。

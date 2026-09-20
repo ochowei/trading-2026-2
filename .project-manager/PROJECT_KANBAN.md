@@ -48,7 +48,6 @@
 
 > 已由專案管理者建立並排序，等待負責角色接手的任務。
 
-
 ## 🔨 Doing
 
 > 正由被指派的角色處理中的任務。
@@ -84,6 +83,25 @@
 ## ✅ Done
 
 > 已完成工作並由專案管理者驗收確認的任務。
+
+### [TASK-008] 在 v003 開發下一個未嘗試的 TSM 動能趨勢 × 量先價行假說並撰寫成果卡
+- **狀態**：Done
+- **優先級**：高
+- **負責角色**：study 開發者
+- **執行者**：Rawls（study 開發者 subagent `01a0bee1-350a-73d3-a71d-1487b9f288c9`）
+- **建立日期**：2026-09-20
+- **更新日期**：2026-09-20
+- **依賴／阻塞**：無；v003 Workflow Release 已存在且為 Active
+- **驗收條件**：
+  - 依 `.study-developer/development-note/TSM.md` 與 v003 允許的既有 Development 資料，盤點已嘗試過的動能、趨勢及量先價行機制，提出一個有明確機制差異、確實未嘗試過的新假說；不得只是改版本號、改名或無語義重發。
+  - 依 v003 `development-to-freeze` 流程建立新的 Development Study，固定 preregistration、candidate／baseline、implementation、runner、data bindings、明確派工與 provenance；完成唯一合法的 Development trial、evidence validation，以及規則允許的 freeze-readiness／freeze 嘗試。
+  - 只做 v003 Development；不得執行 Historical Evaluation、Terminal、challenge 或 replay，不得覆寫、刪除或重排既有 Study、evidence、authority 或成果卡，也不得讀取 `historical-evaluation-artifacts/`、正式 Evaluation／Terminal 結果或 `.super-admin/`。
+  - Development 完成後，依 v003 成果卡規範，以繁體中文 append-only 更新 `.study-developer/development-note/TSM.md`，如實記錄 candidate／baseline、base／stress、formal gates、research targets、evidence validity、candidate freeze 資格／狀態、provenance、限制與下一輪條件；缺少 evidence 時不得補猜數值。
+  - 通過對應 v003 validator／checker、必要測試、Ruff（若適用）與 `git diff --check`；回報 Study ID、事件 head、修改檔案、驗證結果、實驗結果與任何實際缺件。
+  - 接手時將本任務由 TODO 移到 Doing 並記錄進度；完成工作後維持 Doing，由 parent project manager review 後才可移到 Done。
+- **摘要**：根據 TSM Development 研究盤點，在 v003 workflow 中提出並驗證一個真正新的「量先於價、用於動能趨勢確認」機制，產出可追溯的 Development Study 與成果卡，讓後續是否值得凍結有清楚且不越權的證據。
+- **進度／備註**：parent review 已驗收 `tsm-momentum-trend-volume-return-alignment--v001`。新機制是訊號日前五個已完成 session 的成交量加權收盤報酬與未加權報酬差異，與既有總量壓力、量能脈衝、吸收、日內區間效率、收盤承接及 v024 事件後固定突破有明確差異。v003 prepare／create／唯一 Development trial 完成；Source Bundle 12/12、evidence validity `valid`；candidate 5 筆／4 年，baseline 16 筆／5 年，兩者均有 formal gate 失敗，candidate freeze eligibility 不具資格，`candidate_freeze_status=尚不能判斷`；freeze-readiness／freeze 依規則失敗，未產生 candidate-frozen。成果卡已以繁體中文 append-only 寫入並完成 parent review 回修。
+- **Parent review 結果**：假說新穎性、candidate／baseline 可識別性、base／stress 實驗表、formal gates、targets、evidence validity、凍結狀態與盲讀限制均核對通過。parent 重跑 Source Bundle 綁定直接 pytest 為 3 passed／1 failed（舊 fixture assertion），Ruff 為 engine／test 通過但 runner 有 `I001`，full Ruff 不通過；preregistration 文字的 0.20%（0.002）與 canonical tested rule `-0.02`／`0.0005` mismatch 均已由 subagent append-only 揭露。這些 immutable 缺件不能事後修改或重跑，故不把它們誤稱為完整測試通過或 0.20% 假說結果；evidence binding 仍有效。`git diff --check` 通過；未執行 Evaluation、Terminal、challenge 或 replay。未修改已發布 source bundle、preregistration、evidence、manifests、authority、events 或既有 Study。
 
 ### [TASK-006] 在 v003 開發下一個未嘗試的 TSM 動能趨勢 × 量先價行假說並撰寫成果卡
 - **狀態**：Done

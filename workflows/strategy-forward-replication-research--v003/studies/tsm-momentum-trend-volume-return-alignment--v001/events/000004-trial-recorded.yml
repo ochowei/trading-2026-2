@@ -1,0 +1,24 @@
+actor_id: Codex Study Developer subagent（TASK-008；本對話）
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: da1b2be946c8bccfb09920d6607edf6064e1a2f17cbb554c0ee70bae84ce9552
+  workflow_digest: 8b1425a9b418db86b6db2c162478b3cb9ff14042324ac185d7aaeddf019a5b95
+event_type: trial-recorded
+execution:
+  assignment_digest: 21911ecf607cad01075c1078726407a43f5c107305b6ffb04e10f9cc2c95f0da
+  assignment_path: manifests/assignments/21911ecf607cad01075c1078726407a43f5c107305b6ffb04e10f9cc2c95f0da.yml
+  role: study 開發者
+occurred_at: '2026-09-20T13:30:23.827472Z'
+payload:
+  development_evidence_digest: 4892f61ff8e404a3d400dbe168d9a9ba5657b6a66c6260f5fd0a15e3bf048b57
+  development_evidence_path: evidence/trials/tsm-momentum-trend-volume-return-alignment-v001/candidate.yml
+  inputs_digest: c5b29f7e2ffcaa49aae1b6130eb7f9bc52a4654ba543ad00103d2339281d569b
+  inputs_path: evidence/trials/tsm-momentum-trend-volume-return-alignment-v001/inputs.yml
+  publication_digest: 316b570dfca693c34010a8961018ca017f8e6c07b28593dfb5c01a778e7bd789
+  publication_path: evidence/trials/tsm-momentum-trend-volume-return-alignment-v001/publication.yml
+  status: completed
+  trial_id: tsm-momentum-trend-volume-return-alignment-v001
+previous_event_digest: d2b3d4532380dbf2665542cf8fd9143ea92c266deb837271375e74b701e1e4cd
+schema_version: 1
+sequence: 4
+study_id: tsm-momentum-trend-volume-return-alignment--v001

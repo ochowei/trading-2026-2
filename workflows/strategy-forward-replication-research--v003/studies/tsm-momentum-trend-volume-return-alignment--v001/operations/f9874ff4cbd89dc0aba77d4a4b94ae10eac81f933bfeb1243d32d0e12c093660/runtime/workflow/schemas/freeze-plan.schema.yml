@@ -1,0 +1,15 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  actor:
+    minLength: 1
+    type: string
+  provenance:
+    type: object
+  snapshot_set:
+    type: object
+required:
+  - actor
+  - provenance
+  - snapshot_set
+type: object
