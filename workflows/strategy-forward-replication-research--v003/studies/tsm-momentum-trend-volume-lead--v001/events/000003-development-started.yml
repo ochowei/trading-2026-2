@@ -1,0 +1,17 @@
+actor_id: Wegener
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 5c23f3bdd3e0094d681dcf4b65af06cb184b9de05ad1b761b38927885fd00fa0
+  workflow_digest: 8b1425a9b418db86b6db2c162478b3cb9ff14042324ac185d7aaeddf019a5b95
+event_type: development-started
+execution:
+  assignment_digest: dfebe391efc5ebd7762fd7b35658f49e9f9188a049365af28e675549682ef7ac
+  assignment_path: manifests/assignments/dfebe391efc5ebd7762fd7b35658f49e9f9188a049365af28e675549682ef7ac.yml
+  role: study 開發者
+occurred_at: '2026-09-19T17:42:39.211701Z'
+payload:
+  operation_id: 8ca3a694a2e00efe43d0dbce1fa5fb30d5fa8db938700456d99e23ad22a08429
+previous_event_digest: 7a000662fc408dcc075365395d865fc50d93fc3b6513a9f3e3d924f8341714fa
+schema_version: 1
+sequence: 3
+study_id: tsm-momentum-trend-volume-lead--v001

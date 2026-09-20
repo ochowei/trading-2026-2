@@ -1,0 +1,12 @@
+family: portfolio-risk
+kind: portfolio-risk
+schema_version: 1
+values:
+  allocation_changes_require_new_study_after_preregistration: true
+  allocation_model: equal_isolated_sleeves
+  cross_sleeve_borrowing: false
+  max_open_positions_per_sleeve: 1
+  missing_entry_evidence: block_new_position
+  pyramiding: false
+  rebalance_during_evaluation: false
+version: v001

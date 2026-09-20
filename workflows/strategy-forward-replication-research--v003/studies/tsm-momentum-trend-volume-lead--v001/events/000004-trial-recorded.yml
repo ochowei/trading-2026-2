@@ -1,0 +1,24 @@
+actor_id: Wegener
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 5c23f3bdd3e0094d681dcf4b65af06cb184b9de05ad1b761b38927885fd00fa0
+  workflow_digest: 8b1425a9b418db86b6db2c162478b3cb9ff14042324ac185d7aaeddf019a5b95
+event_type: trial-recorded
+execution:
+  assignment_digest: dfebe391efc5ebd7762fd7b35658f49e9f9188a049365af28e675549682ef7ac
+  assignment_path: manifests/assignments/dfebe391efc5ebd7762fd7b35658f49e9f9188a049365af28e675549682ef7ac.yml
+  role: study 開發者
+occurred_at: '2026-09-19T17:42:51.745308Z'
+payload:
+  development_evidence_digest: 2a90d6da6f3fb9a4f8d9d3b8c7bba39b441685ad45ddb8b4a535c29585ddf525
+  development_evidence_path: evidence/trials/tsm-momentum-trend-volume-lead-v001/candidate.yml
+  inputs_digest: 5f1862362212862160505464e04a58683d143af51d4b75a2494c1346f5a20b5c
+  inputs_path: evidence/trials/tsm-momentum-trend-volume-lead-v001/inputs.yml
+  publication_digest: 80d9b018a3b60028e3364bf37578f1e40ae1b23241b49bda8b8d6042d0218b2e
+  publication_path: evidence/trials/tsm-momentum-trend-volume-lead-v001/publication.yml
+  status: completed
+  trial_id: tsm-momentum-trend-volume-lead-v001
+previous_event_digest: 5498ed2c1d6fd1533eeb5bb7e6ff298eaa7ee9e9a0656d487fed55accf939c62
+schema_version: 1
+sequence: 4
+study_id: tsm-momentum-trend-volume-lead--v001
