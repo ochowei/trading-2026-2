@@ -1,0 +1,16 @@
+artifacts:
+  baseline:
+    digest: 1edca3921d1df9c15ed8bf016ea035e898cd833b222af5e95457bce59fa634e9
+    path: evidence/trials/tsm-momentum-trend-volume-ramp-v001/baseline.yml
+  candidate:
+    digest: aa2907a68ec4f40fcfca12f58a15231826acda8ac51358e7b23815f524e16d52
+    path: evidence/trials/tsm-momentum-trend-volume-ramp-v001/candidate.yml
+  inputs:
+    digest: ed89d753dcbdef415d6f714e2d21751a128ea3bc1d10af8bddbb73487a029470
+    path: evidence/trials/tsm-momentum-trend-volume-ramp-v001/inputs.yml
+envelope_digest: 8ddb2ccf7e365fc430d77c6ebdeaa2a58c021b6def78e568f9dc923b02078b7f
+preregistration_digest: 6ed47792d5e3056b0c3e7ff8db3b3c2d115f63add605e6c8eaeff48542bc4cc2
+schema_version: 1
+source_bundle_digest: 75c4fd0f859b6dce8c34ff4805bf6e1960b361015ace883c4103fb46aacbc3d0
+study_id: tsm-momentum-trend-volume-ramp--v001
+trial_id: tsm-momentum-trend-volume-ramp-v001

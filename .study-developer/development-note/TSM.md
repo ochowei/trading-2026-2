@@ -1753,3 +1753,19 @@
 **下一輪（單一主要變更）**：不在本 Study 內調參或重跑；若要續研，另立新 Study，唯一主要變更先事前登記一個針對交易覆蓋不足的候選機制條件，其餘價格、成本、執行與 baseline 固定。成功條件是 evidence valid、至少 20 筆交易與 3 個交易年度，base／stress 報酬及 PF 通過全部 formal gates，且 stress 回撤與 bootstrap／leave-one-year-out 門檻均通過；任一 formal gate 失敗或 evidence 無效即否證並停止凍結。
 
 **來源與盲讀聲明**：實際讀取 `workflows/strategy-forward-replication-research--v003/studies/tsm-momentum-trend-volume-lead--v001/manifests/preregistration.yml`、`workflows/strategy-forward-replication-research--v003/studies/tsm-momentum-trend-volume-lead--v001/manifests/source-bundle.yml`、`workflows/strategy-forward-replication-research--v003/studies/tsm-momentum-trend-volume-lead--v001/manifests/prepare-report.yml`；`workflows/strategy-forward-replication-research--v003/studies/tsm-momentum-trend-volume-lead--v001/evidence/trials/tsm-momentum-trend-volume-lead-v001/{publication,candidate,baseline,inputs}.yml`；`research/tsm-momentum-trend-volume-lead--v001/{assignment,candidate-definition,implementation-contract,preregistration,qualification-spec}.yml`、`research/tsm-momentum-trend-volume-lead--v001/run_development.py`；`src/trading_2026_2/tsm_momentum_trend_volume_lead_v001.py`；`tests/test_tsm_momentum_trend_volume_lead_v001.py`。未讀取或引用 `historical-evaluation-artifacts/`、正式 Evaluation／Terminal 結果、`study.yml`、events、journals、operations/runtime、freeze-plan 或其他未綁定正式結果；未驗證完整事件鏈及實際凍結狀態。
+
+---
+
+## `tsm-momentum-trend-volume-ramp--v001`｜`2026-09-20`
+
+- 狀態：`complete`；evidence：`valid`；targets：`not_registered`；candidate freeze：`不具資格`
+
+**假說與結果**：三個先前 session 內的量能脈衝（至少達此前二十日均量 1.05 倍）應先於趨勢價格加速；baseline 只關閉脈衝。candidate 11 筆／4 年，base -1.865%／PF 0.828、stress -3.271%／PF 0.695；baseline 16 筆／5 年，base -0.573%／PF 0.956、stress -2.793%／PF 0.780。
+
+**Gate 與結論**：candidate 失敗報酬、PF、交易數及 stress bootstrap／leave-one-year-out 門檻；單筆損失 2.601%、stress 回撤 4.797% 與年度 gate 通過。baseline 核心及壓力 gate 亦失敗。evidence 有效但不具 freeze 資格，流程在 freeze 前停止。
+
+**限制與下一輪**：targets 未登記；不得在本 Study 內調參或重跑。若續研須另立 Study 重新預先登記；本卡只用 Development evidence，未讀取或執行 Evaluation、Terminal、events、operations/runtime 或 `historical-evaluation-artifacts/`。
+
+### 更正（2026-09-20）
+
+依 v003 成果卡規範，因 formal Development gates 失敗，本 Study 的最終成果卡狀態應為 `failed`，不是前文的 `complete`。此更正只更新判定，不改變既有 Development evidence：evidence validity 仍為 `valid`、targets 仍為 `not_registered`，candidate freeze 仍為不具資格；未執行 Evaluation、Terminal、challenge 或 replay。
