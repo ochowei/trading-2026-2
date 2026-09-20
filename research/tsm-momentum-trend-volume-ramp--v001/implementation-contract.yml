@@ -1,0 +1,60 @@
+engine:
+  baseline_spec_constant: BASELINE_SPEC
+  cost_constant: BASE_COST
+  path: src/trading_2026_2/tsm_momentum_trend_volume_ramp_v001.py
+  spec_constant: DEFAULT_SPEC
+  stress_cost_constant: STRESS_COST
+execution:
+  cooldown:
+    anchor: completed-position-exit
+    minimum_completed_session_steps_after_exit: 5
+    tracking_continues_during_cooldown: false
+  decision:
+    entry: next-session-open
+    signal: completed-session-close
+  exits:
+    gap_fill: stop-gap-at-open-target-gap-at-open
+    holding_exit: next-open-after-10-complete-sessions
+    same_session_ambiguity: adverse-stop-first
+    stop_return: '-0.04'
+    target_return: '0.04'
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    modeled_stop_includes_entry_exit_costs: true
+    risk_fraction: '0.02'
+    shares: maximum-integer-shares-within-risk-and-cash-caps
+indicator_contract:
+  columns:
+    price_acceleration: price_acceleration
+    raw_signal: raw_signal
+    rsi: rsi_2
+    sma: sma_20
+    trend_slope_ratio: trend_slope_ratio
+    volume_lead: prior_volume_spike_ratio
+  momentum_volume_pulse:
+    price_acceleration_lookback: 1
+    price_acceleration_minimum: '0.02'
+    trend_slope_floor: '0.95'
+    trend_slope_lag_sessions: 5
+    uses_prior_sessions_only: true
+  required_history_sessions: 23
+  rsi:
+    formula: simple-rolling-mean
+    length: 2
+    min_periods: 2
+    not_ready: null
+    zero_gain_and_loss: 50
+    zero_gain_only: 0
+    zero_loss_only: 100
+  sma:
+    lookback: 20
+    min_periods: 20
+    not_ready: null
+  volume_lead:
+    average_min_periods: 20
+    enabled: true
+    lead_min_periods: 3
+    prior_session_window: 3
+    uses_prior_sessions_only: true
+    volume_average_length: 20
+schema_version: 1

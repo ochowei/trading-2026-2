@@ -1,0 +1,26 @@
+actor_id: 01a0bcc6-81c7-7892-a1e6-32b5f9af7160
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 75c4fd0f859b6dce8c34ff4805bf6e1960b361015ace883c4103fb46aacbc3d0
+  workflow_digest: 8b1425a9b418db86b6db2c162478b3cb9ff14042324ac185d7aaeddf019a5b95
+event_type: study-created
+execution:
+  assignment_digest: dfac5cb25bd073a34a319a8fe9fcba84f9ff2ba44afe888e04191fafe44d7c83
+  assignment_path: manifests/assignments/dfac5cb25bd073a34a319a8fe9fcba84f9ff2ba44afe888e04191fafe44d7c83.yml
+  role: study 開發者
+occurred_at: '2026-09-20T03:41:43.747575Z'
+payload:
+  create_plan_digest: f7b8e3ebc3b009635a43f7cb6e8eeaf1bb5f38f83b32b728f8b4b5246fe0e0c1
+  create_plan_path: manifests/create-plan.yml
+  experiment_family: tsm-momentum-trend-volume-ramp
+  historical_evaluation_operator: not-assigned-development-scope
+  prepare_report_digest: a1f404604558f97fe154379fd4eb20e16d1e09cbd8eb2afc6379358d4c03d90c
+  prepare_report_path: manifests/prepare-report.yml
+  research_owner: 01a0bcc6-81c7-7892-a1e6-32b5f9af7160
+  research_round_id: strategy-forward-replication-research-v003-tsm-2026-09-task-004
+  source_bundle_digest: 75c4fd0f859b6dce8c34ff4805bf6e1960b361015ace883c4103fb46aacbc3d0
+  source_bundle_path: manifests/source-bundle.yml
+previous_event_digest: null
+schema_version: 1
+sequence: 1
+study_id: tsm-momentum-trend-volume-ramp--v001

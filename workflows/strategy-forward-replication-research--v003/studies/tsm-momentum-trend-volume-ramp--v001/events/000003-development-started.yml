@@ -1,0 +1,17 @@
+actor_id: 01a0bcc6-81c7-7892-a1e6-32b5f9af7160
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 75c4fd0f859b6dce8c34ff4805bf6e1960b361015ace883c4103fb46aacbc3d0
+  workflow_digest: 8b1425a9b418db86b6db2c162478b3cb9ff14042324ac185d7aaeddf019a5b95
+event_type: development-started
+execution:
+  assignment_digest: dfac5cb25bd073a34a319a8fe9fcba84f9ff2ba44afe888e04191fafe44d7c83
+  assignment_path: manifests/assignments/dfac5cb25bd073a34a319a8fe9fcba84f9ff2ba44afe888e04191fafe44d7c83.yml
+  role: study 開發者
+occurred_at: '2026-09-20T03:41:43.747575Z'
+payload:
+  operation_id: ac31b5a301d1566b78fb1ba29da4267775719b53afb6b6499601eabd88a8929b
+previous_event_digest: 8d8ff01a34702186fa623163f52adb25909cf75362f910ebcff8dc50a8dbe74a
+schema_version: 1
+sequence: 3
+study_id: tsm-momentum-trend-volume-ramp--v001

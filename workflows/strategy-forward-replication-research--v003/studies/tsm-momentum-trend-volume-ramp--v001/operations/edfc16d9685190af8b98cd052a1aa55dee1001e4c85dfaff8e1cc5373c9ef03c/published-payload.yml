@@ -1,0 +1,8 @@
+development_evidence_digest: aa2907a68ec4f40fcfca12f58a15231826acda8ac51358e7b23815f524e16d52
+development_evidence_path: evidence/trials/tsm-momentum-trend-volume-ramp-v001/candidate.yml
+inputs_digest: ed89d753dcbdef415d6f714e2d21751a128ea3bc1d10af8bddbb73487a029470
+inputs_path: evidence/trials/tsm-momentum-trend-volume-ramp-v001/inputs.yml
+publication_digest: adac1c7bdb79e48c1d5001eacf9c4cf23614a199e13cac04b319113f6db89b1f
+publication_path: evidence/trials/tsm-momentum-trend-volume-ramp-v001/publication.yml
+status: completed
+trial_id: tsm-momentum-trend-volume-ramp-v001
