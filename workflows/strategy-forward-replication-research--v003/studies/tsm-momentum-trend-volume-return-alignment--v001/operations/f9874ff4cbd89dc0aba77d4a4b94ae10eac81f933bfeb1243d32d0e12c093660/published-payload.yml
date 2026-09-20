@@ -1,0 +1,8 @@
+development_evidence_digest: 4892f61ff8e404a3d400dbe168d9a9ba5657b6a66c6260f5fd0a15e3bf048b57
+development_evidence_path: evidence/trials/tsm-momentum-trend-volume-return-alignment-v001/candidate.yml
+inputs_digest: c5b29f7e2ffcaa49aae1b6130eb7f9bc52a4654ba543ad00103d2339281d569b
+inputs_path: evidence/trials/tsm-momentum-trend-volume-return-alignment-v001/inputs.yml
+publication_digest: 316b570dfca693c34010a8961018ca017f8e6c07b28593dfb5c01a778e7bd789
+publication_path: evidence/trials/tsm-momentum-trend-volume-return-alignment-v001/publication.yml
+status: completed
+trial_id: tsm-momentum-trend-volume-return-alignment-v001

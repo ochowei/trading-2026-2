@@ -1,0 +1,38 @@
+candidate_family: tsm-momentum-trend-volume-return-alignment-v001
+candidate_id: tsm-momentum-trend-volume-return-alignment-v001
+data_bindings:
+  development_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+  development_path: research/tsm-momentum-trend-volume-return-alignment--v001/data/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+  warmup_digest: 81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847
+date_controls:
+  formal_provider_access: false
+  signal_end: '2018-12-31'
+  signal_start: '2014-01-01'
+  warmup_end: '2013-12-31'
+  warmup_start: '2013-01-01'
+development_diagnostics:
+  block_lengths:
+    - 3
+    - 5
+  bootstrap_seed: 20260920
+  repetitions: 50000
+  seed_application: exact-same-seed-for-each-block-length
+execution:
+  cooldown_anchor: completed-position-exit
+  cooldown_completed_session_steps_after_exit: 5
+  entry: next-XNYS-open
+  holding_sessions: 10
+  intrabar_ambiguity: adverse-stop-first
+  position_sizing:
+    modeled_stop_includes_costs: true
+    risk_fraction: '0.02'
+  stop_market_gtc: '-0.04'
+  target_limit_day: '0.04'
+preregistration_digest: 80ccc3eadd113eb7ed7337e8d4d72467e9e0c3a3e334d0f11b39f75acd84096c
+schema_version: 1
+selected_candidate_id: tsm-momentum-trend-volume-return-alignment-v001
+source_bundle_digest: da1b2be946c8bccfb09920d6607edf6064e1a2f17cbb554c0ee70bae84ce9552
+strategy_engine_digest: f7287c01586a45c4925db93eff29232afc6d22f3750d497b355f2b521bee0bbf
+study_procedure_digest: ff72b67f72ea87e4679cb9e3e7f90505a26a85f102404f7aa5ba40deb7c22fac
+study_procedure_path: research/tsm-momentum-trend-volume-return-alignment--v001/run_development.py
+trial_id: tsm-momentum-trend-volume-return-alignment-v001

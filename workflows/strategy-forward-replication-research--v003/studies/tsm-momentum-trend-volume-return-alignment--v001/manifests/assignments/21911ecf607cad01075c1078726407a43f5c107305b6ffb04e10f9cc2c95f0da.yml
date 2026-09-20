@@ -1,0 +1,9 @@
+assignee: Codex Study Developer subagent（TASK-008；本對話）
+assigner: 專案管理者（TASK-008）
+instruction: 建立 strategy-forward-replication-research--v003 的新 Study，提出與既有 TSM 動能／趨勢／量先價行機制真正不同的「量能加權收盤報酬一致性」假說；固定寫入 新穎性、與既有 volume-lead、volume-ramp、volume-absorption、volume-efficiency、 volume-close-acceptance 及舊 v024 事件突破路徑的差異，以及 Development 可識別性。 依明確派工完成 preregistration、candidate family、baseline、實作、固定 Development 資料、runner、測試、prepare、create、唯一 Development trial、evidence validation、 provenance 與規則允許的 freeze-readiness／freeze 嘗試。只處理 Development-to-freeze； 不執行 Historical Evaluation、Terminal、challenge 或 replay。
+role: study 開發者
+schema_version: 1
+scope: development-to-freeze
+source_id: PROJECT_KANBAN:TASK-008
+study_id: tsm-momentum-trend-volume-return-alignment--v001
+workflow_version: v003

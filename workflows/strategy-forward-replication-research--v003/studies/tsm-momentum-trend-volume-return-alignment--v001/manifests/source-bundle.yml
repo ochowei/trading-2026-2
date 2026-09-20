@@ -1,0 +1,26 @@
+files:
+  - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+    path: pyproject.toml
+  - digest: 21911ecf607cad01075c1078726407a43f5c107305b6ffb04e10f9cc2c95f0da
+    path: research/tsm-momentum-trend-volume-return-alignment--v001/assignment.yml
+  - digest: d72e0671613cffd3139145d8ed5ff598ce80bb7963609f0532e7ad115073aae1
+    path: research/tsm-momentum-trend-volume-return-alignment--v001/candidate-definition.yml
+  - digest: 89df57b1d96b040dc49c97b4218a4be597696fad5e7d57fec2f526c3d481092b
+    path: research/tsm-momentum-trend-volume-return-alignment--v001/implementation-contract.yml
+  - digest: 80ccc3eadd113eb7ed7337e8d4d72467e9e0c3a3e334d0f11b39f75acd84096c
+    path: research/tsm-momentum-trend-volume-return-alignment--v001/preregistration.yml
+  - digest: 3b77754e8334be6469ff31c3f7334e74ec7fd3435d3862257d3063a8a926fc66
+    path: research/tsm-momentum-trend-volume-return-alignment--v001/qualification-spec.yml
+  - digest: ff72b67f72ea87e4679cb9e3e7f90505a26a85f102404f7aa5ba40deb7c22fac
+    path: research/tsm-momentum-trend-volume-return-alignment--v001/run_development.py
+  - digest: 55c12f7f022764a011f1b9da1c384f3aef73d95478883950fae736edd5c9504a
+    path: research/tsm-momentum-trend-volume-return-alignment--v001/runner-contract.yml
+  - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+    path: src/trading_2026_2/__init__.py
+  - digest: f7287c01586a45c4925db93eff29232afc6d22f3750d497b355f2b521bee0bbf
+    path: src/trading_2026_2/tsm_momentum_trend_volume_return_alignment_v001.py
+  - digest: 1ea4890eeceae61dd790bc423a4029c4bba55e5590d827cbd0c887c54d37592b
+    path: tests/test_tsm_momentum_trend_volume_return_alignment_v001.py
+  - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+    path: uv.lock
+schema_version: 1

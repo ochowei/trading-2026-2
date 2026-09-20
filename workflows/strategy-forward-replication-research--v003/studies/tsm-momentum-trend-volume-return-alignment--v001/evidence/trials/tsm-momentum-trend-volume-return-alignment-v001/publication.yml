@@ -1,0 +1,16 @@
+artifacts:
+  baseline:
+    digest: 488c249da8f155ba0585223a1ff337f578349c047b78cbe95957d9a351adb965
+    path: evidence/trials/tsm-momentum-trend-volume-return-alignment-v001/baseline.yml
+  candidate:
+    digest: 4892f61ff8e404a3d400dbe168d9a9ba5657b6a66c6260f5fd0a15e3bf048b57
+    path: evidence/trials/tsm-momentum-trend-volume-return-alignment-v001/candidate.yml
+  inputs:
+    digest: c5b29f7e2ffcaa49aae1b6130eb7f9bc52a4654ba543ad00103d2339281d569b
+    path: evidence/trials/tsm-momentum-trend-volume-return-alignment-v001/inputs.yml
+envelope_digest: 809b79c8b3ff734e1a92eabf58dca865adb4c5e1e52c98a94dd34bbe74f66010
+preregistration_digest: 80ccc3eadd113eb7ed7337e8d4d72467e9e0c3a3e334d0f11b39f75acd84096c
+schema_version: 1
+source_bundle_digest: da1b2be946c8bccfb09920d6607edf6064e1a2f17cbb554c0ee70bae84ce9552
+study_id: tsm-momentum-trend-volume-return-alignment--v001
+trial_id: tsm-momentum-trend-volume-return-alignment-v001
