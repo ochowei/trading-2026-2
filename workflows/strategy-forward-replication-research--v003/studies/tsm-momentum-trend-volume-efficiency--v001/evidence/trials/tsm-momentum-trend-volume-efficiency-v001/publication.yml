@@ -1,0 +1,16 @@
+artifacts:
+  baseline:
+    digest: b8189bd4ac635a99d231616d1bc7daf875e6407a06785580d4bf7807e4be0df4
+    path: evidence/trials/tsm-momentum-trend-volume-efficiency-v001/baseline.yml
+  candidate:
+    digest: 9053d35ae48be6e5a4a42ebb65c625fc4f84f6c0d046bc6f69380216f2a11c55
+    path: evidence/trials/tsm-momentum-trend-volume-efficiency-v001/candidate.yml
+  inputs:
+    digest: 5138197b34e502f2d624578739e5710ebb8a0fc67cb604dac985f74fc6e16b34
+    path: evidence/trials/tsm-momentum-trend-volume-efficiency-v001/inputs.yml
+envelope_digest: 8e5f1bc7262c37b7fb96803482f3a43e8a9c4d4fc1da6bfde0f49a74e9f6ac3f
+preregistration_digest: e1e9d471d21cee4c730891d65bf7a6ca2df5a54e4e4ff37697aaeab12dec2fa4
+schema_version: 1
+source_bundle_digest: 21ff55a26918e5d36885c8ebb9c7c0c7a5396231a9d488528daf7e9aaa9d3b4a
+study_id: tsm-momentum-trend-volume-efficiency--v001
+trial_id: tsm-momentum-trend-volume-efficiency-v001

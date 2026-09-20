@@ -1,0 +1,25 @@
+assignee: codex-study-developer-task-006
+assigner: 專案管理者（TASK-006）
+instruction: '建立 Study tsm-momentum-trend-volume-efficiency--v001，提出與既有 Study 機制真正不同的
+
+  動能／趨勢加上量先於價假說：訊號日前五個已完成 session 的成交量加權日內高低價活動
+
+  相對同窗未加權平均日內高低價活動的量價效率比至少 1.15；當日再以趨勢、價格加速與既定執行規則確認。
+
+  固定寫入新穎性、與既有 v001 五日分散量能壓力及 v024 單次放量事件突破的差異，
+
+  以及 Development 可識別性。使用 strategy-forward-replication-research--v003 正式
+
+  release，完成 preregistration、candidate family、baseline、實作、固定 Development
+
+  資料、runner、測試、prepare、create、Development、provenance、freeze-readiness
+
+  與合法的 candidate freeze。只處理 Development-to-freeze，不執行 Historical
+
+  Evaluation、Terminal、challenge 或 replay。'
+role: study 開發者
+schema_version: 1
+scope: development-to-freeze
+source_id: PROJECT_KANBAN:TASK-006
+study_id: tsm-momentum-trend-volume-efficiency--v001
+workflow_version: v003

@@ -1,0 +1,68 @@
+candidate_freeze: null
+evidence:
+  development: 9053d35ae48be6e5a4a42ebb65c625fc4f84f6c0d046bc6f69380216f2a11c55
+lifecycle:
+  current_event: trial-recorded
+  event_chain_head_digest: 0d4d114e3a6d303c8bdb66d2aa6de03e5eb7330cdcb6371af963522a841d0ad4
+  event_count: 4
+  status: active
+outcome:
+  authority: none
+  status: pending
+preregistration:
+  digest: e1e9d471d21cee4c730891d65bf7a6ca2df5a54e4e4ff37697aaeab12dec2fa4
+provenance:
+  status: null
+schema_version: 1
+study:
+  identity:
+    create_plan_digest: f1cd0e545c2b50cce9dc03f4727c99040822c49c46a99c2cdeee2e3bb2d0d843
+    create_plan_path: manifests/create-plan.yml
+    experiment_family: tsm-momentum-trend-volume-efficiency
+    historical_evaluation_operator: not-assigned-development-scope
+    prepare_report_digest: d7749a83146f57e5df11a0ca8ebf8f47c077c684fb292bbd0f0df010e959ffcb
+    prepare_report_path: manifests/prepare-report.yml
+    research_owner: codex-study-developer-task-006
+    research_round_id: strategy-forward-replication-research-v003-tsm-2026-09-task-006
+    source_bundle_digest: 21ff55a26918e5d36885c8ebb9c7c0c7a5396231a9d488528daf7e9aaa9d3b4a
+    source_bundle_path: manifests/source-bundle.yml
+  study_id: tsm-momentum-trend-volume-efficiency--v001
+trial_registry:
+  assessments:
+    tsm-momentum-trend-volume-efficiency-v001:
+      actuals:
+        base_profit_factor: '3.427325791904355'
+        base_return: '0.052084864204126405'
+        completed_trades: 6
+        maximum_realized_trade_loss_fraction: '0.01999668429289697'
+        maximum_stress_block_bootstrap_drawdown_above_10pct_ratio: '0.0'
+        maximum_stress_leave_one_year_out_drawdown: '0.01999668429289703'
+        minimum_stress_block_bootstrap_positive_return_ratio: '0.91686'
+        minimum_stress_leave_one_year_out_profit_factor: '2.0093618414523857'
+        minimum_stress_leave_one_year_out_return: '0.021028840990221287'
+        stress_maximum_drawdown: '0.019996684292896968'
+        stress_profit_factor: '2.8531470382674895'
+        stress_return: '0.03929893743578755'
+        traded_years: 3
+      candidate_freeze_eligibility:
+        eligible: false
+        reasons:
+          - completed_trades
+      development_evidence_validity:
+        status: valid
+        validated: true
+      formal_development_gates:
+        failed:
+          - completed_trades
+        status: failed
+      research_targets:
+        failed: []
+        status: not_registered
+  digest: null
+  recorded_trial_count: 1
+  trial_ids:
+    - tsm-momentum-trend-volume-efficiency-v001
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 21ff55a26918e5d36885c8ebb9c7c0c7a5396231a9d488528daf7e9aaa9d3b4a
+  workflow_digest: 8b1425a9b418db86b6db2c162478b3cb9ff14042324ac185d7aaeddf019a5b95
