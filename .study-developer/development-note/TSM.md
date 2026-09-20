@@ -1725,3 +1725,31 @@
 - 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v024/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v024.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v024.py`、`research/tools/development_status.py`
 - 詳細盲檢討：無
 - 來源限制：本成果卡只整理 Development 階段，沒有讀取或引用正式 Historical Evaluation、Terminal 或 `historical-evaluation-artifacts/`。
+
+---
+
+## `tsm-momentum-trend-volume-lead--v001`｜`2026-09-20`
+
+- 成果卡：`failed`，原因：Trial evidence 可驗證，但 candidate 與 baseline 都有合法且完整的 formal Development gate 失敗。
+- Formal gates：candidate 失敗於交易數、交易年度與 stress leave-one-year-out 報酬；baseline 失敗於 base／stress 報酬與 PF、交易數及多項 stress 穩健性門檻。
+- Research targets：`not_registered`（checker 明確回報，不能把 formal gates 改稱研究目標）。
+- Evidence validity：Trial `tsm-momentum-trend-volume-lead-v001` 為 `valid`；candidate／baseline 的 publication、inputs 與 evidence 綁定可驗證。
+- Candidate freeze eligibility：`不具資格`，candidate 原因為完成交易 1<20、交易年度 1<3、stress leave-one-year-out 報酬 0 不大於 0；`candidate_freeze_status`：`尚不能判斷`。
+- Provenance：允許來源確認 source bundle、Trial inputs 與 evidence bindings；未找到可引用的獨立 Development-only provenance declaration，因此未驗證完整事件鏈或實際凍結事件。
+
+**研究問題與主要變更**：本 Study 測試 TSM 上升趨勢中，訊號日前五個已完成 session 的分散量能壓力是否先於當日價格加速，並以同一價格、成本、風險、持倉與退出規則的 baseline 關閉量能壓力作控制。程式與測試也確認量能欄位只使用先前 session；這支持可識別性設計，但不等於表現成功。
+
+| Trial／模型 | 情境 | 證據狀態／原因 | 交易數／年度 | 報酬 | PF（獲利因子） | 最大回撤 | formal gate／target |
+| --- | --- | --- | ---: | ---: | ---: | ---: | --- |
+| `tsm-momentum-trend-volume-lead-v001`／candidate | Development/base | valid；只有 1 筆合法完成交易 | 1／1（2015） | 1.904% | ∞ | 0.000% | base 報酬、PF 通過；交易數與年度 gate 使 Trial 失敗；target 未登記 |
+| `tsm-momentum-trend-volume-lead-v001`／candidate | Development/stress | valid；同一筆交易的壓力成本結果 | 1／1（2015） | 1.622% | ∞ | 0.000% | stress 報酬、PF 與 bootstrap 比率通過；leave-one-year-out 報酬為 0，gate 失敗；target 未登記 |
+| `tsm-momentum-trend-volume-lead-v001`／baseline | Development/base | valid；控制組完整產出 | 16／5（2014–2018） | -0.573% | 0.956 | 4.548% | base 報酬、PF、交易數 gate 失敗；target 未登記 |
+| `tsm-momentum-trend-volume-lead-v001`／baseline | Development/stress | valid；控制組完整產出 | 16／5（2014–2018） | -2.793% | 0.780 | 4.832% | stress 報酬、PF、bootstrap 正報酬比、leave-one-year-out PF／報酬 gate 失敗；回撤與年度 gate 通過；target 未登記 |
+
+**主要發現（最多 3 項）**：已確認 candidate base／stress 各只有 1 筆、同一個 2015 年交易，雖為正報酬且 PF 為無限大，仍不滿足交易數與年度覆蓋；baseline 則有 16 筆、5 年，但 base／stress 報酬與 PF 均未達門檻。已確認候選的量能壓力條件使用先前 session，baseline 只關閉該條件，故比較設計可讀；可能原因是量能壓力條件把可接受訊號壓得很少，但一筆交易不足以證明此機制。尚不能判斷 candidate 的單筆正報酬能否跨年度重現，也不能把 PF 無限大解讀為穩健優勢。
+
+**限制（最多 2 項）**：candidate 只有 1 筆交易、1 個交易年度，無法支持跨年度或重抽樣穩健性結論；另未驗證 provenance 事件鏈與凍結事件，且研究 targets 未登記。
+
+**下一輪（單一主要變更）**：不在本 Study 內調參或重跑；若要續研，另立新 Study，唯一主要變更先事前登記一個針對交易覆蓋不足的候選機制條件，其餘價格、成本、執行與 baseline 固定。成功條件是 evidence valid、至少 20 筆交易與 3 個交易年度，base／stress 報酬及 PF 通過全部 formal gates，且 stress 回撤與 bootstrap／leave-one-year-out 門檻均通過；任一 formal gate 失敗或 evidence 無效即否證並停止凍結。
+
+**來源與盲讀聲明**：實際讀取 `workflows/strategy-forward-replication-research--v003/studies/tsm-momentum-trend-volume-lead--v001/manifests/preregistration.yml`、`workflows/strategy-forward-replication-research--v003/studies/tsm-momentum-trend-volume-lead--v001/manifests/source-bundle.yml`、`workflows/strategy-forward-replication-research--v003/studies/tsm-momentum-trend-volume-lead--v001/manifests/prepare-report.yml`；`workflows/strategy-forward-replication-research--v003/studies/tsm-momentum-trend-volume-lead--v001/evidence/trials/tsm-momentum-trend-volume-lead-v001/{publication,candidate,baseline,inputs}.yml`；`research/tsm-momentum-trend-volume-lead--v001/{assignment,candidate-definition,implementation-contract,preregistration,qualification-spec}.yml`、`research/tsm-momentum-trend-volume-lead--v001/run_development.py`；`src/trading_2026_2/tsm_momentum_trend_volume_lead_v001.py`；`tests/test_tsm_momentum_trend_volume_lead_v001.py`。未讀取或引用 `historical-evaluation-artifacts/`、正式 Evaluation／Terminal 結果、`study.yml`、events、journals、operations/runtime、freeze-plan 或其他未綁定正式結果；未驗證完整事件鏈及實際凍結狀態。

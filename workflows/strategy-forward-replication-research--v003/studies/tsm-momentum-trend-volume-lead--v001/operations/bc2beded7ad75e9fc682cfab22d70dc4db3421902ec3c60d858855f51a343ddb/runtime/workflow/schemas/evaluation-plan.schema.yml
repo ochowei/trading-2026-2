@@ -1,0 +1,17 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  actor:
+    minLength: 1
+    type: string
+  data_digest:
+    format: sha256
+    type: string
+  data_path:
+    minLength: 1
+    type: string
+required:
+  - actor
+  - data_path
+  - data_digest
+type: object

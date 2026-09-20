@@ -1,0 +1,26 @@
+actor_id: Wegener
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 5c23f3bdd3e0094d681dcf4b65af06cb184b9de05ad1b761b38927885fd00fa0
+  workflow_digest: 8b1425a9b418db86b6db2c162478b3cb9ff14042324ac185d7aaeddf019a5b95
+event_type: study-created
+execution:
+  assignment_digest: dfebe391efc5ebd7762fd7b35658f49e9f9188a049365af28e675549682ef7ac
+  assignment_path: manifests/assignments/dfebe391efc5ebd7762fd7b35658f49e9f9188a049365af28e675549682ef7ac.yml
+  role: study 開發者
+occurred_at: '2026-09-19T17:42:39.211701Z'
+payload:
+  create_plan_digest: 7ef78c0d1cd5956307a92a60a199237089cbe029124cb532cccaf0f7610dc553
+  create_plan_path: manifests/create-plan.yml
+  experiment_family: tsm-momentum-trend-volume-lead
+  historical_evaluation_operator: not-assigned-development-scope
+  prepare_report_digest: 670f44b3a11905c795037e137eea7b16c5a376a4b332284f6b4655aae7ea8c27
+  prepare_report_path: manifests/prepare-report.yml
+  research_owner: Wegener
+  research_round_id: strategy-forward-replication-research-v003-tsm-2026-09
+  source_bundle_digest: 5c23f3bdd3e0094d681dcf4b65af06cb184b9de05ad1b761b38927885fd00fa0
+  source_bundle_path: manifests/source-bundle.yml
+previous_event_digest: null
+schema_version: 1
+sequence: 1
+study_id: tsm-momentum-trend-volume-lead--v001

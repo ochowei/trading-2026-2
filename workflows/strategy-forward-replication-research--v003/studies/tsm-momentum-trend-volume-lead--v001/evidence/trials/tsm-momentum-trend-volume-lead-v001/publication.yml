@@ -1,0 +1,16 @@
+artifacts:
+  baseline:
+    digest: dfb2477f7e74ded54143c427fee7293958f675c9c8767631d9810076de926eb7
+    path: evidence/trials/tsm-momentum-trend-volume-lead-v001/baseline.yml
+  candidate:
+    digest: 2a90d6da6f3fb9a4f8d9d3b8c7bba39b441685ad45ddb8b4a535c29585ddf525
+    path: evidence/trials/tsm-momentum-trend-volume-lead-v001/candidate.yml
+  inputs:
+    digest: 5f1862362212862160505464e04a58683d143af51d4b75a2494c1346f5a20b5c
+    path: evidence/trials/tsm-momentum-trend-volume-lead-v001/inputs.yml
+envelope_digest: 349dff2acabbcb360ab6392d7a8c5324e86a0f34b4c89df6d149cc7bf64ccc50
+preregistration_digest: 2868ca8475e61d002d2028e4698b456cca1263eaf34f36d2dc4c5fcda7dad488
+schema_version: 1
+source_bundle_digest: 5c23f3bdd3e0094d681dcf4b65af06cb184b9de05ad1b761b38927885fd00fa0
+study_id: tsm-momentum-trend-volume-lead--v001
+trial_id: tsm-momentum-trend-volume-lead-v001

@@ -1,0 +1,26 @@
+files:
+  - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+    path: pyproject.toml
+  - digest: dfebe391efc5ebd7762fd7b35658f49e9f9188a049365af28e675549682ef7ac
+    path: research/tsm-momentum-trend-volume-lead--v001/assignment.yml
+  - digest: 5f1f5859aaf20f8104df1f60ae9f72a0672234d95dfd1492e620a875d9750a4d
+    path: research/tsm-momentum-trend-volume-lead--v001/candidate-definition.yml
+  - digest: cbce0358b0e17c31b06d8067e4ae861c233cb7e2f5a9b1227e295603990c725b
+    path: research/tsm-momentum-trend-volume-lead--v001/implementation-contract.yml
+  - digest: 2868ca8475e61d002d2028e4698b456cca1263eaf34f36d2dc4c5fcda7dad488
+    path: research/tsm-momentum-trend-volume-lead--v001/preregistration.yml
+  - digest: 85d28b904d154935d00db739e7c14fd3b6a1e1a106eb2cd123b7aafe358d6a24
+    path: research/tsm-momentum-trend-volume-lead--v001/qualification-spec.yml
+  - digest: d4d1d38aeac25dc9a5e940284f3b2871b39d27fa6bd486a4e19591fc345fb188
+    path: research/tsm-momentum-trend-volume-lead--v001/run_development.py
+  - digest: df8b69771673fdf6cec801549d7c067068c6ff76eadd4f0e3ba384b01697263a
+    path: research/tsm-momentum-trend-volume-lead--v001/runner-contract.yml
+  - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+    path: src/trading_2026_2/__init__.py
+  - digest: c670ca99dd86c4fa6ff0f830b1a72f57fe5d91d053e10c3a0b4dd2a42ab5fe88
+    path: src/trading_2026_2/tsm_momentum_trend_volume_lead_v001.py
+  - digest: 164b739d4f6f8045792ae77087fb2c9279e0640ec9704806c058fe2775786937
+    path: tests/test_tsm_momentum_trend_volume_lead_v001.py
+  - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+    path: uv.lock
+schema_version: 1

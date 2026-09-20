@@ -1,0 +1,72 @@
+candidate_freeze: null
+evidence:
+  development: 2a90d6da6f3fb9a4f8d9d3b8c7bba39b441685ad45ddb8b4a535c29585ddf525
+lifecycle:
+  current_event: trial-recorded
+  event_chain_head_digest: ebb3c5eeb39b530dc4adae87125a9fd645543d812c2690c9c10d1a2d2a21e714
+  event_count: 4
+  status: active
+outcome:
+  authority: none
+  status: pending
+preregistration:
+  digest: 2868ca8475e61d002d2028e4698b456cca1263eaf34f36d2dc4c5fcda7dad488
+provenance:
+  status: null
+schema_version: 1
+study:
+  identity:
+    create_plan_digest: 7ef78c0d1cd5956307a92a60a199237089cbe029124cb532cccaf0f7610dc553
+    create_plan_path: manifests/create-plan.yml
+    experiment_family: tsm-momentum-trend-volume-lead
+    historical_evaluation_operator: not-assigned-development-scope
+    prepare_report_digest: 670f44b3a11905c795037e137eea7b16c5a376a4b332284f6b4655aae7ea8c27
+    prepare_report_path: manifests/prepare-report.yml
+    research_owner: Wegener
+    research_round_id: strategy-forward-replication-research-v003-tsm-2026-09
+    source_bundle_digest: 5c23f3bdd3e0094d681dcf4b65af06cb184b9de05ad1b761b38927885fd00fa0
+    source_bundle_path: manifests/source-bundle.yml
+  study_id: tsm-momentum-trend-volume-lead--v001
+trial_registry:
+  assessments:
+    tsm-momentum-trend-volume-lead-v001:
+      actuals:
+        base_profit_factor: inf
+        base_return: '0.019041421037209478'
+        completed_trades: 1
+        maximum_realized_trade_loss_fraction: '0.0'
+        maximum_stress_block_bootstrap_drawdown_above_10pct_ratio: '0.0'
+        maximum_stress_leave_one_year_out_drawdown: '0.0'
+        minimum_stress_block_bootstrap_positive_return_ratio: '1.0'
+        minimum_stress_leave_one_year_out_profit_factor: inf
+        minimum_stress_leave_one_year_out_return: '0.0'
+        stress_maximum_drawdown: '0.0'
+        stress_profit_factor: inf
+        stress_return: '0.01622190445428612'
+        traded_years: 1
+      candidate_freeze_eligibility:
+        eligible: false
+        reasons:
+          - completed_trades
+          - minimum_stress_leave_one_year_out_return
+          - traded_years
+      development_evidence_validity:
+        status: valid
+        validated: true
+      formal_development_gates:
+        failed:
+          - completed_trades
+          - minimum_stress_leave_one_year_out_return
+          - traded_years
+        status: failed
+      research_targets:
+        failed: []
+        status: not_registered
+  digest: null
+  recorded_trial_count: 1
+  trial_ids:
+    - tsm-momentum-trend-volume-lead-v001
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 5c23f3bdd3e0094d681dcf4b65af06cb184b9de05ad1b761b38927885fd00fa0
+  workflow_digest: 8b1425a9b418db86b6db2c162478b3cb9ff14042324ac185d7aaeddf019a5b95
