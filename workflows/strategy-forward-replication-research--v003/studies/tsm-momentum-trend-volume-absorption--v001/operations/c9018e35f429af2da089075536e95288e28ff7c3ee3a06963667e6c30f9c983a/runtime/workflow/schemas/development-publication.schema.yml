@@ -1,0 +1,54 @@
+$defs:
+  reference:
+    additionalProperties: false
+    properties:
+      digest:
+        format: sha256
+        type: string
+      path:
+        type: string
+    required:
+      - path
+      - digest
+    type: object
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  artifacts:
+    additionalProperties: false
+    properties:
+      baseline:
+        $ref: '#/$defs/reference'
+      candidate:
+        $ref: '#/$defs/reference'
+      inputs:
+        $ref: '#/$defs/reference'
+    required:
+      - candidate
+      - baseline
+      - inputs
+    type: object
+  envelope_digest:
+    format: sha256
+    type: string
+  preregistration_digest:
+    format: sha256
+    type: string
+  schema_version:
+    const: 1
+  source_bundle_digest:
+    format: sha256
+    type: string
+  study_id:
+    type: string
+  trial_id:
+    type: string
+required:
+  - schema_version
+  - study_id
+  - trial_id
+  - source_bundle_digest
+  - preregistration_digest
+  - envelope_digest
+  - artifacts
+type: object
