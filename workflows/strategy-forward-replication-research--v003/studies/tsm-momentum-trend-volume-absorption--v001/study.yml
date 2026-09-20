@@ -1,0 +1,74 @@
+candidate_freeze: null
+evidence:
+  development: 14a90b2dd3583c2e10f1f432857c9b4f3d2ee7d2b81f2a84387f6918f3bed0ae
+lifecycle:
+  current_event: trial-recorded
+  event_chain_head_digest: a3763b5f576aced2987d1dd5dd549111b927a007cd6a65cbb9b2996441413b32
+  event_count: 4
+  status: active
+outcome:
+  authority: none
+  status: pending
+preregistration:
+  digest: 7fec8e043d31b77f83bf4954787f0fd2aeb7af842562835533bb27d3f4b06b31
+provenance:
+  status: null
+schema_version: 1
+study:
+  identity:
+    create_plan_digest: f62ae601862b00783129421c0a6b1b2fbb6645fcc4774b30bdf69c104b45e4e0
+    create_plan_path: manifests/create-plan.yml
+    experiment_family: tsm-momentum-trend-volume-absorption
+    historical_evaluation_operator: not-assigned-development-scope
+    prepare_report_digest: af3ceffb3790835ef46afcf6044a008df588b3c261fe00cfddd6f60a1103e4a3
+    prepare_report_path: manifests/prepare-report.yml
+    research_owner: codex-study-developer-task-005
+    research_round_id: strategy-forward-replication-research-v003-tsm-2026-09-task-005
+    source_bundle_digest: 53591e751b695c045d16c2fe4856f83f7815e8d2d99c2d6b55b2c4ed8fd60320
+    source_bundle_path: manifests/source-bundle.yml
+  study_id: tsm-momentum-trend-volume-absorption--v001
+trial_registry:
+  assessments:
+    tsm-momentum-trend-volume-absorption-v001:
+      actuals:
+        base_profit_factor: '2.9486720821961323'
+        base_return: '0.039698118103481526'
+        completed_trades: 5
+        maximum_realized_trade_loss_fraction: '0.019997273975937712'
+        maximum_stress_block_bootstrap_drawdown_above_10pct_ratio: '0.0'
+        maximum_stress_leave_one_year_out_drawdown: '0.019997273975937715'
+        minimum_stress_block_bootstrap_positive_return_ratio: '0.7969'
+        minimum_stress_leave_one_year_out_profit_factor: '0.7982565495625856'
+        minimum_stress_leave_one_year_out_return: '-0.004099763389435407'
+        stress_maximum_drawdown: '0.019997273975937674'
+        stress_profit_factor: '2.44771037937037'
+        stress_return: '0.029419889463472793'
+        traded_years: 3
+      candidate_freeze_eligibility:
+        eligible: false
+        reasons:
+          - completed_trades
+          - minimum_stress_block_bootstrap_positive_return_ratio
+          - minimum_stress_leave_one_year_out_profit_factor
+          - minimum_stress_leave_one_year_out_return
+      development_evidence_validity:
+        status: valid
+        validated: true
+      formal_development_gates:
+        failed:
+          - completed_trades
+          - minimum_stress_block_bootstrap_positive_return_ratio
+          - minimum_stress_leave_one_year_out_profit_factor
+          - minimum_stress_leave_one_year_out_return
+        status: failed
+      research_targets:
+        failed: []
+        status: not_registered
+  digest: null
+  recorded_trial_count: 1
+  trial_ids:
+    - tsm-momentum-trend-volume-absorption-v001
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 53591e751b695c045d16c2fe4856f83f7815e8d2d99c2d6b55b2c4ed8fd60320
+  workflow_digest: 8b1425a9b418db86b6db2c162478b3cb9ff14042324ac185d7aaeddf019a5b95

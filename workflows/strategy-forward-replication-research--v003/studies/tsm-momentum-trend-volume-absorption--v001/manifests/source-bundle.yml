@@ -1,0 +1,26 @@
+files:
+  - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+    path: pyproject.toml
+  - digest: 34f70fbfff755173cb479b47c780652632516c2e63a69fd8cb6b93fc9fe20a09
+    path: research/tsm-momentum-trend-volume-absorption--v001/assignment.yml
+  - digest: a8cac41a6be3f8ad349f0c05d3b642c59407636013d521ea210c150e80723ad5
+    path: research/tsm-momentum-trend-volume-absorption--v001/candidate-definition.yml
+  - digest: e6257e47c0f98e3c1b68c591f836228b530b8978d77acb524d87da95d68dc694
+    path: research/tsm-momentum-trend-volume-absorption--v001/implementation-contract.yml
+  - digest: 7fec8e043d31b77f83bf4954787f0fd2aeb7af842562835533bb27d3f4b06b31
+    path: research/tsm-momentum-trend-volume-absorption--v001/preregistration.yml
+  - digest: 0ecd797f0ae3c8be0ca451c54fab824b50a53a0b14a528e49872a5dc74e082d0
+    path: research/tsm-momentum-trend-volume-absorption--v001/qualification-spec.yml
+  - digest: 315f1f20ffcfb30b93e1472eaf5c6c53b5c3a24c0a94fdfbdf4cd84465b0c39a
+    path: research/tsm-momentum-trend-volume-absorption--v001/run_development.py
+  - digest: b37fff431fcd86e4bbd7d191f2214d8661baa469676adfd2a1483f0edf33ac88
+    path: research/tsm-momentum-trend-volume-absorption--v001/runner-contract.yml
+  - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+    path: src/trading_2026_2/__init__.py
+  - digest: 235679b5af7bcf6c05854a0a193642cdd487f390b946c1d993b944ffc7a5f79f
+    path: src/trading_2026_2/tsm_momentum_trend_volume_absorption_v001.py
+  - digest: cc58be77378a186722be701d4071ea7c20a94d4d38bb88c60bae67ed2b163833
+    path: tests/test_tsm_momentum_trend_volume_absorption_v001.py
+  - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+    path: uv.lock
+schema_version: 1

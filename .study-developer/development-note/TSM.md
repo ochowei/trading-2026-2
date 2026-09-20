@@ -1769,3 +1769,31 @@
 ### 更正（2026-09-20）
 
 依 v003 成果卡規範，因 formal Development gates 失敗，本 Study 的最終成果卡狀態應為 `failed`，不是前文的 `complete`。此更正只更新判定，不改變既有 Development evidence：evidence validity 仍為 `valid`、targets 仍為 `not_registered`，candidate freeze 仍為不具資格；未執行 Evaluation、Terminal、challenge 或 replay。
+
+---
+
+## `tsm-momentum-trend-volume-absorption--v001`｜`2026-09-20`
+
+- 成果卡：`failed`，原因：唯一 Development Trial 的 candidate／baseline evidence 完整且 `valid`，但 candidate 有 4 項 formal gate 失敗。
+- Formal gates：candidate 失敗於 `completed_trades`、`minimum_stress_block_bootstrap_positive_return_ratio`、`minimum_stress_leave_one_year_out_profit_factor`、`minimum_stress_leave_one_year_out_return`；baseline 另失敗於 base／stress 報酬與 PF、交易數及多項 stress 穩健性門檻。
+- Research targets：`not_registered`；不能把正式 gate 結果改稱研究目標結果。
+- Evidence validity：Trial `tsm-momentum-trend-volume-absorption-v001` 的 publication、candidate、baseline、inputs 均有一致 binding，validator 判定 `valid`。
+- Candidate freeze eligibility：`不具資格`；candidate 原因為交易數 5<20、stress bootstrap 正報酬比 0.7969<0.80、stress leave-one-year-out PF 0.7983≤1.00、stress leave-one-year-out 報酬 -0.4100%≤0；`candidate_freeze_status`：`尚不能判斷`（freeze 未完成且未產生 candidate-frozen）。
+- Provenance：prepare 與 Trial publication 已核對 source bundle、Development data、runner 與 evidence bindings；freeze plan 的 provenance 只屬文件記載，未驗證完整 provenance 事件，且未完成 registry／provenance／凍結事件。
+
+**研究問題與主要變更**：本 Study 測試 TSM 上升趨勢中，訊號日前五個已完成 session 是否先出現「高量但收盤絕對變化不超過 0.5%」的吸收狀態（成交量至少為此前二十日均量 1.20 倍），再由訊號日一日價格加速至少 2% 確認動能釋放。baseline 保留相同的價格、成本、風險、持倉與退出規則，只關閉吸收條件。這和既有 `volume-lead` 的五日分散量能壓力、`volume-ramp` 的三日單次量能脈衝，以及 v024 的事件後固定價突破不同；本輪識別的是量能與價格結果的背離，不是量能總量或尖峰本身。
+
+| Trial／模型 | 情境 | 證據狀態／原因 | 交易數／年度 | 報酬 | PF（獲利因子） | 最大回撤 | formal gate／target |
+| --- | --- | --- | ---: | ---: | ---: | ---: | --- |
+| `tsm-momentum-trend-volume-absorption-v001`／candidate | Development/base | valid；完整 evidence | 5／3（2015、2016、2018） | 3.9698% | 2.9487 | 1.9991% | base 報酬、PF、單筆損失、stress 回撤與年度 gate 通過；交易數 gate 失敗；target 未登記 |
+| `tsm-momentum-trend-volume-absorption-v001`／candidate | Development/stress | valid；完整 evidence | 5／3（2015、2016、2018） | 2.9420% | 2.4477 | 1.9997% | stress 報酬、PF、回撤與年度 gate 通過；bootstrap 正報酬比及 leave-one-year-out PF／報酬 gate 失敗；target 未登記 |
+| `tsm-momentum-trend-volume-absorption-v001`／baseline | Development/base | valid；控制組完整產出 | 16／5（2014–2018） | -0.5729% | 0.9556 | 4.5483% | base 報酬、PF、交易數及 stress 穩健性 gate 失敗；target 未登記 |
+| `tsm-momentum-trend-volume-absorption-v001`／baseline | Development/stress | valid；控制組完整產出 | 16／5（2014–2018） | -2.7935% | 0.7800 | 4.8322% | stress 報酬、PF、bootstrap 正報酬比及 leave-one-year-out PF／報酬 gate 失敗；回撤與年度 gate 通過；target 未登記 |
+
+**主要發現（最多 3 項）**：已確認 candidate 的 base／stress 報酬與 PF 為正，且最大回撤與單筆損失門檻通過；但只有 5 筆交易，不能用正報酬抵銷樣本不足。已確認 stress bootstrap 正報酬比為 0.7969，僅略低於 0.80，且剔除 2018 後 stress PF 0.7983、報酬 -0.4100%，顯示結果對 signal year 有明顯敏感度。可能原因是吸收條件在 Development 期間留下少量且集中於 2015、2016、2018 的訊號；這由逐年 evidence 支持，但不能判定是門檻、吸收定義或市場狀態的單獨原因。尚不能判斷此機制在其他期間或正式 Evaluation 是否可重現。
+
+**限制（最多 2 項）**：candidate 只有 5 筆交易、3 個年度，無法支持跨年度穩健性或凍結資格；本輪未完成 provenance／registry／candidate freeze 事件，且 targets 未登記。
+
+**下一輪（單一主要變更）**：不在本 Study 內調參或重跑；若要續研，只建立一個事前固定的「吸收狀態覆蓋」新 Study，先保留 1.20 倍與 0.5% 定義，僅改變吸收觀察窗口或另立明確替代機制。成功條件是 evidence valid、candidate 至少 20 筆且覆蓋 3 年、全部 formal gates 通過，並要求 stress bootstrap 正報酬比至少 0.80、每個 leave-one-year-out 的 stress PF>1.00 且報酬>0；任一失敗即停止 freeze。不得以本輪 5 筆正報酬反向選門檻。
+
+**來源與盲讀聲明**：實際讀取 `workflows/strategy-forward-replication-research--v003/studies/tsm-momentum-trend-volume-absorption--v001/manifests/preregistration.yml`、`manifests/source-bundle.yml`、`manifests/prepare-report.yml`；`evidence/trials/tsm-momentum-trend-volume-absorption-v001/{publication,candidate,baseline,inputs}.yml`；`research/tsm-momentum-trend-volume-absorption--v001/{assignment,candidate-definition,development-plan,freeze-plan,implementation-contract,preregistration,qualification-spec,development-trial-inputs,runner-contract,source-bundle}.yml`、`research/tsm-momentum-trend-volume-absorption--v001/run_development.py`；`src/trading_2026_2/tsm_momentum_trend_volume_absorption_v001.py`；`tests/test_tsm_momentum_trend_volume_absorption_v001.py`。未讀取或使用 `historical-evaluation-artifacts/`、任何正式 Evaluation／Terminal 結果、`study.yml`、events、journals、operations/runtime 或 Git 歷史；未驗證完整事件鏈及實際凍結狀態。未執行 Historical Evaluation、Terminal、challenge 或 replay。

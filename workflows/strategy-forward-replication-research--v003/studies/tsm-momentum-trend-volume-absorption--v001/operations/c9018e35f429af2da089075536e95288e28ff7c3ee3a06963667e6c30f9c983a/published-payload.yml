@@ -1,0 +1,8 @@
+development_evidence_digest: 14a90b2dd3583c2e10f1f432857c9b4f3d2ee7d2b81f2a84387f6918f3bed0ae
+development_evidence_path: evidence/trials/tsm-momentum-trend-volume-absorption-v001/candidate.yml
+inputs_digest: a508944b231beed8ef004d3ed7bed921767acf74ad19c32bc2ff41f68a4e457a
+inputs_path: evidence/trials/tsm-momentum-trend-volume-absorption-v001/inputs.yml
+publication_digest: ad1c90a50bdb9b3c467ec6795fa79038c553f9b020a44ba80082934826f539b2
+publication_path: evidence/trials/tsm-momentum-trend-volume-absorption-v001/publication.yml
+status: completed
+trial_id: tsm-momentum-trend-volume-absorption-v001
