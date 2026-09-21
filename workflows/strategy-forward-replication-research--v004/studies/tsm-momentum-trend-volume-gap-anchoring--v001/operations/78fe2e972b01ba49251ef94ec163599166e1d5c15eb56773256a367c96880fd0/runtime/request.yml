@@ -1,0 +1,263 @@
+data_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+data_path: run/bars.csv
+preregistration:
+  baseline_definition:
+    baseline_id: tsm-momentum-trend-volume-gap-anchoring-baseline-v001
+    candidate_family: tsm-momentum-trend-volume-gap-anchoring-v001
+    execution_is_identical: true
+    family: trend-momentum-volume-gap-anchoring
+    objectively_simpler_because: baseline 保留相同的趨勢、價格加速、RSI、持倉、成本、風險、停損停利與冷卻規則，但關閉訊號日前五個 session 的量能加權隔夜跳空壓力條件；因此它是同一價格路徑下不使用這個跳空壓力先行機制的明確控制組。
+    simpler_rule: 收盤高於 SMA(20)、SMA(20) 相對五個 session 前仍不下彎、價格加速至少 2%、RSI(2) <= 70，且符合相同執行規則；不要求先有量能加權隔夜跳空壓力。
+  complete_candidate_family:
+    - tsm-momentum-trend-volume-gap-anchoring-v001
+  eligibility_rules:
+    accepted_signal:
+      cooldown:
+        clock_anchor: completed-position-exit
+        minimum_completed_session_steps_after_exit: 5
+        position_must_be_flat: true
+      decision_time: completed-session-close
+      mean_reversion:
+        close_vs_sma20_gap_minimum: '-0.10'
+        close_vs_sma20_operator: '>='
+        rsi_length: 2
+        rsi_operator: <=
+        rsi_value: '70'
+        sma_length: 20
+      momentum_trend:
+        price_acceleration_lookback: 1
+        price_acceleration_minimum: '0.02'
+        price_to_sma_floor: '0.90'
+        trend_sma_lag_sessions: 5
+        trend_sma_ratio_floor: '0.95'
+      price_direction_confirmation:
+        close_above_prior_close: true
+      symbol: TSM
+      volume_gap_anchoring:
+        enabled: true
+        gap_formula: open_divided_by_prior_close_minus_one
+        lookback_sessions: 5
+        negative_gap_volume_share_minimum: '0.10'
+        uses_prior_sessions_only: true
+        volume_weighted_gap_maximum: '-0.002'
+      volume_leads_price:
+        enabled: true
+        prior_session_window: 5
+        volume_average_length: 20
+        volume_gap_anchoring_is_before_signal: true
+        volume_ratio_minimum: '1.05'
+        volume_ratio_operator: '>='
+        volume_ratio_value: '1.05'
+    costs:
+      base:
+        fee_per_side_bps: '1'
+        slippage_per_side_bps: '5'
+      stress:
+        fee_per_side_bps: '2'
+        slippage_per_side_bps: '20'
+    development_diagnostics:
+      block_bootstrap:
+        block_lengths:
+          - 3
+          - 5
+        maximum_stress_drawdown_above_10pct_ratio: '0.10'
+        minimum_stress_positive_return_ratio: '0.80'
+        repetitions: 50000
+        seed: 20260902
+        seed_application: exact-same-seed-for-each-block-length
+      leave_one_signal_year_out:
+        maximum_stress_drawdown: '0.10'
+        minimum_stress_profit_factor: '1.00'
+        minimum_stress_return: '0'
+      signal_year_breakdown: true
+    development_gates:
+      base_profit_factor:
+        operator: '>'
+        value: '1.10'
+      base_return:
+        operator: '>'
+        value: '0'
+      completed_trades:
+        operator: '>='
+        value: 20
+      maximum_realized_trade_loss_fraction:
+        operator: <=
+        value: '0.04'
+      maximum_stress_block_bootstrap_drawdown_above_10pct_ratio:
+        operator: <=
+        value: '0.10'
+      maximum_stress_leave_one_year_out_drawdown:
+        operator: <=
+        value: '0.10'
+      minimum_stress_block_bootstrap_positive_return_ratio:
+        operator: '>='
+        value: '0.80'
+      minimum_stress_leave_one_year_out_profit_factor:
+        operator: '>'
+        value: '1.00'
+      minimum_stress_leave_one_year_out_return:
+        operator: '>'
+        value: '0'
+      stress_maximum_drawdown:
+        operator: <=
+        value: '0.10'
+      stress_profit_factor:
+        operator: '>'
+        value: '1.00'
+      stress_return:
+        operator: '>'
+        value: '0'
+      traded_years:
+        operator: '>='
+        value: 3
+    execution:
+      cooldown:
+        anchor: completed-position-exit
+        minimum_completed_session_steps_after_exit: 5
+      decision_time: completed-session-close
+      entry: next-XNYS-open
+      gap_fill: stop-gap-at-open-target-gap-at-open
+      holding_period: next-open-after-10-complete-sessions
+      intrabar_ambiguity: adverse-stop-first
+      position_sizing:
+        cash_cap: available-cash-no-borrowing
+        modeled_stop_includes_costs: true
+        risk_fraction_of_pre_entry_equity: '0.02'
+        shares: maximum-integer-shares-within-risk-and-cash-caps
+      stop:
+        level_from_raw_entry_open: '-0.04'
+        order: STOP_MARKET
+        time_in_force: GTC
+      target:
+        level_from_raw_entry_open: '0.04'
+        order: LIMIT
+        reissued_each_open_position_session: true
+        time_in_force: DAY
+    gate_policy: formal Development gates 與研究目標分開判定；任一 formal gate 或事前登記的新穎性識別條件失敗，都保留合法 evidence 並停止在 Development，不得看結果後調參或強行凍結候選。
+    novelty_and_identifiability:
+      development_identifiability: 指標合約明定量能加權隔夜缺口、負缺口量能占比與五日量比只讀取訊號日前資料；candidate 與 baseline 使用同一份 warmup／Development OHLCV、同一成本和持倉規則，只有隔夜跳空壓力條件不同。因此可以由逐筆交易、年度分布、bootstrap 與 leave-one-year-out 診斷識別量能集中在走弱隔夜開盤缺口、先形成壓力、再由價格加速確認反彈，而非資料、成交或事後調參造成的差異。
+      mechanism_difference: 本候選的量價順序是先看成交量是否支持前五日的走弱隔夜開盤缺口，再看訊號日價格加速。它不使用既有 volume-lead 的收盤方向量能壓力、volume-ramp 的三日單次量能脈衝、volume-absorption 的高量小收盤變動、volume-efficiency 的量能加權日內區間放大、volume-close-acceptance 的量能加權收盤位置、volume-return-alignment 的量能加權收盤報酬，也不使用 volume-range-compression 的量能加權日內窄幅區間；v024 則是單次放量事件後突破固定高點。本候選的核心欄位是 Open／前一日 Close 的隔夜缺口方向與量能占比時序，baseline 只關閉此條件。
+      shared_indicator_limitations: 仍共用 TSM、XNYS、Yahoo auto_adjusted OHLCV、五日窗口、二十日量能平均、當日趨勢與至少 2% 價格加速；每日 OHLCV 無法觀察盤中成交量時序，Open／前收缺口也可能混合公司消息與隔夜市場因素。因此新意是隔夜跳空壓力的量價先行機制，不是全新資料來源或對所有量能指標的獨立驗證。
+      this_study_path: 本 Study 固定訊號日前五個已完成 session 的成交量加權隔夜缺口不高於 -0.20%、負隔夜缺口的成交量占比至少 10%，且五日平均量比至少 1.05；當日仍須符合趨勢、均線下限、RSI 與至少 2% 的一日價格加速，才於下一日 open 進場並持有最多十個完整 session。這是先由量能確認隔夜跳空壓力、後由價格加速確認反彈，不是以訊號日 Open 或當日 Volume 形成事後條件。
+      v024_registered_path: v024 已登記上升趨勢中的單次放量事件，事件收盤不得高於先前五日高點，再在事件後五日內首次嚴格突破固定的 max(previous_five_session_high, event_day_high) 價位；本候選沒有事件狀態機或固定突破價。
+    source_and_adjustment:
+      adjustment_policy: Yahoo auto_adjust
+      calendar: XNYS
+      interval: 1d
+      provider: yahoo
+      timezone: America/New_York
+  evaluation_gates:
+    base_compounded_return:
+      operator: '>'
+      value: '0'
+    base_profit_factor:
+      operator: '>'
+      value: '1.10'
+    completed_trades:
+      operator: '>='
+      value: 20
+    family_wise_confidence:
+      operator: '>='
+      value: '0.90'
+    maximum_fold_positive_profit_concentration:
+      operator: <=
+      value: '0.50'
+    maximum_fold_trade_concentration:
+      operator: <=
+      value: '0.50'
+    maximum_realized_trade_loss_fraction:
+      operator: <=
+      value: '0.04'
+    positive_traded_fold_ratio:
+      operator: '>='
+      value: '0.60'
+    stress_max_drawdown:
+      operator: <=
+      value: '0.10'
+    stress_profit_factor:
+      operator: '>'
+      value: '1.00'
+    stress_return:
+      operator: '>'
+      value: '0'
+    traded_folds:
+      operator: '>='
+      value: 3
+  fold_warmup_sessions: 25
+  hypothesis: 在 TSM 的上升趨勢中，若訊號日前五個已完成 XNYS session 的成交量集中於走弱的隔夜開盤缺口，且量能加權隔夜缺口不高於 -0.20%、負缺口量能占比至少 10%、五日平均量比至少 1.05，這個跳空壓力應先於反彈價格釋放；當日趨勢仍在、價格相對均線未低於固定下限並出現至少 2% 的一日價格加速時，下一個 session open 進場並持有最多十個完整 session，可能捕捉動能延續。相較既有 volume-lead 的五日分散量能壓力、volume-ramp 的三日脈衝、volume-absorption 的高量小收盤變動、volume-efficiency 的量能加權日內區間、volume-close-acceptance 的量能加權收盤位置、volume-return-alignment 的量能加權收盤報酬、volume-range-compression 的量能加權窄幅區間，以及 v024 的事件後固定價突破，本候選只使用訊號日前 Open／前一日 Close 的隔夜缺口方向與量能占比時序。baseline 保留完全相同的價格、成交、成本、風險與退出規則，只關閉量能加權隔夜跳空壓力條件。所有規格在 Study 開始前固定；任一 formal gate 或研究目標失敗即否證並停止凍結，不得以結果回頭調參。
+  initial_cash: '100000'
+  maximum_holding_sessions: 11
+  maximum_trials: 1
+  selection_rule:
+    eligible_candidate: 唯一 Trial 必須通過全部 Development gates；未通過時不得凍結候選。
+    method: fixed-single-candidate-no-outcome-ranking
+    selected_candidate_id: tsm-momentum-trend-volume-gap-anchoring-v001
+  tie_handling:
+    method: not-applicable-single-candidate
+source_bundle:
+  files:
+    - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+      path: pyproject.toml
+    - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+      path: uv.lock
+    - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+      path: src/trading_2026_2/__init__.py
+    - digest: 21667b899faaacdf47590c4878a9579558c5281f819ccd9aa31db3ad6ef863c4
+      path: src/trading_2026_2/tsm_momentum_trend_volume_gap_anchoring_v001.py
+    - digest: d79a2549023890b0596ae89f267342cfa15dff9ceed73731105634da2a46a730
+      path: tests/test_tsm_momentum_trend_volume_gap_anchoring_v001.py
+    - digest: e0dbea75f50d5ee72dfd58f56535154cc73fc112f29b124d25392ff68ba2e76b
+      path: research/tsm-momentum-trend-volume-gap-anchoring--v001/assignment.yml
+    - digest: 536c8533c25d5f7d40ea8106fa7e508738ecb750c44268a66ee7117472064b76
+      path: research/tsm-momentum-trend-volume-gap-anchoring--v001/candidate-definition.yml
+    - digest: 356b566543389bcbe3c146de6020bd72ba4652601cdb01bf79a37a93bafa46fc
+      path: research/tsm-momentum-trend-volume-gap-anchoring--v001/implementation-contract.yml
+    - digest: 2d83e90a0dcbd772fd5ce415af8605afc4bdc3bf068cc9dcf71efb6f0a59fc35
+      path: research/tsm-momentum-trend-volume-gap-anchoring--v001/preregistration.yml
+    - digest: 2ae4065f5d56e2a643a8f3111f3ec62da27f05cf4f61861c0d11b4137360ccc4
+      path: research/tsm-momentum-trend-volume-gap-anchoring--v001/qualification-spec.yml
+    - digest: b8aa304e95e4058b8ab744915958d04109c5b1b778a044d73a985df6467983f5
+      path: research/tsm-momentum-trend-volume-gap-anchoring--v001/runner-contract.yml
+    - digest: 82700b35a068bea1a87ca3c6c083cf22ab7ea809c27d097e5dcf263528f864b8
+      path: research/tsm-momentum-trend-volume-gap-anchoring--v001/run_development.py
+  schema_version: 1
+stage: development
+trial_inputs:
+  candidate_family: tsm-momentum-trend-volume-gap-anchoring-v001
+  candidate_id: tsm-momentum-trend-volume-gap-anchoring-v001
+  data_bindings:
+    development_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+    development_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+    warmup_digest: 81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847
+  date_controls:
+    formal_provider_access: false
+    signal_end: '2018-12-31'
+    signal_start: '2014-01-01'
+    warmup_end: '2013-12-31'
+    warmup_start: '2013-01-01'
+  development_diagnostics:
+    block_lengths:
+      - 3
+      - 5
+    bootstrap_seed: 20260902
+    repetitions: 50000
+    seed_application: exact-same-seed-for-each-block-length
+  execution:
+    cooldown_anchor: completed-position-exit
+    cooldown_completed_session_steps_after_exit: 5
+    entry: next-XNYS-open
+    holding_sessions: 10
+    intrabar_ambiguity: adverse-stop-first
+    position_sizing:
+      modeled_stop_includes_costs: true
+      risk_fraction: '0.02'
+    stop_market_gtc: '-0.04'
+    target_limit_day: '0.04'
+  preregistration_digest: 2d83e90a0dcbd772fd5ce415af8605afc4bdc3bf068cc9dcf71efb6f0a59fc35
+  schema_version: 1
+  selected_candidate_id: tsm-momentum-trend-volume-gap-anchoring-v001
+  source_bundle_digest: f0836cec47c9ed7fe29736b0fe0c79d51520c602089e68836e9431949a8554e5
+  strategy_engine_digest: 21667b899faaacdf47590c4878a9579558c5281f819ccd9aa31db3ad6ef863c4
+  study_procedure_digest: 82700b35a068bea1a87ca3c6c083cf22ab7ea809c27d097e5dcf263528f864b8
+  study_procedure_path: research/tsm-momentum-trend-volume-gap-anchoring--v001/run_development.py
+  trial_id: tsm-momentum-trend-volume-gap-anchoring-v001

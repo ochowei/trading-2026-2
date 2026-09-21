@@ -1,0 +1,30 @@
+actor_id: TASK-010-v004-study-developer
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: f0836cec47c9ed7fe29736b0fe0c79d51520c602089e68836e9431949a8554e5
+  workflow_digest: 62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: study-created
+execution:
+  assignment_digest: e0dbea75f50d5ee72dfd58f56535154cc73fc112f29b124d25392ff68ba2e76b
+  assignment_path: manifests/assignments/e0dbea75f50d5ee72dfd58f56535154cc73fc112f29b124d25392ff68ba2e76b.yml
+  role: study 開發者
+occurred_at: '2026-09-21T06:27:22.177484Z'
+payload:
+  create_plan_digest: 1434f5387bd762cc04a90cc47e3d905ef84ec93fe1e05bdb2e32bfa066d550e5
+  create_plan_path: manifests/create-plan.yml
+  experiment_family: tsm-momentum-trend-volume-gap-anchoring
+  historical_evaluation_operator: not-assigned-development-scope
+  prepare_report_digest: 0c514a069ac59183a260be85bff9e17200945c5f144e3d10845369c000180eef
+  prepare_report_path: manifests/prepare-report.yml
+  research_owner: TASK-010-v004-study-developer
+  research_round_id: strategy-forward-replication-research-v004-tsm-2026-09-task-010
+  source_bundle_digest: f0836cec47c9ed7fe29736b0fe0c79d51520c602089e68836e9431949a8554e5
+  source_bundle_path: manifests/source-bundle.yml
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  workflow_reference_path: manifests/workflow-reference.yml
+previous_event_digest: null
+schema_version: 1
+sequence: 1
+study_id: tsm-momentum-trend-volume-gap-anchoring--v001

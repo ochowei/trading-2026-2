@@ -1,0 +1,9 @@
+assignee: TASK-010-v004-study-developer
+assigner: 專案管理者（TASK-010）
+instruction: 建立 Study tsm-momentum-trend-volume-gap-anchoring--v001，提出與既有 TSM Development Study 真正不同的動能／趨勢加上量先於價假說：訊號日前五個已完成 session 的成交量是否集中在走弱的隔夜開盤缺口，以量能加權隔夜缺口、負缺口量能占比及五日量比形成跳空壓力，再由當日趨勢與價格加速確認反彈。固定寫入與 volume-lead、volume-ramp、volume-absorption、volume-efficiency、 volume-close-acceptance、volume-return-alignment、volume-range-compression 及 v024 的機制差異、candidate／baseline、Development 可識別性與限制。使用 strategy-forward-replication-research--v004 正式 release，完成 preregistration、 candidate family、baseline、實作、固定 Development 資料、runner、測試、 runner-preflight、prepare、create、唯一 Development trial、evidence validation 與規則允許的 freeze-readiness／candidate-freeze 嘗試。只處理 Development-to-freeze， 不執行 Historical Evaluation、Terminal、challenge 或 replay。
+role: study 開發者
+schema_version: 1
+scope: development-to-freeze
+source_id: PROJECT_KANBAN:TASK-010
+study_id: tsm-momentum-trend-volume-gap-anchoring--v001
+workflow_version: v004

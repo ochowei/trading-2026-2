@@ -1,0 +1,26 @@
+actor_id: TASK-010-v004-study-developer
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: f0836cec47c9ed7fe29736b0fe0c79d51520c602089e68836e9431949a8554e5
+  workflow_digest: 62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: trial-recorded
+execution:
+  assignment_digest: e0dbea75f50d5ee72dfd58f56535154cc73fc112f29b124d25392ff68ba2e76b
+  assignment_path: manifests/assignments/e0dbea75f50d5ee72dfd58f56535154cc73fc112f29b124d25392ff68ba2e76b.yml
+  role: study 開發者
+occurred_at: '2026-09-21T06:27:46.400978Z'
+payload:
+  development_evidence_digest: e4665fd1d28d36cf1c6aaf10bf783d680d4dc6a9258f51cf3debfa32ee47a6a9
+  development_evidence_path: evidence/trials/tsm-momentum-trend-volume-gap-anchoring-v001/candidate.yml
+  inputs_digest: e6483d82f6cfc919392fe779bf30b2537e23e298258d8ca54c231d3e42fe0c8a
+  inputs_path: evidence/trials/tsm-momentum-trend-volume-gap-anchoring-v001/inputs.yml
+  publication_digest: b03e0bbe43a9bb7fe3f22d4e66067d862360a79253589a1003f1f0d68285fc24
+  publication_path: evidence/trials/tsm-momentum-trend-volume-gap-anchoring-v001/publication.yml
+  status: completed
+  trial_id: tsm-momentum-trend-volume-gap-anchoring-v001
+previous_event_digest: c466b0840d747e446b0e261680ccbd7d99dab85876936a41e21ea6c548e087b5
+schema_version: 1
+sequence: 4
+study_id: tsm-momentum-trend-volume-gap-anchoring--v001

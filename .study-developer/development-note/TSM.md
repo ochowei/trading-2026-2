@@ -1907,3 +1907,22 @@
 本次真正測試的是方向相反的 regime 假說：在五日量比 `>= 1.05` 的高參與度背景下，要求同一類 range ratio `<= 1.05`，代表成交量集中於窄幅區間，先觀察價格展幅未同步放大、等待後續價格釋放，再由訊號日趨勢與價格加速確認。相對地，`volume-efficiency--v001` 的 `>= 1.15` 測試的是高量伴隨較大日內區間的效率方向。故本次差異在「窄幅壓縮／量先等待釋放」與「放大量擴大區間」兩種可解釋的市場機制方向，以及本次額外固定的五日量比條件；不是單純名稱、版本或無語義重發。
 
 限制是：本次仍共用上述 range ratio 的指標家族，不能把它描述成完全獨立的新公式；可主張的研究新意僅限於反向壓縮門檻、五日量比組合及其價格釋放機制。若要進一步否證，後續必須另立 Study，事前固定同一方向相反的 regime 定義並以新的 Development evidence 檢驗，不能在本 Study 內調參或重跑。
+
+## `tsm-momentum-trend-volume-gap-anchoring--v001`｜`2026-09-21`
+
+- 成果卡：`failed`；唯一 Trial 的 candidate／baseline evidence 均 `valid`。假說：訊號日前五個 session 的量能加權隔夜缺口 `<=-0.20%`、負缺口量能占比 `>=10%`、五日量比 `>=1.05`，再由趨勢與 `>=2%` 價格加速確認，測試「負向量能壓力先行、價格反彈後確認」。
+
+| 模型／情境 | evidence／交易數／年 | 報酬 | PF／最大回撤 |
+| --- | ---: | ---: | ---: |
+| candidate／base | valid／3／1（2018） | 0.8092% | 1.3936／1.9988% |
+| candidate／stress | valid／3／1 | 0.3189% | 1.1558／1.9995% |
+| baseline／base | valid／16／5（2014–2018） | -0.5729% | 0.9556／4.5483% |
+| baseline／stress | valid／16／5 | -2.7935% | 0.7800／4.8322% |
+
+- 差異：使用 `Open／前一日 Close` 缺口及負缺口占比；不同於 volume-lead（總量壓力）、volume-ramp（單次脈衝）、volume-absorption（高量小變動）、volume-efficiency（日內區間效率）、volume-close-acceptance（收盤承接）、volume-return-alignment（收盤報酬對齊）、volume-range-compression（窄幅 range ratio）與 v024（事件後固定價突破）。仍共用 OHLCV、五日視窗、量比、趨勢與價格加速，不能宣稱指標限制完全獨立。
+- Gates／freeze：candidate 失敗 `completed_trades`、stress leave-one-year-out return、`traded_years`；baseline 失敗 base／stress 報酬與 PF、交易數及多項 stress 穩健性 gates。targets=`not_registered`；candidate 不具 freeze 資格，`candidate_freeze_status=尚不能判斷`，`freeze-readiness`／`freeze` 均 `qualification-failed`，未產生 freeze operation 或 candidate-frozen。
+- Provenance：workflow／reference／source／data／warmup digest 分別為 `62779bce…67e4`／`7b13d4d7…0b47`／`f0836cec…54e5`／`a42c3932…f7`／`81fdf3d6…c847`；create／Development operation 為 `f99d9129…25e0`／`78fe2e97…80fd0`；event head `fafed18e…97d0`、count `4`。
+
+**發現與限制**：已確認 candidate base／stress 為正但僅 3 筆且集中一年，baseline 同規則下為負；這不是策略有效證明。可能原因是缺口條件留下少量年度集中訊號，尚不能判斷是聚合、門檻或市場狀態造成。限制是樣本不足且只有 Development evidence；preflight synthetic historical 分支不是正式結果。
+
+**下一輪單一可否證變更**：若續研，另立 Study，只改為事前固定的「五日中至少三日負隔夜缺口」狀態，其餘固定；要求 evidence valid、至少 20 筆／3 年及全部 formal gates 通過，否則停止 freeze。未執行 Historical Evaluation、Terminal、challenge、replay，未讀取正式結果、受限資料、study.yml、events、journals、operations/runtime 或 Git 歷史。來源限於本 Study 的 research manifests／runner、v004 manifests、Development candidate／baseline／inputs／publication、engine 與直接 tests。
