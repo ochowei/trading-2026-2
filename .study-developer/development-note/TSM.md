@@ -1877,3 +1877,33 @@
 - Parent 重新執行 Ruff：engine 與 test 通過，但 `research/tsm-momentum-trend-volume-return-alignment--v001/run_development.py` 有 `I001` import 排序錯誤，只有加 `--ignore I001` 才通過；因此不能宣稱 full Ruff passed。事後修正 runner 會改變已綁定 Source Bundle，本 Study 不修正、不改綁定、不重跑。
 - immutable preregistration 的 `novelty_and_identifiability.this_study_path`／`hypothesis` 文字寫的是量能加權五日收盤報酬至少 `0.20%`（`0.002`）；但 candidate-definition、implementation-contract、實際 runner 與已發布 evidence 綁定的 canonical tested rule 是 `volume_weighted_return_minimum=-0.02`，以及 `weighted-minus-unweighted >= 0.0005`。因此本結果不能表述為 `0.20%` 門檻假說的測試結果；此 mismatch 只能列為 immutable 限制，不能回寫 preregistration 或藉重跑修正。
 - 本回修保留成果卡 `failed`、evidence `valid`、candidate freeze `不具資格`、`candidate_freeze_status=尚不能判斷`、targets `not_registered`，且未執行 Evaluation／Terminal／challenge／replay。上述兩項測試／Ruff 驗證缺失與一項 immutable 規格 mismatch 均列為未修復限制；它們不影響已產出的 Development evidence binding，但限制 parent 對「完整測試通過」及「`0.20%` 假說」的結論。未修改任何已發布 source bundle、preregistration、candidate／baseline evidence、manifests、authority、events 或既有 Study 檔案，亦未重跑任何 Trial。
+
+---
+
+## `tsm-momentum-trend-volume-range-compression--v001`｜`2026-09-21`
+
+- 成果卡：`failed`；唯一 v004 Development Trial 的 candidate／baseline evidence 均為 `valid`，但 candidate 未通過全部 formal Development gates。
+- 假說與機制差異：訊號日前五個已完成 session 的原始成交量加權日內區間，除以同窗未加權平均日內區間，壓縮比固定為至多 `1.05`，且五日平均量比至少 `1.05`；再由訊號日的趨勢、至少 2% 價格加速與既定執行規則確認。這測的是「高參與度但價格展幅不擴張，量先於價」；不同於高量小收盤變動吸收、量能加權大區間效率、收盤位置承接、量能報酬對齊、五日分散量能壓力與 v024 事件後固定價突破。所有壓縮欄位只讀取訊號日前資料，baseline 保留同一價格、成本、風控、持倉與退出規則，只關閉壓縮條件。
+
+| Trial／模型 | 情境 | evidence／交易數／年度 | 報酬 | PF（獲利因子） | 最大回撤 | formal gate／target |
+| --- | --- | ---: | ---: | ---: | ---: | --- |
+| candidate | Development/base | valid／5／2（2016、2018） | -2.4766% | 0.4663 | 2.4766% | `base_profit_factor`、`base_return`、`completed_trades` 失敗；targets 未登記 |
+| candidate | Development/stress | valid／5／2 | -3.0025% | 0.3645 | 3.0025% | bootstrap 正報酬比、leave-one-year-out PF／報酬、stress PF／報酬失敗 |
+| baseline | Development/base | valid／16／5（2014–2018） | -0.5729% | 0.9556 | 4.5483% | base 報酬、PF、交易數及部分 stress 穩健性 gate 失敗 |
+| baseline | Development/stress | valid／16／5 | -2.7935% | 0.7800 | 4.8322% | stress 報酬、PF、bootstrap 正報酬比、leave-one-year-out PF／報酬失敗 |
+
+- Evidence validity：candidate／baseline 的 publication、inputs、source bundle 與 preregistration bindings 均由 v004 validator 驗證；candidate 單筆最大損失 `1.9999%`、stress 最大回撤 `3.0025%` 與 bootstrap 最大回撤超過 10% 比率 `0` 通過相應門檻，但這不能抵銷核心 gate 失敗。
+- Candidate freeze：候選不具資格；failed reasons 為 candidate 的 base PF／報酬、交易數、stress bootstrap 正報酬比、stress leave-one-year-out PF／報酬、stress PF／報酬與交易年度（2<3）。`freeze-readiness` 與 `freeze` 均合法返回 `qualification-failed`，沒有 freeze operation、candidate-frozen 或 provenance 事件；`candidate_freeze_status` 為未完成／尚不能判斷。
+- Provenance 與固定摘要：workflow digest `62779bce…67e4`、workflow reference digest `7b13d4d7…0b47`、source bundle digest `855692fd…e718`、preregistration digest `9438ac77…82f5`、Development data digest `a42c3932…f7`、warmup digest `81fdf3d6…c847`；create operation `afbe22…d1569`，唯一 Development operation `9585be…c075`，event head `4473f541…d1d`，event_count `4`。這些是 Development binding／事件鏈資訊，不是正式 Evaluation 結果。
+
+**主要發現**：已確認 candidate 只有 5 筆交易，且兩個 signal years 的 base／stress 報酬皆為負；baseline 交易較多但也未通過核心報酬與壓力門檻。可能原因是壓縮條件在本 Development 期間留下少量且結果偏弱的訊號，並可能受 2016、2018 的年度集中影響；現有 evidence 不能把原因歸因於單一門檻或市場狀態。尚不能判斷此機制在其他期間是否有效，也不能把 Development 結果外推到正式 Evaluation。
+
+**限制與下一輪可否證條件**：targets 為 `not_registered`；candidate 未達 20 筆與 3 年，freeze 未完成。停止本 Study，不在原 Study 內調參或重跑；若續研，另立 Study 並事前固定唯一的新機制，要求 evidence valid、至少 20 筆且 3 年、全部 formal gates 通過，並要求 base／stress 報酬與 PF、stress leave-one-year-out 與 bootstrap 門檻均通過；任一條件失敗即否證並停止 freeze。未執行 Historical Evaluation、Terminal、challenge 或 replay，未讀取或引用受限資料與正式 Evaluation／Terminal 結果。
+
+### Parent review 澄清（2026-09-21）
+
+本卡明確揭露：既有 `tsm-momentum-trend-volume-efficiency--v001` 已使用同類核心指標 **volume-weighted intraday range／unweighted intraday range**，其 canonical rule 為比值 `>= 1.15`。因此，本次不是把相同規則改版本號或改名後無語義重發，也不宣稱公式本身全新。
+
+本次真正測試的是方向相反的 regime 假說：在五日量比 `>= 1.05` 的高參與度背景下，要求同一類 range ratio `<= 1.05`，代表成交量集中於窄幅區間，先觀察價格展幅未同步放大、等待後續價格釋放，再由訊號日趨勢與價格加速確認。相對地，`volume-efficiency--v001` 的 `>= 1.15` 測試的是高量伴隨較大日內區間的效率方向。故本次差異在「窄幅壓縮／量先等待釋放」與「放大量擴大區間」兩種可解釋的市場機制方向，以及本次額外固定的五日量比條件；不是單純名稱、版本或無語義重發。
+
+限制是：本次仍共用上述 range ratio 的指標家族，不能把它描述成完全獨立的新公式；可主張的研究新意僅限於反向壓縮門檻、五日量比組合及其價格釋放機制。若要進一步否證，後續必須另立 Study，事前固定同一方向相反的 regime 定義並以新的 Development evidence 檢驗，不能在本 Study 內調參或重跑。

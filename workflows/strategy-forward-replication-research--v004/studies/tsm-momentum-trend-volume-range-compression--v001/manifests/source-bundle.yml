@@ -1,0 +1,26 @@
+files:
+  - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+    path: pyproject.toml
+  - digest: 1ad2b626be2351b288ad0caa4c5c77a689114232a975c5e05ffd95adc7ffad26
+    path: research/tsm-momentum-trend-volume-range-compression--v001/assignment.yml
+  - digest: 6fd4b5a8161432b1e0ebabcce32ad572e5731b2ca5e775ff72d3e7815461abc0
+    path: research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml
+  - digest: 91980745a3ccc20619d476e576e94de463eb7a458b59625ae501dd9c9998d16b
+    path: research/tsm-momentum-trend-volume-range-compression--v001/implementation-contract.yml
+  - digest: 9438ac7762d398f4a6dc3095addb63e5aea5d6ee676965bdf65d035d6d9b82f5
+    path: research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml
+  - digest: b06b5942e24f055a67a48a880c194309ff008e12715aa1ccd885e9b1daea62d9
+    path: research/tsm-momentum-trend-volume-range-compression--v001/qualification-spec.yml
+  - digest: a973b6caf4c7fa9f4fe556d21a93582df2b08d9d0b7af70f7a5dc3cfcd47b527
+    path: research/tsm-momentum-trend-volume-range-compression--v001/run_development.py
+  - digest: 7cf99bf49e761ccab80d664931897c34b49f7fd1211f32202e1552566bbb8ea8
+    path: research/tsm-momentum-trend-volume-range-compression--v001/runner-contract.yml
+  - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+    path: src/trading_2026_2/__init__.py
+  - digest: 21fc79e3f3aac10a6ae122f0c25b1a3e4e56f117ce17cad88657d4a3404b2d92
+    path: src/trading_2026_2/tsm_momentum_trend_volume_range_compression_v001.py
+  - digest: d4b43d9e55ef5608651e6f8dccdfe455e9a380b1ce286cfe0d09d9deddbff1cf
+    path: tests/test_tsm_momentum_trend_volume_range_compression_v001.py
+  - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+    path: uv.lock
+schema_version: 1

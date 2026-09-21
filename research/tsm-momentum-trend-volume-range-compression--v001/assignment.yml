@@ -1,0 +1,25 @@
+assignee: TASK-009-v004-study-developer
+assigner: 專案管理者（TASK-009）
+instruction: '建立 Study tsm-momentum-trend-volume-range-compression--v001，提出與既有 TSM Development Study 真正不同的
+
+  動能／趨勢加上量先於價假說：訊號日前五個已完成 session 的成交量先集中於窄幅日內高低價區間，
+
+  以原始成交量加權日內區間除以同窗未加權平均區間，壓縮比至多 1.05，且五日平均量比至少 1.05；
+
+  當日再以趨勢、價格加速與既定執行規則確認。固定寫入機制差異、候選／baseline、Development
+
+  可識別性與限制。使用 strategy-forward-replication-research--v004 正式 release，完成
+
+  preregistration、candidate family、baseline、實作、固定 Development 資料、runner、測試、
+
+  prepare、create、唯一 Development trial、evidence validation 與規則允許的 freeze-readiness／
+
+  candidate-freeze 嘗試。只處理 Development-to-freeze，不執行 Historical Evaluation、Terminal、
+
+  challenge 或 replay。'
+role: study 開發者
+schema_version: 1
+scope: development-to-freeze
+source_id: PROJECT_KANBAN:TASK-009
+study_id: tsm-momentum-trend-volume-range-compression--v001
+workflow_version: v004

@@ -1,0 +1,26 @@
+data:
+  digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+  path: research/tsm-momentum-trend-volume-range-compression--v001/data/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+evidence:
+  digest: ee3ab27557b8082365fdd653589760f99c175a2bd2accdd20039bbdb22eb62c1
+  path: runtime/evidence.yml
+execution_contract: request-output-v1
+execution_workspace: temporary
+operation_id: 9585be389b00cb6350c45ca44b04bbf8186e307e94524c48efa810474cc5c075
+request:
+  digest: b400156e6c07fcf6ff68e1e7353523b9dfedc1708b0df42fc2cabed64908e17a
+  path: runtime/request.yml
+resolver_version: 1
+runner:
+  digest: a973b6caf4c7fa9f4fe556d21a93582df2b08d9d0b7af70f7a5dc3cfcd47b527
+  path: research/tsm-momentum-trend-volume-range-compression--v001/run_development.py
+schema_version: 1
+source_bundle:
+  digest: 855692fd88bf85d49d00cb740246e94752fa50e0385d95678121676c05d0e718
+  path: manifests/source-bundle.yml
+stage: development
+study_id: tsm-momentum-trend-volume-range-compression--v001
+workflow_reference:
+  digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  path: manifests/workflow-reference.yml
+workflow_version: v004

@@ -1,0 +1,16 @@
+artifacts:
+  baseline:
+    digest: 446ca48745b4fede7718cca2f3d59e0f411fae582986b173bfe0b5ae2760dfe6
+    path: evidence/trials/tsm-momentum-trend-volume-range-compression-v001/baseline.yml
+  candidate:
+    digest: 227ec3b68dd0fbcc9b7fe7574a9a64c2dabc0c61e1c20cccba76e7e1624ec2be
+    path: evidence/trials/tsm-momentum-trend-volume-range-compression-v001/candidate.yml
+  inputs:
+    digest: b044fa2e00a62a662b4637e2b5cb1b032122dfa4c5a09ee638f9514f4f78a20e
+    path: evidence/trials/tsm-momentum-trend-volume-range-compression-v001/inputs.yml
+envelope_digest: ee3ab27557b8082365fdd653589760f99c175a2bd2accdd20039bbdb22eb62c1
+preregistration_digest: 9438ac7762d398f4a6dc3095addb63e5aea5d6ee676965bdf65d035d6d9b82f5
+schema_version: 1
+source_bundle_digest: 855692fd88bf85d49d00cb740246e94752fa50e0385d95678121676c05d0e718
+study_id: tsm-momentum-trend-volume-range-compression--v001
+trial_id: tsm-momentum-trend-volume-range-compression-v001

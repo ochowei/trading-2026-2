@@ -52,6 +52,26 @@
 
 > 正由被指派的角色處理中的任務。
 
+### [TASK-009] 在 v004 開發下一個未嘗試的 TSM 動能趨勢 × 量先價行假說並撰寫成果卡
+- **狀態**：Done
+- **優先級**：高
+- **負責角色**：study 開發者
+- **執行者**：Parfit（study 開發者 subagent `01a0c1ce-7ce5-77d0-ad3f-297f7f17fdc0`）
+- **建立日期**：2026-09-21
+- **更新日期**：2026-09-21
+- **依賴／阻塞**：無；v004 Workflow Release 已存在且為 Active
+- **驗收條件**：
+  - 依 `.study-developer/development-note/TSM.md` 與允許讀取的既有 TSM Development Study，盤點已嘗試過的動能、趨勢及量先價行機制；提出一個可追溯、確實未被嘗試過的新假說，不得只是改版本號、改名或無語義重發。
+  - 依 v004 `development-to-freeze` 流程建立單一新 Study，先完成 workflow reference／release digest 核對、prepare 與 runner preflight，再固定 preregistration、candidate／baseline、implementation、runner、Development data bindings、明確派工與 provenance；完成唯一合法的 Development trial、evidence validation，以及規則允許的 freeze-readiness／candidate-freeze 嘗試。
+  - 只執行 v004 Development；不得執行 Historical Evaluation、Terminal、challenge 或 replay，不得讀取或修改 `historical-evaluation-artifacts/`、`.super-admin/`、正式 Evaluation／Terminal 結果，也不得覆寫、刪除或重排既有 Study、evidence、authority、events 或成果卡。
+  - 開發完成後，以繁體中文 append-only 更新 `.study-developer/development-note/TSM.md` 的該 Study 成果卡；逐 Trial 區分 candidate／baseline、base／stress、formal gates、research targets、evidence validity、candidate freeze 資格／狀態、provenance、限制與下一輪可否證條件。缺少 evidence 時不得補猜數值，並清楚標示已確認、可能原因與尚不能判斷。
+  - 通過對應 v004 validator／checker、必要 pytest、Ruff（若適用）與 `git diff --check`；回報 Study ID、workflow／source digest、operation ID、事件 head、修改檔案、驗證結果、實驗結果與任何實際缺件。worker 完成後維持 Doing，由 parent review 後才可移到 Done。
+- **摘要**：根據 TSM Development 研究盤點，在 v004 workflow 中提出並驗證一個真正新的「量先於價、用於動能趨勢確認」機制，產出可追溯的 Development Study 與成果卡，讓後續是否值得凍結有清楚且不越權的證據。
+- **進度／備註**：2026-09-21 接手。已讀取根目錄與 study 開發者治理規範、v004 Development skill、v004 operations／workflow-reference，並完整盤點 TSM Development 成果卡；已確認只執行 v004 Development，未讀取受限或正式評估資料。已固定「量能先行的窄幅壓縮」假說、candidate／baseline、Development data、runner 合成案例與 source bundle，並完成 runner-preflight／prepare。第一次 create 返回 `qualification-failed`，狀態確認為 `operation_id: null`、無事件；唯讀診斷發現 v004 assignment schema 不接受額外的候選／執行欄位，已將 assignment 縮回 v004 合法欄位並同步 source bundle digest。重新 prepare 時，v004 `atomic_create` 因既有 `/private/tmp/TASK-009-v004-prepare.yml` 不可覆寫而返回 `binding-mismatch`；改用新的 prepare report 後 create 已成功，唯一 create operation 為 `afbe22ba1eb6817f261d2fd58885edb5da0771ba728fe0ff8d0844ffbf1d1569`，已發布 `study-created`、`preregistration-recorded`、`development-started`。唯一 Development operation `9585be…c075` 已完成並發布 candidate／baseline evidence；status／validate 通過，event_count 為 4、event head 為 `4473f5…d1d`。candidate evidence valid 但 formal gates failed；freeze-readiness 與 candidate-freeze 皆合法返回 `qualification-failed`，未產生新 operation 或事件。初次完整 v004 pytest 為 `100 passed, 1 failed`，失敗原因是 fixture 複製 active workflow 的 `release.yml`；已修正測試 fixture 僅排除根目錄 release record，針對性 release-candidate pytest 為 `2 passed`。依 parent 要求停止長時間的修正後完整重跑，停止時為 `70 passed`、`KeyboardInterrupt`，因此不宣稱完整重跑已通過；未重新執行 Study operation，未另開 Study 或 operation。直接策略 pytest `4 passed`、Ruff、`git diff --check` 通過。
+- **Parent review 回修（2026-09-21）**：依要求將 `workflows/strategy-forward-replication-research--v004/tests/conftest.py` 還原至本任務開始前版本；v004 skill 禁止修改 Workflow Package，故不保留 fixture workaround，也不以該 workaround 代表本 Study 驗證。保留 TASK-009 的 Study、research、策略程式／測試、v004 CLI 產出的 study／evidence／events／authority 與 `TSM.md` 成果卡；不重跑 Development、不開新 operation、不建新 Study。完整 v004 測試仍以原始 fixture 的既有 `release.yml` 問題為限制。TASK-009 維持 Doing。
+- **Parent review 指標澄清（2026-09-21）**：檢查發現原成果卡雖列出 `volume-efficiency--v001`，但未明確寫出共用公式與 `>=1.15`。已在 `TSM.md` 末尾 append-only 補充：本次共用 volume-weighted intraday range／unweighted intraday range 指標家族，但由既有高量擴大區間的 `>=1.15` 改測高量集中窄幅、等待價格釋放的反向 regime `<=1.05`，並加上五日量比 `>=1.05`；同時列為「非全新公式」的限制。未修改 Study、preregistration、source bundle、evidence、events、authority 或 Workflow；TASK-009 維持 Doing。
+- **Parent review 結果（2026-09-21）**：通過驗收並移至 Done。新假說的獨特性是高量窄幅壓縮後的價格釋放，與既有高量大區間效率、量能壓力、量能脈衝、吸收、區間效率、收盤承接及回報對齊機制有可解釋差異；共用指標家族已明列為限制，不能宣稱為全新公式。v004 workflow reference／release／source bindings、唯一 Development operation、4-event chain、candidate／baseline evidence 與 `status`／`validate` 均核對一致；candidate／baseline evidence 均 `valid`，但 candidate formal gates 失敗，freeze-readiness／candidate-freeze 合法 `qualification-failed`，沒有 candidate-frozen 或 provenance 凍結。Candidate base／stress 為 5 筆、2 年、-2.4766%／-3.0025% 報酬與 0.4663／0.3645 PF；baseline 為 16 筆、5 年、-0.5729%／-2.7935% 與 0.9556／0.7800，結果與成果卡一致。Parent 重新執行策略 pytest 得到 4 passed、Ruff passed、`git diff --check` passed，並確認 Workflow fixture 已還原且沒有越界 Workflow diff；完整 v004 suite 的既有 `release.yml` fixture 問題與未完成重跑已保留為限制。未執行 Historical Evaluation、Terminal、challenge 或 replay。
+
 ### [TASK-007] 在 v003 開發下一個未嘗試的 TSM 動能趨勢 × 量先價行假說並撰寫成果卡
 - **狀態**：Done
 - **優先級**：高
