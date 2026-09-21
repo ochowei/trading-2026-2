@@ -1,0 +1,10 @@
+policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+reference_mode: repository-workflow-package
+release_manifest_digest: ea04558c1473f9c6db7e9707846694147c6c6f254498af2f18729a1e4ef1fa84
+release_manifest_path: workflows/strategy-forward-replication-research--v004/release-manifest.yml
+resolver_version: 1
+schema_version: 1
+workflow_digest: 62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4
+workflow_id: strategy-forward-replication-research
+workflow_package_path: workflows/strategy-forward-replication-research--v004
+workflow_version: v004

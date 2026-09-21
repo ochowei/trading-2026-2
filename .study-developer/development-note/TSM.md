@@ -1948,3 +1948,22 @@
 - **可能原因**：candidate 只有 3 筆交易且集中於 2015、2018，baseline 的 stress 穩健性也失敗；可能是 fade 狀態在本 Development 期間留下稀疏訊號，或結果受年度市場狀態影響，但現有 evidence 不能把原因歸因到單一門檻。
 - **尚不能判斷**：fade 機制能否跨期間重現、是否具有正式 Evaluation 表現，以及小樣本正報酬是否超過資料與市場狀態差異所能解釋的範圍。
 - **Development-only 來源與讀取限制**：本卡只使用本 Study 的 preregistration、candidate／implementation／runner contract、source bundle、Development plan／inputs、candidate／baseline evidence 與 publication，以及共用 Development OHLCV 的既有 binding；未讀取或引用 `historical-evaluation-artifacts/`、正式 Evaluation／Terminal、challenge、replay、`.super-admin/` 或其他受限結果資料。
+
+## `tsm-momentum-trend-volume-peak-lead--v001`｜`2026-09-21`
+
+- **成果卡判定**：`failed`。唯一 Trial 的 candidate／baseline Development evidence 均可驗證；候選測試「五日視窗內量能相對二十日均量的峰值，至少早於收盤報酬峰值一個 session」，並由當日趨勢與價格加速確認。這個核心是峰值先後次序，不是既有總量壓力、單次量能脈衝、吸收、日內區間效率、收盤承接、量能報酬、缺口或 v024 固定突破；但它仍共享單日峰值與 OHLCV 資料限制，不能宣稱完全獨立。
+
+| Trial／模型 | 情境 | evidence／交易數／年度 | 報酬／PF／最大回撤 | formal gates／targets |
+| --- | --- | ---: | ---: | --- |
+| candidate `tsm-momentum-trend-volume-peak-lead-v001` | base | valid／1／1（2018） | -1.9986%／0／1.9986% | 失敗 `base_profit_factor`、`base_return`、`completed_trades`；targets `not_registered` |
+| 同上 | stress | valid／1／1（2018） | -2.0000%／0／2.0000% | 失敗 stress 報酬／PF、bootstrap 正報酬比、leave-one-year-out 報酬及交易年數；targets `not_registered` |
+| baseline `tsm-momentum-trend-volume-peak-lead-v001-baseline` | base | valid／10／4（2014、2015、2016、2018） | 2.1411%／1.3059／2.1279% | 失敗 `completed_trades`；targets `not_registered` |
+| 同上 | stress | valid／10／4 | 0.5312%／1.0756／2.2747% | 失敗 `completed_trades`、bootstrap 正報酬比、leave-one-year-out PF／報酬；targets `not_registered` |
+
+- **已確認**：candidate 的 evidence validity 為 `valid`，但 1 筆交易不足 20 筆，且 base／stress 報酬與 PF 均未過 gate；baseline 雖有正 base／stress 報酬與 PF，仍未通過交易數及 stress 穩健性門檻。候選 freeze eligibility=`不具資格`；`freeze-readiness`／`freeze` 均為 `qualification-failed`，沒有 `candidate-frozen`。Provenance 已綁定 v004 workflow/reference、source bundle、preregistration、固定 Development data、runner 與 engine；凍結 provenance 仍非 `verified-clean`。
+- **可能原因**：量峰先於價峰的聯合條件把共同價格路徑中的訊號由 baseline 的 10 筆縮到 1 筆，可能過度稀疏或只保留特定年度狀態；這是由逐 Trial 交易數與年度分布支持的研究解釋，不能判定單一門檻就是原因。
+- **尚不能判斷**：不能由單筆 candidate 虧損或 baseline 的較好摘要，判定量峰先行機制本身具有或不具有跨期間效果；本 Study 沒有正式 Evaluation／Terminal 證據，也沒有足夠 candidate 樣本支持凍結。
+
+- **限制與下一輪可否證條件**：本輪只到 Development；每日 OHLCV 不能辨識盤中成交主動性，且 candidate 只有 1 年／1 筆。若要續研，另立單一新 Study 並事前固定一個不同的量先價機制，保留相同資料、成本、風控與 baseline；必須取得 valid evidence、至少 20 筆／3 年且全部 formal gates 通過，任一失敗即否證並停止 freeze，不得在本 Study 內調參或重跑。
+
+- **Development-only 來源與限制**：數值只取本 Study 的 preregistration、candidate-definition、implementation／runner contract、source bundle、trial inputs 與 Development candidate／baseline evidence、publication 及固定 Development data binding；未讀取或引用 `historical-evaluation-artifacts/`、`.super-admin/`、正式 Evaluation／Terminal、challenge 或 replay，也未以後續階段輸出替代 Development evidence。

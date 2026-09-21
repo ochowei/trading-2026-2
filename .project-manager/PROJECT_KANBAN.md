@@ -48,6 +48,24 @@
 
 > 已由專案管理者建立並排序，等待負責角色接手的任務。
 
+### [TASK-012] 在 v004 開發下一個未嘗試的 TSM 動能趨勢 × 量先價行假說並撰寫成果卡
+- **狀態**：Done
+- **優先級**：高
+- **負責角色**：study 開發者
+- **執行者**：Newton（本對話唯一 Study Developer subagent `01a0c36d-1a60-7b00-8284-6898346bc9b1`）
+- **建立日期**：2026-09-21
+- **更新日期**：2026-09-21
+- **依賴／阻塞**：無；先確認 v004 Workflow Release 為 Active
+- **驗收條件**：
+  - 依允許範圍讀取根目錄規範、`.study-developer/development-note/TSM.md` 與既有 TSM Development Study，盤點已嘗試過的動能、趨勢及量先價行機制；提出一個可追溯、確實未被嘗試過的新假說，不得只是改版本號、改名稱、重用同一規則或無語義重發。
+  - 依 v004 `development-to-freeze` 流程建立單一新 Study，先完成 Workflow reference／release digest 核對、runner preflight 與 prepare，再固定 preregistration、candidate／baseline、implementation、runner、Development data bindings、明確派工與 provenance；完成唯一合法的 Development trial、evidence validation，以及規則允許的 freeze-readiness／candidate-freeze 嘗試。
+  - 只執行 v004 Development；不得執行 Historical Evaluation、Terminal、challenge 或 replay，不得讀取或修改 `historical-evaluation-artifacts/`、`.super-admin/`、正式 Evaluation／Terminal 結果，也不得覆寫、刪除或重排既有 Study、evidence、authority、events 或成果卡。
+  - Development 完成後，以繁體中文 append-only 更新 `.study-developer/development-note/TSM.md` 的該 Study 成果卡；逐 Trial 區分 candidate／baseline、base／stress、formal gates、research targets、evidence validity、candidate freeze 資格／狀態、provenance、限制與下一輪可否證條件。缺少 evidence 時不得補猜數值，並清楚標示已確認、可能原因與尚不能判斷。
+  - 通過對應 v004 validator／checker、必要 pytest、Ruff（若適用）與 `git diff --check`；回報 Study ID、workflow／reference／source digest、operation ID、事件 head、修改檔案、驗證結果、實驗結果與任何實際缺件。subagent 完成後維持 Doing，由 parent project manager review 後才可移到 Done。
+- **摘要**：根據 TSM Development 研究盤點，在 v004 workflow 中提出並驗證一個真正新的「量先於價、用於動能趨勢確認」機制，產出可追溯的 Development Study 與成果卡，讓後續是否值得凍結有清楚且不越權的證據。
+- **進度／備註**：2026-09-21 由 Newton 完成單一 v004 Study `tsm-momentum-trend-volume-peak-lead--v001`。新機制是五日視窗量能峰值至少早於收盤報酬峰值一個 session，再由動能趨勢與價格加速確認；與既有總量壓力、量能脈衝、吸收、日內效率、收盤承接、量能報酬、缺口、持續性及 v024 事件突破有語義差異，並已揭露共用單日峰值／OHLCV 的限制。workflow／reference／source binding 已固定；runner-preflight 與 prepare 均 `passed`。唯一 create operation=`4526cbfcbefc6d791e7e292beb42c60b1e0ad6e7d642741ad08ed5c3d9dde919`，唯一 Development operation=`7ac595cc5e3f1bb2c689849b4c6b7fbf573aebfd08311cb90a1832f4579c5c04`；candidate／baseline evidence 均有效。Candidate base／stress 各 1 筆、1 年、報酬約 -1.9986%／-2.0000%、PF 0；baseline base／stress 各 10 筆、4 年、報酬 2.1411%／0.5312%、PF 1.3059／1.0756；candidate 與 baseline 均有 formal gate 失敗，targets=`not_registered`。status／validate 通過，event head=`40cb635d4aecf6a9316a42c53e8d8c1abb3a698646238517059727dec7861543`、event_count=`4`；freeze-readiness／freeze 均 `qualification-failed`，未產生 candidate-frozen，provenance 未達 `verified-clean`。成果卡已 append-only 寫入 TSM.md；新 Study pytest `5 passed`、v004 選定測試 `25 passed`、Ruff passed、git diff --check passed。未執行 Historical Evaluation、Terminal、challenge 或 replay，未讀取或修改禁止範圍。
+- **Parent review 結果（2026-09-21）**：核對公開 preregistration、candidate／baseline evidence、四事件鏈、authority checkpoints、workflow／reference／release／source bindings 與唯一 Development operation；確認「量峰先於價峰」不是既有量能總量、脈衝、吸收、效率、收盤承接、量價報酬、缺口、持續性或 v024 固定突破的重複。candidate／baseline evidence 均 `valid`，formal gates、`candidate_freeze: null`、`qualification-failed` 與成果卡回報一致；parent 重跑新 Study pytest `5 passed`、v004 選定測試 `25 passed`、Ruff 與 `git diff --check` 均通過。TASK-012 通過驗收，移至 Done。
+
 ### [TASK-011] 在 v004 開發下一個未嘗試的 TSM 動能趨勢 × 量先價行假說並撰寫成果卡
 - **狀態**：Done
 - **優先級**：高

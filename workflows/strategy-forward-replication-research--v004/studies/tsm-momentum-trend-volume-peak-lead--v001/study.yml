@@ -1,0 +1,86 @@
+candidate_freeze: null
+evidence:
+  development: 5cae3ab4e95b4e4259835b1aea77c5c9779a34eaa5cb4b860824b01804dead37
+lifecycle:
+  current_event: trial-recorded
+  event_chain_head_digest: 40cb635d4aecf6a9316a42c53e8d8c1abb3a698646238517059727dec7861543
+  event_count: 4
+  status: active
+outcome:
+  authority: none
+  status: pending
+preregistration:
+  digest: 3d4607eac4befaee3604f4b02d499d2c1a79992ce5ce53cc3eeab401ec18e4e6
+provenance:
+  status: null
+schema_version: 1
+study:
+  identity:
+    create_plan_digest: 2b1c95458016e92fe0cb061de1742cc21134ca923eb491cc27acf5ebc1ebd904
+    create_plan_path: manifests/create-plan.yml
+    experiment_family: trend-momentum-volume-peak-lead
+    historical_evaluation_operator: not-assigned-development-scope
+    prepare_report_digest: c0c647892b82fcb38779c606c01cbb0ce51080d7bbbeb98a35a45684609edcc2
+    prepare_report_path: manifests/prepare-report.yml
+    research_owner: TASK-012-v004-study-developer
+    research_round_id: strategy-forward-replication-research-v004-tsm-2026-09-task-012
+    source_bundle_digest: c106251b756dbec2b6bfe1230d7d0f1e4f6b20aa18aa719e3ce8133b0464aaa2
+    source_bundle_path: manifests/source-bundle.yml
+    workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+    workflow_reference_path: manifests/workflow-reference.yml
+  study_id: tsm-momentum-trend-volume-peak-lead--v001
+trial_registry:
+  assessments:
+    tsm-momentum-trend-volume-peak-lead-v001:
+      actuals:
+        base_profit_factor: '0.0'
+        base_return: '-0.0199860882365962'
+        completed_trades: 1
+        maximum_realized_trade_loss_fraction: '0.019999960209079543'
+        maximum_stress_block_bootstrap_drawdown_above_10pct_ratio: '0.0'
+        maximum_stress_leave_one_year_out_drawdown: '0.0'
+        minimum_stress_block_bootstrap_positive_return_ratio: '0.0'
+        minimum_stress_leave_one_year_out_profit_factor: inf
+        minimum_stress_leave_one_year_out_return: '0.0'
+        stress_maximum_drawdown: '0.01999996020907958'
+        stress_profit_factor: '0.0'
+        stress_return: '-0.019999960209079543'
+        traded_years: 1
+      candidate_freeze_eligibility:
+        eligible: false
+        reasons:
+          - base_profit_factor
+          - base_return
+          - completed_trades
+          - minimum_stress_block_bootstrap_positive_return_ratio
+          - minimum_stress_leave_one_year_out_return
+          - stress_profit_factor
+          - stress_return
+          - traded_years
+      development_evidence_validity:
+        status: valid
+        validated: true
+      formal_development_gates:
+        failed:
+          - base_profit_factor
+          - base_return
+          - completed_trades
+          - minimum_stress_block_bootstrap_positive_return_ratio
+          - minimum_stress_leave_one_year_out_return
+          - stress_profit_factor
+          - stress_return
+          - traded_years
+        status: failed
+      research_targets:
+        failed: []
+        status: not_registered
+  digest: null
+  recorded_trial_count: 1
+  trial_ids:
+    - tsm-momentum-trend-volume-peak-lead-v001
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: c106251b756dbec2b6bfe1230d7d0f1e4f6b20aa18aa719e3ce8133b0464aaa2
+  workflow_digest: 62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  workflow_reference_path: manifests/workflow-reference.yml
