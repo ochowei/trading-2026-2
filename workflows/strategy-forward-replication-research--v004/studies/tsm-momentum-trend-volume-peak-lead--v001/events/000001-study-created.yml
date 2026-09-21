@@ -1,0 +1,30 @@
+actor_id: TASK-012-v004-study-developer
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: c106251b756dbec2b6bfe1230d7d0f1e4f6b20aa18aa719e3ce8133b0464aaa2
+  workflow_digest: 62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: study-created
+execution:
+  assignment_digest: 1b22f1cb822b712164ae6bfd2fcb6e82bd820d9a525c38e1731929794be0d2ec
+  assignment_path: manifests/assignments/1b22f1cb822b712164ae6bfd2fcb6e82bd820d9a525c38e1731929794be0d2ec.yml
+  role: study 開發者
+occurred_at: '2026-09-21T10:49:24.193116Z'
+payload:
+  create_plan_digest: 2b1c95458016e92fe0cb061de1742cc21134ca923eb491cc27acf5ebc1ebd904
+  create_plan_path: manifests/create-plan.yml
+  experiment_family: trend-momentum-volume-peak-lead
+  historical_evaluation_operator: not-assigned-development-scope
+  prepare_report_digest: c0c647892b82fcb38779c606c01cbb0ce51080d7bbbeb98a35a45684609edcc2
+  prepare_report_path: manifests/prepare-report.yml
+  research_owner: TASK-012-v004-study-developer
+  research_round_id: strategy-forward-replication-research-v004-tsm-2026-09-task-012
+  source_bundle_digest: c106251b756dbec2b6bfe1230d7d0f1e4f6b20aa18aa719e3ce8133b0464aaa2
+  source_bundle_path: manifests/source-bundle.yml
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  workflow_reference_path: manifests/workflow-reference.yml
+previous_event_digest: null
+schema_version: 1
+sequence: 1
+study_id: tsm-momentum-trend-volume-peak-lead--v001

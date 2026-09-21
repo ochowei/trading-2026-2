@@ -1,0 +1,8 @@
+development_evidence_digest: 5cae3ab4e95b4e4259835b1aea77c5c9779a34eaa5cb4b860824b01804dead37
+development_evidence_path: evidence/trials/tsm-momentum-trend-volume-peak-lead-v001/candidate.yml
+inputs_digest: ed4c3dc060763d4940a8ade54b5a1435f75b1654e70748b7d1e0579b09302030
+inputs_path: evidence/trials/tsm-momentum-trend-volume-peak-lead-v001/inputs.yml
+publication_digest: 64a3656102e046a986c269a38036dd7b40ec930d9abe4bf48777a2e3a9758980
+publication_path: evidence/trials/tsm-momentum-trend-volume-peak-lead-v001/publication.yml
+status: completed
+trial_id: tsm-momentum-trend-volume-peak-lead-v001

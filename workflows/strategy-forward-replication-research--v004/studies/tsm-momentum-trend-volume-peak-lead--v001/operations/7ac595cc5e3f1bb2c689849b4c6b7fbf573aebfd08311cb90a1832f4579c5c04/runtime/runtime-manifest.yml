@@ -1,0 +1,26 @@
+data:
+  digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+  path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+evidence:
+  digest: f4e67bbb6ae0db0d77c09fe20681bece5864e0fb858f3ff33f21b800cbbbf2c1
+  path: runtime/evidence.yml
+execution_contract: request-output-v1
+execution_workspace: temporary
+operation_id: 7ac595cc5e3f1bb2c689849b4c6b7fbf573aebfd08311cb90a1832f4579c5c04
+request:
+  digest: 537842ff57216f3988001f4fbe11db54f28a89328850577afca2d4d61f7d1ea9
+  path: runtime/request.yml
+resolver_version: 1
+runner:
+  digest: 580b2591119b9cd276ed0bf7d888f99b227a0d52225782020658f54fbff10c8f
+  path: research/tsm-momentum-trend-volume-peak-lead--v001/run_development.py
+schema_version: 1
+source_bundle:
+  digest: c106251b756dbec2b6bfe1230d7d0f1e4f6b20aa18aa719e3ce8133b0464aaa2
+  path: manifests/source-bundle.yml
+stage: development
+study_id: tsm-momentum-trend-volume-peak-lead--v001
+workflow_reference:
+  digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  path: manifests/workflow-reference.yml
+workflow_version: v004
