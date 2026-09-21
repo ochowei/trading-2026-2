@@ -1926,3 +1926,25 @@
 **發現與限制**：已確認 candidate base／stress 為正但僅 3 筆且集中一年，baseline 同規則下為負；這不是策略有效證明。可能原因是缺口條件留下少量年度集中訊號，尚不能判斷是聚合、門檻或市場狀態造成。限制是樣本不足且只有 Development evidence；preflight synthetic historical 分支不是正式結果。
 
 **下一輪單一可否證變更**：若續研，另立 Study，只改為事前固定的「五日中至少三日負隔夜缺口」狀態，其餘固定；要求 evidence valid、至少 20 筆／3 年及全部 formal gates 通過，否則停止 freeze。未執行 Historical Evaluation、Terminal、challenge、replay，未讀取正式結果、受限資料、study.yml、events、journals、operations/runtime 或 Git 歷史。來源限於本 Study 的 research manifests／runner、v004 manifests、Development candidate／baseline／inputs／publication、engine 與直接 tests。
+
+## `tsm-momentum-trend-volume-persistence--v001`｜`2026-09-21`（v004 Development）
+
+- **成果卡判定**：`failed`；唯一 Trial `tsm-momentum-trend-volume-fade-v001` 的 candidate／baseline evidence 均 `valid`。候選假說是訊號日前五個已完成 session 的平均量比至少 `1.05`，且最新／最早量能 `V[t-1]／V[t-5] <= 1.00`，代表量能先放大後衰減或持平，再由當日趨勢與至少 2% 價格加速確認；baseline 保留平均量比、價格、成本、風控、持倉與執行，只關閉 fade filter。這不是既有總量壓力、單次脈衝、吸收、日內區間、收盤位置、量能報酬、缺口或 v024 固定突破的重命名。
+
+| 模型／情境 | evidence／交易數／年度 | 報酬 | PF／最大回撤 | formal gates |
+| --- | ---: | ---: | ---: | --- |
+| candidate／base | valid／3／2（2015、2018） | 4.8247% | inf／0% | 只失敗 `completed_trades`、`traded_years` |
+| candidate／stress | valid／3／2 | 4.0260% | inf／0% | 同上；其餘 formal gates 通過 |
+| baseline／base | valid／10／4（2014–2018 中四年） | 2.1411% | 1.3059／2.128% | 失敗 `completed_trades`、stress bootstrap 正報酬比、stress leave-one-year-out PF／報酬 |
+| baseline／stress | valid／10／4 | 0.5312% | 1.0756／2.275% | 同上；其餘 formal gates 通過 |
+
+- **研究目標／凍結**：research targets=`not_registered`，不把 target-only 狀態誤稱 formal gate。candidate formal gates 失敗 `completed_trades`（3<20）與 `traded_years`（2<3），candidate freeze eligibility=`不具資格`；`freeze-readiness`／`freeze` 均以 `qualification-failed` 停止，未產生 candidate-frozen，狀態為尚不能判斷。Provenance 綁定為 workflow `62779bce…67e4`、reference `7b13d4d7…0b47`、source bundle `cdc34e65…dacd`、preregistration `d8104d63…5876`、Development data `a42c3932…46f7`、warmup `81fdf3d6…c847`；create／Development operation 已由同一 Study 完成，未重跑 Trial。
+
+- **限制與下一輪可否證條件**：candidate 正報酬與 PF 不能抵銷樣本不足；baseline 的 stress bootstrap 正報酬比 `0.5991`、leave-one-year-out PF `0.8456`／報酬 `-1.0733%` 也未達門檻，尚不能判斷 fade 機制能否跨期間重現。若續研，另立 Study 並事前固定唯一替代量先價機制，要求 evidence valid、至少 20 筆／3 年及全部 formal gates 通過；不得在本 Study 內調參或重跑。只執行 Development；未執行 Historical Evaluation、Terminal、challenge、replay 或正式 Evaluation，未讀取受限結果資料。
+
+### Parent review 欄位補充（同一張成果卡）
+
+- **已確認**：唯一 Trial 的 candidate／baseline evidence 均 `valid`；candidate 與 baseline 的 base／stress、formal gate 失敗項目、`research targets=not_registered` 及 candidate freeze 不具資格／尚不能判斷均已如上記錄。
+- **可能原因**：candidate 只有 3 筆交易且集中於 2015、2018，baseline 的 stress 穩健性也失敗；可能是 fade 狀態在本 Development 期間留下稀疏訊號，或結果受年度市場狀態影響，但現有 evidence 不能把原因歸因到單一門檻。
+- **尚不能判斷**：fade 機制能否跨期間重現、是否具有正式 Evaluation 表現，以及小樣本正報酬是否超過資料與市場狀態差異所能解釋的範圍。
+- **Development-only 來源與讀取限制**：本卡只使用本 Study 的 preregistration、candidate／implementation／runner contract、source bundle、Development plan／inputs、candidate／baseline evidence 與 publication，以及共用 Development OHLCV 的既有 binding；未讀取或引用 `historical-evaluation-artifacts/`、正式 Evaluation／Terminal、challenge、replay、`.super-admin/` 或其他受限結果資料。

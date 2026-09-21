@@ -1,0 +1,19 @@
+actor_id: TASK-011-v004-study-developer
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: cdc34e65bdc1fb4a3eab7b8bbf35f26ebde60ce07fe0340501fd5e518527dacd
+  workflow_digest: 62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: development-started
+execution:
+  assignment_digest: 0ac3a466632626026b9de463cf4fbf3f8d6131082cd375cc1e6eebdbf2712911
+  assignment_path: manifests/assignments/0ac3a466632626026b9de463cf4fbf3f8d6131082cd375cc1e6eebdbf2712911.yml
+  role: study 開發者
+occurred_at: '2026-09-21T09:39:02.430712Z'
+payload:
+  operation_id: 2e8cc014e74206f871fb2f57403879243b1d6724d29944491c2794033c80a190
+previous_event_digest: b79b7ede84ef0da4a715afc695fbd26054f9cbb648ab7ad40b7f3592badf2c91
+schema_version: 1
+sequence: 3
+study_id: tsm-momentum-trend-volume-persistence--v001

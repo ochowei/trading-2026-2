@@ -1,0 +1,33 @@
+actor: TASK-011-v004-study-developer
+provenance:
+  sources:
+    - access: read-only
+      data_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+      digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+      quality_report: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.quality.yml
+      role: warmup-development
+      status: passed
+    - access: read-only
+      digest: aac2438682770f0fa7de9f035a080c7318d9fd444456dbdf2ea7b19340ff7625
+      path: research/tsm-momentum-trend-volume-persistence--v001/run_development.py
+      role: development-procedure
+      status: passed
+  status: provenance-unknown
+snapshot_set:
+  development:
+    data_digest: 4e443b4c7db125967ef936d615b6d2283da8ba0bccc62239a5770daf176eccc3
+    sessions:
+      - '2014-01-02'
+      - '2018-12-31'
+  historical-evaluation:
+    data_digest: '0'
+    sessions: []
+  quarantine:
+    data_digest: '0'
+    sessions: []
+  schema_version: 1
+  warmup-only:
+    data_digest: 81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847
+    sessions:
+      - '2013-01-02'
+      - '2013-12-31'

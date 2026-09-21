@@ -1,0 +1,192 @@
+baseline_definition:
+  baseline_id: tsm-momentum-trend-volume-fade-v001-baseline
+  candidate_family: tsm-momentum-trend-volume-fade-v001
+  execution_is_identical: true
+  family: trend-momentum-volume-fade
+  objectively_simpler_because: baseline 保留相同的趨勢、價格加速、RSI、五日平均量比、持倉、成本、風險、停損停利與冷卻規則，但關閉訊號日前五個 session 的量能先行後鈍化條件；因此它是在同一價格路徑下不使用量能先行後不再加速機制的明確控制組。
+  simpler_rule: 收盤高於 SMA(20)、SMA(20) 相對五個 session 前不下彎、價格加速至少 2%、RSI(2) <= 70，且五日平均量比至少 1.05、符合相同執行規則；不要求訊號日前五日最新／最早量能比值不高於 1.00。
+complete_candidate_family:
+  - tsm-momentum-trend-volume-fade-v001
+eligibility_rules:
+  accepted_signal:
+    cooldown:
+      clock_anchor: completed-position-exit
+      minimum_completed_session_steps_after_exit: 5
+      position_must_be_flat: true
+    decision_time: completed-session-close
+    mean_reversion:
+      close_vs_sma20_gap_minimum: '-0.10'
+      close_vs_sma20_operator: '>='
+      rsi_length: 2
+      rsi_operator: <=
+      rsi_value: '70'
+      sma_length: 20
+    momentum_trend:
+      price_acceleration_lookback: 1
+      price_acceleration_minimum: '0.02'
+      price_to_sma_floor: '0.90'
+      trend_sma_lag_sessions: 5
+      trend_sma_ratio_floor: '0.95'
+    price_direction_confirmation:
+      close_above_prior_close: true
+    symbol: TSM
+    volume_fade:
+      endpoint_ratio_formula: prior_volume_last / prior_volume_first
+      endpoint_ratio_maximum: '1.00'
+      endpoint_ratio_operator: <=
+      lookback_sessions: 5
+      uses_prior_sessions_only: true
+    volume_leads_price:
+      enabled: true
+      prior_session_window: 5
+      volume_average_length: 20
+      volume_fade_is_before_signal: true
+      volume_ratio_minimum: '1.05'
+      volume_ratio_operator: '>='
+      volume_ratio_value: '1.05'
+  costs:
+    base:
+      fee_per_side_bps: '1'
+      slippage_per_side_bps: '5'
+    stress:
+      fee_per_side_bps: '2'
+      slippage_per_side_bps: '20'
+  development_diagnostics:
+    block_bootstrap:
+      block_lengths:
+        - 3
+        - 5
+      maximum_stress_drawdown_above_10pct_ratio: '0.10'
+      minimum_stress_positive_return_ratio: '0.80'
+      repetitions: 50000
+      seed: 20260902
+      seed_application: exact-same-seed-for-each-block-length
+    leave_one_signal_year_out:
+      maximum_stress_drawdown: '0.10'
+      minimum_stress_profit_factor: '1.00'
+      minimum_stress_return: '0'
+    signal_year_breakdown: true
+  development_gates:
+    base_profit_factor:
+      operator: '>'
+      value: '1.10'
+    base_return:
+      operator: '>'
+      value: '0'
+    completed_trades:
+      operator: '>='
+      value: 20
+    maximum_realized_trade_loss_fraction:
+      operator: <=
+      value: '0.04'
+    maximum_stress_block_bootstrap_drawdown_above_10pct_ratio:
+      operator: <=
+      value: '0.10'
+    maximum_stress_leave_one_year_out_drawdown:
+      operator: <=
+      value: '0.10'
+    minimum_stress_block_bootstrap_positive_return_ratio:
+      operator: '>='
+      value: '0.80'
+    minimum_stress_leave_one_year_out_profit_factor:
+      operator: '>'
+      value: '1.00'
+    minimum_stress_leave_one_year_out_return:
+      operator: '>'
+      value: '0'
+    stress_maximum_drawdown:
+      operator: <=
+      value: '0.10'
+    stress_profit_factor:
+      operator: '>'
+      value: '1.00'
+    stress_return:
+      operator: '>'
+      value: '0'
+    traded_years:
+      operator: '>='
+      value: 3
+  execution:
+    cooldown:
+      anchor: completed-position-exit
+      minimum_completed_session_steps_after_exit: 5
+    decision_time: completed-session-close
+    entry: next-XNYS-open
+    gap_fill: stop-gap-at-open-target-gap-at-open
+    holding_period: next-open-after-10-complete-sessions
+    intrabar_ambiguity: adverse-stop-first
+    position_sizing:
+      cash_cap: available-cash-no-borrowing
+      modeled_stop_includes_costs: true
+      risk_fraction_of_pre_entry_equity: '0.02'
+      shares: maximum-integer-shares-within-risk-and-cash-caps
+    stop:
+      level_from_raw_entry_open: '-0.04'
+      order: STOP_MARKET
+      time_in_force: GTC
+    target:
+      level_from_raw_entry_open: '0.04'
+      order: LIMIT
+      reissued_each_open_position_session: true
+      time_in_force: DAY
+  gate_policy: formal Development gates 與研究目標分開判定；任一 formal gate 或事前登記的新穎性識別條件失敗，都保留合法 evidence 並停止在 Development，不得看結果後調參或強行凍結候選。
+  novelty_and_identifiability:
+    development_identifiability: 指標合約明定訊號日前五個 session 的先前量能平均量比與最新／最早量能比值只讀取訊號日前資料；candidate 與 baseline 使用同一份 warmup／Development OHLCV、同一成本和持倉規則，唯一策略差異是量能先行後鈍化條件。因此可由逐筆交易、年度分布、bootstrap 與 leave-one-year-out 診斷識別先前量能放大後是否停止加速並先於價格加速，而非資料、成交或事後調參造成的差異。
+    mechanism_difference: 本候選先確認訊號日前五日平均量比達標，再要求窗口最新／最早量能比值不高於 1.00，表示早先量能參與後衰減或維持平台，之後才看訊號日價格加速。它不同於 volume-lead 的五日總量／上漲量占比、volume-ramp 的三日最大值或單次量能脈衝、volume-absorption 的高量小收盤變動、volume-efficiency 的量能加權日內區間、volume-close-acceptance 的量能加權收盤位置、volume-return-alignment 的量能加權收盤報酬、volume-range-compression 的量能加權窄幅區間、volume-gap-anchoring 的量能加權隔夜缺口與負缺口占比，也不使用 v024 的事件後固定價突破。它是有方向的窗口首尾鈍化／平台條件，不是平方和 HHI、entropy、單日最大量或 3/5 persistence 規則的改名。
+    shared_indicator_limitations: 仍共用 TSM、XNYS、Yahoo auto_adjusted OHLCV、五日窗口、二十日量能平均、當日趨勢與至少 2% 價格加速；每日 OHLCV 無法觀察盤中成交量時序與真正的訂單流。因此新意是先前五日量能先放大後不再加速與平均放大量能的聯合狀態，不是全新資料來源，也不宣稱和所有既有量能指標完全獨立。
+    this_study_path: 本 Study 固定訊號日前五個已完成 session 的最新／最早量能比值 = V[t-1] / V[t-5] 不高於 1.00，且五日平均量比至少為 1.05；當日仍須符合趨勢、均線下限、RSI 與至少 2% 的一日價格加速，才於下一日 open 進場並持有最多十個完整 session。量能先行後鈍化與平均量比先於價格加速，訊號日資料不會回頭改變先前量能狀態。
+    v024_registered_path: v024 已登記上升趨勢中的單次放量事件，事件收盤不得高於先前五日高點，再在事件後五日內首次嚴格突破固定高點；本候選沒有事件狀態機或固定突破價。
+  source_and_adjustment:
+    adjustment_policy: Yahoo auto_adjust
+    calendar: XNYS
+    interval: 1d
+    provider: yahoo
+    timezone: America/New_York
+evaluation_gates:
+  base_compounded_return:
+    operator: '>'
+    value: '0'
+  base_profit_factor:
+    operator: '>'
+    value: '1.10'
+  completed_trades:
+    operator: '>='
+    value: 20
+  family_wise_confidence:
+    operator: '>='
+    value: '0.90'
+  maximum_fold_positive_profit_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_fold_trade_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_realized_trade_loss_fraction:
+    operator: <=
+    value: '0.04'
+  positive_traded_fold_ratio:
+    operator: '>='
+    value: '0.60'
+  stress_max_drawdown:
+    operator: <=
+    value: '0.10'
+  stress_profit_factor:
+    operator: '>'
+    value: '1.00'
+  stress_return:
+    operator: '>'
+    value: '0'
+  traded_folds:
+    operator: '>='
+    value: 3
+fold_warmup_sessions: 25
+hypothesis: 在 TSM 的上升趨勢中，若訊號日前五個已完成 XNYS session 的五日平均量比至少為 1.05，且最新／最早先前量能比值（V[t-1] / V[t-5]）不高於 1.00，這種先前量能先放大後衰減或維持平台應先於動能釋放；當日趨勢仍在、價格相對均線未低於固定下限並出現至少 2% 的一日價格加速時，下一個 session open 進場並持有最多十個完整 session，可能捕捉動能延續。相較既有 volume-lead、volume-ramp、volume-absorption、volume-efficiency、volume-close-acceptance、volume-return-alignment、volume-range-compression、volume-gap-anchoring 與 v024，本候選的核心是五日量能先行後鈍化與平均量比的先行聯合狀態，而不是五日平均總量、單次最大脈衝、高量價格背離、量能加權 OHLC 形狀、隔夜缺口或事件後突破。baseline 保留五日平均量比與完全相同的價格、成交、成本、風險與退出規則，只關閉量能先行後鈍化條件。所有規格在 Study 開始前固定；任一 formal gate 失敗即否證並停止凍結，不得以結果回頭調參。
+initial_cash: '100000'
+maximum_holding_sessions: 11
+maximum_trials: 1
+selection_rule:
+  eligible_candidate: 唯一 Trial 必須通過全部 Development gates；未通過時不得凍結候選。
+  method: fixed-single-candidate-no-outcome-ranking
+  selected_candidate_id: tsm-momentum-trend-volume-fade-v001
+tie_handling:
+  method: not-applicable-single-candidate

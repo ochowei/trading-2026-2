@@ -1,0 +1,16 @@
+artifacts:
+  baseline:
+    digest: da53b66cbf898b379351aa6bde8d8c6b934e65dfa0e976b95707c88b613670f8
+    path: evidence/trials/tsm-momentum-trend-volume-fade-v001/baseline.yml
+  candidate:
+    digest: daa71df1fa8d0298ff938a674ce6dc0e30d9ab57d5d57e3e2de087e6b9620011
+    path: evidence/trials/tsm-momentum-trend-volume-fade-v001/candidate.yml
+  inputs:
+    digest: 00410e49ddd0f988e18879c72057785e76c5c60ee8a3055cb2c30b845db4fe3c
+    path: evidence/trials/tsm-momentum-trend-volume-fade-v001/inputs.yml
+envelope_digest: 58c7e10ee7dc2c10b5b6844108af76e54ae8ad457d08606340a44302e5ff6d6e
+preregistration_digest: d8104d63259a02534364c9dec20a077a4a3f5d1c2f6512ed7ab2db8c6c575876
+schema_version: 1
+source_bundle_digest: cdc34e65bdc1fb4a3eab7b8bbf35f26ebde60ce07fe0340501fd5e518527dacd
+study_id: tsm-momentum-trend-volume-persistence--v001
+trial_id: tsm-momentum-trend-volume-fade-v001

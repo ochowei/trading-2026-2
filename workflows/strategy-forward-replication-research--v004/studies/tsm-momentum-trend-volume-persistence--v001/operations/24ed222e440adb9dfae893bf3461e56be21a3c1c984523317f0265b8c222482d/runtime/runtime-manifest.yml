@@ -1,0 +1,26 @@
+data:
+  digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+  path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+evidence:
+  digest: 58c7e10ee7dc2c10b5b6844108af76e54ae8ad457d08606340a44302e5ff6d6e
+  path: runtime/evidence.yml
+execution_contract: request-output-v1
+execution_workspace: temporary
+operation_id: 24ed222e440adb9dfae893bf3461e56be21a3c1c984523317f0265b8c222482d
+request:
+  digest: 220ecc3797e5a102a08e55d70be5cb7dbc09dc6261446b415c964d9b4d9791c1
+  path: runtime/request.yml
+resolver_version: 1
+runner:
+  digest: aac2438682770f0fa7de9f035a080c7318d9fd444456dbdf2ea7b19340ff7625
+  path: research/tsm-momentum-trend-volume-persistence--v001/run_development.py
+schema_version: 1
+source_bundle:
+  digest: cdc34e65bdc1fb4a3eab7b8bbf35f26ebde60ce07fe0340501fd5e518527dacd
+  path: manifests/source-bundle.yml
+stage: development
+study_id: tsm-momentum-trend-volume-persistence--v001
+workflow_reference:
+  digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  path: manifests/workflow-reference.yml
+workflow_version: v004
