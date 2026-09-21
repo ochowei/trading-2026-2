@@ -1,0 +1,39 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  policy_set_digest:
+    format: sha256
+    type: string
+  reference_mode:
+    const: repository-workflow-package
+  release_manifest_digest:
+    format: sha256
+    type: string
+  release_manifest_path:
+    const: workflows/strategy-forward-replication-research--v004/release-manifest.yml
+  resolver_version:
+    const: 1
+  schema_version:
+    const: 1
+  workflow_digest:
+    format: sha256
+    type: string
+  workflow_id:
+    const: strategy-forward-replication-research
+  workflow_package_path:
+    pattern: ^workflows/strategy-forward-replication-research--v004$
+    type: string
+  workflow_version:
+    const: v004
+required:
+  - schema_version
+  - reference_mode
+  - workflow_id
+  - workflow_version
+  - workflow_package_path
+  - workflow_digest
+  - release_manifest_path
+  - release_manifest_digest
+  - policy_set_digest
+  - resolver_version
+type: object

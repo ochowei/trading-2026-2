@@ -1,0 +1,22 @@
+checks:
+  - command: .venv/bin/python -m pytest workflows/strategy-forward-replication-research--v004/tests -q
+    result: passed
+    summary: 101 passed，1 個既有 NumPy RuntimeWarning；退出碼 0。
+  - command: .venv/bin/ruff check workflows/strategy-forward-replication-research--v004
+    result: passed
+    summary: v004 Workflow Package 全部 Ruff 檢查通過。
+  - command: skill-creator quick_validate.py .agent/skills/*
+    result: passed
+    summary: build、blind review、Historical Evaluation、Development note 四個 v004 skill 均通過格式驗證。
+  - command: git diff --quiet -- workflows/strategy-forward-replication-research--v003
+    result: passed
+    summary: v003 工作樹沒有 diff；既有版本與 Study 未被遷移或覆寫。
+  - command: python workflows/strategy-forward-replication-research--v004/operations/release_candidate.py --candidate
+    result: passed
+    summary: Release Candidate manifest、canonical files、Policy binding 與測試報告驗證通過；未建立 release.yml。
+generated_at: '2026-09-21T00:00:00.000000Z'
+release_record_created: false
+schema_version: 1
+status: release-candidate
+workflow: strategy-forward-replication-research
+workflow_version: v004

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Author v004 Study development note"
+  short_description: "為指定 v004 Study 撰寫只使用 Development 證據的成果卡。"
+  default_prompt: "為指定 v004 Study 撰寫只使用 Development 證據的成果卡。"

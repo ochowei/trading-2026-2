@@ -11,25 +11,33 @@
 
 因此，`study-terminal` 只會終止單一 Study；它不會封存所屬 Workflow。反過來，Workflow 進入 `Superseded` 或 `Archived`，也不會改寫或終止既有 Study。
 
-## Strategy Forward Replication Research v003（目前 Active）
+## Strategy Forward Replication Research v004（目前 Active）
 
-詳細內容請參考 [`strategy-forward-replication-research--v003/README.md`](strategy-forward-replication-research--v003/README.md)。這是目前接受新 Study 的 Workflow Package；它以自己的 rules、schemas、validator、writer、policies、tests 與 Release Record 綁定完整研究語意。
+詳細內容請參考 [`strategy-forward-replication-research--v004/README.md`](strategy-forward-replication-research--v004/README.md)。這是目前接受新 Study 的 Workflow Package；它以自己的 rules、schemas、validator、writer、policies、tests 與 Release Record 綁定完整研究語意，並以 Workflow reference 取代每個 Study 的 Workflow runtime 副本。
 
-- [`release.yml`](strategy-forward-replication-research--v003/release.yml)：Trusted Approver 建立的正式啟用紀錄。
-- [`release-manifest.yml`](strategy-forward-replication-research--v003/release-manifest.yml)：v003 權威檔案與 SHA-256 數位指紋清單。
-- [`release-test-report.yml`](strategy-forward-replication-research--v003/release-test-report.yml)：v003 發布前測試與完整性驗證報告。
+- [`release.yml`](strategy-forward-replication-research--v004/release.yml)：Trusted Approver 建立的正式啟用紀錄。
+- [`release-manifest.yml`](strategy-forward-replication-research--v004/release-manifest.yml)：v004 權威檔案與 SHA-256 數位指紋清單。
+- [`release-test-report.yml`](strategy-forward-replication-research--v004/release-test-report.yml)：v004 發布前測試與完整性驗證報告。
 
-既有 v002 Study 不會自動搬遷或重跑；v002 的 Package、原始 Release Record、既有 Study、evidence 與 authority 均保留，狀態為 `Superseded`。v001 同樣維持 `Superseded`。
+既有 v003、v002 與 v001 Study 不會自動搬遷或重跑；這些版本的 Package、原始 Release Record、既有 Study、evidence 與 authority 均保留，狀態為 `Superseded`。
+
+## Strategy Forward Replication Research v003（Superseded）
+
+詳細內容請參考 [`strategy-forward-replication-research--v003/README.md`](strategy-forward-replication-research--v003/README.md)。v003 已由 v004 取代，不再接受新的 Study；它仍保留自己的 rules、schemas、validator、writer、policies、tests、Study runtime 與正式 Release Record，供既有 Study 讀取與獨立驗證。
+
+- [`release.yml`](strategy-forward-replication-research--v003/release.yml)：原始 Trusted Approver 建立的正式啟用紀錄，未被改寫。
+- [`release-manifest.yml`](strategy-forward-replication-research--v003/release-manifest.yml)：v003 原有權威檔案與 SHA-256 數位指紋清單。
+- [`release-test-report.yml`](strategy-forward-replication-research--v003/release-test-report.yml)：v003 原有發布前測試與完整性驗證報告。
 
 ## Strategy Forward Replication Research v002（Superseded）
 
-詳細內容請參考 [`strategy-forward-replication-research--v002/README.md`](strategy-forward-replication-research--v002/README.md)。這個 Workflow Package 已由 v003 取代，不再接受新的 Study；它仍保留自己的 rules、schemas、validator、writer、policies、tests 與原始 Release Record，供既有 Study 讀取與獨立驗證。
+詳細內容請參考 [`strategy-forward-replication-research--v002/README.md`](strategy-forward-replication-research--v002/README.md)。這個 Workflow Package 已由後繼版本取代，不再接受新的 Study；它仍保留自己的 rules、schemas、validator、writer、policies、tests 與原始 Release Record，供既有 Study 讀取與獨立驗證。
 
 - [`release.yml`](strategy-forward-replication-research--v002/release.yml)：原始 Trusted Approver 建立的正式啟用紀錄，未被改寫。
 - [`release-manifest.yml`](strategy-forward-replication-research--v002/release-manifest.yml)：v002 原有權威檔案與 SHA-256 數位指紋清單。
 - [`release-test-report.yml`](strategy-forward-replication-research--v002/release-test-report.yml)：v002 原有發布前測試與完整性驗證報告。
 
-v002 的既有 Study 不會搬遷、重跑或因 v003 啟用而失效。
+v002 的既有 Study 不會搬遷、重跑或因 v004 啟用而失效。
 
 ## Strategy Forward Replication Research v001（Superseded）
 

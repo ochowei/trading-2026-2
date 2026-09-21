@@ -1,0 +1,94 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  binding:
+    additionalProperties: false
+    properties:
+      authority_root:
+        minLength: 1
+        type: string
+      environment:
+        type: object
+      repository:
+        minLength: 1
+        type: string
+      settings:
+        additionalProperties:
+          format: sha256
+          type: string
+        type: object
+      source_bundle:
+        type: object
+      study_id:
+        minLength: 1
+        type: string
+      workflow_digest:
+        format: sha256
+        type: string
+      workflow_reference:
+        type: object
+      workflow_reference_digest:
+        format: sha256
+        type: string
+    required:
+      - study_id
+      - repository
+      - authority_root
+      - settings
+      - source_bundle
+      - environment
+      - workflow_digest
+      - workflow_reference
+      - workflow_reference_digest
+    type: object
+  cases:
+    items:
+      additionalProperties: false
+      properties:
+        case:
+          minimum: 0
+          type: integer
+        data_digest:
+          format: sha256
+          type: string
+        evidence_digest:
+          format: sha256
+          type: string
+        expect:
+          enum:
+            - trades
+            - no-trades
+        request_digest:
+          format: sha256
+          type: string
+        stage:
+          enum:
+            - development
+            - historical-evaluation
+        validation:
+          type: object
+      required:
+        - case
+        - stage
+        - expect
+        - data_digest
+        - request_digest
+        - evidence_digest
+        - validation
+      type: object
+    minItems: 4
+    type: array
+  checks:
+    type: object
+  prepare_checks:
+    const: passed
+  schema_version:
+    const: 1
+  status:
+    const: passed
+required:
+  - schema_version
+  - status
+  - binding
+  - cases
+type: object

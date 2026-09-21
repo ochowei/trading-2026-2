@@ -1,0 +1,4 @@
+interface:
+  display_name: "Blind review strategy Study v004"
+  short_description: "對指定 v004 Study 進行不讀正式結果的 blind review。"
+  default_prompt: "對指定 v004 Study 進行不讀正式結果的 blind review。"

@@ -1,0 +1,33 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  authority:
+    enum:
+      - none
+      - retrospectively-supported
+  bindings:
+    additionalProperties:
+      format: sha256
+      type: string
+    type: object
+  outcome:
+    enum:
+      - pass
+      - fail
+      - indeterminate
+  reasons:
+    items:
+      type: string
+    type: array
+  recomputed:
+    const: true
+  schema_version:
+    const: 1
+required:
+  - schema_version
+  - outcome
+  - authority
+  - recomputed
+  - bindings
+  - reasons
+type: object
