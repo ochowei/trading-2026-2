@@ -1,0 +1,256 @@
+accepted_signal_count: 3
+bindings:
+  preregistration_digest: 2d83e90a0dcbd772fd5ce415af8605afc4bdc3bf068cc9dcf71efb6f0a59fc35
+  source_bundle_digest: f0836cec47c9ed7fe29736b0fe0c79d51520c602089e68836e9431949a8554e5
+  trial_inputs_digest: e6483d82f6cfc919392fe779bf30b2537e23e298258d8ca54c231d3e42fe0c8a
+candidate_id: tsm-momentum-trend-volume-gap-anchoring-v001
+diagnostics:
+  block_bootstrap:
+    base:
+      - block_length: 3
+        drawdown_above_10pct_ratio: '0.0'
+        maximum_drawdown_q05_q50_q95:
+          - '0.019988015553559786'
+          - '0.019988015553559817'
+          - '0.019988015553559828'
+        positive_return_ratio: '1.0'
+        profit_factor_above_one_ratio: '1.0'
+        profit_factor_q05_q50_q95:
+          - '1.3935578405981297'
+          - '1.4009663194207083'
+          - '1.4048342791294959'
+        repetitions: 50000
+        return_q05_q50_q95:
+          - '0.008091833867854614'
+          - '0.008091833867854614'
+          - '0.008091833867854614'
+        seed: 20260902
+      - block_length: 5
+        drawdown_above_10pct_ratio: '0.0'
+        maximum_drawdown_q05_q50_q95:
+          - '0.019988015553559786'
+          - '0.019988015553559817'
+          - '0.019988015553559828'
+        positive_return_ratio: '1.0'
+        profit_factor_above_one_ratio: '1.0'
+        profit_factor_q05_q50_q95:
+          - '1.3935578405981297'
+          - '1.4009663194207083'
+          - '1.4048342791294959'
+        repetitions: 50000
+        return_q05_q50_q95:
+          - '0.008091833867854614'
+          - '0.008091833867854614'
+          - '0.008091833867854614'
+        seed: 20260902
+    gating: true
+    stress:
+      - block_length: 3
+        drawdown_above_10pct_ratio: '0.0'
+        maximum_drawdown_q05_q50_q95:
+          - '0.01999452969308775'
+          - '0.01999452969308777'
+          - '0.019994529693087824'
+        positive_return_ratio: '1.0'
+        profit_factor_above_one_ratio: '1.0'
+        profit_factor_q05_q50_q95:
+          - '1.155807801272496'
+          - '1.1583048994567045'
+          - '1.1594936734956607'
+        repetitions: 50000
+        return_q05_q50_q95:
+          - '0.0031890009905686245'
+          - '0.0031890009905686245'
+          - '0.0031890009905688466'
+        seed: 20260902
+      - block_length: 5
+        drawdown_above_10pct_ratio: '0.0'
+        maximum_drawdown_q05_q50_q95:
+          - '0.01999452969308775'
+          - '0.01999452969308777'
+          - '0.019994529693087824'
+        positive_return_ratio: '1.0'
+        profit_factor_above_one_ratio: '1.0'
+        profit_factor_q05_q50_q95:
+          - '1.155807801272496'
+          - '1.1583048994567045'
+          - '1.1594936734956607'
+        repetitions: 50000
+        return_q05_q50_q95:
+          - '0.0031890009905686245'
+          - '0.0031890009905686245'
+          - '0.0031890009905688466'
+        seed: 20260902
+  by_signal_year:
+    '2018':
+      base_pnl: '809.1833867854539'
+      stress_pnl: '318.9000990568645'
+      trades: 3
+  leave_one_signal_year_out:
+    base:
+      '2018':
+        maximum_drawdown: '0.0'
+        omitted_trades: 3
+        profit_factor: inf
+        remaining_trades: 0
+        return: '0.0'
+    gating: true
+    stress:
+      '2018':
+        maximum_drawdown: '0.0'
+        omitted_trades: 3
+        profit_factor: inf
+        remaining_trades: 0
+        return: '0.0'
+disposition: fail
+failed_gates:
+  - completed_trades
+  - minimum_stress_leave_one_year_out_return
+  - traded_years
+gates:
+  - actual: '1.3935578405981297'
+    gate: base_profit_factor
+    operator: '>'
+    passed: true
+    required: '1.10'
+  - actual: '0.00809183386785454'
+    gate: base_return
+    operator: '>'
+    passed: true
+    required: '0'
+  - actual: 3
+    gate: completed_trades
+    operator: '>='
+    passed: false
+    required: 20
+  - actual: '0.019994529693087813'
+    gate: maximum_realized_trade_loss_fraction
+    operator: <=
+    passed: true
+    required: '0.04'
+  - actual: '0.0'
+    gate: maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+    operator: <=
+    passed: true
+    required: '0.10'
+  - actual: '0.0'
+    gate: maximum_stress_leave_one_year_out_drawdown
+    operator: <=
+    passed: true
+    required: '0.10'
+  - actual: '1.0'
+    gate: minimum_stress_block_bootstrap_positive_return_ratio
+    operator: '>='
+    passed: true
+    required: '0.80'
+  - actual: inf
+    gate: minimum_stress_leave_one_year_out_profit_factor
+    operator: '>'
+    passed: true
+    required: '1.00'
+  - actual: '0.0'
+    gate: minimum_stress_leave_one_year_out_return
+    operator: '>'
+    passed: false
+    required: '0'
+  - actual: '0.01999452969308777'
+    gate: stress_maximum_drawdown
+    operator: <=
+    passed: true
+    required: '0.10'
+  - actual: '1.155807801272496'
+    gate: stress_profit_factor
+    operator: '>'
+    passed: true
+    required: '1.00'
+  - actual: '0.0031890009905686453'
+    gate: stress_return
+    operator: '>'
+    passed: true
+    required: '0'
+  - actual: 1
+    gate: traded_years
+    operator: '>='
+    passed: false
+    required: 3
+metrics:
+  base:
+    completed_trades: 3
+    maximum_drawdown: '0.019988015553559786'
+    maximum_realized_trade_loss_fraction: '0.019988015553559817'
+    profit_factor: '1.3935578405981297'
+    return: '0.00809183386785454'
+    traded_years: 1
+  stress:
+    completed_trades: 3
+    maximum_drawdown: '0.01999452969308777'
+    maximum_realized_trade_loss_fraction: '0.019994529693087813'
+    profit_factor: '1.155807801272496'
+    return: '0.0031890009905686453'
+    traded_years: 1
+  trade_count_by_signal_year:
+    '2018': 3
+network_access_during_run: false
+schema_version: 1
+stage: development
+trades:
+  - base:
+      executed_entry_price: '34.5207673721023'
+      executed_exit_price: '35.86571441074753'
+      fees: '9.903377986846971'
+      pnl: '1882.4371053869925'
+      pnl_fraction_of_pre_entry_equity: '0.018824371053869925'
+      shares: 1407
+    entry_session: '2018-02-12'
+    exit_reason: target
+    exit_session: '2018-02-15'
+    held_sessions: 4
+    signal_session: '2018-02-09'
+    stress:
+      executed_entry_price: '34.57252264552374'
+      executed_exit_price: '35.81188892638923'
+      fees: '18.412562067212434'
+      pnl: '1602.6785333048479'
+      pnl_fraction_of_pre_entry_equity: '0.01602678533304848'
+      shares: 1308
+    trade_id: tsm-momentum-trend-volume-gap-anchoring-v001-0001
+  - base:
+      executed_entry_price: '37.14551402538738'
+      executed_exit_price: '37.89086947500672'
+      fees: '9.994846282252494'
+      pnl: '982.8186126107072'
+      pnl_fraction_of_pre_entry_equity: '0.009646595041636877'
+      shares: 1332
+    entry_session: '2018-09-17'
+    exit_reason: time
+    exit_session: '2018-10-01'
+    held_sessions: 10
+    signal_session: '2018-09-14'
+    stress:
+      executed_entry_price: '37.201204451212554'
+      executed_exit_price: '37.83400473842592'
+      fees: '18.5336966698407'
+      pnl: '762.9746580386636'
+      pnl_fraction_of_pre_entry_equity: '0.007509395116867558'
+      shares: 1235
+    trade_id: tsm-momentum-trend-volume-gap-anchoring-v001-0002
+  - base:
+      executed_entry_price: '34.055024069129985'
+      executed_exit_price: '32.66014662150086'
+      fees: '9.787115540315543'
+      pnl: '-2056.072331212246'
+      pnl_fraction_of_pre_entry_equity: '-0.019988015553559817'
+      shares: 1467
+    entry_session: '2018-10-17'
+    exit_reason: stop
+    exit_session: '2018-10-19'
+    held_sessions: 3
+    signal_session: '2018-10-16'
+    stress:
+      executed_entry_price: '34.106081076729886'
+      executed_exit_price: '32.61113189420495'
+      fees: '18.107051600311713'
+      pnl: '-2046.753092286647'
+      pnl_fraction_of_pre_entry_equity: '-0.019994529693087813'
+      shares: 1357
+    trade_id: tsm-momentum-trend-volume-gap-anchoring-v001-0003

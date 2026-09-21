@@ -1,0 +1,26 @@
+files:
+  - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+    path: pyproject.toml
+  - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+    path: uv.lock
+  - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+    path: src/trading_2026_2/__init__.py
+  - digest: 21667b899faaacdf47590c4878a9579558c5281f819ccd9aa31db3ad6ef863c4
+    path: src/trading_2026_2/tsm_momentum_trend_volume_gap_anchoring_v001.py
+  - digest: d79a2549023890b0596ae89f267342cfa15dff9ceed73731105634da2a46a730
+    path: tests/test_tsm_momentum_trend_volume_gap_anchoring_v001.py
+  - digest: e0dbea75f50d5ee72dfd58f56535154cc73fc112f29b124d25392ff68ba2e76b
+    path: research/tsm-momentum-trend-volume-gap-anchoring--v001/assignment.yml
+  - digest: 536c8533c25d5f7d40ea8106fa7e508738ecb750c44268a66ee7117472064b76
+    path: research/tsm-momentum-trend-volume-gap-anchoring--v001/candidate-definition.yml
+  - digest: 356b566543389bcbe3c146de6020bd72ba4652601cdb01bf79a37a93bafa46fc
+    path: research/tsm-momentum-trend-volume-gap-anchoring--v001/implementation-contract.yml
+  - digest: 2d83e90a0dcbd772fd5ce415af8605afc4bdc3bf068cc9dcf71efb6f0a59fc35
+    path: research/tsm-momentum-trend-volume-gap-anchoring--v001/preregistration.yml
+  - digest: 2ae4065f5d56e2a643a8f3111f3ec62da27f05cf4f61861c0d11b4137360ccc4
+    path: research/tsm-momentum-trend-volume-gap-anchoring--v001/qualification-spec.yml
+  - digest: b8aa304e95e4058b8ab744915958d04109c5b1b778a044d73a985df6467983f5
+    path: research/tsm-momentum-trend-volume-gap-anchoring--v001/runner-contract.yml
+  - digest: 82700b35a068bea1a87ca3c6c083cf22ab7ea809c27d097e5dcf263528f864b8
+    path: research/tsm-momentum-trend-volume-gap-anchoring--v001/run_development.py
+schema_version: 1

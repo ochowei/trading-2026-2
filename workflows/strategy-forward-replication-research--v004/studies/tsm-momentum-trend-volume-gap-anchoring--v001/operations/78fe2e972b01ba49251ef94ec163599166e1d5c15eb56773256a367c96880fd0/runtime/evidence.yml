@@ -1,0 +1,847 @@
+baseline:
+  accepted_signal_count: 16
+  bindings:
+    preregistration_digest: 2d83e90a0dcbd772fd5ce415af8605afc4bdc3bf068cc9dcf71efb6f0a59fc35
+    source_bundle_digest: f0836cec47c9ed7fe29736b0fe0c79d51520c602089e68836e9431949a8554e5
+    trial_inputs_digest: e6483d82f6cfc919392fe779bf30b2537e23e298258d8ca54c231d3e42fe0c8a
+  candidate_id: tsm-momentum-trend-volume-gap-anchoring-baseline-v001
+  diagnostics:
+    block_bootstrap:
+      base:
+        - block_length: 3
+          drawdown_above_10pct_ratio: '0.0257'
+          maximum_drawdown_q05_q50_q95:
+            - '0.026007947695242454'
+            - '0.0496659359330294'
+            - '0.09151420272592467'
+          positive_return_ratio: '0.44954'
+          profit_factor_above_one_ratio: '0.44954'
+          profit_factor_q05_q50_q95:
+            - '0.5921021538772844'
+            - '0.9620096537787148'
+            - '1.581794961074049'
+          repetitions: 50000
+          return_q05_q50_q95:
+            - '-0.06669679282408235'
+            - '-0.004833465789216951'
+            - '0.0548571939555642'
+          seed: 20260902
+        - block_length: 5
+          drawdown_above_10pct_ratio: '0.0124'
+          maximum_drawdown_q05_q50_q95:
+            - '0.022780698896526442'
+            - '0.04603312431752842'
+            - '0.0852555432406587'
+          positive_return_ratio: '0.44136'
+          profit_factor_above_one_ratio: '0.44136'
+          profit_factor_q05_q50_q95:
+            - '0.5793917811288942'
+            - '0.9553156208376596'
+            - '1.6391471628600354'
+          repetitions: 50000
+          return_q05_q50_q95:
+            - '-0.06778151470159022'
+            - '-0.005728609874704249'
+            - '0.05993925076251694'
+          seed: 20260902
+      gating: true
+      stress:
+        - block_length: 3
+          drawdown_above_10pct_ratio: '0.0533'
+          maximum_drawdown_q05_q50_q95:
+            - '0.03055721217312194'
+            - '0.0585658750831048'
+            - '0.10074926142568372'
+          positive_return_ratio: '0.21252'
+          profit_factor_above_one_ratio: '0.21252'
+          profit_factor_q05_q50_q95:
+            - '0.47629045633281464'
+            - '0.7821037069278878'
+            - '1.2875989042383797'
+          repetitions: 50000
+          return_q05_q50_q95:
+            - '-0.0834269569460867'
+            - '-0.027119660863967998'
+            - '0.026989596449633765'
+          seed: 20260902
+        - block_length: 5
+          drawdown_above_10pct_ratio: '0.03538'
+          maximum_drawdown_q05_q50_q95:
+            - '0.025386685308569926'
+            - '0.05421028010629065'
+            - '0.09521163096801447'
+          positive_return_ratio: '0.21318'
+          profit_factor_above_one_ratio: '0.21318'
+          profit_factor_q05_q50_q95:
+            - '0.46428159732761676'
+            - '0.7765366161091557'
+            - '1.3408819586424385'
+          repetitions: 50000
+          return_q05_q50_q95:
+            - '-0.0844125534344501'
+            - '-0.027934890848493765'
+            - '0.031570993415793724'
+          seed: 20260902
+    by_signal_year:
+      '2014':
+        base_pnl: '75.47933184591142'
+        stress_pnl: '-360.46246292290647'
+        trades: 3
+      '2015':
+        base_pnl: '-900.2164378726634'
+        stress_pnl: '-1397.0910375293872'
+        trades: 4
+      '2016':
+        base_pnl: '43.07635884250499'
+        stress_pnl: '-241.85201786752828'
+        trades: 2
+      '2017':
+        base_pnl: '690.6191225002061'
+        stress_pnl: '491.20909568745924'
+        trades: 1
+      '2018':
+        base_pnl: '-481.81936278636203'
+        stress_pnl: '-1285.2926622169944'
+        trades: 6
+    leave_one_signal_year_out:
+      base:
+        '2014':
+          maximum_drawdown: '0.04548341350764148'
+          omitted_trades: 3
+          profit_factor: '0.9395497232624587'
+          remaining_trades: 13
+          return: '-0.006478513254645102'
+        '2015':
+          maximum_drawdown: '0.02321364793515553'
+          omitted_trades: 4
+          profit_factor: '1.0396682200633605'
+          remaining_trades: 12
+          return: '0.0032964173647418438'
+        '2016':
+          maximum_drawdown: '0.04548341350764141'
+          omitted_trades: 2
+          profit_factor: '0.9433139958075297'
+          remaining_trades: 14
+          return: '-0.006160279982371453'
+        '2017':
+          maximum_drawdown: '0.04548341350764141'
+          omitted_trades: 1
+          profit_factor: '0.9020488352210595'
+          remaining_trades: 15
+          return: '-0.012601495411112995'
+        '2018':
+          maximum_drawdown: '0.04548341350764141'
+          omitted_trades: 6
+          profit_factor: '0.9896900323854572'
+          remaining_trades: 10
+          return: '-0.0009104162468402954'
+      gating: true
+      stress:
+        '2014':
+          maximum_drawdown: '0.045062491109999464'
+          omitted_trades: 3
+          profit_factor: '0.7693079720281327'
+          remaining_trades: 13
+          return: '-0.02441828497067322'
+        '2015':
+          maximum_drawdown: '0.029660113048276537'
+          omitted_trades: 4
+          profit_factor: '0.8283585694885557'
+          remaining_trades: 12
+          return: '-0.014111299312661418'
+        '2016':
+          maximum_drawdown: '0.048322181663773445'
+          omitted_trades: 2
+          profit_factor: '0.7615571770147935'
+          remaining_trades: 14
+          return: '-0.025535967562463346'
+        '2017':
+          maximum_drawdown: '0.048322181663773445'
+          omitted_trades: 1
+          profit_factor: '0.7414445587869843'
+          remaining_trades: 15
+          return: '-0.0327828802838841'
+        '2018':
+          maximum_drawdown: '0.048322181663773445'
+          omitted_trades: 6
+          profit_factor: '0.8269380991457962'
+          remaining_trades: 10
+          return: '-0.015081964226323574'
+  disposition: fail
+  failed_gates:
+    - base_profit_factor
+    - base_return
+    - completed_trades
+    - minimum_stress_block_bootstrap_positive_return_ratio
+    - minimum_stress_leave_one_year_out_profit_factor
+    - minimum_stress_leave_one_year_out_return
+    - stress_profit_factor
+    - stress_return
+  gates:
+    - actual: '0.9555686234217424'
+      gate: base_profit_factor
+      operator: '>'
+      passed: false
+      required: '1.10'
+    - actual: '-0.00572860987470403'
+      gate: base_return
+      operator: '>'
+      passed: false
+      required: '0'
+    - actual: 16
+      gate: completed_trades
+      operator: '>='
+      passed: false
+      required: 20
+    - actual: '0.02600794769524249'
+      gate: maximum_realized_trade_loss_fraction
+      operator: <=
+      passed: true
+      required: '0.04'
+    - actual: '0.0533'
+      gate: maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+      operator: <=
+      passed: true
+      required: '0.10'
+    - actual: '0.048322181663773445'
+      gate: maximum_stress_leave_one_year_out_drawdown
+      operator: <=
+      passed: true
+      required: '0.10'
+    - actual: '0.21252'
+      gate: minimum_stress_block_bootstrap_positive_return_ratio
+      operator: '>='
+      passed: false
+      required: '0.80'
+    - actual: '0.7414445587869843'
+      gate: minimum_stress_leave_one_year_out_profit_factor
+      operator: '>'
+      passed: false
+      required: '1.00'
+    - actual: '-0.0327828802838841'
+      gate: minimum_stress_leave_one_year_out_return
+      operator: '>'
+      passed: false
+      required: '0'
+    - actual: '0.048322181663773445'
+      gate: stress_maximum_drawdown
+      operator: <=
+      passed: true
+      required: '0.10'
+    - actual: '0.780024936270159'
+      gate: stress_profit_factor
+      operator: '>'
+      passed: false
+      required: '1.00'
+    - actual: '-0.027934890848493567'
+      gate: stress_return
+      operator: '>'
+      passed: false
+      required: '0'
+    - actual: 5
+      gate: traded_years
+      operator: '>='
+      passed: true
+      required: 3
+  metrics:
+    base:
+      completed_trades: 16
+      maximum_drawdown: '0.04548341350764141'
+      maximum_realized_trade_loss_fraction: '0.02600794769524249'
+      profit_factor: '0.9555686234217424'
+      return: '-0.00572860987470403'
+      traded_years: 5
+    stress:
+      completed_trades: 16
+      maximum_drawdown: '0.048322181663773445'
+      maximum_realized_trade_loss_fraction: '0.02557528774186275'
+      profit_factor: '0.780024936270159'
+      return: '-0.027934890848493567'
+      traded_years: 5
+    trade_count_by_signal_year:
+      '2014': 3
+      '2015': 4
+      '2016': 2
+      '2017': 1
+      '2018': 6
+  network_access_during_run: false
+  schema_version: 1
+  stage: development
+  trades:
+    - base:
+        executed_entry_price: '12.43337101993805'
+        executed_exit_price: '12.917781616996708'
+        fees: '9.907230450514103'
+        pnl: '1883.1693828547182'
+        pnl_fraction_of_pre_entry_equity: '0.018831693828547182'
+        shares: 3908
+      entry_session: '2014-02-07'
+      exit_reason: target
+      exit_session: '2014-02-14'
+      held_sessions: 6
+      signal_session: '2014-02-06'
+      stress:
+        executed_entry_price: '12.452011756099877'
+        executed_exit_price: '12.898395251388408'
+        fees: '18.40946556883799'
+        pnl: '1602.4090058238182'
+        pnl_fraction_of_pre_entry_equity: '0.016024090058238183'
+        shares: 3631
+      trade_id: tsm-momentum-trend-volume-gap-anchoring-baseline-v001-0001
+    - base:
+        executed_entry_price: '14.8241241551908'
+        executed_exit_price: '14.1777342804077'
+        fees: '9.683720531646339'
+        pnl: '-2167.9795124324182'
+        pnl_fraction_of_pre_entry_equity: '-0.021279074115623794'
+        shares: 3339
+      entry_session: '2014-04-21'
+      exit_reason: time
+      exit_session: '2014-05-05'
+      held_sessions: 10
+      signal_session: '2014-04-17'
+      stress:
+        executed_entry_price: '14.846349228886739'
+        executed_exit_price: '14.156457040367068'
+        fees: '17.946936519414255'
+        pnl: '-2152.473367799277'
+        pnl_fraction_of_pre_entry_equity: '-0.02118525917703288'
+        shares: 3094
+      trade_id: tsm-momentum-trend-volume-gap-anchoring-baseline-v001-0002
+    - base:
+        executed_entry_price: '16.33169220808355'
+        executed_exit_price: '16.456403259431315'
+        fees: '9.728227925211659'
+        pnl: '360.2894614236115'
+        pnl_fraction_of_pre_entry_equity: '0.003613185332062244'
+        shares: 2967
+      entry_session: '2014-11-03'
+      exit_reason: time
+      exit_session: '2014-11-17'
+      held_sessions: 10
+      signal_session: '2014-10-31'
+      stress:
+        executed_entry_price: '16.356177503747844'
+        executed_exit_price: '16.431706306065482'
+        fees: '18.026778518635368'
+        pnl: '189.60189905255248'
+        pnl_fraction_of_pre_entry_equity: '0.0019065060005937144'
+        shares: 2749
+      trade_id: tsm-momentum-trend-volume-gap-anchoring-baseline-v001-0003
+    - base:
+        executed_entry_price: '17.089573910173325'
+        executed_exit_price: '17.762824223402422'
+        fees: '9.915507269002301'
+        pnl: '1905.4816338677792'
+        pnl_fraction_of_pre_entry_equity: '0.019040444738208904'
+        shares: 2845
+      entry_session: '2015-01-21'
+      exit_reason: target-gap
+      exit_session: '2015-01-23'
+      held_sessions: 3
+      signal_session: '2015-01-20'
+      stress:
+        executed_entry_price: '17.115195460263543'
+        executed_exit_price: '17.73616665828476'
+        fees: '18.345757019203827'
+        pnl: '1616.0504361726373'
+        pnl_fraction_of_pre_entry_equity: '0.01621896765198539'
+        shares: 2632
+      trade_id: tsm-momentum-trend-volume-gap-anchoring-baseline-v001-0004
+    - base:
+        executed_entry_price: '16.099529984427132'
+        executed_exit_price: '15.24096309198466'
+        fees: '9.64660376891955'
+        pnl: '-2652.3154987068474'
+        pnl_fraction_of_pre_entry_equity: '-0.02600794769524249'
+        shares: 3078
+      entry_session: '2015-08-11'
+      exit_reason: stop-gap
+      exit_session: '2015-08-17'
+      held_sessions: 5
+      signal_session: '2015-08-10'
+      stress:
+        executed_entry_price: '16.123667210790593'
+        executed_exit_price: '15.218090210906144'
+        fees: '17.80211821552375'
+        pnl: '-2589.640797887359'
+        pnl_fraction_of_pre_entry_equity: '-0.02557528774186275'
+        shares: 2840
+      trade_id: tsm-momentum-trend-volume-gap-anchoring-baseline-v001-0005
+    - base:
+        executed_entry_price: '15.447878511676745'
+        executed_exit_price: '14.815140819114514'
+        fees: '9.45416723893919'
+        pnl: '-1986.1267188033466'
+        pnl_fraction_of_pre_entry_equity: '-0.019995507936963273'
+        shares: 3124
+      entry_session: '2015-09-03'
+      exit_reason: stop
+      exit_session: '2015-09-10'
+      held_sessions: 5
+      signal_session: '2015-09-02'
+      stress:
+        executed_entry_price: '15.471038749325437'
+        executed_exit_price: '14.79290699097177'
+        fees: '17.45624390300343'
+        pnl: '-1973.1882349949778'
+        pnl_fraction_of_pre_entry_equity: '-0.019998675241904514'
+        shares: 2884
+      trade_id: tsm-momentum-trend-volume-gap-anchoring-baseline-v001-0006
+    - base:
+        executed_entry_price: '17.19583269187638'
+        executed_exit_price: '17.865791270916205'
+        fees: '9.641946589767961'
+        pnl: '1832.7441457697514'
+        pnl_fraction_of_pre_entry_equity: '0.01882778635007917'
+        shares: 2750
+      entry_session: '2015-11-17'
+      exit_reason: target
+      exit_session: '2015-12-01'
+      held_sessions: 10
+      signal_session: '2015-11-16'
+      stress:
+        executed_entry_price: '17.221613550484893'
+        executed_exit_price: '17.838979177963356'
+        fees: '17.80376898750602'
+        pnl: '1549.6875591803125'
+        pnl_fraction_of_pre_entry_equity: '0.016026924623549522'
+        shares: 2539
+      trade_id: tsm-momentum-trend-volume-gap-anchoring-baseline-v001-0007
+    - base:
+        executed_entry_price: '15.976861567585692'
+        executed_exit_price: '16.66550439563441'
+        fees: '9.844937574507183'
+        pnl: '2067.1018318204297'
+        pnl_fraction_of_pre_entry_equity: '0.020842917593577103'
+        shares: 3016
+      entry_session: '2016-01-20'
+      exit_reason: target-gap
+      exit_session: '2016-01-22'
+      held_sessions: 3
+      signal_session: '2016-01-19'
+      stress:
+        executed_entry_price: '16.000814883279226'
+        executed_exit_price: '16.640493633659972'
+        fees: '18.122454488604642'
+        pnl: '1757.625756568346'
+        pnl_fraction_of_pre_entry_equity: '0.017890696121624354'
+        shares: 2776
+      trade_id: tsm-momentum-trend-volume-gap-anchoring-baseline-v001-0008
+    - base:
+        executed_entry_price: '24.602321893343333'
+        executed_exit_price: '23.594622591804892'
+        fees: '9.63456920258113'
+        pnl: '-2024.0254729779247'
+        pnl_fraction_of_pre_entry_equity: '-0.019991882631937977'
+        shares: 1999
+      entry_session: '2016-10-13'
+      exit_reason: stop
+      exit_session: '2016-10-13'
+      held_sessions: 1
+      signal_session: '2016-10-12'
+      stress:
+        executed_entry_price: '24.63920693366319'
+        executed_exit_price: '23.55921295309783'
+        fees: '17.688820098441294'
+        pnl: '-1999.4777744358744'
+        pnl_fraction_of_pre_entry_equity: '-0.019994763296919373'
+        shares: 1835
+      trade_id: tsm-momentum-trend-volume-gap-anchoring-baseline-v001-0009
+    - base:
+        executed_entry_price: '29.592743789040757'
+        executed_exit_price: '30.022658136170175'
+        fees: '9.711348973616861'
+        pnl: '690.6191225002061'
+        pnl_fraction_of_pre_entry_equity: '0.006960599499054876'
+        shares: 1629
+      entry_session: '2017-08-14'
+      exit_reason: time
+      exit_session: '2017-08-28'
+      held_sessions: 10
+      signal_session: '2017-08-11'
+      stress:
+        executed_entry_price: '29.637110721258214'
+        executed_exit_price: '29.977601620708185'
+        fees: '17.824798990247952'
+        pnl: '491.20909568745924'
+        pnl_fraction_of_pre_entry_equity: '0.00501230730574072'
+        shares: 1495
+      trade_id: tsm-momentum-trend-volume-gap-anchoring-baseline-v001-0010
+    - base:
+        executed_entry_price: '34.5207673721023'
+        executed_exit_price: '35.86571441074753'
+        fees: '9.896339338668685'
+        pnl: '1881.0991969965253'
+        pnl_fraction_of_pre_entry_equity: '0.018828133408518046'
+        shares: 1406
+      entry_session: '2018-02-12'
+      exit_reason: target
+      exit_session: '2018-02-15'
+      held_sessions: 4
+      signal_session: '2018-02-09'
+      stress:
+        executed_entry_price: '34.57252264552374'
+        executed_exit_price: '35.81188892638923'
+        fees: '18.13102442092478'
+        pnl: '1578.1727453338256'
+        pnl_fraction_of_pre_entry_equity: '0.01602339167333994'
+        shares: 1288
+      trade_id: tsm-momentum-trend-volume-gap-anchoring-baseline-v001-0011
+    - base:
+        executed_entry_price: '36.73016003372228'
+        executed_exit_price: '35.225710300407'
+        fees: '9.685260146973802'
+        pnl: '-2034.6746011893356'
+        pnl_fraction_of_pre_entry_equity: '-0.01998893261008214'
+        shares: 1346
+      entry_session: '2018-03-27'
+      exit_reason: stop
+      exit_session: '2018-03-28'
+      held_sessions: 2
+      signal_session: '2018-03-26'
+      stress:
+        executed_entry_price: '36.78522773991976'
+        executed_exit_price: '35.17284530245741'
+        fees: '17.701685968424783'
+        pnl: '-2000.9320840471164'
+        pnl_fraction_of_pre_entry_equity: '-0.019995328844633623'
+        shares: 1230
+      trade_id: tsm-momentum-trend-volume-gap-anchoring-baseline-v001-0012
+    - base:
+        executed_entry_price: '32.41814897298492'
+        executed_exit_price: '32.69752774133796'
+        fees: '9.734793668791271'
+        pnl: '407.93646501899457'
+        pnl_fraction_of_pre_entry_equity: '0.004089367940545952'
+        shares: 1495
+      entry_session: '2018-05-22'
+      exit_reason: time
+      exit_session: '2018-06-06'
+      held_sessions: 10
+      signal_session: '2018-05-21'
+      stress:
+        executed_entry_price: '32.4667518949834'
+        executed_exit_price: '32.64845691431243'
+        fees: '17.78947504669962'
+        pnl: '230.41958135675526'
+        pnl_fraction_of_pre_entry_equity: '0.0023495648718266427'
+        shares: 1366
+      trade_id: tsm-momentum-trend-volume-gap-anchoring-baseline-v001-0013
+    - base:
+        executed_entry_price: '31.10399630181816'
+        executed_exit_price: '31.316327623403698'
+        fees: '9.7625386619047'
+        pnl: '322.32364829787605'
+        pnl_fraction_of_pre_entry_equity: '0.0032179808947263313'
+        shares: 1564
+      entry_session: '2018-06-21'
+      exit_reason: time
+      exit_session: '2018-07-06'
+      held_sessions: 10
+      signal_session: '2018-06-20'
+      stress:
+        executed_entry_price: '31.15062897993183'
+        executed_exit_price: '31.269329632973378'
+        fees: '17.814656188123145'
+        pnl: '151.5711757021639'
+        pnl_fraction_of_pre_entry_equity: '0.0015419328835780297'
+        shares: 1427
+      trade_id: tsm-momentum-trend-volume-gap-anchoring-baseline-v001-0014
+    - base:
+        executed_entry_price: '37.14551402538738'
+        executed_exit_price: '37.89086947500672'
+        fees: '9.859780791951785'
+        pnl: '969.5372800078597'
+        pnl_fraction_of_pre_entry_equity: '0.009648515452034663'
+        shares: 1314
+      entry_session: '2018-09-17'
+      exit_reason: time
+      exit_session: '2018-10-01'
+      held_sessions: 10
+      signal_session: '2018-09-14'
+      stress:
+        executed_entry_price: '37.201204451212554'
+        executed_exit_price: '37.83400473842592'
+        fees: '17.948422038161524'
+        pnl: '738.8807214690215'
+        pnl_fraction_of_pre_entry_equity: '0.007505057935665113'
+        shares: 1196
+      trade_id: tsm-momentum-trend-volume-gap-anchoring-baseline-v001-0015
+    - base:
+        executed_entry_price: '34.055024069129985'
+        executed_exit_price: '32.66014662150086'
+        fees: '9.653685198934284'
+        pnl: '-2028.041351918282'
+        pnl_fraction_of_pre_entry_equity: '-0.01998952980649327'
+        shares: 1447
+      entry_session: '2018-10-17'
+      exit_reason: stop
+      exit_session: '2018-10-19'
+      held_sessions: 3
+      signal_session: '2018-10-16'
+      stress:
+        executed_entry_price: '34.106081076729886'
+        executed_exit_price: '32.61113189420495'
+        fees: '17.54662701135586'
+        pnl: '-1983.404802031644'
+        pnl_fraction_of_pre_entry_equity: '-0.019996032738719898'
+        shares: 1315
+      trade_id: tsm-momentum-trend-volume-gap-anchoring-baseline-v001-0016
+candidate:
+  accepted_signal_count: 3
+  bindings:
+    preregistration_digest: 2d83e90a0dcbd772fd5ce415af8605afc4bdc3bf068cc9dcf71efb6f0a59fc35
+    source_bundle_digest: f0836cec47c9ed7fe29736b0fe0c79d51520c602089e68836e9431949a8554e5
+    trial_inputs_digest: e6483d82f6cfc919392fe779bf30b2537e23e298258d8ca54c231d3e42fe0c8a
+  candidate_id: tsm-momentum-trend-volume-gap-anchoring-v001
+  diagnostics:
+    block_bootstrap:
+      base:
+        - block_length: 3
+          drawdown_above_10pct_ratio: '0.0'
+          maximum_drawdown_q05_q50_q95:
+            - '0.019988015553559786'
+            - '0.019988015553559817'
+            - '0.019988015553559828'
+          positive_return_ratio: '1.0'
+          profit_factor_above_one_ratio: '1.0'
+          profit_factor_q05_q50_q95:
+            - '1.3935578405981297'
+            - '1.4009663194207083'
+            - '1.4048342791294959'
+          repetitions: 50000
+          return_q05_q50_q95:
+            - '0.008091833867854614'
+            - '0.008091833867854614'
+            - '0.008091833867854614'
+          seed: 20260902
+        - block_length: 5
+          drawdown_above_10pct_ratio: '0.0'
+          maximum_drawdown_q05_q50_q95:
+            - '0.019988015553559786'
+            - '0.019988015553559817'
+            - '0.019988015553559828'
+          positive_return_ratio: '1.0'
+          profit_factor_above_one_ratio: '1.0'
+          profit_factor_q05_q50_q95:
+            - '1.3935578405981297'
+            - '1.4009663194207083'
+            - '1.4048342791294959'
+          repetitions: 50000
+          return_q05_q50_q95:
+            - '0.008091833867854614'
+            - '0.008091833867854614'
+            - '0.008091833867854614'
+          seed: 20260902
+      gating: true
+      stress:
+        - block_length: 3
+          drawdown_above_10pct_ratio: '0.0'
+          maximum_drawdown_q05_q50_q95:
+            - '0.01999452969308775'
+            - '0.01999452969308777'
+            - '0.019994529693087824'
+          positive_return_ratio: '1.0'
+          profit_factor_above_one_ratio: '1.0'
+          profit_factor_q05_q50_q95:
+            - '1.155807801272496'
+            - '1.1583048994567045'
+            - '1.1594936734956607'
+          repetitions: 50000
+          return_q05_q50_q95:
+            - '0.0031890009905686245'
+            - '0.0031890009905686245'
+            - '0.0031890009905688466'
+          seed: 20260902
+        - block_length: 5
+          drawdown_above_10pct_ratio: '0.0'
+          maximum_drawdown_q05_q50_q95:
+            - '0.01999452969308775'
+            - '0.01999452969308777'
+            - '0.019994529693087824'
+          positive_return_ratio: '1.0'
+          profit_factor_above_one_ratio: '1.0'
+          profit_factor_q05_q50_q95:
+            - '1.155807801272496'
+            - '1.1583048994567045'
+            - '1.1594936734956607'
+          repetitions: 50000
+          return_q05_q50_q95:
+            - '0.0031890009905686245'
+            - '0.0031890009905686245'
+            - '0.0031890009905688466'
+          seed: 20260902
+    by_signal_year:
+      '2018':
+        base_pnl: '809.1833867854539'
+        stress_pnl: '318.9000990568645'
+        trades: 3
+    leave_one_signal_year_out:
+      base:
+        '2018':
+          maximum_drawdown: '0.0'
+          omitted_trades: 3
+          profit_factor: inf
+          remaining_trades: 0
+          return: '0.0'
+      gating: true
+      stress:
+        '2018':
+          maximum_drawdown: '0.0'
+          omitted_trades: 3
+          profit_factor: inf
+          remaining_trades: 0
+          return: '0.0'
+  disposition: fail
+  failed_gates:
+    - completed_trades
+    - minimum_stress_leave_one_year_out_return
+    - traded_years
+  gates:
+    - actual: '1.3935578405981297'
+      gate: base_profit_factor
+      operator: '>'
+      passed: true
+      required: '1.10'
+    - actual: '0.00809183386785454'
+      gate: base_return
+      operator: '>'
+      passed: true
+      required: '0'
+    - actual: 3
+      gate: completed_trades
+      operator: '>='
+      passed: false
+      required: 20
+    - actual: '0.019994529693087813'
+      gate: maximum_realized_trade_loss_fraction
+      operator: <=
+      passed: true
+      required: '0.04'
+    - actual: '0.0'
+      gate: maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+      operator: <=
+      passed: true
+      required: '0.10'
+    - actual: '0.0'
+      gate: maximum_stress_leave_one_year_out_drawdown
+      operator: <=
+      passed: true
+      required: '0.10'
+    - actual: '1.0'
+      gate: minimum_stress_block_bootstrap_positive_return_ratio
+      operator: '>='
+      passed: true
+      required: '0.80'
+    - actual: inf
+      gate: minimum_stress_leave_one_year_out_profit_factor
+      operator: '>'
+      passed: true
+      required: '1.00'
+    - actual: '0.0'
+      gate: minimum_stress_leave_one_year_out_return
+      operator: '>'
+      passed: false
+      required: '0'
+    - actual: '0.01999452969308777'
+      gate: stress_maximum_drawdown
+      operator: <=
+      passed: true
+      required: '0.10'
+    - actual: '1.155807801272496'
+      gate: stress_profit_factor
+      operator: '>'
+      passed: true
+      required: '1.00'
+    - actual: '0.0031890009905686453'
+      gate: stress_return
+      operator: '>'
+      passed: true
+      required: '0'
+    - actual: 1
+      gate: traded_years
+      operator: '>='
+      passed: false
+      required: 3
+  metrics:
+    base:
+      completed_trades: 3
+      maximum_drawdown: '0.019988015553559786'
+      maximum_realized_trade_loss_fraction: '0.019988015553559817'
+      profit_factor: '1.3935578405981297'
+      return: '0.00809183386785454'
+      traded_years: 1
+    stress:
+      completed_trades: 3
+      maximum_drawdown: '0.01999452969308777'
+      maximum_realized_trade_loss_fraction: '0.019994529693087813'
+      profit_factor: '1.155807801272496'
+      return: '0.0031890009905686453'
+      traded_years: 1
+    trade_count_by_signal_year:
+      '2018': 3
+  network_access_during_run: false
+  schema_version: 1
+  stage: development
+  trades:
+    - base:
+        executed_entry_price: '34.5207673721023'
+        executed_exit_price: '35.86571441074753'
+        fees: '9.903377986846971'
+        pnl: '1882.4371053869925'
+        pnl_fraction_of_pre_entry_equity: '0.018824371053869925'
+        shares: 1407
+      entry_session: '2018-02-12'
+      exit_reason: target
+      exit_session: '2018-02-15'
+      held_sessions: 4
+      signal_session: '2018-02-09'
+      stress:
+        executed_entry_price: '34.57252264552374'
+        executed_exit_price: '35.81188892638923'
+        fees: '18.412562067212434'
+        pnl: '1602.6785333048479'
+        pnl_fraction_of_pre_entry_equity: '0.01602678533304848'
+        shares: 1308
+      trade_id: tsm-momentum-trend-volume-gap-anchoring-v001-0001
+    - base:
+        executed_entry_price: '37.14551402538738'
+        executed_exit_price: '37.89086947500672'
+        fees: '9.994846282252494'
+        pnl: '982.8186126107072'
+        pnl_fraction_of_pre_entry_equity: '0.009646595041636877'
+        shares: 1332
+      entry_session: '2018-09-17'
+      exit_reason: time
+      exit_session: '2018-10-01'
+      held_sessions: 10
+      signal_session: '2018-09-14'
+      stress:
+        executed_entry_price: '37.201204451212554'
+        executed_exit_price: '37.83400473842592'
+        fees: '18.5336966698407'
+        pnl: '762.9746580386636'
+        pnl_fraction_of_pre_entry_equity: '0.007509395116867558'
+        shares: 1235
+      trade_id: tsm-momentum-trend-volume-gap-anchoring-v001-0002
+    - base:
+        executed_entry_price: '34.055024069129985'
+        executed_exit_price: '32.66014662150086'
+        fees: '9.787115540315543'
+        pnl: '-2056.072331212246'
+        pnl_fraction_of_pre_entry_equity: '-0.019988015553559817'
+        shares: 1467
+      entry_session: '2018-10-17'
+      exit_reason: stop
+      exit_session: '2018-10-19'
+      held_sessions: 3
+      signal_session: '2018-10-16'
+      stress:
+        executed_entry_price: '34.106081076729886'
+        executed_exit_price: '32.61113189420495'
+        fees: '18.107051600311713'
+        pnl: '-2046.753092286647'
+        pnl_fraction_of_pre_entry_equity: '-0.019994529693087813'
+        shares: 1357
+      trade_id: tsm-momentum-trend-volume-gap-anchoring-v001-0003
