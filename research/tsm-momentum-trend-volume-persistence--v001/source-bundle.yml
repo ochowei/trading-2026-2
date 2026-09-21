@@ -1,0 +1,28 @@
+files:
+  - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+    path: pyproject.toml
+  - digest: 0ac3a466632626026b9de463cf4fbf3f8d6131082cd375cc1e6eebdbf2712911
+    path: research/tsm-momentum-trend-volume-persistence--v001/assignment.yml
+  - digest: d5b3bca26d2f384ea55583531cab4b7d29ec45eeac975c9ad18ac96e023e16aa
+    path: research/tsm-momentum-trend-volume-persistence--v001/candidate-definition.yml
+  - digest: eb6707c1b2c338aaa3c913e2d62c9f6dcc2a7a874e10dfa891444a4493c8a922
+    path: research/tsm-momentum-trend-volume-persistence--v001/implementation-contract.yml
+  - digest: d8104d63259a02534364c9dec20a077a4a3f5d1c2f6512ed7ab2db8c6c575876
+    path: research/tsm-momentum-trend-volume-persistence--v001/preregistration.yml
+  - digest: 7aaa39de3de8a2e664897ff6f57a5fed24dd153070e0da3b1cad29db519c85d4
+    path: research/tsm-momentum-trend-volume-persistence--v001/qualification-spec.yml
+  - digest: aac2438682770f0fa7de9f035a080c7318d9fd444456dbdf2ea7b19340ff7625
+    path: research/tsm-momentum-trend-volume-persistence--v001/run_development.py
+  - digest: f72f58e353f8ec023c88b71e7819f9b58d2741b15336192301b640cc09cb7cc5
+    path: research/tsm-momentum-trend-volume-persistence--v001/runner-contract.yml
+  - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+    path: src/trading_2026_2/__init__.py
+  - digest: d0f95b58cf53b18e3294a10c3649b8bc67d5536acd796ce445289980ba99392d
+    path: src/trading_2026_2/tsm_momentum_trend_volume_fade_v001.py
+  - digest: 21667b899faaacdf47590c4878a9579558c5281f819ccd9aa31db3ad6ef863c4
+    path: src/trading_2026_2/tsm_momentum_trend_volume_gap_anchoring_v001.py
+  - digest: 72da401acc0b0049203ce8b6db24648f8ab8f005c51537f24fa3022a49cf1fb7
+    path: tests/test_tsm_momentum_trend_volume_fade_v001.py
+  - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+    path: uv.lock
+schema_version: 1

@@ -1,0 +1,9 @@
+assignee: TASK-011-v004-study-developer
+assigner: 專案管理者（TASK-011）
+instruction: 建立 Study tsm-momentum-trend-volume-persistence--v001，提出與既有 TSM Development Study 真正不同的量先於價假說：訊號日前五個已完成 session 的成交量平均量比至少為 1.05，且最新／最早先前量能比值不高於 1.00，代表先前量能先行後鈍化，再由當日趨勢與價格加速確認。固定記錄它與 volume-lead、volume-ramp、volume-absorption、volume-efficiency、volume-close-acceptance、volume-return-alignment、volume-range-compression、volume-gap-anchoring 及 v024 的機制差異，明確區分 candidate／baseline，完成唯一 Development trial、evidence validation 與規則允許的 freeze-readiness／candidate-freeze 嘗試；只處理 Development-to-freeze，不執行 Historical Evaluation、Terminal、challenge 或 replay。
+role: study 開發者
+schema_version: 1
+scope: development-to-freeze
+source_id: PROJECT_KANBAN:TASK-011
+study_id: tsm-momentum-trend-volume-persistence--v001
+workflow_version: v004

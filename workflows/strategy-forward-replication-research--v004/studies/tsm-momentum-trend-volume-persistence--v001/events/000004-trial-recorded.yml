@@ -1,0 +1,26 @@
+actor_id: TASK-011-v004-study-developer
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: cdc34e65bdc1fb4a3eab7b8bbf35f26ebde60ce07fe0340501fd5e518527dacd
+  workflow_digest: 62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: trial-recorded
+execution:
+  assignment_digest: 0ac3a466632626026b9de463cf4fbf3f8d6131082cd375cc1e6eebdbf2712911
+  assignment_path: manifests/assignments/0ac3a466632626026b9de463cf4fbf3f8d6131082cd375cc1e6eebdbf2712911.yml
+  role: study 開發者
+occurred_at: '2026-09-21T09:39:27.779303Z'
+payload:
+  development_evidence_digest: daa71df1fa8d0298ff938a674ce6dc0e30d9ab57d5d57e3e2de087e6b9620011
+  development_evidence_path: evidence/trials/tsm-momentum-trend-volume-fade-v001/candidate.yml
+  inputs_digest: 00410e49ddd0f988e18879c72057785e76c5c60ee8a3055cb2c30b845db4fe3c
+  inputs_path: evidence/trials/tsm-momentum-trend-volume-fade-v001/inputs.yml
+  publication_digest: abd142183556931b28fb866e63204e6e175287bae35255c6fc225584f7aabb33
+  publication_path: evidence/trials/tsm-momentum-trend-volume-fade-v001/publication.yml
+  status: completed
+  trial_id: tsm-momentum-trend-volume-fade-v001
+previous_event_digest: 81cf821464ba4b16a469382027cf7f9dbbe0925dc09f768fef27b15e01f04852
+schema_version: 1
+sequence: 4
+study_id: tsm-momentum-trend-volume-persistence--v001

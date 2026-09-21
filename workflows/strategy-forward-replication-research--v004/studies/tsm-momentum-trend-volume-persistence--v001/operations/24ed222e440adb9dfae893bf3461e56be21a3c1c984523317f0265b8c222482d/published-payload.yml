@@ -1,0 +1,8 @@
+development_evidence_digest: daa71df1fa8d0298ff938a674ce6dc0e30d9ab57d5d57e3e2de087e6b9620011
+development_evidence_path: evidence/trials/tsm-momentum-trend-volume-fade-v001/candidate.yml
+inputs_digest: 00410e49ddd0f988e18879c72057785e76c5c60ee8a3055cb2c30b845db4fe3c
+inputs_path: evidence/trials/tsm-momentum-trend-volume-fade-v001/inputs.yml
+publication_digest: abd142183556931b28fb866e63204e6e175287bae35255c6fc225584f7aabb33
+publication_path: evidence/trials/tsm-momentum-trend-volume-fade-v001/publication.yml
+status: completed
+trial_id: tsm-momentum-trend-volume-fade-v001
