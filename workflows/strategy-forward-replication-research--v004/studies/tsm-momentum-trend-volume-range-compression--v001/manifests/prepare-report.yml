@@ -1,0 +1,598 @@
+binding:
+  authority_root: /Users/william/.codex/worktrees/2f4f/trading-2026-2/.authority
+  environment:
+    executable: /Users/william/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/bin/python3.11
+    executable_digest: 4c78423e7d5986362ac04df40edb18cdd1174f9818d653402e3abbd2a5bbf793
+    packages:
+      - PyYAML==6.0.3
+      - Pygments==2.21.0
+      - attrs==26.1.0
+      - beautifulsoup4==4.15.0
+      - certifi==2026.7.22
+      - cffi==2.1.1
+      - charset-normalizer==3.5.1
+      - contourpy==1.3.3
+      - curl_cffi==0.16.2
+      - cycler==0.12.1
+      - exchange_calendars==4.13.2
+      - execnet==2.1.2
+      - fonttools==4.64.0
+      - idna==3.19
+      - iniconfig==2.3.0
+      - jsonschema-specifications==2025.9.1
+      - jsonschema==4.26.0
+      - kiwisolver==1.5.1
+      - korean_lunar_calendar==0.4.0
+      - lxml==6.1.2
+      - matplotlib==3.11.1
+      - multitasking==0.0.13
+      - numpy==2.4.6
+      - packaging==26.3
+      - pandas==3.0.5
+      - peewee==4.4.0
+      - pillow==12.3.0
+      - platformdirs==4.11.7
+      - pluggy==1.6.0
+      - protobuf==7.36.1
+      - pycparser==3.0
+      - pyluach==2.3.0
+      - pyparsing==3.3.2
+      - pytest-xdist==3.8.0
+      - pytest==9.1.1
+      - python-dateutil==2.9.0.post0
+      - pytz==2026.3.post1
+      - referencing==0.37.0
+      - requests==2.34.2
+      - rpds-py==2026.6.3
+      - ruff==0.16.5
+      - six==1.17.0
+      - soupsieve==2.9.2
+      - toolz==1.1.0
+      - trading-2026-2==0.1.0
+      - typing_extensions==4.16.0
+      - tzdata==2026.3
+      - urllib3==2.7.0
+      - websockets==17.1
+      - yfinance==1.7.0
+    python: 3.11.15 (main, Apr 14 2026, 14:45:51) [Clang 22.1.3 ]
+  repository: /Users/william/.codex/worktrees/2f4f/trading-2026-2
+  settings:
+    candidate-definition.yml: 6fd4b5a8161432b1e0ebabcce32ad572e5731b2ca5e775ff72d3e7815461abc0
+    development-trial-inputs.yml: b044fa2e00a62a662b4637e2b5cb1b032122dfa4c5a09ee638f9514f4f78a20e
+    implementation-contract.yml: 91980745a3ccc20619d476e576e94de463eb7a458b59625ae501dd9c9998d16b
+    preregistration.yml: 9438ac7762d398f4a6dc3095addb63e5aea5d6ee676965bdf65d035d6d9b82f5
+    qualification-spec.yml: b06b5942e24f055a67a48a880c194309ff008e12715aa1ccd885e9b1daea62d9
+    runner-contract.yml: 7cf99bf49e761ccab80d664931897c34b49f7fd1211f32202e1552566bbb8ea8
+    source-bundle.yml: 855692fd88bf85d49d00cb740246e94752fa50e0385d95678121676c05d0e718
+  source_bundle:
+    files:
+      - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+        path: pyproject.toml
+      - digest: 1ad2b626be2351b288ad0caa4c5c77a689114232a975c5e05ffd95adc7ffad26
+        path: research/tsm-momentum-trend-volume-range-compression--v001/assignment.yml
+      - digest: 6fd4b5a8161432b1e0ebabcce32ad572e5731b2ca5e775ff72d3e7815461abc0
+        path: research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml
+      - digest: 91980745a3ccc20619d476e576e94de463eb7a458b59625ae501dd9c9998d16b
+        path: research/tsm-momentum-trend-volume-range-compression--v001/implementation-contract.yml
+      - digest: 9438ac7762d398f4a6dc3095addb63e5aea5d6ee676965bdf65d035d6d9b82f5
+        path: research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml
+      - digest: b06b5942e24f055a67a48a880c194309ff008e12715aa1ccd885e9b1daea62d9
+        path: research/tsm-momentum-trend-volume-range-compression--v001/qualification-spec.yml
+      - digest: a973b6caf4c7fa9f4fe556d21a93582df2b08d9d0b7af70f7a5dc3cfcd47b527
+        path: research/tsm-momentum-trend-volume-range-compression--v001/run_development.py
+      - digest: 7cf99bf49e761ccab80d664931897c34b49f7fd1211f32202e1552566bbb8ea8
+        path: research/tsm-momentum-trend-volume-range-compression--v001/runner-contract.yml
+      - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+        path: src/trading_2026_2/__init__.py
+      - digest: 21fc79e3f3aac10a6ae122f0c25b1a3e4e56f117ce17cad88657d4a3404b2d92
+        path: src/trading_2026_2/tsm_momentum_trend_volume_range_compression_v001.py
+      - digest: d4b43d9e55ef5608651e6f8dccdfe455e9a380b1ce286cfe0d09d9deddbff1cf
+        path: tests/test_tsm_momentum_trend_volume_range_compression_v001.py
+      - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+        path: uv.lock
+    schema_version: 1
+  study_id: tsm-momentum-trend-volume-range-compression--v001
+  workflow_digest: 62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4
+  workflow_reference:
+    policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+    reference_mode: repository-workflow-package
+    release_manifest_digest: ea04558c1473f9c6db7e9707846694147c6c6f254498af2f18729a1e4ef1fa84
+    release_manifest_path: workflows/strategy-forward-replication-research--v004/release-manifest.yml
+    resolver_version: 1
+    schema_version: 1
+    workflow_digest: 62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4
+    workflow_id: strategy-forward-replication-research
+    workflow_package_path: workflows/strategy-forward-replication-research--v004
+    workflow_version: v004
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+cases:
+  - case: 0
+    data_digest: 98f0f95cdca02cab738e95ba0bc94404c2df71ae9169f6ba0c496d41d6185a39
+    evidence_digest: d8aec14e2fe56572a734232804db1e0e550ac994fb9c6438658a0a38afa8665f
+    expect: trades
+    request_digest: 3bd1b1aaeb903a3117e1bbbd7ce3da62e260a1bba89ca35625894c5a2ee2b7ef
+    stage: development
+    validation:
+      baseline:
+        failed_gates:
+          - base_profit_factor
+          - base_return
+          - completed_trades
+          - minimum_stress_block_bootstrap_positive_return_ratio
+          - minimum_stress_leave_one_year_out_return
+          - stress_profit_factor
+          - stress_return
+          - traded_years
+        trades: 1
+      candidate:
+        failed_gates:
+          - base_profit_factor
+          - base_return
+          - completed_trades
+          - minimum_stress_block_bootstrap_positive_return_ratio
+          - minimum_stress_leave_one_year_out_return
+          - stress_profit_factor
+          - stress_return
+          - traded_years
+        trades: 1
+  - case: 1
+    data_digest: 872bd622ba2d1a11883b5f55f89049bc9fac8c13512791ca4efc3f5496376b54
+    evidence_digest: 31ee892925531e8d2b73cd37ea443bcdf539b20e7e2ae72c1d970da05c8deae2
+    expect: no-trades
+    request_digest: 68fe7eb8cc1b8821e8f287ed7363a7ce1d5ff5d518b1063629099574faef4461
+    stage: development
+    validation:
+      baseline:
+        failed_gates:
+          - base_profit_factor
+          - base_return
+          - completed_trades
+          - maximum_realized_trade_loss_fraction
+          - maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+          - maximum_stress_leave_one_year_out_drawdown
+          - minimum_stress_block_bootstrap_positive_return_ratio
+          - minimum_stress_leave_one_year_out_profit_factor
+          - minimum_stress_leave_one_year_out_return
+          - stress_maximum_drawdown
+          - stress_profit_factor
+          - stress_return
+          - traded_years
+          - no-trades
+        trades: 0
+      candidate:
+        failed_gates:
+          - base_profit_factor
+          - base_return
+          - completed_trades
+          - maximum_realized_trade_loss_fraction
+          - maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+          - maximum_stress_leave_one_year_out_drawdown
+          - minimum_stress_block_bootstrap_positive_return_ratio
+          - minimum_stress_leave_one_year_out_profit_factor
+          - minimum_stress_leave_one_year_out_return
+          - stress_maximum_drawdown
+          - stress_profit_factor
+          - stress_return
+          - traded_years
+          - no-trades
+        trades: 0
+  - case: 2
+    data_digest: 81a249ff1bbb8bde4d0410d47e829ac43f3b78879e298a85a3439ded015df0d4
+    evidence_digest: 957d7d34f0710e552c3a10ad9fa86d9f50bd77fc5f28bec43205411ba6443ffb
+    expect: trades
+    request_digest: 5aa53970700dbf5bc322b3163438e8a6ef912d51cdfbdfc31613aadd929fbf44
+    stage: historical-evaluation
+    validation:
+      candidate:
+        failed_gates:
+          - base_compounded_return
+          - base_profit_factor
+          - completed_trades
+          - maximum_fold_trade_concentration
+          - positive_traded_fold_ratio
+          - stress_profit_factor
+          - stress_return
+          - traded_folds
+        trades: 1
+  - case: 3
+    data_digest: cac83f5189a23da85b06ff714dc136bc440a5a7475ee90df986969f43c5fc717
+    evidence_digest: 86545c14433aa670715008d9367bf691459216a427e3954f51fd1c5a24092a11
+    expect: no-trades
+    request_digest: e4a04f889482a2d8748c15f4d8299d2b6d1466405182f8d66788922c741e94cb
+    stage: historical-evaluation
+    validation:
+      candidate:
+        failed_gates:
+          - base_compounded_return
+          - base_profit_factor
+          - completed_trades
+          - positive_traded_fold_ratio
+          - stress_profit_factor
+          - stress_return
+          - traded_folds
+        trades: 0
+checks:
+  contract_source: research/tsm-momentum-trend-volume-range-compression--v001/implementation-contract.yml
+  development_trial_bindings:
+    preregistration_digest: 9438ac7762d398f4a6dc3095addb63e5aea5d6ee676965bdf65d035d6d9b82f5
+    procedure_path: research/tsm-momentum-trend-volume-range-compression--v001/run_development.py
+    source_bundle_digest: 855692fd88bf85d49d00cb740246e94752fa50e0385d95678121676c05d0e718
+    strategy_engine_path: src/trading_2026_2/tsm_momentum_trend_volume_range_compression_v001.py
+  development_trial_inputs_path: research/tsm-momentum-trend-volume-range-compression--v001/development-trial-inputs.yml
+  engine_path: src/trading_2026_2/tsm_momentum_trend_volume_range_compression_v001.py
+  identity:
+    candidate_definition_has_explicit_candidate_id: true
+    candidate_family:
+      - tsm-momentum-trend-volume-range-compression-v001
+    candidate_id: tsm-momentum-trend-volume-range-compression-v001
+    study_id: tsm-momentum-trend-volume-range-compression--v001
+    trial_id: tsm-momentum-trend-volume-range-compression-v001
+  precreate_guards:
+    - canonical-yaml-and-artifact-shape
+    - study-candidate-trial-family-identity
+    - preregistration-qualification-trial-source-digests
+    - implementation-contract
+    - outcome-relevant-parameters
+    - holding-cooldown-stop-target-gap-indicator-readiness
+    - synthetic-contract
+    - source-bundle-path-and-sha256
+  required_documents:
+    - preregistration.yml
+    - candidate-definition.yml
+    - qualification-spec.yml
+    - development-trial-inputs.yml
+    - source-bundle.yml
+  research_root: research/tsm-momentum-trend-volume-range-compression--v001
+  source_bundle_file_count: 12
+  source_bundle_verified_file_count: 12
+  study_event_required: false
+  subchecks:
+    - details:
+        contract_source: research/tsm-momentum-trend-volume-range-compression--v001/implementation-contract.yml
+        derived_required_history_sessions: 25
+        engine_path: src/trading_2026_2/tsm_momentum_trend_volume_range_compression_v001.py
+        engine_spec_constant: DEFAULT_SPEC
+        engine_spec_fields_checked:
+          - sma_lookback
+          - sma_min_periods
+          - rsi_lookback
+          - rsi_min_periods
+          - rsi_max
+          - mean_reversion_min
+          - volume_lookback
+          - volume_average_min_periods
+          - volume_lead_window
+          - volume_lead_min_periods
+          - volume_spike_ratio
+          - volume_lead_enabled
+          - cooldown_sessions
+          - holding_sessions
+          - target_return
+          - stop_return
+          - fold_warmup_sessions
+          - risk_fraction
+          - initial_cash
+          - require_close_above_prior_close
+        holding_period:
+          paths:
+            engine.holding_sessions: implementation contract engine spec
+            execution.held_complete_sessions: candidate-definition.yml
+            preregistration.maximum_holding_sessions: preregistration.yml
+          relation:
+            engine.holding_sessions: 10
+            entry_to_exit_complete_sessions: 10
+            execution.held_complete_sessions: 10
+            formula:
+              engine.holding_sessions: execution.held_complete_sessions
+              preregistration.maximum_holding_sessions: signal_to_exit_session_span
+              signal_to_exit_session_span: 1 + execution.held_complete_sessions
+            preregistration.maximum_holding_sessions: 11
+            signal_to_entry_sessions: 1
+            signal_to_exit_session_span: 11
+          status: complete
+          values:
+            engine.holding_sessions: 10
+            execution.held_complete_sessions: 10
+            preregistration.maximum_holding_sessions: 11
+        outcome_relevant_parameters:
+          - actual: 20
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:sma_lookback
+            expected: 20
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml:registered_sma_lookback
+            label: SMA length
+          - actual: 2
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:rsi_lookback
+            expected: 2
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml:registered_rsi_lookback
+            label: RSI length
+          - actual: '70'
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:rsi_max
+            expected: '70'
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml:registered_rsi_max
+            label: RSI threshold
+          - actual: '-0.10'
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:mean_reversion_gap
+            expected: '-0.10'
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml:registered_mean_reversion_gap
+            label: mean-reversion gap
+          - actual: 20
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:volume_lookback
+            expected: 20
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml:registered_volume_lookback
+            label: Volume average length
+          - actual: 5
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:volume_lead_window
+            expected: 5
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml:registered_volume_lead_window
+            label: Volume lead window
+          - actual: '1.05'
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:volume_spike_ratio
+            expected: '1.05'
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml:registered_volume_spike_ratio
+            label: Volume spike ratio
+          - actual: 5
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:cooldown_sessions
+            expected: 5
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml:registered_cooldown_sessions
+            label: Cooldown
+          - actual: completed-session-close
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:decision_time
+            expected: completed-session-close
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml:registered_decision_time
+            label: Signal decision time
+          - actual: '0.04'
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:target_return
+            expected: '0.04'
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml:registered_target_return
+            label: Target return
+          - actual: '-0.04'
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:stop_return
+            expected: '-0.04'
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml:registered_stop_return
+            label: Stop return
+          - actual: next-session-open
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:entry
+            expected: next-session-open
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml:registered_entry
+            label: Entry timing
+          - actual: stop-gap-at-open-target-gap-at-open
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:gap_fill
+            expected: stop-gap-at-open-target-gap-at-open
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml:registered_gap_fill
+            label: Gap fill
+          - actual: adverse-stop-first
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:intrabar_ambiguity
+            expected: adverse-stop-first
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml:registered_intrabar_ambiguity
+            label: Intrabar ambiguity
+          - actual: 25
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:fold_warmup_sessions
+            expected: 25
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml:registered_fold_warmup_sessions
+            label: Fold warmup
+          - actual: '0.02'
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:risk_fraction
+            expected: '0.02'
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml:registered_risk_fraction
+            label: Risk fraction
+          - actual: true
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:price_direction_above
+            expected: true
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml:registered_price_direction_above
+            label: Close direction confirmation
+          - actual: null
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:price_direction_below
+            expected: null
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml:registered_price_direction_below
+            label: Close-below direction confirmation
+          - actual: null
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:supplemental_enabled
+            expected: null
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml:registered_supplemental_enabled
+            label: Supplemental path enabled
+          - actual: null
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:supplemental_atr_lookback
+            expected: null
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml:registered_supplemental_atr_lookback
+            label: ATR lookback
+          - actual: null
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:supplemental_atr_distance_multiplier
+            expected: null
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml:registered_supplemental_atr_distance_multiplier
+            label: ATR distance multiplier
+          - actual: null
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:supplemental_bollinger_lookback
+            expected: null
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml:registered_supplemental_bollinger_lookback
+            label: Bollinger lookback
+          - actual: null
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:supplemental_pullback_low_lookback
+            expected: null
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/preregistration.yml:registered_supplemental_pullback_low_lookback
+            label: Pullback low lookback
+          - actual: 5
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:Contract cooldown
+            expected: 5
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/implementation-contract.yml:Contract cooldown
+            label: Contract cooldown
+          - actual: '0.04'
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:Contract target
+            expected: '0.04'
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/implementation-contract.yml:Contract target
+            label: Contract target
+          - actual: '-0.04'
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:Contract stop
+            expected: '-0.04'
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/implementation-contract.yml:Contract stop
+            label: Contract stop
+          - actual: next-session-open
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:Contract entry
+            expected: next-session-open
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/implementation-contract.yml:Contract entry
+            label: Contract entry
+          - actual: completed-session-close
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:Contract signal decision time
+            expected: completed-session-close
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/implementation-contract.yml:Contract signal decision time
+            label: Contract signal decision time
+          - actual: stop-gap-at-open-target-gap-at-open
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:Contract gap fill
+            expected: stop-gap-at-open-target-gap-at-open
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/implementation-contract.yml:Contract gap fill
+            label: Contract gap fill
+          - actual: adverse-stop-first
+            actual_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/candidate-definition.yml:Contract same-session ambiguity
+            expected: adverse-stop-first
+            expected_path: /Users/william/.codex/worktrees/2f4f/trading-2026-2/research/tsm-momentum-trend-volume-range-compression--v001/implementation-contract.yml:Contract same-session ambiguity
+            label: Contract same-session ambiguity
+        source_bundle_file_count: 12
+        source_bundle_path: research/tsm-momentum-trend-volume-range-compression--v001/source-bundle.yml
+        source_bundle_verified_file_count: 12
+        validator_metrics:
+          development:
+            - base_profit_factor
+            - base_return
+            - completed_trades
+            - maximum_realized_trade_loss_fraction
+            - maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+            - maximum_stress_leave_one_year_out_drawdown
+            - minimum_stress_block_bootstrap_positive_return_ratio
+            - minimum_stress_leave_one_year_out_profit_factor
+            - minimum_stress_leave_one_year_out_return
+            - stress_maximum_drawdown
+            - stress_profit_factor
+            - stress_return
+            - traded_years
+          evaluation:
+            - base_compounded_return
+            - base_profit_factor
+            - completed_trades
+            - family_wise_confidence
+            - maximum_fold_positive_profit_concentration
+            - maximum_fold_trade_concentration
+            - maximum_realized_trade_loss_fraction
+            - positive_traded_fold_ratio
+            - stress_max_drawdown
+            - stress_profit_factor
+            - stress_return
+            - traded_folds
+      errors: []
+      name: contract
+      status: passed
+      study_id: tsm-momentum-trend-volume-range-compression--v001
+      warnings: []
+    - details:
+        accepted_signal_count: 2
+        accepted_signals:
+          - '2020-02-21T00:00:00'
+        cooldown_sessions: 5
+        engine_path: src/trading_2026_2/tsm_momentum_trend_volume_range_compression_v001.py
+        first_ready_index: 25
+        holding_cooldown_case:
+          accepted_signal_seed: '2020-03-23T00:00:00'
+          accepted_signals:
+            - '2020-02-27T00:00:00'
+            - '2020-03-23T00:00:00'
+          first_signal_seed: '2020-02-27T00:00:00'
+          fixture_search_attempts: 1
+          raw_signals:
+            - '2020-02-27T00:00:00'
+            - '2020-03-19T00:00:00'
+            - '2020-03-23T00:00:00'
+          rejected_signal_seed: '2020-03-19T00:00:00'
+          rejected_signals:
+            - reason: cooldown-not-complete
+              session: '2020-03-19T00:00:00'
+          rejection_reasons:
+            '2020-03-19T00:00:00': cooldown-not-complete
+          trades:
+            - entry_session: '2020-02-28T00:00:00'
+              executed_entry_price: '100.05'
+              executed_exit_price: '99.95'
+              exit_reason: time
+              exit_session: '2020-03-13T00:00:00'
+              fees: '9.7'
+              held_sessions: 10
+              pnl: '-58.19999999999709'
+              raw_entry_price: '100.0'
+              raw_exit_price: '100.0'
+              shares: 485
+              signal_session: '2020-02-27T00:00:00'
+            - entry_session: '2020-03-24T00:00:00'
+              executed_entry_price: '100.05'
+              executed_exit_price: '99.95'
+              exit_reason: time
+              exit_session: '2020-04-07T00:00:00'
+              fees: '9.7'
+              held_sessions: 10
+              pnl: '-58.19999999999709'
+              raw_entry_price: '100.0'
+              raw_exit_price: '100.0'
+              shares: 485
+              signal_session: '2020-03-23T00:00:00'
+        holding_sessions: 10
+        indicator_columns:
+          rsi: rsi_2
+          sma: sma_20
+          volume_lead: prior_volume_range_compression
+        intraday_exit_cases: 4
+        passed_cases:
+          - rsi
+          - readiness
+          - intraday-exit
+          - holding-cooldown
+        passed_signal_cases:
+          - signal
+        raw_signals:
+          - '2020-02-21T00:00:00'
+        rejected_signals: []
+        rejection_reasons: {}
+        rsi_case: passed
+        signal_audit:
+          indicator:
+            accepted_signals:
+              - '2020-02-21T00:00:00'
+            raw_signals:
+              - '2020-02-21T00:00:00'
+            rejected_signals: []
+            rejection_reasons: {}
+            trades:
+              - entry_session: '2020-02-24T00:00:00'
+                executed_entry_price: '100.05'
+                executed_exit_price: '99.95'
+                exit_reason: time
+                exit_session: '2020-03-09T00:00:00'
+                fees: '9.7'
+                held_sessions: 10
+                pnl: '-58.19999999999709'
+                raw_entry_price: '100.0'
+                raw_exit_price: '100.0'
+                shares: 485
+                signal_session: '2020-02-21T00:00:00'
+        signal_case:
+          fixture_search_attempts: 1
+          kind: indicator
+          raw_signal_columns:
+            - raw_signal
+            - raw_momentum_signal
+        trades:
+          - entry_session: '2020-02-24T00:00:00'
+            executed_entry_price: '100.05'
+            executed_exit_price: '99.95'
+            exit_reason: time
+            exit_session: '2020-03-09T00:00:00'
+            fees: '9.7'
+            held_sessions: 10
+            pnl: '-58.19999999999709'
+            raw_entry_price: '100.0'
+            raw_exit_price: '100.0'
+            shares: 485
+            signal_session: '2020-02-21T00:00:00'
+      errors: []
+      name: synthetic
+      status: passed
+      study_id: tsm-momentum-trend-volume-range-compression--v001
+      warnings: []
+prepare_checks: passed
+schema_version: 1
+status: passed

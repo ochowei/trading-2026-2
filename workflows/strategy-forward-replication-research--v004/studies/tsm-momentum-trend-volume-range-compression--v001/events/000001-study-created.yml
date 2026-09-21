@@ -1,0 +1,30 @@
+actor_id: TASK-009-v004-study-developer
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 855692fd88bf85d49d00cb740246e94752fa50e0385d95678121676c05d0e718
+  workflow_digest: 62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: study-created
+execution:
+  assignment_digest: 1ad2b626be2351b288ad0caa4c5c77a689114232a975c5e05ffd95adc7ffad26
+  assignment_path: manifests/assignments/1ad2b626be2351b288ad0caa4c5c77a689114232a975c5e05ffd95adc7ffad26.yml
+  role: study 開發者
+occurred_at: '2026-09-21T03:23:22.589468Z'
+payload:
+  create_plan_digest: b21c79992a662ac947df414cb6d67f8a87264f190155d30cd94775b7366aebac
+  create_plan_path: manifests/create-plan.yml
+  experiment_family: tsm-momentum-trend-volume-range-compression
+  historical_evaluation_operator: not-assigned-development-scope
+  prepare_report_digest: 0317e0b1780dcd5b03725cd752a09fa6663af7a8e30614205c50ee94c29f1b09
+  prepare_report_path: manifests/prepare-report.yml
+  research_owner: TASK-009-v004-study-developer
+  research_round_id: strategy-forward-replication-research-v004-tsm-2026-09-task-009
+  source_bundle_digest: 855692fd88bf85d49d00cb740246e94752fa50e0385d95678121676c05d0e718
+  source_bundle_path: manifests/source-bundle.yml
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  workflow_reference_path: manifests/workflow-reference.yml
+previous_event_digest: null
+schema_version: 1
+sequence: 1
+study_id: tsm-momentum-trend-volume-range-compression--v001

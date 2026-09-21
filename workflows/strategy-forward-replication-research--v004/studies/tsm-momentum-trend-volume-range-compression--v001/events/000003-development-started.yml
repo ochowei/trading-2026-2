@@ -1,0 +1,19 @@
+actor_id: TASK-009-v004-study-developer
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 855692fd88bf85d49d00cb740246e94752fa50e0385d95678121676c05d0e718
+  workflow_digest: 62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: development-started
+execution:
+  assignment_digest: 1ad2b626be2351b288ad0caa4c5c77a689114232a975c5e05ffd95adc7ffad26
+  assignment_path: manifests/assignments/1ad2b626be2351b288ad0caa4c5c77a689114232a975c5e05ffd95adc7ffad26.yml
+  role: study 開發者
+occurred_at: '2026-09-21T03:23:22.589468Z'
+payload:
+  operation_id: afbe22ba1eb6817f261d2fd58885edb5da0771ba728fe0ff8d0844ffbf1d1569
+previous_event_digest: fb3e17cbe3694817535a31a1a66a87cda23134ae7c331d808f3841e74d1ae501
+schema_version: 1
+sequence: 3
+study_id: tsm-momentum-trend-volume-range-compression--v001

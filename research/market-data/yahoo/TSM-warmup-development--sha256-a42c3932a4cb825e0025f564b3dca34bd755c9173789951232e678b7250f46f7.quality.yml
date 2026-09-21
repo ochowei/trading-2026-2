@@ -1,0 +1,64 @@
+adjustment_policy: auto_adjusted
+derived_view:
+  components:
+    development:
+      data_digest: 4e443b4c7db125967ef936d615b6d2283da8ba0bccc62239a5770daf176eccc3
+      end_date: '2018-12-31'
+      first_session: '2014-01-02'
+      last_session: '2018-12-31'
+      rows: 1258
+    warmup-only:
+      data_digest: 81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847
+      end_date: '2013-12-31'
+      first_session: '2013-01-02'
+      last_session: '2013-12-31'
+      rows: 252
+  end_inclusive: '2018-12-31'
+  first_session: '2013-01-02'
+  last_session: '2018-12-31'
+  role: warmup-development
+  rows: 1510
+  start_inclusive: '2013-01-01'
+  view: inclusive-date-filter-preserving-source-lines
+interval: 1d
+provider: yahoo
+quality:
+  calendar: XNYS
+  expected_sessions: 1510
+  first_session: '2013-01-02'
+  last_session: '2018-12-31'
+  observed_sessions: 1510
+  ohlc_tolerance: 1e-10
+  repaired_high_rows: 0
+  repaired_low_rows: 0
+  rows: 1510
+  status: passed
+schema_version: 1
+snapshot:
+  bytes: 144689
+  columns:
+  - Date
+  - Open
+  - High
+  - Low
+  - Close
+  - Volume
+  digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+  first_session: '2013-01-02'
+  last_session: '2018-12-31'
+  path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+  rows: 1510
+source_snapshot:
+  bytes: 311430
+  digest: 50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95
+  first_session: '2013-01-02'
+  last_session: '2025-12-31'
+  path: research/market-data/yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv
+  rows: 3270
+ticker: TSM
+storage_policy:
+  filenames_include_sha256: true
+  files_read_only: true
+  formal_run_provider_access: prohibited
+  repository_root_relative_prefix: research/market-data/yahoo
+  reuse_without_copy: true
