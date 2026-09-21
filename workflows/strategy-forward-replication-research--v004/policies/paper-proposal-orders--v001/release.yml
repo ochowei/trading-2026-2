@@ -1,0 +1,10 @@
+conformance:
+  - digest: d6662c3b8314d2ff79eb1f0c36c37a4676ab2a9e27130ebb45828649c48d67d2
+    path: tests/test_policy_conformance.py
+policy: paper-proposal-orders
+policy_digest: 7a5eca96848c0b855bb6ffd26864f7289b0615154d1cd75ac61159d7e90b814a
+schema_version: 1
+source:
+  policy_path: policies/paper-proposal-orders--v001/policy.yml
+  repository: trading-2026-1-migration-source-only
+version: v001

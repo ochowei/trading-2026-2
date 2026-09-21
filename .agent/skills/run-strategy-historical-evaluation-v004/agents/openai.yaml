@@ -1,0 +1,4 @@
+interface:
+  display_name: "Run v004 historical evaluation"
+  short_description: "對已 frozen 的 v004 Study 執行唯一 Historical Evaluation 至 terminal。"
+  default_prompt: "對已 frozen 的 v004 Study 執行唯一 Historical Evaluation 至 terminal。"

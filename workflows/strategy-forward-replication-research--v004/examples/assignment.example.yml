@@ -1,0 +1,9 @@
+assignee: 請填入實際受派者
+assigner: 請填入實際指派者
+instruction: 格式範例，不是真實派工
+role: study 開發者
+schema_version: 1
+scope: development-to-freeze
+source_id: EXAMPLE-ONLY-請填入既有指令來源
+study_id: example-study
+workflow_version: v004

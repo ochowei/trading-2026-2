@@ -1,0 +1,77 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+definitions:
+  binding:
+    additionalProperties: false
+    properties:
+      digest:
+        format: sha256
+        type: string
+      path:
+        minLength: 1
+        type: string
+    required:
+      - path
+      - digest
+    type: object
+  evidence:
+    additionalProperties: false
+    properties:
+      digest:
+        format: sha256
+        type: string
+      path:
+        minLength: 1
+        type: string
+    required:
+      - path
+    type: object
+properties:
+  data:
+    $ref: '#/definitions/binding'
+  evidence:
+    $ref: '#/definitions/evidence'
+  execution_contract:
+    const: request-output-v1
+  execution_workspace:
+    const: temporary
+  operation_id:
+    minLength: 1
+    type: string
+  request:
+    $ref: '#/definitions/binding'
+  resolver_version:
+    const: 1
+  runner:
+    $ref: '#/definitions/binding'
+  schema_version:
+    const: 1
+  source_bundle:
+    $ref: '#/definitions/binding'
+  stage:
+    enum:
+      - development
+      - historical-evaluation
+  study_id:
+    minLength: 1
+    type: string
+  workflow_reference:
+    $ref: '#/definitions/binding'
+  workflow_version:
+    const: v004
+required:
+  - schema_version
+  - workflow_version
+  - study_id
+  - operation_id
+  - stage
+  - resolver_version
+  - execution_contract
+  - execution_workspace
+  - workflow_reference
+  - source_bundle
+  - runner
+  - request
+  - data
+  - evidence
+type: object
