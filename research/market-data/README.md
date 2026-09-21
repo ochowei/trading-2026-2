@@ -24,10 +24,15 @@ uv run python research/tools/download_market_data.py \
   --end 2025-12-31
 ```
 
-目前已保存的 TSM 共用快照是 [`TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv`](yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv)，共有 3,270 個 XNYS session；品質報告在同目錄的 [`.quality.yml`](yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.quality.yml)。檢查結果為通過，High 和 Low 都沒有需要校正的資料。
+目前已保存的 TSM 完整共用快照是 [`TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv`](yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.csv)，共有 3,270 個 XNYS session；品質報告在同目錄的 [`.quality.yml`](yahoo/TSM-2013-01-02-2025-12-31-auto-adjust--sha256-50178c8f2965b76b37f60e906901d2ec06e997e3c647df6b885bb99464788e95.quality.yml)。檢查結果為通過，High 和 Low 都沒有需要校正的資料。
 
-這份共用快照是原始完整區間。`strategy-forward-replication-research--v001` 的正式 Study
-應優先 reference 這類公用 immutable snapshot，不要為每個 Study 再複製一份相同 CSV。Study
+另外已建立可供 v004 Development 直接引用的 [`TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv`](yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv)。它包含 2013 年 warmup 與 2014--2018 年 Development 的 1,510 個 XNYS session，內容是從上述完整快照依日期保留原始列切出的不可變 view，資料 digest 為 `a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7`；切片的來源、角色範圍與品質檢查記錄在同名 [`.quality.yml`](yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.quality.yml)。
+
+這些共用快照都是不可覆寫的固定版本。`strategy-forward-replication-research--v001` 的正式 Study
+應優先 reference 這類公用 immutable snapshot，不要為每個 Study 再複製一份相同 CSV。v004
+Development 若需要同時讀取 warmup 與 Development 區間，可直接使用上面的
+`warmup-development` view，並在自己的 plan 與 trial inputs 中記錄完整 `data_path` 和
+`data_digest`；不需要再建立 Study-local CSV。Study
 仍須在 workflow 的 `data-snapshot-set.yml` 內建立 `warmup-only`、`development`、`quarantine` 與
 `historical-evaluation` 四個不重疊的 role entry，並維持 `data-snapshot.schema.yml` 的固定欄位與 `data_digest`。source path、source digest、品質
 報告、XNYS session inventory 與 view digest 應另記在 Study 的 acquisition/lineage manifest。
