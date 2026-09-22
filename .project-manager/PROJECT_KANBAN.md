@@ -48,6 +48,27 @@
 
 > 目前沒有待接手的 TODO 任務。
 
+### [TASK-017] 在 v004 開發新的 TSM 動能趨勢 × 量先價行假說，完成 blind review 與成果卡
+- **狀態**：Done
+- **優先級**：高
+- **負責角色**：study 開發者
+- **執行者**：Codex study developer subagent（TASK-017，唯一受派執行者）
+- **建立日期**：2026-09-22
+- **更新日期**：2026-09-22
+- **依賴／阻塞**：無；先確認 v004 Workflow Release 為 Active
+- **驗收條件**：
+  - 先依根目錄規範、`.study-developer/development-note/TSM.md` 與允許讀取的既有 TSM Development-only Study，盤點已嘗試過的動能、趨勢與量先價行機制，提出一個可追溯且確實未被嘗試過的新假說；不得只是改版本號、改名稱、重用同一規則或無語義重發，並須在研究文件中說明與既有 Study 的機制差異。
+  - 依 v004 `development-to-freeze` 完成 Workflow reference／release／policy／source digest 核對、runner preflight、prepare，固定單一新 Study 的 preregistration、candidate／baseline、implementation、runner、Development data bindings、明確派工與 provenance；完成唯一合法的 create、Development trial、evidence validation，以及規則允許的 freeze-readiness／candidate-freeze 嘗試。若資格失敗，必須保留 `qualification-failed` 與未凍結狀態，不得補猜或繞過流程。
+  - Development 階段只使用 v004 Development 範圍；不得執行 Historical Evaluation、Terminal、challenge 或 replay，不得讀取或修改 `historical-evaluation-artifacts/`、`.super-admin/`、正式 Evaluation／Terminal 結果，也不得覆寫、刪除或重排既有 Study、evidence、authority、events、成果卡或 Workflow Package。
+  - Development 完成後，對同一 Study 依 v004 blind-review 規範進行受限盲檢討：先確認本次沒有正式 outcome exposure；只讀取研究設計、程式與 Development candidate／baseline evidence 及其允許 binding，不得重跑 runner，不得以完整 `status`／`validate` 取代 blind review；若盲性已破壞，立即停止並如實回報。
+  - blind review 完成後，才以繁體中文 append-only 更新 `.study-developer/development-note/TSM.md` 的該 Study 成果卡。成果卡約 300–600 字，逐 Trial 區分 candidate／baseline、base／stress、formal gates、research targets、evidence validity、candidate freeze 資格／狀態、provenance、盲性狀態、已確認問題、可能原因、尚不能判斷、限制、下一輪單一可否證變更，並聲明未使用正式結果與實際讀取限制；缺少 evidence 時不得補猜數值。
+  - 通過對應 v004 validator／checker、必要 pytest、Ruff（若適用）與 `git diff --check`；回報 Study ID、workflow／reference／release／policy／source／data digest、create／Development operation ID、事件 head／count、修改檔案、Development 與 blind review 驗證結果及任何實際缺件。
+  - 接手時將本任務由 TODO 移到 Doing；完成工作後維持 Doing，由 parent project manager review。若 parent review 發現問題，只能將修改要求交回同一個 subagent，修正通過後才由 parent 移到 Done，不得另開 subagent 或新 top-level Codex conversation/thread。
+- **摘要**：根據 TSM Development 研究盤點，在 v004 workflow 中提出並驗證一個真正新的「量先於價、用於動能趨勢確認」機制，依序完成 Development、同一 Study 的受限 blind review 與不混入正式結果的繁體中文成果卡，讓後續是否值得凍結有清楚且可追溯的證據。
+- **進度／備註**：2026-09-22 已由本 parent thread 指派唯一 Codex study developer subagent 接手，狀態維持 Doing。已完成規範／三份 v004 skill／reference-first 核對與 TSM Development-only 機制盤點，建立新 Study `tsm-momentum-trend-volume-body-followthrough--v001`；runner-preflight、prepare、唯一 create、唯一 Development trial 均通過固定入口。candidate／baseline evidence 均 valid，但 candidate 3 筆交易未達 20 筆，formal gate 與 research target 的 `completed_trades` 失敗；freeze-readiness／freeze 均保留 `qualification-failed`、未凍結。已完成同一 Study 的受限 blind review 並 append-only 更新 TSM.md；未執行或讀取正式 Evaluation／Terminal。create operation=`2356a4d1…605f11`、Development operation=`03adb083…a04bb9`、event count=`4`；event head 因 blind review 禁止讀取／雜湊 events／authority，標示 unavailable，不補猜。直接 pytest 13 passed、Ruff passed、git diff --check passed。維持同一 Study、同一 operation 與本角色，不建立 top-level thread 或 descendant；parent review 後如需修正仍由本 subagent 接續。
+- **Parent review 回修（2026-09-22）**：依 review 在 TASK-017 成果卡補足既有 `tsm-mean-reversion-two-stage-volume-reversal--v012` 的近鄰機制差異：該卡是單日未加權 Close > Open／區間位置的均值回歸確認；本 Study 則是訊號日前五個已完成 session 的成交量加權 Open→Close 實體平均及相對未加權平均差值，置於動能趨勢／價格加速前。保留 assignment 原文 `0.05` 個百分點與實際 canonical contract=`0` 的 immutable 規格限制揭露；未回寫 assignment、preregistration、Source Bundle 或 evidence，未重跑 runner／建立新 Study 或 operation。狀態維持 Doing，待 parent review。
+- **Parent review 結果（2026-09-22）**：驗收通過並移至 Done。新假說不是既有 Study 的版本重發：它測試訊號日前五個已完成 session 的成交量加權 Open→Close 實體平均，及其相對同窗口未加權平均的差值，並先於動能趨勢／價格加速訊號；同時已 append-only 揭露 v012 的單日未加權 Close>Open 近鄰規則，避免過度宣稱 Open→Close 概念完全前所未有。v004 Workflow Release 為 Active；workflow／reference／release／policy／source／Development data binding、唯一 create／Development operation、4-event chain 與 evidence publication 綁定均核對一致，Workflow Package 未被修改。candidate／baseline evidence 均 `valid`；candidate base／stress 各 3 筆／3 年、報酬 5.0316%／4.2172%、PF 均 `inf`、回撤 0%，僅因 `completed_trades=3<20` 失敗；baseline 10 筆／4 年、報酬 2.1411%／0.5312%、PF 1.3059／1.0756%，另有 stress robustness gates 失敗。candidate freeze eligibility=`false`，freeze-readiness／freeze 均 `qualification-failed`，未產生 `candidate-frozen`。assignment 的 0.05 個百分點與實際 canonical contract 的 0 門檻不一致，但成果卡已明確揭露，未冒稱 0.05 假說，也未回寫 immutable binding。受限 blind review 的 exposure check 通過，未讀取正式 Evaluation／Terminal／Historical Evaluation、events／journals／operations，未重跑 runner，成果卡在 blind review 後才以繁體中文 append-only 更新，內容包含逐 Trial base／stress、formal gates、research targets、evidence validity、provenance、盲性、已確認／可能原因／尚不能判斷、限制、下一輪可否證條件及來源限制；event head 依盲讀邊界標示 unavailable。驗證：subagent 回報選定 v004 測試 13 passed、Study pytest 4 passed、Ruff 與 `git diff --check` passed；parent 重新執行 Study pytest 4 passed、Ruff、9 份研究 YAML parse 與 `git diff --check` 均通過；parent 另一次較廣 v004 測試在 36 passed 後因長時間執行中止，未宣稱完整 suite 通過。未執行 Historical Evaluation、Terminal、challenge 或 replay；未讀取或修改 `historical-evaluation-artifacts/`、`.super-admin/` 或正式結果。
+
 ### [TASK-016] 將 `tsm-momentum-trend-volume-response-lag--v001` 假說、policy 與回測整理為 Google Colab notebook
 - **狀態**：Done
 - **優先級**：中

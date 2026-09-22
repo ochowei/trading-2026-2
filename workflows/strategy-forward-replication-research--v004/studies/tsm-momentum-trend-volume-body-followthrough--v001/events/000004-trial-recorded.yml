@@ -1,0 +1,26 @@
+actor_id: TASK-017-v004-study-developer
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: acf714eeb3906ead63adcff09570e500eee68b575d08eca3623c17d285441a24
+  workflow_digest: 62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: trial-recorded
+execution:
+  assignment_digest: 6d689f38ac490e949f48295f4fd870085af04b839651090b5ad0c1576cc17d5f
+  assignment_path: manifests/assignments/6d689f38ac490e949f48295f4fd870085af04b839651090b5ad0c1576cc17d5f.yml
+  role: study 開發者
+occurred_at: '2026-09-22T06:29:59.360503Z'
+payload:
+  development_evidence_digest: 575b29d84335bd7cf81e827166f7c3f7f447a1ba3e96f748f8278b9b5bc5fedc
+  development_evidence_path: evidence/trials/tsm-momentum-trend-volume-body-followthrough-v001/candidate.yml
+  inputs_digest: c033a4c134847271539a4295516e27b893ee79fe9ff80971114b23cc4367bcd6
+  inputs_path: evidence/trials/tsm-momentum-trend-volume-body-followthrough-v001/inputs.yml
+  publication_digest: 7ed3d56145edba51a3ac9e6a8898d702ab46ba8008077032213053269f0fd79f
+  publication_path: evidence/trials/tsm-momentum-trend-volume-body-followthrough-v001/publication.yml
+  status: completed
+  trial_id: tsm-momentum-trend-volume-body-followthrough-v001
+previous_event_digest: 5e34a4bae80fae013a0e99ff24f866120ff4a5b9dd819aafd42ca7d7b689381a
+schema_version: 1
+sequence: 4
+study_id: tsm-momentum-trend-volume-body-followthrough--v001

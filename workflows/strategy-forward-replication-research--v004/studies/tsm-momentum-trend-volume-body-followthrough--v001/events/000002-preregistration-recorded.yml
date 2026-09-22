@@ -1,0 +1,20 @@
+actor_id: TASK-017-v004-study-developer
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: acf714eeb3906ead63adcff09570e500eee68b575d08eca3623c17d285441a24
+  workflow_digest: 62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: preregistration-recorded
+execution:
+  assignment_digest: 6d689f38ac490e949f48295f4fd870085af04b839651090b5ad0c1576cc17d5f
+  assignment_path: manifests/assignments/6d689f38ac490e949f48295f4fd870085af04b839651090b5ad0c1576cc17d5f.yml
+  role: study 開發者
+occurred_at: '2026-09-22T06:29:44.692237Z'
+payload:
+  preregistration_digest: afcd8d9f582b535e8619079f4533ff9465858252930e55377dcdadd18da1b24f
+  preregistration_path: manifests/preregistration.yml
+previous_event_digest: fbffb499479379e4dbb98d6facdd088d42bd347967afcbdfb60634041eb0d8f3
+schema_version: 1
+sequence: 2
+study_id: tsm-momentum-trend-volume-body-followthrough--v001
