@@ -1,0 +1,283 @@
+data_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+data_path: run/bars.csv
+preregistration:
+  baseline_definition:
+    baseline_id: tsm-momentum-trend-volume-response-lag-baseline-v001
+    candidate_family: tsm-momentum-trend-volume-response-lag-v001
+    execution_is_identical: true
+    family: trend-momentum-volume-forward-response
+    objectively_simpler_because: baseline 保留相同的趨勢、價格加速、RSI、五日平均量比、持倉、成本、風險、停損停利與冷卻規則，但關閉訊號日前五個已完成量—下一日報酬配對的延遲傳導條件，因此是在同一價格路徑下不使用新延遲機制的明確控制組。
+    simpler_rule: 收盤符合相同趨勢、價格加速、RSI、五日平均量比與執行規則，但不要求前五個已完成量—下一日報酬配對通過延遲回應門檻。
+  complete_candidate_family:
+    - tsm-momentum-trend-volume-response-lag-v001
+  eligibility_rules:
+    accepted_signal:
+      cooldown:
+        clock_anchor: completed-position-exit
+        minimum_completed_session_steps_after_exit: 5
+        position_must_be_flat: true
+      decision_time: completed-session-close
+      mean_reversion:
+        close_vs_sma20_gap_minimum: '-0.10'
+        close_vs_sma20_operator: '>='
+        rsi_length: 2
+        rsi_operator: <=
+        rsi_value: '70'
+        sma_length: 20
+      momentum_trend:
+        price_acceleration_lookback: 1
+        price_acceleration_minimum: '0.02'
+        price_to_sma_floor: '0.90'
+        trend_sma_lag_sessions: 5
+        trend_sma_ratio_floor: '0.95'
+      momentum_trend_volume_response_lag:
+        price_acceleration_lookback: 1
+        price_acceleration_minimum: '0.02'
+        trend_sma_lag_sessions: 5
+        trend_sma_ratio_floor: '0.95'
+      price_direction_confirmation:
+        close_above_prior_close: true
+      symbol: TSM
+      volume_forward_response:
+        enabled: true
+        forward_return_definition: session_d_close_to_session_d_plus_1_close
+        prior_session_window: 5
+        response_shift_sessions: 2
+        unweighted_reference: arithmetic_mean_of_same_five_forward_returns
+        uses_completed_pairs_only: true
+        volume_weighted_forward_return_minimum: '-0.02'
+        weighted_minus_unweighted_forward_return_minimum: '0.0005'
+      volume_leads_price:
+        enabled: true
+        prior_session_window: 5
+        response_filter_is_before_signal: true
+        volume_average_length: 20
+        volume_forward_response_is_before_signal: true
+        volume_ratio_minimum: '1.05'
+        volume_ratio_operator: '>='
+        volume_ratio_value: '1.05'
+    costs:
+      base:
+        fee_per_side_bps: '1'
+        slippage_per_side_bps: '5'
+      stress:
+        fee_per_side_bps: '2'
+        slippage_per_side_bps: '20'
+    development_diagnostics:
+      block_bootstrap:
+        block_lengths:
+          - 3
+          - 5
+        maximum_stress_drawdown_above_10pct_ratio: '0.10'
+        minimum_stress_positive_return_ratio: '0.80'
+        repetitions: 50000
+        seed: 20260902
+        seed_application: exact-same-seed-for-each-block-length
+      leave_one_signal_year_out:
+        maximum_stress_drawdown: '0.10'
+        minimum_stress_profit_factor: '1.00'
+        minimum_stress_return: '0'
+      signal_year_breakdown: true
+    development_gates:
+      base_profit_factor:
+        operator: '>'
+        value: '1.10'
+      base_return:
+        operator: '>'
+        value: '0'
+      completed_trades:
+        operator: '>='
+        value: 20
+      maximum_realized_trade_loss_fraction:
+        operator: <=
+        value: '0.04'
+      maximum_stress_block_bootstrap_drawdown_above_10pct_ratio:
+        operator: <=
+        value: '0.10'
+      maximum_stress_leave_one_year_out_drawdown:
+        operator: <=
+        value: '0.10'
+      minimum_stress_block_bootstrap_positive_return_ratio:
+        operator: '>='
+        value: '0.80'
+      minimum_stress_leave_one_year_out_profit_factor:
+        operator: '>'
+        value: '1.00'
+      minimum_stress_leave_one_year_out_return:
+        operator: '>'
+        value: '0'
+      stress_maximum_drawdown:
+        operator: <=
+        value: '0.10'
+      stress_profit_factor:
+        operator: '>'
+        value: '1.00'
+      stress_return:
+        operator: '>'
+        value: '0'
+      traded_years:
+        operator: '>='
+        value: 3
+    execution:
+      cooldown:
+        anchor: completed-position-exit
+        minimum_completed_session_steps_after_exit: 5
+      decision_time: completed-session-close
+      entry: next-XNYS-open
+      gap_fill: stop-gap-at-open-target-gap-at-open
+      gate_policy: formal Development gates、研究 targets 與 candidate freeze qualification 分開判定；任一 formal gate 或事前登記 target 失敗，都保留合法 evidence 並停止在 Development，不得看結果後調參或強行凍結候選。
+      holding_period: next-open-after-10-complete-sessions
+      intrabar_ambiguity: adverse-stop-first
+      position_sizing:
+        cash_cap: available-cash-no-borrowing
+        modeled_stop_includes_costs: true
+        risk_fraction_of_pre_entry_equity: '0.02'
+        shares: maximum-integer-shares-within-risk-and-cash-caps
+      stop:
+        level_from_raw_entry_open: '-0.04'
+        order: STOP_MARKET
+        time_in_force: GTC
+      target:
+        level_from_raw_entry_open: '0.04'
+        order: LIMIT
+        reissued_each_open_position_session: true
+        time_in_force: DAY
+    novelty_and_identifiability:
+      development_identifiability: 指標合約明定每個量能觀測日只和下一個 session 的收盤到收盤報酬配對，訊號日前五個配對都已完成；candidate 與 baseline 使用同一份 warmup／Development OHLCV、同一成本、持倉與價格條件，唯一策略差異是延遲報酬傳導門檻。因此逐筆交易、年度分布、bootstrap 與 leave-one-year-out 可檢查差異是否來自量先價後機制，而不是資料、成交或事後調參。
+      mechanism_difference: 本候選測的是量在 d 日出現後，d→d+1 的後續收盤報酬是否被量加權地保護且優於未加權平均；它和既有同日量能報酬對齊、量峰先於報酬峰、量能廣度、量能 ramp、吸收、日內區間效率、收盤承接、區間壓縮、缺口錨定、端點 fade 及事件後固定價突破不同。這不是改版號、改名稱或重用既有規則，而是新增明確的跨日配對方向與回應差值。
+      shared_indicator_limitations: 仍共用 TSM、XNYS、Yahoo auto_adjusted OHLCV、五日視窗、二十日量能平均、當日趨勢與至少 2% 價格加速；每日 OHLCV 無法觀察盤中成交主動性，也不能把日線配對解讀成因果。因此新意是可追溯的跨日量—下一日報酬傳導測試，不宣稱與所有既有量能指標完全獨立。
+      this_study_path: 本 Study 固定訊號日前五個已完成配對：每筆以 d 日成交量加權 d→d+1 收盤報酬，五日加權平均不得低於 -0.02，且至少高於同五日未加權平均 0.0005；當日仍須符合趨勢、均線下限、RSI、收盤高於前收與至少 2% 一日價格加速，下一日 open 進場並持有最多十個完整 session。baseline 保留五日平均單日量比與其他全部規則，只關閉延遲回應條件。
+      v024_registered_path: v024 登記的是上升趨勢中的單次放量事件，事件後五日內首次嚴格突破固定價；本候選沒有事件狀態機、事件高點或固定突破價，而是固定把已完成量配對到下一 session 報酬。
+    research_targets:
+      completed_trades:
+        operator: '>='
+        value: 20
+      stress_return:
+        operator: '>'
+        value: '0'
+      traded_years:
+        operator: '>='
+        value: 3
+    source_and_adjustment:
+      adjustment_policy: Yahoo auto_adjust
+      calendar: XNYS
+      interval: 1d
+      provider: yahoo
+      timezone: America/New_York
+  evaluation_gates:
+    base_compounded_return:
+      operator: '>'
+      value: '0'
+    base_profit_factor:
+      operator: '>'
+      value: '1.10'
+    completed_trades:
+      operator: '>='
+      value: 20
+    family_wise_confidence:
+      operator: '>='
+      value: '0.90'
+    maximum_fold_positive_profit_concentration:
+      operator: <=
+      value: '0.50'
+    maximum_fold_trade_concentration:
+      operator: <=
+      value: '0.50'
+    maximum_realized_trade_loss_fraction:
+      operator: <=
+      value: '0.04'
+    positive_traded_fold_ratio:
+      operator: '>='
+      value: '0.60'
+    stress_max_drawdown:
+      operator: <=
+      value: '0.10'
+    stress_profit_factor:
+      operator: '>'
+      value: '1.00'
+    stress_return:
+      operator: '>'
+      value: '0'
+    traded_folds:
+      operator: '>='
+      value: 3
+  fold_warmup_sessions: 25
+  hypothesis: 在 TSM 的上升趨勢中，若訊號日前五個已完成 session 的成交量先和各自下一 session 的收盤到收盤報酬配對，量能加權的五日後續報酬不低於 -0.02 且至少比同窗口未加權平均高 0.0005，這種量先價後的延遲傳導可能比單看同日量價更能篩出價格加速後仍有承接的動能；當日趨勢、均線下限、RSI、收盤方向與至少 2% 價格加速成立時，下一個 session open 進場並持有最多十個完整 session。baseline 保留五日平均單日量比與完全相同的價格、成本、風險及退出規則，只關閉跨日量—下一日報酬條件。所有規格在 Study 開始前固定；任一 formal gate 或 research target 失敗即停止 freeze，不得以結果回頭調參。
+  initial_cash: '100000'
+  maximum_holding_sessions: 11
+  maximum_trials: 1
+  selection_rule:
+    eligible_candidate: 唯一 Trial 必須通過全部 Development gates 與已登記 research targets；未通過時不得凍結候選。
+    method: fixed-single-candidate-no-outcome-ranking
+    selected_candidate_id: tsm-momentum-trend-volume-response-lag-v001
+  tie_handling:
+    method: not-applicable-single-candidate
+source_bundle:
+  files:
+    - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+      path: pyproject.toml
+    - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+      path: uv.lock
+    - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+      path: src/trading_2026_2/__init__.py
+    - digest: 45ea909055d2e602384b773dce28611d11a3835af66ec0ae7f24fed17f6850b2
+      path: src/trading_2026_2/tsm_momentum_trend_volume_response_lag_v001.py
+    - digest: 21667b899faaacdf47590c4878a9579558c5281f819ccd9aa31db3ad6ef863c4
+      path: src/trading_2026_2/tsm_momentum_trend_volume_gap_anchoring_v001.py
+    - digest: eab4e7d7f5fb7b94b4ccfdb5952aaf2f695d90ccba18ab0db4607110414f9d73
+      path: tests/test_tsm_momentum_trend_volume_response_lag_v001.py
+    - digest: 66907156a24b24d8a5985cbb230daa11834252d7d19e9aa084e9beb2ecb77dae
+      path: research/tsm-momentum-trend-volume-response-lag--v001/assignment.yml
+    - digest: 6337c2f3786212eb8c1dd9ade1914444461d3a0de5620a151b7943b07579e628
+      path: research/tsm-momentum-trend-volume-response-lag--v001/candidate-definition.yml
+    - digest: af173edd387652b598f0b70a163ec185f5a9245fcef95a1d254f3536db2ec20f
+      path: research/tsm-momentum-trend-volume-response-lag--v001/implementation-contract.yml
+    - digest: 8018ba3fff138c288c0e4d863ca75fc45ec30d3f219c88743d6ae035f94ba7d9
+      path: research/tsm-momentum-trend-volume-response-lag--v001/preregistration.yml
+    - digest: d88b33afd24cbc4168c6ae955361f086e4474a4b7cb729b636e849f542bcec7a
+      path: research/tsm-momentum-trend-volume-response-lag--v001/qualification-spec.yml
+    - digest: 3dadfe15cd77e4187056fcfa4dd5575bca34be332af16ed0e1be36e4d4953d31
+      path: research/tsm-momentum-trend-volume-response-lag--v001/runner-contract.yml
+    - digest: 0b3b7667ad72f40755957facc89f59d69bc911a670b41196487d0f6b28422817
+      path: research/tsm-momentum-trend-volume-response-lag--v001/run_development.py
+  schema_version: 1
+stage: development
+trial_inputs:
+  candidate_family: tsm-momentum-trend-volume-response-lag-v001
+  candidate_id: tsm-momentum-trend-volume-response-lag-v001
+  data_bindings:
+    development_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+    development_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+    warmup_digest: 81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847
+  date_controls:
+    formal_provider_access: false
+    signal_end: '2018-12-31'
+    signal_start: '2014-01-01'
+    warmup_end: '2013-12-31'
+    warmup_start: '2013-01-01'
+  development_diagnostics:
+    block_lengths:
+      - 3
+      - 5
+    bootstrap_seed: 20260902
+    repetitions: 50000
+    seed_application: exact-same-seed-for-each-block-length
+  execution:
+    cooldown_anchor: completed-position-exit
+    cooldown_completed_session_steps_after_exit: 5
+    entry: next-XNYS-open
+    holding_sessions: 10
+    intrabar_ambiguity: adverse-stop-first
+    position_sizing:
+      modeled_stop_includes_costs: true
+      risk_fraction: '0.02'
+    stop_market_gtc: '-0.04'
+    target_limit_day: '0.04'
+  preregistration_digest: 8018ba3fff138c288c0e4d863ca75fc45ec30d3f219c88743d6ae035f94ba7d9
+  schema_version: 1
+  selected_candidate_id: tsm-momentum-trend-volume-response-lag-v001
+  source_bundle_digest: 06ed3b3bdb9c596df4c213d2fb657b368de9950d3ddbe1282ccb408a3639c426
+  strategy_engine_digest: 45ea909055d2e602384b773dce28611d11a3835af66ec0ae7f24fed17f6850b2
+  study_procedure_digest: 0b3b7667ad72f40755957facc89f59d69bc911a670b41196487d0f6b28422817
+  study_procedure_path: research/tsm-momentum-trend-volume-response-lag--v001/run_development.py
+  trial_id: tsm-momentum-trend-volume-response-lag-v001
