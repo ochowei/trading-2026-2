@@ -48,6 +48,26 @@
 
 > 目前沒有待接手的 TODO 任務。
 
+### [TASK-016] 將 `tsm-momentum-trend-volume-response-lag--v001` 假說、policy 與回測整理為 Google Colab notebook
+- **狀態**：Done
+- **優先級**：中
+- **負責角色**：study 開發者
+- **執行者**：Anscombe（本 parent thread 唯一 Study Developer subagent `01a0c746-df08-7812-8590-1a1fdfd8bf9a`）
+- **建立日期**：2026-09-22
+- **更新日期**：2026-09-22
+- **依賴／阻塞**：無；只使用既有 Study 的 Development-only 規格與證據，不重新執行正式 Evaluation
+- **驗收條件**：
+  - 讀取 `tsm-momentum-trend-volume-response-lag--v001` 的 preregistration、candidate／baseline definition、implementation／runner contract、v004 workflow reference／policy binding 與 Development evidence；不得讀取或引用 `historical-evaluation-artifacts/`、正式 Evaluation／Terminal 結果、`.super-admin/`、events、journals、operations 或 Git 歷史。
+  - 建立一個有效的 `.ipynb`，建議路徑為 `notebooks/tsm_momentum_trend_volume_response_lag_v001_colab.ipynb`；Notebook 必須可在 Google Colab 開啟，不能依賴本機 package import 或 repository checkout 才能理解核心邏輯。
+  - 以繁體中文 Markdown 說明 Study 假說與限制：訊號日前五個已完成的「成交量→下一 session 收盤到收盤報酬」配對、加權後續報酬下限 `-0.02`、加權減未加權至少 `0.0005`，以及趨勢、RSI、收盤方向、至少 2% 價格加速與五日量比條件。
+  - 明確列出 v004 policy／執行規則與可重現設定：Yahoo auto-adjusted OHLCV、XNYS session、下一個 open 進場、2% risk budget、-4% stop、+4% target、最多 10 個完整 session、退出後 5-session cooldown、adverse-stop-first，以及 base 每邊 1／5 bps、stress 每邊 2／20 bps 成本。
+  - Code cells 必須自包含地完成資料上傳／本地 CSV fallback、欄位與日期整理、指標計算、candidate／baseline 回測、base／stress metrics（交易數、年度、報酬、PF、最大回撤）與至少一個結果視覺化；不得把正式 Development evidence 的結果硬編成回測輸出，也不得宣稱 Colab 重跑就是正式 Evaluation。
+  - Notebook 應有離線或合成資料 smoke path，使沒有上傳資料時也能驗證程式結構；不得在執行時自動下載 Yahoo 或其他外部資料。需以 nbformat／Notebook execution 檢查 JSON 與 cells 可執行，並通過 notebook 直接測試、Ruff（若有外部 `.py` helper）與 `git diff --check`。
+  - 完成後將任務由 TODO 移到 Doing，回報 notebook 路徑、使用的 Study／policy digest、回測規則、驗證命令與結果；完成工作後維持 Doing，由 parent project manager review，若有問題只能交回同一個 subagent 修正，通過後才移到 Done。
+- **摘要**：把既有 v004 Development Study 轉成可在 Google Colab 閱讀、上傳資料並重現策略邏輯的教學／研究 notebook，讓使用者能看懂量先價後延遲報酬假說、政策限制與 base／stress 回測結果，同時避免把 notebook 當成正式評估證據。
+- **進度／備註**：2026-09-22 已由 parent thread 只 spawn exactly one Study Developer subagent Anscombe（`01a0c746-df08-7812-8590-1a1fdfd8bf9a`）接手，狀態由 TODO 移至 Doing。已讀取根目錄規範、TASK-016、v004 workflow reference／release／policy binding、Study preregistration、candidate／baseline definition、implementation／runner contract、Development inputs／evidence／publication 與 TSM Development-only 卡；未讀取禁止範圍。已新增 `notebooks/tsm_momentum_trend_volume_response_lag_v001_colab.ipynb`：包含繁中假說與限制、candidate／baseline、policy 摘要、離線 synthetic fallback、Colab upload 開關、OHLCV/session 驗證、指標、next-open、2% sizing、base／stress cost、stop／target／time exit、cooldown、ledger、metrics、equity／trade 圖與 look-ahead test。固定 binding 摘要為 workflow `62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4`、reference `7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47`、release `ea04558c1473f9c6db7e9707846694147c6c6f254498af2f18729a1e4ef1fa84`、policy set `c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215`、source `06ed3b3bdb9c596df4c213d2fb657b368de9950d3ddbe1282ccb408a3639c426`、preregistration `8018ba3fff138c288c0e4d863ca75fc45ec30d3f219c88743d6ae035f94ba7d9`。驗證：JSON parse、10 個 code cells compile／非互動執行、look-ahead PASS、CSV valid／duplicate／weekend smoke PASS、Ruff PASS、reference indicators／execution equivalence PASS、git diff whitespace check PASS；目前無具體阻塞。工作完成後維持 Doing，等待 parent review，不移到 Done。
+- **Parent review 結果（2026-09-22）**：已驗收通過並移至 Done。假說、v004 policy 與回測邏輯均對應既有 Development-only Study 規格；notebook 為自包含 Colab JSON（nbformat 4、Python 3、23 cells／10 code cells），預設使用 deterministic synthetic smoke，僅在明確開關後提供 Colab upload，沒有自動下載或 repository import。parent 以 `.venv/bin/python` 完成全部 code cells 非互動執行，look-ahead／CSV smoke 通過；另與既有 reference 實作逐欄比對 indicators，並比對 candidate／baseline 的 base／stress backtest 與 metrics，結果等價；`git diff --check` 通過。未修改 Study、正式 Evaluation、Terminal 或受限資料夾，沒有把 notebook smoke 結果宣稱為正式 Evaluation。
+
 ### [TASK-012] 在 v004 開發下一個未嘗試的 TSM 動能趨勢 × 量先價行假說並撰寫成果卡
 - **狀態**：Done
 - **優先級**：高
