@@ -1,0 +1,19 @@
+actor_id: TASK-018-v004-study-developer
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 8d58073e513338e438281a754638a0eee5683b4954c9ef78688dce5b0f5b9706
+  workflow_digest: 62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: development-started
+execution:
+  assignment_digest: 940a7426c1d6f57c86c5e4dfe5cc7df55aef596e2707f6a847c374e8c971ff76
+  assignment_path: manifests/assignments/940a7426c1d6f57c86c5e4dfe5cc7df55aef596e2707f6a847c374e8c971ff76.yml
+  role: study 開發者
+occurred_at: '2026-09-22T13:35:55.991875Z'
+payload:
+  operation_id: 91b2bd76173a894dbd23933d5b3b198273cd1ba29fe692d239dcd2383ad65269
+previous_event_digest: 6a9b25e60de1b2946fe6280ab2447cf6154510d69d6a6778584def8fe6c46707
+schema_version: 1
+sequence: 3
+study_id: tsm-momentum-trend-volume-body-sign-consistency--v001

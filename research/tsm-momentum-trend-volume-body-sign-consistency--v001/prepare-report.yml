@@ -1,0 +1,600 @@
+binding:
+  authority_root: /Users/william/.codex/worktrees/45da/trading-2026-2/.authority
+  environment:
+    executable: /Users/william/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/bin/python3.11
+    executable_digest: 4c78423e7d5986362ac04df40edb18cdd1174f9818d653402e3abbd2a5bbf793
+    packages:
+      - PyYAML==6.0.3
+      - Pygments==2.21.0
+      - attrs==26.1.0
+      - beautifulsoup4==4.15.0
+      - certifi==2026.7.22
+      - cffi==2.1.1
+      - charset-normalizer==3.5.1
+      - contourpy==1.3.3
+      - curl_cffi==0.16.2
+      - cycler==0.12.1
+      - exchange_calendars==4.13.2
+      - execnet==2.1.2
+      - fonttools==4.64.0
+      - idna==3.19
+      - iniconfig==2.3.0
+      - jsonschema-specifications==2025.9.1
+      - jsonschema==4.26.0
+      - kiwisolver==1.5.1
+      - korean_lunar_calendar==0.4.0
+      - lxml==6.1.2
+      - matplotlib==3.11.1
+      - multitasking==0.0.13
+      - numpy==2.4.6
+      - packaging==26.3
+      - pandas==3.0.5
+      - peewee==4.4.0
+      - pillow==12.3.0
+      - platformdirs==4.11.7
+      - pluggy==1.6.0
+      - protobuf==7.36.1
+      - pycparser==3.0
+      - pyluach==2.3.0
+      - pyparsing==3.3.2
+      - pytest-xdist==3.8.0
+      - pytest==9.1.1
+      - python-dateutil==2.9.0.post0
+      - pytz==2026.3.post1
+      - referencing==0.37.0
+      - requests==2.34.2
+      - rpds-py==2026.6.3
+      - ruff==0.16.5
+      - six==1.17.0
+      - soupsieve==2.9.2
+      - toolz==1.1.0
+      - trading-2026-2==0.1.0
+      - typing_extensions==4.16.0
+      - tzdata==2026.3
+      - urllib3==2.7.0
+      - websockets==17.1
+      - yfinance==1.7.0
+    python: 3.11.15 (main, Apr 14 2026, 14:45:51) [Clang 22.1.3 ]
+  repository: /Users/william/.codex/worktrees/45da/trading-2026-2
+  settings:
+    candidate-definition.yml: 0c5a14988ae28e19ae608f76dc8e18118a7a68aacb02a0402701bd7f87f0a8da
+    development-trial-inputs.yml: 915b30bd13f2e81667ecfa19f1d898d41c1e9646ec89bdf3e2ccee78a26527f5
+    implementation-contract.yml: 4a80e8e7de8a30440b7c5780d3e605441742b6b3cc6b40d1f1029b7c9a9c3d3c
+    preregistration.yml: aaeb0741a380fe2495ac826d5053e195d5f02568c94d2a100a5603a5b0971710
+    qualification-spec.yml: e3331853c839c66c0a233fc15b1e2c33ce29ba87e027526e7e6ab80a72437dd4
+    runner-contract.yml: a1764d480c68f5b80b3d6bd707886336c0aeeee4e2bacbb398632a5f9d068904
+    source-bundle.yml: 8d58073e513338e438281a754638a0eee5683b4954c9ef78688dce5b0f5b9706
+  source_bundle:
+    files:
+      - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+        path: pyproject.toml
+      - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+        path: uv.lock
+      - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+        path: src/trading_2026_2/__init__.py
+      - digest: e0f2645d031b7a6ee2582ed3a9d5273f15b34c8b5fd48ec426df4d2f7e45267f
+        path: src/trading_2026_2/tsm_momentum_trend_volume_body_sign_consistency_v001.py
+      - digest: 21667b899faaacdf47590c4878a9579558c5281f819ccd9aa31db3ad6ef863c4
+        path: src/trading_2026_2/tsm_momentum_trend_volume_gap_anchoring_v001.py
+      - digest: 75856a661610fbec5193b348c1af39f38a51668a191b709e202836090b15d59e
+        path: tests/test_tsm_momentum_trend_volume_body_sign_consistency_v001.py
+      - digest: 940a7426c1d6f57c86c5e4dfe5cc7df55aef596e2707f6a847c374e8c971ff76
+        path: research/tsm-momentum-trend-volume-body-sign-consistency--v001/assignment.yml
+      - digest: 0c5a14988ae28e19ae608f76dc8e18118a7a68aacb02a0402701bd7f87f0a8da
+        path: research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml
+      - digest: 4a80e8e7de8a30440b7c5780d3e605441742b6b3cc6b40d1f1029b7c9a9c3d3c
+        path: research/tsm-momentum-trend-volume-body-sign-consistency--v001/implementation-contract.yml
+      - digest: aaeb0741a380fe2495ac826d5053e195d5f02568c94d2a100a5603a5b0971710
+        path: research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml
+      - digest: e3331853c839c66c0a233fc15b1e2c33ce29ba87e027526e7e6ab80a72437dd4
+        path: research/tsm-momentum-trend-volume-body-sign-consistency--v001/qualification-spec.yml
+      - digest: a1764d480c68f5b80b3d6bd707886336c0aeeee4e2bacbb398632a5f9d068904
+        path: research/tsm-momentum-trend-volume-body-sign-consistency--v001/runner-contract.yml
+      - digest: 5f6e6985ad8428d232cd8cc42616adf2b307ee84217634c66bc366869e385f67
+        path: research/tsm-momentum-trend-volume-body-sign-consistency--v001/run_development.py
+    schema_version: 1
+  study_id: tsm-momentum-trend-volume-body-sign-consistency--v001
+  workflow_digest: 62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4
+  workflow_reference:
+    policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+    reference_mode: repository-workflow-package
+    release_manifest_digest: ea04558c1473f9c6db7e9707846694147c6c6f254498af2f18729a1e4ef1fa84
+    release_manifest_path: workflows/strategy-forward-replication-research--v004/release-manifest.yml
+    resolver_version: 1
+    schema_version: 1
+    workflow_digest: 62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4
+    workflow_id: strategy-forward-replication-research
+    workflow_package_path: workflows/strategy-forward-replication-research--v004
+    workflow_version: v004
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+cases:
+  - case: 0
+    data_digest: 95ca2a6bb0f72b9e50e768e0b8b6c3d7f5d499abb5e7ef02d8aabd02e720c318
+    evidence_digest: d105b60b20c3c0509cf0edd359898569dbc39671b93a9b577caa9b9f85ef2c72
+    expect: trades
+    request_digest: b415801d62f114581fa65a17db02bdc78dc704e1ac8810690d2042210a8aaf16
+    stage: development
+    validation:
+      baseline:
+        failed_gates:
+          - base_profit_factor
+          - base_return
+          - completed_trades
+          - minimum_stress_block_bootstrap_positive_return_ratio
+          - minimum_stress_leave_one_year_out_return
+          - stress_profit_factor
+          - stress_return
+          - traded_years
+        trades: 1
+      candidate:
+        failed_gates:
+          - base_profit_factor
+          - base_return
+          - completed_trades
+          - minimum_stress_block_bootstrap_positive_return_ratio
+          - minimum_stress_leave_one_year_out_return
+          - stress_profit_factor
+          - stress_return
+          - traded_years
+        trades: 1
+  - case: 1
+    data_digest: 45bce1c4f52b0dbd35f074293c86a5fefb35514a9dc9031132a10e9a536c0e83
+    evidence_digest: 1ef66c696b57326d605f214481ac0bb79bfea20bbb5b1aed36585739d2b84889
+    expect: no-trades
+    request_digest: 7e1983bd474ef7d366fb94410c464fcb2c54a410dd1f16749d4ff109f310a3a7
+    stage: development
+    validation:
+      baseline:
+        failed_gates:
+          - base_profit_factor
+          - base_return
+          - completed_trades
+          - maximum_realized_trade_loss_fraction
+          - maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+          - maximum_stress_leave_one_year_out_drawdown
+          - minimum_stress_block_bootstrap_positive_return_ratio
+          - minimum_stress_leave_one_year_out_profit_factor
+          - minimum_stress_leave_one_year_out_return
+          - stress_maximum_drawdown
+          - stress_profit_factor
+          - stress_return
+          - traded_years
+          - no-trades
+        trades: 0
+      candidate:
+        failed_gates:
+          - base_profit_factor
+          - base_return
+          - completed_trades
+          - maximum_realized_trade_loss_fraction
+          - maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+          - maximum_stress_leave_one_year_out_drawdown
+          - minimum_stress_block_bootstrap_positive_return_ratio
+          - minimum_stress_leave_one_year_out_profit_factor
+          - minimum_stress_leave_one_year_out_return
+          - stress_maximum_drawdown
+          - stress_profit_factor
+          - stress_return
+          - traded_years
+          - no-trades
+        trades: 0
+  - case: 2
+    data_digest: 59cf3bc7608e5d87d603d2807c0200748167472875d1d5caa0c9112a0504cf4d
+    evidence_digest: f80b84e1d048f47cc7a6716745f92622bd1a22c50a946f726b3f6aefac4130f2
+    expect: trades
+    request_digest: 4d497c1616f995c67f76c6a2789d786fe775a4c564e412a0b0dccd0601b27b02
+    stage: historical-evaluation
+    validation:
+      candidate:
+        failed_gates:
+          - base_compounded_return
+          - base_profit_factor
+          - completed_trades
+          - maximum_fold_trade_concentration
+          - positive_traded_fold_ratio
+          - stress_profit_factor
+          - stress_return
+          - traded_folds
+        trades: 1
+  - case: 3
+    data_digest: 6ad1413abf052580bab1778c59f219354412e07e831fef033fdb0ab0ddf8efa0
+    evidence_digest: 86545c14433aa670715008d9367bf691459216a427e3954f51fd1c5a24092a11
+    expect: no-trades
+    request_digest: 38bec269d1f0e1a9e7d6830f4b36632041e7b0b477e96c39abb711bcc6839b7c
+    stage: historical-evaluation
+    validation:
+      candidate:
+        failed_gates:
+          - base_compounded_return
+          - base_profit_factor
+          - completed_trades
+          - positive_traded_fold_ratio
+          - stress_profit_factor
+          - stress_return
+          - traded_folds
+        trades: 0
+checks:
+  contract_source: research/tsm-momentum-trend-volume-body-sign-consistency--v001/implementation-contract.yml
+  development_trial_bindings:
+    preregistration_digest: aaeb0741a380fe2495ac826d5053e195d5f02568c94d2a100a5603a5b0971710
+    procedure_path: research/tsm-momentum-trend-volume-body-sign-consistency--v001/run_development.py
+    source_bundle_digest: 8d58073e513338e438281a754638a0eee5683b4954c9ef78688dce5b0f5b9706
+    strategy_engine_path: src/trading_2026_2/tsm_momentum_trend_volume_body_sign_consistency_v001.py
+  development_trial_inputs_path: research/tsm-momentum-trend-volume-body-sign-consistency--v001/development-trial-inputs.yml
+  engine_path: src/trading_2026_2/tsm_momentum_trend_volume_body_sign_consistency_v001.py
+  identity:
+    candidate_definition_has_explicit_candidate_id: true
+    candidate_family:
+      - tsm-momentum-trend-volume-body-sign-consistency-v001
+    candidate_id: tsm-momentum-trend-volume-body-sign-consistency-v001
+    study_id: tsm-momentum-trend-volume-body-sign-consistency--v001
+    trial_id: tsm-momentum-trend-volume-body-sign-consistency-v001
+  precreate_guards:
+    - canonical-yaml-and-artifact-shape
+    - study-candidate-trial-family-identity
+    - preregistration-qualification-trial-source-digests
+    - implementation-contract
+    - outcome-relevant-parameters
+    - holding-cooldown-stop-target-gap-indicator-readiness
+    - synthetic-contract
+    - source-bundle-path-and-sha256
+  required_documents:
+    - preregistration.yml
+    - candidate-definition.yml
+    - qualification-spec.yml
+    - development-trial-inputs.yml
+    - source-bundle.yml
+  research_root: research/tsm-momentum-trend-volume-body-sign-consistency--v001
+  source_bundle_file_count: 13
+  source_bundle_verified_file_count: 13
+  study_event_required: false
+  subchecks:
+    - details:
+        contract_source: research/tsm-momentum-trend-volume-body-sign-consistency--v001/implementation-contract.yml
+        derived_required_history_sessions: 25
+        engine_path: src/trading_2026_2/tsm_momentum_trend_volume_body_sign_consistency_v001.py
+        engine_spec_constant: DEFAULT_SPEC
+        engine_spec_fields_checked:
+          - sma_lookback
+          - sma_min_periods
+          - rsi_lookback
+          - rsi_min_periods
+          - rsi_max
+          - mean_reversion_min
+          - volume_lookback
+          - volume_average_min_periods
+          - volume_lead_window
+          - volume_lead_min_periods
+          - volume_spike_ratio
+          - volume_lead_enabled
+          - cooldown_sessions
+          - holding_sessions
+          - target_return
+          - stop_return
+          - fold_warmup_sessions
+          - risk_fraction
+          - initial_cash
+          - require_close_above_prior_close
+        holding_period:
+          paths:
+            engine.holding_sessions: implementation contract engine spec
+            execution.held_complete_sessions: candidate-definition.yml
+            preregistration.maximum_holding_sessions: preregistration.yml
+          relation:
+            engine.holding_sessions: 10
+            entry_to_exit_complete_sessions: 10
+            execution.held_complete_sessions: 10
+            formula:
+              engine.holding_sessions: execution.held_complete_sessions
+              preregistration.maximum_holding_sessions: signal_to_exit_session_span
+              signal_to_exit_session_span: 1 + execution.held_complete_sessions
+            preregistration.maximum_holding_sessions: 11
+            signal_to_entry_sessions: 1
+            signal_to_exit_session_span: 11
+          status: complete
+          values:
+            engine.holding_sessions: 10
+            execution.held_complete_sessions: 10
+            preregistration.maximum_holding_sessions: 11
+        outcome_relevant_parameters:
+          - actual: 20
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:sma_lookback
+            expected: 20
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml:registered_sma_lookback
+            label: SMA length
+          - actual: 2
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:rsi_lookback
+            expected: 2
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml:registered_rsi_lookback
+            label: RSI length
+          - actual: '70'
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:rsi_max
+            expected: '70'
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml:registered_rsi_max
+            label: RSI threshold
+          - actual: '-0.10'
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:mean_reversion_gap
+            expected: '-0.10'
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml:registered_mean_reversion_gap
+            label: mean-reversion gap
+          - actual: 20
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:volume_lookback
+            expected: 20
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml:registered_volume_lookback
+            label: Volume average length
+          - actual: 5
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:volume_lead_window
+            expected: 5
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml:registered_volume_lead_window
+            label: Volume lead window
+          - actual: '1.05'
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:volume_spike_ratio
+            expected: '1.05'
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml:registered_volume_spike_ratio
+            label: Volume spike ratio
+          - actual: 5
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:cooldown_sessions
+            expected: 5
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml:registered_cooldown_sessions
+            label: Cooldown
+          - actual: completed-session-close
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:decision_time
+            expected: completed-session-close
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml:registered_decision_time
+            label: Signal decision time
+          - actual: '0.04'
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:target_return
+            expected: '0.04'
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml:registered_target_return
+            label: Target return
+          - actual: '-0.04'
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:stop_return
+            expected: '-0.04'
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml:registered_stop_return
+            label: Stop return
+          - actual: next-session-open
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:entry
+            expected: next-session-open
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml:registered_entry
+            label: Entry timing
+          - actual: stop-gap-at-open-target-gap-at-open
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:gap_fill
+            expected: stop-gap-at-open-target-gap-at-open
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml:registered_gap_fill
+            label: Gap fill
+          - actual: adverse-stop-first
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:intrabar_ambiguity
+            expected: adverse-stop-first
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml:registered_intrabar_ambiguity
+            label: Intrabar ambiguity
+          - actual: 25
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:fold_warmup_sessions
+            expected: 25
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml:registered_fold_warmup_sessions
+            label: Fold warmup
+          - actual: '0.02'
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:risk_fraction
+            expected: '0.02'
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml:registered_risk_fraction
+            label: Risk fraction
+          - actual: true
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:price_direction_above
+            expected: true
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml:registered_price_direction_above
+            label: Close direction confirmation
+          - actual: null
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:price_direction_below
+            expected: null
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml:registered_price_direction_below
+            label: Close-below direction confirmation
+          - actual: null
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:supplemental_enabled
+            expected: null
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml:registered_supplemental_enabled
+            label: Supplemental path enabled
+          - actual: null
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:supplemental_atr_lookback
+            expected: null
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml:registered_supplemental_atr_lookback
+            label: ATR lookback
+          - actual: null
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:supplemental_atr_distance_multiplier
+            expected: null
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml:registered_supplemental_atr_distance_multiplier
+            label: ATR distance multiplier
+          - actual: null
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:supplemental_bollinger_lookback
+            expected: null
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml:registered_supplemental_bollinger_lookback
+            label: Bollinger lookback
+          - actual: null
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:supplemental_pullback_low_lookback
+            expected: null
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml:registered_supplemental_pullback_low_lookback
+            label: Pullback low lookback
+          - actual: 5
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:Contract cooldown
+            expected: 5
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/implementation-contract.yml:Contract cooldown
+            label: Contract cooldown
+          - actual: '0.04'
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:Contract target
+            expected: '0.04'
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/implementation-contract.yml:Contract target
+            label: Contract target
+          - actual: '-0.04'
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:Contract stop
+            expected: '-0.04'
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/implementation-contract.yml:Contract stop
+            label: Contract stop
+          - actual: next-session-open
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:Contract entry
+            expected: next-session-open
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/implementation-contract.yml:Contract entry
+            label: Contract entry
+          - actual: completed-session-close
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:Contract signal decision time
+            expected: completed-session-close
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/implementation-contract.yml:Contract signal decision time
+            label: Contract signal decision time
+          - actual: stop-gap-at-open-target-gap-at-open
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:Contract gap fill
+            expected: stop-gap-at-open-target-gap-at-open
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/implementation-contract.yml:Contract gap fill
+            label: Contract gap fill
+          - actual: adverse-stop-first
+            actual_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml:Contract same-session ambiguity
+            expected: adverse-stop-first
+            expected_path: /Users/william/.codex/worktrees/45da/trading-2026-2/research/tsm-momentum-trend-volume-body-sign-consistency--v001/implementation-contract.yml:Contract same-session ambiguity
+            label: Contract same-session ambiguity
+        source_bundle_file_count: 13
+        source_bundle_path: research/tsm-momentum-trend-volume-body-sign-consistency--v001/source-bundle.yml
+        source_bundle_verified_file_count: 13
+        validator_metrics:
+          development:
+            - base_profit_factor
+            - base_return
+            - completed_trades
+            - maximum_realized_trade_loss_fraction
+            - maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+            - maximum_stress_leave_one_year_out_drawdown
+            - minimum_stress_block_bootstrap_positive_return_ratio
+            - minimum_stress_leave_one_year_out_profit_factor
+            - minimum_stress_leave_one_year_out_return
+            - stress_maximum_drawdown
+            - stress_profit_factor
+            - stress_return
+            - traded_years
+          evaluation:
+            - base_compounded_return
+            - base_profit_factor
+            - completed_trades
+            - family_wise_confidence
+            - maximum_fold_positive_profit_concentration
+            - maximum_fold_trade_concentration
+            - maximum_realized_trade_loss_fraction
+            - positive_traded_fold_ratio
+            - stress_max_drawdown
+            - stress_profit_factor
+            - stress_return
+            - traded_folds
+      errors: []
+      name: contract
+      status: passed
+      study_id: tsm-momentum-trend-volume-body-sign-consistency--v001
+      warnings: []
+    - details:
+        accepted_signal_count: 2
+        accepted_signals:
+          - '2020-02-21T00:00:00'
+        cooldown_sessions: 5
+        engine_path: src/trading_2026_2/tsm_momentum_trend_volume_body_sign_consistency_v001.py
+        first_ready_index: 25
+        holding_cooldown_case:
+          accepted_signal_seed: '2020-03-23T00:00:00'
+          accepted_signals:
+            - '2020-02-27T00:00:00'
+            - '2020-03-23T00:00:00'
+          first_signal_seed: '2020-02-27T00:00:00'
+          fixture_search_attempts: 1
+          raw_signals:
+            - '2020-02-27T00:00:00'
+            - '2020-03-19T00:00:00'
+            - '2020-03-23T00:00:00'
+          rejected_signal_seed: '2020-03-19T00:00:00'
+          rejected_signals:
+            - reason: cooldown-not-complete
+              session: '2020-03-19T00:00:00'
+          rejection_reasons:
+            '2020-03-19T00:00:00': cooldown-not-complete
+          trades:
+            - entry_session: '2020-02-28T00:00:00'
+              executed_entry_price: '100.05'
+              executed_exit_price: '99.95'
+              exit_reason: time
+              exit_session: '2020-03-13T00:00:00'
+              fees: '9.7'
+              held_sessions: 10
+              pnl: '-58.19999999999709'
+              raw_entry_price: '100.0'
+              raw_exit_price: '100.0'
+              shares: 485
+              signal_session: '2020-02-27T00:00:00'
+            - entry_session: '2020-03-24T00:00:00'
+              executed_entry_price: '100.05'
+              executed_exit_price: '99.95'
+              exit_reason: time
+              exit_session: '2020-04-07T00:00:00'
+              fees: '9.7'
+              held_sessions: 10
+              pnl: '-58.19999999999709'
+              raw_entry_price: '100.0'
+              raw_exit_price: '100.0'
+              shares: 485
+              signal_session: '2020-03-23T00:00:00'
+        holding_sessions: 10
+        indicator_columns:
+          rsi: rsi_2
+          sma: sma_20
+          volume_lead: prior_volume_ratio
+        intraday_exit_cases: 4
+        passed_cases:
+          - rsi
+          - readiness
+          - intraday-exit
+          - holding-cooldown
+        passed_signal_cases:
+          - signal
+        raw_signals:
+          - '2020-02-21T00:00:00'
+        rejected_signals: []
+        rejection_reasons: {}
+        rsi_case: passed
+        signal_audit:
+          indicator:
+            accepted_signals:
+              - '2020-02-21T00:00:00'
+            raw_signals:
+              - '2020-02-21T00:00:00'
+            rejected_signals: []
+            rejection_reasons: {}
+            trades:
+              - entry_session: '2020-02-24T00:00:00'
+                executed_entry_price: '100.05'
+                executed_exit_price: '99.95'
+                exit_reason: time
+                exit_session: '2020-03-09T00:00:00'
+                fees: '9.7'
+                held_sessions: 10
+                pnl: '-58.19999999999709'
+                raw_entry_price: '100.0'
+                raw_exit_price: '100.0'
+                shares: 485
+                signal_session: '2020-02-21T00:00:00'
+        signal_case:
+          fixture_search_attempts: 1
+          kind: indicator
+          raw_signal_columns:
+            - raw_signal
+            - raw_momentum_signal
+        trades:
+          - entry_session: '2020-02-24T00:00:00'
+            executed_entry_price: '100.05'
+            executed_exit_price: '99.95'
+            exit_reason: time
+            exit_session: '2020-03-09T00:00:00'
+            fees: '9.7'
+            held_sessions: 10
+            pnl: '-58.19999999999709'
+            raw_entry_price: '100.0'
+            raw_exit_price: '100.0'
+            shares: 485
+            signal_session: '2020-02-21T00:00:00'
+      errors: []
+      name: synthetic
+      status: passed
+      study_id: tsm-momentum-trend-volume-body-sign-consistency--v001
+      warnings: []
+prepare_checks: passed
+schema_version: 1
+status: passed

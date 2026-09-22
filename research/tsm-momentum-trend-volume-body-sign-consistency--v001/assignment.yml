@@ -1,0 +1,9 @@
+assignee: TASK-018-v004-study-developer
+assigner: 專案管理者（TASK-018）
+instruction: 建立單一 v004 Study，測試訊號日前五個已完成 session 的成交量是否集中於非負 Open 到 Close 日內實體，並以非負實體成交量占比確認動能先行；平盤事前歸入非負類別。固定 candidate／baseline、Development data bindings、provenance 與機制差異，完成唯一 Development trial、evidence validation、freeze-readiness／candidate-freeze 嘗試及繁體中文成果卡。只執行 development-to-freeze，不執行 Historical Evaluation、Terminal、challenge 或 replay。
+role: study 開發者
+schema_version: 1
+scope: development-to-freeze
+source_id: PROJECT_KANBAN:TASK-018
+study_id: tsm-momentum-trend-volume-body-sign-consistency--v001
+workflow_version: v004
