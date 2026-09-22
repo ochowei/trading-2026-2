@@ -30,7 +30,7 @@
 
 ```markdown
 ### [TASK-001] 任務名稱
-- **狀態**：TODO
+- **狀態**：Done
 - **優先級**：高／中／低
 - **負責角色**：角色名稱
 - **執行者**：subagent 或人員識別名稱
@@ -46,7 +46,24 @@
 
 ## 📋 TODO
 
-> 目前沒有待接手的 TODO 任務。
+### [TASK-018] 在 v004 開發另一個未嘗試的 TSM 動能趨勢 × 量先價行假說，完成 blind review 與成果卡
+- **狀態**：Done
+- **優先級**：高
+- **負責角色**：study 開發者
+- **執行者**：Erdos（本 parent thread 唯一 Study Developer subagent，`01a0c8ec-72d6-7362-a292-74bb25847635`）
+- **建立日期**：2026-09-22
+- **更新日期**：2026-09-22
+- **依賴／阻塞**：無；接手時先確認 v004 Workflow Release 為 Active
+- **驗收條件**：
+  - 先依根目錄 `AGENTS.md`、`.study-developer/development-note/TSM.md`、v004 reference 與允許讀取的既有 TSM Development-only Study，盤點已嘗試過的動能、趨勢與量先價行機制；提出一個可追溯且確實未被嘗試過的新假說。不得只是改版本號、改名稱、重用同一規則或無語義重發，並須在研究設計中說明與既有 Study 的機制差異及近鄰限制。
+  - 依 v004 `development-to-freeze` 固定入口完成 Workflow reference／release／policy／source digest 核對、runner preflight、prepare，建立單一新 Study 的 preregistration、candidate／baseline、implementation、runner、Development data bindings、明確派工與 provenance；完成唯一合法的 create、Development trial、evidence validation，以及規則允許的 freeze-readiness／candidate-freeze 嘗試。若資格失敗，保留 `qualification-failed` 與未凍結狀態，不得補猜或繞過流程。
+  - 只執行 v004 Development；不得執行 Historical Evaluation、Terminal、challenge 或 replay，不得讀取、搜尋、雜湊、修改或引用 `historical-evaluation-artifacts/`、`.super-admin/`、正式 Evaluation／Terminal 結果、quarantine／full evaluation data、events、journals、operations 或 Git 歷史，也不得覆寫、刪除或重排既有 Study、evidence、authority、成果卡或 Workflow Package。
+  - Development 完成後，對同一 Study 依 v004 blind-review 規範完成受限盲檢討：先確認沒有正式 outcome exposure；只讀研究設計、程式與 Development candidate／baseline evidence 及允許的 binding，不重跑 runner，不以完整 `status`／`validate` 取代 blind review；若盲性已破壞，立即停止並如實回報。
+  - blind review 完成後，才以繁體中文 append-only 更新 `.study-developer/development-note/TSM.md` 的該 Study 成果卡。成果卡約 300–600 字，逐 Trial 區分 candidate／baseline、base／stress、formal gates、research targets、evidence validity、candidate freeze 資格／狀態、provenance、盲性狀態、已確認問題、可能原因、尚不能判斷、限制與下一輪單一可否證變更；缺少 evidence 時不得補猜數值，並聲明未使用正式結果與實際讀取限制。
+  - 通過對應 v004 checker／validator、必要 pytest、Ruff（若適用）與 `git diff --check`；回報 Study ID、workflow／reference／release／policy／source／Development data digest、create／Development operation ID、事件 head／count（若盲讀限制不允許則標示 unavailable）、修改檔案、Development 與 blind review 驗證結果及任何實際缺件。
+  - 接手時將本任務由 TODO 移到 Doing；完成工作後維持 Doing，由 parent project manager 依下列項目驗收：假說確實未被嘗試過、符合 v004 workflow、實驗與結果完整、blind review 順利且未越過讀取邊界、成果卡符合專案規範。若 review 發現問題，只能將修改要求交回同一個 subagent；修正通過後由 parent 移到 Done，不得另開 subagent 或建立獨立 top-level Codex conversation/thread。
+- **摘要**：根據 TSM Development 研究盤點，在 v004 workflow 中提出並驗證另一個真正新的「量先於價、用於動能趨勢確認」機制，依序完成 Development、同一 Study 的受限 blind review 與不混入正式結果的繁體中文成果卡，讓後續是否值得凍結有清楚且可追溯的證據。
+- **進度／備註**：2026-09-22 由本 parent thread 只 spawn 一個 Erdos Study Developer subagent 接手，未建立 top-level thread。Study `tsm-momentum-trend-volume-body-sign-consistency--v001` 已完成 v004 workflow reference／release／policy／source／Development data binding 核對、runner-preflight、prepare、唯一 create、唯一 Development trial、evidence validation 與 freeze-readiness／freeze 嘗試；candidate／baseline evidence 均 `valid`，candidate base／stress 各 3 筆／3 年，return `0.6977421%`／`0.2156383%`、PF `1.3278289`／`1.1017603`，因 `completed_trades` 與 stress leave-one-year-out PF／return 失敗而 `qualification-failed`、未凍結；baseline base／stress 各 10 筆／4 年，return `2.1411376%`／`0.5312003%`、PF `1.3058564`／`1.0755804`，另有交易數與 stress robustness gates 失敗。blind review 已完成且 exposure check 通過；未讀取、引用或修改正式 Evaluation／Terminal、events、journals、operations、`study.yml`、`historical-evaluation-artifacts/` 或 `.super-admin/`，event head/count 依盲讀限制標示 unavailable。parent review 確認假說不是既有 Study 的版本重發，但不過度宣稱 Open→Close 概念全新：已揭露 v012 的單日未加權 `Close>Open`／區間位置近鄰，以及 `body-followthrough` 的五日 Open→Close 加權／未加權平均近鄰；本 Study 可主張差異是五日成交量加權非負實體占比 `>=0.60` 加固定五日量比，先於動能趨勢／價格加速。成果卡在 blind review 後以繁體中文 append-only 寫入並經 parent review correction 補足 baseline evidence 與新穎性邊界；未修改 immutable Study／evidence／publication／binding。QA：canonical／source-bundle validator（subagent）passed、Study pytest `5 passed`、Ruff passed、8 份允許 YAML parse passed、`git diff --check` passed；未執行完整 project pytest、runner、status、validate 或正式 Evaluation。parent review 通過，移至 Done。
 
 ### [TASK-017] 在 v004 開發新的 TSM 動能趨勢 × 量先價行假說，完成 blind review 與成果卡
 - **狀態**：Done

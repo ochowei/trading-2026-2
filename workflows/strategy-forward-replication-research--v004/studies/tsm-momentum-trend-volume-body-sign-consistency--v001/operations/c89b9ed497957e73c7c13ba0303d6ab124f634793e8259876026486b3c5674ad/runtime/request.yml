@@ -1,0 +1,280 @@
+data_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+data_path: run/bars.csv
+preregistration:
+  baseline_definition:
+    baseline_id: tsm-momentum-trend-volume-body-sign-consistency-baseline-v001
+    candidate_family: tsm-momentum-trend-volume-body-sign-consistency-v001
+    execution_is_identical: true
+    family: trend-momentum-volume-body-sign-consistency
+    objectively_simpler_because: baseline 保留相同的趨勢、價格加速、RSI、五日平均量比、成本、風險、持倉、停損停利與冷卻規則，只關閉訊號日前五個已完成 session 的非負實體成交量占比條件，因此是同一價格路徑下不使用新方向量能機制的控制組。
+    simpler_rule: 收盤符合相同趨勢、價格加速、RSI、五日平均量比與執行規則，但不要求前五個已完成 session 中正 Open 到 Close 實體承擔至少 60% 成交量。
+  complete_candidate_family:
+    - tsm-momentum-trend-volume-body-sign-consistency-v001
+  eligibility_rules:
+    accepted_signal:
+      cooldown:
+        clock_anchor: completed-position-exit
+        minimum_completed_session_steps_after_exit: 5
+        position_must_be_flat: true
+      decision_time: completed-session-close
+      mean_reversion:
+        close_vs_sma20_gap_minimum: '-0.10'
+        close_vs_sma20_operator: '>='
+        rsi_length: 2
+        rsi_operator: <=
+        rsi_value: '70'
+        sma_length: 20
+      momentum_trend:
+        price_acceleration_lookback: 1
+        price_acceleration_minimum: '0.02'
+        price_to_sma_floor: '0.90'
+        trend_sma_lag_sessions: 5
+        trend_sma_ratio_floor: '0.95'
+      momentum_trend_volume_body_sign_consistency:
+        price_acceleration_lookback: 1
+        price_acceleration_minimum: '0.02'
+        trend_sma_lag_sessions: 5
+        trend_sma_ratio_floor: '0.95'
+      price_direction_confirmation:
+        close_above_prior_close: true
+      symbol: TSM
+      volume_body_sign_consistency:
+        enabled: true
+        positive_body_definition: close_greater_than_or_equal_to_open
+        positive_body_volume_share_minimum: '0.60'
+        prior_session_window: 5
+        uses_completed_sessions_only: true
+      volume_leads_price:
+        body_filter_is_before_signal: true
+        enabled: true
+        prior_session_window: 5
+        volume_average_length: 20
+        volume_body_sign_consistency_is_before_signal: true
+        volume_ratio_minimum: '1.05'
+        volume_ratio_operator: '>='
+        volume_ratio_value: '1.05'
+    costs:
+      base:
+        fee_per_side_bps: '1'
+        slippage_per_side_bps: '5'
+      stress:
+        fee_per_side_bps: '2'
+        slippage_per_side_bps: '20'
+    development_diagnostics:
+      block_bootstrap:
+        block_lengths:
+          - 3
+          - 5
+        maximum_stress_drawdown_above_10pct_ratio: '0.10'
+        minimum_stress_positive_return_ratio: '0.80'
+        repetitions: 50000
+        seed: 20260902
+        seed_application: exact-same-seed-for-each-block-length
+      leave_one_signal_year_out:
+        maximum_stress_drawdown: '0.10'
+        minimum_stress_profit_factor: '1.00'
+        minimum_stress_return: '0'
+      signal_year_breakdown: true
+    development_gates:
+      base_profit_factor:
+        operator: '>'
+        value: '1.10'
+      base_return:
+        operator: '>'
+        value: '0'
+      completed_trades:
+        operator: '>='
+        value: 20
+      maximum_realized_trade_loss_fraction:
+        operator: <=
+        value: '0.04'
+      maximum_stress_block_bootstrap_drawdown_above_10pct_ratio:
+        operator: <=
+        value: '0.10'
+      maximum_stress_leave_one_year_out_drawdown:
+        operator: <=
+        value: '0.10'
+      minimum_stress_block_bootstrap_positive_return_ratio:
+        operator: '>='
+        value: '0.80'
+      minimum_stress_leave_one_year_out_profit_factor:
+        operator: '>'
+        value: '1.00'
+      minimum_stress_leave_one_year_out_return:
+        operator: '>'
+        value: '0'
+      stress_maximum_drawdown:
+        operator: <=
+        value: '0.10'
+      stress_profit_factor:
+        operator: '>'
+        value: '1.00'
+      stress_return:
+        operator: '>'
+        value: '0'
+      traded_years:
+        operator: '>='
+        value: 3
+    execution:
+      cooldown:
+        anchor: completed-position-exit
+        minimum_completed_session_steps_after_exit: 5
+      decision_time: completed-session-close
+      entry: next-XNYS-open
+      gap_fill: stop-gap-at-open-target-gap-at-open
+      gate_policy: formal Development gates、研究 targets 與 candidate freeze qualification 分開判定；任一 formal gate 或事前登記 target 失敗，都保留合法 evidence 並停止在 Development，不得看結果後調參或強行凍結候選。
+      holding_period: next-open-after-10-complete-sessions
+      intrabar_ambiguity: adverse-stop-first
+      position_sizing:
+        cash_cap: available-cash-no-borrowing
+        modeled_stop_includes_costs: true
+        risk_fraction_of_pre_entry_equity: '0.02'
+        shares: maximum-integer-shares-within-risk-and-cash-caps
+      stop:
+        level_from_raw_entry_open: '-0.04'
+        order: STOP_MARKET
+        time_in_force: GTC
+      target:
+        level_from_raw_entry_open: '0.04'
+        order: LIMIT
+        reissued_each_open_position_session: true
+        time_in_force: DAY
+    novelty_and_identifiability:
+      development_identifiability: 指標合約明定每個量能觀測日只計算同一 session 的 Open 到 Close 是否不下跌，平盤與上漲同歸非負類別；訊號日前五個 session 的成交量先加總，再計算非負實體所占成交量比例。candidate 與 baseline 使用同一份 warmup／Development OHLCV、同一成本、持倉與價格條件，唯一策略差異是這個方向量能條件。逐筆交易、年度分布、bootstrap 與 leave-one-year-out 可檢查差異是否來自非負實體成交量占比，而不是資料、成交或事後調參。
+      mechanism_difference: 本候選測的是「成交量分布在非負日內實體的比例」，只使用非負／負方向的分類，不使用日內實體幅度。它不同於 volume-lead 的 Close 對前收上漲／持平量能壓力、volume-ramp 的單次量能脈衝、volume-absorption 的高量小收盤變動、volume-efficiency 的量能加權日內區間、volume-close-acceptance 的收盤位置、volume-return-alignment 的收盤到前收報酬、volume-range-compression 的窄幅區間、volume-gap-anchoring 的隔夜缺口、volume-persistence 的首尾量能變化、volume-peak-lead 的量峰先後、volume-breadth 的高量日數、volume-response-lag 的跨日量到報酬配對、volume-body-followthrough 的量能加權實體報酬大小與 v024 的事件後固定價突破。另與既有均值回歸 v012 的單一訊號日 Close>Open 不同，本 Study 使用訊號日前五日的成交量加權方向分布，置於動能趨勢／價格加速之前；平盤納入非負類別是本次事前固定的邊界定義。
+      shared_indicator_limitations: 仍共用 TSM、XNYS、Yahoo auto_adjusted OHLCV、五日視窗、二十日量能平均、當日趨勢與至少 2% 價格加速；每日 OHLCV 無法觀察盤中主動買賣方向，Close>=Open 只是日內價格結果，不等於真實買方成交，平盤也可能掩蓋盤中來回波動。因此新意是可追溯的「量能分布於非負日內實體」先行測試，不宣稱與所有既有量能指標完全獨立。
+      this_study_path: 本 Study 固定訊號日前五個已完成 session，以每日日內實體 Close／Open−1 的非負／負方向建立成交量占比；非負實體成交量／五日總成交量至少為 0.60，並同時要求五日平均量比至少 1.05。當日仍須符合上升趨勢、均線下限、RSI、收盤高於前收與至少 2% 一日價格加速，下一日 open 進場並持有最多十個完整 session。baseline 保留五日平均量比與全部價格、成本、風控及退出規則，只關閉非負實體成交量占比條件。
+      v024_registered_path: v024 登記的是上升趨勢中的單次放量事件，事件後五日內首次嚴格突破固定價；本候選沒有事件狀態機、事件高點或固定突破價，而是固定聚合前五個已完成 session 的日內方向成交量後，在訊號日前確認。
+    research_targets:
+      completed_trades:
+        operator: '>='
+        value: 20
+      stress_return:
+        operator: '>'
+        value: '0'
+      traded_years:
+        operator: '>='
+        value: 3
+    source_and_adjustment:
+      adjustment_policy: Yahoo auto_adjust
+      calendar: XNYS
+      interval: 1d
+      provider: yahoo
+      timezone: America/New_York
+  evaluation_gates:
+    base_compounded_return:
+      operator: '>'
+      value: '0'
+    base_profit_factor:
+      operator: '>'
+      value: '1.10'
+    completed_trades:
+      operator: '>='
+      value: 20
+    family_wise_confidence:
+      operator: '>='
+      value: '0.90'
+    maximum_fold_positive_profit_concentration:
+      operator: <=
+      value: '0.50'
+    maximum_fold_trade_concentration:
+      operator: <=
+      value: '0.50'
+    maximum_realized_trade_loss_fraction:
+      operator: <=
+      value: '0.04'
+    positive_traded_fold_ratio:
+      operator: '>='
+      value: '0.60'
+    stress_max_drawdown:
+      operator: <=
+      value: '0.10'
+    stress_profit_factor:
+      operator: '>'
+      value: '1.00'
+    stress_return:
+      operator: '>'
+      value: '0'
+    traded_folds:
+      operator: '>='
+      value: 3
+  fold_warmup_sessions: 25
+  hypothesis: 在 TSM 的上升趨勢中，若訊號日前五個已完成 XNYS session 的成交量至少有 60% 落在同日 Open 到 Close 不下跌的日內實體，這種量能方向分布先行可能比單看總量或收盤到收盤報酬更能篩出價格加速後的動能延續；平盤事前歸入非負類別。當日趨勢、均線下限、RSI、收盤方向與至少 2% 一日價格加速成立時，下一個 session open 進場並持有最多十個完整 session。baseline 保留五日平均量比與完全相同的價格、成本、風險及退出規則，只關閉非負實體成交量占比條件。所有規格在 Study 開始前固定；任一 formal gate 或 research target 失敗即停止 freeze，不得以結果回頭調參。
+  initial_cash: '100000'
+  maximum_holding_sessions: 11
+  maximum_trials: 1
+  selection_rule:
+    eligible_candidate: 唯一 Trial 必須通過全部 Development gates 與已登記 research targets；未通過時不得凍結候選。
+    method: fixed-single-candidate-no-outcome-ranking
+    selected_candidate_id: tsm-momentum-trend-volume-body-sign-consistency-v001
+  tie_handling:
+    method: not-applicable-single-candidate
+source_bundle:
+  files:
+    - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+      path: pyproject.toml
+    - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+      path: uv.lock
+    - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+      path: src/trading_2026_2/__init__.py
+    - digest: e0f2645d031b7a6ee2582ed3a9d5273f15b34c8b5fd48ec426df4d2f7e45267f
+      path: src/trading_2026_2/tsm_momentum_trend_volume_body_sign_consistency_v001.py
+    - digest: 21667b899faaacdf47590c4878a9579558c5281f819ccd9aa31db3ad6ef863c4
+      path: src/trading_2026_2/tsm_momentum_trend_volume_gap_anchoring_v001.py
+    - digest: 75856a661610fbec5193b348c1af39f38a51668a191b709e202836090b15d59e
+      path: tests/test_tsm_momentum_trend_volume_body_sign_consistency_v001.py
+    - digest: 940a7426c1d6f57c86c5e4dfe5cc7df55aef596e2707f6a847c374e8c971ff76
+      path: research/tsm-momentum-trend-volume-body-sign-consistency--v001/assignment.yml
+    - digest: 0c5a14988ae28e19ae608f76dc8e18118a7a68aacb02a0402701bd7f87f0a8da
+      path: research/tsm-momentum-trend-volume-body-sign-consistency--v001/candidate-definition.yml
+    - digest: 4a80e8e7de8a30440b7c5780d3e605441742b6b3cc6b40d1f1029b7c9a9c3d3c
+      path: research/tsm-momentum-trend-volume-body-sign-consistency--v001/implementation-contract.yml
+    - digest: aaeb0741a380fe2495ac826d5053e195d5f02568c94d2a100a5603a5b0971710
+      path: research/tsm-momentum-trend-volume-body-sign-consistency--v001/preregistration.yml
+    - digest: e3331853c839c66c0a233fc15b1e2c33ce29ba87e027526e7e6ab80a72437dd4
+      path: research/tsm-momentum-trend-volume-body-sign-consistency--v001/qualification-spec.yml
+    - digest: a1764d480c68f5b80b3d6bd707886336c0aeeee4e2bacbb398632a5f9d068904
+      path: research/tsm-momentum-trend-volume-body-sign-consistency--v001/runner-contract.yml
+    - digest: 5f6e6985ad8428d232cd8cc42616adf2b307ee84217634c66bc366869e385f67
+      path: research/tsm-momentum-trend-volume-body-sign-consistency--v001/run_development.py
+  schema_version: 1
+stage: development
+trial_inputs:
+  candidate_family: tsm-momentum-trend-volume-body-sign-consistency-v001
+  candidate_id: tsm-momentum-trend-volume-body-sign-consistency-v001
+  data_bindings:
+    development_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+    development_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+    warmup_digest: 81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847
+  date_controls:
+    formal_provider_access: false
+    signal_end: '2018-12-31'
+    signal_start: '2014-01-01'
+    warmup_end: '2013-12-31'
+    warmup_start: '2013-01-01'
+  development_diagnostics:
+    block_lengths:
+      - 3
+      - 5
+    bootstrap_seed: 20260902
+    repetitions: 50000
+    seed_application: exact-same-seed-for-each-block-length
+  execution:
+    cooldown_anchor: completed-position-exit
+    cooldown_completed_session_steps_after_exit: 5
+    entry: next-XNYS-open
+    holding_sessions: 10
+    intrabar_ambiguity: adverse-stop-first
+    position_sizing:
+      modeled_stop_includes_costs: true
+      risk_fraction: '0.02'
+    stop_market_gtc: '-0.04'
+    target_limit_day: '0.04'
+  preregistration_digest: aaeb0741a380fe2495ac826d5053e195d5f02568c94d2a100a5603a5b0971710
+  schema_version: 1
+  selected_candidate_id: tsm-momentum-trend-volume-body-sign-consistency-v001
+  source_bundle_digest: 8d58073e513338e438281a754638a0eee5683b4954c9ef78688dce5b0f5b9706
+  strategy_engine_digest: e0f2645d031b7a6ee2582ed3a9d5273f15b34c8b5fd48ec426df4d2f7e45267f
+  study_procedure_digest: 5f6e6985ad8428d232cd8cc42616adf2b307ee84217634c66bc366869e385f67
+  study_procedure_path: research/tsm-momentum-trend-volume-body-sign-consistency--v001/run_development.py
+  trial_id: tsm-momentum-trend-volume-body-sign-consistency-v001

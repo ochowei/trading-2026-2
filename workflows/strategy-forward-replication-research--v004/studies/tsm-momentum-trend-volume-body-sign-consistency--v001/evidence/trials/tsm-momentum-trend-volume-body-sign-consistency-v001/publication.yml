@@ -1,0 +1,16 @@
+artifacts:
+  baseline:
+    digest: 1f6c75428fa0047dcbb3146059da8596b68ba00778e6fbbdeb4b4f7e749ac7b6
+    path: evidence/trials/tsm-momentum-trend-volume-body-sign-consistency-v001/baseline.yml
+  candidate:
+    digest: ef0ad2a4588087c22706a6ea55ec58a52c15fb3bb8cef851436509aa24fef059
+    path: evidence/trials/tsm-momentum-trend-volume-body-sign-consistency-v001/candidate.yml
+  inputs:
+    digest: 915b30bd13f2e81667ecfa19f1d898d41c1e9646ec89bdf3e2ccee78a26527f5
+    path: evidence/trials/tsm-momentum-trend-volume-body-sign-consistency-v001/inputs.yml
+envelope_digest: 67739ccc49776abe2b5aab1a662519e12d8bd7c0c58d661ba1b745576b09fbc2
+preregistration_digest: aaeb0741a380fe2495ac826d5053e195d5f02568c94d2a100a5603a5b0971710
+schema_version: 1
+source_bundle_digest: 8d58073e513338e438281a754638a0eee5683b4954c9ef78688dce5b0f5b9706
+study_id: tsm-momentum-trend-volume-body-sign-consistency--v001
+trial_id: tsm-momentum-trend-volume-body-sign-consistency-v001

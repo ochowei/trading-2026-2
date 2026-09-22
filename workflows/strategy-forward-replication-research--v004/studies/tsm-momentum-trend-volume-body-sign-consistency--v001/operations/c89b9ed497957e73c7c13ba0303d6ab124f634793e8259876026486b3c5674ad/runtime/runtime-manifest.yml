@@ -1,0 +1,26 @@
+data:
+  digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+  path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+evidence:
+  digest: 67739ccc49776abe2b5aab1a662519e12d8bd7c0c58d661ba1b745576b09fbc2
+  path: runtime/evidence.yml
+execution_contract: request-output-v1
+execution_workspace: temporary
+operation_id: c89b9ed497957e73c7c13ba0303d6ab124f634793e8259876026486b3c5674ad
+request:
+  digest: 1f1891ab7335a6ca6599a6ecda27e056e7f568c63ae5670f5c933e09a629f24e
+  path: runtime/request.yml
+resolver_version: 1
+runner:
+  digest: 5f6e6985ad8428d232cd8cc42616adf2b307ee84217634c66bc366869e385f67
+  path: research/tsm-momentum-trend-volume-body-sign-consistency--v001/run_development.py
+schema_version: 1
+source_bundle:
+  digest: 8d58073e513338e438281a754638a0eee5683b4954c9ef78688dce5b0f5b9706
+  path: manifests/source-bundle.yml
+stage: development
+study_id: tsm-momentum-trend-volume-body-sign-consistency--v001
+workflow_reference:
+  digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  path: manifests/workflow-reference.yml
+workflow_version: v004
