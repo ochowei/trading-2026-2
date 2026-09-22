@@ -157,6 +157,42 @@
 
 > 已完成工作並由專案管理者驗收確認的任務。
 
+### [TASK-014] 對 `tsm-momentum-trend-volume-breadth--v001` 進行 v004 blind review 並重寫成果卡
+- **狀態**：Done
+- **優先級**：高
+- **負責角色**：study 開發者
+- **執行者**：Linnaeus（本 parent thread 的唯一 Study Developer subagent `01a0c6af-eb2f-7470-a0fe-ffc2798fd577`）
+- **建立日期**：2026-09-22
+- **更新日期**：2026-09-22
+- **依賴／阻塞**：TASK-013 已完成；目標 Study 為 `tsm-momentum-trend-volume-breadth--v001`，Workflow 為 v004
+- **驗收條件**：
+  - 先依根目錄規範與 v004 blind-review skill 核對目標 Study；若發現已接觸正式 Historical Evaluation evidence、帶 outcome 的 Terminal／正式結果或其他會破壞盲性的內容，必須停止 blind review 並如實回報，不能假裝忽略曝光。
+  - 先解析並驗證該 Study 的 `manifests/workflow-reference.yml`、v004 release／policy binding，再只讀取 preregistration、candidate family、qualification／implementation contract、Development 設計、每個已登記 Trial 的 candidate／baseline evidence、inputs、publication、Source Bundle 綁定的研究程式／runner／測試／Development data metadata，以及 Development provenance／selection／assignment 作補充。
+  - 嚴禁開啟、搜尋、雜湊、複製或引用 `historical-evaluation-artifacts/`、正式 Evaluation／Terminal、quarantine／full evaluation data、`events/`、`journals/`、`operations/`、`study.yml` 或 Git 歷史；不得使用完整 `status`／`validate` 取代盲讀範圍，也不得修改 Study、Workflow、authority 或 evidence。
+  - 逐 Trial 重新判定 candidate／baseline evidence validity、formal gates、research targets、candidate freeze eligibility 與 blind eligibility；清楚區分 formal gate 與 target，缺 evidence 只能標示 unavailable，不得推測未執行結果。
+  - 完成後以繁體中文重新撰寫該 Study 的成果卡，保留 Development-only 邊界，完整記錄已確認問題、影響、證據強度、限制、下一輪可否證建議、盲性狀態與「未使用正式結果」聲明；不得新增獨立 review 檔案，除非另有指定路徑。
+  - subagent 完成後維持 Doing，由 parent project manager review 成果卡是否符合專案規範；若需修正，parent 只能把修改要求交回同一個 subagent，通過後才移到 Done。
+- **摘要**：對剛完成 Development 的 v004 Study 做受限讀取的 blind review，重新整理成果卡，讓 Study 的問題、影響、證據強度與後續可否證方向清楚且不混入正式評估結果。
+- **進度／備註**：2026-09-22 已由本 parent thread 的唯一 Study Developer subagent 接手，並依使用者要求將原始 `2026-09-21` v004 Development 卡與 `2026-09-22` blind-review／更正內容合併為 `.study-developer/development-note/TSM.md` 唯一的 `2026-09-22`「Development + blind review consolidated card」，移除第二個 revision 標題與重複段落；保留 exact workflow／reference／release／policy／source／preregistration／Development data／warmup digest、create／Development operation、event head／count／lifecycle、逐 Trial 數值、candidate targets 與 baseline targets「不適用／未對 baseline 登記」更正。未修改其他 Study 或 Study、Workflow、manifest、evidence、events、authority、正式結果；未重新執行 blind review、runner、`status`／`validate` 或測試。parent review 通過，任務結案。
+
+### [TASK-013] 在 v004 開發下一個未嘗試的 TSM 動能趨勢 × 量先價行假說並撰寫成果卡
+- **狀態**：Done
+- **優先級**：高
+- **負責角色**：study 開發者
+- **執行者**：Huygens（本對話唯一 study 開發者 subagent `01a0c475-8171-7c42-927c-8d65bea438f8`）
+- **建立日期**：2026-09-21
+- **更新日期**：2026-09-21
+- **依賴／阻塞**：無；接手時先確認 v004 Workflow Release 為 Active
+- **驗收條件**：
+  - 依根目錄規範、`.study-developer/development-note/TSM.md` 與允許讀取的既有 TSM Development Study，完整盤點已嘗試過的動能、趨勢及量先價行機制；提出一個可追溯、確實未被嘗試過的新假說，不得只是改版本號、改名稱、重用既有規則或無語義重發，並在研究文件中說明與既有 v004 Study 的機制差異。
+  - 依 v004 `development-to-freeze` 流程建立單一新 Study，先完成 Workflow reference／release digest 核對、runner preflight 與 prepare，再固定 preregistration、candidate／baseline、implementation、runner、Development data bindings、明確派工與 provenance；完成唯一合法的 Development trial、evidence validation，以及規則允許的 freeze-readiness／candidate-freeze 嘗試。
+  - 只執行 v004 Development；不得執行 Historical Evaluation、Terminal、challenge 或 replay，不得讀取或修改 `historical-evaluation-artifacts/`、`.super-admin/`、正式 Evaluation／Terminal 結果，也不得覆寫、刪除或重排既有 Study、evidence、authority、events 或成果卡。
+  - Development 完成後，以繁體中文 append-only 更新 `.study-developer/development-note/TSM.md` 的該 Study 成果卡；逐 Trial 區分 candidate／baseline、base／stress、formal gates、research targets、evidence validity、candidate freeze 資格／狀態、provenance、限制與下一輪可否證條件。缺少 evidence 時不得補猜數值，並清楚標示已確認、可能原因與尚不能判斷。
+  - 通過對應 v004 validator／checker、必要 pytest、Ruff（若適用）與 `git diff --check`；回報 Study ID、workflow／reference／source digest、operation ID、事件 head、修改檔案、驗證結果、實驗結果與任何實際缺件。subagent 完成後維持 Doing，由 parent project manager review 後才可移到 Done。
+- **摘要**：根據 TSM Development 研究盤點，在 v004 workflow 中提出並驗證一個真正新的「量先於價、用於動能趨勢確認」機制，產出可追溯的 Development Study 與成果卡，讓後續是否值得凍結有清楚且不越權的證據。
+- **進度／備註**：2026-09-21 由本對話唯一 study 開發者 subagent 接手，已由 TODO 移至 Doing。已完成 `tsm-momentum-trend-volume-breadth--v001` 的 v004 runner-preflight、prepare、唯一 Development trial、evidence validation、freeze-readiness 與 candidate-freeze 嘗試；成果卡已 append-only 寫入 `.study-developer/development-note/TSM.md`。create operation=`3d83dc6f2a376ef5d63fe3cfa080053b68c6fd3ef6f2a639981b8992684c73eb`，Development operation=`3134e0ec6c2cfde7406a6a7ca308b576e398b25f36ba5335d6933f44a3eaebc0`，event count=`4`，event head=`52ef75ad804a93ecf81e3725e27fe789ba0802723a58ad813c83a33671e14947`。Candidate／baseline evidence 均 `valid`；candidate 7 筆／3 年，base／stress 報酬 7.1897%／5.5959%、PF 4.2884／3.5981、最大回撤 1.9990%／1.9990%，僅因 `completed_trades` 低於 20 失敗；baseline 10 筆／4 年，base／stress 報酬 2.1411%／0.5312%、PF 1.3059／1.0756、最大回撤 2.1279%／2.2747%，另有 stress bootstrap 正報酬比與 leave-one-year-out PF／報酬 gate 失敗。`status`／`validate` 通過，candidate freeze eligibility 不具資格；freeze-readiness／freeze 均 `qualification-failed`，沒有 candidate-frozen 或 freeze provenance。未執行 Historical Evaluation、Terminal、challenge 或 replay，未修改 Workflow、validator 或既有 immutable artifact。
+- **Parent review 結果（2026-09-21）**：核對公開 preregistration、candidate／baseline evidence、inputs／publication、四事件鏈、authority／workflow reference／release／source bindings 與 Study lifecycle；確認新假說的核心「訊號日前五日中至少三日的五日滾動量比達標」未在既有 TSM Development 卡片或既有動能量先價行 Study 中出現，且與 volume-lead、ramp、absorption、efficiency、close-acceptance、return-alignment、range-compression、gap-anchoring、persistence／fade、peak-lead 及 v024 固定突破有可識別差異；共用 OHLCV、五日視窗與二十日均量的限制已揭露。parent 重跑新 Study targeted pytest=`4 passed`、Ruff=`All checks passed`、`git diff --check` 通過。成果卡已逐 Trial 區分 candidate／baseline、base／stress、formal gates、research targets、evidence validity、candidate freeze 狀態、provenance、限制、已確認／可能原因／尚不能判斷與下一輪可否證條件；全 repo 既有 pytest／Ruff 問題未被誤報為通過，也未以 workaround 修改 Workflow。TASK-013 通過驗收，移至 Done。
+
 ### [TASK-008] 在 v003 開發下一個未嘗試的 TSM 動能趨勢 × 量先價行假說並撰寫成果卡
 - **狀態**：Done
 - **優先級**：高

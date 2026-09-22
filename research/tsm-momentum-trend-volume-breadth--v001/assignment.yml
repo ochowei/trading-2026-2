@@ -1,0 +1,9 @@
+assignee: TASK-013-v004-study-developer
+assigner: 專案管理者（TASK-013）
+instruction: 建立單一 v004 Study，測試訊號日前五個已完成 session 中至少三個 session 的五日滾動平均量／此前二十日均量達到門檻的多日量能覆蓋廣度，並由當日趨勢與價格加速確認；固定 candidate／baseline、Development data bindings、provenance 與機制差異，完成唯一 Development trial、evidence validation、freeze-readiness／candidate-freeze 嘗試及繁體中文成果卡。只執行 development-to-freeze，不執行 Historical Evaluation、Terminal、challenge 或 replay。
+role: study 開發者
+schema_version: 1
+scope: development-to-freeze
+source_id: PROJECT_KANBAN:TASK-013
+study_id: tsm-momentum-trend-volume-breadth--v001
+workflow_version: v004

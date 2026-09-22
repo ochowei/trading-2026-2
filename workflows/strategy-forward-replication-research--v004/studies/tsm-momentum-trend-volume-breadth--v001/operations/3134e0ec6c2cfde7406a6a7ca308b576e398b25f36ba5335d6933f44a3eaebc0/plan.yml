@@ -1,0 +1,45 @@
+authority_root: /Users/william/.codex/worktrees/0f7c/trading-2026-2/.authority
+kind: development
+plan:
+  actor: TASK-013-v004-study-developer
+  data_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+  data_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+  trial_inputs:
+    candidate_family: tsm-momentum-trend-volume-breadth-v001
+    candidate_id: tsm-momentum-trend-volume-breadth-v001
+    data_bindings:
+      development_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+      development_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+      warmup_digest: 81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847
+    date_controls:
+      formal_provider_access: false
+      signal_end: '2018-12-31'
+      signal_start: '2014-01-01'
+      warmup_end: '2013-12-31'
+      warmup_start: '2013-01-01'
+    development_diagnostics:
+      block_lengths:
+        - 3
+        - 5
+      bootstrap_seed: 20260902
+      repetitions: 50000
+      seed_application: exact-same-seed-for-each-block-length
+    execution:
+      cooldown_anchor: completed-position-exit
+      cooldown_completed_session_steps_after_exit: 5
+      entry: next-XNYS-open
+      holding_sessions: 10
+      intrabar_ambiguity: adverse-stop-first
+      position_sizing:
+        modeled_stop_includes_costs: true
+        risk_fraction: '0.02'
+      stop_market_gtc: '-0.04'
+      target_limit_day: '0.04'
+    preregistration_digest: 8821de3964d2ecc0559b3a9d727d241353805d4d622e17b8cebe0fa4955e1d52
+    schema_version: 1
+    selected_candidate_id: tsm-momentum-trend-volume-breadth-v001
+    source_bundle_digest: 0ee236a2306f71b33e7dbbe3825283fb6e19623930d5ba84f083aa47de18f332
+    strategy_engine_digest: 15ee756c1d4349f1755b3f0a11f2a3de9c01dbd4623f0e698bd41b1ccbc423cb
+    study_procedure_digest: ac1b0e9c98490fd40991c6aa8dc38df9e9e919763c95cbc8e247cbae06de8391
+    study_procedure_path: research/tsm-momentum-trend-volume-breadth--v001/run_development.py
+    trial_id: tsm-momentum-trend-volume-breadth-v001

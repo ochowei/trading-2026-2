@@ -1,0 +1,26 @@
+actor_id: TASK-013-v004-study-developer
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 0ee236a2306f71b33e7dbbe3825283fb6e19623930d5ba84f083aa47de18f332
+  workflow_digest: 62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: trial-recorded
+execution:
+  assignment_digest: 8d03e9733369fbd2c184373a5f8ded9c733aeabffcd6d06bc6dbc09ae1a15c7d
+  assignment_path: manifests/assignments/8d03e9733369fbd2c184373a5f8ded9c733aeabffcd6d06bc6dbc09ae1a15c7d.yml
+  role: study 開發者
+occurred_at: '2026-09-21T15:44:34.712358Z'
+payload:
+  development_evidence_digest: 2f3d89efd8f9bbfa01995c518307fc2b43f8b35d63c885be070dcf238b2d23e6
+  development_evidence_path: evidence/trials/tsm-momentum-trend-volume-breadth-v001/candidate.yml
+  inputs_digest: 939b843467cd083cecc185952be4bd538c762adf45e95b39b2444b2df6defcb0
+  inputs_path: evidence/trials/tsm-momentum-trend-volume-breadth-v001/inputs.yml
+  publication_digest: a84ff0c301f9f6e57e9c9747ecbe5db7f77d4318219e50a11357c469e0e1ff98
+  publication_path: evidence/trials/tsm-momentum-trend-volume-breadth-v001/publication.yml
+  status: completed
+  trial_id: tsm-momentum-trend-volume-breadth-v001
+previous_event_digest: a6116cfde34126e39f3b85e00cbb55786c6a53f0ca875cb1401baa8b8ab3db37
+schema_version: 1
+sequence: 4
+study_id: tsm-momentum-trend-volume-breadth--v001
