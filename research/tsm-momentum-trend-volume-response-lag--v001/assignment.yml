@@ -1,0 +1,9 @@
+assignee: TASK-015-v004-study-developer
+assigner: 專案管理者（TASK-015）
+instruction: 建立單一 v004 Study，測試訊號日前五個已完成 session 的成交量與下一 session 收盤到收盤報酬配對後，量能加權的五日後續報酬不低於 -2%，且至少比同五日未加權平均高 0.05 個百分點；固定 candidate／baseline、Development data bindings、provenance 與機制差異，完成唯一 Development trial、evidence validation、freeze-readiness／candidate-freeze 嘗試及繁體中文成果卡。只執行 development-to-freeze，不執行 Historical Evaluation、Terminal、challenge 或 replay。
+role: study 開發者
+schema_version: 1
+scope: development-to-freeze
+source_id: PROJECT_KANBAN:TASK-015
+study_id: tsm-momentum-trend-volume-response-lag--v001
+workflow_version: v004

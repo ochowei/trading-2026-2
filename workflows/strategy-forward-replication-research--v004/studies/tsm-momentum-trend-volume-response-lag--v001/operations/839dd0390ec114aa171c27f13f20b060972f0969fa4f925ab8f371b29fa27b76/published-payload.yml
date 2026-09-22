@@ -1,0 +1,8 @@
+development_evidence_digest: e051dcc060adf91f0919f050a11982145a91c38cfc0178fc43751242d797c504
+development_evidence_path: evidence/trials/tsm-momentum-trend-volume-response-lag-v001/candidate.yml
+inputs_digest: 106b4131fcec629ef1068130d898b5dc295f3824cacdbccef5dcf0dcbaed1921
+inputs_path: evidence/trials/tsm-momentum-trend-volume-response-lag-v001/inputs.yml
+publication_digest: 8fd0f0c57cb0b18d4990c156a5d45aef9aabaf2c49277b184e42319f3639ebc3
+publication_path: evidence/trials/tsm-momentum-trend-volume-response-lag-v001/publication.yml
+status: completed
+trial_id: tsm-momentum-trend-volume-response-lag-v001

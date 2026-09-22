@@ -46,7 +46,27 @@
 
 ## 📋 TODO
 
-> 已由專案管理者建立並排序，等待負責角色接手的任務。
+> 目前沒有待接手的 TODO 任務。
+
+### [TASK-016] 將 `tsm-momentum-trend-volume-response-lag--v001` 假說、policy 與回測整理為 Google Colab notebook
+- **狀態**：Done
+- **優先級**：中
+- **負責角色**：study 開發者
+- **執行者**：Anscombe（本 parent thread 唯一 Study Developer subagent `01a0c746-df08-7812-8590-1a1fdfd8bf9a`）
+- **建立日期**：2026-09-22
+- **更新日期**：2026-09-22
+- **依賴／阻塞**：無；只使用既有 Study 的 Development-only 規格與證據，不重新執行正式 Evaluation
+- **驗收條件**：
+  - 讀取 `tsm-momentum-trend-volume-response-lag--v001` 的 preregistration、candidate／baseline definition、implementation／runner contract、v004 workflow reference／policy binding 與 Development evidence；不得讀取或引用 `historical-evaluation-artifacts/`、正式 Evaluation／Terminal 結果、`.super-admin/`、events、journals、operations 或 Git 歷史。
+  - 建立一個有效的 `.ipynb`，建議路徑為 `notebooks/tsm_momentum_trend_volume_response_lag_v001_colab.ipynb`；Notebook 必須可在 Google Colab 開啟，不能依賴本機 package import 或 repository checkout 才能理解核心邏輯。
+  - 以繁體中文 Markdown 說明 Study 假說與限制：訊號日前五個已完成的「成交量→下一 session 收盤到收盤報酬」配對、加權後續報酬下限 `-0.02`、加權減未加權至少 `0.0005`，以及趨勢、RSI、收盤方向、至少 2% 價格加速與五日量比條件。
+  - 明確列出 v004 policy／執行規則與可重現設定：Yahoo auto-adjusted OHLCV、XNYS session、下一個 open 進場、2% risk budget、-4% stop、+4% target、最多 10 個完整 session、退出後 5-session cooldown、adverse-stop-first，以及 base 每邊 1／5 bps、stress 每邊 2／20 bps 成本。
+  - Code cells 必須自包含地完成資料上傳／本地 CSV fallback、欄位與日期整理、指標計算、candidate／baseline 回測、base／stress metrics（交易數、年度、報酬、PF、最大回撤）與至少一個結果視覺化；不得把正式 Development evidence 的結果硬編成回測輸出，也不得宣稱 Colab 重跑就是正式 Evaluation。
+  - Notebook 應有離線或合成資料 smoke path，使沒有上傳資料時也能驗證程式結構；不得在執行時自動下載 Yahoo 或其他外部資料。需以 nbformat／Notebook execution 檢查 JSON 與 cells 可執行，並通過 notebook 直接測試、Ruff（若有外部 `.py` helper）與 `git diff --check`。
+  - 完成後將任務由 TODO 移到 Doing，回報 notebook 路徑、使用的 Study／policy digest、回測規則、驗證命令與結果；完成工作後維持 Doing，由 parent project manager review，若有問題只能交回同一個 subagent 修正，通過後才移到 Done。
+- **摘要**：把既有 v004 Development Study 轉成可在 Google Colab 閱讀、上傳資料並重現策略邏輯的教學／研究 notebook，讓使用者能看懂量先價後延遲報酬假說、政策限制與 base／stress 回測結果，同時避免把 notebook 當成正式評估證據。
+- **進度／備註**：2026-09-22 已由 parent thread 只 spawn exactly one Study Developer subagent Anscombe（`01a0c746-df08-7812-8590-1a1fdfd8bf9a`）接手，狀態由 TODO 移至 Doing。已讀取根目錄規範、TASK-016、v004 workflow reference／release／policy binding、Study preregistration、candidate／baseline definition、implementation／runner contract、Development inputs／evidence／publication 與 TSM Development-only 卡；未讀取禁止範圍。已新增 `notebooks/tsm_momentum_trend_volume_response_lag_v001_colab.ipynb`：包含繁中假說與限制、candidate／baseline、policy 摘要、離線 synthetic fallback、Colab upload 開關、OHLCV/session 驗證、指標、next-open、2% sizing、base／stress cost、stop／target／time exit、cooldown、ledger、metrics、equity／trade 圖與 look-ahead test。固定 binding 摘要為 workflow `62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4`、reference `7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47`、release `ea04558c1473f9c6db7e9707846694147c6c6f254498af2f18729a1e4ef1fa84`、policy set `c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215`、source `06ed3b3bdb9c596df4c213d2fb657b368de9950d3ddbe1282ccb408a3639c426`、preregistration `8018ba3fff138c288c0e4d863ca75fc45ec30d3f219c88743d6ae035f94ba7d9`。驗證：JSON parse、10 個 code cells compile／非互動執行、look-ahead PASS、CSV valid／duplicate／weekend smoke PASS、Ruff PASS、reference indicators／execution equivalence PASS、git diff whitespace check PASS；目前無具體阻塞。工作完成後維持 Doing，等待 parent review，不移到 Done。
+- **Parent review 結果（2026-09-22）**：已驗收通過並移至 Done。假說、v004 policy 與回測邏輯均對應既有 Development-only Study 規格；notebook 為自包含 Colab JSON（nbformat 4、Python 3、23 cells／10 code cells），預設使用 deterministic synthetic smoke，僅在明確開關後提供 Colab upload，沒有自動下載或 repository import。parent 以 `.venv/bin/python` 完成全部 code cells 非互動執行，look-ahead／CSV smoke 通過；另與既有 reference 實作逐欄比對 indicators，並比對 candidate／baseline 的 base／stress backtest 與 metrics，結果等價；`git diff --check` 通過。未修改 Study、正式 Evaluation、Terminal 或受限資料夾，沒有把 notebook smoke 結果宣稱為正式 Evaluation。
 
 ### [TASK-012] 在 v004 開發下一個未嘗試的 TSM 動能趨勢 × 量先價行假說並撰寫成果卡
 - **狀態**：Done
@@ -104,6 +124,26 @@
 ## 🔨 Doing
 
 > 正由被指派的角色處理中的任務。
+
+### [TASK-015] 在 v004 開發新的 TSM 動能趨勢 × 量先價行假說，完成 blind review 與成果卡
+- **狀態**：Done
+- **優先級**：高
+- **負責角色**：study 開發者
+- **執行者**：Ptolemy（本 parent thread 唯一 Study Developer subagent `01a0c6e4-ae0b-7200-8836-d8cc701f0383`）
+- **建立日期**：2026-09-22
+- **更新日期**：2026-09-22
+- **依賴／阻塞**：無；接手時先確認 v004 Workflow Release 為 Active
+- **驗收條件**：
+  - 依根目錄規範、`.study-developer/development-note/TSM.md` 與允許讀取的既有 TSM Development Study，盤點已嘗試過的動能、趨勢及量先價行機制；提出一個可追溯、確實未被嘗試過的新假說，不得只是改版本號、改名稱、重用同一規則或無語義重發，並在研究文件中說明與既有 Study 的機制差異。
+  - 依 v004 `development-to-freeze` 流程完成 Workflow reference／release／policy digest 核對、runner preflight、prepare，固定單一新 Study 的 preregistration、candidate／baseline、implementation、runner、Development data bindings、明確派工與 provenance；完成唯一合法的 Development trial、evidence validation，以及規則允許的 freeze-readiness／candidate-freeze 嘗試。若資格失敗，必須如實保留 `qualification-failed` 與未凍結狀態，不得補猜或繞過流程。
+  - Development 階段只使用 v004 Development 範圍；不得執行 Historical Evaluation、Terminal、challenge 或 replay，不得讀取或修改 `historical-evaluation-artifacts/`、`.super-admin/`、正式 Evaluation／Terminal 結果，也不得覆寫、刪除或重排既有 Study、evidence、authority、events 或 Workflow Package。
+  - Development 完成後，針對同一個 Study 依 v004 blind-review 規範進行受限盲檢討：先確認本次沒有正式 outcome exposure；只讀取研究設計、程式與 Development candidate／baseline 證據及其允許 binding，不得重跑 runner，不得以完整 `status`／`validate` 取代 blind review；若發現盲性已破壞，立即停止 blind review 並如實回報。
+  - blind review 完成後，才以繁體中文 append-only 更新 `.study-developer/development-note/TSM.md` 的該 Study 成果卡；逐 Trial 區分 candidate／baseline、base／stress、formal gates 與 research targets、evidence validity、candidate freeze 資格／狀態、provenance、盲性狀態、已確認問題、可能原因、尚不能判斷、限制、下一輪可否證條件與「未使用正式結果」聲明。不得覆寫既有成果卡或補填缺少的 evidence。
+  - 通過對應 v004 validator／checker、必要 pytest、Ruff（若適用）與 `git diff --check`；回報 Study ID、workflow／reference／release／source digest、create／Development operation ID、事件 head／count、修改檔案、Development 與 blind review 驗證結果及任何實際缺件。subagent 完成後維持 Doing，由 parent project manager review；若 review 發現問題，只能將修改要求交回同一個 subagent，通過後才移到 Done。
+- **摘要**：根據 TSM Development 研究盤點，在 v004 workflow 中提出並驗證一個真正新的「量先於價、用於動能趨勢確認」機制，先完成 Development，再對同一 Study 做受限 blind review，最後產出不混入正式結果的繁體中文成果卡，讓後續是否值得凍結有清楚且可追溯的證據。
+- **進度／備註**：2026-09-22 已由本對話唯一 study 開發者 Ptolemy（`01a0c6e4-ae0b-7200-8836-d8cc701f0383`）依規範由 TODO 移至 Doing。已完成既有 Development-only Study 盤點並固定新的「量先價後延遲報酬傳導」假說：訊號日前五個已完成的量—下一 session 收盤報酬配對，量能加權後續報酬至少 `-0.02` 且比未加權平均高 `0.0005`；與同日量價對齊、量峰先後、量能廣度及其他既有機制有語義差異。Study=`tsm-momentum-trend-volume-response-lag--v001`；workflow=`62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4`、reference=`7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47`、release=`ea04558c1473f9c6db7e9707846694147c6c6f254498af2f18729a1e4ef1fa84`、policy=`c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215`、source=`06ed3b3bdb9c596df4c213d2fb657b368de9950d3ddbe1282ccb408a3639c426`、preregistration=`8018ba3fff138c288c0e4d863ca75fc45ec30d3f219c88743d6ae035f94ba7d9`、Development data=`a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7`。v004 runner-preflight、prepare、contract／synthetic validator 均 passed；唯一 create operation=`8587deb68665d24bcb188d323272a2a9c8b6f4efdd915f1cc6547f8dec4fa294`、唯一 Development operation=`839dd0390ec114aa171c27f13f20b060972f0969fa4f925ab8f371b29fa27b76`；candidate／baseline evidence 均 valid。Candidate base／stress 為 1 筆、1 年、報酬 `-1.9986088%`／`-1.9999960%`、PF `0`／`0`、回撤 `1.9986088%`／`1.9999960%`；baseline 為 10 筆、4 年、報酬 `2.1411376%`／`0.5312003%`、PF `1.3058564`／`1.0755804`、回撤 `2.1279074%`／`2.2746830%`。Candidate formal gates 與三項 research targets 失敗，freeze eligibility=`false`；baseline 為控制組、不適用 candidate freeze。freeze-readiness／freeze 均 `qualification-failed`，event head=`bf03bed5c949ef01d87b6c007134682ac18252dfeb5678cf091b7037cff4266a`、event_count=`4`、lifecycle=`trial-recorded`，未產生 candidate-frozen。已完成受限 blind review，確認未曝光正式結果；成果卡已 append-only 更新 TSM.md，含逐 Trial 指標、gates／targets、validity、provenance、盲性、已確認／可能原因／尚不能判斷、限制與下一輪單一可否證條件。最後直接 pytest `4 passed`、Ruff passed、`git diff --check` passed；實際未完成項為 candidate freeze／freeze provenance（因資格失敗），沒有 evidence 缺件。未執行 Historical Evaluation、Terminal、challenge 或 replay，維持 Doing，等待 parent review。
+
+- **Parent review 結果（2026-09-22）**：通過驗收。新 Study `tsm-momentum-trend-volume-response-lag--v001` 的核心是訊號日前五個已完成配對中，以 d 日成交量加權 d→d+1 收盤報酬；parent 核對既有 `volume-return-alignment` 是同日收盤報酬，其他既有 Study 也沒有這個跨日配對差值，確認不是改名、改版或無語義重發。v004 workflow/reference/release/policy/source/data binding、唯一 create／Development operation、4-event chain、candidate／baseline evidence 與 card 數值一致；candidate 1 筆／1 年且 base／stress 報酬為負、PF 為 0，formal gates 與 research targets 失敗；baseline 10 筆／4 年，仍有交易數與 stress robustness formal gates 失敗。candidate freeze eligibility=`false`，freeze-readiness／freeze 均 `qualification-failed`，未產生 candidate-frozen；唯一未完成項是資格失敗後的 freeze provenance，不是 evidence 缺件。受限 blind review 已確認未曝光正式結果，成果卡以繁體中文 append-only 記錄逐 Trial 指標、formal gates／targets、evidence validity、provenance、盲性、已確認／可能原因／尚不能判斷、限制與下一輪條件。parent 重跑直接 pytest=`4 passed`、Ruff 通過、`git diff --check` 通過；未執行 Historical Evaluation、Terminal、challenge 或 replay，未讀取或修改 `historical-evaluation-artifacts/`、`.super-admin/` 或正式結果。
 
 ### [TASK-009] 在 v004 開發下一個未嘗試的 TSM 動能趨勢 × 量先價行假說並撰寫成果卡
 - **狀態**：Done
