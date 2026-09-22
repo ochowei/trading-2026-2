@@ -1,0 +1,45 @@
+authority_root: /Users/william/.codex/worktrees/f4f4/trading-2026-2/.authority
+kind: development
+plan:
+  actor: TASK-017-v004-study-developer
+  data_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+  data_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+  trial_inputs:
+    candidate_family: tsm-momentum-trend-volume-body-followthrough-v001
+    candidate_id: tsm-momentum-trend-volume-body-followthrough-v001
+    data_bindings:
+      development_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+      development_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+      warmup_digest: 81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847
+    date_controls:
+      formal_provider_access: false
+      signal_end: '2018-12-31'
+      signal_start: '2014-01-01'
+      warmup_end: '2013-12-31'
+      warmup_start: '2013-01-01'
+    development_diagnostics:
+      block_lengths:
+        - 3
+        - 5
+      bootstrap_seed: 20260902
+      repetitions: 50000
+      seed_application: exact-same-seed-for-each-block-length
+    execution:
+      cooldown_anchor: completed-position-exit
+      cooldown_completed_session_steps_after_exit: 5
+      entry: next-XNYS-open
+      holding_sessions: 10
+      intrabar_ambiguity: adverse-stop-first
+      position_sizing:
+        modeled_stop_includes_costs: true
+        risk_fraction: '0.02'
+      stop_market_gtc: '-0.04'
+      target_limit_day: '0.04'
+    preregistration_digest: afcd8d9f582b535e8619079f4533ff9465858252930e55377dcdadd18da1b24f
+    schema_version: 1
+    selected_candidate_id: tsm-momentum-trend-volume-body-followthrough-v001
+    source_bundle_digest: acf714eeb3906ead63adcff09570e500eee68b575d08eca3623c17d285441a24
+    strategy_engine_digest: d542ca73dcf64a47e75980e50942c39656ab00f4b384b16f69eeca625f05d3ed
+    study_procedure_digest: ed30972901a25fbff835e2ef35cd03b9d35cf0c75a00d627903d8d83bd43ee0f
+    study_procedure_path: research/tsm-momentum-trend-volume-body-followthrough--v001/run_development.py
+    trial_id: tsm-momentum-trend-volume-body-followthrough-v001

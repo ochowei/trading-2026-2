@@ -1,0 +1,28 @@
+files:
+  - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+    path: pyproject.toml
+  - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+    path: uv.lock
+  - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+    path: src/trading_2026_2/__init__.py
+  - digest: d542ca73dcf64a47e75980e50942c39656ab00f4b384b16f69eeca625f05d3ed
+    path: src/trading_2026_2/tsm_momentum_trend_volume_body_followthrough_v001.py
+  - digest: 21667b899faaacdf47590c4878a9579558c5281f819ccd9aa31db3ad6ef863c4
+    path: src/trading_2026_2/tsm_momentum_trend_volume_gap_anchoring_v001.py
+  - digest: 4f9b792c36589fd57d5e43cc18f410ee0341b80f11f0da36642bf4dee74b719b
+    path: tests/test_tsm_momentum_trend_volume_body_followthrough_v001.py
+  - digest: 6d689f38ac490e949f48295f4fd870085af04b839651090b5ad0c1576cc17d5f
+    path: research/tsm-momentum-trend-volume-body-followthrough--v001/assignment.yml
+  - digest: a5f393970c063ca050d8987af04ee2bd66c8323437fbba04aae5f2ca271199a5
+    path: research/tsm-momentum-trend-volume-body-followthrough--v001/candidate-definition.yml
+  - digest: 0952499652f9dae1433830d20f7989acdb44036ee39318817ecb66147ca6b0d9
+    path: research/tsm-momentum-trend-volume-body-followthrough--v001/implementation-contract.yml
+  - digest: afcd8d9f582b535e8619079f4533ff9465858252930e55377dcdadd18da1b24f
+    path: research/tsm-momentum-trend-volume-body-followthrough--v001/preregistration.yml
+  - digest: a8a985ce6c1e15c8c92219aacf5f3e301df39aa4f5fd091a7f6528f205fe7339
+    path: research/tsm-momentum-trend-volume-body-followthrough--v001/qualification-spec.yml
+  - digest: 3d3896921bf05be3dd0d92fa8e2e01dff8d7a0737d79d2e6e2d5ca96a783a0ec
+    path: research/tsm-momentum-trend-volume-body-followthrough--v001/runner-contract.yml
+  - digest: ed30972901a25fbff835e2ef35cd03b9d35cf0c75a00d627903d8d83bd43ee0f
+    path: research/tsm-momentum-trend-volume-body-followthrough--v001/run_development.py
+schema_version: 1

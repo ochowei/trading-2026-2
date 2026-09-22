@@ -1,0 +1,16 @@
+artifacts:
+  baseline:
+    digest: 960d90c4a03603c4cb5aaf25448fa160164aa42cc3ae19b57951c342c3067650
+    path: evidence/trials/tsm-momentum-trend-volume-body-followthrough-v001/baseline.yml
+  candidate:
+    digest: 575b29d84335bd7cf81e827166f7c3f7f447a1ba3e96f748f8278b9b5bc5fedc
+    path: evidence/trials/tsm-momentum-trend-volume-body-followthrough-v001/candidate.yml
+  inputs:
+    digest: c033a4c134847271539a4295516e27b893ee79fe9ff80971114b23cc4367bcd6
+    path: evidence/trials/tsm-momentum-trend-volume-body-followthrough-v001/inputs.yml
+envelope_digest: 1726b7cd4a02f50d65cbc414b954f4d23f4bc5d4b597384e666f7e30704a8efc
+preregistration_digest: afcd8d9f582b535e8619079f4533ff9465858252930e55377dcdadd18da1b24f
+schema_version: 1
+source_bundle_digest: acf714eeb3906ead63adcff09570e500eee68b575d08eca3623c17d285441a24
+study_id: tsm-momentum-trend-volume-body-followthrough--v001
+trial_id: tsm-momentum-trend-volume-body-followthrough-v001
