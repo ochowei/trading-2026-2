@@ -1,0 +1,16 @@
+artifacts:
+  baseline:
+    digest: 018ec42c5eac3f83c340ae9b4fad3c79043347ce375646330dd4bf1c048ebf65
+    path: evidence/trials/tsm-momentum-trend-volume-gap-retention-v001/baseline.yml
+  candidate:
+    digest: 9392069e3d1263ad243fc2699a956fb7e51fdcdf15928f62f959d5888e64465f
+    path: evidence/trials/tsm-momentum-trend-volume-gap-retention-v001/candidate.yml
+  inputs:
+    digest: 49950621326dad351c9e3b756198a10aeb1ab10d7358db0318ff257e998a91e9
+    path: evidence/trials/tsm-momentum-trend-volume-gap-retention-v001/inputs.yml
+envelope_digest: ff8e6a1ab3d5765ba0643e7baa1932d87d6f431d2d4f57113c00715209a93b18
+preregistration_digest: 5918d9125051ec13653cdfc3da15759e03230419d6838b62c176e5db554de2cb
+schema_version: 1
+source_bundle_digest: 5e3dec05bde233d3671ee8cd8d282d2f394add33b271f8acdfedd6c7f63edd19
+study_id: tsm-momentum-trend-volume-gap-retention--v001
+trial_id: tsm-momentum-trend-volume-gap-retention-v001

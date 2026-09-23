@@ -1,0 +1,9 @@
+assignee: Study Developer subagent /root/study_developer_task_020
+assigner: Parent Project Manager (/root)
+instruction: 依 TSM Development 成果卡盤點，在 v004 workflow 發想並開發一個未嘗試的動能趨勢與量先價行假說；完成 Development 後先做該 Study 的 blind review，再 append-only 撰寫成果卡。只執行 development-to-freeze；不得執行 Historical Evaluation、Terminal、challenge 或 replay。
+role: study 開發者
+schema_version: 1
+scope: development-to-freeze
+source_id: parent-thread-dispatch-TASK-020
+study_id: tsm-momentum-trend-volume-gap-retention--v001
+workflow_version: v004

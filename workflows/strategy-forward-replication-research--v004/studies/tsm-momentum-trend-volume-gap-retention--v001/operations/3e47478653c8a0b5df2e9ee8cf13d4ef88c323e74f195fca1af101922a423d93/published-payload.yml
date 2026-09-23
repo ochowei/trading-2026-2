@@ -1,0 +1,8 @@
+development_evidence_digest: 9392069e3d1263ad243fc2699a956fb7e51fdcdf15928f62f959d5888e64465f
+development_evidence_path: evidence/trials/tsm-momentum-trend-volume-gap-retention-v001/candidate.yml
+inputs_digest: 49950621326dad351c9e3b756198a10aeb1ab10d7358db0318ff257e998a91e9
+inputs_path: evidence/trials/tsm-momentum-trend-volume-gap-retention-v001/inputs.yml
+publication_digest: a472798f2de203131cce198209f568821bf89af4c87f141079cec6d960dd118d
+publication_path: evidence/trials/tsm-momentum-trend-volume-gap-retention-v001/publication.yml
+status: completed
+trial_id: tsm-momentum-trend-volume-gap-retention-v001

@@ -1,0 +1,88 @@
+candidate_freeze: null
+evidence:
+  development: 9392069e3d1263ad243fc2699a956fb7e51fdcdf15928f62f959d5888e64465f
+lifecycle:
+  current_event: trial-recorded
+  event_chain_head_digest: 0413b5437db2dd5b3bf430e50ceb55f9df842c9c845a826ef39415ab38f09e0b
+  event_count: 4
+  status: active
+outcome:
+  authority: none
+  status: pending
+preregistration:
+  digest: 5918d9125051ec13653cdfc3da15759e03230419d6838b62c176e5db554de2cb
+provenance:
+  status: null
+schema_version: 1
+study:
+  identity:
+    create_plan_digest: 889a69f685382fb4be970c8aecb90399ddfb8794b35879d8180b2a48b37fea7f
+    create_plan_path: manifests/create-plan.yml
+    experiment_family: tsm-momentum-trend-volume-gap-retention-family-v001
+    historical_evaluation_operator: not assigned; requires a separate future evaluator task
+    prepare_report_digest: 32c90a4c0b60c589b7e22d1819c58bb5a8e5859fd11cfe8b4bf42eddbef8dfd2
+    prepare_report_path: manifests/prepare-report.yml
+    research_owner: TASK-020 requestor; individual name not separately recorded
+    research_round_id: 2026-09-23-tsm-volume-gap-retention-v001
+    source_bundle_digest: 5e3dec05bde233d3671ee8cd8d282d2f394add33b271f8acdfedd6c7f63edd19
+    source_bundle_path: manifests/source-bundle.yml
+    workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+    workflow_reference_path: manifests/workflow-reference.yml
+  study_id: tsm-momentum-trend-volume-gap-retention--v001
+trial_registry:
+  assessments:
+    tsm-momentum-trend-volume-gap-retention-v001:
+      actuals:
+        base_profit_factor: '1.0336697772094057'
+        base_return: '0.002326693763762887'
+        completed_trades: 9
+        maximum_realized_trade_loss_fraction: '0.021279074115623766'
+        maximum_stress_block_bootstrap_drawdown_above_10pct_ratio: '0.0'
+        maximum_stress_leave_one_year_out_drawdown: '0.023919209049838203'
+        minimum_stress_block_bootstrap_positive_return_ratio: '0.24904'
+        minimum_stress_leave_one_year_out_profit_factor: '0.8095646598425458'
+        minimum_stress_leave_one_year_out_return: '-0.008278402551536446'
+        stress_maximum_drawdown: '0.02632762715080489'
+        stress_profit_factor: '0.8456775573362756'
+        stress_return: '-0.010725413361050887'
+        traded_years: 3
+      candidate_freeze_eligibility:
+        eligible: false
+        reasons:
+          - base_profit_factor
+          - completed_trades
+          - minimum_stress_block_bootstrap_positive_return_ratio
+          - minimum_stress_leave_one_year_out_profit_factor
+          - minimum_stress_leave_one_year_out_return
+          - stress_profit_factor
+          - stress_return
+          - completed_trades
+          - stress_return
+      development_evidence_validity:
+        status: valid
+        validated: true
+      formal_development_gates:
+        failed:
+          - base_profit_factor
+          - completed_trades
+          - minimum_stress_block_bootstrap_positive_return_ratio
+          - minimum_stress_leave_one_year_out_profit_factor
+          - minimum_stress_leave_one_year_out_return
+          - stress_profit_factor
+          - stress_return
+        status: failed
+      research_targets:
+        failed:
+          - completed_trades
+          - stress_return
+        status: failed
+  digest: null
+  recorded_trial_count: 1
+  trial_ids:
+    - tsm-momentum-trend-volume-gap-retention-v001
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 5e3dec05bde233d3671ee8cd8d282d2f394add33b271f8acdfedd6c7f63edd19
+  workflow_digest: 62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  workflow_reference_path: manifests/workflow-reference.yml
