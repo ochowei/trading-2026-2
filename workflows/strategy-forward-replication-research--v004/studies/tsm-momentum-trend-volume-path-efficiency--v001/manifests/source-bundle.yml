@@ -1,0 +1,24 @@
+files:
+  - digest: afaf9e79ff16bc6772f5673b7e64d0adfac5870e7a820efbe3b7a888586a313a
+    path: research/tsm-momentum-trend-volume-path-efficiency--v001/assignment.yml
+  - digest: 27fdd10f793a0fa588e9839e4ead3266b060fff98bede9c442de40a338080fec
+    path: research/tsm-momentum-trend-volume-path-efficiency--v001/candidate-definition.yml
+  - digest: cc1d0fcfaaefe46addb58c6b3ba8ab78039d5d925332e43768d4638586ce4af6
+    path: research/tsm-momentum-trend-volume-path-efficiency--v001/create-plan.yml
+  - digest: 51172d5bf212a819f23c2a0a12a9d35ef9c010ec851ccdae61a6b3527f7568a5
+    path: research/tsm-momentum-trend-volume-path-efficiency--v001/implementation-contract.yml
+  - digest: 44bc95deae91907c193ef153d57c320f2dc57145f298c6947d705634dd444845
+    path: research/tsm-momentum-trend-volume-path-efficiency--v001/preregistration.yml
+  - digest: cbfa7f04a089a20532cbb90533d86b49cfce6204ac1a644656c7155218abc5dc
+    path: research/tsm-momentum-trend-volume-path-efficiency--v001/qualification-spec.yml
+  - digest: 95a979d0674fd7f6295817268a200f71459071aba928cb089122fb41fb975ba9
+    path: research/tsm-momentum-trend-volume-path-efficiency--v001/run_development.py
+  - digest: f1f74c089439adea18c39cfc49d186fa7dbda8d7233833bb6fe7b26c97b3d9fe
+    path: research/tsm-momentum-trend-volume-path-efficiency--v001/runner-contract.yml
+  - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+    path: src/trading_2026_2/__init__.py
+  - digest: 21667b899faaacdf47590c4878a9579558c5281f819ccd9aa31db3ad6ef863c4
+    path: src/trading_2026_2/tsm_momentum_trend_volume_gap_anchoring_v001.py
+  - digest: 6a1d41ed21724d4c6f2b6f41277ecbcbac6bc44a69a44f001ab24bdfb5865f2f
+    path: src/trading_2026_2/tsm_momentum_trend_volume_path_efficiency_v001.py
+schema_version: 1

@@ -2081,3 +2081,41 @@
 ### 成果卡補充／Parent review correction 2（2026-09-23）
 
 更精確限定前述範圍聲明：該輸出僅用於識別超出 allowlist、觸發停止並標記 blind review 未通過；其中鄰近 Study 的實質內容未用於策略分析、Development 結果解讀或成果卡研究結論，亦未轉述。
+
+## `tsm-momentum-trend-volume-path-efficiency--v001`｜2026-09-23
+
+- **假說**：五日量比加權絕對淨位移／總路徑≥0.20；未見同式。
+- **Trial（證據valid）**：candidate 6筆，base +3.32%、stress +2.19%；formal fail交易數、bootstrap 0.7193<0.80；target 6<20，stress報酬／3年達標。baseline 10筆，base +2.14%、stress +0.53%；formal fail交易數、bootstrap、留年PF／報酬。freeze eligibility=false，停trial-recorded。
+- **盲性／限制**：eligible、review完成；僅讀設計與Dev證據，無正式結果曝光。可能條件減少訊號；6筆尚不能判斷重現性。prereg留3/5、contract錯列volume_coverage_ratio、docstring稱方向但公式取絕對值；均已binding未改。
+- **Provenance／下一步**：v004 ref 7b13d4d7、source ec25435a、data a42c3932。另立Study校正文稿；candidate須≥20筆且bootstrap≥0.80，否則否證。
+
+### Parent review correction（2026-09-23）
+
+- **與目標 breadth Study 的關係與假說邊界**：本 Study 的 candidate-definition 列有五日成交量條件及 path-efficiency 門檻，但 preregistration 仍留有原 3/5 breadth 假說文字，且 implementation contract 與 bound engine 的欄位名稱不一致。因此，path-efficiency 究竟是取代 `tsm-momentum-trend-volume-breadth--v001` 的 3/5 覆蓋日數，或是在該條件上追加，依 immutable 定義、程式與本次報告尚不能判定；不得選擇其中一種當成已註冊意圖。可讀公式為 `abs(Σ(qᵢ × (Closeᵢ/Closeᵢ₋₁−1))) / Σ(qᵢ × (abs(Openᵢ/Closeᵢ₋₁−1)+(Highᵢ−Lowᵢ)/Closeᵢ₋₁)) ≥ 0.20`，其中 `qᵢ` 是相對此前二十個完成 session 平均量的量比。它把量加權的五日「收盤淨位移絕對值」除以「缺口加日內區間總路徑」；與既有 volume-efficiency 的量加權日內區間／未加權日內區間、range-compression 的同類窄幅比值、body-sign-consistency 的非負實體量占比、breadth 的五日中達標覆蓋日數，數學分子／分母或統計對象不同。允許讀取的 Development-only 紀錄未找到相同整體規則；不主張其 OHLCV、量權重、五日視窗等組件首創，也不主張機制彼此完全獨立。
+
+- **Development Trial evidence**：以下數字皆來自該 Trial 已發布的 Development candidate／baseline evidence；`valid` 只表示 evidence validation 通過，不證明 preregistration、contract、docstring 與實作一致。
+
+| Trial／情境 | 交易數 | 報酬 | PF | MDD（最大回撤） | Evidence validity |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Candidate／base | 6 | +3.318876% | 2.186381 | 2.324947% | valid |
+| Candidate／stress | 6 | +2.194951% | 1.764773 | 2.582898% | valid |
+| Baseline／base | 10 | +2.141138% | 1.305856 | 2.127907% | valid |
+| Baseline／stress | 10 | +0.531200% | 1.075580 | 2.274683% | valid |
+
+- **Formal gates 與 candidate targets**：Candidate formal gates 失敗：`completed_trades`（6<20）、`minimum_stress_block_bootstrap_positive_return_ratio`（0.7193<0.80）。通過：`base_profit_factor`、`base_return`、`maximum_realized_trade_loss_fraction`、`maximum_stress_block_bootstrap_drawdown_above_10pct_ratio`、`maximum_stress_leave_one_year_out_drawdown`、`minimum_stress_leave_one_year_out_profit_factor`、`minimum_stress_leave_one_year_out_return`、`stress_maximum_drawdown`、`stress_profit_factor`、`stress_return`、`traded_years`。Candidate targets：`completed_trades` 未達（6<20）；`stress_return` 達標（+2.194951%>0）；`traded_years` 達標（3≥3）。Baseline formal gates 失敗：`completed_trades`（10<20）、`minimum_stress_block_bootstrap_positive_return_ratio`（0.5991<0.80）、`minimum_stress_leave_one_year_out_profit_factor`（0.845579<1.00）、`minimum_stress_leave_one_year_out_return`（−1.073294%≤0）。通過：`base_profit_factor`、`base_return`、`maximum_realized_trade_loss_fraction`、`maximum_stress_block_bootstrap_drawdown_above_10pct_ratio`、`maximum_stress_leave_one_year_out_drawdown`、`stress_maximum_drawdown`、`stress_profit_factor`、`stress_return`、`traded_years`。Baseline targets：未登記／不適用。Candidate freeze eligibility=`false`；baseline 不具 candidate freeze 資格。Lifecycle=`trial-recorded`、未 frozen；因候選不具資格，未嘗試 freeze-readiness／candidate-freeze。
+
+- **盲性與 frozen defects**：outcome exposure 檢查在允許範圍內合格，blind review 僅使用允許的設計、程式與 Development candidate／baseline evidence，未讀正式 Evaluation／Terminal 結果，也未重跑 runner。盲檢討發現三項 frozen design／traceability defects：preregistration 仍寫舊 3/5 breadth 假說；implementation contract 把 `volume_coverage_ratio` 綁到 engine 未輸出的同名欄位（engine 輸出 `prior_volume_ratio`）；engine／runner docstring 稱 directional path efficiency，但公式取絕對值。缺陷已 binding，本 Study 未修改。blind eligibility 是 outcome exposure 範圍判定，不等於 prereg／實作一致或研究設計無缺陷。
+
+- **Provenance**：workflow=`62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4`；reference=`7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47`；release manifest=`ea04558c1473f9c6db7e9707846694147c6f254498af2f18729a1e4ef1fa84`；policy=`c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215`；source bundle=`ec25435af68b584094d37a1de5a09f6b3f815098f2f8f05379d48add12ce66ec`；preregistration=`44bc95deae91907c193ef153d57c320f2dc57145f298c6947d705634dd444845`；engine=`6a1d41ed21724d4c6f2b6f41277ecbcbac6bc44a69a44f001ab24bdfb5865f2f`；runner=`95a979d0674fd7f6295817268a200f71459071aba928cb089122fb41fb975ba9`；Development data=`a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7`；warmup=`81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847`；Development role=`4e443b4c7db125967ef936d615b6d2283da8ba0bccc62239a5770daf176eccc3`；create operation=`3f2535566c7326e7b9077b9ced023eb87218b1998818d54fe8c285dac6db1226`；Development operation=`b880c89fc886bc1900d302ab9aef56447d7e6dd1ca34be380efa370bf25c89cf`。Candidate evidence=`5c699e64594e29bd6d1078da83c3d1c9985a0437970f77f3c4d181209f7cdde4`；baseline evidence=`db4ee9bfb36b0d9e11b5d1f5e7586b33ae1f4edd551c1268e190cfcf3fe2f868`；publication envelope=`f686bbd2c63d09eeb04d566f0e140d6f555bd0a629ff3bb67ddd2bcc90cfc313`。
+
+- **可支持範圍與下一步否證條件**：本次僅能描述同一 Development 資料與 inputs 下發布 candidate／baseline evidence 的數字與 gate 結果；交易樣本少，且候選意圖因 frozen prereg 缺陷尚不能判定，不能宣稱相對原 breadth Study 有效、改善或因果優越。若要檢驗明確假說，應另立 Study，在 create 前釐清 path-efficiency 是取代或追加 breadth、修正並核對 prereg／contract／docstring binding；之後 candidate 至少 20 筆且通過全部 formal gates 及事前 targets，任一不符即否證，不可在本 Study 內補跑。
+
+- **Freeze eligibility 補充**：Candidate 的 freeze eligibility 明確為 `false`。Baseline 在 candidate-definition 中標示為排除於 candidate family 的比較基準，因此 baseline 的 freeze eligibility 為 `not applicable`，不是另一個可凍結候選。
+
+### Parent review digest correction（2026-09-23）
+
+- **Baseline evidence digest 核對**：允許讀取的 Development `publication.yml` 將 `baseline.yml` artifact digest 列為 `db4ee9bfb36b0d9e11b5d1f5e7586b33ae1f4edd551c1268e190cfcf3fe2f868`（64 位十六進位）。本卡上一段 Parent review correction 的 baseline digest 與 publication 一致；先前交付中被指出不一致的舊字串，無法由已讀取的允許 Development baseline／publication 來源還原，故標記 `unavailable`，不猜寫。後續以 publication 所列完整 digest 為準；未重算雜湊或修改 evidence。
+
+### Parent review exact digest correction（2026-09-23）
+
+- **Baseline digest 逐字核對**：先前回覆中的 `db4ee9bfb36b0d9e11b5d1f5e7586b33ae1f4edd551c1268e190cfcf3e2f868` 為 63 位，誤少一位；Development `publication.yml` 的 baseline artifact digest 原樣為 `db4ee9bfb36b0d9e11b5d1f5e7586b33ae1f4edd551c1268e190cfcf3fe2f868`（64 位），且與前一段成果卡 correction 中的 digest 完全相同。後續應採 publication 的完整值。本次僅從 publication 欄位複製並核對成果卡字串，未重算雜湊、重跑流程或修改 evidence／binding。
