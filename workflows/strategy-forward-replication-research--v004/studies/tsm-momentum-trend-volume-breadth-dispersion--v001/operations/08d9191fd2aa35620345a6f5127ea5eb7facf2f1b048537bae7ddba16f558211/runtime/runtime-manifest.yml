@@ -1,0 +1,26 @@
+data:
+  digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+  path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+evidence:
+  digest: dd4a7da767d9c94c39fbd0f3fb6c3a99d779b44da86503f9b00b4c3e13e380a0
+  path: runtime/evidence.yml
+execution_contract: request-output-v1
+execution_workspace: temporary
+operation_id: 08d9191fd2aa35620345a6f5127ea5eb7facf2f1b048537bae7ddba16f558211
+request:
+  digest: 58f758fb1678462cc808584d467eebc75afffccca55887b4e762e5ada87d8a23
+  path: runtime/request.yml
+resolver_version: 1
+runner:
+  digest: 5b3ca61ee37bbb47f8fd99e1d44fea7eb93d755781444a6e2a1f28e3340ea7b7
+  path: research/tsm-momentum-trend-volume-breadth-dispersion--v001/run_development.py
+schema_version: 1
+source_bundle:
+  digest: 89b63978611889d3f90d7ca5cc1c588c4c963f3e237e21344c83d7157c6c3d34
+  path: manifests/source-bundle.yml
+stage: development
+study_id: tsm-momentum-trend-volume-breadth-dispersion--v001
+workflow_reference:
+  digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  path: manifests/workflow-reference.yml
+workflow_version: v004
