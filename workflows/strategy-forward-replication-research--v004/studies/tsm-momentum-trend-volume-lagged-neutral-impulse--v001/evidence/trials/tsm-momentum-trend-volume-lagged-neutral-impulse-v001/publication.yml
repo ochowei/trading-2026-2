@@ -1,0 +1,16 @@
+artifacts:
+  baseline:
+    digest: 196bcb29ca789bd609463f1f86ee6681eb781ae0bc1798fc19a91bae8c785f7d
+    path: evidence/trials/tsm-momentum-trend-volume-lagged-neutral-impulse-v001/baseline.yml
+  candidate:
+    digest: 64881d5bb39ec5a8a0b03fd6e913e5088957cc9d60c3858a348bf3f31748bff8
+    path: evidence/trials/tsm-momentum-trend-volume-lagged-neutral-impulse-v001/candidate.yml
+  inputs:
+    digest: 8b84f3a1c75c64badac96b56c681cca213529cea9eb40035737877febeda0270
+    path: evidence/trials/tsm-momentum-trend-volume-lagged-neutral-impulse-v001/inputs.yml
+envelope_digest: 98e527b114da3781a41eeb9dc14eda683f53873b2c9e22ba43058f18890e3962
+preregistration_digest: 0f395ac77d1ec042f1c07e705254e94ff86c9f59cc8193b32f8b5f6169e7aece
+schema_version: 1
+source_bundle_digest: d56969e957bec445027d24fd95d3395b31773c6fb59e4d1134cb175803573a38
+study_id: tsm-momentum-trend-volume-lagged-neutral-impulse--v001
+trial_id: tsm-momentum-trend-volume-lagged-neutral-impulse-v001

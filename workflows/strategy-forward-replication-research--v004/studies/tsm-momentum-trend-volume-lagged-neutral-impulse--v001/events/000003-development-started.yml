@@ -1,0 +1,19 @@
+actor_id: TASK-019-v004-study-developer
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: d56969e957bec445027d24fd95d3395b31773c6fb59e4d1134cb175803573a38
+  workflow_digest: 62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: development-started
+execution:
+  assignment_digest: 52138697fe638dfa1fa193dc773d8b1b250d57c67f031eb98414df0e450147d3
+  assignment_path: manifests/assignments/52138697fe638dfa1fa193dc773d8b1b250d57c67f031eb98414df0e450147d3.yml
+  role: study 開發者
+occurred_at: '2026-09-22T23:50:45.729743Z'
+payload:
+  operation_id: edcc51353af04f655d7f1d93847f60ccfa27166863766f57805b2e179e8469d0
+previous_event_digest: 242214ed34d2612ffc37c95ac2f75b7a82e672808e62c4fb87de5b69bfd42671
+schema_version: 1
+sequence: 3
+study_id: tsm-momentum-trend-volume-lagged-neutral-impulse--v001

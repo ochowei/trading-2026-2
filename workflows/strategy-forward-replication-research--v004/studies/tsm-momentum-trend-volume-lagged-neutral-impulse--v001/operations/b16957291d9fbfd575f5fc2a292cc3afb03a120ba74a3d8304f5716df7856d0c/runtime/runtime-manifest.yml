@@ -1,0 +1,26 @@
+data:
+  digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+  path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+evidence:
+  digest: 98e527b114da3781a41eeb9dc14eda683f53873b2c9e22ba43058f18890e3962
+  path: runtime/evidence.yml
+execution_contract: request-output-v1
+execution_workspace: temporary
+operation_id: b16957291d9fbfd575f5fc2a292cc3afb03a120ba74a3d8304f5716df7856d0c
+request:
+  digest: 7314fee956d9588f99f9575df434302324cea31f8058c8e87afc8f0df53e9bc4
+  path: runtime/request.yml
+resolver_version: 1
+runner:
+  digest: 29ca7ebb286f0161a8a60b1b7bf4516fe953b6a8757f11d8ae94d209c3c521e9
+  path: research/tsm-momentum-trend-volume-lagged-neutral-impulse--v001/run_development.py
+schema_version: 1
+source_bundle:
+  digest: d56969e957bec445027d24fd95d3395b31773c6fb59e4d1134cb175803573a38
+  path: manifests/source-bundle.yml
+stage: development
+study_id: tsm-momentum-trend-volume-lagged-neutral-impulse--v001
+workflow_reference:
+  digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  path: manifests/workflow-reference.yml
+workflow_version: v004

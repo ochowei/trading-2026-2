@@ -1,0 +1,98 @@
+accepted_signal_count: 0
+bindings:
+  preregistration_digest: 0f395ac77d1ec042f1c07e705254e94ff86c9f59cc8193b32f8b5f6169e7aece
+  source_bundle_digest: d56969e957bec445027d24fd95d3395b31773c6fb59e4d1134cb175803573a38
+  trial_inputs_digest: 8b84f3a1c75c64badac96b56c681cca213529cea9eb40035737877febeda0270
+candidate_id: tsm-momentum-trend-volume-lagged-neutral-impulse-v001
+diagnostics:
+  reason: no-trades
+  status: not-estimable
+disposition: fail
+failed_gates:
+  - base_profit_factor
+  - base_return
+  - completed_trades
+  - maximum_realized_trade_loss_fraction
+  - maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+  - maximum_stress_leave_one_year_out_drawdown
+  - minimum_stress_block_bootstrap_positive_return_ratio
+  - minimum_stress_leave_one_year_out_profit_factor
+  - minimum_stress_leave_one_year_out_return
+  - stress_maximum_drawdown
+  - stress_profit_factor
+  - stress_return
+  - traded_years
+gates:
+  - actual: null
+    gate: base_profit_factor
+    operator: '>'
+    passed: false
+    required: '1.10'
+  - actual: null
+    gate: base_return
+    operator: '>'
+    passed: false
+    required: '0'
+  - actual: 0
+    gate: completed_trades
+    operator: '>='
+    passed: false
+    required: 20
+  - actual: null
+    gate: maximum_realized_trade_loss_fraction
+    operator: <=
+    passed: false
+    required: '0.04'
+  - actual: null
+    gate: maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+    operator: <=
+    passed: false
+    required: '0.10'
+  - actual: null
+    gate: maximum_stress_leave_one_year_out_drawdown
+    operator: <=
+    passed: false
+    required: '0.10'
+  - actual: null
+    gate: minimum_stress_block_bootstrap_positive_return_ratio
+    operator: '>='
+    passed: false
+    required: '0.80'
+  - actual: null
+    gate: minimum_stress_leave_one_year_out_profit_factor
+    operator: '>'
+    passed: false
+    required: '1.00'
+  - actual: null
+    gate: minimum_stress_leave_one_year_out_return
+    operator: '>'
+    passed: false
+    required: '0'
+  - actual: null
+    gate: stress_maximum_drawdown
+    operator: <=
+    passed: false
+    required: '0.10'
+  - actual: null
+    gate: stress_profit_factor
+    operator: '>'
+    passed: false
+    required: '1.00'
+  - actual: null
+    gate: stress_return
+    operator: '>'
+    passed: false
+    required: '0'
+  - actual: 0
+    gate: traded_years
+    operator: '>='
+    passed: false
+    required: 3
+metrics:
+  completed_trades: 0
+  traded_years: 0
+network_access_during_run: false
+qualification_failure: no-trades
+schema_version: 1
+stage: development
+trades: []
