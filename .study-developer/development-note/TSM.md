@@ -2059,3 +2059,25 @@
 
 - **預先登記 key 歧義**：`preregistration.yml` 與 `candidate-definition.yml` 同時列出舊 `volume_lagged_neutral_impulse` resistance／`retest_*` 欄位，以及新 `lagged_neutral_volume_impulse` 固定延遲條件。綁定的 engine 實際以 `lagged_neutral_volume_impulse_enabled` 啟用新條件並讀取事件參數；舊 `volume_lagged_neutral_impulse`／`retest_*` 欄位沒有被此 engine 消費。因此，Development evidence 對應的是新 key，但 prereg／candidate metadata 仍有歧義；Study 已建立且 immutable binding 固定，未改寫原始檔。
 - **Parent review 的盲檢討判定**：parent 確認因意外讀到鄰近 Study assignment 片段而越出指定 Study allowlist，盲檢討程序未通過；當時沒有 formal outcome exposure，並已依技能停止，未再嘗試 blind review。不可將其補稱為 passed。
+
+
+## `tsm-momentum-trend-volume-gap-retention--v001`｜`2026-09-23`（v004 Development；盲檢討未通過）
+
+- **假說與差異**：前五個已完成 session 的平均量比須達 `1.05`，量能先行後，訊號日要求正向開盤缺口至少 `0.50%`，且收盤不低於開盤，才接受缺口；其餘趨勢、至少 `2%` 收盤加速、風控與執行固定。baseline 只關閉訊號日缺口接受條件。TSM Development 成果卡中可見五日量比、負向缺口承接、收盤位置與前五日實體等近鄰，但未見此時間順序與正向當日缺口接受的同一組合；此處只主張規則組合未見嘗試，不宣稱組件首創或量能獨立因果。
+- **Development 判定**：candidate／baseline evidence 均 `valid`。candidate 9 筆、3 年；base 報酬 `0.233%`／PF `1.034`，stress `-1.073%`／PF `0.846`。Formal gates 失敗 `base_profit_factor`、`completed_trades`、stress bootstrap 正報酬比、stress 留一年度 PF／報酬、stress PF／報酬；research targets 失敗交易數與 stress 報酬，年度目標通過。baseline 10 筆、4 年；base `2.141%`／PF `1.306`、stress `0.531%`／PF `1.076`，仍失敗交易數與三項 stress 重抽樣／留年門檻。candidate freeze eligibility=`false`，未凍結。
+- **限制、盲性與下一輪**：9 筆 candidate 樣本不足，且壓力成本報酬為負；不能據此判定缺口接受的因果效果。依 blind-review skill，因檢討前的 reference-validation 搜尋超出單一 Study allowlist，已立即停止；盲檢討未通過，本卡不宣稱盲檢討成功，也不使用鄰近 Study 輸出。依派工不執行 Terminal；本輪停在 Development 完成、未達 freeze 資格。若續研，應另立 Study 事前固定一項可否證的 gap-acceptance 變更並重新驗證樣本與 stress gates，不在本 Study 調參或重跑。
+- **來源與界線**：目標 Study 的 preregistration、candidate／implementation／runner contract、Source Bundle 綁定程式、Development inputs、quality metadata、candidate／baseline evidence 與 publication，以及 v004 prepare／runner-preflight 結果；新穎性盤點僅查 TSM Development 成果卡的研究問題／差異描述。未讀取或引用正式 Evaluation／Terminal 結果、quarantine／full data、events、journals、operations、`study.yml`、Git 歷史或鄰近 Study 證據。
+
+
+### 成果卡補充／Parent review correction（2026-09-23）
+
+- **讀取範圍更正與盲性**：更正原卡「未讀取或引用 events、journals、operations、study.yml 或鄰近 Study 證據」的不準確說法。blind review 前的遞迴 `rg` 搜尋掃過整個 v004 workflow；輸出含 allowlist 外 Study 的 `events/`、`study.yml` 路徑與事件摘要。該輸出未被後續分析、判定或成果卡引用。依技能立即停止，blind review 未通過且未重試。除已知輸出外，無法確定遞迴搜尋實際遍歷的完整檔案集合。沒有刻意開啟、分析或引用 `historical-evaluation-artifacts/`、quarantine／full data 或正式 Evaluation／Terminal evidence；本 Study 沒有正式結果被引用。本次未執行正式 Evaluation 或 Terminal；但因搜尋範圍廣，不能保證未對 v004 樹中其他檔案發生附帶掃描。
+- **已確認**：candidate／baseline evidence 均 `valid`。candidate 9 筆、3 年；base 報酬 `0.2327%`、PF `1.0337`；stress 報酬 `-1.0725%`、PF `0.8457`。formal gates 失敗 `base_profit_factor`、`completed_trades`、stress bootstrap 正報酬比、stress 留一年度 PF／報酬、`stress_profit_factor`、`stress_return`；research targets 失敗交易數與 stress 報酬，`traded_years` 通過。baseline 10 筆、4 年；base `2.1411%`／PF `1.3059`、stress `0.5312%`／PF `1.0756`；formal gates 失敗 `completed_trades`、stress bootstrap 正報酬比及 stress 留一年度 PF／報酬。candidate freeze eligibility=`false`，未凍結。
+- **可能原因**：9 筆 candidate 樣本偏少；gap-acceptance 複合條件可能限制訊號量。這只是推測，不能據此判定該條件造成交易減少或績效差異。
+- **尚不能判斷**：gap-acceptance 是否有獨立因果效果、能否跨期間重現，或是否優於 baseline；目前 Development evidence 不足以支持這些結論。
+- **Provenance／binding**：workflow=`62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4`；reference=`7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47`；release=`ea04558c1473f9c6db7e9707846694147c6c6f254498af2f18729a1e4ef1fa84`；policy=`c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215`；preregistration=`5918d9125051ec13653cdfc3da15759e03230419d6838b62c176e5db554de2cb`；Source Bundle=`5e3dec05bde233d3671ee8cd8d282d2f394add33b271f8acdfedd6c7f63edd19`；Development data role=`4e443b4c7db125967ef936d615b6d2283da8ba0bccc62239a5770daf176eccc3`。create operation=`c69578922b8dd9bd1cd4b93b708eb1011cd4ac152e44f2e0a2fb837dd0923f40`；Development operation=`3e47478653c8a0b5df2e9ee8cf13d4ef88c323e74f195fca1af101922a423d93`。依派工不執行 Terminal，Study 停在 Development 完成且未達 freeze 資格。
+
+
+### 成果卡補充／Parent review correction 2（2026-09-23）
+
+更精確限定前述範圍聲明：該輸出僅用於識別超出 allowlist、觸發停止並標記 blind review 未通過；其中鄰近 Study 的實質內容未用於策略分析、Development 結果解讀或成果卡研究結論，亦未轉述。

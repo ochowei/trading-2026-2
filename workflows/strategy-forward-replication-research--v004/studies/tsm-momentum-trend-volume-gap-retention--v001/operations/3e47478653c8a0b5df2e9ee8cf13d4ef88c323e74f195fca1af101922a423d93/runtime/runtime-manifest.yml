@@ -1,0 +1,26 @@
+data:
+  digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+  path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+evidence:
+  digest: ff8e6a1ab3d5765ba0643e7baa1932d87d6f431d2d4f57113c00715209a93b18
+  path: runtime/evidence.yml
+execution_contract: request-output-v1
+execution_workspace: temporary
+operation_id: 3e47478653c8a0b5df2e9ee8cf13d4ef88c323e74f195fca1af101922a423d93
+request:
+  digest: fe5a2c4b54e82b6a9f9ac35d0b0380dd3f317f0b33512be6b56bebdcb41b12e7
+  path: runtime/request.yml
+resolver_version: 1
+runner:
+  digest: 63f8dc09fb8fb1f51a4198c83b24450616e3688fbb10e4da267023e24d3f1fee
+  path: research/tsm-momentum-trend-volume-gap-retention--v001/run_development.py
+schema_version: 1
+source_bundle:
+  digest: 5e3dec05bde233d3671ee8cd8d282d2f394add33b271f8acdfedd6c7f63edd19
+  path: manifests/source-bundle.yml
+stage: development
+study_id: tsm-momentum-trend-volume-gap-retention--v001
+workflow_reference:
+  digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  path: manifests/workflow-reference.yml
+workflow_version: v004

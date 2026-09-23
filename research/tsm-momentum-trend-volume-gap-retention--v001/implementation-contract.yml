@@ -1,0 +1,59 @@
+candidate_family: tsm-momentum-trend-volume-gap-retention-family-v001
+candidate_id: tsm-momentum-trend-volume-gap-retention-v001
+engine:
+  baseline_spec_constant: BASELINE_SPEC
+  cost_constant: BASE_COST
+  holding_sessions: 10
+  path: src/trading_2026_2/tsm_momentum_trend_volume_gap_retention_v001.py
+  spec_constant: DEFAULT_SPEC
+execution:
+  cooldown:
+    minimum_completed_session_steps_after_exit: 5
+  decision:
+    entry: next-session-open-market
+    signal: completed-session-close
+  exits:
+    gap_fill: stop-gap-at-open-target-gap-at-open
+    same_session_ambiguity: adverse-stop-first
+    stop_return: '-0.04'
+    target_return: '0.04'
+indicator_contract:
+  columns:
+    rsi: rsi_2
+    signal_day_gap_acceptance: signal_day_gap_accepted
+    sma: sma_20
+    volume_lead: prior_volume_ratio
+  price_acceleration:
+    lookback_sessions: 1
+    return_minimum: '0.02'
+  required_history_sessions: 25
+  rsi:
+    formula: simple-rolling-mean
+    length: 2
+    min_periods: 2
+    not_ready: null
+    zero_gain_and_loss: 50
+    zero_gain_only: 0
+    zero_loss_only: 100
+  signal_day_gap_acceptance:
+    minimum_positive_gap_return: '0.005'
+    positive_gap_definition: Open_t / Close_(t-1) - 1 >= 0.005
+    prior_volume_context_precedes_signal: true
+    retained_gap_definition: Close_t >= Open_t
+    uses_signal_day_ohlc: true
+  sma:
+    lookback: 20
+    min_periods: 20
+    not_ready: null
+  trend_filter:
+    price_to_sma20_minimum: '0.90'
+    sma_slope_lookback: 5
+    sma_slope_ratio_minimum: '0.95'
+  volume_lead:
+    average_min_periods: 20
+    lead_min_periods: 5
+    prior_session_window: 5
+    uses_prior_sessions_only: true
+    volume_average_length: 20
+schema_version: 1
+study_id: tsm-momentum-trend-volume-gap-retention--v001

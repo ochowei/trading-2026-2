@@ -1,0 +1,86 @@
+baseline_comparison:
+  baseline_id: tsm-momentum-trend-volume-gap-retention-baseline-v001
+  baseline_is_excluded_from_candidate_family: true
+  candidate_id: tsm-momentum-trend-volume-gap-retention-v001
+  execution_is_identical: true
+candidate_family: tsm-momentum-trend-volume-gap-retention-family-v001
+candidate_id: tsm-momentum-trend-volume-gap-retention-v001
+complete_candidate_family:
+  - tsm-momentum-trend-volume-gap-retention-v001
+costs:
+  base:
+    fee_per_side_bps: '1'
+    slippage_per_side_bps: '5'
+  stress:
+    fee_per_side_bps: '2'
+    slippage_per_side_bps: '20'
+data:
+  adjustment_policy: auto_adjusted
+  calendar: XNYS
+  interval: 1d
+  provider: yahoo
+  symbol: TSM
+  timezone: America/New_York
+execution:
+  entry: next-session-open-market
+  gap_fill: stop-gap-at-open-target-gap-at-open
+  held_complete_sessions: 10
+  intrabar_ambiguity: adverse-stop-first
+  maximum_holding_session_span_for_validator: 11
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    modeled_stop_includes_costs: true
+    risk_fraction_of_pre_entry_equity: '0.02'
+    shares: maximum-integer-shares-within-risk-and-cash-caps
+  stop:
+    level_from_raw_entry_open: '-0.04'
+    order_type: STOP_MARKET
+    time_in_force: GTC
+  target:
+    level_from_raw_entry_open: '0.04'
+    order_type: LIMIT
+    reissued_each_session: true
+    time_in_force: DAY
+fold_policy:
+  evaluation_fold_warmup_sessions: 25
+  indicator_state_carried_between_folds: false
+  portfolio_state_reset_each_fold: true
+  warmup_uses_sessions_inside_fold_only: true
+initial_cash: '100000'
+schema_version: 1
+selected_candidate_id: tsm-momentum-trend-volume-gap-retention-v001
+signal:
+  accepted_only_when_flat: true
+  cooldown:
+    clock_anchor: completed-position-exit
+    completed_session_steps_after_exit: 5
+  decision_time: completed-session-close
+  mean_reversion:
+    close_vs_sma20_gap_minimum: '-0.10'
+    rsi_length: 2
+    rsi_maximum: '70'
+    sma_length: 20
+  price_acceleration:
+    lookback_sessions: 1
+    return_minimum: '0.02'
+  price_direction_confirmation:
+    close_above_prior_close: true
+  signal_day_gap_acceptance:
+    enabled: true
+    minimum_positive_gap_return: '0.005'
+    positive_gap_definition: Open_t / Close_(t-1) - 1 >= 0.005
+    prior_volume_context_precedes_signal: true
+    retained_gap_definition: Close_t >= Open_t
+    uses_signal_day_ohlc: true
+  symbol: TSM
+  trend_filter:
+    price_to_sma20_minimum: '0.90'
+    sma_slope_lookback: 5
+    sma_slope_ratio_minimum: '0.95'
+  volume_leads_price:
+    enabled: true
+    prior_session_window: 5
+    volume_average_length: 20
+    volume_ratio_minimum: '1.05'
+study_id: tsm-momentum-trend-volume-gap-retention--v001
+trial_id: tsm-momentum-trend-volume-gap-retention-trial-v001

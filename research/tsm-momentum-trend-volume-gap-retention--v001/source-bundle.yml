@@ -1,0 +1,22 @@
+files:
+  - digest: 6001193d095a4f5c9f0a6daab4e1114efdc4b9e5e3145aa535314f71395a1974
+    path: research/tsm-momentum-trend-volume-gap-retention--v001/assignment.yml
+  - digest: 59db90da6ccefa06094b0c0b45eda6c55c94eaee35c9d6e96dfeddeead676b0b
+    path: research/tsm-momentum-trend-volume-gap-retention--v001/candidate-definition.yml
+  - digest: 889a69f685382fb4be970c8aecb90399ddfb8794b35879d8180b2a48b37fea7f
+    path: research/tsm-momentum-trend-volume-gap-retention--v001/create-plan.yml
+  - digest: 75eeef0a8a1a85ce63b904fd2fcaf04565d8df5af5869af0ac5488b57f923aac
+    path: research/tsm-momentum-trend-volume-gap-retention--v001/implementation-contract.yml
+  - digest: 5918d9125051ec13653cdfc3da15759e03230419d6838b62c176e5db554de2cb
+    path: research/tsm-momentum-trend-volume-gap-retention--v001/preregistration.yml
+  - digest: bdc670e298ad913b25fed25b012c606bea16f5dca730b7b9a14d2db809e3ca85
+    path: research/tsm-momentum-trend-volume-gap-retention--v001/qualification-spec.yml
+  - digest: 63f8dc09fb8fb1f51a4198c83b24450616e3688fbb10e4da267023e24d3f1fee
+    path: research/tsm-momentum-trend-volume-gap-retention--v001/run_development.py
+  - digest: 6b3c791ca15f880b17557c668bcb14c0c4d9e8d51660a8ba8963a72a93044f8f
+    path: research/tsm-momentum-trend-volume-gap-retention--v001/runner-contract.yml
+  - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+    path: src/trading_2026_2/__init__.py
+  - digest: c5dd712bc29d3a3b30bcd14526d077f2636dd8e551d8aabbe1c5a87c03bfdd30
+    path: src/trading_2026_2/tsm_momentum_trend_volume_gap_retention_v001.py
+schema_version: 1

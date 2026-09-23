@@ -1,0 +1,191 @@
+baseline_definition:
+  baseline_id: tsm-momentum-trend-volume-gap-retention-baseline-v001
+  candidate_family: tsm-momentum-trend-volume-gap-retention-family-v001
+  execution_is_identical: true
+  family: TSM trend plus five-session volume context
+  objectively_simpler_because: 控制組保留同一趨勢、價格加速、五日平均量比背景及所有成本和執行規則，只關閉訊號日正向開盤缺口收盤接受條件。
+  simpler_rule: 不要求訊號日正向開盤缺口與收盤守住開盤；其餘趨勢、價格、量能背景、成本與執行規則相同。
+complete_candidate_family:
+  - tsm-momentum-trend-volume-gap-retention-v001
+eligibility_rules:
+  accepted_signal:
+    cooldown:
+      clock_anchor: completed-position-exit
+      minimum_completed_session_steps_after_exit: 5
+      position_must_be_flat: true
+    decision_time: completed-session-close
+    mean_reversion:
+      close_vs_sma20_gap_minimum: '-0.10'
+      rsi_length: 2
+      rsi_operator: <=
+      rsi_value: '70'
+      sma_length: 20
+    price_acceleration:
+      lookback_sessions: 1
+      return_minimum: '0.02'
+    price_direction_confirmation:
+      close_above_prior_close: true
+    signal_day_gap_acceptance:
+      enabled: true
+      minimum_positive_gap_return: '0.005'
+      positive_gap_definition: Open_t / Close_(t-1) - 1 >= 0.005
+      prior_volume_context_precedes_signal: true
+      retained_gap_definition: Close_t >= Open_t
+      uses_signal_day_ohlc: true
+    symbol: TSM
+    trend_filter:
+      price_to_sma20_minimum: '0.90'
+      sma_slope_lookback: 5
+      sma_slope_ratio_minimum: '0.95'
+    volume_leads_price:
+      enabled: true
+      prior_session_window: 5
+      volume_average_length: 20
+      volume_ratio_operator: '>='
+      volume_ratio_value: '1.05'
+      volume_shock_is_before_signal: true
+  costs:
+    base:
+      fee_per_side_bps: '1'
+      slippage_per_side_bps: '5'
+    stress:
+      fee_per_side_bps: '2'
+      slippage_per_side_bps: '20'
+  development_diagnostics:
+    block_bootstrap:
+      block_lengths:
+        - 3
+        - 5
+      maximum_stress_drawdown_above_10pct_ratio: '0.10'
+      minimum_stress_positive_return_ratio: '0.80'
+      repetitions: 50000
+      seed: 20260902
+      seed_application: exact-same-seed-for-each-block-length
+    leave_one_signal_year_out:
+      maximum_stress_drawdown: '0.10'
+      minimum_stress_profit_factor: '1.00'
+      minimum_stress_return: '0'
+    signal_year_breakdown: true
+  development_gates:
+    base_profit_factor:
+      operator: '>'
+      value: '1.10'
+    base_return:
+      operator: '>'
+      value: '0'
+    completed_trades:
+      operator: '>='
+      value: 20
+    maximum_realized_trade_loss_fraction:
+      operator: <=
+      value: '0.04'
+    maximum_stress_block_bootstrap_drawdown_above_10pct_ratio:
+      operator: <=
+      value: '0.10'
+    maximum_stress_leave_one_year_out_drawdown:
+      operator: <=
+      value: '0.10'
+    minimum_stress_block_bootstrap_positive_return_ratio:
+      operator: '>='
+      value: '0.80'
+    minimum_stress_leave_one_year_out_profit_factor:
+      operator: '>'
+      value: '1.00'
+    minimum_stress_leave_one_year_out_return:
+      operator: '>'
+      value: '0'
+    stress_maximum_drawdown:
+      operator: <=
+      value: '0.10'
+    stress_profit_factor:
+      operator: '>'
+      value: '1.00'
+    stress_return:
+      operator: '>'
+      value: '0'
+    traded_years:
+      operator: '>='
+      value: 3
+  execution:
+    entry: next-session-open-market
+    gap_fill: stop-gap-at-open-target-gap-at-open
+    intrabar_ambiguity: adverse-stop-first
+    position_sizing:
+      cash_cap: available-cash-no-borrowing
+      modeled_stop_includes_costs: true
+      risk_fraction_of_pre_entry_equity: '0.02'
+      shares: maximum-integer-shares-within-risk-and-cash-caps
+    stop:
+      level_from_raw_entry_open: '-0.04'
+      order_type: STOP_MARKET
+      time_in_force: GTC
+    target:
+      level_from_raw_entry_open: '0.04'
+      order_type: LIMIT
+      reissued_each_session: true
+      time_in_force: DAY
+  gate_policy: 任一 Development formal gate 失敗即否證候選並停止 freeze。
+  research_targets:
+    completed_trades:
+      operator: '>='
+      value: 20
+    stress_return:
+      operator: '>'
+      value: '0'
+    traded_years:
+      operator: '>='
+      value: 3
+  source_and_adjustment:
+    adjustment_policy: Yahoo auto_adjust; OHLC uses one adjustment basis
+    calendar: XNYS
+    interval: 1d
+    provider: yahoo
+    timezone: America/New_York
+evaluation_gates:
+  base_compounded_return:
+    operator: '>'
+    value: '0'
+  base_profit_factor:
+    operator: '>'
+    value: '1.10'
+  completed_trades:
+    operator: '>='
+    value: 20
+  family_wise_confidence:
+    operator: '>='
+    value: '0.90'
+  maximum_fold_positive_profit_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_fold_trade_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_realized_trade_loss_fraction:
+    operator: <=
+    value: '0.04'
+  positive_traded_fold_ratio:
+    operator: '>='
+    value: '0.60'
+  stress_max_drawdown:
+    operator: <=
+    value: '0.10'
+  stress_profit_factor:
+    operator: '>'
+    value: '1.00'
+  stress_return:
+    operator: '>'
+    value: '0'
+  traded_folds:
+    operator: '>='
+    value: 3
+fold_warmup_sessions: 25
+hypothesis: TSM 處於溫和上升趨勢時，先要求訊號日前五個已完成 session 的平均量比至少為此前各日二十日均量的 1.05 倍；只有在這個先行量能背景成立後，訊號日再出現至少 0.5% 的正向開盤缺口（Open 相對前收），且當日收盤不低於開盤，才視為缺口獲得收盤接受。這個「前五日量比先行、訊號日缺口接受」組合，可能比單純趨勢及相同量比背景更能確認至少 2% 收盤加速的延續性。既有 TSM Development 卡片分別記錄過前五日量比、收盤確認、前五日負缺口承接、量能加權收盤位置及日內 Open→Close 實體，但未記錄此時間順序與正向訊號日缺口接受的組合；因此本假說只主張這個規則組合未見嘗試，並不主張量能先行、缺口或收盤確認各自首創。每日成交量是整個 session 總量，不能推論隔夜時段實際成交量。
+initial_cash: '100000'
+maximum_holding_sessions: 11
+maximum_trials: 1
+selection_rule:
+  eligible_candidate: 唯一候選必須通過全部 Development formal gates 與已登錄 targets。
+  method: fixed-single-candidate-no-outcome-ranking
+  selected_candidate_id: tsm-momentum-trend-volume-gap-retention-v001
+tie_handling:
+  method: not-applicable-single-candidate

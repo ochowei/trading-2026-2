@@ -1,0 +1,30 @@
+actor_id: Study Developer subagent /root/study_developer_task_020
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 5e3dec05bde233d3671ee8cd8d282d2f394add33b271f8acdfedd6c7f63edd19
+  workflow_digest: 62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: study-created
+execution:
+  assignment_digest: 6001193d095a4f5c9f0a6daab4e1114efdc4b9e5e3145aa535314f71395a1974
+  assignment_path: manifests/assignments/6001193d095a4f5c9f0a6daab4e1114efdc4b9e5e3145aa535314f71395a1974.yml
+  role: study 開發者
+occurred_at: '2026-09-23T04:04:03.669561Z'
+payload:
+  create_plan_digest: 889a69f685382fb4be970c8aecb90399ddfb8794b35879d8180b2a48b37fea7f
+  create_plan_path: manifests/create-plan.yml
+  experiment_family: tsm-momentum-trend-volume-gap-retention-family-v001
+  historical_evaluation_operator: not assigned; requires a separate future evaluator task
+  prepare_report_digest: 32c90a4c0b60c589b7e22d1819c58bb5a8e5859fd11cfe8b4bf42eddbef8dfd2
+  prepare_report_path: manifests/prepare-report.yml
+  research_owner: TASK-020 requestor; individual name not separately recorded
+  research_round_id: 2026-09-23-tsm-volume-gap-retention-v001
+  source_bundle_digest: 5e3dec05bde233d3671ee8cd8d282d2f394add33b271f8acdfedd6c7f63edd19
+  source_bundle_path: manifests/source-bundle.yml
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  workflow_reference_path: manifests/workflow-reference.yml
+previous_event_digest: null
+schema_version: 1
+sequence: 1
+study_id: tsm-momentum-trend-volume-gap-retention--v001
