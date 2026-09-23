@@ -1,0 +1,30 @@
+actor_id: Study Developer subagent /root/study_developer_task_021
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: ec25435af68b584094d37a1de5a09f6b3f815098f2f8f05379d48add12ce66ec
+  workflow_digest: 62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: study-created
+execution:
+  assignment_digest: afaf9e79ff16bc6772f5673b7e64d0adfac5870e7a820efbe3b7a888586a313a
+  assignment_path: manifests/assignments/afaf9e79ff16bc6772f5673b7e64d0adfac5870e7a820efbe3b7a888586a313a.yml
+  role: study 開發者
+occurred_at: '2026-09-23T07:51:42.347689Z'
+payload:
+  create_plan_digest: cc1d0fcfaaefe46addb58c6b3ba8ab78039d5d925332e43768d4638586ce4af6
+  create_plan_path: manifests/create-plan.yml
+  experiment_family: tsm-momentum-trend-volume-path-efficiency-family-v001
+  historical_evaluation_operator: not assigned; requires a separate future evaluator task
+  prepare_report_digest: 7b7ccb9ff973c43fdf15ac2c97d5727716687b130686d540d6604695e4591222
+  prepare_report_path: manifests/prepare-report.yml
+  research_owner: TASK-021 requestor; individual name not separately recorded
+  research_round_id: 2026-09-23-tsm-breadth-path-efficiency-v001
+  source_bundle_digest: ec25435af68b584094d37a1de5a09f6b3f815098f2f8f05379d48add12ce66ec
+  source_bundle_path: manifests/source-bundle.yml
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  workflow_reference_path: manifests/workflow-reference.yml
+previous_event_digest: null
+schema_version: 1
+sequence: 1
+study_id: tsm-momentum-trend-volume-path-efficiency--v001

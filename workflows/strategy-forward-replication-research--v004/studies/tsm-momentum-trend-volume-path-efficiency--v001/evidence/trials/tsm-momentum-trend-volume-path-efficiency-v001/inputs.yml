@@ -1,0 +1,51 @@
+candidate_family: tsm-momentum-trend-volume-path-efficiency-family-v001
+candidate_id: tsm-momentum-trend-volume-path-efficiency-v001
+complete_candidate_family:
+  - tsm-momentum-trend-volume-path-efficiency-v001
+cost_models:
+  base:
+    fee_per_side_bps: '1'
+    slippage_per_side_bps: '5'
+  stress:
+    fee_per_side_bps: '2'
+    slippage_per_side_bps: '20'
+data_bindings:
+  development_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+  development_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+  development_role_digest: 4e443b4c7db125967ef936d615b6d2283da8ba0bccc62239a5770daf176eccc3
+  development_role_end: '2018-12-31'
+  development_role_sessions: 1258
+  development_role_start: '2014-01-01'
+  lineage: 使用共用且唯讀的 warmup-development view；runner 可見範圍只含 2013 warmup 與 2014–2018 Development role，未載入 view 範圍外資料。
+  quality_report_digest: c41329f349b15118c28d5960c1dfa9ec66ea795ad8097475bccec42cc10ac581
+  quality_report_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.quality.yml
+  warmup_digest: 81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847
+  warmup_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+  warmup_role_end: '2013-12-31'
+  warmup_role_sessions: 252
+  warmup_role_start: '2013-01-01'
+data_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+data_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+date_controls:
+  formal_provider_access: false
+  signal_end: '2018-12-31'
+  signal_start: '2014-01-01'
+  warmup_end: '2013-12-31'
+  warmup_start: '2013-01-01'
+development_diagnostics:
+  block_lengths:
+    - 3
+    - 5
+  bootstrap_seed: 20260902
+  repetitions: 50000
+  seed_application: exact-same-seed-for-each-block-length
+preregistration_digest: 44bc95deae91907c193ef153d57c320f2dc57145f298c6947d705634dd444845
+schema_version: 1
+selected_candidate_id: tsm-momentum-trend-volume-path-efficiency-v001
+source_bundle_digest: ec25435af68b584094d37a1de5a09f6b3f815098f2f8f05379d48add12ce66ec
+strategy_engine_digest: 6a1d41ed21724d4c6f2b6f41277ecbcbac6bc44a69a44f001ab24bdfb5865f2f
+strategy_engine_path: src/trading_2026_2/tsm_momentum_trend_volume_path_efficiency_v001.py
+study_id: tsm-momentum-trend-volume-path-efficiency--v001
+study_procedure_digest: 95a979d0674fd7f6295817268a200f71459071aba928cb089122fb41fb975ba9
+study_procedure_path: research/tsm-momentum-trend-volume-path-efficiency--v001/run_development.py
+trial_id: tsm-momentum-trend-volume-path-efficiency-trial-v001

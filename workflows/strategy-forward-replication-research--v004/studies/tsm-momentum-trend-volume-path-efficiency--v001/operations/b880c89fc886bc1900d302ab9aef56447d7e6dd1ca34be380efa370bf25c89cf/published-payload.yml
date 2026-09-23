@@ -1,0 +1,8 @@
+development_evidence_digest: 5c699e64594e29bd6d1078da83c3d1c9985a0437970f77f3c4d181209f7cdde4
+development_evidence_path: evidence/trials/tsm-momentum-trend-volume-path-efficiency-v001/candidate.yml
+inputs_digest: b4c1effb52ac3f837b47ea226328407ac3bc4518d29a2051d1e65532590bc733
+inputs_path: evidence/trials/tsm-momentum-trend-volume-path-efficiency-v001/inputs.yml
+publication_digest: eedb93f298f5f32f1026a8f092c572dfcc7dfb7223f95692897312145c30b0e9
+publication_path: evidence/trials/tsm-momentum-trend-volume-path-efficiency-v001/publication.yml
+status: completed
+trial_id: tsm-momentum-trend-volume-path-efficiency-v001
