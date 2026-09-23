@@ -1,0 +1,9 @@
+assignee: TASK-019-v004-study-developer
+assigner: 專案管理者（TASK-019）
+instruction: 建立單一 v004 Study，檢驗五個 session 前高量中性日、接續四日量縮且尚無上漲、訊號日才出現動能加速的固定延遲量價假說。固定 candidate／baseline、Development data bindings、provenance 與近鄰差異，完成唯一 Development trial、evidence validation、freeze-readiness／candidate-freeze 嘗試及繁體中文成果卡。只執行 development-to-freeze，不執行 Historical Evaluation、Terminal、challenge 或 replay。
+role: study 開發者
+schema_version: 1
+scope: development-to-freeze
+source_id: PROJECT_KANBAN:TASK-019
+study_id: tsm-momentum-trend-volume-lagged-neutral-impulse--v001
+workflow_version: v004

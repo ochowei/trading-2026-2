@@ -1,0 +1,20 @@
+actor_id: TASK-019-v004-study-developer
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: d56969e957bec445027d24fd95d3395b31773c6fb59e4d1134cb175803573a38
+  workflow_digest: 62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4
+  workflow_reference_digest: 7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: preregistration-recorded
+execution:
+  assignment_digest: 52138697fe638dfa1fa193dc773d8b1b250d57c67f031eb98414df0e450147d3
+  assignment_path: manifests/assignments/52138697fe638dfa1fa193dc773d8b1b250d57c67f031eb98414df0e450147d3.yml
+  role: study 開發者
+occurred_at: '2026-09-22T23:50:45.729743Z'
+payload:
+  preregistration_digest: 0f395ac77d1ec042f1c07e705254e94ff86c9f59cc8193b32f8b5f6169e7aece
+  preregistration_path: manifests/preregistration.yml
+previous_event_digest: 4060e50235eda61e73148e0f6a92bfe0afa2b2c62fac2df23309203dd5be63f0
+schema_version: 1
+sequence: 2
+study_id: tsm-momentum-trend-volume-lagged-neutral-impulse--v001

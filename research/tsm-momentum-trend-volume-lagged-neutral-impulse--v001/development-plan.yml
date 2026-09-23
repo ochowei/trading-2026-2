@@ -1,0 +1,42 @@
+actor: TASK-019-v004-study-developer
+data_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+data_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+trial_inputs:
+  candidate_family: tsm-momentum-trend-volume-lagged-neutral-impulse-v001
+  candidate_id: tsm-momentum-trend-volume-lagged-neutral-impulse-v001
+  data_bindings:
+    development_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+    development_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+    warmup_digest: 81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847
+  date_controls:
+    formal_provider_access: false
+    signal_end: '2018-12-31'
+    signal_start: '2014-01-01'
+    warmup_end: '2013-12-31'
+    warmup_start: '2013-01-01'
+  development_diagnostics:
+    block_lengths:
+      - 3
+      - 5
+    bootstrap_seed: 20260902
+    repetitions: 50000
+    seed_application: exact-same-seed-for-each-block-length
+  execution:
+    cooldown_anchor: completed-position-exit
+    cooldown_completed_session_steps_after_exit: 5
+    entry: next-XNYS-open
+    holding_sessions: 10
+    intrabar_ambiguity: adverse-stop-first
+    position_sizing:
+      modeled_stop_includes_costs: true
+      risk_fraction: '0.02'
+    stop_market_gtc: '-0.04'
+    target_limit_day: '0.04'
+  preregistration_digest: 0f395ac77d1ec042f1c07e705254e94ff86c9f59cc8193b32f8b5f6169e7aece
+  schema_version: 1
+  selected_candidate_id: tsm-momentum-trend-volume-lagged-neutral-impulse-v001
+  source_bundle_digest: d56969e957bec445027d24fd95d3395b31773c6fb59e4d1134cb175803573a38
+  strategy_engine_digest: 2c99cd088cd016c807bfe67523228d53d84cb7583bc165349f61ab7bfe55d11c
+  study_procedure_digest: 29ca7ebb286f0161a8a60b1b7bf4516fe953b6a8757f11d8ae94d209c3c521e9
+  study_procedure_path: research/tsm-momentum-trend-volume-lagged-neutral-impulse--v001/run_development.py
+  trial_id: tsm-momentum-trend-volume-lagged-neutral-impulse-v001

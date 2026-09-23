@@ -46,6 +46,24 @@
 
 ## 📋 TODO
 
+### [TASK-019] 依 TSM Development 盤點在 v004 開發新動能趨勢 × 量先價行假說，完成 blind review 與成果卡
+- **狀態**：Done
+- **優先級**：高
+- **負責角色**：study 開發者
+- **執行者**：Codex Study Developer subagent `/root/study_developer_task_019`
+- **建立日期**：2026-09-23
+- **更新日期**：2026-09-23
+- **依賴／阻塞**：無；執行前依 v004 規範確認 Workflow Release 為 Active
+- **驗收條件**：
+  - Study Developer 依 `.study-developer/development-note/TSM.md`、v004 workflow 與其允許讀取的既有 TSM Development 證據盤點既有假說，提出有清楚機制差異、可追溯且過去未曾嘗試的新「動能趨勢 + 量先價行」假說；說明近鄰限制，不得僅改名、版本或重用既有規則。
+  - 依 v004 `development-to-freeze` 完成適用的 workflow/reference/release/policy/source 與 Development data 綁定核對、runner preflight、prepare、單一 Study 的 preregistration、candidate/baseline、implementation、runner、明確派工與 provenance；依流程完成合法的 create、Development trial、evidence validation 及 freeze-readiness／candidate-freeze 嘗試。資格不符時保留實際失敗狀態，不得繞過規則。
+  - 僅執行 v004 Development；不得執行 Historical Evaluation、Terminal、challenge 或 replay，不得讀取、搜尋、雜湊、修改或引用 `historical-evaluation-artifacts/`、`.super-admin/` 或正式 Evaluation／Terminal 結果；不得覆寫或刪除既有 Study、evidence、authority、成果卡或 Workflow Package。
+  - Development 完成後，依 v004 blind-review 規範先核對 outcome exposure，再對同一 Study 進行受限 blind review；只使用規範允許的研究設計、程式、Development candidate/baseline evidence 與 binding，不重跑 runner，也不以完整 status/validate 取代 blind review。若盲性受損，停止並如實回報。
+  - blind review 完成後，才以繁體中文 append-only 更新 TSM Development 成果卡；完整呈現 candidate/baseline、base/stress、gates/targets、evidence validity、凍結資格與狀態、provenance、盲性、限制及可否證的下一步；缺少證據時不得補猜。
+  - 回報 Study ID、適用 workflow/reference/release/policy/source/data digest、operation 識別資訊、驗證結果、修改檔案及任何缺件。完成後由 Study Developer 維持 Doing；由本 parent project manager review。若有問題，只交回同一 subagent 修正；驗收通過後由 parent 移至 Done。
+- **摘要**：依 TSM 的 Development 研究脈絡，在 v004 建立並檢驗一個未曾嘗試的量先價行動能趨勢假說，依序完成 Development、同一 Study 的受限 blind review 與繁體中文成果卡，留下可追溯的研究結果。
+- **進度／備註**：2026-09-23 由本 parent thread 指派的唯一 Study Developer subagent `/root/study_developer_task_019` 完成，未建立 top-level thread。Parent review 確認假說的固定 t−5 高量中性事件、四日量縮且未先漲、訊號日才加速，與既有 d→d+1 response-lag、動態 peak-lead、同日 absorption 及 v024 固定事件價突破有明確差異；新穎性僅主張此條件組合未見已嘗試，未宣稱完全獨立。v004 為 Active；reference/release/policy/source 與 Development data binding、runner-preflight、prepare 核對通過，唯一 create 與 Development trial 完成。candidate／baseline evidence 均 valid；candidate 0 trades、13 項 gates 與 3 項 targets 失敗；baseline 16 trades／5 年，base/stress return 為 −0.5729%／−2.7935%、PF 為 0.9556／0.7800，8 項 gates 失敗。freeze-readiness／freeze 均合法回報 `qualification-failed`，Study 未凍結。Blind review **未通過**：成果卡 checker 搜尋意外輸出四個鄰近 Study 的 assignment 片段，越出單一 Study allowlist；未曝光 formal outcomes/evidence，subagent 依技能停止且未重試，卡片如實揭露。TSM 成果卡欄位、provenance 與 append-only key 歧義更正已核對；舊 resistance/retest key 與新 lagged-neutral key 並存的規格歧義已揭露、immutable binding 未回改。正文 671 漢字，符合 authoring skill「約 300–600 字」的近似篇幅；卡片各要求欄位均齊全。工作依規範記錄並完成，Done 不表示 blind review 通過。
+
 ### [TASK-018] 在 v004 開發另一個未嘗試的 TSM 動能趨勢 × 量先價行假說，完成 blind review 與成果卡
 - **狀態**：Done
 - **優先級**：高
