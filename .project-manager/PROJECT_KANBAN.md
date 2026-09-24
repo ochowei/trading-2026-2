@@ -46,6 +46,54 @@
 
 ## 📋 TODO
 
+### [TASK-027] 建立 v005 Study Development 專用 skill
+- **狀態**：Done
+- **優先級**：高
+- **負責角色**：study 開發者
+- **執行者**：`/root/v005_build_skill`（GPT-6 Luna，Max）
+- **建立日期**：2026-09-25
+- **更新日期**：2026-09-25
+- **依賴／阻塞**：v005 已 Active；依 v004 對應 skill 格式，並以 v005 操作指南與實際 CLI 契約為準
+- **驗收條件**：在 `.agents/skills/build-strategy-study-v005/SKILL.md` 建立繁體中文 skill；明確限定 Study Developer 角色、v005 單一 Study 的合法 Development 範圍、固定 workflow/release/policy/data bindings、多資產輸入及單資產相容路徑；不得照搬 v004 CLI 命令或資料契約；不執行 Study Lifecycle；符合 skill-creator 格式並通過 quick_validate；原 v004 skill 不變。
+- **摘要**：建立 v005 專用 Study 開發指引，讓後續研究者依目前 Active workflow 合法準備、開發與交接，不沿用 v004 的過期契約。
+- **進度／備註**：GPT-6 Luna／Max study 開發者已建立指定 skill。Parent 以 repo `.venv` 重跑 `quick_validate.py` 通過，並對照 v005 operations/CLI、多資產契約與角色限制審閱命令、assignment、release/reference/policy bindings、單資產相容及 1–16 資產規則。skill-creator 驗證及 v005 契約符合；v004 skills 未變，TASK-027 驗收完成。
+
+### [TASK-028] 建立 v005 Study blind review 專用 skill
+- **狀態**：Done
+- **優先級**：高
+- **負責角色**：study 開發者
+- **執行者**：`/root/v005_blind_review_skill`（GPT-6 Luna，Max）
+- **建立日期**：2026-09-25
+- **更新日期**：2026-09-25
+- **依賴／阻塞**：v005 已 Active；依 v004 對應 skill 格式，並先核對 v005 evidence/reference 契約
+- **驗收條件**：在 `.agents/skills/blind-review-strategy-study-v005/SKILL.md` 建立繁體中文 skill；明確處理 outcome exposure、v005 reference/digest 驗證、允許與禁止讀取範圍、盲檢討判定與輸出；不得讀取正式 Evaluation／Terminal 結果或受限資料、不得重跑 runner、不得執行 Study Lifecycle；符合 skill-creator 格式並通過 quick_validate；原 v004 skill 不變。
+- **摘要**：建立 v005 Development evidence 專用盲檢討指引，保留盲性與讀取界線並適配 v005 套件。
+- **進度／備註**：GPT-6 Luna／Max study 開發者已建立指定 skill；worker 與 parent 執行 `quick_validate.py` 均通過，檔案及新檔 whitespace 檢查通過。Parent 審閱確認 outcome exposure、v005 workflow-reference/digest、Development-only allowlist、多資產 publication bindings、禁止資料與不宣稱完整 event/state 驗證的限制一致；未執行 Study 操作，v004 skill 未變。TASK-028 驗收完成。
+
+### [TASK-029] 建立 v005 Historical Evaluation 專用 skill
+- **狀態**：Done
+- **優先級**：高
+- **負責角色**：workflow 維護者
+- **執行者**：`/root/v005_eval_skill_maintainer`（GPT-6 Luna，Max；workflow 維護者）
+- **建立日期**：2026-09-25
+- **更新日期**：2026-09-25
+- **依賴／阻塞**：v005 已 Active；依 v004 對應 skill 格式，並以 v005 Lifecycle、操作與多資產契約為準
+- **驗收條件**：在 `.agents/skills/run-strategy-historical-evaluation-v005/SKILL.md` 建立繁體中文 skill；限定歷史評估執行者、已 frozen 單一 Study、唯一評估 operation、v005 多資產 digest/snapshot 綁定及合法 resume/indeterminate 規則；僅授權在明確評估派工下讀寫其指定 `historical-evaluation-artifacts/` Study 子目錄，且不覆寫既有 artifact；建立 skill 本身不得讀取該資料夾或執行 Evaluation；符合 skill-creator 格式並通過 quick_validate；原 v004 skill 不變。
+- **摘要**：建立與 v005 多資產資料契約和 operation 恢復方式一致的正式歷史評估指引。
+- **進度／備註**：原受派 evaluator subagent 在整理 schema 檔名時讓搜尋結果意外包含受限資料夾檔名；沒有開啟或讀取檔案內容，parent 立即停止該執行者。改派 workflow 維護者只依明列 v005 公開操作文件與 schema 建立 skill；未碰 Study 結果或受限資料。Parent 驗證 `quick_validate.py`、`git diff --check` 均通過，並核對 frozen candidate、multi-asset digest、唯一 reservation/marker、原 operation resume、indeterminate 與 artifact 不覆寫規則符合 v005。TASK-029 驗收完成。
+
+### [TASK-030] 建立 v005 Development 成果卡專用 skill
+- **狀態**：Done
+- **優先級**：中
+- **負責角色**：study 開發者
+- **執行者**：`/root/v005_note_card_skill`（GPT-6 Luna，Max）
+- **建立日期**：2026-09-25
+- **更新日期**：2026-09-25
+- **依賴／阻塞**：v005 已 Active；依 v004 對應成果卡 skill 格式，並以 v005 evidence/reference 契約為準
+- **驗收條件**：在 `.agents/skills/study-development-note-authoring-v005/SKILL.md` 建立繁體中文 skill；只使用允許的 Development evidence，明確區分正式 gates、研究 targets、evidence validity、freeze 資格／狀態與限制；禁止接觸正式 Evaluation／Terminal 結果與受限資料；成果卡預設對話輸出，寫檔須遵守明確要求與 append-only 原則；符合 skill-creator 格式並通過 quick_validate；原 v004 skill 不變。
+- **摘要**：建立 v005 Development 結果整理指引，讓成果卡完整呈現逐資產研究綁定和可判定範圍，不誤用正式評估結果。
+- **進度／備註**：GPT-6 Luna／Max study 開發者建立成果卡 skill 後，parent review 發現兩項需修正：v005 trial registry 實際保存在禁止讀取的 event payload，且寫檔條件同時要求新路徑並談及既有檔 append。已交回同一 subagent 修正：移除 registry 的讀取暗示，證據不足時標示「尚不能判斷」；明確要求使用者指定寫入目標，已存在則只 append。修正版 `quick_validate.py` 通過；parent 重驗四份 v005 skills 均 `Skill is valid!`，untracked skill whitespace checks 無診斷、tracked `git diff --check` 通過，四份 v004 skills 均無 diff。Parent 確認 Development-only 範圍、資產綁定、freeze 判讀與 append 規則符合驗收，TASK-030 驗收完成。
+
 ### [TASK-022] 以既有 TSM breadth Study 為基礎，在 v004 提出新假說、盲檢討並撰寫成果卡
 - **狀態**：Done
 - **優先級**：高
@@ -243,6 +291,7 @@
 
 > 正由被指派的角色處理中的任務。
 
+
 ### [TASK-015] 在 v004 開發新的 TSM 動能趨勢 × 量先價行假說，完成 blind review 與成果卡
 - **狀態**：Done
 - **優先級**：高
@@ -307,13 +356,92 @@
 
 > 因阻塞、依賴或等待決策而暫停的任務。
 
-（目前沒有 Pending 任務）
+
+### [TASK-023] 驗證 TSM 相對半導體產業落後後修復假說
+- **狀態**：Pending
+- **優先級**：高
+- **負責角色**：study 開發者
+- **執行者**：本 parent thread 唯一 study 開發者 subagent `/root/study_developer_task_023`
+- **建立日期**：2026-09-24
+- **更新日期**：2026-09-24
+- **依賴／阻塞**：TASK-025 與 TASK-026 已完成；v005 已於 `2026-09-24T10:59:32Z` 成為 Active，支援 1–16 個資產。Workflow／reference binding 資訊已備妥；本任務仍 Pending，待專案管理者安排原 Study Developer 接續。
+- **驗收條件**：
+  - 依允許的 Development 資料盤點既有 TSM 假說，確認本研究使用「相對同業落後」而非重做 v009 的自身均線超跌、成交量篩選或近期動能量價條件；以 v009 為固定增量比較基準。
+  - 在看任何本假說的 Development 交易結果前，核對並固定 TSM 與產業基準資料來源、調整方式、交易日對齊與可得時間；預先登記候選條件：產業基準過去五個共同交易日報酬大於 0，且 TSM 同期報酬至少落後 3 個百分點。產業基準優先評估 SOXX；若資料或組成不適合，須在試驗前說明並固定替代基準，不得依績效挑選。
+  - 事前固定候選／對照組、下一個 XNYS open 進場、持有與風控、base／stress 成本、與 v009 訊號重疊時的持倉和優先順序。對照組須能區分「TSM 自身下跌」與「相對產業落後」，並保留逐筆交易供重疊與排擠核對。
+  - 若 workflow 與資料條件允許，依當時有效的 Development Lifecycle 建立一個新 Study，完成規定的 preregistration、唯一合法 Development trial 與 candidate／baseline evidence 驗證；只在流程與資格允許時嘗試 candidate freeze。若前置條件不成立，交付具體缺口與所需派工，不得用未驗證資料產出結果。
+  - Development Study 完成後、撰寫成果卡前，先依適用的 blind review 規範檢查正式結果接觸情形與允許讀取範圍，再只用研究設計、程式和 Development candidate／baseline evidence 進行盲檢討；若資格或讀取範圍不符，停止盲檢討並如實記錄，不得宣稱已通過。
+  - 盲檢討階段結束後，才以繁體中文 append-only 撰寫本 Study 的 Development 成果卡，分列 candidate／baseline、base／stress、正式 gates、研究目標、evidence validity、freeze 資格與狀態、來源綁定、盲檢討狀態、限制及下一輪可否證條件；缺少結果不得補猜。
+  - 事前設定並逐項回報：候選至少 20 筆完成交易、涵蓋至少 3 個交易年、相對 v009 至少 5 筆不重疊交易；全部正式 Development gates 通過，扣除排擠交易後的 stress 淨新增損益大於 0，且合併策略的 stress 回撤不高於 v009。任一目標失敗即如實記錄，不得在同一 Study 內調門檻或重跑。
+  - 僅處理 Development；不得執行 Historical Evaluation、Terminal、challenge 或 replay，不得讀取、搜尋、引用或修改 `historical-evaluation-artifacts/`、`.super-admin/`、正式結果或受限資料；不得覆寫既有 Study 或 evidence。回報資料／規格／程式／evidence 綁定、驗證結果、未達條件與限制，完成後維持 Doing，由專案管理者驗收。
+- **摘要**：測試 TSM 短期表現落後半導體產業後是否修復，尋找不依賴 v009 超跌訊號的交易機會，並以淨新增交易及壓力成本後結果判斷是否值得保留。
+- **進度／備註**：2026-09-24 由專案管理者依 TSM Development 成果卡與使用者討論建立；已由 `/root/study_developer_task_023` 接手；正在核對新增產業資料與 v004 支援，尚未執行 Study。3 個百分點與其他數值均為待事前固定並接受否證的研究設定，不是已驗證成果。
+  - 2026-09-24 前置核對：SOXX 2013-01-02～2018-12-31 的 Yahoo `auto_adjust=True` 固定快照已新增至 `research/market-data/yahoo/`；品質報告 passed、SHA-256 `41c33b0ae3c53a6ae6726c2c6dcd673c19010e86c4f44f17ac64c13e5da1263a`、1510 個 XNYS session，與既有 TSM warmup／Development view 的日期逐日一致。v004 reference／release／policy digest 驗證通過。
+  - **TASK-026 完成後的 v005 binding（已核對）**：Package=`workflows/strategy-forward-replication-research--v005/`；workflow digest=`2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2`；release record=`workflows/strategy-forward-replication-research--v005/release.yml`，SHA-256=`92c2c35d15e371378c189f60de69093220ab1ee74c256208c36be31534f9aeb8`；release manifest digest=`6cf440bf81e2c081ff6e77025c5779cf5f2e4849015278419b836c0777db6405`；policy set digest=`c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215`。建立 Study 時仍須產生其專屬 `manifests/workflow-reference.yml` 並綁定這些固定值。本次只解除 Workflow 阻塞，不啟動 TASK-023。
+  - **阻塞**：v004 的正式 Development 隔離執行只帶入 `plan.data_path` 一份 CSV；Source Bundle preflight 明確拒絕 `.csv` 資料檔，runner contract 合成輸入也固定單一六欄 OHLCV，沒有合法方式同時綁定並交付 SOXX 第二條價格序列。不能把資料偽裝成程式設定或挪用 Volume 欄。依前置條件停止：未建立 Study、未執行 runner-preflight／prepare／create／Development trial、freeze、blind review 或成果卡，也沒有績效數值。需要 workflow 維護者制定多資產輸入的 digest、日期界線與合成 preflight 契約，再由 workflow 執行者按 Lifecycle 發行可用版本；本角色不修改 workflow 治理。subagent 回報時任務維持 Doing，交由專案管理者決定阻塞處置。
+  - **Parent review（2026-09-24）**：已核對 SOXX 快照 SHA-256 與品質報告 `passed`，並查閱 v004 `operations/lifecycle.py`、`operations/preflight.py`、`schemas/runner-contract.schema.yml`。單一 `plan.data_path` 被複製為 `run/bars.csv`、Source Bundle 拒收 CSV、合成列僅有六欄，確認目前不能合法送入第二份 SOXX 價格資料。Study Developer 沒有越權修改 workflow 或建立不合規 Study，這部分符合 v004；但實驗與結果尚未產出，blind review 與成果卡也因沒有 Study／evidence 而未執行，均不能驗收為完成。依看板阻塞規則移至 Pending；待跨角色流程支援完成後，交回同一 subagent 接續，不把前置檢查當成策略有效性證據。
+
 
 ---
 
 ## ✅ Done
 
 > 已完成工作並由專案管理者驗收確認的任務。
+
+### [TASK-026] 依 Lifecycle 發行支援多資產輸入的 Workflow 新版本
+- **狀態**：Done
+- **優先級**：高
+- **負責角色**：workflow 執行者
+- **執行者**：本 parent thread 的 workflow 執行者 subagent `/root/workflow_executor_task_026_luna`
+- **建立日期**：2026-09-24
+- **更新日期**：2026-09-24
+- **依賴／阻塞**：無。v005 已完成 Release 並為 Active；v004 已標記 Superseded，兩者的舊 Package 與 Release Record 均保留。
+- **驗收條件**：
+  - 依 `docs/workflow-lifecycle.md` 核對 TASK-025 的新版本為完整自包含 Package；執行 Draft→Release Candidate 的規定驗證，涵蓋 schema、validator、狀態轉換、逐資產資料／artifact digest、政策符合性、一個／兩個／三個以上資產的端到端 fixtures、必要測試與 Ruff，並產生可驗證的 release manifest 與 test report。缺件時退回，不以測試摘要代替證據。
+  - 由符合規範的 Trusted Approver 檢視並建立綁定 Workflow／manifest／test report digest 的 `release.yml`；執行者不得自行替自己的交付核准。核准無法取得時記錄阻塞，不得宣稱 Active。
+  - Release 有效後依 Lifecycle 更新治理狀態，保留 v004 與更早版本的 Package、Release Record、Study 與 evidence；核對新版本確實可接受新 Study，並提供 TASK-023 study 開發者接續所需的固定 reference／release／policy binding。
+  - 回報 Release ID／版本、核准者與時間、digest、驗證命令及結果、治理狀態變更和任何缺件；本任務不建立 TASK-023 Study，不執行 Development、Historical Evaluation、Terminal、challenge 或 replay。
+- **摘要**：在 TASK-025 交付多資產 Workflow Draft 後，依治理程序驗證 Release Candidate 並啟用新版本，讓 TASK-023 與未來使用更多資產的 Study 能合法進行。
+- **進度／備註**：2026-09-24 由專案管理者建立 TODO；同日依使用者回饋將範圍從固定雙資產修正為可變數量多資產。2026-09-24 由 workflow 執行者 subagent 接手並移至 Doing。建立候選版檔案前，正式重跑全套 pytest 得 118 passed、16 個 NumPy 警告、退出碼 0（908.28 秒）；Ruff、102 檔 canonical YAML／schema／Policy 定義檢查、v004 無 diff、`git diff --check` 均通過。曾建立可重算 manifest／test report，且 `release_candidate.py --candidate` 通過；但建立後重跑 `tests/test_release_candidate.py -q` 得 1 passed、1 failed：`test_draft_has_no_release_artifacts_and_is_reproducible` 要求 Package 無 manifest／report，形成候選版後必要測試必然失敗。不能以建立前的測試通過宣稱最終 Release Candidate 完成；本輪未核准的兩個檔案已撤回，v005 維持 Draft。該次嘗試的 workflow／manifest／report digest 分別為 `31f58d368a373c104e36f535d0c2e1cb5ff0cea5768c0947200bcacd0509e938`／`758b38fab56335d7ddc97818f9b7e976f1d6266b0bf18081aefe57e98627afa4`／`9480d3b5e0a5324330305eabe67a1569bc065223ba34a73ccd7c9dbae7588761`，僅供追查，不是可用 Release。須交回原 workflow 維護者修正測試，再由本任務重跑全套、重建候選版證據；尚無獨立核准或有效 `release.yml`，v004 仍為 Active，TASK-023 不能綁定 v005；本任務維持 Doing。
+
+- **Parent review（2026-09-24）**：確認 `tests/test_release_candidate.py:28-29` 在發行檔存在時與 RC 必要產物衝突。執行者已撤回本輪未核准的 manifest／test report，v005 實際回到 Draft；先前 RC digest 僅作本輪嘗試紀錄，不代表有效 RC。重新開啟 TASK-025 修正測試，TASK-026 移至 Pending，之後交回同一 workflow 執行者重跑完整發行驗證；無獨立 Trusted Approver 前不得啟用。
+
+- **續辦（2026-09-24）**：由專案管理者另派新的 workflow 執行者 subagent `/root/workflow_executor_task_026_luna`，依序續辦本任務。修正後 Draft gate 的正式全套測試命令 `.venv/bin/python -m pytest workflows/strategy-forward-replication-research--v005/tests -q` 得 `124 passed, 16 warnings in 907.26s (0:15:07)`、退出碼 0；16 個 NumPy `invalid value encountered in subtract` 警告分布於 `test_assignment_lifecycle.py` 1 個、`test_multi_asset.py` 15 個。`.venv/bin/python workflows/strategy-forward-replication-research--v005/operations/release_candidate.py` 通過並核對 102 個定義檔、canonical YAML、Schema 與 Policy release／conformance；`.venv/bin/ruff check workflows/strategy-forward-replication-research--v005` 通過；`git diff --exit-code HEAD -- workflows/strategy-forward-replication-research--v004`、`git diff --check` 通過。檢查時 v005 無 `studies/`，也沒有 manifest、test report 或 `release.yml`。建立 RC 前發現 v005 `README.md` 首段仍聲稱「目前是 Draft、沒有 manifest／report」；README 會納入 Workflow digest，建立候選版後該敘述將失實。依 parent 指示暫不建立任何 RC artifact，待 TASK-025 維護者修正 README 後重新執行 Lifecycle gates。尚未取得獨立 Trusted Approver 核准，也沒有 `release.yml`；v004 仍為 Active，不得讓 TASK-023 使用 v005。本次 pytest 是 Draft gate 結果，不代表 Release Candidate 已完成；TASK-026 維持 Doing。
+- **Parent review（2026-09-24，Draft gate）**：v005 Draft 狀態全套 pytest `124 passed, 16 warnings`（907.26 秒，exit 0）；102-file definitions／canonical／schema／Policy checker、Ruff、v004 `git diff` 空、`git diff --check` 通過。未建立 RC artifacts。Parent 確認 README 首段確稱「目前是 Draft、沒有 manifest／report／release」，且 README 納入 Workflow digest；這是會在 RC 建立後過時的狀態說明。依 TASK-025 修正完成後再續辦，本任務由 Doing 移至 Pending。
+- **Parent resume（2026-09-24）**：TASK-025 新增 README 狀態說明與回歸測試後，parent 已重跑 `tests/test_release_candidate.py` 得 9 passed，v005 Ruff／`git diff --check` 通過，v004 無 diff。原 Draft gate（124 passed、16 warnings）涵蓋 README 修正前的 Workflow digest，不能重用；TASK-026 交回同一 Luna／Max workflow 執行者，需重跑完整 suite／全部 Release Candidate gates，建立新 manifest／report 並在 RC artifacts 存在下再次重跑測試與 checker。
+
+- **本次續辦結果（2026-09-24，待 PM 驗收）**：依 README 修正和新增回歸測試後重新執行全部 gates。Draft 狀態 `.venv/bin/python -m pytest workflows/strategy-forward-replication-research--v005/tests -q`：`125 passed, 16 warnings in 894.24s (0:14:54)`，exit 0；NumPy `invalid value encountered in subtract` 警告分別在 `test_assignment_lifecycle.py` 1 個、`test_multi_asset.py` 15 個；log SHA-256 `959cbddeaeb5cb79e5a331c2c8d7bcd231a7703d1b40ebfec6aa0508b2b965ac`。Definition checker 通過 102 個 canonical YAML／Schema／Policy release 與 conformance 檔；Ruff 通過；v004 `git diff` 為空、`git diff --check` 通過；無 v005 `studies/` 或既有 release artifacts。其後新建 v005 Release Candidate manifest／test report，產生 `workflow_digest=2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2`、manifest SHA-256 `6cf440bf81e2c081ff6e77025c5779cf5f2e4849015278419b836c0777db6405`。RC artifacts 存在時重新執行全套 pytest：`125 passed, 16 warnings in 895.26s (0:14:55)`，exit 0；NumPy 警告分布相同，log SHA-256 `d311584e0a3054ad8996f82757c674935c2b312aef95f068010e75a8bd267391`。RC 狀態 Ruff、`release_candidate.py --candidate`、v004 未變與 diff-check 均通過。完成 RC 結果後更新 test report；最終 report SHA-256 `3120c4edf745f3b2ae8701a7d37ac54737180a15b204bfcea46bb6619b3872dc`，包含 Draft 與 RC 兩次全套測試及 RC 狀態 Ruff／checker 結果。更新後重新驗證 report schema 與 candidate checker；仍為 102 files、`release-candidate`，Workflow digest 和 manifest digest 與 report 更新前相同。沒有 `release.yml`，未取得獨立 Trusted Approver 核准；v004 維持 Active，TASK-023 不得使用 v005。本任務未執行真實 Study Lifecycle、Historical Evaluation、Terminal、challenge 或 replay；維持 Doing。
+- **Parent review（2026-09-24，RC）**：重新執行 `.venv/bin/python workflows/strategy-forward-replication-research--v005/operations/release_candidate.py --candidate`，結果 `release-candidate`、102 files、`release_record_created=false`、workflow digest `2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2`。親自重算並核對 manifest SHA-256 `6cf440bf81e2c081ff6e77025c5779cf5f2e4849015278419b836c0777db6405`、最終 report SHA-256 `3120c4edf745f3b2ae8701a7d37ac54737180a15b204bfcea46bb6619b3872dc`；report 有 11 checks、狀態 `release-candidate`。Draft 與 RC artifacts 存在下的完整 pytest 各為 125 passed、16 個 NumPy warnings，退出碼皆 0；RC run 耗時 895.26 秒。Ruff、102-file canonical/schema/Policy gates、RC checker、v004 無 diff、`git diff --check` 均通過。未建立 `release.yml`、未取得獨立 Trusted Approver；依 `docs/workflow-lifecycle.md` Release Candidate 尚不得建立正式 Study，因此 v004 保持 Active、TASK-023 仍不可使用 v005。本任務的候選版建置與驗證已交付，剩餘阻塞是獨立 Trusted Approver 必須檢查這三個 digest 並建立 Release Record；由 Doing 移至 Pending 等待該核准。未執行真實 Study Lifecycle、Historical Evaluation、Terminal、challenge 或 replay。
+
+- **Trusted Approver 核准與 Lifecycle 完成（2026-09-24，待 PM 驗收）**：使用者明確核准 `ochowei@gmail.com`，核准文字由使用者提供；workflow 執行者不是核准者。依 v005 release schema，以實際 UTC `2026-09-24T10:59:32Z` 建立 `workflows/strategy-forward-replication-research--v005/release.yml`，並立即由 `validate_release_record` 驗證通過。Release Record SHA-256=`92c2c35d15e371378c189f60de69093220ab1ee74c256208c36be31534f9aeb8`，核准者、時間與 workflow／manifest／test report 三個 digest 均與使用者核准及 parent 已驗收 RC 一致；Release Candidate 狀態測試 `.venv/bin/python -m pytest workflows/strategy-forward-replication-research--v005/tests/test_release_candidate.py -q` 為 9 passed。已更新 `docs/workflow-lifecycle.md` 與 `workflows/README.md`：v005 標記 Active，v004 自同一時間停止接受新 Study 並因 v005 多資產能力取代而標記 Superseded；v004 Package 與原 Release Record 未修改。再驗證 Release Record、test report schema、Lifecycle 狀態文案、`git diff --check` 及 v004 無 diff，均通過。v005 現可供新 Study 使用；未建立 TASK-023 Study，也未執行真實 Study Lifecycle、Historical Evaluation、Terminal、challenge 或 replay。任務由 Pending 回 Doing，等待 parent review。
+- **Parent review（2026-09-24，Active）**：parent 重新執行 `validate_release_record` 並核對 Trusted Approver 為使用者明確提供的 `ochowei@gmail.com`、核准時間 `2026-09-24T10:59:32Z`，以及 workflow `2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2`、manifest `6cf440bf81e2c081ff6e77025c5779cf5f2e4849015278419b836c0777db6405`、test report `3120c4edf745f3b2ae8701a7d37ac54737180a15b204bfcea46bb6619b3872dc` 完全相符；release record SHA-256=`92c2c35d15e371378c189f60de69093220ab1ee74c256208c36be31534f9aeb8`。`test_release_candidate.py` 在 Active 狀態 9 passed；Ruff、`git diff --check` 通過，v004 package/release 無 diff。核對 `docs/workflow-lifecycle.md` 與 `workflows/README.md` 已列 v005 Active、v004 Superseded，保留舊版 Package、Release Record 與既有 Studies；治理文件適用版本清單已含 v005。新版本目前可供新 Study 使用。已在 TASK-023 補入 v005 固定 binding；TASK-023 仍 Pending，沒有在本任務建立 Study 或執行 Study Lifecycle。TASK-026 驗收通過，移至 Done。
+
+
+### [TASK-025] 制定支援可變數量資產輸入的新 Workflow Draft
+- **狀態**：Done
+- **優先級**：高
+- **負責角色**：workflow 維護者
+- **執行者**：本 parent thread 的 workflow 維護者 subagent `/root/workflow_maintainer_task_025_luna`（GPT-6 Luna、Max）
+- **建立日期**：2026-09-24
+- **更新日期**：2026-09-24
+- **依賴／阻塞**：承接 TASK-023 的 v004 單一價格檔阻塞；開始前核對現行 Active Workflow、Release 與新版本編號。此任務只制定及開發 Workflow Draft，不執行 Workflow Lifecycle 或啟用 Release。
+- **驗收條件**：
+  - 以 TASK-023 的 TSM／SOXX 作第一個驗證案例，說明 v004 `plan.data_path`、隔離執行、Source Bundle preflight 與六欄合成 runner contract 的單一資料限制；設計可變長度、至少一個資產的輸入清單，不把數量寫死為兩個。每個資產須有穩定識別、用途（交易標的或參考資料）、來源、日期範圍與獨立 digest；若需限制資產數量或檔案大小，須明定資源上限與拒絕方式。
+  - 依 `docs/workflow-lifecycle.md` 建立自包含的新 Workflow Version；不得直接修改已發布的 v004 Package、Release Record、既有 Study 或 evidence。定義多資產的交易日／時區對齊、缺漏資料與可得時間規則，不得默默填入未來資料；讓輸入清單在 runner request、隔離 workspace、preflight、schema、validator、evidence 與來源綁定中逐項一致。
+  - 驗證每份 Development 輸入只能讀取允許的 warmup／Development 區間；補足一個、兩個及三個以上資產的端到端案例，以及重複識別、缺檔、digest 漂移、日期錯位、受限資料混入、超出資源上限與隔離執行的拒絕測試，同時確認既有單資產 Study 路徑不被破壞。
+  - 完成 Draft 的規格、程式、測試、reference 與 Release Candidate 驗證計畫；回報新版本 ID、差異、已執行的開發驗證及交給 workflow 執行者的待辦。不得自行執行 Draft→Release Candidate→Active 轉換、建立正式 release artifact、執行 Study Lifecycle 或讀取正式 Historical Evaluation／Terminal 結果。
+- **摘要**：補上 v004 缺少的可變數量資產輸入能力，讓 TSM／SOXX 及未來更多資產的 Study 都能逐檔驗證來源與時間範圍，再進入同一次 Development 試驗。
+- **進度／備註**：2026-09-24 由專案管理者建立 TODO；同日依使用者回饋將範圍從固定雙資產修正為可變數量多資產。同日 workflow 維護者 subagent 接手並移至 Doing。已建立 `strategy-forward-replication-research--v005` 自包含 Draft，新增 1–16 資產的逐檔來源／日期／digest、XNYS 完整交易日與可得時間規則、資源上限、Development 與 Historical Evaluation 的 request／隔離執行／snapshot／evidence 綁定，以及單資產相容路徑；TSM／SOXX 是兩資產驗證範例。純合成聚焦測試 19 passed（含 1／2／3 資產 Development 與 2／3 資產 Evaluation→terminal）、canonical／Draft 測試 7 passed；29 份 schema 為 canonical 且 meta-schema 有效，Ruff 與 `git diff --check` 通過。首次全套 pytest 為 113 passed、1 failed（14 分 14 秒），唯一失敗是複製的 contract fixture 未更新 preregistration digest；修正後該測試單獨重跑通過，修正後尚未重跑整套，不能宣稱全套通過。v005 沒有建立 Workflow release manifest、test report 或 release record；待專案管理者驗收 Draft，TASK-026 執行者須正式重跑全套與 Release Candidate 檢查、產生發行證據並取得獨立 Trusted Approver 核准。任務維持 Doing。
+- **Parent review（2026-09-24）**：已核對 v005 Draft 的多資產參考文件、實作計畫與 `operations/multi_asset.py`：資料清單支援 1–16 資產、逐檔 digest／完整 XNYS 日期／角色／路徑／容量檢查與隔離檔名，並保留單資產路徑。v004 無 diff，v005 無正式 release manifest、test report 或 `release.yml`，符合維護者不執行 Workflow Lifecycle 的界線。parent 重新執行 `tests/test_multi_asset.py` 得 17 passed，目標 Ruff 通過；worker 的首次全套 113 passed／1 failed 及修正後單測通過均如實保留，未將全套稱為通過，交由 TASK-026 正式重跑。Draft、規格與交接計畫符合 TASK-025 驗收，移至 Done；此驗收不代表 v005 已成 Release Candidate 或 Active。
+- **重新開啟（2026-09-24）**：TASK-026 建立 Release Candidate 必要的 manifest／test report 後重跑測試，發現 v005 `tests/test_release_candidate.py:28-29` 直接斷言這兩個檔案不得存在，使已產生 RC artifact 的 Package 必然測試失敗。原 Draft 驗收沒有涵蓋 artifact 建立後的重跑情境；交回原 workflow 維護者修正測試設計並驗證 Draft／RC 兩種狀態。維護者只修改 Draft／測試，不執行 Lifecycle。
+
+- **續辦結果（2026-09-24，待 PM 驗收）**：原 workflow 維護者 subagent 已修正 v005 `tests/conftest.py` 與 `tests/test_release_candidate.py`。測試會檢查目前 Package 實際狀態，並以隔離副本分別驗證 Draft（無正式發行檔、可重算 Workflow digest）與 Release Candidate（manifest／test report 齊全、定義檔 digest 可重算、report schema 有效）；缺任一份發行證據、定義檔漂移或無效 report 都會失敗。若未來有正式 `release.yml`，會透過既有 release validator 核對其 manifest／report digest 綁定。已在 `IMPLEMENTATION-PLAN.md` 補上建立候選版後必須重跑測試的交接說明。聚焦 pytest 13 passed，整個 v005 Ruff 與 `git diff --check` 通過，v004 無 diff。這是 Draft／隔離 fixture 驗證；沒有在 v005 Package 建立正式 manifest、test report 或 release record，未執行 Lifecycle。修正後完整 pytest 尚待 TASK-026 執行者重跑；任務維持 Doing。
+- **本次續辦（2026-09-24，待 PM 驗收）**：新 workflow 維護者 subagent `/root/workflow_maintainer_task_025_luna` 接手 Doing。將 v005 README 標題改為不固定宣稱 Draft，並以 Lifecycle 條件說明 Draft、Release Candidate、Active：候選版須有通過必要驗證的 manifest／test report；只有 Trusted Approver 建立且與目前 Workflow、manifest、test report 完全一致的有效 `release.yml` 才是 Active，只有 Active 可建立正式 Study。新增測試，防止 README 把目前缺少發行檔寫成固定事實，並確認正式 Study 限制。該測試 1 passed（0.04 秒）、變更測試檔 Ruff 通過、`git diff --check` 通過。README 與測試檔均受 Workflow digest 保護；TASK-026 必須在這些修改後重跑全套驗證並重建發行證據。此維護工作未執行 Lifecycle 或建立正式發行檔。
+- **Parent review（2026-09-24，重新開啟後）**：核對 `tests/conftest.py` 的隔離 fixtures、`tests/test_release_candidate.py` 及 `IMPLEMENTATION-PLAN.md`。Draft fixture 排除正式 release artifacts 並重算 workflow digest；RC fixture 在暫存副本建立 manifest／test report，驗證 Package 完整狀態、manifest digest、report schema，另有缺少任一檔、定義漂移、無效 report 的拒絕測試，Active 狀態沿用 release validator。Parent 重跑該測試檔為 8 passed，v005 Ruff 通過，v004 無 diff。確認修正解決「RC artifacts 建立後全套必然失敗」的 Draft 測試設計缺陷；未建立正式發行檔、未執行 Lifecycle。TASK-025 重新驗收完成並移至 Done；TASK-026 可恢復執行完整發行驗證。
+- **重新開啟（2026-09-24，再次）**：TASK-026 Draft 全套驗證通過後的審查發現 README 第 1 段仍寫「此 Package 目前是 Draft，沒有 release-manifest.yml、release-test-report.yml 或 release.yml」。README 會納入 workflow digest；建立 RC manifest／report 後該聲明便不正確。請以符合 Draft、RC 與 Active 各階段的穩定描述取代，不要刪除安全界線（例如尚未 Active 不得供正式 Study 使用），並更新 Draft／RC 測試或驗收文件以避免狀態文字回歸。維護者不執行 Lifecycle；修正後交由 TASK-026 重跑完整驗證。
+- **Parent review（2026-09-24，再次重新開啟後）**：核對 README 首段依 Lifecycle 定義 Draft、Release Candidate 與 Active，說明只有 Trusted Approver 建立且通過驗證、綁定目前 Workflow／manifest／report 的有效 `release.yml` 才是 Active，且只有 Active 可建立正式 Study。新增回歸測試避免把「目前 Draft／缺少 artifacts」寫成固定 Package 現況。Parent 重跑 `test_release_candidate.py` 得 9 passed；v005 Ruff、`git diff --check` 通過，v004 無 diff。未建立正式發行檔或執行 Lifecycle。TASK-025 驗收通過並移至 Done；README 與測試均會納入 Workflow digest，TASK-026 必須從新 digest 重跑 gates。
+
+
 
 ### [TASK-014] 對 `tsm-momentum-trend-volume-breadth--v001` 進行 v004 blind review 並重寫成果卡
 - **狀態**：Done

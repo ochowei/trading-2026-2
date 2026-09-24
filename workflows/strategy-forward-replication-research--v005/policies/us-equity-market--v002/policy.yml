@@ -1,0 +1,20 @@
+family: us-equity-market
+kind: market
+schema_version: 1
+values:
+  adjustment_policy: auto_adjusted
+  allowed_excess_observation_lag_modes:
+    - fail
+    - mark_unavailable
+  decision_buffer_minutes: 30
+  default_excess_observation_lag_mode: fail
+  formal_run_provider_access_allowed: false
+  interval: 1d
+  mark_unavailable_requires_manifest_evidence: true
+  mark_unavailable_requires_signal_suppression: true
+  primary_calendar: XNYS
+  primary_coverage: xnys_sessions
+  provider: yahoo
+  timezone: America/New_York
+  unknown_publication_min_lag_sessions: 1
+version: v002

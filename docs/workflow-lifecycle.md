@@ -1,23 +1,24 @@
-# Workflow Lifecycle：strategy-forward-replication-research（v001／v002／v003／v004）
+# Workflow Lifecycle：strategy-forward-replication-research（v001／v002／v003／v004／v005）
 
 ## 文件目的
 
 本文件定義 Workflow Package（流程套件）的生命週期，處理的是研究流程本身如何建立、發布、取代與封存；它與 Study Lifecycle（單一研究個案從建立到終止的流程）不同。
 
-本文件目前適用於 `strategy-forward-replication-research--v001`、`strategy-forward-replication-research--v002`、`strategy-forward-replication-research--v003` 與 `strategy-forward-replication-research--v004`。它位於 Workflow Package 外部，是專案治理文件，不列入任何 Workflow Package 的 release digest。這樣可以記錄 Workflow 的治理狀態，而不會因為在已發布的 Package 內新增文件，意外改變既有 Release Record。
+本文件目前適用於 `strategy-forward-replication-research--v001`、`strategy-forward-replication-research--v002`、`strategy-forward-replication-research--v003`、`strategy-forward-replication-research--v004` 與 `strategy-forward-replication-research--v005`。它位於 Workflow Package 外部，是專案治理文件，不列入任何 Workflow Package 的 release digest。這樣可以記錄 Workflow 的治理狀態，而不會因為在已發布的 Package 內新增文件，意外改變既有 Release Record。
 
 ## 目前狀態
 
-截至 2026-09-21T02:07:06.216838Z：
+截至 2026-09-24T10:59:32Z：
 
 | Version | Status | Release Record | 核准者／核准時間 |
 | --- | --- | --- | --- |
-| `v004` | `Active` | `workflows/strategy-forward-replication-research--v004/release.yml` | `ochowei@gmail.com`／`2026-09-21T02:07:06.216838Z` |
+| `v005` | `Active` | `workflows/strategy-forward-replication-research--v005/release.yml` | `ochowei@gmail.com`／`2026-09-24T10:59:32Z` |
+| `v004` | `Superseded` | `workflows/strategy-forward-replication-research--v004/release.yml` | 原始核准者 `ochowei@gmail.com`／`2026-09-21T02:07:06.216838Z`；於 `2026-09-24T10:59:32Z` 停止接受新的 Study，由 v005 取代 |
 | `v003` | `Superseded` | `workflows/strategy-forward-replication-research--v003/release.yml` | `ochowei`／`2026-09-19T16:38:39.747194Z`；於 `2026-09-21T02:07:06.216838Z` 停止接受新的 Study |
 | `v002` | `Superseded` | `workflows/strategy-forward-replication-research--v002/release.yml` | 原始 Release Record 保留；於 `2026-09-19T16:38:39.747194Z` 停止接受新的 Study |
 | `v001` | `Superseded` | `workflows/strategy-forward-replication-research--v001/release.yml` | 原始 Release Record 保留；於 `2026-09-19T03:02:44.000000Z` 停止接受新的 Study |
 
-本次切換的原因是 v004 已通過 Release Candidate 的完整驗證。Trusted Approver `ochowei@gmail.com` 依 v004 當下的 manifest、測試報告與 digest 建立新的 Release Record，正式啟用 v004，並取代 v003 接受新的 Study。v004 的主要治理變更是 Study 使用不可變 Workflow reference 與 digest，Development／Historical Evaluation 使用隔離暫存 workspace；blind review 與 Historical Evaluation skill 也已納入 v004 的 `.agent/skills/`。
+本次切換的原因是 v005 已通過 Release Candidate 的完整驗證，新增一次提交 1 至 16 個資產資料檔的能力。Trusted Approver `ochowei@gmail.com` 依 v005 當下的 manifest、測試報告與 digest 建立新的 Release Record，於 `2026-09-24T10:59:32Z` 正式啟用 v005；同一時間 v004 停止接受新的 Study，並由 v005 取代。v004 的 Package、原始 Release Record、既有 Study、evidence、authority 與 runtime 均原地保留；`Superseded` 不會改寫或終止既有研究。
 
 v003 的 Package、原始 Release Record、既有 Study、evidence、authority 與 `runtime/workflow/` 均原地保留，不因 Superseded 而遷移、刪除或失效。v002 與 v001 也維持原地保留；`Superseded` 不代表既有研究結果失效。
 
@@ -147,9 +148,11 @@ Trusted Approver 必須檢視 Release Candidate 的規則、測試報告、manif
 
 2026-09-19 制定 [以明確派工取代 Study 人工核准](plans/study-explicit-assignment-lifecycle.md)。後繼版本應移除 Study 的預先登記核准、Development 授權及歷史評估核准文件，改以登記事實、執行開始事件與既有明確派工驅動；不得自動填入 approved。預先登記、內容指紋、角色與資料隔離、候選資格及一次性歷史評估限制全部保留。
 
-這項規格支援 v004 的明確派工與 reference-first 流程；本次切換不修改已發布 v003、v002 或 v001，也不取消 Workflow Release 核准。v003 的既有 Study 留在原版，v004 接受新的 Study。
+這項規格先支援 v004 的明確派工與 reference-first 流程；v004 自 `2026-09-21T02:07:06.216838Z` 啟用至 `2026-09-24T10:59:32Z` 停止接受新 Study。現在由 v005 接受新 Study。本次切換不修改已發布 v004、v003、v002 或 v001 的 Package 或原始 Release Record；既有 Study 繼續留在原版，也不取消 Workflow Release 核准。
 
 - [Workflow Package 說明](../workflows/README.md)
+- [v005 Workflow Package README](../workflows/strategy-forward-replication-research--v005/README.md)
+- [v005 Release Record](../workflows/strategy-forward-replication-research--v005/release.yml)
 - [v004 Workflow Package README](../workflows/strategy-forward-replication-research--v004/README.md)
 - [v004 Release Record](../workflows/strategy-forward-replication-research--v004/release.yml)
 - [v001 Workflow Package README](../workflows/strategy-forward-replication-research--v001/README.md)

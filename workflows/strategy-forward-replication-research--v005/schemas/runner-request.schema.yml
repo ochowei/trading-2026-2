@@ -1,0 +1,87 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+oneOf:
+  - required:
+      - data_path
+      - data_digest
+  - required:
+      - data_assets
+      - availability_policy
+properties:
+  availability_policy:
+    const: after-close-next-session
+  data_assets:
+    items:
+      additionalProperties: false
+      properties:
+        asset_id:
+          pattern: ^[A-Z][A-Z0-9_]{0,31}$
+          type: string
+        available_at:
+          const: after-close
+        data_digest:
+          format: sha256
+          type: string
+        data_path:
+          pattern: ^(run|runs/[0-9]+)/assets/[A-Z][A-Z0-9_]{0,31}\.csv$
+          type: string
+        end_date:
+          format: date
+          type: string
+        interval_role:
+          enum:
+            - warmup-development
+            - historical-evaluation
+        provider:
+          minLength: 1
+          type: string
+        start_date:
+          format: date
+          type: string
+        symbol:
+          minLength: 1
+          type: string
+        timezone:
+          const: America/New_York
+        use:
+          enum:
+            - trade
+            - reference
+      required:
+        - asset_id
+        - use
+        - provider
+        - symbol
+        - data_path
+        - data_digest
+        - start_date
+        - end_date
+        - timezone
+        - available_at
+        - interval_role
+      type: object
+    maxItems: 16
+    minItems: 1
+    type: array
+  data_digest:
+    format: sha256
+    type: string
+  data_path:
+    minLength: 1
+    type: string
+  preregistration:
+    type: object
+  source_bundle:
+    type: object
+  stage:
+    enum:
+      - development
+      - historical-evaluation
+  trial_inputs:
+    type: object
+required:
+  - stage
+  - preregistration
+  - trial_inputs
+  - source_bundle
+type: object

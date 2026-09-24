@@ -1,0 +1,75 @@
+$defs:
+  asset:
+    additionalProperties: false
+    properties:
+      asset_id:
+        pattern: ^[A-Z][A-Z0-9_]{0,31}$
+        type: string
+      available_at:
+        const: after-close
+      data_digest:
+        format: sha256
+        type: string
+      data_path:
+        minLength: 1
+        type: string
+      end_date:
+        format: date
+        type: string
+      interval_role:
+        const: historical-evaluation
+      provider:
+        minLength: 1
+        type: string
+      start_date:
+        format: date
+        type: string
+      symbol:
+        minLength: 1
+        type: string
+      timezone:
+        const: America/New_York
+      use:
+        enum:
+          - trade
+          - reference
+    required:
+      - asset_id
+      - use
+      - provider
+      - symbol
+      - data_path
+      - data_digest
+      - start_date
+      - end_date
+      - timezone
+      - available_at
+      - interval_role
+    type: object
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+oneOf:
+  - required:
+      - data_path
+  - required:
+      - data_assets
+properties:
+  actor:
+    minLength: 1
+    type: string
+  data_assets:
+    items:
+      $ref: '#/$defs/asset'
+    maxItems: 16
+    minItems: 1
+    type: array
+  data_digest:
+    format: sha256
+    type: string
+  data_path:
+    minLength: 1
+    type: string
+required:
+  - actor
+  - data_digest
+type: object

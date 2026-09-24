@@ -1,0 +1,10 @@
+conformance:
+  - digest: d6662c3b8314d2ff79eb1f0c36c37a4676ab2a9e27130ebb45828649c48d67d2
+    path: tests/test_policy_conformance.py
+policy: us-equity-market
+policy_digest: c804ff09e982df695c55c8ee528127be5093bc3ba5aebc9c9c019b38316ea69f
+schema_version: 1
+source:
+  policy_path: policies/us-equity-market--v002/policy.yml
+  repository: trading-2026-1-migration-source-only
+version: v002

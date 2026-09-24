@@ -1,0 +1,129 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+definitions:
+  binding:
+    additionalProperties: false
+    properties:
+      digest:
+        format: sha256
+        type: string
+      path:
+        minLength: 1
+        type: string
+    required:
+      - path
+      - digest
+    type: object
+  evidence:
+    additionalProperties: false
+    properties:
+      digest:
+        format: sha256
+        type: string
+      path:
+        minLength: 1
+        type: string
+    required:
+      - path
+    type: object
+oneOf:
+  - required:
+      - data
+  - required:
+      - data_assets
+properties:
+  data:
+    $ref: '#/definitions/binding'
+  data_assets:
+    items:
+      additionalProperties: false
+      properties:
+        asset_id:
+          pattern: ^[A-Z][A-Z0-9_]{0,31}$
+          type: string
+        available_at:
+          const: after-close
+        digest:
+          format: sha256
+          type: string
+        end_date:
+          format: date
+          type: string
+        path:
+          minLength: 1
+          type: string
+        provider:
+          minLength: 1
+          type: string
+        start_date:
+          format: date
+          type: string
+        symbol:
+          minLength: 1
+          type: string
+        timezone:
+          const: America/New_York
+        use:
+          enum:
+            - trade
+            - reference
+      required:
+        - asset_id
+        - path
+        - digest
+        - use
+        - provider
+        - symbol
+        - start_date
+        - end_date
+        - timezone
+        - available_at
+      type: object
+    maxItems: 16
+    minItems: 1
+    type: array
+  evidence:
+    $ref: '#/definitions/evidence'
+  execution_contract:
+    const: request-output-v1
+  execution_workspace:
+    const: temporary
+  operation_id:
+    minLength: 1
+    type: string
+  request:
+    $ref: '#/definitions/binding'
+  resolver_version:
+    const: 1
+  runner:
+    $ref: '#/definitions/binding'
+  schema_version:
+    const: 1
+  source_bundle:
+    $ref: '#/definitions/binding'
+  stage:
+    enum:
+      - development
+      - historical-evaluation
+  study_id:
+    minLength: 1
+    type: string
+  workflow_reference:
+    $ref: '#/definitions/binding'
+  workflow_version:
+    const: v005
+required:
+  - schema_version
+  - workflow_version
+  - study_id
+  - operation_id
+  - stage
+  - resolver_version
+  - execution_contract
+  - execution_workspace
+  - workflow_reference
+  - source_bundle
+  - runner
+  - request
+  - evidence
+type: object
