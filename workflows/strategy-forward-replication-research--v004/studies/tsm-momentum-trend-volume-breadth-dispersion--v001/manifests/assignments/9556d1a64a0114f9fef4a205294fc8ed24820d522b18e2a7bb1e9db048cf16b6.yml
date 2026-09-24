@@ -1,0 +1,9 @@
+assignee: /root/study_developer_task_022
+assigner: /root (project manager)
+instruction: 依 TASK-022 僅執行指定 v004 Study 的 development-to-freeze：建立一個新且未試過的 TSM breadth 改善假說，完成唯一 Development Trial、合規 freeze-readiness／freeze 嘗試；development 後先做受限 blind review，再 append-only 寫入 TSM.md 成果卡。不執行 Historical Evaluation、Terminal、challenge 或 replay；不得讀取正式結果或修改既有 Study。
+role: study 開發者
+schema_version: 1
+scope: development-to-freeze
+source_id: parent-thread-task-022
+study_id: tsm-momentum-trend-volume-breadth-dispersion--v001
+workflow_version: v004

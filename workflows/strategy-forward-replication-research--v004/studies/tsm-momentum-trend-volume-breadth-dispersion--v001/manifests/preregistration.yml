@@ -1,0 +1,210 @@
+baseline_definition:
+  baseline_id: tsm-momentum-trend-volume-breadth-dispersion-baseline-v001
+  candidate_family: tsm-momentum-trend-volume-breadth-dispersion-v001
+  execution_is_identical: true
+  family: trend-momentum-volume-breadth
+  objectively_simpler_because: baseline 保留原 breadth Study 的五日平均量比、至少三個五日滾動量比達標日、趨勢、價格加速、RSI、成本、風險、持倉、停損停利與冷卻規則；只省略本 Study 追加的單日成交量占五日總量上限，所以可比較此一條件帶來的增量。
+  simpler_rule: 完整使用原 tsm-momentum-trend-volume-breadth--v001 candidate 規則；不限制訊號日前五個 session 中最大單日成交量的總量占比。
+complete_candidate_family:
+  - tsm-momentum-trend-volume-breadth-dispersion-v001
+eligibility_rules:
+  accepted_signal:
+    cooldown:
+      clock_anchor: completed-position-exit
+      minimum_completed_session_steps_after_exit: 5
+      position_must_be_flat: true
+    decision_time: completed-session-close
+    mean_reversion:
+      close_vs_sma20_gap_minimum: '-0.10'
+      close_vs_sma20_operator: '>='
+      rsi_length: 2
+      rsi_operator: <=
+      rsi_value: '70'
+      sma_length: 20
+    momentum_trend:
+      price_acceleration_lookback: 1
+      price_acceleration_minimum: '0.02'
+      price_to_sma_floor: '0.90'
+      trend_sma_lag_sessions: 5
+      trend_sma_ratio_floor: '0.95'
+    price_direction_confirmation:
+      close_above_prior_close: true
+    symbol: TSM
+    volume_breadth:
+      breadth_formula: count_of_prior_sessions_with_trailing_5_session_volume_ratio_at_least_1_05
+      coverage_window_sessions: 5
+      enabled: true
+      lookback_sessions: 5
+      minimum_qualifying_sessions: 3
+      reference_volume_average_length: 20
+      uses_prior_sessions_only: true
+    volume_concentration:
+      concentration_formula: max_prior_session_volume_divided_by_total_volume_in_prior_5_sessions
+      enabled: true
+      maximum_single_session_share: '0.60'
+      uses_prior_sessions_only: true
+      window_sessions: 5
+    volume_leads_price:
+      enabled: true
+      prior_session_window: 5
+      volume_average_length: 20
+      volume_breadth_is_before_signal: true
+      volume_ratio_minimum: '1.05'
+      volume_ratio_operator: '>='
+      volume_ratio_value: '1.05'
+  costs:
+    base:
+      fee_per_side_bps: '1'
+      slippage_per_side_bps: '5'
+    stress:
+      fee_per_side_bps: '2'
+      slippage_per_side_bps: '20'
+  development_diagnostics:
+    block_bootstrap:
+      block_lengths:
+        - 3
+        - 5
+      maximum_stress_drawdown_above_10pct_ratio: '0.10'
+      minimum_stress_positive_return_ratio: '0.80'
+      repetitions: 50000
+      seed: 20260902
+      seed_application: exact-same-seed-for-each-block-length
+    leave_one_signal_year_out:
+      maximum_stress_drawdown: '0.10'
+      minimum_stress_profit_factor: '1.00'
+      minimum_stress_return: '0'
+    signal_year_breakdown: true
+  development_gates:
+    base_profit_factor:
+      operator: '>'
+      value: '1.10'
+    base_return:
+      operator: '>'
+      value: '0'
+    completed_trades:
+      operator: '>='
+      value: 20
+    maximum_realized_trade_loss_fraction:
+      operator: <=
+      value: '0.04'
+    maximum_stress_block_bootstrap_drawdown_above_10pct_ratio:
+      operator: <=
+      value: '0.10'
+    maximum_stress_leave_one_year_out_drawdown:
+      operator: <=
+      value: '0.10'
+    minimum_stress_block_bootstrap_positive_return_ratio:
+      operator: '>='
+      value: '0.80'
+    minimum_stress_leave_one_year_out_profit_factor:
+      operator: '>'
+      value: '1.00'
+    minimum_stress_leave_one_year_out_return:
+      operator: '>'
+      value: '0'
+    stress_maximum_drawdown:
+      operator: <=
+      value: '0.10'
+    stress_profit_factor:
+      operator: '>'
+      value: '1.00'
+    stress_return:
+      operator: '>'
+      value: '0'
+    traded_years:
+      operator: '>='
+      value: 3
+  execution:
+    cooldown:
+      anchor: completed-position-exit
+      minimum_completed_session_steps_after_exit: 5
+    decision_time: completed-session-close
+    entry: next-XNYS-open
+    gap_fill: stop-gap-at-open-target-gap-at-open
+    gate_policy: formal Development gates、研究 targets 與 candidate freeze qualification 分開判定；任一 formal gate 或事前登記 target 失敗，都保留合法 evidence 並停止在 Development，不得看結果後調參或強行凍結候選。
+    holding_period: next-open-after-10-complete-sessions
+    intrabar_ambiguity: adverse-stop-first
+    position_sizing:
+      cash_cap: available-cash-no-borrowing
+      modeled_stop_includes_costs: true
+      risk_fraction_of_pre_entry_equity: '0.02'
+      shares: maximum-integer-shares-within-risk-and-cash-caps
+    stop:
+      level_from_raw_entry_open: '-0.04'
+      order: STOP_MARKET
+      time_in_force: GTC
+    target:
+      level_from_raw_entry_open: '0.04'
+      order: LIMIT
+      reissued_each_open_position_session: true
+      time_in_force: DAY
+  novelty_and_identifiability:
+    development_identifiability: 候選與 baseline 共用同一個 warmup／Development OHLCV、同一 original breadth、價格、成本與執行；唯一差別是 candidate 額外要求訊號日前五個已完成 session 的最大原始成交量占同五日總量不超過 0.60。此比例只用 t-5 至 t-1 的 Volume，不讀訊號日或其後資料。逐筆交易、年度分布、bootstrap 與 leave-one-year-out 可檢視此限制下的樣本與壓力結果，但不能單憑摘要宣稱因果優勢。
+    mechanism_difference: 原 breadth 計算五個重疊滾動量比中達標日數；新條件計算五日原始成交量最大單日占比，針對單一尖峰可能同時抬高多個重疊滾動均量這個量能集中度問題。TASK-021 path-efficiency 使用量加權收盤淨位移與缺口加日內區間路徑的比值，且其 preregistration 仍留原 breadth 敘述，故本研究不推定它取代或追加 breadth，也不重用其公式。TSM volume-lead 登記五日累積量相對二十日均量及上漲／持平成交量占比；volume-ramp 測三日單次量能脈衝；volume-peak-lead 測量峰與報酬峰的先後。這些均未測本研究明確的五日最大單日原始量占比上限。
+    shared_indicator_limitations: 仍共用 TSM、XNYS、Yahoo auto_adjusted 日線 OHLCV、五日量能窗口、二十日均量、原 breadth、當日趨勢與至少 2% 價格加速；每日 OHLCV 無法判斷盤中主動買賣。新意限於原 breadth 上追加的單日成交量集中度上限，不主張資料來源首創或機制完全獨立。
+    this_study_path: candidate 明確保留五日平均量比至少 1.05 與五個重疊五日量比中至少三日達 1.05，再追加 max(V[t-5:t-1]) / sum(V[t-5:t-1]) <= 0.60；baseline 完整使用原 breadth candidate，只不加此占比限制。其他價格、成本、風控、持倉與執行固定。
+    v024_registered_path: 既有 v024 登記的是事件日與其後固定價突破；本 Study 不使用事件狀態、事件高點或突破價。
+  research_targets:
+    completed_trades:
+      operator: '>='
+      value: 20
+    stress_return:
+      operator: '>'
+      value: '0'
+    traded_years:
+      operator: '>='
+      value: 3
+  source_and_adjustment:
+    adjustment_policy: Yahoo auto_adjust
+    calendar: XNYS
+    interval: 1d
+    provider: yahoo
+    timezone: America/New_York
+evaluation_gates:
+  base_compounded_return:
+    operator: '>'
+    value: '0'
+  base_profit_factor:
+    operator: '>'
+    value: '1.10'
+  completed_trades:
+    operator: '>='
+    value: 20
+  family_wise_confidence:
+    operator: '>='
+    value: '0.90'
+  maximum_fold_positive_profit_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_fold_trade_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_realized_trade_loss_fraction:
+    operator: <=
+    value: '0.04'
+  positive_traded_fold_ratio:
+    operator: '>='
+    value: '0.60'
+  stress_max_drawdown:
+    operator: <=
+    value: '0.10'
+  stress_profit_factor:
+    operator: '>'
+    value: '1.00'
+  stress_return:
+    operator: '>'
+    value: '0'
+  traded_folds:
+    operator: '>='
+    value: 3
+fold_warmup_sessions: 25
+hypothesis: 在保留既有五日量比至少 1.05、且五日中至少三個五日滾動量比達 1.05 的 breadth 條件後，若訊號日前五個已完成 session 的最大單日成交量不超過同五日總成交量的 60%，可排除單一極端量峰占掉五日超過五分之三、透過重疊五日均量同時推高多個 breadth 計數的情況；因此相較只用原 breadth 的 baseline，candidate 可能降低對極端單日尖峰的依賴。此 Study 明確是在原 breadth 上追加此一占比上限，不解讀 TASK-021 path-efficiency 是取代或追加 breadth，也不使用其量加權收盤路徑效率公式。Candidate 與 baseline 使用相同的價格、資料、成本、風險和執行；候選必須 evidence valid、至少 20 筆交易且涵蓋至少 3 年，並通過所有事前 formal gates 與 research targets，否則本假說不獲支持且停止凍結。
+initial_cash: '100000'
+maximum_holding_sessions: 11
+maximum_trials: 1
+selection_rule:
+  eligible_candidate: 唯一 Trial 必須通過全部 Development gates 與已登記 research targets；未通過時不得凍結候選。
+  method: fixed-single-candidate-no-outcome-ranking
+  selected_candidate_id: tsm-momentum-trend-volume-breadth-dispersion-v001
+tie_handling:
+  method: not-applicable-single-candidate

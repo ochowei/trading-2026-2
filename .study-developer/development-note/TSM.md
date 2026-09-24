@@ -2119,3 +2119,46 @@
 ### Parent review exact digest correction（2026-09-23）
 
 - **Baseline digest 逐字核對**：先前回覆中的 `db4ee9bfb36b0d9e11b5d1f5e7586b33ae1f4edd551c1268e190cfcf3e2f868` 為 63 位，誤少一位；Development `publication.yml` 的 baseline artifact digest 原樣為 `db4ee9bfb36b0d9e11b5d1f5e7586b33ae1f4edd551c1268e190cfcf3fe2f868`（64 位），且與前一段成果卡 correction 中的 digest 完全相同。後續應採 publication 的完整值。本次僅從 publication 欄位複製並核對成果卡字串，未重算雜湊、重跑流程或修改 evidence／binding。
+
+
+## `tsm-momentum-trend-volume-breadth-dispersion--v001`｜`2026-09-23`
+
+- **假說**：候選保留 3/5 breadth，加訊號日前五日 max 量／總量≤0.60；baseline 不加。TSM 卡未見此上限，異於 volume-lead／ramp／peak-lead 與 TASK-021 path-efficiency。
+- **結果**：兩份 evidence valid；候選 7 筆／3 年，base／stress 報酬 +7.19%／+5.60%、PF 4.29／3.60；candidate／baseline outcome 相同，cap 未排除訊號。失敗 formal gate／target 是 7<20 筆；freeze eligibility=false。
+- **盲檢討／限制**：eligible；reference 已驗證，只讀設計／Development evidence，未讀正式結果。7 筆且兩組無差，不支持改良；新 Study 先確保足量 Development 樣本。
+- **來源**：prereg、candidate／engine／runner contract、Source Bundle、Development inputs／evidence／publication；未讀受限資料。
+
+### Parent review correction／同一成果卡補充：`tsm-momentum-trend-volume-breadth-dispersion--v001`（2026-09-23）
+
+以下補充屬於同一 Study 成果卡，原卡原文保留；若原摘要省略了細節，以本補充列出的 Development 證據為準。
+
+- **新穎性盤點**：逐項比對 TSM Development 成果卡中的原 breadth（五日內至少 3/5 日達量比）、volume-lead（五日總量壓力／上漲與平盤量占比）、volume-ramp（三日量能脈衝）、volume-peak-lead（量峰與報酬峰的先後）、吸收、效率、收盤接受、報酬對齊、區間壓縮、跳空錨定、持續性與反應延遲等機制，也對照 TASK-021 的 path-efficiency（量加權淨位移除以缺口加日內路徑）。盤點未見「訊號日前五日中，最大單日原始成交量占五日總量不得超過 60%」這個相同上限；這只表示既有 Development 紀錄未見同一規則，不表示各組件首創或具有獨立因果效果。
+
+- **Candidate／baseline Development metrics**：兩臂各自的 base 與 stress 數字如下。報酬及 MDD 以百分比表示；兩臂 trade 數及指標相同。
+
+| 臂別／情境 | 完成交易 | 有交易年份 | 報酬 | PF | 最大回撤 MDD |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Candidate／base | 7 | 3 | 7.189742% | 4.288368 | 1.998988% |
+| Candidate／stress | 7 | 3 | 5.595919% | 3.598111 | 1.998930% |
+| Baseline／base | 7 | 3 | 7.189742% | 4.288368 | 1.998988% |
+| Baseline／stress | 7 | 3 | 5.595919% | 3.598111 | 1.998930% |
+
+- **Evidence validity、formal gates 與 targets**：candidate evidence=`valid`，baseline evidence=`valid`。兩臂各有 13 項 formal gates；唯一失敗是 `completed_trades`（7，門檻 ≥20）。其餘 12 項均通過：`base_profit_factor`、`base_return`、`maximum_realized_trade_loss_fraction`、`maximum_stress_block_bootstrap_drawdown_above_10pct_ratio`、`maximum_stress_leave_one_year_out_drawdown`、`minimum_stress_block_bootstrap_positive_return_ratio`、`minimum_stress_leave_one_year_out_profit_factor`、`minimum_stress_leave_one_year_out_return`、`stress_maximum_drawdown`、`stress_profit_factor`、`stress_return`、`traded_years`。Candidate 的全部 research targets：`completed_trades ≥20` 未達（7）；`stress_return >0` 達成（5.595919%）；`traded_years ≥3` 達成（3）。Baseline 是比較臂，沒有登記 candidate research targets，故 targets 不適用；它仍接受上述 formal-gate 評估，結果相同。
+
+- **Freeze 與實際階段**：candidate `freeze eligibility=false`；Study 已完成並發布 Development Trial，現停在 `trial-recorded`、未 frozen。由於交易數未達 20 筆且 candidate 不具 freeze 資格，未嘗試 freeze-readiness 或 candidate-freeze；本任務也未執行正式 Evaluation、Terminal、challenge 或 replay。
+
+- **預先建立前的修正**：最初草案設最大單日量占比上限 35%，v004 prepare 的 synthetic fixture 有前一交易日 5 倍量、另四日各 1 倍量，單日占比為 5/9＝55.6%，因此 35% 上限會拒絕這個人工 fixture，相關 cooldown 合成情境無法成立。這是 workflow 的合成資料檢查，不是 TSM 市場資料結果。建立 Study 前將上限調到 60%、更新 preregistration bindings；在這次 35% fixture 失敗時，尚未建立任何 Study，也尚未執行任何 Development 資料。最終 Study 僅建立一次，之後只執行一個 Development Trial。
+
+- **Blind review**：outcome-exposure eligibility 檢查為 eligible，盲檢討已完成。讀取範圍僅限已驗證的 v004 reference、目標 Study 的 preregistration／設計／candidate 與 qualification 定義、implementation／runner contract、Source Bundle 程式、Development inputs、candidate／baseline Development evidence 與 publication；未發生 allowlist 外讀取。沒有讀正式 Historical Evaluation、Terminal 或其他正式結果，也沒有重跑 runner。實質結論是兩臂 trades 與所有 metrics 相同，60% cap 沒有排除本樣本任何已接受訊號；本次試驗沒有顯示改善，也不能支持因果主張。七筆交易不足以判斷此規則能否在其他樣本重現。
+
+- **已確認**：兩份 Development evidence 均有效；candidate 與 baseline 各有 7 筆交易、3 個交易年份，base／stress 指標完全相同；唯一 formal-gate 失敗為交易數；candidate freeze eligibility 為 false；60% cap 在這組已接受訊號中未造成兩臂差異。
+- **可能原因**：在原本能通過其他條件的訊號中，單日量占比可能都沒有高於 60%，因此上限未形成篩選；目前也可能只是七筆交易樣本偏少。這些是可能解釋，不是已證明的機制。
+- **尚不能判斷**：60% 上限在更多交易、其他年份或不同樣本中是否會排除訊號、改善壓力結果或產生可重現效果；本 Trial 不能區分這些情況，也不能證明成交量集中度造成績效變化。
+
+- **限制與下一輪否證條件**：本輪只有 7 筆交易，candidate 和 baseline 完全同結果，無法估計有差異的效果。若另立 Study，應先選擇有足夠原始 breadth 訊號的事前資料範圍，明確要求候選至少完成 20 筆交易、涵蓋至少 3 年，並要求 60% 規則排除至少一筆事前定義的 baseline 訊號；任何條件或正式 candidate target／gate 未達，即否證該假說並停止，不可依結果調高或調低上限。
+
+- **Provenance／bindings**：Study=`tsm-momentum-trend-volume-breadth-dispersion--v001`；workflow=`62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4`；reference=`7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47`；release manifest=`ea04558c1473f9c6db7e9707846694147c6c6f254498af2f18729a1e4ef1fa84`；policy set=`c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215`；最終 preregistration=`35728c5d7ec6edcf75bf0ba194a5abfa67154b254ed0ab31eca3a66087e0571e`；Source Bundle=`89b63978611889d3f90d7ca5cc1c588c4c963f3e237e21344c83d7157c6c3d34`；engine=`265f1b29da95bd034a07039d23cb5c2843b46a5a87900b50abb88a7525282023`；Development data view=`a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7`；Development role=`4e443b4c7db125967ef936d615b6d2283da8ba0bccc62239a5770daf176eccc3`；warmup role=`81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847`。資料為 `research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv`；Development 訊號期間 2014-01-01 至 2018-12-31，warmup 期間 2013-01-01 至 2013-12-31。create operation=`3fc98ae22dd4113012eb2cf4390486f0e92c5bfe4d896e1a62deb19ab5bb5b2e`；Development operation=`08d9191fd2aa35620345a6f5127ea5eb7facf2f1b048537bae7ddba16f558211`。candidate evidence=`615e23433bdc9f7681db31ad084af4488b7c5c20b63522f959cf6e331e0bae87`；baseline evidence=`e24fd0bba5c25ca9abc5c7a8c5e214279f822b938c6b738cc150737543bcb021`；Development inputs=`1cc8066d83139e86a93334735cc555117f5e441328ced41044df024162dd20f4`；publication envelope=`dd4a7da767d9c94c39fbd0f3fb6c3a99d779b44da86503f9b00b4c3e13e380a0`。
+
+- **白話名詞補充（適用於本卡正文與以上補充）**：candidate 是加上本次 60% 規則的候選策略，baseline 是拿來比較、未加這項規則的版本；base／stress 是預先設定的基準成本與較不利成本情境。PF（獲利因子）是總獲利除以總虧損；MDD（最大回撤）是績效從高點跌到之後低點的最大幅度，數字越大代表期間內承受過的下跌越深。formal gate 是事前設定、必須逐項通過的門檻；research target 是事前設定要達成的數值目標。bootstrap（區塊重抽樣）是把過往相鄰交易成組抽取很多次，估計結果對樣本變動有多敏感，不能當成新增的真實交易。evidence validity=`valid` 表示證據檔的格式、必需欄位與來源檢核通過，不等於策略有效。freeze eligibility 是候選是否符合凍結資格；`false` 表示尚不符合，不能把它凍結成後續正式評估版本。盲檢討 eligibility 是檢討者是否符合限定讀取範圍的條件；allowlist 是事先列好的可讀資料清單；outcome exposure 指檢討前是否接觸過正式結果。provenance／binding 是記錄結果由哪個固定版本的流程、策略程式、登記規格與資料產生，避免把不同版本的證據混在一起。Source Bundle 是本次綁定的策略程式來源包；synthetic fixture 是用人工資料檢查流程能否正確處理特定情境；cooldown（冷卻期）是一次訊號後暫停一段時間，避免短時間重複進場。trial-recorded 表示 Development 試驗已記錄、Study 尚未凍結；Development 是研究階段試做，Historical Evaluation／Terminal 是正式歷史評估及其終點結果，本 Study 未讀取或使用那些結果。
+
+- **來源欄位白話補充**：engine 是依策略規則判斷何時進出場的程式；runner 是把這個程式套用到指定資料並產生試驗結果的執行工具；contract 是說明程式如何接收資料、輸出欄位的約定。preregistration 是看結果前先寫下假說、規則與目標的登記文件；Development data view 是本次允許使用的資料範圍及日期。reference 是 v004 流程規則的固定版本；release manifest 記錄該次發布包含哪些流程內容；policy set 是執行時適用的治理規則。digest 是檔案內容的指紋，用來核對綁定的是哪個確切版本；operation ID 是一次建立或試驗操作的唯一編號。publication 是列出已發布試驗證據及其指紋的索引。

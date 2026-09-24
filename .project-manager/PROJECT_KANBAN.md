@@ -46,6 +46,32 @@
 
 ## 📋 TODO
 
+### [TASK-022] 以既有 TSM breadth Study 為基礎，在 v004 提出新假說、盲檢討並撰寫成果卡
+- **狀態**：Done
+- **優先級**：高
+- **負責角色**：study 開發者
+- **執行者**：本 parent thread 唯一 Study Developer subagent `/root/study_developer_task_022`
+- **建立日期**：2026-09-23
+- **更新日期**：2026-09-23
+- **依賴／阻塞**：無；開始前依 v004 規範確認 Workflow Release、reference 與 Development data bindings
+- **驗收條件**：
+  - 依 `.study-developer/development-note/TSM.md`、目標 `tsm-momentum-trend-volume-breadth--v001` 與 v004 允許讀取的 Development-only 研究，盤點既有假說與可改善處。必須把 TASK-021 的 `tsm-momentum-trend-volume-path-efficiency--v001` 視為既有嘗試；其 preregistration／candidate 規格歧義未釐清前，不得推定 path-efficiency 是取代或追加 breadth，也不得重用該 path-efficiency 公式作為本次新假說。
+  - 提出一個機制清楚、可否證、可預先登記且確實未曾嘗試過的改進假說；說明相對原 breadth Study、TASK-021 與其他最近鄰機制的差異，固定單一研究變更及比較 baseline，只建立一個新的 v004 Study。不得修改或重發原 Study，也不得只改名稱、版本或參數。
+  - 依 v004 `development-to-freeze` 核對 Workflow reference／release／policy／source 與 Development data bindings，完成 runner preflight、prepare、preregistration、candidate／baseline、implementation、runner、明確派工及 provenance；依法只做一次 create 與一次 Development trial，完成 evidence validation 及規則允許的 freeze-readiness／candidate-freeze 嘗試。若資格不符，保留實際狀態與失敗原因，不得繞過流程或補猜結果。
+  - 僅執行 v004 Development；不得執行 Historical Evaluation、Terminal、challenge 或 replay，不得讀取、搜尋、雜湊、修改或引用 `historical-evaluation-artifacts/`、`.super-admin/`、quarantine／full evaluation data 或正式 Evaluation／Terminal 結果；不得覆寫或刪除既有 Study、evidence、authority、成果卡或 Workflow Package。
+  - Development 後、寫成果卡前，依 `blind-review-strategy-study-v004` 技能先做 outcome-exposure／allowlist 檢查，再對新 Study 進行受限 blind review；只使用技能允許的研究設計、程式與 Development candidate／baseline evidence，不重跑 runner，不讀 `events/`、`journals/`、`operations/`、`study.yml` 或 Git 歷史，也不以完整 status／validate 取代盲檢討。若輸出或讀取超出 allowlist，立即停止且不重試，記錄實際範圍並標示盲檢討未通過。
+  - 盲檢討階段結束後，依 `study-development-note-authoring-v004` 技能，以繁體中文 append-only 將新 Study 成果卡追加到 `.study-developer/development-note/TSM.md`。如實分列 candidate／baseline、base／stress、formal gates、targets、evidence validity、freeze eligibility／狀態、provenance、盲性、限制與下一輪可否證條件，並說明已確認、可能原因和尚不能判斷；數值只能取自允許的 Development evidence，缺件不得臆測。
+  - 回報 Study ID、假說與新舊機制差異、workflow／reference／release／policy／source／data bindings、create／Development operation 識別資訊、evidence 與驗證結果、candidate freeze 狀態、盲檢討及成果卡自查結果、修改檔案與任何缺件，提供 parent 可在 PM 權限內核對的完整驗收證據包。完成時維持 Doing，由 parent review；若需修正，只交回同一 subagent，通過後由 parent 移至 Done。
+- **摘要**：以既有 TSM breadth Study 為起點，在 v004 找出一個機制上不同、先前未嘗試的改進假說並完成 Development；完成後先盲檢討，再撰寫繁體中文成果卡，留下可由專案管理者驗收的研究紀錄。
+- **進度／備註**：
+  - 2026-09-23 由 parent thread 唯一 Study Developer subagent `/root/study_developer_task_022` 執行，狀態維持 Doing，等 parent 驗收。
+  - **假說**：Study `tsm-momentum-trend-volume-breadth-dispersion--v001` 保留原 3/5 breadth，candidate 唯一新增訊號日前五日最大單日原始成交量占五日總量 `<=0.60`；baseline 保留原 breadth、不加 cap。已比對 TSM Development 卡：未見同一 raw-volume share cap；機制不同於 volume-lead、ramp、peak-lead 及 TASK-021 的量加權收盤路徑效率，不推定 TASK-021 取代或追加 breadth。
+  - **前置校正**：初版 35% cap 在 Study create 前的 prepare synthetic fixture 未通過，因 fixture 的單日 5x volume 約占 prior 5 日 55.6%；另將部分條件輸出欄從 `raw_momentum_signal` 改名 `momentum_condition`，避免 v004 checker 誤把中間條件當完整訊號。未建立 Study、未跑 Development 資料即將門檻改為事前 60%，重算 bindings；final runner-preflight／prepare 均 passed。Parent review 確認此調整於 create 前固定，僅依 synthetic fixture 做校正，未用 Development outcome 選門檻。
+  - **v004／資料 binding**：workflow=`62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4`；reference=`7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47`；release=`ea04558c1473f9c6db7e9707846694147c6c6f254498af2f18729a1e4ef1fa84`；policy=`c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215`；prereg=`35728c5d7ec6edcf75bf0ba194a5abfa67154b254ed0ab31eca3a66087e0571e`；source bundle=`89b63978611889d3f90d7ca5cc1c588c4c963f3e237e21344c83d7157c6c3d34`。Development 使用固定 warmup-development view，資料 digest=`a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7`、Development role=`4e443b4c7db125967ef936d615b6d2283da8ba0bccc62239a5770daf176eccc3`、warmup=`81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847`；訊號期間 2014–2018，warmup 2013。
+  - **v004 執行與結果**：assignment=`research/tsm-momentum-trend-volume-breadth-dispersion--v001/assignment.yml`；create operation=`3fc98ae22dd4113012eb2cf4390486f0e92c5bfe4d896e1a62deb19ab5bb5b2e`；唯一 Development operation=`08d9191fd2aa35620345a6f5127ea5eb7facf2f1b048537bae7ddba16f558211`。candidate／baseline evidence 均 valid、7 筆／3 年（2015:1、2016:1、2018:5），結果欄位與績效相同。base return／PF=`7.1897%`／`4.2884`；stress=`5.5959%`／`3.5981`。唯一失敗 formal gate 及 candidate target 為 `completed_trades`（7<20）；其他 Development gates 與 targets 通過。candidate freeze eligibility=false，未凍結；未執行 Terminal 或正式 Historical Evaluation。
+  - **盲檢討／成果卡**：目標 reference 再驗證通過；未接觸本 Study 正式 Evaluation／Terminal outcome，受限 blind review eligible 並完成，只讀設計、程式 binding 與 Development evidence／publication，不重跑 runner，未讀禁止路徑或 Git 歷史。原卡以 append-only 寫入；作者自查正文 530 字元。Parent 初審發現必填欄位缺件後，同一 subagent 另 append-only 補充 6,084 字元，補足逐 Trial 數值、gates／targets、provenance、blind review、前置調整原因、限制、否證條件及白話名詞說明，沒有新增 Study 標題或改寫原卡。沒有成果卡專用 checker；作者回報欄位自查通過，parent 依自查與 PM 可讀 evidence review 驗收。
+  - **Parent review／結案**：已檢視 preregistration、candidate／baseline 定義、engine、assignment、development plan、candidate／baseline evidence 與 publication。新機制保留原 3/5 breadth，再加訊號日前五日最大單日原始量占比 ≤60%；與 TASK-021 path-efficiency 及已盤點近鄰機制不同，且沒有假定 TASK-021 是取代或追加 breadth。35%→60% 僅在 Study create 前依 synthetic fixture 調整，final preregistration／bindings 固定為 60%，未用 Development outcome 選門檻。parent 以 shasum 確認 candidate、baseline、inputs 與 publication digest 相符；candidate／baseline 的七筆交易結果及 metrics 相同：base return／PF／MDD 7.1897%／4.2884／1.999%，stress 5.5959%／3.5981／1.999%；三個交易年。兩份 evidence validity 均為 valid；唯一 formal gate 與唯一未達 candidate target 為 completed_trades（7<20），stress_return 與 traded_years targets 通過，freeze eligibility=false，未凍結。worker 回報 v004 runner-preflight／prepare、單次 create 與 Development trial 均完成；blind review eligible 且依允許範圍完成，沒有 allowlist 逸出。初次成果卡自查發現欄位缺件後，同一 subagent 依 append-only 原則補上逐項結果、來源綁定、調整原因、限制、下一輪否證條件及白話名詞說明；原卡正文 530 字元符合技能長度，另有審查補充。沒有成果卡專用 checker；parent 依 worker 的欄位自查及允許的 Development／PM 資料驗收。因 `.study-developer/AGENTS.md` 的角色存取限制，parent 未直接讀取成果卡；Done 表示派工、Development、盲檢討交付及角色範圍內驗收完成，不代表假說獲得支持或策略有效。
+
 ### [TASK-021] 以既有 TSM breadth Study 為基礎，在 v004 開發新假說、盲檢討並撰寫成果卡
 - **狀態**：Done
 - **優先級**：高
