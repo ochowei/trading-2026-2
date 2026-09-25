@@ -2164,30 +2164,18 @@
 - **來源欄位白話補充**：engine 是依策略規則判斷何時進出場的程式；runner 是把這個程式套用到指定資料並產生試驗結果的執行工具；contract 是說明程式如何接收資料、輸出欄位的約定。preregistration 是看結果前先寫下假說、規則與目標的登記文件；Development data view 是本次允許使用的資料範圍及日期。reference 是 v004 流程規則的固定版本；release manifest 記錄該次發布包含哪些流程內容；policy set 是執行時適用的治理規則。digest 是檔案內容的指紋，用來核對綁定的是哪個確切版本；operation ID 是一次建立或試驗操作的唯一編號。publication 是列出已發布試驗證據及其指紋的索引。
 
 
-## `tsm-industry-relative-lag-repair--v001`｜2026-09-25（v005 Development；盲檢討完成）
+## 精簡定稿／目前採用版本｜`tsm-industry-relative-lag-repair--v001`
 
-- **假說與固定比較**：SOXX 近五個共同交易日報酬須大於 0，且 TSM 同期落後至少 3 個百分點；收盤後出訊號、下一個 XNYS 開盤進場。候選是固定 v009 訊號加此 overlay，baseline 為原樣 v009；成本、10 個完整持有交易日、±4% 出場、2% 風險預算與共用冷卻期均事前固定。資料是 TSM 交易資產、SOXX 參考資產，Yahoo auto-adjusted、2013-01-02 至 2018-12-31，兩檔 XNYS sessions 對齊；訊號期 2014–2018。
-- **正式 Development 結果**：candidate／baseline evidence 均 `valid`。候選 47 筆、5 年；base／stress 報酬 +28.78%／+18.24%，獲利因子（獲利總額除以虧損總額）2.005／1.646。v005 兩項 research targets（至少 20 筆、3 年）通過；正式 gates 10/11 通過，唯一失敗為壓力交易區塊重抽樣中最大回撤超過 10% 的比例 0.19848，高於上限 0.10。固定 v009 baseline 24 筆、5 年，11 項正式 gates 均通過。候選 freeze eligibility=`false`；本輪未執行 freeze，沒有凍結候選。
-- **TASK-023 補充目標（不屬 v005 qualification）**：候選有 26 筆 entry–exit 區間不與任何 v009 baseline 交易重疊的 overlay 交易，達到事前 5 筆門檻；candidate stress PnL $18,244.95、v009 $26,523.17，差額 −$8,278.22，未達大於 0；候選／v009 stress 已實現最大回撤為 7.674%／2.119%，未達「不高於 v009」。候選排擠 7 筆 v009 成交，同日雙觸發 1 次。這三項是 digest 綁定 raw trades 的事前補充計算，v005 不會自動裁定。
-- **盲檢討與限制**：正式 Historical Evaluation／Terminal 結果未接觸；盲檢討只讀本 Study 的 reference、Source Bundle、preregistration、設計程式及 Development candidate／baseline publication/evidence，bindings 與 validator 重算一致，review 完成。此證據僅涵蓋 2014–2018 Development；SOXX 是單一固定產業 proxy，absolute-only 對照僅分類、不另形成交易組，不能證明因果或跨期有效。provenance、selection evidence 尚未建立；未達資格，不補做 freeze/readiness、不重跑。若另立 Study，須在新 Trial 前固定方案，並要求正式 gates 全通過、stress 淨增損益大於 0、回撤不高於 v009；不得在本 Study 調整或重跑。
-- **固定 bindings**：v005 workflow `2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2`；release record `92c2c35d15e371378c189f60de69093220ab1ee74c256208c36be31534f9aeb8`；manifest `6cf440bf81e2c081ff6e77025c5779cf5f2e4849015278419b836c0777db6405`；policy `c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215`；Workflow reference `40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90`；preregistration `802926ef20773c47addac43595a1819fd29287abb5c6a581d82e0693e3317563`；Source Bundle `c991bc32ba2380c91db35ab7af84597d7b27ca08a695080ba77c8e82bb29507c`；Development operation `c61aed2338903a1440e715b6b8018c6f181f3f63332236e378fe65fde6a07e32`；publication `2f241bc8d4519fccddfbfef4734f4622524ab30c17fa6e1c7fb3ac2768dc7393`；candidate/baseline/inputs `d919b7ad99401aeba63ea1083e98d746df3d05f8a865dac33ff4664e6e3f35f4` / `8b852f5dacd04e96cd23cdd1ff94d232f7bb882e589dc33899669ec9d9e1f3af` / `455950bb45f577da87a24e795c731c407c364695c5f7faad26b50c722beb1f1f`；data-assets list `bdb73ca5243640ea1e84f859e4e22bc67d78fc97ec1d5c43426993ff5e122289`（SOXX `41c33b0ae3c53a6ae6726c2c6dcd673c19010e86c4f44f17ac64c13e5da1263a`，TSM `a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7`）。
+### Development 正文（600 字）
+【已確認】SOXX五個XNYS（美國交易日）漲>0、TSM落後≥3個百分點，次日買；候選在v009上加條件，對照是v009。
+【已確認】基準／壓力成本：候選報酬28.783%／18.245%、PF2.005／1.646、MDD6.955%／7.674%；v009為33.676%／26.523%、5.036／4.204、1.9998%／2.119%。PF=獲利除以虧損；MDD=高點後最大跌幅。兩份證據有效、publication digest綁定。
+【已確認】正式門檻：候選10/11，失敗項為壓力重抽MDD>10%率19.848%>10%；v009全過。研究目標≥20筆／≥3年，候選47筆／5年通過。candidate_freeze_eligibility=false；實際凍結狀態尚不能判斷；未執行freeze/readiness。
+【已確認】TASK-023自訂目標（非v005）：不重疊新增26筆≥5通過；排擠後壓力淨增益−$8,278.22<0，MDD 7.674%>v009 2.119%。
+【尚不能判斷】SOXX僅一檔參考資產，訊號期只有2014–2018；因果及跨期效果未知。盲檢討完成，限本Study設計／程式／Development證據，未讀正式Evaluation／Terminal。下一Study事前登記；正式門檻全過、壓力增益>0、MDD≤v009須同時成立，否則否證。
 
+### Development 資產與來源綁定（不計入正文）
+- SOXX：`asset_id=SOXX`；`use=reference`；`provider/symbol=yahoo/SOXX`；資料期2013-01-02–2018-12-31；`interval_role=warmup-development`；`available_at=after-close`；SHA-256 `41c33b0ae3c53a6ae6726c2c6dcd673c19010e86c4f44f17ac64c13e5da1263a`。
+- TSM：`asset_id=TSM`；`use=trade`；`provider/symbol=yahoo/TSM`；資料期2013-01-02–2018-12-31；`interval_role=warmup-development`；`available_at=after-close`；SHA-256 `a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7`。
+- 兩資產均為1日 Yahoo 調整價、America/New_York 時區，按 XNYS 對齊；訊號期2014-01-01–2018-12-31，暖機標示2013-01-01–2013-12-31。Publication 的資產清單 digest 為 `bdb73ca5243640ea1e84f859e4e22bc67d78fc97ec1d5c43426993ff5e122289`（不同於逐檔 SHA-256）。
 
-### 精簡成果卡摘要｜`tsm-industry-relative-lag-repair--v001`（2026-09-25）
-
-- **假說**：SOXX 五個共同交易日上漲、TSM 同期落後至少 3 個百分點時，於下一個 XNYS 開盤買進；候選為固定 v009 加此相對落後條件，baseline 為原樣 v009。交易、風控及 base/stress 成本均事前固定。
-- **Development**：候選與 baseline evidence 均有效。候選 47 筆／5 年，正式 research targets 全通過；11 項正式 gates 有 10 項通過，唯壓力區塊重抽樣中最大回撤超過 10% 的比例為 19.848%，高於 10% 上限。候選 freeze eligibility=`false`，本輪未執行 freeze。Baseline 24 筆／5 年，正式 gates 全通過。
-- **補充目標**：26 筆 overlay 交易與 baseline 持倉區間不重疊（達標）；扣除排擠後壓力淨損益 −$8,278.22（未達正值）；候選壓力回撤 7.674%，高於 v009 的 2.119%。這些是預先固定、digest 綁定的自訂計算，不屬 v005 qualification。
-- **盲檢討與限制**：只用本 Study 設計、程式及 Development 證據，未接觸正式 Evaluation／Terminal 結果；綁定與重算均通過。資料只涵蓋 2014–2018 Development，SOXX 是單一產業 proxy，不能推出因果或跨期有效。若續研須另立 Study 事前登記，不能在本 Study 調整或重跑；完整 provenance 與 evidence digests 見前段。
-
-
-### 精簡正文（詳細 provenance 與指標見前段）
-
-候選在 SOXX 五日報酬為正且 TSM 同期落後至少 3 個百分點時，下一個 XNYS 開盤進場；固定 v009 原樣作 baseline。兩份 Development evidence 均有效。候選 47 筆／5 年，正式 research targets 通過；11 項正式 gates 唯一失敗是壓力區塊重抽樣中最大回撤超過 10% 的比例 19.848% 高於 10%，故 freeze eligibility=`false`，本輪未執行 freeze。Baseline 24 筆／5 年，正式 gates 全通過。補充目標：不重疊 overlay 26 筆達標；排擠後 stress 損益差額 −$8,278.22、stress 回撤 7.674% 高於 v009 2.119%，皆未達，且不屬 v005 qualification。盲檢討只讀本 Study 設計、程式及 Development evidence，bindings／重算一致，未接觸正式 Evaluation／Terminal。資料僅涵蓋 2014–2018，不能推論因果或跨期有效；不得在本 Study 調整或重跑。完整 digests 見前段。
-
-## Canonical成果卡
-【已確認】SOXX5日漲>0、TSM落後≥3pp，次日開盤買；v009對照。TSM交易/SOXX參考；Yahoo調整價2013–18對齊。
-【已確認】報酬%/PF/MDD%（候選B/S；v009 B/S）：28.783/2.005/6.955；18.245/1.646/7.674；33.676/5.036/1.9998；26.523/4.204/2.119。證據有效；候選47筆/5年，v005研究目標≥20筆/≥3年通過；正式門檻10/11，失敗stress重抽MDD>10%率19.848%>10%；candidate_freeze_eligibility=false。
-【已確認】自訂目標（非v005）：不重疊26筆≥5通過；排擠後stress增益-$8,278≤0、MDD 7.674%>v009 2.119%未達。凍結狀態【尚不能判斷】；未跑freeze/readiness。
-【尚不能判斷】單一SOXX proxy、僅2014–18 Development，不能推因果/跨期。否證：新Study預登記，正式門檻全過、stress增益>0、MDD≤v009；任一不符即否證。
-來源／界線：來源見前文附錄；盲檢討完成，只讀設計/程式/Development evidence，未讀events/state或正式Evaluation/Terminal。
+來源／讀取界線：本 Study 的 v005 `workflow-reference.yml`、`create-plan.yml`、`preregistration.yml`、`source-bundle.yml`、Development `inputs.yml`／`publication.yml`／candidate 與 baseline evidence、`runtime-manifest.yml`；盲檢討只用設計、程式及 Development evidence。未開啟價格 CSV，未讀 events、journals、Study 狀態資料或正式 Evaluation／Terminal。
