@@ -357,36 +357,43 @@
 > 因阻塞、依賴或等待決策而暫停的任務。
 
 
-### [TASK-023] 驗證 TSM 相對半導體產業落後後修復假說
-- **狀態**：Pending
-- **優先級**：高
-- **負責角色**：study 開發者
-- **執行者**：本 parent thread 唯一 study 開發者 subagent `/root/study_developer_task_023`
-- **建立日期**：2026-09-24
-- **更新日期**：2026-09-24
-- **依賴／阻塞**：TASK-025 與 TASK-026 已完成；v005 已於 `2026-09-24T10:59:32Z` 成為 Active，支援 1–16 個資產。Workflow／reference binding 資訊已備妥；本任務仍 Pending，待專案管理者安排原 Study Developer 接續。
-- **驗收條件**：
-  - 依允許的 Development 資料盤點既有 TSM 假說，確認本研究使用「相對同業落後」而非重做 v009 的自身均線超跌、成交量篩選或近期動能量價條件；以 v009 為固定增量比較基準。
-  - 在看任何本假說的 Development 交易結果前，核對並固定 TSM 與產業基準資料來源、調整方式、交易日對齊與可得時間；預先登記候選條件：產業基準過去五個共同交易日報酬大於 0，且 TSM 同期報酬至少落後 3 個百分點。產業基準優先評估 SOXX；若資料或組成不適合，須在試驗前說明並固定替代基準，不得依績效挑選。
-  - 事前固定候選／對照組、下一個 XNYS open 進場、持有與風控、base／stress 成本、與 v009 訊號重疊時的持倉和優先順序。對照組須能區分「TSM 自身下跌」與「相對產業落後」，並保留逐筆交易供重疊與排擠核對。
-  - 若 workflow 與資料條件允許，依當時有效的 Development Lifecycle 建立一個新 Study，完成規定的 preregistration、唯一合法 Development trial 與 candidate／baseline evidence 驗證；只在流程與資格允許時嘗試 candidate freeze。若前置條件不成立，交付具體缺口與所需派工，不得用未驗證資料產出結果。
-  - Development Study 完成後、撰寫成果卡前，先依適用的 blind review 規範檢查正式結果接觸情形與允許讀取範圍，再只用研究設計、程式和 Development candidate／baseline evidence 進行盲檢討；若資格或讀取範圍不符，停止盲檢討並如實記錄，不得宣稱已通過。
-  - 盲檢討階段結束後，才以繁體中文 append-only 撰寫本 Study 的 Development 成果卡，分列 candidate／baseline、base／stress、正式 gates、研究目標、evidence validity、freeze 資格與狀態、來源綁定、盲檢討狀態、限制及下一輪可否證條件；缺少結果不得補猜。
-  - 事前設定並逐項回報：候選至少 20 筆完成交易、涵蓋至少 3 個交易年、相對 v009 至少 5 筆不重疊交易；全部正式 Development gates 通過，扣除排擠交易後的 stress 淨新增損益大於 0，且合併策略的 stress 回撤不高於 v009。任一目標失敗即如實記錄，不得在同一 Study 內調門檻或重跑。
-  - 僅處理 Development；不得執行 Historical Evaluation、Terminal、challenge 或 replay，不得讀取、搜尋、引用或修改 `historical-evaluation-artifacts/`、`.super-admin/`、正式結果或受限資料；不得覆寫既有 Study 或 evidence。回報資料／規格／程式／evidence 綁定、驗證結果、未達條件與限制，完成後維持 Doing，由專案管理者驗收。
-- **摘要**：測試 TSM 短期表現落後半導體產業後是否修復，尋找不依賴 v009 超跌訊號的交易機會，並以淨新增交易及壓力成本後結果判斷是否值得保留。
-- **進度／備註**：2026-09-24 由專案管理者依 TSM Development 成果卡與使用者討論建立；已由 `/root/study_developer_task_023` 接手；正在核對新增產業資料與 v004 支援，尚未執行 Study。3 個百分點與其他數值均為待事前固定並接受否證的研究設定，不是已驗證成果。
-  - 2026-09-24 前置核對：SOXX 2013-01-02～2018-12-31 的 Yahoo `auto_adjust=True` 固定快照已新增至 `research/market-data/yahoo/`；品質報告 passed、SHA-256 `41c33b0ae3c53a6ae6726c2c6dcd673c19010e86c4f44f17ac64c13e5da1263a`、1510 個 XNYS session，與既有 TSM warmup／Development view 的日期逐日一致。v004 reference／release／policy digest 驗證通過。
-  - **TASK-026 完成後的 v005 binding（已核對）**：Package=`workflows/strategy-forward-replication-research--v005/`；workflow digest=`2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2`；release record=`workflows/strategy-forward-replication-research--v005/release.yml`，SHA-256=`92c2c35d15e371378c189f60de69093220ab1ee74c256208c36be31534f9aeb8`；release manifest digest=`6cf440bf81e2c081ff6e77025c5779cf5f2e4849015278419b836c0777db6405`；policy set digest=`c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215`。建立 Study 時仍須產生其專屬 `manifests/workflow-reference.yml` 並綁定這些固定值。本次只解除 Workflow 阻塞，不啟動 TASK-023。
-  - **阻塞**：v004 的正式 Development 隔離執行只帶入 `plan.data_path` 一份 CSV；Source Bundle preflight 明確拒絕 `.csv` 資料檔，runner contract 合成輸入也固定單一六欄 OHLCV，沒有合法方式同時綁定並交付 SOXX 第二條價格序列。不能把資料偽裝成程式設定或挪用 Volume 欄。依前置條件停止：未建立 Study、未執行 runner-preflight／prepare／create／Development trial、freeze、blind review 或成果卡，也沒有績效數值。需要 workflow 維護者制定多資產輸入的 digest、日期界線與合成 preflight 契約，再由 workflow 執行者按 Lifecycle 發行可用版本；本角色不修改 workflow 治理。subagent 回報時任務維持 Doing，交由專案管理者決定阻塞處置。
-  - **Parent review（2026-09-24）**：已核對 SOXX 快照 SHA-256 與品質報告 `passed`，並查閱 v004 `operations/lifecycle.py`、`operations/preflight.py`、`schemas/runner-contract.schema.yml`。單一 `plan.data_path` 被複製為 `run/bars.csv`、Source Bundle 拒收 CSV、合成列僅有六欄，確認目前不能合法送入第二份 SOXX 價格資料。Study Developer 沒有越權修改 workflow 或建立不合規 Study，這部分符合 v004；但實驗與結果尚未產出，blind review 與成果卡也因沒有 Study／evidence 而未執行，均不能驗收為完成。依看板阻塞規則移至 Pending；待跨角色流程支援完成後，交回同一 subagent 接續，不把前置檢查當成策略有效性證據。
-
-
----
-
 ## ✅ Done
 
 > 已完成工作並由專案管理者驗收確認的任務。
+
+### [TASK-023] 在 v005 驗證 TSM 相對半導體產業落後後修復假說
+- **狀態**：Done
+- **優先級**：高
+- **負責角色**：study 開發者
+- **執行者**：本 parent thread 新的 study 開發者 subagent `/root/task_023_v005_luna`（GPT-6 Luna，Max）
+- **建立日期**：2026-09-24
+- **更新日期**：2026-09-25
+- **依賴／阻塞**：已解除。TASK-025 與 TASK-026 完成後，v005 於 `2026-09-24T10:59:32Z` 成為 Active，支援 1–16 個資產。**本 Study 已使用 v005，未使用已 Superseded 的 v004**；Study 專屬 `manifests/workflow-reference.yml` 已綁定下列固定 Workflow／release／manifest／policy digest，Development operation 已完成。
+- **驗收條件**：
+  - 依允許的 Development 資料盤點既有 TSM 假說，確認本研究使用「相對同業落後」而非重做 v009 的自身均線超跌、成交量篩選或近期動能量價條件；以 v009 為固定增量比較基準。
+  - 僅依 v005 的多資產契約建立本 Study：以 `data_assets` 綁定 TSM（`use: trade`）與產業參考資產（優先 SOXX，`use: reference`）；若在 Development 前確認資料或產業組成不適合，先說明並固定替代參考資產，不得依績效挑選。逐檔記錄來源、日期、時區、可得時間及獨立 digest，並核對兩份資料的 XNYS session 完全對齊；不得把參考資產當成交易標的，也不得沿用 v004 的單一 `data_path` 契約。使用 v005 的 `build-strategy-study-v005`，Study 建立及 Development 僅用明確的 `development-to-freeze` 派工。
+  - 在看任何本假說的 Development 交易結果前，核對並固定 TSM 與產業基準資料來源、調整方式、交易日對齊與可得時間；預先登記候選條件：產業基準過去五個共同交易日報酬大於 0，且 TSM 同期報酬至少落後 3 個百分點。產業基準優先評估 SOXX；若資料或組成不適合，須在試驗前說明並固定替代基準，不得依績效挑選。
+  - 事前固定候選／對照組、下一個 XNYS open 進場、持有與風控、base／stress 成本、與 v009 訊號重疊時的持倉和優先順序。對照組須能區分「TSM 自身下跌」與「相對產業落後」，並保留逐筆交易供重疊與排擠核對。
+  - 依 Active v005 的 `development-to-freeze` Lifecycle 建立一個新 Study，完成規定的 preregistration、唯一合法 Development trial 與 candidate／baseline evidence 驗證；只在流程與資格允許時嘗試 candidate freeze。若前置條件不成立，交付具體缺口與所需派工，不得用未驗證資料產出結果。
+  - Development Study 完成後、撰寫成果卡前，依 `blind-review-strategy-study-v005` 檢查正式結果接觸情形與允許讀取範圍，再只用研究設計、程式和 Development candidate／baseline evidence 盲檢討；若資格或讀取範圍不符，停止並如實記錄，不得宣稱已通過。
+  - 盲檢討階段結束後，依 `study-development-note-authoring-v005` 以繁體中文 append-only 撰寫成果卡，分列 candidate／baseline、base／stress、正式 gates、研究目標、evidence validity、freeze 資格與狀態、逐資產來源綁定、盲檢討狀態、限制及下一輪可否證條件；缺少結果不得補猜。
+  - 事前設定並逐項回報：候選至少 20 筆完成交易、涵蓋至少 3 個交易年、相對 v009 至少 5 筆不重疊交易；全部正式 Development gates 通過，扣除排擠交易後的 stress 淨新增損益大於 0，且合併策略的 stress 回撤不高於 v009。任一目標失敗即如實記錄，不得在同一 Study 內調門檻或重跑。
+  - 僅處理 v005 Development；不得執行 Historical Evaluation、Terminal、challenge 或 replay，不得讀取、搜尋、引用或修改 `historical-evaluation-artifacts/`、`.super-admin/`、正式結果或受限資料；不得覆寫既有 Study 或 evidence。回報 v005 Workflow reference、release、policy、逐資產資料／程式／evidence bindings、驗證結果、未達條件與限制，完成後維持 Doing，由專案管理者驗收。
+- **摘要**：測試 TSM 短期表現落後半導體產業後是否修復，尋找不依賴 v009 超跌訊號的交易機會，並以淨新增交易及壓力成本後結果判斷是否值得保留。
+- **進度／備註**：2026-09-24 由專案管理者依 TSM Development 成果卡與使用者討論建立；已由 `/root/study_developer_task_023` 接手；正在核對新增產業資料與 v004 支援，尚未執行 Study。3 個百分點與其他數值均為待事前固定並接受否證的研究設定，不是已驗證成果。
+- **版本決策（2026-09-25）**：依使用者指示，本 Study 改為明確使用已 Active 的 v005；沿用本任務已核對的固定 bindings，並以 v005 的 Study Development、blind review 與成果卡 skills 執行。此為任務規格更新，不代表已開始 Study 或新增 Development 結果。
+- **開始執行（2026-09-25）**：依使用者指示，本任務改派給新 subagent `/root/task_023_v005_luna`（GPT-6 Luna，Max），扮演 study 開發者；其須依序完成 v005 Development、v005 blind review、v005 Development 成果卡，維持 Doing 交 parent 驗收。
+  - 2026-09-24 前置核對：SOXX 2013-01-02～2018-12-31 的 Yahoo `auto_adjust=True` 固定快照已新增至 `research/market-data/yahoo/`；品質報告 passed、SHA-256 `41c33b0ae3c53a6ae6726c2c6dcd673c19010e86c4f44f17ac64c13e5da1263a`、1510 個 XNYS session，與既有 TSM warmup／Development view 的日期逐日一致。v004 reference／release／policy digest 驗證通過。
+  - **TASK-026 完成後的 v005 binding（已核對）**：Package=`workflows/strategy-forward-replication-research--v005/`；workflow digest=`2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2`；release record=`workflows/strategy-forward-replication-research--v005/release.yml`，SHA-256=`92c2c35d15e371378c189f60de69093220ab1ee74c256208c36be31534f9aeb8`；release manifest digest=`6cf440bf81e2c081ff6e77025c5779cf5f2e4849015278419b836c0777db6405`；policy set digest=`c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215`。建立 Study 時仍須產生其專屬 `manifests/workflow-reference.yml` 並綁定這些固定值。本次只解除 Workflow 阻塞，不啟動 TASK-023。
+  - **阻塞**：v004 的正式 Development 隔離執行只帶入 `plan.data_path` 一份 CSV；Source Bundle preflight 明確拒絕 `.csv` 資料檔，runner contract 合成輸入也固定單一六欄 OHLCV，沒有合法方式同時綁定並交付 SOXX 第二條價格序列。不能把資料偽裝成程式設定或挪用 Volume 欄。依前置條件停止：未建立 Study、未執行 runner-preflight／prepare／create／Development trial、freeze、blind review 或成果卡，也沒有績效數值。需要 workflow 維護者制定多資產輸入的 digest、日期界線與合成 preflight 契約，再由 workflow 執行者按 Lifecycle 發行可用版本；本角色不修改 workflow 治理。subagent 回報時任務維持 Doing，交由專案管理者決定阻塞處置。
+- **Parent review（2026-09-24）**：已核對 SOXX 快照 SHA-256 與品質報告 `passed`，並查閱 v004 `operations/lifecycle.py`、`operations/preflight.py`、`schemas/runner-contract.schema.yml`。單一 `plan.data_path` 被複製為 `run/bars.csv`、Source Bundle 拒收 CSV、合成列僅有六欄，確認目前不能合法送入第二份 SOXX 價格資料。Study Developer 沒有越權修改 workflow 或建立不合規 Study，這部分符合 v004；但實驗與結果尚未產出，blind review 與成果卡也因沒有 Study／evidence 而未執行，均不能驗收為完成。依看板阻塞規則移至 Pending；待跨角色流程支援完成後，交回同一 subagent 接續，不把前置檢查當成策略有效性證據。
+- **v005 schema 契約核對（2026-09-25）**：重新指派的 Study Developer 已核實 Active v005 release／workflow／policy bindings 及 TSM、SOXX 固定 Development CSV 的 digest、完整 XNYS sessions 與逐日對齊；v009 已確認為固定比較基準，且尚未查看本假說 Development outcome。建立 Study 前檢查發現正式 v005 `validator/qualification.py::METRICS` 與 `validator/artifacts.py::_recompute_development()` 沒有「相對 v009 非重疊交易數」、「扣除排擠後 stress 淨新增損益」或「合併策略 stress drawdown 相對 v009」的受支援可重算 metric；把它們加入 `eligibility_rules.research_targets` 會被 `validate_supported()` 拒絕，Development validator 又會精確核對 metrics／diagnostics，不能自行擴充 evidence 欄位或手動發布 evidence。依 parent guardrail 停在 Study create 前；未寫 preregistration／plan、未執行 prepare／create／trial，未產生 evidence、未做 blind review 或成果卡，也沒有可回報的策略績效或 freeze 結果。任務維持 Doing，交由 parent review 此 schema 缺口的治理處理方式。
+
+
+- **v005 Development／盲檢討／成果卡（2026-09-25）**：依重新指派，以 Active v005 建立 `tsm-industry-relative-lag-repair--v001`；assignment digest=`6d47c2ac9822098fb2e4c209c1c481b31f0f4c1e245912996ae579f6739c7cd3`，create operation=`2ef62b694cb221730d1fccbd51cfdd1f66564b3476e4a5866ea7950c9f3ce0f7`，唯一 Development operation=`c61aed2338903a1440e715b6b8018c6f181f3f63332236e378fe65fde6a07e32`，event head=`4cc5da19c9187f3661644cf3d8520c88160496499e83f729707f2037a589f07e`。reference=`40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90`、preregistration=`802926ef20773c47addac43595a1819fd29287abb5c6a581d82e0693e3317563`、Source Bundle=`c991bc32ba2380c91db35ab7af84597d7b27ca08a695080ba77c8e82bb29507c`。TSM trade digest=`a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7`、SOXX reference digest=`41c33b0ae3c53a6ae6726c2c6dcd673c19010e86c4f44f17ac64c13e5da1263a`；兩檔 2013-01-02～2018-12-31 完整且 XNYS sessions 對齊。Candidate／baseline evidence 均 valid；候選 47 筆／5 年、research targets 通過，但 11 個正式 gates 中 bootstrap stress drawdown ratio=`0.19848` 超過 `0.10`，故 freeze eligibility=false，未執行 freeze/readiness。v009 baseline 24 筆／5 年、正式 gates 全通過。補充計算：26 筆不重疊 overlay 通過；排擠後 stress PnL delta=`-8278.224119213886735` 及 stress drawdown 7.674% 高於 v009 2.119%，兩者未達。盲檢討只用該 Study 的設計／程式／Development evidence，digest 與重算一致；未接觸正式 Evaluation／Terminal 結果。已 append-only 更新 `.study-developer/development-note/TSM.md`；完整 candidate／baseline／inputs／publication digests 留在成果卡。TASK-023 維持 Doing，交 parent review；未執行 Historical Evaluation、Terminal、challenge、replay。
+
+---
+- **Parent review／驗收（2026-09-25）**：確認 Study 依 Active v005 的固定 workflow／release／manifest／policy bindings 建立，僅有一次合法 Development trial；TSM 與 SOXX 資產用途、日期與 XNYS 對齊有 digest 綁定，candidate／baseline evidence 均 valid。v005 formal gates 10/11 通過，唯一失敗的壓力重抽樣回撤比例為 19.848%（上限 10%）；候選不具 freeze 資格，未做 freeze/readiness。獨立重算的三項 TASK 目標為：不重疊交易 26 筆達標、排擠後壓力淨損益差 −$8,278.22 未達、壓力回撤 7.674% 高於 v009 的 2.119% 未達。盲檢討範圍與 v005 規範相符，僅檢視允許的 Study 設計／程式／Development evidence，未接觸正式 Evaluation／Terminal；成果卡已 append-only 補齊 candidate／baseline base／stress 數字、證據有效性、凍結資格與狀態、限制及下一輪否證條件，正文約 580 字。補充計算重現、Ruff 與 `git diff --check` 均通過。實驗交付及文件驗收完成；研究假說未通過全部預設目標，不代表策略有效或可進入正式評估。
 
 ### [TASK-026] 依 Lifecycle 發行支援多資產輸入的 Workflow 新版本
 - **狀態**：Done

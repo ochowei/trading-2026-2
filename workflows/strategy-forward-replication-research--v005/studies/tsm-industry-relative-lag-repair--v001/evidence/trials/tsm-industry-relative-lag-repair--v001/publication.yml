@@ -1,0 +1,17 @@
+artifacts:
+  baseline:
+    digest: 8b852f5dacd04e96cd23cdd1ff94d232f7bb882e589dc33899669ec9d9e1f3af
+    path: evidence/trials/tsm-industry-relative-lag-repair--v001/baseline.yml
+  candidate:
+    digest: d919b7ad99401aeba63ea1083e98d746df3d05f8a865dac33ff4664e6e3f35f4
+    path: evidence/trials/tsm-industry-relative-lag-repair--v001/candidate.yml
+  inputs:
+    digest: 455950bb45f577da87a24e795c731c407c364695c5f7faad26b50c722beb1f1f
+    path: evidence/trials/tsm-industry-relative-lag-repair--v001/inputs.yml
+data_assets_digest: bdb73ca5243640ea1e84f859e4e22bc67d78fc97ec1d5c43426993ff5e122289
+envelope_digest: 4b60fa005543b2f3586d3c98bb5337bd0d942c2cf1b82996c79458f66c6c7219
+preregistration_digest: 802926ef20773c47addac43595a1819fd29287abb5c6a581d82e0693e3317563
+schema_version: 1
+source_bundle_digest: c991bc32ba2380c91db35ab7af84597d7b27ca08a695080ba77c8e82bb29507c
+study_id: tsm-industry-relative-lag-repair--v001
+trial_id: tsm-industry-relative-lag-repair--v001

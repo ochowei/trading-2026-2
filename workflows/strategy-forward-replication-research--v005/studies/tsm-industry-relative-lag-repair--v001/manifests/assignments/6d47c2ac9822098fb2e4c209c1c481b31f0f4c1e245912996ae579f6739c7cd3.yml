@@ -1,0 +1,9 @@
+assignee: /root/task_023_v005_luna
+assigner: /root（專案管理者）
+instruction: 依 parent thread 明確指派，使用 Active v005 完成 TASK-023 的 Development / freeze eligibility、盲檢討與成果卡；不得執行 Historical Evaluation、Terminal、challenge 或 replay。
+role: study 開發者
+schema_version: 1
+scope: development-to-freeze
+source_id: parent-thread NEW_TASK handoff for TASK-023, received 2026-09-25
+study_id: tsm-industry-relative-lag-repair--v001
+workflow_version: v005

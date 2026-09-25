@@ -1,0 +1,207 @@
+creator: /root/task_023_v005_luna
+development_actor: /root/task_023_v005_luna
+identity:
+  experiment_family: tsm-industry-relative-lag-repair-family-v001
+  historical_evaluation_operator: 待由專案管理者另行指派的 Study 歷史評估執行者
+  research_owner: 本任務委託使用者（姓名未提供）
+  research_round_id: TASK-023
+preregistration:
+  baseline_definition:
+    baseline_id: tsm-v009-fixed-baseline
+    candidate_family: tsm-industry-relative-lag-repair-family-v001
+    execution_is_identical: true
+    family: fixed-existing-strategy-incremental-baseline
+    objectively_simpler_because: 固定 v009 僅使用 TSM 自身均值回歸、量先價後與收盤方向條件；候選在同一組合上另加 SOXX 相對報酬條件。
+    simpler_rule: 原樣使用 v009 原始 DEFAULT_SPEC 訊號及執行；不加入產業相對落後 overlay。
+  complete_candidate_family:
+    - tsm-industry-relative-lag-repair--v001
+  eligibility_rules:
+    accepted_signal:
+      absolute_only_negative_control:
+        condition: TSM five-XNYS-session return < 0 and relative-lag condition is false
+        execution: none; descriptive classification only
+      cooldown:
+        clock_anchor: completed-position-exit
+        minimum_completed_session_steps_after_exit: 5
+        position_must_be_flat: true
+      decision_time: completed-session-close
+      mean_reversion:
+        close_vs_sma20_gap_minimum: '0.015'
+        close_vs_sma20_operator: '>='
+        rsi_length: 2
+        rsi_operator: <=
+        rsi_value: '50'
+        sma_length: 20
+      price_direction_confirmation:
+        close_above_prior_close: true
+      priority_if_simultaneous: v009-before-industry-relative-lag
+      relative_lag_overlay:
+        benchmark_asset_id: SOXX
+        decision_time: completed-session-close
+        lookback_common_sessions: 5
+        relative_underperformance_minimum: '-0.03'
+        relative_underperformance_operator: <=
+        sector_return_minimum: '0'
+        sector_return_operator: '>'
+        soxx_return_formula: adjusted_Close[t] / adjusted_Close[t-5] - 1
+        tsm_return_formula: adjusted_Close[t] / adjusted_Close[t-5] - 1
+      symbol: TSM
+      volume_leads_price:
+        enabled: true
+        prior_session_window: 5
+        volume_average_length: 20
+        volume_ratio_operator: '>='
+        volume_ratio_value: '1.05'
+        volume_shock_is_before_signal: true
+    costs:
+      base:
+        fee_per_side_bps: '1'
+        slippage_per_side_bps: '5'
+      stress:
+        fee_per_side_bps: '2'
+        slippage_per_side_bps: '20'
+    development_diagnostics:
+      block_bootstrap:
+        block_lengths:
+          - 3
+          - 5
+        maximum_stress_drawdown_above_10pct_ratio: '0.10'
+        minimum_stress_positive_return_ratio: '0.80'
+        repetitions: 50000
+        seed: 20260902
+        seed_application: exact-same-seed-for-each-block-length
+      leave_one_signal_year_out:
+        maximum_stress_drawdown: '0.10'
+        minimum_stress_profit_factor: '1.00'
+        minimum_stress_return: '0'
+      signal_year_breakdown: true
+    development_gates:
+      base_profit_factor:
+        operator: '>'
+        value: '1.10'
+      base_return:
+        operator: '>'
+        value: '0'
+      maximum_realized_trade_loss_fraction:
+        operator: <=
+        value: '0.04'
+      maximum_stress_block_bootstrap_drawdown_above_10pct_ratio:
+        operator: <=
+        value: '0.10'
+      maximum_stress_leave_one_year_out_drawdown:
+        operator: <=
+        value: '0.10'
+      minimum_stress_block_bootstrap_positive_return_ratio:
+        operator: '>='
+        value: '0.80'
+      minimum_stress_leave_one_year_out_profit_factor:
+        operator: '>'
+        value: '1.00'
+      minimum_stress_leave_one_year_out_return:
+        operator: '>'
+        value: '0'
+      stress_maximum_drawdown:
+        operator: <=
+        value: '0.10'
+      stress_profit_factor:
+        operator: '>'
+        value: '1.00'
+      stress_return:
+        operator: '>'
+        value: '0'
+    execution:
+      candidate_portfolio:
+        cooldown_shared_between_components: true
+        position_preemption: none; an open position is held to its registered exit
+        simultaneous_trigger_priority: v009-before-industry-relative-lag
+      entry: next-XNYS-open
+      gap_fill: stop-gap-at-open-target-gap-at-open
+      holding_period: 10 complete sessions; exit at next XNYS open if no stop or target
+      intrabar_ambiguity: adverse-stop-first
+      position_sizing:
+        cash_cap: available-cash-no-borrowing
+        maximum_open_positions: 1
+        modeled_stop_includes_costs: true
+        risk_fraction_of_pre_entry_equity: '0.02'
+        shares: maximum-integer-shares-within-risk-and-cash-caps
+      stop:
+        level_from_raw_entry_open: '-0.04'
+        order_type: STOP_MARKET
+        time_in_force: GTC
+      target:
+        level_from_raw_entry_open: '0.04'
+        order_type: LIMIT
+        reissued_each_session: true
+        time_in_force: DAY
+    gate_policy: 正式 v005 Development gates 與 v005 research_targets 分開呈現；TASK-023 三項增量比較目標只作預先固定的補充計算，不改寫 v005 qualification。
+    research_targets:
+      completed_trades:
+        operator: '>='
+        value: 20
+      traded_years:
+        operator: '>='
+        value: 3
+    source_and_adjustment:
+      adjustment_policy: Yahoo auto_adjust=True；各資產 OHLCV 使用相同調整基礎
+      assets:
+        - asset_id: SOXX
+          symbol: SOXX
+          use: reference
+        - asset_id: TSM
+          symbol: TSM
+          use: trade
+      availability_policy: after-close-next-session
+      calendar: XNYS
+      interval: 1d
+      provider: yahoo
+      timezone: America/New_York
+  evaluation_gates:
+    base_compounded_return:
+      operator: '>'
+      value: '0'
+    base_profit_factor:
+      operator: '>'
+      value: '1.10'
+    completed_trades:
+      operator: '>='
+      value: 20
+    family_wise_confidence:
+      operator: '>='
+      value: '0.90'
+    maximum_fold_positive_profit_concentration:
+      operator: <=
+      value: '0.50'
+    maximum_fold_trade_concentration:
+      operator: <=
+      value: '0.50'
+    maximum_realized_trade_loss_fraction:
+      operator: <=
+      value: '0.04'
+    positive_traded_fold_ratio:
+      operator: '>='
+      value: '0.60'
+    stress_max_drawdown:
+      operator: <=
+      value: '0.10'
+    stress_profit_factor:
+      operator: '>'
+      value: '1.00'
+    stress_return:
+      operator: '>'
+      value: '0'
+    traded_folds:
+      operator: '>='
+      value: 3
+  fold_warmup_sessions: 25
+  hypothesis: 唯一候選是固定 TSM v009 組合訊號加一個獨立產業相對落後 overlay。共同 XNYS session 收盤後計算 r_TSM(t)=TSM adjusted Close[t]/Close[t-5]-1 與 r_SOXX(t)=SOXX adjusted Close[t]/Close[t-5]-1；只有 r_SOXX(t)>0 且 r_TSM(t)-r_SOXX(t)<=-0.03 才產生 overlay 訊號，下一個 XNYS open 進場。此條件測試的是 TSM 相對上漲半導體基準落後後的修復，與 v009 的自身 SMA20 超跌、RSI(2)、此前成交量濾網及收盤反轉確認分開。v009 原始訊號與執行是固定增量比較組，不依績效更換基準。候選保留 v009 元件；同日兩種訊號皆成立時 v009 優先，最多一個 TSM 部位、不搶先平倉，兩元件共用出場後五個完整 session 冷卻。兩組都用次日開盤、10 個完整 持有 session 後次日開盤退出、raw entry +4% LIMIT target、-4% GTC stop、同日 stop 優先、現金上限及進場前權益 2% stop 風險預算；base 每邊費用 1bp／滑價 5bp，stress 每邊 2bp／20bp。v009 固定條件為 Close 低於 SMA20 至少 1.5%、RSI(2)<=50、此前五個 session 內 Volume / 前 20 session 平均量>=1.05，且訊號日 Close 高於前一日。TSM 五日報酬<0 但 relative-lag 規則不成立只作非交易負向對照。v005 research_targets 固定為 candidate 至少 20 筆完成交易、至少涵蓋 3 個訊號交易年；v005 eligibility 不會自動裁定三項 TASK-023 補充目標：a) overlay 完成交易 entry 至 exit （含兩端）不與任一 isolated v009 baseline 成交區間共享 XNYS session，數量>=5；b) candidate 全部 stress raw trade pnl 總和減 isolated v009 baseline stress raw trade pnl 總和>0，差額包含未執行 baseline 成交及組合部位順序／資金規模影響；c) 以初始資金 100000、按完成交易順序累加 stress raw pnl 重建 realized maximum drawdown，candidate <= v009。逐筆 component 與同日 trigger_components 由 runner 產生並由正式 candidate evidence digest 綁定；補充計算只讀 publication 綁定的 candidate、baseline、inputs artifacts，不另行發布或改寫正式 evidence。候選、對照、公式、成本、風控、訊號重疊／排擠定義均在唯一 trial 前固定，不因 Development 結果調整或重跑。
+  initial_cash: '100000'
+  maximum_holding_sessions: 11
+  maximum_trials: 1
+  selection_rule:
+    eligible_candidate: 唯一候選只有在 v005 gates 與 v005 research_targets 通過時具凍結資格；補充目標單獨呈現，不改寫正式 qualification。
+    family_selection_adjustment: 完整候選 family 僅一個預先登記 Trial；不依 outcome 排名。
+    method: fixed-single-candidate-no-outcome-ranking
+    selected_candidate_id: tsm-industry-relative-lag-repair--v001
+  tie_handling:
+    method: not-applicable-single-candidate
+study_id: tsm-industry-relative-lag-repair--v001

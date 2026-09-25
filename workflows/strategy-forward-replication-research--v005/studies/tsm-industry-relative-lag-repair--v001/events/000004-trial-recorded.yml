@@ -1,0 +1,26 @@
+actor_id: /root/task_023_v005_luna
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: c991bc32ba2380c91db35ab7af84597d7b27ca08a695080ba77c8e82bb29507c
+  workflow_digest: 2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2
+  workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: trial-recorded
+execution:
+  assignment_digest: 6d47c2ac9822098fb2e4c209c1c481b31f0f4c1e245912996ae579f6739c7cd3
+  assignment_path: manifests/assignments/6d47c2ac9822098fb2e4c209c1c481b31f0f4c1e245912996ae579f6739c7cd3.yml
+  role: study 開發者
+occurred_at: '2026-09-24T18:20:48.991975Z'
+payload:
+  development_evidence_digest: d919b7ad99401aeba63ea1083e98d746df3d05f8a865dac33ff4664e6e3f35f4
+  development_evidence_path: evidence/trials/tsm-industry-relative-lag-repair--v001/candidate.yml
+  inputs_digest: 455950bb45f577da87a24e795c731c407c364695c5f7faad26b50c722beb1f1f
+  inputs_path: evidence/trials/tsm-industry-relative-lag-repair--v001/inputs.yml
+  publication_digest: 2f241bc8d4519fccddfbfef4734f4622524ab30c17fa6e1c7fb3ac2768dc7393
+  publication_path: evidence/trials/tsm-industry-relative-lag-repair--v001/publication.yml
+  status: completed
+  trial_id: tsm-industry-relative-lag-repair--v001
+previous_event_digest: 372011d1a1767dcd0eb3542bdaee6a601f278e011d80258c5e0ada2244c9f6c2
+schema_version: 1
+sequence: 4
+study_id: tsm-industry-relative-lag-repair--v001

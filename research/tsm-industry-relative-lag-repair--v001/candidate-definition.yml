@@ -1,0 +1,101 @@
+candidate_family: tsm-industry-relative-lag-repair-family-v001
+candidate_id: tsm-industry-relative-lag-repair--v001
+complete_candidate_family:
+  - tsm-industry-relative-lag-repair--v001
+costs:
+  base:
+    fee_per_side_bps: '1'
+    slippage_per_side_bps: '5'
+  stress:
+    fee_per_side_bps: '2'
+    slippage_per_side_bps: '20'
+data:
+  adjustment_policy: Yahoo auto_adjust；OHLC 均使用同一調整基礎
+  assets:
+    - asset_id: SOXX
+      available_at: after-close
+      data_digest: 41c33b0ae3c53a6ae6726c2c6dcd673c19010e86c4f44f17ac64c13e5da1263a
+      data_path: research/market-data/yahoo/SOXX-2013-01-02-2018-12-31-auto-adjust--sha256-41c33b0ae3c53a6ae6726c2c6dcd673c19010e86c4f44f17ac64c13e5da1263a.csv
+      end_date: '2018-12-31'
+      interval_role: warmup-development
+      provider: yahoo
+      start_date: '2013-01-02'
+      symbol: SOXX
+      timezone: America/New_York
+      use: reference
+    - asset_id: TSM
+      available_at: after-close
+      data_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+      data_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+      end_date: '2018-12-31'
+      interval_role: warmup-development
+      provider: yahoo
+      start_date: '2013-01-02'
+      symbol: TSM
+      timezone: America/New_York
+      use: trade
+  calendar: XNYS
+  interval: 1d
+  timezone: America/New_York
+execution:
+  entry: next-session-open-market
+  gap_fill: stop-gap-at-open-target-gap-at-open
+  held_complete_sessions: 10
+  intrabar_ambiguity: adverse-stop-first
+  maximum_holding_session_span_for_validator: 11
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    modeled_stop_includes_costs: true
+    risk_fraction_of_pre_entry_equity: '0.02'
+    shares: maximum-integer-shares-within-risk-and-cash-caps
+  stop:
+    level_from_raw_entry_open: '-0.04'
+    order_type: STOP_MARKET
+    time_in_force: GTC
+  target:
+    level_from_raw_entry_open: '0.04'
+    order_type: LIMIT
+    reissued_each_session: true
+    time_in_force: DAY
+fold_policy:
+  evaluation_fold_warmup_sessions: 25
+  indicator_state_carried_between_folds: false
+  portfolio_state_reset_each_fold: true
+  replay_warmup_sessions: 25
+initial_cash: '100000'
+schema_version: 1
+signal:
+  absolute_only_negative_control:
+    condition: TSM five-XNYS-session return < 0 and relative-lag condition is false
+    execution: none; descriptive negative-control condition only
+    purpose: distinguish an absolute TSM decline from a relative lag against a rising sector benchmark
+  accepted_only_when_flat: true
+  cooldown:
+    clock_anchor: completed-position-exit
+    completed_session_steps_after_exit: 5
+  decision_time: completed-session-close
+  mean_reversion:
+    close_vs_sma20_gap_minimum: '0.015'
+    rsi_length: 2
+    rsi_maximum: '50'
+    sma_length: 20
+  price_direction_confirmation:
+    close_above_prior_close: true
+  priority_if_simultaneous: v009-before-industry-relative-lag
+  relative_lag_overlay:
+    benchmark_asset_id: SOXX
+    decision_time: completed-session-close
+    lookback_common_sessions: 5
+    relative_underperformance_minimum: '-0.03'
+    relative_underperformance_operator: <=
+    sector_return_minimum: '0'
+    sector_return_operator: '>'
+    signal_rule: SOXX_return_5d > 0 and TSM_return_5d - SOXX_return_5d <= -0.03
+    soxx_return_formula: adjusted_Close[t] / adjusted_Close[t-5] - 1
+    tsm_return_formula: adjusted_Close[t] / adjusted_Close[t-5] - 1
+  symbol: TSM
+  volume_leads_price:
+    enabled: true
+    prior_session_window: 5
+    volume_average_length: 20
+    volume_ratio_minimum: '1.05'

@@ -1,0 +1,72 @@
+candidate_freeze: null
+evidence:
+  development: d919b7ad99401aeba63ea1083e98d746df3d05f8a865dac33ff4664e6e3f35f4
+lifecycle:
+  current_event: trial-recorded
+  event_chain_head_digest: 4cc5da19c9187f3661644cf3d8520c88160496499e83f729707f2037a589f07e
+  event_count: 4
+  status: active
+outcome:
+  authority: none
+  status: pending
+preregistration:
+  digest: 802926ef20773c47addac43595a1819fd29287abb5c6a581d82e0693e3317563
+provenance:
+  status: null
+schema_version: 1
+study:
+  identity:
+    create_plan_digest: 3468845c9bfefe774f210a80335831b1daf310851309254d29e2c9741cbdc669
+    create_plan_path: manifests/create-plan.yml
+    experiment_family: tsm-industry-relative-lag-repair-family-v001
+    historical_evaluation_operator: 待由專案管理者另行指派的 Study 歷史評估執行者
+    prepare_report_digest: 357365f9e9794042709f481def5393e6341122aa76a7f7354b82691f2818a4ab
+    prepare_report_path: manifests/prepare-report.yml
+    research_owner: 本任務委託使用者（姓名未提供）
+    research_round_id: TASK-023
+    source_bundle_digest: c991bc32ba2380c91db35ab7af84597d7b27ca08a695080ba77c8e82bb29507c
+    source_bundle_path: manifests/source-bundle.yml
+    workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+    workflow_reference_path: manifests/workflow-reference.yml
+  study_id: tsm-industry-relative-lag-repair--v001
+trial_registry:
+  assessments:
+    tsm-industry-relative-lag-repair--v001:
+      actuals:
+        base_profit_factor: '2.005105810374364'
+        base_return: '0.287830686702747'
+        completed_trades: 47
+        maximum_realized_trade_loss_fraction: '0.03323644067702124'
+        maximum_stress_block_bootstrap_drawdown_above_10pct_ratio: '0.19848'
+        maximum_stress_leave_one_year_out_drawdown: '0.07674201535468088'
+        minimum_stress_block_bootstrap_positive_return_ratio: '0.9313'
+        minimum_stress_leave_one_year_out_profit_factor: '1.4174566573668048'
+        minimum_stress_leave_one_year_out_return: '0.10537478112191434'
+        stress_maximum_drawdown: '0.07674201535468088'
+        stress_profit_factor: '1.6463450471231573'
+        stress_return: '0.18244945031171741'
+        traded_years: 5
+      candidate_freeze_eligibility:
+        eligible: false
+        reasons:
+          - maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+      development_evidence_validity:
+        status: valid
+        validated: true
+      formal_development_gates:
+        failed:
+          - maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+        status: failed
+      research_targets:
+        failed: []
+        status: passed
+  digest: null
+  recorded_trial_count: 1
+  trial_ids:
+    - tsm-industry-relative-lag-repair--v001
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: c991bc32ba2380c91db35ab7af84597d7b27ca08a695080ba77c8e82bb29507c
+  workflow_digest: 2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2
+  workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+  workflow_reference_path: manifests/workflow-reference.yml
