@@ -1,0 +1,596 @@
+binding:
+  authority_root: /Users/william/.codex/worktrees/747b/trading-2026-2/.authority
+  environment:
+    executable: /Users/william/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/bin/python3.11
+    executable_digest: 4c78423e7d5986362ac04df40edb18cdd1174f9818d653402e3abbd2a5bbf793
+    packages:
+      - PyYAML==6.0.3
+      - Pygments==2.21.0
+      - attrs==26.1.0
+      - beautifulsoup4==4.15.0
+      - certifi==2026.7.22
+      - cffi==2.1.1
+      - charset-normalizer==3.5.1
+      - contourpy==1.3.3
+      - curl_cffi==0.16.2
+      - cycler==0.12.1
+      - exchange_calendars==4.13.2
+      - execnet==2.1.2
+      - fonttools==4.64.0
+      - idna==3.19
+      - iniconfig==2.3.0
+      - jsonschema-specifications==2025.9.1
+      - jsonschema==4.26.0
+      - kiwisolver==1.5.1
+      - korean_lunar_calendar==0.4.0
+      - lxml==6.1.2
+      - matplotlib==3.11.1
+      - multitasking==0.0.13
+      - numpy==2.4.6
+      - packaging==26.3
+      - pandas==3.0.5
+      - peewee==4.4.0
+      - pillow==12.3.0
+      - platformdirs==4.11.7
+      - pluggy==1.6.0
+      - protobuf==7.36.1
+      - pycparser==3.0
+      - pyluach==2.3.0
+      - pyparsing==3.3.2
+      - pytest-xdist==3.8.0
+      - pytest==9.1.1
+      - python-dateutil==2.9.0.post0
+      - pytz==2026.3.post1
+      - referencing==0.37.0
+      - requests==2.34.2
+      - rpds-py==2026.6.3
+      - ruff==0.16.5
+      - six==1.17.0
+      - soupsieve==2.9.2
+      - toolz==1.1.0
+      - trading-2026-2==0.1.0
+      - typing_extensions==4.16.0
+      - tzdata==2026.3
+      - urllib3==2.7.0
+      - websockets==17.1
+      - yfinance==1.7.0
+    python: 3.11.15 (main, Apr 14 2026, 14:45:51) [Clang 22.1.3 ]
+  repository: /Users/william/.codex/worktrees/747b/trading-2026-2
+  settings:
+    candidate-definition.yml: c11e25877c8b3265045f3342ae9cc37201c1e774877943eb5310a1e49cdb864c
+    development-trial-inputs.yml: 455950bb45f577da87a24e795c731c407c364695c5f7faad26b50c722beb1f1f
+    implementation-contract.yml: b7c31a0a5bdf6a92c0f2c9ffe541e525e8b9cce734ea40eed637671a26d83187
+    preregistration.yml: 802926ef20773c47addac43595a1819fd29287abb5c6a581d82e0693e3317563
+    qualification-spec.yml: 8d224e348b01c0cafb406bdf2fcdb389adae766eac6fed227d718407ccd9c0fc
+    runner-contract.yml: bea345cb08d83121ea5aa7f44b58de663bf88a62345fa2b73b0d69ea0b61046a
+    source-bundle.yml: c991bc32ba2380c91db35ab7af84597d7b27ca08a695080ba77c8e82bb29507c
+  source_bundle:
+    files:
+      - digest: c11e25877c8b3265045f3342ae9cc37201c1e774877943eb5310a1e49cdb864c
+        path: research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml
+      - digest: b7c31a0a5bdf6a92c0f2c9ffe541e525e8b9cce734ea40eed637671a26d83187
+        path: research/tsm-industry-relative-lag-repair--v001/implementation-contract.yml
+      - digest: 802926ef20773c47addac43595a1819fd29287abb5c6a581d82e0693e3317563
+        path: research/tsm-industry-relative-lag-repair--v001/preregistration.yml
+      - digest: 8d224e348b01c0cafb406bdf2fcdb389adae766eac6fed227d718407ccd9c0fc
+        path: research/tsm-industry-relative-lag-repair--v001/qualification-spec.yml
+      - digest: a0e1b3f52dd9897c8796f3cc24fc9781fe3deba3044c8ab918ea8f619e17b1e9
+        path: research/tsm-industry-relative-lag-repair--v001/run_development.py
+      - digest: 604948fbdfb5fbd26cc39eef4a2749462389ed3d506ae481363c53d55b8b5960
+        path: research/tsm-industry-relative-lag-repair--v001/run_historical_evaluation.py
+      - digest: bea345cb08d83121ea5aa7f44b58de663bf88a62345fa2b73b0d69ea0b61046a
+        path: research/tsm-industry-relative-lag-repair--v001/runner-contract.yml
+      - digest: 0f232ebea09a43f5630320c100925da2ae4e346465717e4eb69c7dde91772554
+        path: research/tsm-industry-relative-lag-repair--v001/strategy_engine.py
+      - digest: 0ae8375bd5e36cb025893e8bfb188a1bb9864948b5655104f0683f6949337181
+        path: research/tsm-industry-relative-lag-repair--v001/supplemental_targets.py
+      - digest: f3163c9b92046d0397ce1daf0cfb320a302c9e994875a4be0e93057a83cef7c4
+        path: src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v009.py
+    schema_version: 1
+  study_id: tsm-industry-relative-lag-repair--v001
+  workflow_digest: 2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2
+  workflow_reference:
+    policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+    reference_mode: repository-workflow-package
+    release_manifest_digest: 6cf440bf81e2c081ff6e77025c5779cf5f2e4849015278419b836c0777db6405
+    release_manifest_path: workflows/strategy-forward-replication-research--v005/release-manifest.yml
+    resolver_version: 1
+    schema_version: 1
+    workflow_digest: 2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2
+    workflow_id: strategy-forward-replication-research
+    workflow_package_path: workflows/strategy-forward-replication-research--v005
+    workflow_version: v005
+  workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+cases:
+  - case: 0
+    data_assets:
+      - asset_id: SOXX
+        digest: 018a01e5473a6786d31a19062541b8711ca551efcd91d1ffadc00e1925a2f377
+      - asset_id: TSM
+        digest: dcde4669a12fdd60a3ac2b2defe29f0e10c0f04cd3722685d714f0bfc4cd96a9
+    data_digest: e44b8fec251428224d5eb742fc6469510afe2d27f586a6686ad814e725495fa4
+    evidence_digest: 29ad13e961d91459d4db3e2aad22d862bc1794d67db3df98108d19e63129c429
+    expect: trades
+    request_digest: 0c0ee425e4e3fe4fec7cbc078ab7068c68293c51a1ceed87c37f9dd76c049982
+    stage: development
+    validation:
+      baseline:
+        failed_gates:
+          - base_profit_factor
+          - base_return
+          - maximum_realized_trade_loss_fraction
+          - maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+          - maximum_stress_leave_one_year_out_drawdown
+          - minimum_stress_block_bootstrap_positive_return_ratio
+          - minimum_stress_leave_one_year_out_profit_factor
+          - minimum_stress_leave_one_year_out_return
+          - stress_maximum_drawdown
+          - stress_profit_factor
+          - stress_return
+          - no-trades
+        trades: 0
+      candidate:
+        failed_gates:
+          - minimum_stress_leave_one_year_out_return
+        trades: 1
+  - case: 1
+    data_assets:
+      - asset_id: SOXX
+        digest: c9be56cc3d749ec2feb589acce58a405a781c36cb3de462198d139aae62f3d13
+      - asset_id: TSM
+        digest: c9be56cc3d749ec2feb589acce58a405a781c36cb3de462198d139aae62f3d13
+    data_digest: d7098ea4e136e64872a326802cb2575410193630d2019ef231a851496a540ac1
+    evidence_digest: 4beb3a9d150c04b8a7a92ef75020b8962b085ae8b469d50f68c3511cba00fbd4
+    expect: no-trades
+    request_digest: d8e7cb2564d296269a8fd7b5df0e5df97d562398d7f5eb983700c105f50fe95a
+    stage: development
+    validation:
+      baseline:
+        failed_gates:
+          - base_profit_factor
+          - base_return
+          - maximum_realized_trade_loss_fraction
+          - maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+          - maximum_stress_leave_one_year_out_drawdown
+          - minimum_stress_block_bootstrap_positive_return_ratio
+          - minimum_stress_leave_one_year_out_profit_factor
+          - minimum_stress_leave_one_year_out_return
+          - stress_maximum_drawdown
+          - stress_profit_factor
+          - stress_return
+          - no-trades
+        trades: 0
+      candidate:
+        failed_gates:
+          - base_profit_factor
+          - base_return
+          - maximum_realized_trade_loss_fraction
+          - maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+          - maximum_stress_leave_one_year_out_drawdown
+          - minimum_stress_block_bootstrap_positive_return_ratio
+          - minimum_stress_leave_one_year_out_profit_factor
+          - minimum_stress_leave_one_year_out_return
+          - stress_maximum_drawdown
+          - stress_profit_factor
+          - stress_return
+          - no-trades
+        trades: 0
+  - case: 2
+    data_digest: 3d4d8938d519bc04f962fb5c25017d67d6a8be3c7424f8effd4464f8d8530898
+    evidence_digest: 48fa1e061172ce69409870ff789f571018dcbc211685f8a82cccb23cd84229df
+    expect: trades
+    request_digest: 16f5d0e7681a3da0c46a52ad82152bd089374b2b1f729091c4efb0472a734ae9
+    stage: historical-evaluation
+    validation:
+      candidate:
+        failed_gates:
+          - base_compounded_return
+          - base_profit_factor
+          - completed_trades
+          - maximum_fold_trade_concentration
+          - positive_traded_fold_ratio
+          - stress_profit_factor
+          - stress_return
+          - traded_folds
+        trades: 1
+  - case: 3
+    data_digest: b4466a2830799f5472398c03403dba7aa2c9d3fd3ff49409b4c996e4df3d8c5d
+    evidence_digest: 86545c14433aa670715008d9367bf691459216a427e3954f51fd1c5a24092a11
+    expect: no-trades
+    request_digest: 5afb78d962830c17f31bae78e95e028b4ebd4c2b87e67b74d4bf021b1940dfdc
+    stage: historical-evaluation
+    validation:
+      candidate:
+        failed_gates:
+          - base_compounded_return
+          - base_profit_factor
+          - completed_trades
+          - positive_traded_fold_ratio
+          - stress_profit_factor
+          - stress_return
+          - traded_folds
+        trades: 0
+checks:
+  contract_source: research/tsm-industry-relative-lag-repair--v001/implementation-contract.yml
+  development_trial_bindings:
+    preregistration_digest: 802926ef20773c47addac43595a1819fd29287abb5c6a581d82e0693e3317563
+    procedure_path: research/tsm-industry-relative-lag-repair--v001/run_development.py
+    source_bundle_digest: c991bc32ba2380c91db35ab7af84597d7b27ca08a695080ba77c8e82bb29507c
+    strategy_engine_path: research/tsm-industry-relative-lag-repair--v001/strategy_engine.py
+  development_trial_inputs_path: research/tsm-industry-relative-lag-repair--v001/development-trial-inputs.yml
+  engine_path: research/tsm-industry-relative-lag-repair--v001/strategy_engine.py
+  identity:
+    candidate_definition_has_explicit_candidate_id: true
+    candidate_family:
+      - tsm-industry-relative-lag-repair--v001
+    candidate_id: tsm-industry-relative-lag-repair--v001
+    study_id: tsm-industry-relative-lag-repair--v001
+    trial_id: tsm-industry-relative-lag-repair--v001
+  precreate_guards:
+    - canonical-yaml-and-artifact-shape
+    - study-candidate-trial-family-identity
+    - preregistration-qualification-trial-source-digests
+    - implementation-contract
+    - outcome-relevant-parameters
+    - holding-cooldown-stop-target-gap-indicator-readiness
+    - synthetic-contract
+    - source-bundle-path-and-sha256
+  required_documents:
+    - preregistration.yml
+    - candidate-definition.yml
+    - qualification-spec.yml
+    - development-trial-inputs.yml
+    - source-bundle.yml
+  research_root: research/tsm-industry-relative-lag-repair--v001
+  source_bundle_file_count: 10
+  source_bundle_verified_file_count: 10
+  study_event_required: false
+  subchecks:
+    - details:
+        contract_source: research/tsm-industry-relative-lag-repair--v001/implementation-contract.yml
+        derived_required_history_sessions: 25
+        engine_path: research/tsm-industry-relative-lag-repair--v001/strategy_engine.py
+        engine_spec_constant: DEFAULT_SPEC
+        engine_spec_fields_checked:
+          - sma_lookback
+          - sma_min_periods
+          - rsi_lookback
+          - rsi_min_periods
+          - rsi_max
+          - mean_reversion_min
+          - volume_lookback
+          - volume_average_min_periods
+          - volume_lead_window
+          - volume_lead_min_periods
+          - volume_spike_ratio
+          - volume_lead_enabled
+          - cooldown_sessions
+          - holding_sessions
+          - target_return
+          - stop_return
+          - fold_warmup_sessions
+          - risk_fraction
+          - initial_cash
+          - require_close_above_prior_close
+        holding_period:
+          paths:
+            engine.holding_sessions: implementation contract engine spec
+            execution.held_complete_sessions: candidate-definition.yml
+            preregistration.maximum_holding_sessions: preregistration.yml
+          relation:
+            engine.holding_sessions: 10
+            entry_to_exit_complete_sessions: 10
+            execution.held_complete_sessions: 10
+            formula:
+              engine.holding_sessions: execution.held_complete_sessions
+              preregistration.maximum_holding_sessions: signal_to_exit_session_span
+              signal_to_exit_session_span: 1 + execution.held_complete_sessions
+            preregistration.maximum_holding_sessions: 11
+            signal_to_entry_sessions: 1
+            signal_to_exit_session_span: 11
+          status: complete
+          values:
+            engine.holding_sessions: 10
+            execution.held_complete_sessions: 10
+            preregistration.maximum_holding_sessions: 11
+        outcome_relevant_parameters:
+          - actual: 20
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:sma_lookback
+            expected: 20
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/preregistration.yml:registered_sma_lookback
+            label: SMA length
+          - actual: 2
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:rsi_lookback
+            expected: 2
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/preregistration.yml:registered_rsi_lookback
+            label: RSI length
+          - actual: '50'
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:rsi_max
+            expected: '50'
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/preregistration.yml:registered_rsi_max
+            label: RSI threshold
+          - actual: '0.015'
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:mean_reversion_gap
+            expected: '0.015'
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/preregistration.yml:registered_mean_reversion_gap
+            label: mean-reversion gap
+          - actual: 20
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:volume_lookback
+            expected: 20
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/preregistration.yml:registered_volume_lookback
+            label: Volume average length
+          - actual: 5
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:volume_lead_window
+            expected: 5
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/preregistration.yml:registered_volume_lead_window
+            label: Volume lead window
+          - actual: '1.05'
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:volume_spike_ratio
+            expected: '1.05'
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/preregistration.yml:registered_volume_spike_ratio
+            label: Volume spike ratio
+          - actual: 5
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:cooldown_sessions
+            expected: 5
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/preregistration.yml:registered_cooldown_sessions
+            label: Cooldown
+          - actual: completed-session-close
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:decision_time
+            expected: completed-session-close
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/preregistration.yml:registered_decision_time
+            label: Signal decision time
+          - actual: '0.04'
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:target_return
+            expected: '0.04'
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/preregistration.yml:registered_target_return
+            label: Target return
+          - actual: '-0.04'
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:stop_return
+            expected: '-0.04'
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/preregistration.yml:registered_stop_return
+            label: Stop return
+          - actual: next-session-open
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:entry
+            expected: next-session-open
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/preregistration.yml:registered_entry
+            label: Entry timing
+          - actual: stop-gap-at-open-target-gap-at-open
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:gap_fill
+            expected: stop-gap-at-open-target-gap-at-open
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/preregistration.yml:registered_gap_fill
+            label: Gap fill
+          - actual: adverse-stop-first
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:intrabar_ambiguity
+            expected: adverse-stop-first
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/preregistration.yml:registered_intrabar_ambiguity
+            label: Intrabar ambiguity
+          - actual: 25
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:fold_warmup_sessions
+            expected: 25
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/preregistration.yml:registered_fold_warmup_sessions
+            label: Fold warmup
+          - actual: '0.02'
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:risk_fraction
+            expected: '0.02'
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/preregistration.yml:registered_risk_fraction
+            label: Risk fraction
+          - actual: true
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:price_direction_above
+            expected: true
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/preregistration.yml:registered_price_direction_above
+            label: Close direction confirmation
+          - actual: null
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:price_direction_below
+            expected: null
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/preregistration.yml:registered_price_direction_below
+            label: Close-below direction confirmation
+          - actual: null
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:supplemental_enabled
+            expected: null
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/preregistration.yml:registered_supplemental_enabled
+            label: Supplemental path enabled
+          - actual: null
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:supplemental_atr_lookback
+            expected: null
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/preregistration.yml:registered_supplemental_atr_lookback
+            label: ATR lookback
+          - actual: null
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:supplemental_atr_distance_multiplier
+            expected: null
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/preregistration.yml:registered_supplemental_atr_distance_multiplier
+            label: ATR distance multiplier
+          - actual: null
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:supplemental_bollinger_lookback
+            expected: null
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/preregistration.yml:registered_supplemental_bollinger_lookback
+            label: Bollinger lookback
+          - actual: null
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:supplemental_pullback_low_lookback
+            expected: null
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/preregistration.yml:registered_supplemental_pullback_low_lookback
+            label: Pullback low lookback
+          - actual: 5
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:Contract cooldown
+            expected: 5
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/implementation-contract.yml:Contract cooldown
+            label: Contract cooldown
+          - actual: '0.04'
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:Contract target
+            expected: '0.04'
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/implementation-contract.yml:Contract target
+            label: Contract target
+          - actual: '-0.04'
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:Contract stop
+            expected: '-0.04'
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/implementation-contract.yml:Contract stop
+            label: Contract stop
+          - actual: next-session-open
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:Contract entry
+            expected: next-session-open
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/implementation-contract.yml:Contract entry
+            label: Contract entry
+          - actual: completed-session-close
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:Contract signal decision time
+            expected: completed-session-close
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/implementation-contract.yml:Contract signal decision time
+            label: Contract signal decision time
+          - actual: stop-gap-at-open-target-gap-at-open
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:Contract gap fill
+            expected: stop-gap-at-open-target-gap-at-open
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/implementation-contract.yml:Contract gap fill
+            label: Contract gap fill
+          - actual: adverse-stop-first
+            actual_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml:Contract same-session ambiguity
+            expected: adverse-stop-first
+            expected_path: /Users/william/.codex/worktrees/747b/trading-2026-2/research/tsm-industry-relative-lag-repair--v001/implementation-contract.yml:Contract same-session ambiguity
+            label: Contract same-session ambiguity
+        source_bundle_file_count: 10
+        source_bundle_path: research/tsm-industry-relative-lag-repair--v001/source-bundle.yml
+        source_bundle_verified_file_count: 10
+        validator_metrics:
+          development:
+            - base_profit_factor
+            - base_return
+            - completed_trades
+            - maximum_realized_trade_loss_fraction
+            - maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+            - maximum_stress_leave_one_year_out_drawdown
+            - minimum_stress_block_bootstrap_positive_return_ratio
+            - minimum_stress_leave_one_year_out_profit_factor
+            - minimum_stress_leave_one_year_out_return
+            - stress_maximum_drawdown
+            - stress_profit_factor
+            - stress_return
+            - traded_years
+          evaluation:
+            - base_compounded_return
+            - base_profit_factor
+            - completed_trades
+            - family_wise_confidence
+            - maximum_fold_positive_profit_concentration
+            - maximum_fold_trade_concentration
+            - maximum_realized_trade_loss_fraction
+            - positive_traded_fold_ratio
+            - stress_max_drawdown
+            - stress_profit_factor
+            - stress_return
+            - traded_folds
+      errors: []
+      name: contract
+      status: passed
+      study_id: tsm-industry-relative-lag-repair--v001
+      warnings: []
+    - details:
+        accepted_signal_count: 2
+        accepted_signals:
+          - '2020-02-21T00:00:00'
+        cooldown_sessions: 5
+        engine_path: research/tsm-industry-relative-lag-repair--v001/strategy_engine.py
+        first_ready_index: 25
+        holding_cooldown_case:
+          accepted_signal_seed: '2020-03-23T00:00:00'
+          accepted_signals:
+            - '2020-02-27T00:00:00'
+            - '2020-03-23T00:00:00'
+          first_signal_seed: '2020-02-27T00:00:00'
+          fixture_search_attempts: 1
+          raw_signals:
+            - '2020-02-27T00:00:00'
+            - '2020-03-19T00:00:00'
+            - '2020-03-23T00:00:00'
+          rejected_signal_seed: '2020-03-19T00:00:00'
+          rejected_signals:
+            - reason: cooldown-not-complete
+              session: '2020-03-19T00:00:00'
+          rejection_reasons:
+            '2020-03-19T00:00:00': cooldown-not-complete
+          trades:
+            - entry_session: '2020-02-28T00:00:00'
+              executed_entry_price: '100.05'
+              executed_exit_price: '99.95'
+              exit_reason: time
+              exit_session: '2020-03-13T00:00:00'
+              fees: '9.7'
+              held_sessions: 10
+              pnl: '-58.19999999999709'
+              raw_entry_price: '100.0'
+              raw_exit_price: '100.0'
+              shares: 485
+              signal_session: '2020-02-27T00:00:00'
+            - entry_session: '2020-03-24T00:00:00'
+              executed_entry_price: '100.05'
+              executed_exit_price: '99.95'
+              exit_reason: time
+              exit_session: '2020-04-07T00:00:00'
+              fees: '9.7'
+              held_sessions: 10
+              pnl: '-58.19999999999709'
+              raw_entry_price: '100.0'
+              raw_exit_price: '100.0'
+              shares: 485
+              signal_session: '2020-03-23T00:00:00'
+        holding_sessions: 10
+        indicator_columns:
+          rsi: rsi_2
+          sma: sma_20
+          volume_lead: prior_volume_spike_ratio
+        intraday_exit_cases: 4
+        passed_cases:
+          - rsi
+          - readiness
+          - intraday-exit
+          - holding-cooldown
+        passed_signal_cases:
+          - signal
+        raw_signals:
+          - '2020-02-21T00:00:00'
+        rejected_signals: []
+        rejection_reasons: {}
+        rsi_case: passed
+        signal_audit:
+          indicator:
+            accepted_signals:
+              - '2020-02-21T00:00:00'
+            raw_signals:
+              - '2020-02-21T00:00:00'
+            rejected_signals: []
+            rejection_reasons: {}
+            trades:
+              - entry_session: '2020-02-24T00:00:00'
+                executed_entry_price: '100.05'
+                executed_exit_price: '99.95'
+                exit_reason: time
+                exit_session: '2020-03-09T00:00:00'
+                fees: '9.7'
+                held_sessions: 10
+                pnl: '-58.19999999999709'
+                raw_entry_price: '100.0'
+                raw_exit_price: '100.0'
+                shares: 485
+                signal_session: '2020-02-21T00:00:00'
+        signal_case:
+          fixture_search_attempts: 1
+          kind: indicator
+          raw_signal_columns:
+            - raw_signal
+        trades:
+          - entry_session: '2020-02-24T00:00:00'
+            executed_entry_price: '100.05'
+            executed_exit_price: '99.95'
+            exit_reason: time
+            exit_session: '2020-03-09T00:00:00'
+            fees: '9.7'
+            held_sessions: 10
+            pnl: '-58.19999999999709'
+            raw_entry_price: '100.0'
+            raw_exit_price: '100.0'
+            shares: 485
+            signal_session: '2020-02-21T00:00:00'
+      errors: []
+      name: synthetic
+      status: passed
+      study_id: tsm-industry-relative-lag-repair--v001
+      warnings: []
+prepare_checks: passed
+schema_version: 1
+status: passed

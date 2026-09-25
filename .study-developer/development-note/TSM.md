@@ -2162,3 +2162,20 @@
 - **白話名詞補充（適用於本卡正文與以上補充）**：candidate 是加上本次 60% 規則的候選策略，baseline 是拿來比較、未加這項規則的版本；base／stress 是預先設定的基準成本與較不利成本情境。PF（獲利因子）是總獲利除以總虧損；MDD（最大回撤）是績效從高點跌到之後低點的最大幅度，數字越大代表期間內承受過的下跌越深。formal gate 是事前設定、必須逐項通過的門檻；research target 是事前設定要達成的數值目標。bootstrap（區塊重抽樣）是把過往相鄰交易成組抽取很多次，估計結果對樣本變動有多敏感，不能當成新增的真實交易。evidence validity=`valid` 表示證據檔的格式、必需欄位與來源檢核通過，不等於策略有效。freeze eligibility 是候選是否符合凍結資格；`false` 表示尚不符合，不能把它凍結成後續正式評估版本。盲檢討 eligibility 是檢討者是否符合限定讀取範圍的條件；allowlist 是事先列好的可讀資料清單；outcome exposure 指檢討前是否接觸過正式結果。provenance／binding 是記錄結果由哪個固定版本的流程、策略程式、登記規格與資料產生，避免把不同版本的證據混在一起。Source Bundle 是本次綁定的策略程式來源包；synthetic fixture 是用人工資料檢查流程能否正確處理特定情境；cooldown（冷卻期）是一次訊號後暫停一段時間，避免短時間重複進場。trial-recorded 表示 Development 試驗已記錄、Study 尚未凍結；Development 是研究階段試做，Historical Evaluation／Terminal 是正式歷史評估及其終點結果，本 Study 未讀取或使用那些結果。
 
 - **來源欄位白話補充**：engine 是依策略規則判斷何時進出場的程式；runner 是把這個程式套用到指定資料並產生試驗結果的執行工具；contract 是說明程式如何接收資料、輸出欄位的約定。preregistration 是看結果前先寫下假說、規則與目標的登記文件；Development data view 是本次允許使用的資料範圍及日期。reference 是 v004 流程規則的固定版本；release manifest 記錄該次發布包含哪些流程內容；policy set 是執行時適用的治理規則。digest 是檔案內容的指紋，用來核對綁定的是哪個確切版本；operation ID 是一次建立或試驗操作的唯一編號。publication 是列出已發布試驗證據及其指紋的索引。
+
+
+## 精簡定稿／目前採用版本｜`tsm-industry-relative-lag-repair--v001`
+
+### Development 正文（600 字）
+【已確認】SOXX五個XNYS（美國交易日）漲>0、TSM落後≥3個百分點，次日買；候選在v009上加條件，對照是v009。
+【已確認】基準／壓力成本：候選報酬28.783%／18.245%、PF2.005／1.646、MDD6.955%／7.674%；v009為33.676%／26.523%、5.036／4.204、1.9998%／2.119%。PF=獲利除以虧損；MDD=高點後最大跌幅。兩份證據有效、publication digest綁定。
+【已確認】正式門檻：候選10/11，失敗項為壓力重抽MDD>10%率19.848%>10%；v009全過。研究目標≥20筆／≥3年，候選47筆／5年通過。candidate_freeze_eligibility=false；實際凍結狀態尚不能判斷；未執行freeze/readiness。
+【已確認】TASK-023自訂目標（非v005）：不重疊新增26筆≥5通過；排擠後壓力淨增益−$8,278.22<0，MDD 7.674%>v009 2.119%。
+【尚不能判斷】SOXX僅一檔參考資產，訊號期只有2014–2018；因果及跨期效果未知。盲檢討完成，限本Study設計／程式／Development證據，未讀正式Evaluation／Terminal。下一Study事前登記；正式門檻全過、壓力增益>0、MDD≤v009須同時成立，否則否證。
+
+### Development 資產與來源綁定（不計入正文）
+- SOXX：`asset_id=SOXX`；`use=reference`；`provider/symbol=yahoo/SOXX`；資料期2013-01-02–2018-12-31；`interval_role=warmup-development`；`available_at=after-close`；SHA-256 `41c33b0ae3c53a6ae6726c2c6dcd673c19010e86c4f44f17ac64c13e5da1263a`。
+- TSM：`asset_id=TSM`；`use=trade`；`provider/symbol=yahoo/TSM`；資料期2013-01-02–2018-12-31；`interval_role=warmup-development`；`available_at=after-close`；SHA-256 `a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7`。
+- 兩資產均為1日 Yahoo 調整價、America/New_York 時區，按 XNYS 對齊；訊號期2014-01-01–2018-12-31，暖機標示2013-01-01–2013-12-31。Publication 的資產清單 digest 為 `bdb73ca5243640ea1e84f859e4e22bc67d78fc97ec1d5c43426993ff5e122289`（不同於逐檔 SHA-256）。
+
+來源／讀取界線：本 Study 的 v005 `workflow-reference.yml`、`create-plan.yml`、`preregistration.yml`、`source-bundle.yml`、Development `inputs.yml`／`publication.yml`／candidate 與 baseline evidence、`runtime-manifest.yml`；盲檢討只用設計、程式及 Development evidence。未開啟價格 CSV，未讀 events、journals、Study 狀態資料或正式 Evaluation／Terminal。

@@ -1,0 +1,40 @@
+checks:
+  - command: .venv/bin/python -m pytest workflows/strategy-forward-replication-research--v005/tests -q
+    result: passed
+    summary: '125 passed, 16 warnings in 894.24s (0:14:54); exit code 0. NumPy invalid value encountered in subtract warnings: 1 in test_assignment_lifecycle.py and 15 in test_multi_asset.py. Captured stdout SHA-256: 959cbddeaeb5cb79e5a331c2c8d7bcd231a7703d1b40ebfec6aa0508b2b965ac.'
+  - command: .venv/bin/ruff check workflows/strategy-forward-replication-research--v005
+    result: passed
+    summary: All checks passed.
+  - command: .venv/bin/python workflows/strategy-forward-replication-research--v005/operations/release_candidate.py
+    result: passed
+    summary: 102 definition files passed canonical YAML, JSON Schema, workflow schema, vendored Policy release, and conformance digest checks.
+  - command: git diff --exit-code HEAD -- workflows/strategy-forward-replication-research--v004
+    result: passed
+    summary: v004 tracked files are unchanged; working tree status for the package is empty.
+  - command: git diff --check
+    result: passed
+    summary: No whitespace errors in the worktree diff.
+  - command: .venv/bin/python workflows/strategy-forward-replication-research--v005/operations/release_candidate.py --candidate
+    result: passed
+    summary: 'Release Candidate checker passed: 102 definition files; release manifest digest and test report schema validated; no release.yml created; workflow_digest=2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2.'
+  - command: .venv/bin/python -m pytest workflows/strategy-forward-replication-research--v005/tests -q
+    result: passed
+    summary: 'RC artifacts present: 125 passed, 16 warnings in 895.26s (0:14:55); exit code 0. NumPy invalid value encountered in subtract warnings: 1 in test_assignment_lifecycle.py and 15 in test_multi_asset.py. Captured stdout SHA-256: d311584e0a3054ad8996f82757c674935c2b312aef95f068010e75a8bd267391.'
+  - command: .venv/bin/ruff check workflows/strategy-forward-replication-research--v005
+    result: passed
+    summary: 'RC artifacts present: All checks passed.'
+  - command: .venv/bin/python workflows/strategy-forward-replication-research--v005/operations/release_candidate.py --candidate
+    result: passed
+    summary: 'RC artifacts present: checker returned release-candidate, 102 definition files, release_record_created=false, workflow_digest=2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2.'
+  - command: git diff --exit-code HEAD -- workflows/strategy-forward-replication-research--v004
+    result: passed
+    summary: 'RC artifacts present: v004 tracked files are unchanged; working tree status for the package is empty.'
+  - command: git diff --check
+    result: passed
+    summary: 'RC artifacts present: no whitespace errors in the worktree diff.'
+generated_at: '2026-09-24T10:40:03.719321Z'
+release_record_created: false
+schema_version: 1
+status: release-candidate
+workflow: strategy-forward-replication-research
+workflow_version: v005

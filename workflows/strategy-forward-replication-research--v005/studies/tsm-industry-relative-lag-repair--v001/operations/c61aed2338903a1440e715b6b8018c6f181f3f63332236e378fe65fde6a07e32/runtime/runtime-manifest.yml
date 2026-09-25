@@ -1,0 +1,44 @@
+data_assets:
+  - asset_id: SOXX
+    available_at: after-close
+    digest: 41c33b0ae3c53a6ae6726c2c6dcd673c19010e86c4f44f17ac64c13e5da1263a
+    end_date: '2018-12-31'
+    path: research/market-data/yahoo/SOXX-2013-01-02-2018-12-31-auto-adjust--sha256-41c33b0ae3c53a6ae6726c2c6dcd673c19010e86c4f44f17ac64c13e5da1263a.csv
+    provider: yahoo
+    start_date: '2013-01-02'
+    symbol: SOXX
+    timezone: America/New_York
+    use: reference
+  - asset_id: TSM
+    available_at: after-close
+    digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+    end_date: '2018-12-31'
+    path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+    provider: yahoo
+    start_date: '2013-01-02'
+    symbol: TSM
+    timezone: America/New_York
+    use: trade
+evidence:
+  digest: 4b60fa005543b2f3586d3c98bb5337bd0d942c2cf1b82996c79458f66c6c7219
+  path: runtime/evidence.yml
+execution_contract: request-output-v1
+execution_workspace: temporary
+operation_id: c61aed2338903a1440e715b6b8018c6f181f3f63332236e378fe65fde6a07e32
+request:
+  digest: 5de3707d68c95c308bc0bebe216633b64cb66e9a9d6c8a97972699fb324ed20e
+  path: runtime/request.yml
+resolver_version: 1
+runner:
+  digest: a0e1b3f52dd9897c8796f3cc24fc9781fe3deba3044c8ab918ea8f619e17b1e9
+  path: research/tsm-industry-relative-lag-repair--v001/run_development.py
+schema_version: 1
+source_bundle:
+  digest: c991bc32ba2380c91db35ab7af84597d7b27ca08a695080ba77c8e82bb29507c
+  path: manifests/source-bundle.yml
+stage: development
+study_id: tsm-industry-relative-lag-repair--v001
+workflow_reference:
+  digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+  path: manifests/workflow-reference.yml
+workflow_version: v005

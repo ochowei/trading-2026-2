@@ -1,0 +1,22 @@
+files:
+  - digest: c11e25877c8b3265045f3342ae9cc37201c1e774877943eb5310a1e49cdb864c
+    path: research/tsm-industry-relative-lag-repair--v001/candidate-definition.yml
+  - digest: b7c31a0a5bdf6a92c0f2c9ffe541e525e8b9cce734ea40eed637671a26d83187
+    path: research/tsm-industry-relative-lag-repair--v001/implementation-contract.yml
+  - digest: 802926ef20773c47addac43595a1819fd29287abb5c6a581d82e0693e3317563
+    path: research/tsm-industry-relative-lag-repair--v001/preregistration.yml
+  - digest: 8d224e348b01c0cafb406bdf2fcdb389adae766eac6fed227d718407ccd9c0fc
+    path: research/tsm-industry-relative-lag-repair--v001/qualification-spec.yml
+  - digest: a0e1b3f52dd9897c8796f3cc24fc9781fe3deba3044c8ab918ea8f619e17b1e9
+    path: research/tsm-industry-relative-lag-repair--v001/run_development.py
+  - digest: 604948fbdfb5fbd26cc39eef4a2749462389ed3d506ae481363c53d55b8b5960
+    path: research/tsm-industry-relative-lag-repair--v001/run_historical_evaluation.py
+  - digest: bea345cb08d83121ea5aa7f44b58de663bf88a62345fa2b73b0d69ea0b61046a
+    path: research/tsm-industry-relative-lag-repair--v001/runner-contract.yml
+  - digest: 0f232ebea09a43f5630320c100925da2ae4e346465717e4eb69c7dde91772554
+    path: research/tsm-industry-relative-lag-repair--v001/strategy_engine.py
+  - digest: 0ae8375bd5e36cb025893e8bfb188a1bb9864948b5655104f0683f6949337181
+    path: research/tsm-industry-relative-lag-repair--v001/supplemental_targets.py
+  - digest: f3163c9b92046d0397ce1daf0cfb320a302c9e994875a4be0e93057a83cef7c4
+    path: src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v009.py
+schema_version: 1

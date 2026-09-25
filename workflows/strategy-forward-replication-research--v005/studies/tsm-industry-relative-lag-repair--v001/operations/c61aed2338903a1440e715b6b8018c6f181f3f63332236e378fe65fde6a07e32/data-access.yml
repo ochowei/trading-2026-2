@@ -1,0 +1,7 @@
+assets:
+  - asset_id: SOXX
+    expected_digest: 41c33b0ae3c53a6ae6726c2c6dcd673c19010e86c4f44f17ac64c13e5da1263a
+    path: research/market-data/yahoo/SOXX-2013-01-02-2018-12-31-auto-adjust--sha256-41c33b0ae3c53a6ae6726c2c6dcd673c19010e86c4f44f17ac64c13e5da1263a.csv
+  - asset_id: TSM
+    expected_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+    path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv

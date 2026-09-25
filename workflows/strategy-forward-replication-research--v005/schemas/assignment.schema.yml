@@ -1,0 +1,41 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  assignee:
+    minLength: 1
+    type: string
+  assigner:
+    minLength: 1
+    type: string
+  instruction:
+    minLength: 1
+    type: string
+  role:
+    enum:
+      - study 開發者
+      - Study 歷史評估執行者
+  schema_version:
+    const: 1
+  scope:
+    enum:
+      - development-to-freeze
+      - historical-evaluation-to-terminal
+  source_id:
+    minLength: 1
+    type: string
+  study_id:
+    minLength: 1
+    type: string
+  workflow_version:
+    const: v005
+required:
+  - schema_version
+  - source_id
+  - instruction
+  - assigner
+  - assignee
+  - role
+  - study_id
+  - workflow_version
+  - scope
+type: object

@@ -1,0 +1,88 @@
+baseline_comparison:
+  baseline_id: tsm-v009-fixed-baseline
+  baseline_is_excluded_from_candidate_family: true
+  candidate_id: tsm-industry-relative-lag-repair--v001
+  execution_is_identical: true
+candidate_family: tsm-industry-relative-lag-repair-family-v001
+candidate_id: tsm-industry-relative-lag-repair--v001
+cost_models:
+  base:
+    fee_per_side_bps: '1'
+    slippage_per_side_bps: '5'
+  stress:
+    fee_per_side_bps: '2'
+    slippage_per_side_bps: '20'
+data_bindings:
+  assets:
+    - asset_id: SOXX
+      available_at: after-close
+      data_digest: 41c33b0ae3c53a6ae6726c2c6dcd673c19010e86c4f44f17ac64c13e5da1263a
+      data_path: research/market-data/yahoo/SOXX-2013-01-02-2018-12-31-auto-adjust--sha256-41c33b0ae3c53a6ae6726c2c6dcd673c19010e86c4f44f17ac64c13e5da1263a.csv
+      end_date: '2018-12-31'
+      interval_role: warmup-development
+      provider: yahoo
+      start_date: '2013-01-02'
+      symbol: SOXX
+      timezone: America/New_York
+      use: reference
+    - asset_id: TSM
+      available_at: after-close
+      data_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+      data_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+      end_date: '2018-12-31'
+      interval_role: warmup-development
+      provider: yahoo
+      start_date: '2013-01-02'
+      symbol: TSM
+      timezone: America/New_York
+      use: trade
+date_controls:
+  formal_provider_access: false
+  signal_end: '2018-12-31'
+  signal_start: '2014-01-01'
+  warmup_end: '2013-12-31'
+  warmup_start: '2013-01-01'
+development_diagnostics:
+  block_lengths:
+    - 3
+    - 5
+  bootstrap_seed: 20260902
+  leave_one_signal_year_out: true
+  repetitions: 50000
+  seed_application: exact-same-seed-for-each-block-length
+execution:
+  cooldown_anchor: completed-position-exit
+  cooldown_completed_session_steps_after_exit: 5
+  entry: next-XNYS-open
+  holding_sessions: 10
+  intrabar_ambiguity: adverse-stop-first
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    modeled_stop_includes_costs: true
+    risk_fraction_of_pre_entry_equity: '0.02'
+  simultaneous_trigger_priority: v009-before-industry-relative-lag
+  stop_market_gtc: '-0.04'
+  target_limit_day: '0.04'
+preregistration_digest: 802926ef20773c47addac43595a1819fd29287abb5c6a581d82e0693e3317563
+schema_version: 1
+signal:
+  decision_time: completed-session-close
+  relative_lag_overlay:
+    benchmark_asset_id: SOXX
+    condition: SOXX_return_5d > 0 and TSM_return_5d - SOXX_return_5d <= -0.03
+    entry: next-XNYS-open
+    lookback_common_sessions: 5
+  v009_component:
+    close_above_prior_close: true
+    mean_reversion_gap_minimum: '0.015'
+    rsi_length: 2
+    rsi_maximum: '50'
+    sma_length: 20
+    volume_average_length: 20
+    volume_lead_window: 5
+    volume_ratio_minimum: '1.05'
+source_bundle_digest: c991bc32ba2380c91db35ab7af84597d7b27ca08a695080ba77c8e82bb29507c
+strategy_engine_digest: 0f232ebea09a43f5630320c100925da2ae4e346465717e4eb69c7dde91772554
+study_procedure_digest: a0e1b3f52dd9897c8796f3cc24fc9781fe3deba3044c8ab918ea8f619e17b1e9
+study_procedure_path: research/tsm-industry-relative-lag-repair--v001/run_development.py
+trial_id: tsm-industry-relative-lag-repair--v001

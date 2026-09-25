@@ -1,0 +1,19 @@
+actor_id: /root/task_023_v005_luna
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: c991bc32ba2380c91db35ab7af84597d7b27ca08a695080ba77c8e82bb29507c
+  workflow_digest: 2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2
+  workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: development-started
+execution:
+  assignment_digest: 6d47c2ac9822098fb2e4c209c1c481b31f0f4c1e245912996ae579f6739c7cd3
+  assignment_path: manifests/assignments/6d47c2ac9822098fb2e4c209c1c481b31f0f4c1e245912996ae579f6739c7cd3.yml
+  role: study 開發者
+occurred_at: '2026-09-24T18:20:33.353475Z'
+payload:
+  operation_id: 2ef62b694cb221730d1fccbd51cfdd1f66564b3476e4a5866ea7950c9f3ce0f7
+previous_event_digest: 9acfb0e2e5c8a12058db3205baafe455a2822015ad2e8214eac93bde5baff56f
+schema_version: 1
+sequence: 3
+study_id: tsm-industry-relative-lag-repair--v001

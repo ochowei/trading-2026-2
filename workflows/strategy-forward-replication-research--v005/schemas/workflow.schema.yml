@@ -1,0 +1,112 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  asset_input_policy:
+    additionalProperties: false
+    properties:
+      available_at:
+        const: after-close
+      calendar:
+        const: XNYS
+      max_assets:
+        const: 16
+      max_file_bytes:
+        const: 33554432
+      max_rows_per_asset:
+        const: 10000
+      max_total_bytes:
+        const: 134217728
+      min_assets:
+        const: 1
+      missing_sessions_allowed:
+        const: false
+      timezone:
+        const: America/New_York
+    required:
+      - available_at
+      - calendar
+      - max_assets
+      - max_file_bytes
+      - max_rows_per_asset
+      - max_total_bytes
+      - min_assets
+      - missing_sessions_allowed
+      - timezone
+    type: object
+  authority:
+    type: object
+  bindings:
+    type: object
+  candidate_policy:
+    type: object
+  data_intervals:
+    type: object
+  evidence_requirements_path:
+    pattern: ^rules/[a-z0-9-]+\.yml$
+    type: string
+  failure_and_recovery_path:
+    pattern: ^rules/[a-z0-9-]+\.yml$
+    type: string
+  fold_policy:
+    type: object
+  language:
+    const: zh-TW
+  outcomes:
+    type: object
+  provenance_policy:
+    type: object
+  release:
+    type: object
+  safety:
+    type: object
+  schema_version:
+    const: 1
+  scope:
+    type: object
+  state_machine_path:
+    pattern: ^rules/[a-z0-9-]+\.yml$
+    type: string
+  storage:
+    properties:
+      historical_evaluation_artifacts_path:
+        pattern: ^[a-zA-Z0-9_-]+(?:/[a-zA-Z0-9_-]+)*$
+        type: string
+    required:
+      - historical_evaluation_artifacts_path
+    type: object
+  title:
+    minLength: 1
+    type: string
+  trial_policy:
+    type: object
+  workflow:
+    const: strategy-forward-replication-research
+  workflow_floors_path:
+    pattern: ^rules/[a-z0-9-]+\.yml$
+    type: string
+  workflow_version:
+    const: v005
+required:
+  - asset_input_policy
+  - schema_version
+  - workflow
+  - workflow_version
+  - title
+  - language
+  - release
+  - scope
+  - authority
+  - bindings
+  - data_intervals
+  - fold_policy
+  - provenance_policy
+  - trial_policy
+  - candidate_policy
+  - state_machine_path
+  - workflow_floors_path
+  - evidence_requirements_path
+  - failure_and_recovery_path
+  - safety
+  - storage
+  - outcomes
+type: object
