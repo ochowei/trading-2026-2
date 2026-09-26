@@ -1,1916 +1,821 @@
-# TSM：Study Development 成果卡
+# TSM：Development 摘要與索引
+
+本檔整理 52 個 Study 的研究階段（Development）記錄，不包含正式歷史評估或交易結果。2026-09-26 僅精簡文件，未重新核對底層證據、執行試驗或改判策略。每份摘要列目前採用內容；原卡、完整來源、指紋及歷次更正均逐字保存在歷史檔，文末附精確行連結。
+
+閱讀時分開看「證據是否有效、正式門檻、研究目標、凍結資格、實際凍結狀態」。舊卡的 complete 或通過不必然代表目標全過或已凍結；未登記、不適用、尚不能判斷也不是同一件事。缺少證據只表示無法判定，除原卡另有明確記錄，不代表未曾執行。各卡未記載的判定維持未記載，不由其他欄位推論。
+
+下列下一步沿用各卡當時建議，並非本次執行授權；不同版本的來源與結果各自保留，不把同數字當作獨立驗證。盲檢討的個案例外在該卡明列，不能由共同聲明覆蓋。
+
+## 名詞與讀法
+
+| 用語 | 白話說明 |
+| --- | --- |
+| candidate／baseline | 候選策略／比較基準；基準不自動取得候選的研究目標或凍結資格。 |
+| base／stress | 基準成本／較不利成本情境。每份數字依原卡保留；比例與百分比依表頭區分。 |
+| PF／MDD | 獲利因子：總獲利除以總虧損；最大回撤：績效自高點往後下跌的最大幅度。PF 為 inf 或 ∞ 不代表小樣本穩健。 |
+| valid／證據有效性 | 證據格式、必要欄位及來源檢核通過；不等於假說成立，也不保證登記文字與程式一致。 |
+| formal gates／research targets | 必須逐項通過的正式門檻／事前另登記的研究目標；兩種判定分開列。 |
+| freeze eligibility／status | 是否具備固定候選供後續評估的資格／實際是否完成凍結；資格不足與狀態未知分開保留。 |
+| readiness／qualification-failed／trial-recorded | 凍結前檢查／因不具資格停止／研究試驗已記錄；不能單憑其中一項改寫其他狀態。 |
+| provenance／binding／digest | 來源可信狀態／結果與固定版本的綁定／檔案內容指紋。verified-clean 為原卡已核實來源標記，unknown 或未確認不補猜。 |
+| publication／Source Bundle | 已發布證據與指紋的索引／本次綁定的程式來源包；完整值見各卡歷史連結。 |
+| preregistration／contract／runner | 看結果前的研究登記／程式輸入輸出約定／把策略套用到資料並產生試驗結果的工具。 |
+| bootstrap／leave-one-year-out | 保留相鄰交易的區塊重抽樣／每次剔除一年後檢查結果；用來觀察樣本變動影響，並非新增真實交易。 |
+| session／XNYS／cooldown | 交易日／紐約證交所交易日曆／退場後暫停進場的冷卻期；stop、target 指停損與停利。 |
+| SMA／RSI／ATR／bps | 簡單移動平均／相對強弱指標／平均真實波幅／基點（0.01%）；risk budget 是部位風險預算。 |
+| OHLCV／消融／fixture | 每日開高低收與成交量／移除或單獨改一項條件來比較／用人工資料檢查程式的測試情境。 |
+| blind eligibility／allowlist | 是否符合受限盲檢討的讀取條件／指定可讀清單；未看正式結果不等於整個盲檢討程序合格。 |
+
+## Study 索引
+
+| 摘要 | 原記錄日期 | 目前記錄的重點判定 |
+| --- | --- | --- |
+| [tsm-mean-reversion-reversal-trigger--v001](#study-01) | 2026-09-08 | `未完成` |
+| [tsm-mean-reversion-reversal-trigger--v002](#study-02) | 2026-09-08 | `未完成` |
+| [tsm-mean-reversion-two-stage-volume-reversal--v001](#study-03) | 2026-09-08 | `通過` |
+| [tsm-mean-reversion-two-stage-volume-reversal--v002](#study-04) | 2026-09-08 | `通過` |
+| [tsm-mean-reversion-two-stage-volume-reversal--v003](#study-05) | 2026-09-08 | `通過` |
+| [tsm-mean-reversion-two-stage-volume-reversal--v004](#study-06) | 2026-09-08 | `未完成` |
+| [tsm-mean-reversion-two-stage-volume-reversal--v005](#study-07) | 2026-09-08 | `未完成` |
+| [tsm-mean-reversion-two-stage-volume-reversal--v006](#study-08) | 2026-09-08 | `未完成` |
+| [tsm-mean-reversion-two-stage-volume-reversal--v007](#study-09) | 2026-09-08 | `通過` |
+| [tsm-mean-reversion-two-stage-volume-reversal--v008](#study-10) | 2026-09-08 | `未完成` |
+| [tsm-mean-reversion-two-stage-volume-reversal--v009](#study-11) | 2026-09-08 | `通過` |
+| [tsm-mean-reversion-two-stage-volume-reversal--v010](#study-12) | 2026-09-08 | `通過` |
+| [tsm-mean-reversion-two-stage-volume-reversal--v011](#study-13) | 2026-09-08 | `未完成` |
+| [tsm-mean-reversion-two-stage-volume-reversal--v012](#study-14) | 2026-09-08 | `未通過` |
+| [tsm-mean-reversion-volume-lead-setup--v003](#study-15) | 2026-09-08 | `未完成` |
+| [tsm-mean-reversion-volume-leads--v001](#study-16) | 2026-09-08 | `不可判定` |
+| [tsm-mean-reversion-volume-leads--v002](#study-17) | 2026-09-08 | `未通過` |
+| [tsm-mean-reversion-volume-leads--v003](#study-18) | 2026-09-08 | `未通過` |
+| [tsm-mean-reversion-bollinger-rebound--v001](#study-19) | 2026-09-08 | `未通過` |
+| [tsm-mean-reversion-bollinger-rebound--v002](#study-20) | 2026-09-08 | `未通過` |
+| [tsm-mean-reversion-supplemental-divergence--v001](#study-21) | 2026-09-08 | `未完成` |
+| [tsm-mean-reversion-supplemental-divergence--v002](#study-22) | 2026-09-08 | `未完成` |
+| [tsm-mean-reversion-supplemental-divergence--v003](#study-23) | 2026-09-08 | `未完成` |
+| [tsm-mean-reversion-supplemental-divergence--v004](#study-24) | 2026-09-08 | `通過` |
+| [tsm-mean-reversion-selling-pressure-rollover--v001](#study-25) | 2026-09-09 | `evidence-unavailable`；門檻`尚不能判斷` |
+| [tsm-mean-reversion-selling-pressure-rollover--v002](#study-26) | 2026-09-10 | `complete`；門檻`通過` |
+| [tsm-mean-reversion-two-stage-volume-reversal--v013](#study-27) | 2026-09-10 | `complete`；門檻`通過` |
+| [tsm-mean-reversion-two-stage-volume-reversal--v017](#study-28) | 2026-09-11 | `complete`；門檻`通過` |
+| [tsm-mean-reversion-two-stage-volume-reversal--v014](#study-29) | 2026-09-11 | `evidence-unavailable`；門檻`尚不能判斷` |
+| [tsm-mean-reversion-two-stage-volume-reversal--v015](#study-30) | 2026-09-11 | `evidence-unavailable`；門檻`尚不能判斷` |
+| [tsm-mean-reversion-two-stage-volume-reversal--v016](#study-31) | 2026-09-11 | `complete`；門檻`通過` |
+| [tsm-mean-reversion-two-stage-volume-reversal--v018](#study-32) | 2026-09-11 | `complete`；門檻`通過` |
+| [tsm-mean-reversion-two-stage-volume-reversal--v024](#study-33) | 2026-09-17 | `complete`；門檻`通過` |
+| [tsm-momentum-trend-volume-lead--v001](#study-34) | 2026-09-20 | failed；不具凍結資格 |
+| [tsm-momentum-trend-volume-ramp--v001](#study-35) | 2026-09-20 | failed（已更正） |
+| [tsm-momentum-trend-volume-absorption--v001](#study-36) | 2026-09-20 | failed；不具凍結資格 |
+| [tsm-momentum-trend-volume-efficiency--v001](#study-37) | 2026-09-20 | failed；不具凍結資格 |
+| [tsm-momentum-trend-volume-close-acceptance--v001](#study-38) | 2026-09-20 | failed；不具凍結資格 |
+| [tsm-momentum-trend-volume-return-alignment--v001](#study-39) | 2026-09-20 | failed；不具凍結資格 |
+| [tsm-momentum-trend-volume-range-compression--v001](#study-40) | 2026-09-21 | failed；不具凍結資格 |
+| [tsm-momentum-trend-volume-gap-anchoring--v001](#study-41) | 2026-09-21 | failed；不具凍結資格 |
+| [tsm-momentum-trend-volume-persistence--v001](#study-42) | 2026-09-21 | failed；不具凍結資格 |
+| [tsm-momentum-trend-volume-peak-lead--v001](#study-43) | 2026-09-21 | failed；不具凍結資格 |
+| [tsm-momentum-trend-volume-breadth--v001](#study-44) | 2026-09-22 | failed；不具凍結資格 |
+| [tsm-momentum-trend-volume-response-lag--v001](#study-45) | 2026-09-22 | 候選 fail；不具凍結資格 |
+| [tsm-momentum-trend-volume-body-followthrough--v001](#study-46) | 2026-09-22 | 候選 fail；不具凍結資格 |
+| [tsm-momentum-trend-volume-body-sign-consistency--v001](#study-47) | 2026-09-22 | baseline 已更正為 valid；候選不具凍結資格 |
+| [tsm-momentum-trend-volume-lagged-neutral-impulse--v001](#study-48) | 2026-09-23 | 盲檢討未通過；候選 0 筆 |
+| [tsm-momentum-trend-volume-gap-retention--v001](#study-49) | 2026-09-23 | 盲檢討未通過；不具凍結資格 |
+| [tsm-momentum-trend-volume-path-efficiency--v001](#study-50) | 2026-09-23 | 不具凍結資格；登記意圖有歧義 |
+| [tsm-momentum-trend-volume-breadth-dispersion--v001](#study-51) | 2026-09-23 | 不具凍結資格；兩組結果相同 |
+| [tsm-industry-relative-lag-repair--v001](#study-52) | 原卡未列 | 正式門檻 10/11；資格 false，凍結狀態未知 |
 
-本檔只整理 TSM 各 Study 的 Development 階段；未包含正式 Historical Evaluation、Terminal 或交易結果。
+<a id="study-01"></a>
+## `tsm-mean-reversion-reversal-trigger--v001`
 
----
+**判定**：Development `未完成`；來源可信狀態：`provenance-unknown`。
 
-# `tsm-mean-reversion-reversal-trigger--v001`：Study Development 成果卡
+**研究與差異**：TSM 收盤低於 SMA(20) 至少 2%、RSI(2)≤35 時，若前五個 session 有成交量比率≥1.25，且訊號日收盤高於前一日，是否能提升均值回歸的穩健性。 本分支首份候選；加入成交量先行與訊號日反轉確認。 2% risk budget、-4% stop、+4% target、15-session 持有、退場後五-session cooldown 與 SMA＋RSI baseline。
 
-- Development 判定：`未完成`
-- Provenance（來源可信狀態）：`provenance-unknown`
-- 前一個 Study：無（本分支第一份）
-- 記錄日期：`2026-09-08`
+**結果**：允許範圍沒有可核對的 Development 結果證據；base／stress 績效、交易年度及門檻不可判定，不填零、不借用前版結果。
 
-## 結論
+**限制**：沒有可核對的結果證據；程式、測試或輸入檔存在，不能代替實際結果，也無法確認停止點。
 
-> 規格預計在 2014–2018、base 每邊 1 bps 費用／5 bps 滑價與 stress 每邊 2 bps 費用／20 bps 滑價下，測試成交量先行加上訊號日收盤高於前收的反轉觸發；但允許讀取範圍內沒有 outcome-bearing Development evidence，因此本 Study 的 Development 結果不可判定，不能支持或否證原始假說。
+**下一步**：補做一次固定規格的 Development trial，不修改候選規則。 產出這個已凍結候選的完整 Development evidence 與 bindings。 依 preregistration 的完整 gates 檢查完成交易、年度覆蓋、base/stress 報酬、PF 與 stress 回撤；任何 gate 失敗即否證。
 
-## 研究變更
+**來源與歷史**：[原卡、完整來源及更正（原第 7–57 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:7)。
 
-- 研究問題或假說：TSM 收盤低於 SMA(20) 至少 2%、RSI(2)≤35 時，若前五個 session 有成交量比率≥1.25，且訊號日收盤高於前一日，是否能提升均值回歸的穩健性。
-- 相較上一個 Study 只改：本分支首份候選；加入成交量先行與訊號日反轉確認。
-- 保持不變或比較基準：2% risk budget、-4% stop、+4% target、15-session 持有、退場後五-session cooldown 與 SMA＋RSI baseline。
+<a id="study-02"></a>
+## `tsm-mean-reversion-reversal-trigger--v002`
 
-## 主要結果
+**判定**：Development `未完成`；來源可信狀態：`provenance-unknown`。
 
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
-| Development / stress | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
+**研究與差異**：維持 SMA(20) 偏離 2%、RSI(2)≤35、五日成交量比率≥1.25、收盤高於前收的反轉觸發。 規格可見的主要差異是 candidate family／程序版本更新；沒有看到訊號、成本、持有期或風險規則的語義變更。 15-session 持有、退場後五-session cooldown、-4%／+4% stop-target 與相同 baseline。
 
-- 交易年度覆蓋：未執行（規格規劃 2014–2018）
-- 失敗 gate：未執行；允許路徑沒有 Development evidence，不能填入零或推測值。
-- 未執行項目與原因：整體 Development trial 未產出可核對的 evidence；因此 base、stress、年度分段與穩健性檢查均未執行。
+**結果**：允許範圍沒有可核對的 Development 結果證據；base／stress 績效、交易年度及門檻不可判定，不填零、不借用前版結果。
 
-## 主要發現
+**限制**：無法判定策略表現或凍結狀態；版本更新不是新策略，也不能以 v001 證據代替 v002。
 
-- 已確認：preregistration、candidate definition、Development runner、程式與測試均有明確路徑，但沒有可供核對的 Development evidence。
-- 可能原因：Study 可能停在 source validation 或正式執行前；這只是依檔案狀態的中等強度推論，沒有 evidence 可以確認實際停止點。
-- 尚不能判斷：無法判斷交易數、報酬、PF、回撤、gate 是否通過，也無法判斷來源隔離是否已完成 provenance 審計。
+**下一步**：只執行一次 v002 的完整 Development trial，並保留不可變 evidence。 同一候選的 Development evidence 產出與來源綁定，不再改訊號。 完整 gates 均有 actual、threshold 與 passed 值，且資料、程式、輸入 digest 一致；缺任何一項即未完成。
 
-## 下一輪
+**來源與歷史**：[原卡、完整來源及更正（原第 58–108 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:58)。
 
-- 建議處置：補做一次固定規格的 Development trial，不修改候選規則。
-- 下一個 Study 只測：產出這個已凍結候選的完整 Development evidence 與 bindings。
-- 成功／失敗條件：依 preregistration 的完整 gates 檢查完成交易、年度覆蓋、base/stress 報酬、PF 與 stress 回撤；任何 gate 失敗即否證。
-- 不得沿用的問題：不得用程式存在、測試通過或輸入檔存在，代替實際 outcome-bearing evidence。
+<a id="study-03"></a>
+## `tsm-mean-reversion-two-stage-volume-reversal--v001`
 
-## 證據連結
+**判定**：Development `通過`；來源可信狀態：`provenance-unknown`。
 
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-reversal-trigger--v001/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-reversal-trigger--v001/candidate-definition.yml`
-- Development evidence：無（允許路徑未找到）
-- 程式／測試：`research/tsm-mean-reversion-reversal-trigger--v001/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_reversal_trigger_v001.py`、`tests/test_tsm_mean_reversion_reversal_trigger_v001.py`
-- 詳細盲檢討：無
+**研究與差異**：TSM 低於 SMA(20) 1.5%、RSI(2)≤50 時，前五日成交量比率≥1.25 且訊號日收盤高於前收，是否能避免在下跌途中接刀。 本系列首份 Study；建立「量先換手＋價行止跌」兩階段條件。 下一 open 進場、退場後五-session cooldown、15-session 持有、2% risk budget 與 SMA＋RSI baseline。
 
----
+| 條件 | 完成交易 | 報酬 | PF | 最大回撤 |
+| --- | ---: | ---: | ---: | ---: |
+| Development / base | 20 | 19.76% | 2.760 | 3.96% |
+| Development / stress | 20 | 14.90% | 2.315 | 4.34% |
 
-# `tsm-mean-reversion-reversal-trigger--v002`：Study Development 成果卡
+**門檻與覆蓋**：交易年度覆蓋：5（2014–2018） 失敗 gate：無；20 筆交易是完成交易門檻 20 的剛好邊界，其餘交易年度、報酬、PF、回撤與額外穩健性 gates 均通過。
 
-- Development 判定：`未完成`
-- Provenance（來源可信狀態）：`provenance-unknown`
-- 前一個 Study：`tsm-mean-reversion-reversal-trigger--v001`
-- 記錄日期：`2026-09-08`
+**限制**：交易數剛好達門檻，來源尚無獨立聲明；條件組合尚未逐一拆除比較，不能判定單項條件的效果。
 
-## 結論
+**下一步**：建立有限 follow-up，單獨測試持有時間是否是主要限制。 把未觸發 stop／target 的持有期由 15 個 session 改為 10 個；訊號、成本、風險與 cooldown 不變。 完成交易至少 20 筆、年度至少 3 年，base/stress 報酬大於 0、PF 高於 1.10／1.00，stress 回撤不超過 10%，並保留完整重抽樣與逐年剔除 evidence。
 
-> 本 Study 延續相同的 TSM 成交量先行與收盤反轉規則，只更新 Study／candidate 的版本識別與執行程序；但允許讀取範圍內仍沒有 Development evidence，所以無法判定 base 或 stress 結果，也不能把 v002 視為已完成的重現。
+**來源與歷史**：[原卡、完整來源及更正（原第 109–159 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:109)。
 
-## 研究變更
+<a id="study-04"></a>
+## `tsm-mean-reversion-two-stage-volume-reversal--v002`
 
-- 研究問題或假說：維持 SMA(20) 偏離 2%、RSI(2)≤35、五日成交量比率≥1.25、收盤高於前收的反轉觸發。
-- 相較上一個 Study 只改：規格可見的主要差異是 candidate family／程序版本更新；沒有看到訊號、成本、持有期或風險規則的語義變更。
-- 保持不變或比較基準：15-session 持有、退場後五-session cooldown、-4%／+4% stop-target 與相同 baseline。
+**判定**：Development `通過`；來源可信狀態：`provenance-unknown`。
 
-## 主要結果
+**研究與差異**：測試 TSM 的 1.5% SMA 偏離、RSI(2)≤50、1.25 倍成交量先行與收盤高於前收的兩階段反轉。 candidate family 與 Study／實作版本更新；preregistration 沒有顯示訊號、執行或成本語義變更。 15-session 持有、退場後五-session cooldown、2% risk budget、-4%／+4% stop-target 與相同 baseline。
 
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
-| Development / stress | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
+| 條件 | 完成交易 | 報酬 | PF | 最大回撤 |
+| --- | ---: | ---: | ---: | ---: |
+| Development / base | 20 | 19.76% | 2.760 | 3.96% |
+| Development / stress | 20 | 14.90% | 2.315 | 4.34% |
 
-- 交易年度覆蓋：未執行（規格規劃 2014–2018）
-- 失敗 gate：未執行；沒有 Development evidence 可核對。
-- 未執行項目與原因：base/stress metrics、年度分段、bootstrap 與 leave-one-year-out 均未產出可引用結果。
+**門檻與覆蓋**：交易年度覆蓋：5（2014–2018） 失敗 gate：無；全部事前 Development gates 通過。
 
-## 主要發現
+**限制**：同規則重發，並非新的條件增益或獨立驗證；來源聲明、持有期及成交量條件的因果問題仍未解決。
 
-- 已確認：v002 的規格仍固定同一組訊號與成本，並保留 Development runner、程式與測試路徑；結果檔不存在於允許讀取範圍。
-- 可能原因：這次版本更新可能是為了修正前一份 Study 的執行或註冊問題；現有檔案不足以確認是哪一項。
-- 尚不能判斷：不能判斷 v002 是否重現 v001，也不能判斷任何 gate、provenance 或候選 freeze 狀態。
+**下一步**：停止同規則重發，若要繼續只建立一個明確的持有期變更 Study。 將固定持有期由 15 個 session 改為 10 個，其他設定不動。 沿用完整 Development gates，並要求交易數不低於 20、stress 回撤不超過 10%；任一未達即停止。
 
-## 下一輪
+**來源與歷史**：[原卡、完整來源及更正（原第 160–210 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:160)。
 
-- 建議處置：只執行一次 v002 的完整 Development trial，並保留不可變 evidence。
-- 下一個 Study 只測：同一候選的 Development evidence 產出與來源綁定，不再改訊號。
-- 成功／失敗條件：完整 gates 均有 actual、threshold 與 passed 值，且資料、程式、輸入 digest 一致；缺任何一項即未完成。
-- 不得沿用的問題：不得把版本號更新當成策略變更，也不得以 v001 的結果代替 v002 evidence。
+<a id="study-05"></a>
+## `tsm-mean-reversion-two-stage-volume-reversal--v003`
 
-## 證據連結
+**判定**：Development `通過`；來源可信狀態：`provenance-unknown`。
 
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-reversal-trigger--v002/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-reversal-trigger--v002/candidate-definition.yml`
-- Development evidence：無（允許路徑未找到）
-- 程式／測試：`research/tsm-mean-reversion-reversal-trigger--v002/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_reversal_trigger_v001.py`、`tests/test_tsm_mean_reversion_reversal_trigger_v001.py`
-- 詳細盲檢討：無
+**研究與差異**：維持 TSM 1.5% SMA 偏離、RSI(2)≤50、1.25 倍成交量先行與收盤高於前收的兩階段反轉條件。 candidate family 與版本識別更新；未見策略訊號、成本或執行規則變更。 下一 open 進場、15-session 持有、退場後五-session cooldown、2% risk budget 與 -4%／+4% stop-target。
 
----
+| 條件 | 完成交易 | 報酬 | PF | 最大回撤 |
+| --- | ---: | ---: | ---: | ---: |
+| Development / base | 20 | 19.76% | 2.760 | 3.96% |
+| Development / stress | 20 | 14.90% | 2.315 | 4.34% |
 
-# `tsm-mean-reversion-two-stage-volume-reversal--v001`：Study Development 成果卡
+**門檻與覆蓋**：交易年度覆蓋：5（2014–2018） 失敗 gate：無；全部事前 Development gates 通過。
 
-- Development 判定：`通過`
-- Provenance（來源可信狀態）：`provenance-unknown`
-- 前一個 Study：無（本 two-stage 系列第一份）
-- 記錄日期：`2026-09-08`
+**限制**：同規則、同數字不能證明持有期、成交量或價格確認各自有效；交易數仍在下限，來源未有獨立聲明。
 
-## 結論
+**下一步**：停止同規則版本化，改做一個明確的持有期變更測試。 將未觸發 stop／target 的持有期由 15 個 session 改為 10 個。 沿用相同訊號、成本、風險與 cooldown；完成交易至少 20、stress 報酬大於 0、PF>1、回撤≤10%，並完成 bootstrap／leave-one-year-out。
 
-> 在 2014–2018、base 每邊 1／5 bps、stress 每邊 2／20 bps、2% risk budget、-4%／+4% stop-target 與 15-session 持有下，本 Study 的 Development 結果支持「成交量先行加上訊號日收盤反轉」的候選假說：20 筆交易與五個交易年度剛好達標，base/stress 報酬與 PF 均為正，所有事前 gates 通過。
+**來源與歷史**：[原卡、完整來源及更正（原第 211–261 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:211)。
 
-## 研究變更
+<a id="study-06"></a>
+## `tsm-mean-reversion-two-stage-volume-reversal--v004`
 
-- 研究問題或假說：TSM 低於 SMA(20) 1.5%、RSI(2)≤50 時，前五日成交量比率≥1.25 且訊號日收盤高於前收，是否能避免在下跌途中接刀。
-- 相較上一個 Study 只改：本系列首份 Study；建立「量先換手＋價行止跌」兩階段條件。
-- 保持不變或比較基準：下一 open 進場、退場後五-session cooldown、15-session 持有、2% risk budget 與 SMA＋RSI baseline。
+**判定**：Development `未完成`；來源可信狀態：`provenance-unknown`。
 
-## 主要結果
+**研究與差異**：維持 1.5% SMA 偏離、RSI(2)≤50、1.25 倍成交量先行與收盤反轉，只把未觸發 stop／target 的持有期縮短至 10 個 session。 持有期 15→10 個 session；成本、部位、cooldown、stop／target 與訊號固定。 同一 SMA＋RSI baseline 也採 10-session 執行規則。
 
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 20 | 19.76% | 2.760 | 3.96% | 通過 |
-| Development / stress | 20 | 14.90% | 2.315 | 4.34% | 通過 |
+**結果**：允許範圍沒有可核對的 Development 結果證據；base／stress 績效、交易年度及門檻不可判定，不填零、不借用前版結果。
 
-- 交易年度覆蓋：5（2014–2018）
-- 失敗 gate：無；20 筆交易是完成交易門檻 20 的剛好邊界，其餘交易年度、報酬、PF、回撤與額外穩健性 gates 均通過。
-- 未執行項目與原因：無；時間區塊重抽樣與 leave-one-year-out 均有 evidence。
+**限制**：無法判定縮短持有期的交易數、成本後報酬或風險；不能沿用 15-session 結果推論 10-session 效果。
 
-## 主要發現
+**下一步**：先完成固定規格的 Development evidence，再決定是否保留 time-decay 假說。 只執行 v004 已凍結的 10-session 持有規則，不再改門檻。 完成交易至少 20、交易年度至少 3 年、base/stress 報酬大於 0、PF 高於 1.10／1.00、stress 回撤≤10%；缺 evidence 或任一 gate 失敗均不通過。
 
-- 已確認：20 筆交易覆蓋五年；stress block bootstrap 正報酬比例為 97.57%／97.13%，逐年剔除後最低 stress 報酬 6.73%、PF 1.594、回撤 4.34%。
-- 可能原因：成交量與收盤反轉的聯合條件可能避開部分下跌途中訊號；這是條件組合的合理解釋，尚未由單一條件消融證明。
-- 尚不能判斷：交易數剛好貼著 20 筆門檻，且沒有 provenance declaration 可引用；因此不能把本次通過解讀成穩健性已充分餘裕。
+**來源與歷史**：[原卡、完整來源及更正（原第 262–312 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:262)。
 
-## 下一輪
+<a id="study-07"></a>
+## `tsm-mean-reversion-two-stage-volume-reversal--v005`
 
-- 建議處置：建立有限 follow-up，單獨測試持有時間是否是主要限制。
-- 下一個 Study 只測：把未觸發 stop／target 的持有期由 15 個 session 改為 10 個；訊號、成本、風險與 cooldown 不變。
-- 成功／失敗條件：完成交易至少 20 筆、年度至少 3 年，base/stress 報酬大於 0、PF 高於 1.10／1.00，stress 回撤不超過 10%，並保留完整重抽樣與逐年剔除 evidence。
-- 不得沿用的問題：不得把 20 筆剛好過門檻當成交易容量已被證明足夠。
+**判定**：Development `未完成`；來源可信狀態：`verified-clean`。
 
-## 證據連結
+**研究與差異**：測試 10-session 固定持有是否比長持有更能保留均值回歸優勢。 規格中未見訊號、成本、風險或持有語義變更，主要是 Study／candidate 版本與來源登錄更新。 1.5% SMA 偏離、RSI(2)≤50、成交量比率≥1.25、收盤高於前收、10-session 持有、五-session cooldown、2% risk budget。
 
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v001/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-two-stage-volume-reversal--v001/candidate-definition.yml`
-- Development evidence：`research/tsm-mean-reversion-two-stage-volume-reversal--v001/development-evidence.yml`
-- 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v001/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v001.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v001.py`
-- 詳細盲檢討：無
+**結果**：允許範圍沒有可核對的 Development 結果證據；base／stress 績效、交易年度及門檻不可判定，不填零、不借用前版結果。
 
----
+**限制**：已有僅限 Development 的授權、禁止連網及 verified-clean 來源記錄，但這些不等於績效或門檻通過。
 
-# `tsm-mean-reversion-two-stage-volume-reversal--v002`：Study Development 成果卡
+**下一步**：完成 v005 的固定規格 Development evidence，或明確封存為未完成，不再用新版本掩蓋缺口。 同一 10-session 候選的 evidence 完整性與 gate 產出。 base/stress 的 actual、threshold、passed、raw-trade bindings 與 provenance 均齊全；完整 gates 全數通過才算完成。
 
-- Development 判定：`通過`
-- Provenance（來源可信狀態）：`provenance-unknown`
-- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v001`
-- 記錄日期：`2026-09-08`
+**來源與歷史**：[原卡、完整來源及更正（原第 313–363 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:313)。
 
-## 結論
+<a id="study-08"></a>
+## `tsm-mean-reversion-two-stage-volume-reversal--v006`
 
-> 在同一 2014–2018 Development 範圍與相同成本、風險、持有期和訊號規則下，本 Study 的 Development 結果支持原始候選假說：20 筆交易、19.76%／14.90% base／stress 報酬與 2.760／2.315 PF 均符合事前門檻，沒有 failed gate。
+**判定**：Development `未完成`；來源可信狀態：`verified-clean`。
 
-## 研究變更
+**研究與差異**：確認 10-session 持有規則在成交量先行與訊號日反轉條件下，是否仍能通過穩健性 gates。 未見策略語義變更；主要是版本、source bundle 與程序登錄更新。 1.5% SMA 偏離、RSI(2)≤50、成交量比率≥1.25、收盤高於前收、10-session 持有、五-session cooldown 與 2% risk budget。
 
-- 研究問題或假說：測試 TSM 的 1.5% SMA 偏離、RSI(2)≤50、1.25 倍成交量先行與收盤高於前收的兩階段反轉。
-- 相較上一個 Study 只改：candidate family 與 Study／實作版本更新；preregistration 沒有顯示訊號、執行或成本語義變更。
-- 保持不變或比較基準：15-session 持有、退場後五-session cooldown、2% risk budget、-4%／+4% stop-target 與相同 baseline。
+**結果**：允許範圍沒有可核對的 Development 結果證據；base／stress 績效、交易年度及門檻不可判定，不填零、不借用前版結果。
 
-## 主要結果
+**限制**：授權限暖機與 Development、禁止連網；缺證據不代表策略失敗，也無法確認與 v005 是否重現。
 
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 20 | 19.76% | 2.760 | 3.96% | 通過 |
-| Development / stress | 20 | 14.90% | 2.315 | 4.34% | 通過 |
+**下一步**：只補齊 v006 的 Development evidence，完成後再決定是否進行 volume filter 的消融。 固定 10-session 規則下，關閉成交量先行條件；其他訊號與執行規則不變。 先要求 v006 evidence 完整；後續消融版本仍須通過完成交易、年度、報酬、PF、stress 回撤與重抽樣 gates。
 
-- 交易年度覆蓋：5（2014–2018）
-- 失敗 gate：無；全部事前 Development gates 通過。
-- 未執行項目與原因：無；完整 Development evidence 已產出。
+**來源與歷史**：[原卡、完整來源及更正（原第 364–414 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:364)。
 
-## 主要發現
+<a id="study-09"></a>
+## `tsm-mean-reversion-two-stage-volume-reversal--v007`
 
-- 已確認：本 Study evidence 的 base/stress metrics、年度覆蓋與 bootstrap／leave-one-year-out 數值完整，兩套成本下均通過。
-- 可能原因：結果與前一版規格一致，較像版本化與程序重發行的確認，而不是新策略條件帶來的增量；這是檔案語義的判讀，不是額外效果估計。
-- 尚不能判斷：沒有 provenance declaration，因此來源潔淨狀態不能只靠 evidence 欄位推定；同規則重發也沒有回答持有期或成交量條件的因果問題。
+**判定**：Development `通過`；來源可信狀態：`verified-clean`。
 
-## 下一輪
+**研究與差異**：相較 v006，只移除前五個 session 的成交量尖峰條件，保留收盤高於前收的止跌確認，檢查成交量是否提供可重現的額外篩選。 關閉 volume-lead filter；10-session 持有與其他條件固定。 SMA(20) 偏離 1.5%、RSI(2)≤50、五-session cooldown、-4%／+4% stop-target、2% risk budget。
 
-- 建議處置：停止同規則重發，若要繼續只建立一個明確的持有期變更 Study。
-- 下一個 Study 只測：將固定持有期由 15 個 session 改為 10 個，其他設定不動。
-- 成功／失敗條件：沿用完整 Development gates，並要求交易數不低於 20、stress 回撤不超過 10%；任一未達即停止。
-- 不得沿用的問題：不得以 v001／v002 的重複結果冒充對訊號條件的獨立驗證。
+| 條件 | 完成交易 | 報酬 | PF | 最大回撤 |
+| --- | ---: | ---: | ---: | ---: |
+| Development / base | 25 | 30.97% | 3.861 | 2.03% |
+| Development / stress | 25 | 23.96% | 3.249 | 2.12% |
 
-## 證據連結
+**門檻與覆蓋**：交易年度覆蓋：5（2014–2018） 失敗 gate：無；25≥20，stress 單筆最大虧損 2.02%、bootstrap 正報酬比例最低 99.996%、逐年剔除 gates 全部通過。
 
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v002/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-two-stage-volume-reversal--v002/candidate-definition.yml`
-- Development evidence：`research/tsm-mean-reversion-two-stage-volume-reversal--v002/development-evidence.yml`
-- 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v002/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v002.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v002.py`
-- 詳細盲檢討：無
+**限制**：同份證據的描述性比較中，volume-only 為 36 筆、stress PF 1.280、報酬 6.95%；這些比較不參與選擇，不能據此挑新門檻或宣稱價格條件具跨期因果優勢。
 
----
+**下一步**：建立有限 follow-up，重新加入成交量條件但只改一個門檻。 在保留收盤反轉與 10-session 執行的前提下，將成交量比率門檻由 1.25 改為 1.05。 沿用完整 Development gates；完成交易至少 20、stress 報酬與 PF 仍通過、回撤≤10%，並保留同樣的 mechanism ablation。
 
-# `tsm-mean-reversion-two-stage-volume-reversal--v003`：Study Development 成果卡
+**來源與歷史**：[原卡、完整來源及更正（原第 415–465 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:415)。
 
-- Development 判定：`通過`
-- Provenance（來源可信狀態）：`provenance-unknown`
-- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v002`
-- 記錄日期：`2026-09-08`
+<a id="study-10"></a>
+## `tsm-mean-reversion-two-stage-volume-reversal--v008`
 
-## 結論
+**判定**：Development `未完成`；來源可信狀態：`provenance-unknown`。
 
-> 在同一 2014–2018 Development 資料與相同 15-session 兩階段反轉規則下，本 Study 的 Development 結果支持原始假說：base/stress 分別有 20 筆完成交易、19.76%／14.90% 報酬與 2.760／2.315 PF，最大回撤 3.96%／4.34%，全部事前 gates 通過。
+**研究與差異**：在保留收盤反轉的前提下，較寬鬆的 1.05 倍成交量確認能否增加交易樣本並維持風險調整後品質。 重新啟用 volume-lead，且門檻 1.25→1.05；其他訊號與 10-session 執行固定。 SMA(20) 偏離 1.5%、RSI(2)≤50、收盤高於前收、五-session cooldown、2% risk budget、-4%／+4% stop-target。
 
-## 研究變更
+**結果**：允許範圍沒有可核對的 Development 結果證據；base／stress 績效、交易年度及門檻不可判定，不填零、不借用前版結果。
 
-- 研究問題或假說：維持 TSM 1.5% SMA 偏離、RSI(2)≤50、1.25 倍成交量先行與收盤高於前收的兩階段反轉條件。
-- 相較上一個 Study 只改：candidate family 與版本識別更新；未見策略訊號、成本或執行規則變更。
-- 保持不變或比較基準：下一 open 進場、15-session 持有、退場後五-session cooldown、2% risk budget 與 -4%／+4% stop-target。
+**限制**：已有固定規格與授權，但無法確認實際執行或封存情況；不得用預期交易數或前版結果代填。
 
-## 主要結果
+**下一步**：先完成 v008 的固定規格 Development evidence。 不再改 1.05 門檻或訊號，補齊實際 run、raw trades、metrics、gates 與 provenance bindings。 完整 Development gates 通過，並能核對 volume-on 與 price-only 的描述性消融；缺任何 evidence 或 gate 失敗都不進 freeze。
 
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 20 | 19.76% | 2.760 | 3.96% | 通過 |
-| Development / stress | 20 | 14.90% | 2.315 | 4.34% | 通過 |
+**來源與歷史**：[原卡、完整來源及更正（原第 466–516 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:466)。
 
-- 交易年度覆蓋：5（2014–2018）
-- 失敗 gate：無；全部事前 Development gates 通過。
-- 未執行項目與原因：無
+<a id="study-11"></a>
+## `tsm-mean-reversion-two-stage-volume-reversal--v009`
 
-## 主要發現
+**判定**：Development `通過`；來源可信狀態：`verified-clean`。
 
-- 已確認：evidence 具有 20 筆交易、五年分段、50,000 次 block bootstrap 與 leave-one-year-out 結果；stress 逐年剔除後最低 PF 1.594、最低報酬 6.73%。
-- 可能原因：本輪沒有實質策略變更，因此通過主要表示這個版本的 Development 產出可用；不能把它解讀成新的條件增益。
-- 尚不能判斷：來源 provenance 未有獨立 declaration，且 20 筆仍是交易數下限；交易容量與條件因果仍未被解開。
+**研究與差異**：在保留 1.5% SMA 偏離、RSI(2)≤50 與訊號日收盤反轉下，把成交量先行門檻固定為 1.05，檢查適度換手條件是否保留樣本與穩健性。 確認並重發 1.05 倍 volume-lead candidate 的可核對 Development evidence；本輪規格的策略門檻維持 1.05。 10-session 持有、五-session cooldown、-4%／+4% stop-target、2% risk budget 與相同資料邊界。
 
-## 下一輪
+| 條件 | 完成交易 | 報酬 | PF | 最大回撤 |
+| --- | ---: | ---: | ---: | ---: |
+| Development / base | 24 | 33.68% | 5.036 | 2.00% |
+| Development / stress | 24 | 26.52% | 4.204 | 2.12% |
 
-- 建議處置：停止同規則版本化，改做一個明確的持有期變更測試。
-- 下一個 Study 只測：將未觸發 stop／target 的持有期由 15 個 session 改為 10 個。
-- 成功／失敗條件：沿用相同訊號、成本、風險與 cooldown；完成交易至少 20、stress 報酬大於 0、PF>1、回撤≤10%，並完成 bootstrap／leave-one-year-out。
-- 不得沿用的問題：不得用重複版本的相同 metrics 宣稱 holding period、volume 或 price confirmation 已各自被證明。
+**門檻與覆蓋**：交易年度覆蓋：5（2014–2018） 失敗 gate：無；stress block bootstrap 正報酬比例最低 99.998%、stress 回撤超過 10% 比例為 0，逐年剔除後最低 stress 報酬 18.36%、PF 3.409。
 
-## 證據連結
+**限制**：樣本有限；描述性消融中的 price-only 為 24 筆、calibrated two-stage 為 25 筆，均有正 stress 結果，但不代表 1.05 已被證明最佳。
 
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v003/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-two-stage-volume-reversal--v003/candidate-definition.yml`
-- Development evidence：`research/tsm-mean-reversion-two-stage-volume-reversal--v003/development-evidence.yml`
-- 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v003/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v003.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v003.py`
-- 詳細盲檢討：無
+**下一步**：若要增加容量，只允許一次單參數變更，並保留本 Study 作固定基準。 只把退場後 cooldown 由 5 個 session 改為 3 個，維持 1.5%／RSI 50／volume 1.05 與 10-session 持有。 完成交易增加但不少於 20，base/stress 報酬與 PF 通過，stress 回撤≤10%，bootstrap 與 leave-one-year-out gates 不得退化失敗。
 
----
+**來源與歷史**：[原卡、完整來源及更正（原第 517–567 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:517)。
 
-# `tsm-mean-reversion-two-stage-volume-reversal--v004`：Study Development 成果卡
+<a id="study-12"></a>
+## `tsm-mean-reversion-two-stage-volume-reversal--v010`
 
-- Development 判定：`未完成`
-- Provenance（來源可信狀態）：`provenance-unknown`
-- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v003`
-- 記錄日期：`2026-09-08`
+**判定**：Development `通過`；來源可信狀態：`verified-clean`。
 
-## 結論
+**研究與差異**：把 SMA 偏離門檻由 1.5% 放寬至 1.2%、RSI 上限由 50 放寬至 55，並把退場後 cooldown 由 5 縮短至 3，檢查交易容量能否增加而不破壞成本後品質。 一個「容量擴張組合」同時改三項設定；這不是可完全歸因於單一 knob 的變更。 volume 1.05、收盤高於前收、10-session 持有、2% risk budget、-4%／+4% stop-target 與相同資料。
 
-> 本 Study 預先登記的唯一策略變更是把固定持有期由 15 個 session 改為 10 個，目的是測試均值回歸優勢是否會隨時間衰減；然而允許讀取範圍內沒有 Development evidence，因此無法判定這個變更是否改善交易容量、報酬或風險。
+| 條件 | 完成交易 | 報酬 | PF | 最大回撤 |
+| --- | ---: | ---: | ---: | ---: |
+| Development / base | 29 | 34.79% | 3.837 | 2.55% |
+| Development / stress | 29 | 26.59% | 3.206 | 2.58% |
 
-## 研究變更
+**門檻與覆蓋**：交易年度覆蓋：5（2014–2018） 失敗 gate：無；stress PF 為 3.206、stress 報酬 26.59%，且 bootstrap、逐年剔除、單筆損失與回撤 gates 均通過。
 
-- 研究問題或假說：維持 1.5% SMA 偏離、RSI(2)≤50、1.25 倍成交量先行與收盤反轉，只把未觸發 stop／target 的持有期縮短至 10 個 session。
-- 相較上一個 Study 只改：持有期 15→10 個 session；成本、部位、cooldown、stop／target 與訊號固定。
-- 保持不變或比較基準：同一 SMA＋RSI baseline 也採 10-session 執行規則。
+**限制**：三項設定同時變更，無法分辨 SMA、RSI 或冷卻期各自貢獻，不能將通過歸功於任何單項。
 
-## 主要結果
+**下一步**：建立單參數隔離 follow-up，不再複製三項同時放寬。 固定 1.2% SMA、RSI 55、volume 1.05 與 10-session 持有，只把 cooldown 由 3 恢復為 5 個 session。 完整 gates 通過，並比較交易數、stress 報酬、PF 與回撤；任何 gate 失敗即否證該單一 cooldown 變更。
 
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
-| Development / stress | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
+**來源與歷史**：[原卡、完整來源及更正（原第 568–618 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:568)。
 
-- 交易年度覆蓋：未執行（規格規劃 2014–2018）
-- 失敗 gate：未執行；沒有 evidence 可提供 actual／threshold。
-- 未執行項目與原因：未找到 Development evidence；不能以 v003 的結果代填 v004。
+<a id="study-13"></a>
+## `tsm-mean-reversion-two-stage-volume-reversal--v011`
 
-## 主要發現
+**判定**：Development `未完成`；來源可信狀態：`provenance-unknown`。
 
-- 已確認：v004 的 preregistration 與程式／測試明確表達 10-session time-decay 變更，但沒有結果檔。
-- 可能原因：Study 可能在執行前或 source validation 階段停止；沒有允許證據可以確認。
-- 尚不能判斷：無法判斷 10-session 是否增加交易數、是否造成較多成本、或是否改善 stress 回撤與 PF。
+**研究與差異**：以 1.5% SMA 偏離、RSI(2)≤50、volume 1.05 建立資格，保留 v009 同日確認，並允許三日內延後確認。 改回 v009 的嚴格資格門檻，加入三日有效期的 delayed confirmation 與明確等待狀態；這是機制變更，不是單純參數調整。 10-session 持有、2% risk budget、-4%／+4% stop-target、資料邊界與 base／stress 成本固定。
 
-## 下一輪
+**結果**：允許範圍沒有可核對的 Development 結果證據；base／stress 績效、交易年度及門檻不可判定，不填零、不借用前版結果。
 
-- 建議處置：先完成固定規格的 Development evidence，再決定是否保留 time-decay 假說。
-- 下一個 Study 只測：只執行 v004 已凍結的 10-session 持有規則，不再改門檻。
-- 成功／失敗條件：完成交易至少 20、交易年度至少 3 年、base/stress 報酬大於 0、PF 高於 1.10／1.00、stress 回撤≤10%；缺 evidence 或任一 gate 失敗均不通過。
-- 不得沿用的問題：不得用前一版 15-session 結果推論 10-session 的效果。
+**限制**：無法判定延後確認是否增加有效交易；事前研究目標也沒有實際結果，不能事後放寬三日有效期。
 
-## 證據連結
+**下一步**：只完成 v011 的固定規格 Development trial，再依事前 targets 決定停止或 freeze。 產出延後確認版本的完整 raw trades、v009／v010 controls 與新增交易比較；不調整三日有效期。 交易數嚴格高於 29、stress 報酬嚴格高於 v009、延後新增交易的 base 與 stress 合計損益都大於 0，且 formal gates 全數通過。
 
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v004/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-two-stage-volume-reversal--v004/candidate-definition.yml`
-- Development evidence：無（允許路徑未找到）
-- 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v004/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v004.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v004.py`
-- 詳細盲檢討：無
+**來源與歷史**：[原卡、完整來源及更正（原第 619–669 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:619)。
 
----
+<a id="study-14"></a>
+## `tsm-mean-reversion-two-stage-volume-reversal--v012`
 
-# `tsm-mean-reversion-two-stage-volume-reversal--v005`：Study Development 成果卡
+**判定**：Development `未通過`；來源可信狀態：`provenance-unknown`。
 
-- Development 判定：`未完成`
-- Provenance（來源可信狀態）：`verified-clean`
-- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v004`
-- 記錄日期：`2026-09-08`
+**研究與差異**：保留 v009 的超跌、RSI 與成交量資格；若當日收盤高於開盤、日內 high>low，且收盤位於當日區間上方三分之一，即使未高於前收也提早確認反轉。 移除三日 delayed confirmation，改為同日盤中反轉條件；同時使用較嚴格的交易數、stress PF 與 stress 報酬選擇門檻。 下一日 open 進場、10-session 持有、五-session cooldown、2% risk budget、-4%／+4% stop-target 與相同資料。
 
-## 結論
+| 條件 | 完成交易 | 報酬 | PF | 最大回撤 |
+| --- | ---: | ---: | ---: | ---: |
+| Development / base | 28 | 21.80% | 2.166 | 5.88% |
+| Development / stress | 28 | 15.38% | 1.849 | 5.88% |
 
-> v005 延續 10-session time-decay 規格，且已有 Development authorization 與 verified-clean provenance declaration；但允許讀取範圍內沒有 outcome-bearing Development evidence。因此本 Study 尚未完成，不能判定 10-session 持有是否通過任何 base／stress gate。
+**門檻與覆蓋**：交易年度覆蓋：5（2014–2018） 失敗 gate：`completed_trades` 28≥30 失敗；`stress_profit_factor` 1.84883≥3.20558 失敗；`stress_return` 0.15380>0.26590 失敗。
 
-## 研究變更
+**限制**：正報酬不能抵銷事前門檻失敗；無法區分盤中確認、交易替換與較高選擇門檻的影響，不得降低既定門檻。
 
-- 研究問題或假說：測試 10-session 固定持有是否比長持有更能保留均值回歸優勢。
-- 相較上一個 Study 只改：規格中未見訊號、成本、風險或持有語義變更，主要是 Study／candidate 版本與來源登錄更新。
-- 保持不變或比較基準：1.5% SMA 偏離、RSI(2)≤50、成交量比率≥1.25、收盤高於前收、10-session 持有、五-session cooldown、2% risk budget。
+**下一步**：停止本次 intraday-reversal 假說，不放寬 failed gates。 若仍需 follow-up，只恢復 v009 的收盤高於前收確認，其他 1.5%／RSI 50／volume 1.05／10-session 設定固定。 必須重新通過本輪的交易數、stress PF、stress 報酬與原有穩健性 gates；任一失敗即停止，不再加入第三種確認規則。
 
-## 主要結果
+**來源與歷史**：[原卡、完整來源及更正（原第 670–720 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:670)。
 
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
-| Development / stress | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
+<a id="study-15"></a>
+## `tsm-mean-reversion-volume-lead-setup--v003`
 
-- 交易年度覆蓋：未執行（規格規劃 2014–2018）
-- 失敗 gate：未執行；没有 Development actual 可核對。
-- 未執行項目與原因：沒有 Development evidence；authorization 與 provenance 只能證明流程聲明，不能代替結果。
+**判定**：Development `未完成`；來源可信狀態：`provenance-unknown`。
 
-## 主要發現
+**研究與差異**：TSM 低於 SMA(20) 至少 2%、RSI(2)≤35 且前五日成交量比率≥1.25 時，即使訊號日未收紅，是否仍保留有參與度的回落 setup。 移除 `close_above_prior_close` 方向確認；成交量先行與其他執行規則固定。 15-session 持有、五-session cooldown、2% risk budget、-4%／+4% stop-target、base／stress 成本與 SMA＋RSI baseline。
 
-- 已確認：v005 已有 development-only authorization、network access=false 與 verified-clean provenance，但沒有 metrics 或 gates evidence。
-- 可能原因：可能是執行尚未完成或 evidence 尚未封存；目前沒有資料判定是哪一種。
-- 尚不能判斷：不能判斷交易數、年度覆蓋、報酬、PF、回撤或 time-decay 假說是否成立。
+**結果**：允許範圍沒有可核對的 Development 結果證據；base／stress 績效、交易年度及門檻不可判定，不填零、不借用前版結果。
 
-## 下一輪
+**限制**：沒有實際結果可判斷移除方向確認後的交易數或品質；不得以同系列有方向條件的結果代替。
 
-- 建議處置：完成 v005 的固定規格 Development evidence，或明確封存為未完成，不再用新版本掩蓋缺口。
-- 下一個 Study 只測：同一 10-session 候選的 evidence 完整性與 gate 產出。
-- 成功／失敗條件：base/stress 的 actual、threshold、passed、raw-trade bindings 與 provenance 均齊全；完整 gates 全數通過才算完成。
-- 不得沿用的問題：不得把 authorization／provenance 通過誤寫成策略 Development 通過。
+**下一步**：先完成 v003 固定規格 Development evidence，再決定是否停止或保留 setup 假說。 只執行「volume lead、無訊號日方向確認」版本，不再改 RSI、SMA 偏離或持有期。 完整 Development gates、交易年度、兩套成本報酬與 PF、stress 回撤及重抽樣均需有 actual 並通過。
 
-## 證據連結
+**來源與歷史**：[原卡、完整來源及更正（原第 721–771 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:721)。
 
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v005/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-two-stage-volume-reversal--v005/candidate-definition.yml`
-- Development evidence：無（允許路徑未找到）
-- 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v005/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v005.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v005.py`
-- 詳細盲檢討：無
+<a id="study-16"></a>
+## `tsm-mean-reversion-volume-leads--v001`
 
----
+**判定**：Development `不可判定`；來源可信狀態：`provenance-unknown`。
 
-# `tsm-mean-reversion-two-stage-volume-reversal--v006`：Study Development 成果卡
+**研究與差異**：SMA(20) 偏離至少 2%、RSI(2)≤35 時，若前五日成交量比率≥1.25，能否在價格偏離擴大前辨識換手並提高均值回歸穩健性。 本分支首份候選；加入 volume-lead 條件。 15-session 持有、五-session cooldown、2% risk budget、-4%／+4% stop-target 與 base／stress 成本。
 
-- Development 判定：`未完成`
-- Provenance（來源可信狀態）：`verified-clean`
-- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v005`
-- 記錄日期：`2026-09-08`
+**結果**：允許範圍沒有可核對的 Development 結果證據；base／stress 績效、交易年度及門檻不可判定，不填零、不借用前版結果。
 
-## 結論
+**限制**：原卡記載 evidence-unavailable payload 明示沒有產出結果試驗；來源驗證未通過，但 snapshot 或 binding 的具體原因未確認。不得以修正版結果回填。
 
-> v006 仍是 10-session time-decay 候選，已有 development-only authorization 與 verified-clean provenance，但允許讀取範圍內沒有 Development evidence。故本 Study 的 Development 結果不可判定，不能填入任何交易數、報酬或 PF，也不能假設它已重現 v005 的規格。
+**下一步**：建立 corrected Study，只修正 source validation／snapshot integrity，不修改 volume-lead 策略。 讓同一候選產出可核對的 warmup、Development raw trades、metrics 與 bindings。 source validation、network control、資料 digest 與完整 Development gates 全數有證據；若仍無 outcome-bearing evidence，維持未完成。
 
-## 研究變更
+**來源與歷史**：[原卡、完整來源及更正（原第 772–822 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:772)。
 
-- 研究問題或假說：確認 10-session 持有規則在成交量先行與訊號日反轉條件下，是否仍能通過穩健性 gates。
-- 相較上一個 Study 只改：未見策略語義變更；主要是版本、source bundle 與程序登錄更新。
-- 保持不變或比較基準：1.5% SMA 偏離、RSI(2)≤50、成交量比率≥1.25、收盤高於前收、10-session 持有、五-session cooldown 與 2% risk budget。
+<a id="study-17"></a>
+## `tsm-mean-reversion-volume-leads--v002`
 
-## 主要結果
+**判定**：Development `未通過`；來源可信狀態：`provenance-unknown`。
 
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
-| Development / stress | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
+**研究與差異**：修正 v001 的來源驗證問題後，測試不含訊號日方向確認的 volume-lead candidate 是否能在五年中維持穩健均值回歸。 修正 source／程序版本以產出正式 Development evidence；訊號仍是 volume-lead 1.25，沒有加入方向確認。 2% risk budget、-4%／+4% stop-target、15-session 持有、五-session cooldown、base／stress 成本與相同 baseline。
 
-- 交易年度覆蓋：未執行（規格規劃 2014–2018）
-- 失敗 gate：未執行；沒有 outcome-bearing evidence。
-- 未執行項目與原因：缺少 Development evidence；不得以 v005 或其他 Study 結果代填。
+| 條件 | 完成交易 | 報酬 | PF | 最大回撤 |
+| --- | ---: | ---: | ---: | ---: |
+| Development / base | 29 | 6.86% | 1.294 | 6.40% |
+| Development / stress | 29 | 2.03% | 1.088 | 6.77% |
 
-## 主要發現
+**門檻與覆蓋**：交易年度覆蓋：5（2014–2018） 失敗 gate：stress block bootstrap 回撤超標比例 0.25024／0.20438>0.10；正報酬比例 0.60006／0.61252<0.80；leave-one-year-out 最低 PF 0.96755≤1；最低報酬 -0.00459≤0。
 
-- 已確認：v006 的 authorization 限定 warmup-only／development，且 network access=false；但這只描述執行範圍，沒有實際結果。
-- 可能原因：版本可能尚未完成 runner 執行或封存；原因無法由允許資料確認。
-- 尚不能判斷：不能判斷 10-session 規則是否改善交易數、成本後報酬、PF 或回撤，也不能判斷 v006 與 v005 是否真正重現。
+**限制**：整體正報酬掩蓋部分抽樣及剔除年度後的負結果；無法歸因於成交量門檻、缺方向確認或 setup 本身，來源亦無獨立聲明。
 
-## 下一輪
+**下一步**：建立有限 follow-up，只加入訊號日收盤低於前收的方向確認，不改 volume threshold。 在 1.25 volume-lead 與其他設定固定下，新增 `close_below_prior_close`。 完整原有 gates 全數通過，尤其 stress bootstrap 正報酬比例≥80%、回撤超標比例≤10%，以及 leave-one-year-out 的最低 PF>1、報酬>0。
 
-- 建議處置：只補齊 v006 的 Development evidence，完成後再決定是否進行 volume filter 的消融。
-- 下一個 Study 只測：固定 10-session 規則下，關閉成交量先行條件；其他訊號與執行規則不變。
-- 成功／失敗條件：先要求 v006 evidence 完整；後續消融版本仍須通過完成交易、年度、報酬、PF、stress 回撤與重抽樣 gates。
-- 不得沿用的問題：不得把缺少 evidence 解讀成策略失敗，也不得把 authorization 當成通過。
+**來源與歷史**：[原卡、完整來源及更正（原第 823–873 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:823)。
 
-## 證據連結
+<a id="study-18"></a>
+## `tsm-mean-reversion-volume-leads--v003`
 
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v006/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-two-stage-volume-reversal--v006/candidate-definition.yml`
-- Development evidence：無（允許路徑未找到）
-- 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v006/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v006.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v006.py`
-- 詳細盲檢討：無
+**判定**：Development `未通過`；來源可信狀態：`provenance-unknown`。
 
----
+**研究與差異**：成交量先行若再加上訊號日收盤低於前收，是否能把較有方向的回落 setup 與無方向成交量異常分開。 新增 `close_below_prior_close`；SMA 偏離 2%、RSI(2)≤35、volume 1.25、成本、風險、持有期與 cooldown 固定。 15-session 持有、2% risk budget、-4%／+4% stop-target、base／stress 成本與相同 SMA＋RSI baseline。
 
-# `tsm-mean-reversion-two-stage-volume-reversal--v007`：Study Development 成果卡
+| 條件 | 完成交易 | 報酬 | PF | 最大回撤 |
+| --- | ---: | ---: | ---: | ---: |
+| Development / base | 28 | 4.42% | 1.191 | 6.40% |
+| Development / stress | 28 | 0.01% | 1.000 | 8.09% |
 
-- Development 判定：`通過`
-- Provenance（來源可信狀態）：`verified-clean`
-- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v006`
-- 記錄日期：`2026-09-08`
+**門檻與覆蓋**：交易年度覆蓋：5（2014–2018） 失敗 gate：stress bootstrap 回撤超標比例 0.34794／0.27364>0.10；正報酬比例 0.50224／0.50444<0.80；leave-one-year-out 最低 PF 0.82576≤1、最低報酬 -0.02431≤0。
 
-## 結論
+**限制**：加入收跌條件後，stress 報酬接近零；2015、2017、2018 的逐年剔除結果存在報酬或 PF 未達標，不能將接近不虧當成穩健成功。
 
-> 在 2014–2018、10-session 持有、2% risk budget 與固定 base／stress 成本下，本 Study 的 Development 結果支持「只保留訊號日收盤高於前收、移除成交量先行條件」的候選可行性：25 筆交易、30.97%／23.96% 報酬、3.861／3.249 PF 與約 2.0% 回撤，所有事前 gates 通過。
+**下一步**：停止本方向確認版本，不再疊加第三個 filter。 若流程必須 follow-up，只移除 `close_below_prior_close`，其餘 volume-lead 設定固定；不得同時改 threshold。 必須重新通過原有 bootstrap 與 leave-one-year-out gates，且 stress 報酬、PF、回撤與交易數都達到事前門檻；否則終止此分支。
 
-## 研究變更
+**來源與歷史**：[原卡、完整來源及更正（原第 874–924 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:874)。
 
-- 研究問題或假說：相較 v006，只移除前五個 session 的成交量尖峰條件，保留收盤高於前收的止跌確認，檢查成交量是否提供可重現的額外篩選。
-- 相較上一個 Study 只改：關閉 volume-lead filter；10-session 持有與其他條件固定。
-- 保持不變或比較基準：SMA(20) 偏離 1.5%、RSI(2)≤50、五-session cooldown、-4%／+4% stop-target、2% risk budget。
+<a id="study-19"></a>
+## `tsm-mean-reversion-bollinger-rebound--v001`
 
-## 主要結果
+**判定**：Development `未通過`；來源可信狀態：`verified-clean`。
 
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 25 | 30.97% | 3.861 | 2.03% | 通過 |
-| Development / stress | 25 | 23.96% | 3.249 | 2.12% | 通過 |
+**研究與差異**：將均值回歸的超跌條件由固定均線偏離改為動態布林通道下軌（%b ≤ 0.25），並搭配前五日成交量比率 ≥ 1.05 與訊號日收盤反轉，檢驗能否改善極端行情下的進場品質。 本系列首份 Study；引進動態布林通道下軌作為超跌資格，同時保留成交量先行與收盤確認。 20 日、±2 倍標準差通道的布林 baseline；10-session 持有、退場後 5-session cooldown、2% risk budget、-4%／+4% stop-target 與相同成本。
 
-- 交易年度覆蓋：5（2014–2018）
-- 失敗 gate：無；25≥20，stress 單筆最大虧損 2.02%、bootstrap 正報酬比例最低 99.996%、逐年剔除 gates 全部通過。
-- 未執行項目與原因：無；四組 mechanism ablation 只作事前固定的描述性診斷，不參與 candidate selection。
+| 條件 | 完成交易 | 報酬 | PF | 最大回撤 |
+| --- | ---: | ---: | ---: | ---: |
+| Development / base | 25 | 27.59% | 3.766 | 2.58% |
+| Development / stress | 25 | 20.99% | 3.088 | 2.54% |
 
-## 主要發現
+**門檻與覆蓋**：交易年度覆蓋：5（2014–2018） 失敗 gate：`completed_trades` 25 < 30 失敗；`stress_profit_factor` 3.0878 < 3.20558 失敗；`stress_return` 0.20988 < 0.26590 失敗。
 
-- 已確認：price-only candidate 的 25 筆交易在五年內通過所有正式 gates；同一 evidence 的描述性消融顯示 volume-only 有 36 筆但 stress PF 1.280、stress 報酬 6.95%。
-- 可能原因：成交量條件可能增加樣本但未必改善成本後品質；這是本 Study 內描述性消融支持的弱推論，不能外推成成交量永遠無用。
-- 尚不能判斷：消融不參與選擇，且本 Study 沒有把成交量門檻做逐一控制；因此不能判斷「移除 volume」與「price-only」的因果優勢是否跨資料仍成立。
+**限制**：重抽樣正報酬比例雖達 99.88% 以上，仍未達容量與超越基準目標；動態布林的單獨貢獻尚不明。
 
-## 下一輪
+**下一步**：建立有限 follow-up，嘗試引入事件觀察期以捕捉延後確認的反彈機會。 將同日布林條件拆分為事件觸發與 5 個 session 內的延後確認，其他風險與執行規則固定。 完成交易至少 30 筆，且 stress 報酬、PF 與回撤符合事前 gate；任一失敗即否證。
 
-- 建議處置：建立有限 follow-up，重新加入成交量條件但只改一個門檻。
-- 下一個 Study 只測：在保留收盤反轉與 10-session 執行的前提下，將成交量比率門檻由 1.25 改為 1.05。
-- 成功／失敗條件：沿用完整 Development gates；完成交易至少 20、stress 報酬與 PF 仍通過、回撤≤10%，並保留同樣的 mechanism ablation。
-- 不得沿用的問題：不得用描述性 volume-only 結果直接選出新的成交量門檻。
+**來源與歷史**：[原卡、完整來源及更正（原第 925–975 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:925)。
 
-## 證據連結
+<a id="study-20"></a>
+## `tsm-mean-reversion-bollinger-rebound--v002`
 
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v007/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-two-stage-volume-reversal--v007/candidate-definition.yml`
-- Development evidence：`research/tsm-mean-reversion-two-stage-volume-reversal--v007/development-evidence.yml`
-- 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v007/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v007.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v007.py`
-- 詳細盲檢討：無
+**判定**：Development `未通過`；來源可信狀態：`provenance-unknown`。
 
----
+**研究與差異**：布林下軌跌深與爆量觸發後，若在後續 5 個 session 內守住事件日低點且出現收盤反轉，是否能捕捉更多延後止跌的反彈交易並維持品質。 將同日條件改為「事件記憶（5 個 session 觀察期）」與「縮量守低後反轉確認」兩階段架構。 10-session 持有、退場後 5-session cooldown、2% risk budget、-4%／+4% stop-target、base（1/5 bps）與 stress（2/20 bps）成本。
 
-# `tsm-mean-reversion-two-stage-volume-reversal--v008`：Study Development 成果卡
+| 條件 | 完成交易 | 報酬 | PF | 最大回撤 |
+| --- | ---: | ---: | ---: | ---: |
+| Development / base | 16 | 10.89% | 2.868 | 2.58% |
+| Development / stress | 16 | 7.57% | 2.240 | 2.54% |
 
-- Development 判定：`未完成`
-- Provenance（來源可信狀態）：`provenance-unknown`
-- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v007`
-- 記錄日期：`2026-09-08`
+**門檻與覆蓋**：交易年度覆蓋：5（2014–2018，但 2017 僅 1 筆） 失敗 gate：`completed_trades` 16 < 20（Workflow 最低門檻）與 16 < 30 失敗；`more_completed_trades_than_v009`、`base_return_not_below_v009`、`stress_return_not_below_v009` 等事前目標均失敗。
 
-## 結論
+**限制**：60 個事件中 34 個（56.7%）因跌破低點失效，8 筆因持有到期退出；2018 少數交易貢獻近半獲利。事件到期邊界與成交量參數未對齊也是限制，不宜沿用未修正設計。
 
-> 本 Study 只把成交量先行條件重新開啟，並把五日成交量門檻由 1.25 調為 1.05；然而允許讀取範圍內沒有 Development evidence。即使規格已固定 10-session 持有與相同成本，本 Study 仍未完成，不能判定交易數、報酬、PF 或風險是否改善。
+**下一步**：停止本事件記憶與縮量守低假說，不在此 Study 放寬門檻。 若需繼續布林研究，應簡化觸發條件或改進持有期配對，不再疊加事件觀察與守低狀態機。 完成交易至少 20 筆（優先滿足流程底線），stress PF > 1.10、報酬 > 0 且通過各年度穩健性檢查。
 
-## 研究變更
+**來源與歷史**：[原卡、完整來源及更正（原第 976–1026 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:976)。
 
-- 研究問題或假說：在保留收盤反轉的前提下，較寬鬆的 1.05 倍成交量確認能否增加交易樣本並維持風險調整後品質。
-- 相較上一個 Study 只改：重新啟用 volume-lead，且門檻 1.25→1.05；其他訊號與 10-session 執行固定。
-- 保持不變或比較基準：SMA(20) 偏離 1.5%、RSI(2)≤50、收盤高於前收、五-session cooldown、2% risk budget、-4%／+4% stop-target。
+<a id="study-21"></a>
+## `tsm-mean-reversion-supplemental-divergence--v001`
 
-## 主要結果
+**判定**：Development `未完成`；來源可信狀態：`provenance-unknown`。
 
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
-| Development / stress | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
+**研究與差異**：TSM 在既有跌深反彈條件之外，若在低檔出現價格破底但成交量未創高的量價背離現象，補充進場能否增加有效交易機會。 本系列首份候選；新增量價背離補充觸發路徑（ATR 距離、近 3 日低點比對與成交量分數）。 10-session 持有、退場後 5-session cooldown、2% risk budget、-4%／+4% stop-target 與相同成本。
 
-- 交易年度覆蓋：未執行（規格規劃 2014–2018）
-- 失敗 gate：未執行；沒有 Development evidence 可核對。
-- 未執行項目與原因：base/stress、年度、重抽樣與 mechanism ablation 均未產出 evidence。
+**結果**：允許範圍沒有可核對的 Development 結果證據；base／stress 績效、交易年度及門檻不可判定，不填零、不借用前版結果。
 
-## 主要發現
+**限制**：規格、授權、runner、程式與測試存在，但不能代替結果；實際停止原因未確認。
 
-- 已確認：v008 已有 development-only authorization、固定成本與輸入規格，但允許路徑只看得到程式／測試與程序檔，沒有結果 evidence。
-- 可能原因：可能尚未完成 runner 或封存；現有資料不能確認執行阻塞點。
-- 尚不能判斷：不能判斷 1.05 門檻是否真的增加交易數，也不能判斷新增交易是否帶來成本後的改善或更大回撤。
+**下一步**：補齊固定規格的 Development trial 證據，不修改候選規則。 產出已登記候選的完整 Development evidence 與 bindings。 依 preregistration 的完整 gates 檢查完成交易（至少 20 筆）、年度覆蓋、base/stress 報酬與 PF；任一 gate 失敗即否證。
 
-## 下一輪
+**來源與歷史**：[原卡、完整來源及更正（原第 1027–1077 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1027)。
 
-- 建議處置：先完成 v008 的固定規格 Development evidence。
-- 下一個 Study 只測：不再改 1.05 門檻或訊號，補齊實際 run、raw trades、metrics、gates 與 provenance bindings。
-- 成功／失敗條件：完整 Development gates 通過，並能核對 volume-on 與 price-only 的描述性消融；缺任何 evidence 或 gate 失敗都不進 freeze。
-- 不得沿用的問題：不得使用規格中的預期交易數或前一版結果代替 v008 actual。
+<a id="study-22"></a>
+## `tsm-mean-reversion-supplemental-divergence--v002`
 
-## 證據連結
+**判定**：Development `未完成`；來源可信狀態：`provenance-unknown`。
 
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v008/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-two-stage-volume-reversal--v008/candidate-definition.yml`
-- Development evidence：無（允許路徑未找到）
-- 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v008/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v008.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v008.py`
-- 詳細盲檢討：無
+**研究與差異**：維持 TSM 均線偏離 1.5%、RSI(2)≤50、成交量先行 1.05 與量價背離補充路徑的雙重觸發設計。 規格中僅見 candidate family 與版本識別更新；未見策略進出場、成本或風控語義變更。 10-session 持有、5-session cooldown、2% risk budget、-4%／+4% stop-target 與相同成本。
 
----
+**結果**：允許範圍沒有可核對的 Development 結果證據；base／stress 績效、交易年度及門檻不可判定，不填零、不借用前版結果。
 
-# `tsm-mean-reversion-two-stage-volume-reversal--v009`：Study Development 成果卡
+**限制**：版本識別更新不能代替結果；目前無法判定績效、容量或任何門檻。
 
-- Development 判定：`通過`
-- Provenance（來源可信狀態）：`verified-clean`
-- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v008`
-- 記錄日期：`2026-09-08`
+**下一步**：只執行一次固定規格的 Development trial 並封存 evidence，不再改動訊號。 同一量價背離候選的 Development evidence 產出。 完整 gates 均有 actual 且通過門檻；缺漏任何一項即未完成。
 
-## 結論
+**來源與歷史**：[原卡、完整來源及更正（原第 1078–1128 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1078)。
 
-> 在 2014–2018、1.05 倍成交量先行、收盤反轉、10-session 持有、2% risk budget 與固定 base／stress 成本下，本 Study 的 Development 結果支持校準後 two-stage candidate 的可行性：24 筆交易、33.68%／26.52% 報酬、5.036／4.204 PF 與 2.00%／2.12% 回撤，所有 formal gates 通過。
+<a id="study-23"></a>
+## `tsm-mean-reversion-supplemental-divergence--v003`
 
-## 研究變更
+**判定**：Development `未完成`；來源可信狀態：`provenance-unknown`。
 
-- 研究問題或假說：在保留 1.5% SMA 偏離、RSI(2)≤50 與訊號日收盤反轉下，把成交量先行門檻固定為 1.05，檢查適度換手條件是否保留樣本與穩健性。
-- 相較上一個 Study 只改：確認並重發 1.05 倍 volume-lead candidate 的可核對 Development evidence；本輪規格的策略門檻維持 1.05。
-- 保持不變或比較基準：10-session 持有、五-session cooldown、-4%／+4% stop-target、2% risk budget 與相同資料邊界。
+**研究與差異**：確認量價背離補充路徑在 TSM 均值回歸中的表現。 Study 及 candidate 版本識別更新；未見訊號、成本或執行規則變更。 10-session 持有、5-session cooldown、2% risk budget、-4%／+4% stop-target 與相同成本。
 
-## 主要結果
+**結果**：允許範圍沒有可核對的 Development 結果證據；base／stress 績效、交易年度及門檻不可判定，不填零、不借用前版結果。
 
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 24 | 33.68% | 5.036 | 2.00% | 通過 |
-| Development / stress | 24 | 26.52% | 4.204 | 2.12% | 通過 |
+**限制**：同規則持續重發仍缺結果；不能宣稱量價背離補充路徑具重現性。
 
-- 交易年度覆蓋：5（2014–2018）
-- 失敗 gate：無；stress block bootstrap 正報酬比例最低 99.998%、stress 回撤超過 10% 比例為 0，逐年剔除後最低 stress 報酬 18.36%、PF 3.409。
-- 未執行項目與原因：無；evidence 另含事前固定、非選擇用途的 mechanism ablation。
+**下一步**：專注產出完整的 Development evidence，避免持續同規則重發。 產出本策略的完整 evidence 與資料綁定。 完成交易至少 20 筆、stress 報酬大於 0、PF > 1.0、最大回撤在限度內且重抽樣 gate 全數通過。
 
-## 主要發現
+**來源與歷史**：[原卡、完整來源及更正（原第 1129–1179 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1129)。
 
-- 已確認：24 筆交易分布於五年，兩套成本下均通過 formal gates；描述性消融中的 price-only 有 24 筆，而 calibrated two-stage 有 25 筆，兩者均有正 stress 結果。
-- 可能原因：1.05 門檻可能在交易容量與篩選強度間取得平衡；這是同一 Development evidence 的合理解釋，不代表門檻已被最佳化證明。
-- 尚不能判斷：消融不是 candidate selection，且 24 筆仍是有限樣本；無法由本卡判斷 1.05 是否優於所有其他門檻。
+<a id="study-24"></a>
+## `tsm-mean-reversion-supplemental-divergence--v004`
 
-## 下一輪
+**判定**：Development `通過`；來源可信狀態：`provenance-unknown`。
 
-- 建議處置：若要增加容量，只允許一次單參數變更，並保留本 Study 作固定基準。
-- 下一個 Study 只測：只把退場後 cooldown 由 5 個 session 改為 3 個，維持 1.5%／RSI 50／volume 1.05 與 10-session 持有。
-- 成功／失敗條件：完成交易增加但不少於 20，base/stress 報酬與 PF 通過，stress 回撤≤10%，bootstrap 與 leave-one-year-out gates 不得退化失敗。
-- 不得沿用的問題：不得同時放寬 SMA 偏離、RSI 與 cooldown，否則無法知道容量變化由哪一個設定造成。
+**研究與差異**：TSM 低於 SMA(20) 1.5%、RSI(2)≤50 且成交量比率≥1.05 時，加入量價背離補充路徑是否能捕捉更優質的反彈時機。 完成並封存可核對之正式 Development evidence；策略進出場與風控規則維持同一設定。 10-session 持有、5-session cooldown、2% risk budget、-4%／+4% stop-target、base／stress 成本。
 
-## 證據連結
+| 條件 | 完成交易 | 報酬 | PF | 最大回撤 |
+| --- | ---: | ---: | ---: | ---: |
+| Development / base | 27 | 38.73% | 5.967 | 2.00% |
+| Development / stress | 27 | 30.40% | 4.831 | 2.00% |
 
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v009/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-two-stage-volume-reversal--v009/candidate-definition.yml`
-- Development evidence：`research/tsm-mean-reversion-two-stage-volume-reversal--v009/development.yml`
-- 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v009/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v009.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v009.py`
-- 詳細盲檢討：無
+**門檻與覆蓋**：交易年度覆蓋：5（2014–2018） 失敗 gate：無；所有事前 Development gates（包含報酬、獲利因子、回撤、交易數與逐年剔除）全數通過。
 
----
+**限制**：逐年剔除後最低 stress 報酬 19.73%、PF 3.792；但無獨立來源聲明，也無法排除參數過度配合本樣本。未做單一機制消融，不能將改善全歸因於背離條件。
 
-# `tsm-mean-reversion-two-stage-volume-reversal--v010`：Study Development 成果卡
+**下一步**：建立有限 follow-up Study，對量價背離補充路徑進行單一參數敏感度測試或消融驗證。 單獨關閉或調整量價背離補充路徑中的觀察窗口（例如由 5 個 session 改為 3 個），其他參數不變。 完成交易至少 20 筆，base/stress 報酬與 PF 維持通過，stress 回撤不超過 5%；任何 gate 失敗即否證該參數變更。
 
-- Development 判定：`通過`
-- Provenance（來源可信狀態）：`verified-clean`
-- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v009`
-- 記錄日期：`2026-09-08`
+**來源與歷史**：[原卡、完整來源及更正（原第 1180–1230 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1180)。
 
-## 結論
+<a id="study-25"></a>
+## `tsm-mean-reversion-selling-pressure-rollover--v001`
 
-> 在 2014–2018 與相同成本、風險及 10-session 持有下，本 Study 的 Development 結果支持「提高交易容量的參數組合」通過既定 Development gates：base/stress 各 29 筆交易，報酬 34.79%／26.59%，PF 3.837／3.206，最大回撤 2.55%／2.58%。但本輪同時改了三個設定，效果不能歸因到單一參數。
+**判定**：成果卡狀態：`evidence-unavailable`；Development gate：`尚不能判斷`；來源可信狀態：`verified-clean`；實際凍結狀態：`已完成`。
 
-## 研究變更
+**研究與差異**：TSM 超跌時，價格尚未反轉，但賣方成交量可能已先衰退。若三個 session 的 Signed Volume Balance（依漲跌方向加總成交量的賣壓指標）由前五個 session 的極負值回升，可能增加可接受的均值回歸交易。 保留 v009 的 Path A，新增不要求訊號日收盤上漲的 Path B；Path B 要求目前 SVB3 ≥ -0.15，且前五個 session 的最低值 ≤ -0.50。 SMA(20) 超跌 1.5%、RSI(2)≤50、下一個開盤進場、持有 10 個完整 session、5-session cooldown、2% risk budget、-4% stop／+4% target，以及簡單超跌 baseline。
 
-- 研究問題或假說：把 SMA 偏離門檻由 1.5% 放寬至 1.2%、RSI 上限由 50 放寬至 55，並把退場後 cooldown 由 5 縮短至 3，檢查交易容量能否增加而不破壞成本後品質。
-- 相較上一個 Study 只改：一個「容量擴張組合」同時改三項設定；這不是可完全歸因於單一 knob 的變更。
-- 保持不變或比較基準：volume 1.05、收盤高於前收、10-session 持有、2% risk budget、-4%／+4% stop-target 與相同資料。
+**結果**：允許範圍沒有可核對的 Development 結果證據；base／stress 績效、交易年度及門檻不可判定，不填零、不借用前版結果。
 
-## 主要結果
+**限制**：來源聲明記載已完成凍結，與目前缺少 Development 結果證據是兩回事；不能由 verified-clean 或凍結記錄反推績效通過。
 
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 29 | 34.79% | 3.837 | 2.55% | 通過 |
-| Development / stress | 29 | 26.59% | 3.206 | 2.58% | 通過 |
+**下一步**：修正 Development evidence 的產製與 validator 綁定流程，不調整策略參數。 以相同凍結候選補齊可驗證的 base／stress Development evidence。 validator 接受合法 evidence，且兩種成本情境都含實際交易數、報酬、PF、回撤、年度與必要 diagnostics；否則仍為 `evidence-unavailable`。
 
-- 交易年度覆蓋：5（2014–2018）
-- 失敗 gate：無；stress PF 為 3.206、stress 報酬 26.59%，且 bootstrap、逐年剔除、單筆損失與回撤 gates 均通過。
-- 未執行項目與原因：無；mechanism ablation 為事前固定的描述性診斷。
+**來源與歷史**：[原卡、完整來源及更正（原第 1231–1285 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1231)。
 
-## 主要發現
+<a id="study-26"></a>
+## `tsm-mean-reversion-selling-pressure-rollover--v002`
 
-- 已確認：29 筆交易覆蓋五年，stress block bootstrap 正報酬比例 99.972%／99.960%，逐年剔除後最低 stress 報酬 16.89%、PF 2.652。
-- 可能原因：放寬入場範圍與縮短 cooldown 共同增加了交易機會；由於三項設定同時改變，這只能是組合效果的推論。
-- 尚不能判斷：無法知道較寬 SMA、較寬 RSI 或較短 cooldown 哪一項主導交易數與結果；若要再調整，應先拆開驗證。
+**判定**：成果卡狀態：`complete`；Development gate：`通過`；來源可信狀態：`provenance-unknown`；實際凍結狀態：`未完成`。
 
-## 下一輪
+**研究與差異**：在 SMA(20) 超跌 1.5%、RSI(2)≤50 時，若前三日 SVB3 從前五日的極負值回升，是否能在不等待收盤上漲確認下增加有效交易。 保留既有 v009 Path A，新增不要求訊號日上漲的 Path B。 下一個 session open 進場、10-session 持有、5-session cooldown、2% risk budget、-4%／+4% stop-target 與相同成本模型。
 
-- 建議處置：建立單參數隔離 follow-up，不再複製三項同時放寬。
-- 下一個 Study 只測：固定 1.2% SMA、RSI 55、volume 1.05 與 10-session 持有，只把 cooldown 由 3 恢復為 5 個 session。
-- 成功／失敗條件：完整 gates 通過，並比較交易數、stress 報酬、PF 與回撤；任何 gate 失敗即否證該單一 cooldown 變更。
-- 不得沿用的問題：不得把 v010 的通過結果歸因於其中任何一個設定，也不得再同時修改 SMA、RSI、cooldown。
+| 條件 | 完成交易 | 報酬 | PF | 最大回撤 |
+| --- | ---: | ---: | ---: | ---: |
+| Development / base | 26 | 37.52% | 5.391 | 2.00% |
+| Development / stress | 26 | 29.53% | 4.498 | 2.00% |
 
-## 證據連結
+**門檻與覆蓋**：交易年度覆蓋：5 年（2014–2018）。 Research targets 失敗：完成交易 26 少於 30；stress return 29.53% 低於 30.40%。
 
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v010/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-two-stage-volume-reversal--v010/candidate-definition.yml`
-- Development evidence：`research/tsm-mean-reversion-two-stage-volume-reversal--v010/development.yml`
-- 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v010/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v010.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v010.py`
-- 詳細盲檢討：無
+**限制**：Path B 的 5 筆皆獲利，但排擠 3 筆 v009 交易，淨增量仍待驗證。來源無獨立聲明；已實現回撤約 2.00%，保守逐日估值的 stress 回撤約 3.42%。
 
----
+**下一步**：建立一個只測 Path B capacity／crowding 的 follow-up Study。 固定 Path A／Path B 優先順序，並扣除被排擠的既有交易後重新評估淨增量。 完成交易至少 30 筆、stress return >30.40%，且 Path B 扣除被排擠交易後的淨增量仍為正。
 
-# `tsm-mean-reversion-two-stage-volume-reversal--v011`：Study Development 成果卡
+**來源與歷史**：[原卡、完整來源及更正（原第 1286–1340 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1286)。
 
-- Development 判定：`未完成`
-- Provenance（來源可信狀態）：`provenance-unknown`
-- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v010`
-- 記錄日期：`2026-09-08`
+<a id="study-27"></a>
+## `tsm-mean-reversion-two-stage-volume-reversal--v013`
 
-## 結論
+**判定**：成果卡狀態：`complete`；Development gate：`通過`；來源可信狀態：`verified-clean`；實際凍結狀態：`未完成`。
 
-> 本 Study 的唯一核心主張是把跌深資格與止跌確認拆成兩階段：資格建立後最多保留三個交易日，第一次收盤高於前收且仍低於 SMA(20) 才在下一 open 進場；但允許讀取範圍內沒有 Development evidence。因此無法判定它是否真的增加交易數、改善 stress 報酬，或新增交易的成本後損益是否為正。
+**研究與差異**：退場後放量事件若在三個 session 內獲得原有反轉條件確認，能否提前恢復交易。 加入提前冷卻重設；其餘訊號、執行、成本、風控與持有期沿用 v009。 固定 v009 two-stage candidate。
 
-## 研究變更
+| 條件 | 完成交易 | 報酬 | PF | 最大回撤 |
+| --- | ---: | ---: | ---: | ---: |
+| Development / base | 25 | 24.399% | 3.353 | 2.362% |
+| Development / stress | 25 | 18.167% | 2.742 | 2.596% |
 
-- 研究問題或假說：以 1.5% SMA 偏離、RSI(2)≤50、volume 1.05 建立資格，保留 v009 同日確認，並允許三日內延後確認。
-- 相較上一個 Study 只改：改回 v009 的嚴格資格門檻，加入三日有效期的 delayed confirmation 與明確等待狀態；這是機制變更，不是單純參數調整。
-- 保持不變或比較基準：10-session 持有、2% risk budget、-4%／+4% stop-target、資料邊界與 base／stress 成本固定。
+**門檻與覆蓋**：交易年度覆蓋：5 年（2014–2018）；formal gates 無失敗，research targets 失敗 10 項，故 freeze 未完成。
 
-## 主要結果
+**限制**：新增 3 筆提前交易（2015–2016）的 base／stress 損益為 -210.07／-677.31，並取代兩筆 v009 獲利交易；總交易僅增 1 筆，不能把正式門檻通過當成可凍結。
 
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
-| Development / stress | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
+**下一步**：停止本 Study freeze，建立有限 follow-up Study。 只禁止上一筆交易以 stop、stop-gap 或 stop-same-session 結束後啟動提前重設。 formal gates 全通過，新增減被取代的 base／stress PnL >0，且 stress 報酬／PF／回撤不劣於 v009；任一失敗即停止。
 
-- 交易年度覆蓋：未執行（規格規劃 2014–2018）
-- 失敗 gate：未執行；三項 research targets 也沒有 actual evidence 可核對。
-- 未執行項目與原因：沒有 Development evidence；不能以 v009／v010 的結果填入交易數或比較目標。
+**來源與歷史**：[原卡、完整來源及更正（原第 1341–1395 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1341)。
 
-## 主要發現
+<a id="study-28"></a>
+## `tsm-mean-reversion-two-stage-volume-reversal--v017`
 
-- 已確認：preregistration 固定資格期限、等待衝突順序、v009／v010 reference controls 與新增交易損益目標，但沒有 outcome-bearing evidence。
-- 可能原因：Study 可能尚未執行或結果尚未封存；檔案狀態不能確認原因。
-- 尚不能判斷：不能判斷 delayed confirmation 是否增加有效交易、是否稀釋 PF，或新增交易在兩套成本下是否合計為正。
+**判定**：成果卡狀態：`complete`；Development gate：`通過`；來源可信狀態：`provenance-unknown`；實際凍結狀態：`未完成`。 原卡記錄 Development 證據已由 validator（證據檢查工具）接受。
 
-## 下一輪
+**研究與差異**：訊號日前第 2–5 個交易日若先有成交量至少為前 20 日均量 1.25 倍、收盤守住區間上半部的放量事件，之後出現不破事件低點的縮量收跌回測，是否能讓原本只需低於 SMA(20) 1.0%（含）至未滿 1.5% 的淺超跌訊號形成有效均值回歸機會。 保留 v009 原有量先與收盤上漲路徑，新增一次性、最新事件優先的「放量→縮量回測→收盤反轉」補充路徑。 下一個 XNYS session open 進場、10-session 持有、退場後 5-session cooldown、2% risk budget、-4%／+4% stop-target 與成本模型。
 
-- 建議處置：只完成 v011 的固定規格 Development trial，再依事前 targets 決定停止或 freeze。
-- 下一個 Study 只測：產出延後確認版本的完整 raw trades、v009／v010 controls 與新增交易比較；不調整三日有效期。
-- 成功／失敗條件：交易數嚴格高於 29、stress 報酬嚴格高於 v009、延後新增交易的 base 與 stress 合計損益都大於 0，且 formal gates 全數通過。
-- 不得沿用的問題：不得先看結果再放寬資格期限、門檻或比較條件。
+| 條件 | 完成交易 | 報酬 | PF | 最大回撤 |
+| --- | ---: | ---: | ---: | ---: |
+| Development / base | 24 | 33.676% | 5.036 | 2.000% |
+| Development / stress | 24 | 26.523% | 4.204 | 2.119% |
 
-## 證據連結
+**門檻與覆蓋**：交易年度覆蓋：5 年（2014–2018）。 失敗 gate：無 formal Development gate 失敗；但 research targets 有 7 項失敗，包括完成交易 24<30、相對 v009 未增加交易（24 不大於 24）、新增交易數 0<1、新增交易年度 0<3、兩套成本下淨新增減被排擠損益均為 0，以及 stress 報酬 26.523%<30.40%。
 
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v011/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-two-stage-volume-reversal--v011/candidate-definition.yml`
-- Development evidence：無（允許路徑未找到）
-- 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v011/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v011.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v011.py`
-- 詳細盲檢討：無
+**限制**：建立 164 個放量事件，補充確認及交易均為 0；與 v009 完全相同的結果不支持新增機制。無獨立來源聲明，無法分辨事件窗口、低點或消耗規則何者造成稀疏。
 
----
+**下一步**：停止 v017 candidate freeze，不在原 Study 內調參或重跑。 若仍要延伸，只把補充事件的有效觀察窗口（含 expiry）由 5 個 session 延長至 7 個 session；其餘訊號、成本、執行與風控固定。 formal Development gates 全部通過，且補充路徑至少產生 1 筆交易、分布於至少 3 個 signal years、總交易至少 30 筆、stress 報酬至少 30.40%，兩套成本下淨新增減被排擠損益都嚴格大於 0；任一條件失敗即停止。
 
-# `tsm-mean-reversion-two-stage-volume-reversal--v012`：Study Development 成果卡
+**來源與歷史**：[原卡、完整來源及更正（原第 1396–1451 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1396)。
 
-- Development 判定：`未通過`
-- Provenance（來源可信狀態）：`provenance-unknown`
-- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v011`
-- 記錄日期：`2026-09-08`
+<a id="study-29"></a>
+## `tsm-mean-reversion-two-stage-volume-reversal--v014`
 
-## 結論
+**判定**：成果卡狀態：`evidence-unavailable`；Development gate：`尚不能判斷`；來源可信狀態：`未確認`；實際凍結狀態：`尚不能判斷`。
 
-> 在 2014–2018、1.5% SMA 偏離、RSI(2)≤50、volume 1.05、10-session 持有與相同成本下，本 Study 的 Development 結果不支持同日盤中反轉確認的候選 freeze：base/stress 雖仍為正報酬，但只有 28 筆交易，stress PF 1.849、stress 報酬 15.38%，均低於本輪預先固定的選擇門檻。
+**研究與差異**：訊號日前第 2–5 個交易日若先有成交量至少為前 20 日均量 1.25 倍的放量事件，之後出現收跌、量縮至事件量 80% 以下且不跌破事件低點的淺回測，是否能在原本 1.5% 超跌門檻之外，形成扣除成本後有優勢的均值回歸機會。 移除 v013 的退場冷卻提前重設，改加入獨立的「放量事件→縮量回測→訊號日收盤上漲」補充路徑；它與 v009 原有路徑並存，原路徑優先。 v009 的資料、進場與退場、2% 風險預算、10 個完整持有 session、停損停利、冷卻與成本口徑。
 
-## 研究變更
+**結果**：允許範圍沒有可核對的 Development 結果證據；base／stress 績效、交易年度及門檻不可判定，不填零、不借用前版結果。
 
-- 研究問題或假說：保留 v009 的超跌、RSI 與成交量資格；若當日收盤高於開盤、日內 high>low，且收盤位於當日區間上方三分之一，即使未高於前收也提早確認反轉。
-- 相較上一個 Study 只改：移除三日 delayed confirmation，改為同日盤中反轉條件；同時使用較嚴格的交易數、stress PF 與 stress 報酬選擇門檻。
-- 保持不變或比較基準：下一日 open 進場、10-session 持有、五-session cooldown、2% risk budget、-4%／+4% stop-target 與相同資料。
+**限制**：缺 evidence/development.yml，績效、門檻、研究目標與凍結資格皆無法判斷；不得以程式或輸入重建數值。
 
-## 主要結果
+**下一步**：修正 Development evidence 的產製、驗證與封存流程；不要在 v014 內補跑或調整策略參數。 只驗證同一候選能否產出一份被 validator 接受、同時包含 base／stress 與 status table 的 `evidence/development.yml`。 檔案存在、validator 接受、base／stress 結果完整且 status 與 gates／research targets 一致即成功；缺檔、無法驗證或任一情境缺資料即失敗。
 
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 28 | 21.80% | 2.166 | 5.88% | 未通過 |
-| Development / stress | 28 | 15.38% | 1.849 | 5.88% | 未通過 |
+**來源與歷史**：[原卡、完整來源及更正（原第 1452–1506 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1452)。
 
-- 交易年度覆蓋：5（2014–2018）
-- 失敗 gate：`completed_trades` 28≥30 失敗；`stress_profit_factor` 1.84883≥3.20558 失敗；`stress_return` 0.15380>0.26590 失敗。
-- 未執行項目與原因：正式 Development evidence 有產出；未通過後不應進入候選 freeze，也不延伸執行後段結果。
+<a id="study-30"></a>
+## `tsm-mean-reversion-two-stage-volume-reversal--v015`
 
-## 主要發現
+**判定**：成果卡狀態：`evidence-unavailable`；Development gate：`尚不能判斷`；來源可信狀態：`未確認`；實際凍結狀態：`尚不能判斷`。
 
-- 已確認：候選在兩套成本下仍有正報酬，但交易數、stress PF 與 stress 報酬都未達本輪事前門檻；stress bootstrap 正報酬比例約 93.76%／95.92%，並不能抵銷上述 failed gates。
-- 可能原因：同日盤中條件可能替換了原 v009 的交易路徑，造成新增或被排擠交易的成本後品質下降；這需要 evidence 內的交易比較才能進一步拆解，不能只看 aggregate metrics。
-- 尚不能判斷：目前不能判斷失敗主要來自盤中確認規則、交易替換，或本輪提高的 selection floor；也不能把正報酬解讀成假說通過。
+**研究與差異**：延續 v014 的放量後縮量淺回測補充路徑，檢驗訊號日只需低於 SMA(20) 1.0%（含）但未達 1.5% 時，是否能形成成本後有優勢的均值回歸交易。 明確綁定 v009 Study-local comparison control，並將同一套候選與 Development runner／證據路徑版本化；v014 與 v015 的策略 source diff 為空，因此沒有可確認的策略規則變更。 補充路徑條件、v009 原有路徑、資料期間、成本、2% 風險預算、10-session 持有、停損停利與冷卻規則。
 
-## 下一輪
+**結果**：允許範圍沒有可核對的 Development 結果證據；base／stress 績效、交易年度及門檻不可判定，不填零、不借用前版結果。
 
-- 建議處置：停止本次 intraday-reversal 假說，不放寬 failed gates。
-- 下一個 Study 只測：若仍需 follow-up，只恢復 v009 的收盤高於前收確認，其他 1.5%／RSI 50／volume 1.05／10-session 設定固定。
-- 成功／失敗條件：必須重新通過本輪的交易數、stress PF、stress 報酬與原有穩健性 gates；任一失敗即停止，不再加入第三種確認規則。
-- 不得沿用的問題：不得因候選仍有正報酬就降低 30 筆、PF 3.20558 或 stress 報酬 0.26590 的事前門檻。
+**限制**：策略與 v014 相同，但兩處 evidence 目錄都缺 development.yml；無法確認 base／stress 是否實際執行，不得借用 v014 或 v009 結果。
 
-## 證據連結
+**下一步**：修正 Development evidence 產製、validator 驗證與封存鏈；保持策略規則不變，不在 v015 內重跑或調參。 只驗證候選結果能否產出並封存一份與 v009 control 綁定、可被 validator 接受的 `evidence/development.yml`。 evidence 存在且合法、base／stress 完整、status table 與 gates／research targets 一致即成功；任一缺失或不一致即失敗。
 
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v012/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-two-stage-volume-reversal--v012/candidate-definition.yml`
-- Development evidence：`research/tsm-mean-reversion-two-stage-volume-reversal--v012/evidence/development.yml`
-- 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v012/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v012.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v012.py`
-- 詳細盲檢討：無
+**來源與歷史**：[原卡、完整來源及更正（原第 1507–1561 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1507)。
 
----
+<a id="study-31"></a>
+## `tsm-mean-reversion-two-stage-volume-reversal--v016`
 
-# `tsm-mean-reversion-volume-lead-setup--v003`：Study Development 成果卡
+**判定**：成果卡狀態：`complete`；Development gate：`通過`；來源可信狀態：`provenance-unknown`；實際凍結狀態：`未完成`。 原卡記錄 Development 證據已由 validator（證據檢查工具）接受。
 
-- Development 判定：`未完成`
-- Provenance（來源可信狀態）：`provenance-unknown`
-- 前一個 Study：`tsm-mean-reversion-reversal-trigger--v002`
-- 記錄日期：`2026-09-08`
+**研究與差異**：放量事件後的縮量、不破低點淺回測，是否能在原 v009 路徑外增加扣除成本後有優勢的均值回歸機會；補充路徑只在訊號日前 2–5 個交易日有效，且與原路徑並存但不增加持倉。 策略 source 與 v015 相同；v016 主要是同一候選的版本化 Study／runner 與獨立 Development evidence，沒有新的策略參數變更。 v009 原有路徑、資料與 2014–2018 期間、base／stress 成本、2% 風險預算、10-session 持有、5-session 冷卻、停損停利與進出場口徑。
 
-## 結論
+| 條件 | 完成交易 | 報酬 | PF | 最大回撤 |
+| --- | ---: | ---: | ---: | ---: |
+| Development / base | 24 | 33.676% | 5.036 | 2.000% |
+| Development / stress | 24 | 26.523% | 4.204 | 2.119% |
 
-> 本 Study 測試的是移除訊號日收盤方向條件、只保留前五日成交量先行的 TSM setup；但允許讀取範圍內沒有 Development evidence。因而不能判定放寬方向條件是否增加可交易樣本、維持成本後報酬，或改善跨年度穩健性。
+**門檻與覆蓋**：交易年度覆蓋：5 年（2014–2018）。 失敗 gate：無 formal Development gate 失敗；research targets 失敗包括完成交易至少 30、交易數多於 v009、新增交易至少 1 筆且分布至少 3 年、base／stress 淨新增減被排擠損益嚴格大於 0，以及 stress 報酬至少 30.40%。實際新增交易為 0、兩套成本下淨新增損益為 0。
 
-## 研究變更
+**限制**：164 個事件未形成任何補充確認或交易；24 筆全來自原路徑，新增及淨新增損益均為 0。來源無獨立聲明，不能估計補充機制效果；研究目標失敗阻止凍結。
 
-- 研究問題或假說：TSM 低於 SMA(20) 至少 2%、RSI(2)≤35 且前五日成交量比率≥1.25 時，即使訊號日未收紅，是否仍保留有參與度的回落 setup。
-- 相較上一個 Study 只改：移除 `close_above_prior_close` 方向確認；成交量先行與其他執行規則固定。
-- 保持不變或比較基準：15-session 持有、五-session cooldown、2% risk budget、-4%／+4% stop-target、base／stress 成本與 SMA＋RSI baseline。
+**下一步**：停止 v016 candidate freeze；若要延伸，建立有限 follow-up Study，不在原 Study 內調參或重跑。 只把補充事件的有效觀察窗口／expiry 從 5 個 session 延長到 7 個 session，其餘訊號、成本、執行與風控固定。 formal Development gates 全通過，補充路徑至少新增 1 筆交易且分布於至少 3 個 signal years，總交易至少 30 筆，stress 報酬至少 30.40%，兩套成本下淨新增減被排擠損益都嚴格大於 0；任一條件失敗即停止。
 
-## 主要結果
+**來源與歷史**：[原卡、完整來源及更正（原第 1562–1617 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1562)。
 
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
-| Development / stress | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
+<a id="study-32"></a>
+## `tsm-mean-reversion-two-stage-volume-reversal--v018`
 
-- 交易年度覆蓋：未執行（規格規劃 2014–2018）
-- 失敗 gate：未執行；缺少 Development evidence。
-- 未執行項目與原因：base/stress metrics、年度分段、bootstrap 與 leave-one-year-out 均沒有 actual。
+**判定**：成果卡狀態：`complete`；Development gate：`通過`；來源可信狀態：`verified-clean`；實際凍結狀態：`未完成`。 原卡記錄 Development 證據已由 validator（證據檢查工具）接受。
 
-## 主要發現
+**研究與差異**：連續兩日放量、跌幅收斂、低點守住，若訊號日只比 SMA(20) 低 1.0% 至未滿 1.5% 且收盤轉強，是否能增加成本後有優勢的均值回歸交易。 在 v009 原有訊號路徑上加入事前固定的淺回落補充路徑；原路徑、成本、風險、停損停利、持有期與冷卻規則維持不變。 v009 comparison control、2013 warmup／2014–2018 Development、下一個 XNYS open 進場與單一部位執行口徑。
 
-- 已確認：v003 的候選、runner、程式與測試明確保留 volume-lead 並關閉方向確認，但沒有可核對的結果檔。
-- 可能原因：Study 可能停在正式 trial 前；這是檔案狀態推論，不能當作執行原因。
-- 尚不能判斷：無法判斷不加方向條件會增加多少交易，也不能判斷新增交易是改善還是稀釋 stress PF。
+| 條件 | 完成交易 | 報酬 | PF | 最大回撤 |
+| --- | ---: | ---: | ---: | ---: |
+| Development / base | 24 | 33.676% | 5.036 | 2.000% |
+| Development / stress | 24 | 26.523% | 4.204 | 2.119% |
 
-## 下一輪
+**門檻與覆蓋**：交易年度覆蓋：5 年（2014–2018）。 失敗 gate：無 formal Development gate 失敗；research targets 失敗包括交易至少 30 筆、交易數多於 v009、新增交易至少 1 筆且分布至少 3 年，以及 base／stress 淨新增減被排擠損益大於 0。實際新增交易與淨新增損益均為 0。
 
-- 建議處置：先完成 v003 固定規格 Development evidence，再決定是否停止或保留 setup 假說。
-- 下一個 Study 只測：只執行「volume lead、無訊號日方向確認」版本，不再改 RSI、SMA 偏離或持有期。
-- 成功／失敗條件：完整 Development gates、交易年度、兩套成本報酬與 PF、stress 回撤及重抽樣均需有 actual 並通過。
-- 不得沿用的問題：不得以同系列有方向確認的 Study 結果代替本候選的實際 evidence。
+**限制**：補充路徑的原始訊號、接受訊號及完成交易皆為 0；24 筆全來自 v009。多條件交集或持倉限制的影響尚不能區分，不能估計增量效果。
 
-## 證據連結
+**下一步**：停止 v018 candidate freeze，不在原 Study 內調參或重跑。 另建一個 follow-up，只放寬一項事前有機制理由的補充條件；原 v009 路徑、成本、執行、風控與比較控制全部固定。 formal Development gates 全部通過，補充路徑至少有 1 筆新增交易且分布於至少 3 個 signal years，總交易至少 30 筆，base／stress 淨新增減被排擠損益均嚴格大於 0；任一條件失敗即停止。
 
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-volume-lead-setup--v003/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-volume-lead-setup--v003/candidate-definition.yml`
-- Development evidence：無（允許路徑未找到）
-- 程式／測試：`research/tsm-mean-reversion-volume-lead-setup--v003/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_volume_lead_setup_v003.py`、`tests/test_tsm_mean_reversion_volume_lead_setup_v003.py`
-- 詳細盲檢討：無
+**來源與歷史**：[原卡、完整來源及更正（原第 1618–1673 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1618)。
 
----
+<a id="study-33"></a>
+## `tsm-mean-reversion-two-stage-volume-reversal--v024`
 
-# `tsm-mean-reversion-volume-leads--v001`：Study Development 成果卡
+**判定**：成果卡狀態：`complete`；Development gate：`通過`；來源可信狀態：`verified-clean`；實際凍結狀態：`未完成`。 證據狀態表為 valid／validated。
 
-- Development 判定：`不可判定`
-- Provenance（來源可信狀態）：`provenance-unknown`
-- 前一個 Study：無（volume-leads 分支第一份）
-- 記錄日期：`2026-09-08`
+**研究與差異**：上升趨勢中的放量蓄勢，若在事件後五個交易日內突破固定價位，能否補足 v009 均值回歸的交易空窗，同時增加交易並維持 stress 表現。 在 v009 原有路徑上加入完整補充路徑：收盤高於 SMA(20) 且均線上行、成交量至少為前 20 日均量 1.25 倍、事件收盤不高於前五日高點，之後五日內首次嚴格突破固定價；事件失效、單事件追蹤與原路徑優先順序均事前固定。 v009 原路徑、2014–2018 資料範圍、下一個 XNYS open 進場、base／stress 成本、2% 風險、4% 停損／停利、10-session 持有與 5-session 冷卻。
 
-## 結論
+| 條件 | 完成交易 | 報酬 | PF | 最大回撤 |
+| --- | ---: | ---: | ---: | ---: |
+| Development / base | 35 | 33.874% | 2.806 | 5.880% |
+| Development / stress | 35 | 24.715% | 2.348 | 5.880% |
 
-> 這份 Study 原本要測試 TSM 的 volume-lead 均值回歸候選，但 Development authorization 後，允許資料明確記錄 source validation 在產出 outcome-bearing trial 前失敗，且 current frozen setup 已關閉。因此本 Study 沒有可判定的 Development 結果，不支持也不否證原始假說。
+**門檻與覆蓋**：交易年度覆蓋：5 年（2014–2018）。 失敗 gate：無 formal Development gate 失敗。研究目標失敗為：base 最大回撤 5.8799% > v009 的 1.9998%；stress 報酬 24.7146% < v009 的 26.5232%；stress 最大回撤 5.8797% > v009 的 2.1193%；淨新增 stress PnL 為 -1,598.34，未大於 0。
 
-## 研究變更
+**限制**：新增 11 筆補充交易提高交易量，卻惡化 stress 結果及回撤；無證據缺口，但研究目標失敗使候選不具凍結資格，不能歸因至單一補充條件。
 
-- 研究問題或假說：SMA(20) 偏離至少 2%、RSI(2)≤35 時，若前五日成交量比率≥1.25，能否在價格偏離擴大前辨識換手並提高均值回歸穩健性。
-- 相較上一個 Study 只改：本分支首份候選；加入 volume-lead 條件。
-- 保持不變或比較基準：15-session 持有、五-session cooldown、2% risk budget、-4%／+4% stop-target 與 base／stress 成本。
+**下一步**：停止 v024 candidate freeze，不在原 Study 內調參或重跑，並停止這組「上升趨勢放量突破」增量假說。 無；不建立 v024 同機制的參數 follow-up。若另起研究，必須另行事前登記全新假說，不得用本輪失敗結果反向放寬門檻。 本輪停止處置的成功條件是保留合法 evidence、凍結失敗結論且不事後調參；若未來另立 Study，須事前要求 formal gates 全通過、stress 報酬不低於 v009、stress 回撤不高於 v009，且淨新增 stress PnL 嚴格大於 0。
 
-## 主要結果
+**來源與歷史**：[原卡、完整來源及更正（原第 1674–1730 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1674)。
 
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 未執行 | 未執行 | 未執行 | 未執行 | 不可判定 |
-| Development / stress | 未執行 | 未執行 | 未執行 | 未執行 | 不可判定 |
+<a id="study-34"></a>
+## `tsm-momentum-trend-volume-lead--v001`
 
-- 交易年度覆蓋：未執行（規格規劃 2014–2018）
-- 失敗 gate：不可判定；沒有 outcome-bearing trial，不能視為通過或 failed gate。
-- 未執行項目與原因：`evidence-unavailable` 記錄 source validation 在 Development outcome 產出前失敗；現有 frozen setup 關閉，應建立修正 Study。
+**研究與差異**：五日分散量能壓力先於當日價格加速；baseline 只關閉量能壓力，量能欄位只取先前交易日。
 
-## 主要發現
+**判定**：成果卡 failed；兩組證據 valid。候選失敗：交易數、交易年度及 stress 逐年剔除報酬；baseline 失敗：base／stress 報酬與 PF、交易數及 stress 穩健性門檻。研究目標未登記；候選不具凍結資格，實際凍結狀態尚不能判斷。
 
-- 已確認：Development authorization 存在，但明確的 evidence-unavailable payload 說明沒有產出結果試驗；因此沒有任何 base/stress actual。
-- 可能原因：來源驗證未通過，可能涉及 snapshot 或 source binding；這裡只記錄 evidence 已明示的狀態，不猜測具體技術原因。
-- 尚不能判斷：無法判斷 volume-lead 規則的交易數、報酬、PF、回撤或 provenance 是否能成立。
+| Trial／模型 | 情境 | 證據狀態／原因 | 交易數／年度 | 報酬 | PF | 最大回撤 |
+| --- | --- | --- | ---: | ---: | ---: | ---: |
+| `tsm-momentum-trend-volume-lead-v001`／candidate | Development/base | valid；只有 1 筆合法完成交易 | 1／1（2015） | 1.904% | ∞ | 0.000% |
+| `tsm-momentum-trend-volume-lead-v001`／candidate | Development/stress | valid；同一筆交易的壓力成本結果 | 1／1（2015） | 1.622% | ∞ | 0.000% |
+| `tsm-momentum-trend-volume-lead-v001`／baseline | Development/base | valid；控制組完整產出 | 16／5（2014–2018） | -0.573% | 0.956 | 4.548% |
+| `tsm-momentum-trend-volume-lead-v001`／baseline | Development/stress | valid；控制組完整產出 | 16／5（2014–2018） | -2.793% | 0.780 | 4.832% |
 
-## 下一輪
+**限制與更正**：單筆正報酬與 PF 無限大不代表穩健；未找到獨立來源聲明，未驗證完整事件鏈或凍結事件。
 
-- 建議處置：建立 corrected Study，只修正 source validation／snapshot integrity，不修改 volume-lead 策略。
-- 下一個 Study 只測：讓同一候選產出可核對的 warmup、Development raw trades、metrics 與 bindings。
-- 成功／失敗條件：source validation、network control、資料 digest 與完整 Development gates 全數有證據；若仍無 outcome-bearing evidence，維持未完成。
-- 不得沿用的問題：不得用 v001 的空缺當作策略失敗，也不得把修正 Study 的結果回填覆寫本 Study。
+**下一步**：另立 Study，事前固定一項改善交易覆蓋的機制，其餘條件不變；證據須有效，至少 20 筆／3 年且全部正式門檻通過，否則停止凍結。
 
-## 證據連結
+**來源與歷史**：[原卡、完整來源及更正（原第 1731–1758 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1731)。
 
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-volume-leads--v001/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-volume-leads--v001/candidate-definition.yml`
-- Development evidence：`research/tsm-mean-reversion-volume-leads--v001/evidence-unavailable.payload.yml`（無 outcome-bearing evidence）
-- 程式／測試：`research/tsm-mean-reversion-volume-leads--v001/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_volume_leads.py`、`tests/test_tsm_mean_reversion_volume_leads.py`
-- 詳細盲檢討：無
+<a id="study-35"></a>
+## `tsm-momentum-trend-volume-ramp--v001`
 
----
+**研究與差異**：前三個交易日至少一次量能達此前二十日均量 1.05 倍；baseline 只關閉量能脈衝。
 
-# `tsm-mean-reversion-volume-leads--v002`：Study Development 成果卡
+**判定**：依更正，目前成果卡採 failed（原 complete 已更正）；證據仍 valid、研究目標未登記、候選不具凍結資格，流程停在凍結前。候選失敗：報酬、PF、交易數及 stress 重抽樣／逐年剔除門檻；baseline 核心及壓力門檻亦失敗。
 
-- Development 判定：`未通過`
-- Provenance（來源可信狀態）：`provenance-unknown`
-- 前一個 Study：`tsm-mean-reversion-volume-leads--v001`
-- 記錄日期：`2026-09-08`
+| 模型 | 交易數／年 | base 報酬／PF | stress 報酬／PF |
+| --- | --- | --- | --- |
+| candidate | 11／4 | -1.865%／0.828 | -3.271%／0.695 |
+| baseline | 16／5 | -0.573%／0.956 | -2.793%／0.780 |
 
-## 結論
+**限制與更正**：單筆損失 2.601%、stress 回撤 4.797% 及年度門檻通過，不能抵銷失敗項目。
 
-> 在 2014–2018、SMA(20) 偏離 2%、RSI(2)≤35、volume-lead 比率≥1.25、15-session 持有與固定成本下，本 Study 的 Development 結果不支持穩健的 volume-lead 假說：aggregate stress 報酬仍為 2.03%，但四個穩健性 gates 失敗，包含 bootstrap 正報酬比例、回撤超標比例，以及 leave-one-year-out 的 PF 與報酬。
+**下一步**：不得在本 Study 調參或重跑；若續研，另立 Study 重新事前登記。
 
-## 研究變更
+**來源與歷史**：[原卡、完整來源及更正（原第 1759–1774 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1759)。
+更正定位：[更正（2026-09-20）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1769)。
 
-- 研究問題或假說：修正 v001 的來源驗證問題後，測試不含訊號日方向確認的 volume-lead candidate 是否能在五年中維持穩健均值回歸。
-- 相較上一個 Study 只改：修正 source／程序版本以產出正式 Development evidence；訊號仍是 volume-lead 1.25，沒有加入方向確認。
-- 保持不變或比較基準：2% risk budget、-4%／+4% stop-target、15-session 持有、五-session cooldown、base／stress 成本與相同 baseline。
+<a id="study-36"></a>
+## `tsm-momentum-trend-volume-absorption--v001`
 
-## 主要結果
+**研究與差異**：前五日先出現成交量至少為二十日均量 1.20 倍、收盤絕對變化不超過 0.5% 的吸收狀態，再由當日漲幅至少 2% 確認；baseline 只關閉吸收條件。
 
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 29 | 6.86% | 1.294 | 6.40% | 未通過 |
-| Development / stress | 29 | 2.03% | 1.088 | 6.77% | 未通過 |
+**判定**：成果卡 failed；兩組證據 valid；研究目標未登記。候選失敗：交易數、stress 重抽樣正報酬比例、逐年剔除 PF／報酬；baseline 另失敗 base／stress 報酬、PF 及多項穩健性門檻。候選不具凍結資格，實際凍結狀態尚不能判斷；未完成 registry、來源及凍結事件。
 
-- 交易年度覆蓋：5（2014–2018）
-- 失敗 gate：stress block bootstrap 回撤超標比例 0.25024／0.20438>0.10；正報酬比例 0.60006／0.61252<0.80；leave-one-year-out 最低 PF 0.96755≤1；最低報酬 -0.00459≤0。
-- 未執行項目與原因：正式 evidence 有產出；因穩健性 gates 失敗，不進入候選 freeze。
+| Trial／模型 | 情境 | 證據狀態／原因 | 交易數／年度 | 報酬 | PF | 最大回撤 |
+| --- | --- | --- | ---: | ---: | ---: | ---: |
+| `tsm-momentum-trend-volume-absorption-v001`／candidate | Development/base | valid；完整 evidence | 5／3（2015、2016、2018） | 3.9698% | 2.9487 | 1.9991% |
+| `tsm-momentum-trend-volume-absorption-v001`／candidate | Development/stress | valid；完整 evidence | 5／3（2015、2016、2018） | 2.9420% | 2.4477 | 1.9997% |
+| `tsm-momentum-trend-volume-absorption-v001`／baseline | Development/base | valid；控制組完整產出 | 16／5（2014–2018） | -0.5729% | 0.9556 | 4.5483% |
+| `tsm-momentum-trend-volume-absorption-v001`／baseline | Development/stress | valid；控制組完整產出 | 16／5（2014–2018） | -2.7935% | 0.7800 | 4.8322% |
 
-## 主要發現
+**限制與更正**：候選重抽樣正報酬比例 0.7969<0.80；剔除 2018 後 stress PF 0.7983、報酬 -0.4100%，結果對年度敏感。
 
-- 已確認：aggregate base/stress 報酬與 PF 為正，但 stress block bootstrap 的正報酬比例最高只有 61.25%，且某些逐年剔除路徑出現負報酬與 PF<1。
-- 可能原因：只用成交量先行而沒有價格方向確認，可能保留較多不完整的回落 setup；這是結果型態支持的合理解釋，不能當成已證明的因果機制。
-- 尚不能判斷：無法由本 Study 單獨判斷失敗來自 volume threshold、缺少方向確認，或該均值回歸 setup 本身；provenance 也沒有獨立 declaration 可補強。
+**下一步**：另立 Study，保留 1.20 倍及 0.5% 定義，僅改吸收觀察窗口或另立明確替代機制；至少 20 筆／3 年，全部正式門檻通過，重抽樣正報酬比≥0.80、各逐年剔除 stress PF>1.00 且報酬>0。
 
-## 下一輪
+**來源與歷史**：[原卡、完整來源及更正（原第 1775–1800 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1775)。
 
-- 建議處置：建立有限 follow-up，只加入訊號日收盤低於前收的方向確認，不改 volume threshold。
-- 下一個 Study 只測：在 1.25 volume-lead 與其他設定固定下，新增 `close_below_prior_close`。
-- 成功／失敗條件：完整原有 gates 全數通過，尤其 stress bootstrap 正報酬比例≥80%、回撤超標比例≤10%，以及 leave-one-year-out 的最低 PF>1、報酬>0。
-- 不得沿用的問題：不得因 aggregate 報酬為正而忽略路徑穩健性 failed gates。
+<a id="study-37"></a>
+## `tsm-momentum-trend-volume-efficiency--v001`
 
-## 證據連結
+**研究與差異**：前五日成交量加權日內區間／未加權日內區間≥1.15，檢驗高量伴隨較大區間是否先於價格加速；baseline 只關閉這項條件。
 
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-volume-leads--v002/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-volume-leads--v002/candidate-definition.yml`
-- Development evidence：`research/tsm-mean-reversion-volume-leads--v002/development.yml`
-- 程式／測試：`research/tsm-mean-reversion-volume-leads--v002/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_volume_leads.py`、`tests/test_tsm_mean_reversion_volume_leads.py`
-- 詳細盲檢討：無
+**判定**：成果卡 failed；證據 valid；研究目標未登記。候選只失敗交易數（6<20），其餘門檻通過；baseline 失敗報酬、PF、交易數及 stress 穩健性。候選不具凍結資格，readiness／freeze 未完成，實際凍結狀態尚不能判斷。
 
----
+| Trial／模型 | 情境 | evidence／交易數／年度 | 報酬 | PF | 最大回撤 |
+| --- | --- | ---: | ---: | ---: | ---: |
+| candidate | Development/base | valid／6／3（2015、2016、2018） | 5.208% | 3.427 | 1.999% |
+| candidate | Development/stress | valid／6／3 | 3.930% | 2.853 | 2.000% |
+| baseline | Development/base | valid／16／5（2014–2018） | -0.573% | 0.956 | 4.548% |
+| baseline | Development/stress | valid／16／5 | -2.793% | 0.780 | 4.832% |
 
-# `tsm-mean-reversion-volume-leads--v003`：Study Development 成果卡
+**限制與更正**：只有三年六筆，不能將正報酬視為穩健優勢；來源綁定已核對，但未形成凍結來源事件。
 
-- Development 判定：`未通過`
-- Provenance（來源可信狀態）：`provenance-unknown`
-- 前一個 Study：`tsm-mean-reversion-volume-leads--v002`
-- 記錄日期：`2026-09-08`
+**下一步**：停止原 Study；另立且事前固定一項新的量價效率機制，其餘不變，要求有效證據、至少 20 筆／3 年及全部正式門檻通過。
 
-## 結論
+**來源與歷史**：[原卡、完整來源及更正（原第 1801–1818 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1801)。
 
-> 在同一 2014–2018 資料、1.25 volume-lead 與固定成本下，本 Study 新增訊號日收盤低於前收的方向確認後，仍未支持穩健的 volume-lead 假說：base/stress 報酬降至 4.42%／0.01%，stress PF 僅 1.0003，且四個路徑穩健性 gates 再次失敗。
+<a id="study-38"></a>
+## `tsm-momentum-trend-volume-close-acceptance--v001`
 
-## 研究變更
+**研究與差異**：前五日量能加權收盤位置≥0.48、加權減未加權位置差≥0.01，另要求平均量比≥1.05；baseline 只關閉收盤承接條件。這是實際執行的規則。
 
-- 研究問題或假說：成交量先行若再加上訊號日收盤低於前收，是否能把較有方向的回落 setup 與無方向成交量異常分開。
-- 相較上一個 Study 只改：新增 `close_below_prior_close`；SMA 偏離 2%、RSI(2)≤35、volume 1.25、成本、風險、持有期與 cooldown 固定。
-- 保持不變或比較基準：15-session 持有、2% risk budget、-4%／+4% stop-target、base／stress 成本與相同 SMA＋RSI baseline。
+**判定**：成果卡 failed；兩組證據 valid；研究目標未登記。候選只失敗交易數（4<20）；baseline 失敗 base／stress 報酬與 PF、交易數及 stress 重抽樣／逐年剔除。候選不具凍結資格，baseline 資格不適用；實際凍結狀態尚不能判斷。
 
-## 主要結果
+| Trial／模型 | 情境 | 證據狀態／原因 | 交易數／年度 | 報酬 | PF | 最大回撤 |
+| --- | --- | --- | ---: | ---: | ---: | ---: |
+| `tsm-momentum-trend-volume-close-acceptance-v001`／candidate | Development/base | valid；完整 evidence | 4／4（2014、2015、2016、2018） | 2.7972% | 2.3142 | 2.1284% |
+| `tsm-momentum-trend-volume-close-acceptance-v001`／candidate | Development/stress | valid；同一 Trial 的壓力成本 evidence | 4／4 | 2.0084% | 1.9478 | 2.1191% |
+| `tsm-momentum-trend-volume-close-acceptance-v001`／baseline | Development/base | valid；控制組完整產出 | 16／5（2014–2018） | -0.5729% | 0.9556 | 4.5483% |
+| `tsm-momentum-trend-volume-close-acceptance-v001`／baseline | Development/stress | valid；控制組壓力 evidence | 16／5 | -2.7935% | 0.7800 | 4.8322% |
 
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 28 | 4.42% | 1.191 | 6.40% | 未通過 |
-| Development / stress | 28 | 0.01% | 1.000 | 8.09% | 未通過 |
+**限制與更正**：已發布登記文字仍寫 0.65／0.10，實際結構化規格、contract、程式及證據綁定為 0.48／0.01；不得把本結果當作 0.65／0.10 假說的試驗。缺陷不可回寫或重跑修正。
 
-- 交易年度覆蓋：5（2014–2018）
-- 失敗 gate：stress bootstrap 回撤超標比例 0.34794／0.27364>0.10；正報酬比例 0.50224／0.50444<0.80；leave-one-year-out 最低 PF 0.82576≤1、最低報酬 -0.02431≤0。
-- 未執行項目與原因：正式 evidence 有產出；因 failed gates 不進入 candidate freeze。
+**下一步**：另立 Study，只改收盤承接門檻家族，先對齊登記文字與結構化規格；有效證據、至少 20 筆／3 年及全部正式門檻通過，否則停止。
 
-## 主要發現
+**來源與歷史**：[原卡、完整來源及更正（原第 1819–1848 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1819)。
+更正定位：[Parent review 回修更正（2026-09-20）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1844)。
 
-- 已確認：加入方向條件後，stress aggregate 報酬接近零，且 2015、2017、2018 的 leave-one-year-out stress 報酬或 PF 低於門檻；四個既定穩健性 gates 全部失敗。
-- 可能原因：新增方向條件可能排除部分可盈利交易，卻沒有充分排除下行風險；這是觀察到的結果型態，不能單獨證明機制。
-- 尚不能判斷：無法從本 Study 判斷是否應移除方向條件、降低 volume threshold，或停止 volume-lead 分支；不能以幾乎零的 stress 報酬宣稱「不虧」即足夠。
+<a id="study-39"></a>
+## `tsm-momentum-trend-volume-return-alignment--v001`
 
-## 下一輪
+**研究與差異**：前五日量能加權收盤報酬≥-0.02，且加權減未加權≥0.0005；baseline 只關閉此條件，ready index 固定 25。
 
-- 建議處置：停止本方向確認版本，不再疊加第三個 filter。
-- 下一個 Study 只測：若流程必須 follow-up，只移除 `close_below_prior_close`，其餘 volume-lead 設定固定；不得同時改 threshold。
-- 成功／失敗條件：必須重新通過原有 bootstrap 與 leave-one-year-out gates，且 stress 報酬、PF、回撤與交易數都達到事前門檻；否則終止此分支。
-- 不得沿用的問題：不得把 stress 報酬 0.01% 視為穩健成功，也不得繼續用方向條件堆疊來掩蓋路徑失敗。
+**判定**：成果卡 failed；證據 valid；研究目標未登記。候選失敗交易數、stress 報酬／PF、重抽樣正報酬比例及逐年剔除 PF／報酬；baseline 另失敗 base 報酬／PF。候選不具凍結資格，兩次凍結相關嘗試失敗，實際凍結狀態尚不能判斷。
 
-## 證據連結
+| Trial／模型 | 情境 | evidence／交易數／年度 | 報酬 | PF | 最大回撤 |
+| --- | --- | ---: | ---: | ---: | ---: |
+| `tsm-momentum-trend-volume-return-alignment-v001`／candidate | Development/base | valid／5／4（2014、2015、2016、2018） | 0.7410% | 1.1797 | 2.2588% |
+| 同上／candidate | Development/stress | valid／5／4 | -0.0308% | 0.9925 | 2.5202% |
+| 同上／baseline | Development/base | valid／16／5（2014–2018） | -0.5729% | 0.9556 | 4.5483% |
+| 同上／baseline | Development/stress | valid／16／5 | -2.7935% | 0.7800 | 4.8322% |
 
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-volume-leads--v003/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-volume-leads--v003/candidate-definition.yml`
-- Development evidence：`research/tsm-mean-reversion-volume-leads--v003/development.yml`
-- 程式／測試：`research/tsm-mean-reversion-volume-leads--v003/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_volume_leads_v003.py`、`tests/test_tsm_mean_reversion_volume_leads_v003.py`
-- 詳細盲檢討：無
+**限制與更正**：目前採用更正：直接測試為 3 passed／1 failed，舊測試夾具仍要求 False，而實際為 True；runner 的 Ruff I001 未修復，只有忽略該項才通過。登記文字寫 0.20%（0.002），實測下限為 -0.02，不得宣稱測了 0.20% 假說或完整測試通過。證據仍 valid，綁定檔案未改。
 
----
+**下一步**：停止原 Study，不回寫或重跑；另立並事前固定一項量能與報酬對齊替代機制，其餘不變，任一正式門檻失敗即停止凍結。
 
-# `tsm-mean-reversion-bollinger-rebound--v001`：Study Development 成果卡
+**來源與歷史**：[原卡、完整來源及更正（原第 1849–1882 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1849)。
+更正定位：[驗證補充（2026-09-20）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1870)；[Parent review correction（2026-09-20；TASK-008）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1874)。
 
-- Development 判定：`未通過`
-- Provenance（來源可信狀態）：`verified-clean`
-- 前一個 Study：無（布林反彈系列第一份）
-- 記錄日期：`2026-09-08`
+<a id="study-40"></a>
+## `tsm-momentum-trend-volume-range-compression--v001`
 
-## 結論
+**研究與差異**：前五日原始量加權日內區間／未加權平均區間≤1.05，且平均量比≥1.05，再由趨勢及至少 2% 漲幅確認；baseline 只關閉壓縮條件。
 
-> 在 2014–2018、base 每邊 1 bps 費用／5 bps 滑價與 stress 每邊 2 bps 費用／20 bps 滑價下，本 Study 的 Development 結果不支持布林下軌超跌反彈候選進入 freeze：雖然 25 筆交易取得正報酬（base 27.59%／stress 20.99%）與良好獲利因子（3.766／3.088），但未能跨過事前設定的 30 筆完成交易、stress PF 3.2056 與 stress 報酬 26.59% 的較高選擇門檻，共有三個 formal gates 失敗。
+**判定**：成果卡 failed；兩組證據 valid；研究目標未登記。候選失敗 base／stress 報酬及 PF、交易數、stress 重抽樣正報酬比例、逐年剔除 PF／報酬及年度（2<3）；baseline 亦失敗核心及壓力門檻。候選不具資格，readiness／freeze 回 qualification-failed，實際凍結狀態為未完成／尚不能判斷。
 
-## 研究變更
+| Trial／模型 | 情境 | evidence／交易數／年度 | 報酬 | PF | 最大回撤 |
+| --- | --- | ---: | ---: | ---: | ---: |
+| candidate | Development/base | valid／5／2（2016、2018） | -2.4766% | 0.4663 | 2.4766% |
+| candidate | Development/stress | valid／5／2 | -3.0025% | 0.3645 | 3.0025% |
+| baseline | Development/base | valid／16／5（2014–2018） | -0.5729% | 0.9556 | 4.5483% |
+| baseline | Development/stress | valid／16／5 | -2.7935% | 0.7800 | 4.8322% |
 
-- 研究問題或假說：將均值回歸的超跌條件由固定均線偏離改為動態布林通道下軌（%b ≤ 0.25），並搭配前五日成交量比率 ≥ 1.05 與訊號日收盤反轉，檢驗能否改善極端行情下的進場品質。
-- 相較上一個 Study 只改：本系列首份 Study；引進動態布林通道下軌作為超跌資格，同時保留成交量先行與收盤確認。
-- 保持不變或比較基準：20 日、±2 倍標準差通道的布林 baseline；10-session 持有、退場後 5-session cooldown、2% risk budget、-4%／+4% stop-target 與相同成本。
+**限制與更正**：與 efficiency 共用區間比值家族；差異為相反方向的≤1.05 壓縮條件及五日量比，不能宣稱公式全新或完全獨立。樣本僅兩年，無法把弱結果歸因單一門檻。
 
-## 主要結果
+**下一步**：另立 Study，事前固定新機制或相反方向的市場狀態定義；有效證據、至少 20 筆／3 年且全部正式門檻通過，否則停止。
 
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 25 | 27.59% | 3.766 | 2.58% | 未通過 |
-| Development / stress | 25 | 20.99% | 3.088 | 2.54% | 未通過 |
+**來源與歷史**：[原卡、完整來源及更正（原第 1883–1910 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1883)。
+更正定位：[Parent review 澄清（2026-09-21）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1903)。
 
-- 交易年度覆蓋：5（2014–2018）
-- 失敗 gate：`completed_trades` 25 < 30 失敗；`stress_profit_factor` 3.0878 < 3.20558 失敗；`stress_return` 0.20988 < 0.26590 失敗。
-- 未執行項目與原因：無；正式 Development evidence 已完整產出。
+<a id="study-41"></a>
+## `tsm-momentum-trend-volume-gap-anchoring--v001`
 
-## 主要發現
+**研究與差異**：前五日量能加權隔夜缺口≤-0.20%、負缺口量能占比≥10%、平均量比≥1.05，再由趨勢及至少 2% 漲幅確認；比較條件採相同價格與執行。
 
-- 已確認：候選在兩套成本模型下均為正報酬且最大回撤僅約 2.5%，bootstrap 正報酬比例達 99.88% 以上；但未能達成事前針對容量與超越基準所設定的較高選擇門檻。
-- 可能原因：動態布林下軌加上成交量與價格反轉的三重約束過於嚴苛，大幅過濾了進場機會，致使交易樣本僅有 25 筆，限制了整體報酬積累。
-- 尚不能判斷：無法確認動態布林相較於固定均線偏離的真實邊際貢獻，亦無法確定若放寬觀察窗口能否在不犧牲品質下增加交易數。
-
-## 下一輪
-
-- 建議處置：建立有限 follow-up，嘗試引入事件觀察期以捕捉延後確認的反彈機會。
-- 下一個 Study 只測：將同日布林條件拆分為事件觸發與 5 個 session 內的延後確認，其他風險與執行規則固定。
-- 成功／失敗條件：完成交易至少 30 筆，且 stress 報酬、PF 與回撤符合事前 gate；任一失敗即否證。
-- 不得沿用的問題：不得因策略為正報酬就事後放寬交易數或績效門檻。
-
-## 證據連結
-
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-bollinger-rebound--v001/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-bollinger-rebound--v001/candidate-definition.yml`
-- Development evidence：`research/tsm-mean-reversion-bollinger-rebound--v001/evidence/development.yml`
-- 程式／測試：`research/tsm-mean-reversion-bollinger-rebound--v001/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_bollinger_rebound_v001.py`、`tests/test_tsm_mean_reversion_bollinger_rebound_v001.py`
-- 詳細盲檢討：無
-
----
-
-# `tsm-mean-reversion-bollinger-rebound--v002`：Study Development 成果卡
-
-- Development 判定：`未通過`
-- Provenance（來源可信狀態）：`provenance-unknown`
-- 前一個 Study：`tsm-mean-reversion-bollinger-rebound--v001`
-- 記錄日期：`2026-09-08`
-
-## 結論
-
-> 在 2014–2018 與相同 base/stress 成本下，本 Study 將布林條件改為事件記憶架構後，Development 結果不支持候選假說：完成交易僅 16 筆，不僅未達研究目標（30 筆）與 Workflow gate（20 筆），且 base/stress 報酬（10.89%／7.57%）與回撤均未達事前設定之比較目標，多項候選資格 gate 失敗。
-
-## 研究變更
-
-- 研究問題或假說：布林下軌跌深與爆量觸發後，若在後續 5 個 session 內守住事件日低點且出現收盤反轉，是否能捕捉更多延後止跌的反彈交易並維持品質。
-- 相較上一個 Study 只改：將同日條件改為「事件記憶（5 個 session 觀察期）」與「縮量守低後反轉確認」兩階段架構。
-- 保持不變或比較基準：10-session 持有、退場後 5-session cooldown、2% risk budget、-4%／+4% stop-target、base（1/5 bps）與 stress（2/20 bps）成本。
-
-## 主要結果
-
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 16 | 10.89% | 2.868 | 2.58% | 未通過 |
-| Development / stress | 16 | 7.57% | 2.240 | 2.54% | 未通過 |
-
-- 交易年度覆蓋：5（2014–2018，但 2017 僅 1 筆）
-- 失敗 gate：`completed_trades` 16 < 20（Workflow 最低門檻）與 16 < 30 失敗；`more_completed_trades_than_v009`、`base_return_not_below_v009`、`stress_return_not_below_v009` 等事前目標均失敗。
-- 未執行項目與原因：無；正式 Development evidence 已完整產出。
-
-## 主要發現
-
-- 已確認：事件漏斗過窄，60 個事件中高達 56.7%（34 個）在觀察期跌破事件低點失效，僅 16 個事件最終進場；且 8 筆交易以 10-session 到期平倉（time exit），顯示反轉動能未如預期展開。
-- 可能原因：加入守住事件日低點的條件進一步加劇了訊號稀疏問題，使得交易機會由 v001 的 25 筆降至 16 筆；盲檢討亦指出事件到期邊界與未對齊的成交量參數可能增加過濾雜訊。
-- 尚不能判斷：由於樣本過少且 2018 年少數交易貢獻近半獲利，無法由 16 筆交易判斷事件記憶結構是否具備真實因果優勢。
-
-## 下一輪
-
-- 建議處置：停止本事件記憶與縮量守低假說，不在此 Study 放寬門檻。
-- 下一個 Study 只測：若需繼續布林研究，應簡化觸發條件或改進持有期配對，不再疊加事件觀察與守低狀態機。
-- 成功／失敗條件：完成交易至少 20 筆（優先滿足流程底線），stress PF > 1.10、報酬 > 0 且通過各年度穩健性檢查。
-- 不得沿用的問題：不得在未修正事件到期與未對齊參數的情況下沿用此複雜事件狀態機。
-
-## 證據連結
-
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-bollinger-rebound--v002/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-bollinger-rebound--v002/candidate-definition.yml`
-- Development evidence：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-bollinger-rebound--v002/evidence/development.yml`
-- 程式／測試：`research/tsm-mean-reversion-bollinger-rebound--v002/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_bollinger_rebound_v002.py`、`tests/test_tsm_mean_reversion_bollinger_rebound_v002.py`
-- 詳細盲檢討：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-bollinger-rebound--v002/reviews/001-first-review.md`
-
----
-
-# `tsm-mean-reversion-supplemental-divergence--v001`：Study Development 成果卡
-
-- Development 判定：`未完成`
-- Provenance（來源可信狀態）：`provenance-unknown`
-- 前一個 Study：無（補充量價背離系列第一份）
-- 記錄日期：`2026-09-08`
-
-## 結論
-
-> 規格預計在 2014–2018、base 每邊 1/5 bps 與 stress 每邊 2/20 bps 下，測試在原有均值回歸之外新增「量價背離補充進場路徑」的效果；但允許讀取範圍內沒有 outcome-bearing Development evidence，因此本 Study 的 Development 結果不可判定，不能支持或否證原始假說。
-
-## 研究變更
-
-- 研究問題或假說：TSM 在既有跌深反彈條件之外，若在低檔出現價格破底但成交量未創高的量價背離現象，補充進場能否增加有效交易機會。
-- 相較上一個 Study 只改：本系列首份候選；新增量價背離補充觸發路徑（ATR 距離、近 3 日低點比對與成交量分數）。
-- 保持不變或比較基準：10-session 持有、退場後 5-session cooldown、2% risk budget、-4%／+4% stop-target 與相同成本。
-
-## 主要結果
-
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
-| Development / stress | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
-
-- 交易年度覆蓋：未執行（規格規劃 2014–2018）
-- 失敗 gate：未執行；缺少 Development evidence。
-- 未執行項目與原因：整體 Development trial 未產出可核對的 outcome-bearing evidence；base、stress 與各項診斷均未執行。
-
-## 主要發現
-
-- 已確認：規格、Development authorization、runner、策略程式與測試均存在於允許路徑，但沒有可供核對的結果 evidence。
-- 可能原因：Study 可能停在驗證或授權階段，尚未正式封存 trial 結果；這是依檔案現況的推論，無法由證據證實具體停頓原因。
-- 尚不能判斷：無法判斷補充背離路徑的交易數、報酬、PF、回撤或 gate 是否通過。
-
-## 下一輪
-
-- 建議處置：補齊固定規格的 Development trial 證據，不修改候選規則。
-- 下一個 Study 只測：產出已登記候選的完整 Development evidence 與 bindings。
-- 成功／失敗條件：依 preregistration 的完整 gates 檢查完成交易（至少 20 筆）、年度覆蓋、base/stress 報酬與 PF；任一 gate 失敗即否證。
-- 不得沿用的問題：不得以程式或授權存在代替實際 outcome-bearing evidence。
-
-## 證據連結
-
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-supplemental-divergence--v001/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-supplemental-divergence--v001/candidate-definition.yml`
-- Development evidence：無（允許路徑未找到）
-- 程式／測試：`research/tsm-mean-reversion-supplemental-divergence--v001/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_supplemental_divergence_v001.py`、`tests/test_tsm_mean_reversion_supplemental_divergence_v001.py`
-- 詳細盲檢討：無
-
----
-
-# `tsm-mean-reversion-supplemental-divergence--v002`：Study Development 成果卡
-
-- Development 判定：`未完成`
-- Provenance（來源可信狀態）：`provenance-unknown`
-- 前一個 Study：`tsm-mean-reversion-supplemental-divergence--v001`
-- 記錄日期：`2026-09-08`
-
-## 結論
-
-> 本 Study 延續相同的量價背離補充路徑規格，更新 Study 與 candidate 版本識別；但允許讀取範圍內仍未產出 outcome-bearing Development evidence。因此本 Study 尚未完成，無法判定補充路徑是否有效。
-
-## 研究變更
-
-- 研究問題或假說：維持 TSM 均線偏離 1.5%、RSI(2)≤50、成交量先行 1.05 與量價背離補充路徑的雙重觸發設計。
-- 相較上一個 Study 只改：規格中僅見 candidate family 與版本識別更新；未見策略進出場、成本或風控語義變更。
-- 保持不變或比較基準：10-session 持有、5-session cooldown、2% risk budget、-4%／+4% stop-target 與相同成本。
-
-## 主要結果
-
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
-| Development / stress | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
-
-- 交易年度覆蓋：未執行（規格規劃 2014–2018）
-- 失敗 gate：未執行；無 Development evidence。
-- 未執行項目與原因：未產出結果檔，base、stress、年度分段與 bootstrap 均未執行。
-
-## 主要發現
-
-- 已確認：v002 規格與程式測試齊全，但結果檔不存在於允許路徑。
-- 可能原因：可能是為了排解前一版本的執行或註冊流程問題，但仍未完成結果封存；現有資料無法斷定。
-- 尚不能判斷：無法判斷策略表現、交易容量或是否通過任何事前 gates。
-
-## 下一輪
-
-- 建議處置：只執行一次固定規格的 Development trial 並封存 evidence，不再改動訊號。
-- 下一個 Study 只測：同一量價背離候選的 Development evidence 產出。
-- 成功／失敗條件：完整 gates 均有 actual 且通過門檻；缺漏任何一項即未完成。
-- 不得沿用的問題：不得以版本號遞增代替實際結果。
-
-## 證據連結
-
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-supplemental-divergence--v002/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-supplemental-divergence--v002/candidate-definition.yml`
-- Development evidence：無（允許路徑未找到）
-- 程式／測試：`research/tsm-mean-reversion-supplemental-divergence--v002/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_supplemental_divergence_v002.py`、`tests/test_tsm_mean_reversion_supplemental_divergence_v002.py`
-- 詳細盲檢討：無
-
----
-
-# `tsm-mean-reversion-supplemental-divergence--v003`：Study Development 成果卡
-
-- Development 判定：`未完成`
-- Provenance（來源可信狀態）：`provenance-unknown`
-- 前一個 Study：`tsm-mean-reversion-supplemental-divergence--v002`
-- 記錄日期：`2026-09-08`
-
-## 結論
-
-> 本 Study 再次保留相同的量價背離補充架構，進行第三次程序版本更新；但允許讀取範圍內依然缺少 Development evidence。故無法判定任何 base 或 stress 指標，本 Study 處於未完成狀態。
-
-## 研究變更
-
-- 研究問題或假說：確認量價背離補充路徑在 TSM 均值回歸中的表現。
-- 相較上一個 Study 只改：Study 及 candidate 版本識別更新；未見訊號、成本或執行規則變更。
-- 保持不變或比較基準：10-session 持有、5-session cooldown、2% risk budget、-4%／+4% stop-target 與相同成本。
-
-## 主要結果
-
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
-| Development / stress | 未執行 | 未執行 | 未執行 | 未執行 | 未完成 |
-
-- 交易年度覆蓋：未執行（規格規劃 2014–2018）
-- 失敗 gate：未執行；無結果 evidence。
-- 未執行項目與原因：缺少 Development evidence，不能填入任何預期值。
-
-## 主要發現
-
-- 已確認：v003 仍維持相同策略架構與檔案結構，但無可核對的結果檔。
-- 可能原因：版本更迭可能涉及 runner 或環境調校，但尚未產生正式 evidence。
-- 尚不能判斷：無法評估背離補充路徑的實際交易次數與獲利能力。
-
-## 下一輪
-
-- 建議處置：專注產出完整的 Development evidence，避免持續同規則重發。
-- 下一個 Study 只測：產出本策略的完整 evidence 與資料綁定。
-- 成功／失敗條件：完成交易至少 20 筆、stress 報酬大於 0、PF > 1.0、最大回撤在限度內且重抽樣 gate 全數通過。
-- 不得沿用的問題：不得在未產出 evidence 前宣稱策略具備重現性。
-
-## 證據連結
-
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-supplemental-divergence--v003/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-supplemental-divergence--v003/candidate-definition.yml`
-- Development evidence：無（允許路徑未找到）
-- 程式／測試：`research/tsm-mean-reversion-supplemental-divergence--v003/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_supplemental_divergence_v003.py`、`tests/test_tsm_mean_reversion_supplemental_divergence_v003.py`
-- 詳細盲檢討：無
-
----
-
-# `tsm-mean-reversion-supplemental-divergence--v004`：Study Development 成果卡
-
-- Development 判定：`通過`
-- Provenance（來源可信狀態）：`provenance-unknown`
-- 前一個 Study：`tsm-mean-reversion-supplemental-divergence--v003`
-- 記錄日期：`2026-09-08`
-
-## 結論
-
-> 在 2014–2018、base 每邊 1/5 bps 與 stress 每邊 2/20 bps 成本下，本 Study 的 Development 結果支持「均值回歸搭配量價背離補充路徑」的候選假說：完成交易 27 筆覆蓋五年，base 報酬 38.73%（PF 5.967）、stress 報酬 30.40%（PF 4.831），且最大回撤僅 2.00%，事前登記事前 gates 全數通過。
-
-## 研究變更
-
-- 研究問題或假說：TSM 低於 SMA(20) 1.5%、RSI(2)≤50 且成交量比率≥1.05 時，加入量價背離補充路徑是否能捕捉更優質的反彈時機。
-- 相較上一個 Study 只改：完成並封存可核對之正式 Development evidence；策略進出場與風控規則維持同一設定。
-- 保持不變或比較基準：10-session 持有、5-session cooldown、2% risk budget、-4%／+4% stop-target、base／stress 成本。
-
-## 主要結果
-
-| 條件 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | 判定 |
-| --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 27 | 38.73% | 5.967 | 2.00% | 通過 |
-| Development / stress | 27 | 30.40% | 4.831 | 2.00% | 通過 |
-
-- 交易年度覆蓋：5（2014–2018）
-- 失敗 gate：無；所有事前 Development gates（包含報酬、獲利因子、回撤、交易數與逐年剔除）全數通過。
-- 未執行項目與原因：無；正式 evidence 完整。
-
-## 主要發現
-
-- 已確認：27 筆交易跨足五年（各年 2 至 7 筆），stress block bootstrap 正報酬比例為 100%、回撤超標比例為 0%，leave-one-year-out 逐年剔除後最低 stress 報酬仍有 19.73%、PF 3.792。
-- 可能原因：低檔量價背離補充條件成功提供第二條有效過濾路徑，在未過度限制樣本的情況下提升了整體交易勝率與盈虧比；但背離條件與主路徑的邊際貢獻仍需進一步消融分析。
-- 尚不能判斷：無獨立的 provenance declaration，來源可信狀態仍屬未確認；此外，背離各項參數（ATR 倍數、lookback 窗口）是否過度擬合尚無法從單一資料集得出定論。
-
-## 下一輪
-
-- 建議處置：建立有限 follow-up Study，對量價背離補充路徑進行單一參數敏感度測試或消融驗證。
-- 下一個 Study 只測：單獨關閉或調整量價背離補充路徑中的觀察窗口（例如由 5 個 session 改為 3 個），其他參數不變。
-- 成功／失敗條件：完成交易至少 20 筆，base/stress 報酬與 PF 維持通過，stress 回撤不超過 5%；任何 gate 失敗即否證該參數變更。
-- 不得沿用的問題：不得在未做單一機制消融前，斷言量價背離為績效改善的唯一原因。
-
-## 證據連結
-
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-supplemental-divergence--v004/manifests/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-supplemental-divergence--v004/candidate-definition.yml`
-- Development evidence：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-supplemental-divergence--v004/evidence/development.yml`
-- 程式／測試：`research/tsm-mean-reversion-supplemental-divergence--v004/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_supplemental_divergence_v004.py`、`tests/test_tsm_mean_reversion_supplemental_divergence_v004.py`
-- 詳細盲檢討：無
-
----
-
-# `tsm-mean-reversion-selling-pressure-rollover--v001`：Study Development 成果卡
-
-- 成果卡狀態：`evidence-unavailable`
-- Development gate：`尚不能判斷`
-- Provenance（來源可信狀態）：`verified-clean`
-- candidate_freeze_status：`已完成`
-- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v009`（Path A 明示來源）
-- 記錄日期：`2026-09-09`
-
-## 結論
-
-> 本 Study 預先設定 2014–2018、base 每邊 1 bps 費用／5 bps 滑價、stress 每邊 2／20 bps，並要求至少 20 筆交易、3 個交易年度及正報酬與 PF 門檻。但必要的 Development evidence 不存在，因此無法判定新增「賣壓翻轉」Path B 是否改善成本後的均值回歸，也不能判定任何 gate 通過或失敗。
-
-## 研究變更
-
-- 研究問題或假說：TSM 超跌時，價格尚未反轉，但賣方成交量可能已先衰退。若三個 session 的 Signed Volume Balance（依漲跌方向加總成交量的賣壓指標）由前五個 session 的極負值回升，可能增加可接受的均值回歸交易。
-- 相較上一個 Study 只改：保留 v009 的 Path A，新增不要求訊號日收盤上漲的 Path B；Path B 要求目前 SVB3 ≥ -0.15，且前五個 session 的最低值 ≤ -0.50。
-- 保持不變或比較基準：SMA(20) 超跌 1.5%、RSI(2)≤50、下一個開盤進場、持有 10 個完整 session、5-session cooldown、2% risk budget、-4% stop／+4% target，以及簡單超跌 baseline。
-
-## 主要結果
-
-| 條件 | 狀態 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | gate／備註 |
-| --- | --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 證據不可用：`evidence/development.yml` 不存在 | — | — | — | — | 停止分析 |
-| Development / stress | 證據不可用：`evidence/development.yml` 不存在 | — | — | — | — | 停止分析 |
-
-- 交易年度覆蓋：證據不可用，無法確認。
-- 失敗 gate：停止分析；沒有合法 evidence，不能判定通過或失敗。
-- 未執行項目與原因：base／stress 指標、年度分段、bootstrap、逐年剔除與 gate 判定均無法核對；不得填零或推測。
-
-## 主要發現
-
-- 已確認：規格、Development inputs、runner、策略程式與測試路徑均存在；provenance declaration 為 `verified-clean`，並明確記載 candidate freeze 已完成。
-- 可能原因：Development evidence 可能未產出或未發布；這只是低強度推論，現有資料無法確認實際原因。
-- 尚不能判斷：交易數、報酬、PF、回撤、假說是否成立，以及任何 Development gate 狀態。
-- 證據缺口與影響：缺少 `workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-selling-pressure-rollover--v001/evidence/development.yml`，因此程式、測試與輸入檔不能代替實際結果證據。
-
-## 下一輪
-
-- 建議處置：修正 Development evidence 的產製與 validator 綁定流程，不調整策略參數。
-- 下一個 Study 只測：以相同凍結候選補齊可驗證的 base／stress Development evidence。
-- 成功／失敗條件：validator 接受合法 evidence，且兩種成本情境都含實際交易數、報酬、PF、回撤、年度與必要 diagnostics；否則仍為 `evidence-unavailable`。
-- 不得沿用的問題：不得以程式存在、測試通過、輸入檔存在或 provenance 狀態推論策略結果。
-
-## 允許讀取的 repository-relative 來源
-
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-selling-pressure-rollover--v001/manifests/preregistration.yml`
-- Candidate definition：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-selling-pressure-rollover--v001/manifests/candidate-definition.yml`
-- Development evidence：無；上述 `evidence/development.yml` 不存在
-- 程式／測試：`research/tsm-mean-reversion-selling-pressure-rollover--v001/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_selling_pressure_rollover_v001.py`、`tests/test_tsm_mean_reversion_selling_pressure_rollover_v001.py`
-- Provenance：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-selling-pressure-rollover--v001/evidence/provenance.yml`
-- 詳細盲檢討：無
-
----
-
-# `tsm-mean-reversion-selling-pressure-rollover--v002`：Study Development 成果卡
-
-- 成果卡狀態：`complete`
-- Development gate：`通過`
-- Provenance（來源可信狀態）：`provenance-unknown`
-- candidate_freeze_status：`未完成`
-- 前一個 Study：`tsm-mean-reversion-selling-pressure-rollover--v001`
-- 記錄日期：`2026-09-10`
-
-## 結論
-
-> 在 2014–2018 Development 期間、base 每邊 1／5 bps、stress 每邊 2／20 bps 下，本 Study 的 Development evidence 完整，正式 Development gates 全部通過，對「加入賣壓翻轉 Path B 可改善均值回歸」提供有限支持；但完成交易數與 stress return 未達事前 research targets，因此 candidate freeze 尚未完成。
-
-## 研究變更
-
-- 研究問題或假說：在 SMA(20) 超跌 1.5%、RSI(2)≤50 時，若前三日 SVB3 從前五日的極負值回升，是否能在不等待收盤上漲確認下增加有效交易。
-- 主要變更：保留既有 v009 Path A，新增不要求訊號日上漲的 Path B。
-- 保持不變：下一個 session open 進場、10-session 持有、5-session cooldown、2% risk budget、-4%／+4% stop-target 與相同成本模型。
-
-## 主要結果
-
-| 條件 | 狀態 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | gate／備註 |
-| --- | --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 已完成 | 26 | 37.52% | 5.391 | 2.00% | 正式 gates 通過 |
-| Development / stress | 已完成 | 26 | 29.53% | 4.498 | 2.00% | 正式 gates 通過 |
-
-- 交易年度覆蓋：5 年（2014–2018）。
-- Research targets 失敗：完成交易 26 少於 30；stress return 29.53% 低於 30.40%。
-- 未執行項目與原因：無。
-
-## 主要發現
-
-- 已確認：正式 Development gates 全部通過，且逐年剔除後 stress 結果仍維持正報酬。
-- 可能原因：Path B 可能帶來額外機會，但目前只有 5 筆交易且全部獲利；同時它排擠了 3 筆既有 v009 交易，因此淨增量仍需更嚴格驗證。
-- 尚不能判斷：Path B 在後續固定 Evaluation 中是否能維持優勢。
-- 已確認的證據缺口、影響與限制：Provenance 尚無獨立聲明；realized drawdown 約 2.00%，但保守 mark-to-market stress drawdown 約 3.42%。
-
-## 下一輪
-
-- 建議處置：建立一個只測 Path B capacity／crowding 的 follow-up Study。
-- 下一個 Study 只測：固定 Path A／Path B 優先順序，並扣除被排擠的既有交易後重新評估淨增量。
-- 成功／失敗條件：完成交易至少 30 筆、stress return >30.40%，且 Path B 扣除被排擠交易後的淨增量仍為正。
-- 不得沿用的問題：不得把 5 筆全正交易視為機制已被證明。
-
-## 允許讀取的 repository-relative 來源
-
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-selling-pressure-rollover--v002/manifests/preregistration.yml`
-- Candidate definition：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-selling-pressure-rollover--v002/manifests/candidate-definition.yml`
-- Development evidence：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-selling-pressure-rollover--v002/evidence/development.yml`
-- 程式／測試：`src/trading_2026_2/tsm_mean_reversion_selling_pressure_rollover_v001.py`、`tests/test_tsm_mean_reversion_selling_pressure_rollover_v001.py`
-- 詳細盲檢討：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-selling-pressure-rollover--v002/reviews/001-first-review.md`
-- 來源限制：本成果卡只整理 Development 階段，沒有讀取或引用正式 Historical Evaluation、Terminal 或 `historical-evaluation-artifacts/`。
-
----
-
-# `tsm-mean-reversion-two-stage-volume-reversal--v013`：Study Development 成果卡
-
-- 成果卡狀態：`complete`
-- Development gate：`通過`
-- Provenance（來源可信狀態）：`verified-clean`
-- candidate_freeze_status：`未完成`
-- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v009`
-- 記錄日期：`2026-09-10`
-
-## 結論
-
-> 在 2014–2018 Development、base 每邊 1／5 bps、stress 每邊 2／20 bps 下，evidence 完整、formal gates 通過，成果卡為 `complete`；但提前解禁相對 v009 的改善假說不受本輪支持，candidate freeze 未完成。
-
-## 研究變更
-
-- 研究問題或假說：退場後放量事件若在三個 session 內獲得原有反轉條件確認，能否提前恢復交易。
-- 唯一變更：加入提前冷卻重設；其餘訊號、執行、成本、風控與持有期沿用 v009。
-- 比較基準：固定 v009 two-stage candidate。
-
-## 主要結果
-
-| 條件 | 狀態 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | gate／備註 |
-| --- | --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 已完成 | 25 | 24.399% | 3.353 | 2.362% | formal gates 通過 |
-| Development / stress | 已完成 | 25 | 18.167% | 2.742 | 2.596% | formal gates 通過 |
-
-- 交易年度覆蓋：5 年（2014–2018）；formal gates 無失敗，research targets 失敗 10 項，故 freeze 未完成。
-- 未執行項目與原因：pytest 未執行，因環境缺少 pandas／pytest。
-
-## 主要發現
-
-- 已確認：新增 3 筆提前交易（2015–2016），base／stress PnL 為 -210.07／-677.31，並取代兩筆 v009 獲利交易；總交易數只增 1 筆，績效變差。
-- 可能原因：放量 1.05 倍加一次收盤上漲，可能仍在同一下跌波段重入；這仍是推論。
-- 尚不能判斷：正式 Historical Evaluation 的表現或失敗原因。
-- 證據限制：evidence 可驗證，但 pytest 因環境缺 pandas／pytest 未執行。
-
-## 下一輪
-
-- 建議處置：停止本 Study freeze，建立有限 follow-up Study。
-- 下一個 Study 只測：只禁止上一筆交易以 stop、stop-gap 或 stop-same-session 結束後啟動提前重設。
-- 成功／失敗條件：formal gates 全通過，新增減被取代的 base／stress PnL >0，且 stress 報酬／PF／回撤不劣於 v009；任一失敗即停止。
-- 不得沿用的問題：不得在原 Study 內事後改規則或把 formal gate 通過當成 freeze 通過。
-
-## 允許讀取的 repository-relative 來源
-
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v013/manifests/preregistration.yml`
-- Candidate definition：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v013/manifests/candidate-definition.yml`
-- Development evidence：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v013/evidence/development.yml`
-- Provenance：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v013/evidence/provenance.yml`
-- 程式／測試：`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v013.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v009.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v013.py`
-- 詳細盲檢討：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v013/reviews/001-blind-review.md`
-- 來源限制：本成果卡只整理 Development 階段，沒有讀取或引用正式 Historical Evaluation、Terminal 或 `historical-evaluation-artifacts/`。
-
----
-
-# `tsm-mean-reversion-two-stage-volume-reversal--v017`：Study Development 成果卡
-
-- 成果卡狀態：`complete`
-- Development gate：`通過`
-- Provenance（來源可信狀態）：`provenance-unknown`
-- candidate_freeze_status：`未完成`
-- 前一個 Study：無（v017 規格未明示前版；Development 比較基準為 `tsm-mean-reversion-two-stage-volume-reversal--v009`）
-- 記錄日期：`2026-09-11`
-
-## 結論
-
-> 在 2014–2018、base 每邊 1／5 bps、stress 每邊 2／20 bps、2% risk budget、10-session 持有與相同停損停利規則下，本成果卡狀態為 `complete`，formal Development gates 全部通過；但對「加入放量事件後的縮量淺回測，可在 v009 原有路徑之外增加成本後有優勢交易」的假說，本輪不支持。補充路徑實際接受 0 筆訊號，所有 24 筆交易都來自原有路徑，因此 candidate freeze 未完成。
-
-## 研究變更
-
-- 研究問題或假說：訊號日前第 2–5 個交易日若先有成交量至少為前 20 日均量 1.25 倍、收盤守住區間上半部的放量事件，之後出現不破事件低點的縮量收跌回測，是否能讓原本只需低於 SMA(20) 1.0%（含）至未滿 1.5% 的淺超跌訊號形成有效均值回歸機會。
-- 相較比較基準只改：保留 v009 原有量先與收盤上漲路徑，新增一次性、最新事件優先的「放量→縮量回測→收盤反轉」補充路徑。
-- 保持不變：下一個 XNYS session open 進場、10-session 持有、退場後 5-session cooldown、2% risk budget、-4%／+4% stop-target 與成本模型。
-
-## 主要結果
-
-| 條件 | 狀態 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | gate／備註 |
-| --- | --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 已完成 | 24 | 33.676% | 5.036 | 2.000% | formal gates 通過；freeze research targets 未全數通過 |
-| Development / stress | 已完成 | 24 | 26.523% | 4.204 | 2.119% | formal gates 通過；stress 30.40% 目標失敗 |
-
-- 交易年度覆蓋：5 年（2014–2018）。
-- 失敗 gate：無 formal Development gate 失敗；但 research targets 有 7 項失敗，包括完成交易 24<30、相對 v009 未增加交易（24 不大於 24）、新增交易數 0<1、新增交易年度 0<3、兩套成本下淨新增減被排擠損益均為 0，以及 stress 報酬 26.523%<30.40%。
-- 未執行項目與原因：無；交易區塊 bootstrap、calendar block bootstrap 與 leave-one-signal-year-out 均有 evidence。
-
-## 主要發現
-
-- 已確認：`evidence/development.yml` 通過 Development validator；base／stress 報酬與 PF 均為正，stress block bootstrap 正報酬比例最低為 99.998%，逐年剔除後最低 stress 報酬 18.030%、PF 3.409，formal gates 全數通過。
-- 已確認：補充路徑建立 164 個放量事件，但接受的補充確認與補充交易都是 0；v017 與 v009 的交易數、報酬、PF、回撤完全一致，顯示本輪沒有量到新增機制的邊際效果。
-- 可能原因：嚴格的 2–5 session 事件窗口、低點不可跌破與單次消耗規則，可能讓事件在完成回測與訊號確認前過期、失效或被新事件取代；evidence 只支持這個可能性，不能分辨主因。
-- 尚不能判斷：不能由本輪結果判斷補充路徑在較寬時間窗口下是否有效，也不能把原有路徑的正報酬歸因於新增路徑。
-- 已確認的證據缺口、影響與限制：允許讀取資料沒有獨立 provenance declaration，故來源可信狀態仍為 `provenance-unknown`；24 筆交易也低於 freeze 所要求的 30 筆，正報酬不能抵銷上述新增交易目標失敗。
-
-## 下一輪
-
-- 建議處置：停止 v017 candidate freeze，不在原 Study 內調參或重跑。
-- 下一個 Study 只測：若仍要延伸，只把補充事件的有效觀察窗口（含 expiry）由 5 個 session 延長至 7 個 session；其餘訊號、成本、執行與風控固定。
-- 成功／失敗條件：formal Development gates 全部通過，且補充路徑至少產生 1 筆交易、分布於至少 3 個 signal years、總交易至少 30 筆、stress 報酬至少 30.40%，兩套成本下淨新增減被排擠損益都嚴格大於 0；任一條件失敗即停止。
-- 不得沿用的問題：不得用本輪與 v009 完全相同的 aggregate metrics 宣稱縮量淺回測機制已被驗證，也不得把 0 筆新增交易當成可估計的增量效果。
-
-## 允許讀取的 repository-relative 來源
-
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v017/manifests/preregistration.yml`
-- Candidate definition：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v017/manifests/candidate-definition.yml`
-- Development evidence：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v017/evidence/development.yml`
-- 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v017/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v017.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v017.py`、`research/tools/development_status.py`
-- 詳細盲檢討：無
-- 來源限制：本成果卡只整理 Development 階段，沒有讀取或引用正式 Historical Evaluation、Terminal 或 `historical-evaluation-artifacts/`。
-
----
-
-# `tsm-mean-reversion-two-stage-volume-reversal--v014`：Study Development 成果卡
-
-- 成果卡狀態：`evidence-unavailable`
-- Development gate：`尚不能判斷`
-- Provenance（來源可信狀態）：`未確認`
-- candidate_freeze_status：`尚不能判斷`
-- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v013`
-- 記錄日期：`2026-09-11`
-
-## 結論
-
-> 在事前規格的 2014–2018、base 每邊 1／5 bps、stress 每邊 2／20 bps 成本下，本成果卡狀態為 `evidence-unavailable`。v014 的規格與程式路徑可以確認，但找不到可驗證的 `evidence/development.yml`，因此不能判定 base／stress 的交易、報酬、PF、回撤、Development gate 或 candidate freeze，也不能以程式與輸入檔代替結果證據。
-
-## 研究變更
-
-- 研究問題或假說：訊號日前第 2–5 個交易日若先有成交量至少為前 20 日均量 1.25 倍的放量事件，之後出現收跌、量縮至事件量 80% 以下且不跌破事件低點的淺回測，是否能在原本 1.5% 超跌門檻之外，形成扣除成本後有優勢的均值回歸機會。
-- 相較上一個 Study 只改：移除 v013 的退場冷卻提前重設，改加入獨立的「放量事件→縮量回測→訊號日收盤上漲」補充路徑；它與 v009 原有路徑並存，原路徑優先。
-- 保持不變或比較基準：v009 的資料、進場與退場、2% 風險預算、10 個完整持有 session、停損停利、冷卻與成本口徑。
-
-## 主要結果
-
-| 條件 | 狀態 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | gate／備註 |
-| --- | --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 證據不可用：缺少 `evidence/development.yml` |  |  |  |  | 停止分析 |
-| Development / stress | 證據不可用：缺少 `evidence/development.yml` |  |  |  |  | 停止分析 |
-
-- 交易年度覆蓋：證據不可用：沒有合法 Development evidence。
-- 失敗 gate：停止分析：缺少可被 validator 驗證的 `evidence/development.yml`，不判定 gate 失敗或通過。
-- 未執行項目與原因：尚不能判斷；目前無法區分 Development 未執行、證據未保存或路徑未對齊。
-
-## 主要發現
-
-- 已確認：v014 的 preregistration 與 implementation contract 已固定補充路徑、成本、執行與比較 v009 的規格；但允許讀取範圍內沒有候選結果 evidence。
-- 可能原因：結果檔可能尚未產製、未封存，或產出路徑與 workflow 期待不一致；這只是流程層面的可能解釋，沒有證據支持其中任何一項。
-- 尚不能判斷：補充路徑是否產生交易、base／stress 是否通過門檻、研究目標是否達成，以及 candidate 是否可 freeze。
-- 已確認的證據缺口、影響與限制：缺少 `evidence/development.yml` 使所有數值與 gate 分析停止；不得用 runner、程式或 input 重建數值。
-
-## 下一輪
-
-- 建議處置：修正 Development evidence 的產製、驗證與封存流程；不要在 v014 內補跑或調整策略參數。
-- 下一個 Study 只測：只驗證同一候選能否產出一份被 validator 接受、同時包含 base／stress 與 status table 的 `evidence/development.yml`。
-- 成功／失敗條件：檔案存在、validator 接受、base／stress 結果完整且 status 與 gates／research targets 一致即成功；缺檔、無法驗證或任一情境缺資料即失敗。
-- 不得沿用的問題：不得把規格存在、測試通過或 runner 可執行解讀成策略結果，也不得在證據缺失時宣稱假說有效或失敗。
-
-## 允許讀取的 repository-relative 來源
-
-- Preregistration：`research/tsm-mean-reversion-two-stage-volume-reversal--v014/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-two-stage-volume-reversal--v014/candidate-definition.yml`
-- Development evidence：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v014/evidence/development.yml`（缺失）
-- 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v014/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v014.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v014.py`
-- 詳細盲檢討：無
-- 來源限制：本成果卡只整理 Development 階段，沒有讀取或引用正式 Historical Evaluation、Terminal 或 `historical-evaluation-artifacts/`。
-
----
-
-# `tsm-mean-reversion-two-stage-volume-reversal--v015`：Study Development 成果卡
-
-- 成果卡狀態：`evidence-unavailable`
-- Development gate：`尚不能判斷`
-- Provenance（來源可信狀態）：`未確認`
-- candidate_freeze_status：`尚不能判斷`
-- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v014`
-- 記錄日期：`2026-09-11`
-
-## 結論
-
-> 在同一套 2014–2018、base 每邊 1／5 bps、stress 每邊 2／20 bps 成本規格下，本成果卡狀態為 `evidence-unavailable`。v015 的 workflow 與 research 目錄目前只有 Development authorization，沒有可被驗證的 `evidence/development.yml`；因此不能判定任何 base／stress 結果、Development gate、研究目標或 candidate freeze，也不能把 v014 的結果假設沿用到 v015。
-
-## 研究變更
-
-- 研究問題或假說：延續 v014 的放量後縮量淺回測補充路徑，檢驗訊號日只需低於 SMA(20) 1.0%（含）但未達 1.5% 時，是否能形成成本後有優勢的均值回歸交易。
-- 相較上一個 Study 只改：明確綁定 v009 Study-local comparison control，並將同一套候選與 Development runner／證據路徑版本化；v014 與 v015 的策略 source diff 為空，因此沒有可確認的策略規則變更。
-- 保持不變或比較基準：補充路徑條件、v009 原有路徑、資料期間、成本、2% 風險預算、10-session 持有、停損停利與冷卻規則。
-
-## 主要結果
-
-| 條件 | 狀態 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | gate／備註 |
-| --- | --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 證據不可用：沒有 `evidence/development.yml`；目前僅有 authorization |  |  |  |  | 停止分析 |
-| Development / stress | 證據不可用：沒有 `evidence/development.yml`；目前僅有 authorization |  |  |  |  | 停止分析 |
-
-- 交易年度覆蓋：證據不可用：沒有合法 Development evidence。
-- 失敗 gate：停止分析：缺少可被 validator 驗證的 `evidence/development.yml`，不判定 gate 失敗或通過。
-- 未執行項目與原因：尚不能判斷；authorization 只能確認 Development scope，不能證明結果已產出或完整。
-
-## 主要發現
-
-- 已確認：v015 preregistration 已固定 v009 comparison control 與同一個補充路徑假說；策略 source 與 v014 相同，版本差異主要在 Study／runner／比較控制封裝。
-- 可能原因：證據可能尚未產製、未封存，或只保留 authorization 而未完成結果發布；目前資料不能在這些解釋之間做選擇。
-- 尚不能判斷：v015 是否實際執行 base／stress、補充路徑是否新增交易、任何報酬或回撤，以及 candidate 是否可 freeze。
-- 已確認的證據缺口、影響與限制：workflow 與 research 的 evidence 目錄都沒有 `development.yml`；因此不能用 v014、v009 或程式輸出補足 v015 結果。
-
-## 下一輪
-
-- 建議處置：修正 Development evidence 產製、validator 驗證與封存鏈；保持策略規則不變，不在 v015 內重跑或調參。
-- 下一個 Study 只測：只驗證候選結果能否產出並封存一份與 v009 control 綁定、可被 validator 接受的 `evidence/development.yml`。
-- 成功／失敗條件：evidence 存在且合法、base／stress 完整、status table 與 gates／research targets 一致即成功；任一缺失或不一致即失敗。
-- 不得沿用的問題：不得把 authorization、source diff 為空或程式可執行當成 Development outcome，也不得在證據缺失時宣稱機制有效。
-
-## 允許讀取的 repository-relative 來源
-
-- Preregistration：`research/tsm-mean-reversion-two-stage-volume-reversal--v015/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-two-stage-volume-reversal--v015/candidate-definition.yml`
-- Development evidence：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v015/evidence/development.yml`（缺失；目前僅有 `development-authorization.yml`）
-- 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v015/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v015.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v015.py`
-- 詳細盲檢討：無
-- 來源限制：本成果卡只整理 Development 階段，沒有讀取或引用正式 Historical Evaluation、Terminal 或 `historical-evaluation-artifacts/`。
-
----
-
-# `tsm-mean-reversion-two-stage-volume-reversal--v016`：Study Development 成果卡
-
-- 成果卡狀態：`complete`
-- Development gate：`通過`
-- Provenance（來源可信狀態）：`provenance-unknown`
-- candidate_freeze_status：`未完成`
-- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v015`
-- 記錄日期：`2026-09-11`
-
-## 結論
-
-> 在 2014–2018、base 每邊 1／5 bps、stress 每邊 2／20 bps、2% risk budget、10 個完整持有 session 與既定停損停利規則下，`evidence/development.yml` 已通過 validator，且 formal Development gates 全部通過；本成果卡狀態為 `complete`。但 7 項預先登記 research targets 失敗：v016 只有 24 筆、沒有補充路徑新增交易，stress 報酬為 26.523% 未達 30.40%，所以 candidate freeze 未完成，不能把補充機制視為已被支持。
-
-## 研究變更
-
-- 研究問題或假說：放量事件後的縮量、不破低點淺回測，是否能在原 v009 路徑外增加扣除成本後有優勢的均值回歸機會；補充路徑只在訊號日前 2–5 個交易日有效，且與原路徑並存但不增加持倉。
-- 相較上一個 Study 只改：策略 source 與 v015 相同；v016 主要是同一候選的版本化 Study／runner 與獨立 Development evidence，沒有新的策略參數變更。
-- 保持不變或比較基準：v009 原有路徑、資料與 2014–2018 期間、base／stress 成本、2% 風險預算、10-session 持有、5-session 冷卻、停損停利與進出場口徑。
-
-## 主要結果
-
-| 條件 | 狀態 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | gate／備註 |
-| --- | --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 已完成 | 24 | 33.676% | 5.036 | 2.000% | formal gates 通過；研究目標未全數通過 |
-| Development / stress | 已完成 | 24 | 26.523% | 4.204 | 2.119% | formal gates 通過；30.40% 研究目標失敗 |
-
-- 交易年度覆蓋：5 年（2014–2018）。
-- 失敗 gate：無 formal Development gate 失敗；research targets 失敗包括完成交易至少 30、交易數多於 v009、新增交易至少 1 筆且分布至少 3 年、base／stress 淨新增減被排擠損益嚴格大於 0，以及 stress 報酬至少 30.40%。實際新增交易為 0、兩套成本下淨新增損益為 0。
-- 未執行項目與原因：無；交易區塊 bootstrap 與 leave-one-signal-year-out evidence 已存在並通過正式 Development gate，calendar block bootstrap 為描述性診斷。
-
-## 主要發現
-
-- 已確認：validator 接受 evidence；base／stress 報酬、PF 均為正，最大回撤分別為 2.000% 與 2.119%，formal gates 全數通過。
-- 已確認：建立 164 個放量事件，但補充確認與補充交易均為 0；24 筆交易全部來自 original path，v016 combined 與 v009 original path 的交易數、報酬、PF、回撤完全一致。因此本輪沒有量到補充機制的邊際效果。
-- 可能原因：2–5 session 事件窗口、5-session expiry，以及事件被 invalidated／replaced 的規則可能過於嚴格；evidence 只支持這個可能性，不能分辨哪一項是主因。
-- 尚不能判斷：若放寬有效窗口，補充路徑是否會產生可重現且不排擠原路徑的增量效果；也不能把原有路徑的正報酬歸因於補充機制。
-- 已確認的證據缺口、影響與限制：沒有獨立 provenance declaration，來源可信狀態仍為 `provenance-unknown`；新增交易為 0，使增量效果無法估計，且研究目標失敗阻止 candidate freeze。
-
-## 下一輪
-
-- 建議處置：停止 v016 candidate freeze；若要延伸，建立有限 follow-up Study，不在原 Study 內調參或重跑。
-- 下一個 Study 只測：只把補充事件的有效觀察窗口／expiry 從 5 個 session 延長到 7 個 session，其餘訊號、成本、執行與風控固定。
-- 成功／失敗條件：formal Development gates 全通過，補充路徑至少新增 1 筆交易且分布於至少 3 個 signal years，總交易至少 30 筆，stress 報酬至少 30.40%，兩套成本下淨新增減被排擠損益都嚴格大於 0；任一條件失敗即停止。
-- 不得沿用的問題：不得用與 v009 完全相同的 aggregate metrics 宣稱補充機制已驗證，也不得把 0 筆新增交易當成可估計的增量效果。
-
-## 允許讀取的 repository-relative 來源
-
-- Preregistration：`research/tsm-mean-reversion-two-stage-volume-reversal--v016/preregistration.yml`
-- Candidate definition：`research/tsm-mean-reversion-two-stage-volume-reversal--v016/candidate-definition.yml`
-- Development evidence：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v016/evidence/development.yml`
-- 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v016/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v016.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v016.py`、`research/tools/development_status.py`
-- 詳細盲檢討：無
-- 來源限制：本成果卡只整理 Development 階段，沒有讀取或引用正式 Historical Evaluation、Terminal 或 `historical-evaluation-artifacts/`。
-
----
-
-# `tsm-mean-reversion-two-stage-volume-reversal--v018`：Study Development 成果卡
-
-- 成果卡狀態：`complete`
-- Development gate：`通過`
-- Provenance（來源可信狀態）：`verified-clean`
-- candidate_freeze_status：`未完成`
-- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v017`
-- 記錄日期：`2026-09-11`
-
-## 結論
-
-> 在 2014–2018、base 每邊 1／5 bps、stress 每邊 2／20 bps、2% risk budget、4% stop／target 與 10-session 持有下，本成果卡狀態為 `complete`，且 formal Development gates 全部通過；但 v018 想驗證的淺回落補充路徑沒有產生任何 raw signal 或交易。24 筆交易全部來自 v009 原有路徑，因此本次無法支持 v018 的增量假說，candidate freeze 未完成。
-
-## 研究變更
-
-- 研究問題或假說：連續兩日放量、跌幅收斂、低點守住，若訊號日只比 SMA(20) 低 1.0% 至未滿 1.5% 且收盤轉強，是否能增加成本後有優勢的均值回歸交易。
-- 相較上一個 Study 只改：在 v009 原有訊號路徑上加入事前固定的淺回落補充路徑；原路徑、成本、風險、停損停利、持有期與冷卻規則維持不變。
-- 保持不變或比較基準：v009 comparison control、2013 warmup／2014–2018 Development、下一個 XNYS open 進場與單一部位執行口徑。
-
-## 主要結果
-
-| 條件 | 狀態 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | gate／備註 |
-| --- | --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 已完成 | 24 | 33.676% | 5.036 | 2.000% | formal gate 通過；research targets 未全數通過 |
-| Development / stress | 已完成 | 24 | 26.523% | 4.204 | 2.119% | formal gate 通過；research targets 未全數通過 |
-
-- 交易年度覆蓋：5 年（2014–2018）。
-- 失敗 gate：無 formal Development gate 失敗；research targets 失敗包括交易至少 30 筆、交易數多於 v009、新增交易至少 1 筆且分布至少 3 年，以及 base／stress 淨新增減被排擠損益大於 0。實際新增交易與淨新增損益均為 0。
-- 未執行項目與原因：無；bootstrap、leave-one-signal-year-out 與成本壓力結果均已產出。限制是補充路徑本身沒有觀測值。
-
-## 主要發現
-
-- 已確認：Development evidence 已被 validator 接受，base／stress 結果完整，formal gates 通過；補充路徑 raw signal、accepted signal 與 completed trade 均為 0，v018 combined 的 24 筆交易與 v009 原路徑相同。
-- 可能原因：補充路徑把兩日成交量、跌幅收斂、低點守住、淺 gap、RSI 與收盤轉強全部串成必要條件，交集可能過窄；也可能被單一部位與 cooldown 擋下，但現有 evidence 不能分辨主因。
-- 尚不能判斷：補充機制在其他資料期間是否有效，也不能把既有 v009 交易的正報酬歸因於 v018。
-- 已確認的證據缺口、影響與限制：Development 只有 24 筆交易，且全數是原路徑；因此本卡能判定 gate 與既有路徑表現，不能估計 v018 的增量效果。
-
-## 下一輪
-
-- 建議處置：停止 v018 candidate freeze，不在原 Study 內調參或重跑。
-- 下一個 Study 只測：另建一個 follow-up，只放寬一項事前有機制理由的補充條件；原 v009 路徑、成本、執行、風控與比較控制全部固定。
-- 成功／失敗條件：formal Development gates 全部通過，補充路徑至少有 1 筆新增交易且分布於至少 3 個 signal years，總交易至少 30 筆，base／stress 淨新增減被排擠損益均嚴格大於 0；任一條件失敗即停止。
-- 不得沿用的問題：不得用本輪 v009 原路徑的 24 筆交易宣稱 v018 補充機制已被驗證，也不得依本輪結果在原 Study 事後挑參數。
-
-## 允許讀取的 repository-relative 來源
-
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v018/manifests/preregistration.yml`
-- Candidate definition：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v018/manifests/candidate-definition.yml`
-- Development evidence：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v018/evidence/development.yml`
-- Provenance：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v018/evidence/provenance.yml`
-- 程式／測試：`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v018.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v018.py`、`research/tools/development_status.py`
-- 詳細盲檢討：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v018/reviews/001-first-review.md`
-- 來源限制：本成果卡只整理 Development 階段，沒有讀取或引用正式 Historical Evaluation、Terminal 或 `historical-evaluation-artifacts/`。
-
----
-
-# `tsm-mean-reversion-two-stage-volume-reversal--v024`：Study Development 成果卡
-
-- 成果卡狀態：`complete`
-- Development gate：`通過`
-- Provenance（來源可信狀態）：`verified-clean`
-- candidate_freeze_status：`未完成`
-- 前一個 Study：`tsm-mean-reversion-two-stage-volume-reversal--v023`
-- 記錄日期：`2026-09-17`
-
-## 結論
-
-> 在 2014–2018、base 每邊 1／5 bps、stress 每邊 2／20 bps、2% 風險預算、4% 停損／停利與 10-session 持有下，Development evidence 完整，formal Development gates 全部通過，因此成果卡狀態為 `complete`。但 v024 的四項研究目標失敗：相較 v009，base／stress 回撤變差、stress 報酬變低，且 stress 淨新增損益為負；所以原始「增加交易且維持高成本表現」假說不獲支持，candidate freeze 未完成。
-
-## 研究變更
-
-- 研究問題或假說：上升趨勢中的放量蓄勢，若在事件後五個交易日內突破固定價位，能否補足 v009 均值回歸的交易空窗，同時增加交易並維持 stress 表現。
-- 相較上一個 Study 只改：在 v009 原有路徑上加入完整補充路徑：收盤高於 SMA(20) 且均線上行、成交量至少為前 20 日均量 1.25 倍、事件收盤不高於前五日高點，之後五日內首次嚴格突破固定價；事件失效、單事件追蹤與原路徑優先順序均事前固定。
-- 保持不變或比較基準：v009 原路徑、2014–2018 資料範圍、下一個 XNYS open 進場、base／stress 成本、2% 風險、4% 停損／停利、10-session 持有與 5-session 冷卻。
-
-## 主要結果
-
-| 條件 | 狀態 | 完成交易 | 報酬 | PF（Profit Factor，獲利因子） | 最大回撤 | gate／備註 |
-| --- | --- | ---: | ---: | ---: | ---: | --- |
-| Development / base | 已完成 | 35 | 33.874% | 2.806 | 5.880% | formal gate 通過；相對 v009 回撤目標失敗 |
-| Development / stress | 已完成 | 35 | 24.715% | 2.348 | 5.880% | formal gate 通過；stress 報酬、回撤與淨新增損益目標失敗 |
-
-- 交易年度覆蓋：5 年（2014–2018）。
-- 失敗 gate：無 formal Development gate 失敗。研究目標失敗為：base 最大回撤 5.8799% > v009 的 1.9998%；stress 報酬 24.7146% < v009 的 26.5232%；stress 最大回撤 5.8797% > v009 的 2.1193%；淨新增 stress PnL 為 -1,598.34，未大於 0。
-- 未執行項目與原因：無；base／stress、50,000 次 block bootstrap、leave-one-signal-year-out、交易配對與路徑診斷均有 evidence。
-
-## 主要發現
-
-- 已確認：evidence 內的狀態表為 valid／validated，provenance 為 `verified-clean`，formal gates 全數通過；base 與 stress 各有 35 筆完成交易，覆蓋五個 signal years。
-- 已確認：相較 v009 的 24 筆交易，v024 增加交易量，且有 11 筆完成交易來自 supplemental path；base 報酬略高，但回撤顯著變大；stress 報酬與回撤均劣於 v009，保守計算的淨新增 stress PnL 也為負。
-- 可能原因：補充訊號的進場時點與原路徑交易產生排擠或成本敏感性，使新增交易在 stress 成本下不足以補償風險；這是由交易配對與壓力結果支持的合理推論，不能歸因到趨勢、放量或五日突破中的單一條件。
-- 尚不能判斷：目前不能知道哪一個補充條件主導 stress 惡化，也不能把本次結果外推到其他資料期間。
-- 已確認的證據缺口、影響與限制：沒有發現 Development evidence 缺口；但研究目標失敗使 candidate freeze 不具資格，本卡只能支持 Development 階段判斷。
-
-## 下一輪
-
-- 建議處置：停止 v024 candidate freeze，不在原 Study 內調參或重跑，並停止這組「上升趨勢放量突破」增量假說。
-- 下一個 Study 只測：無；不建立 v024 同機制的參數 follow-up。若另起研究，必須另行事前登記全新假說，不得用本輪失敗結果反向放寬門檻。
-- 成功／失敗條件：本輪停止處置的成功條件是保留合法 evidence、凍結失敗結論且不事後調參；若未來另立 Study，須事前要求 formal gates 全通過、stress 報酬不低於 v009、stress 回撤不高於 v009，且淨新增 stress PnL 嚴格大於 0。
-- 不得沿用的問題：不得把 formal gate 通過解讀成研究目標通過，也不得把 base 的小幅增益或新增交易數當成 stress 下的增量優勢證明。
-
-## 允許讀取的 repository-relative 來源
-
-- Preregistration：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v024/manifests/preregistration.yml`
-- Candidate definition：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v024/manifests/candidate-definition.yml`
-- Development evidence：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v024/evidence/development.yml`
-- Provenance：`workflows/strategy-forward-replication-research--v001/studies/tsm-mean-reversion-two-stage-volume-reversal--v024/evidence/provenance.yml`
-- 程式／測試：`research/tsm-mean-reversion-two-stage-volume-reversal--v024/run_development.py`、`src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v024.py`、`tests/test_tsm_mean_reversion_two_stage_volume_reversal_v024.py`、`research/tools/development_status.py`
-- 詳細盲檢討：無
-- 來源限制：本成果卡只整理 Development 階段，沒有讀取或引用正式 Historical Evaluation、Terminal 或 `historical-evaluation-artifacts/`。
-
----
-
-## `tsm-momentum-trend-volume-lead--v001`｜`2026-09-20`
-
-- 成果卡：`failed`，原因：Trial evidence 可驗證，但 candidate 與 baseline 都有合法且完整的 formal Development gate 失敗。
-- Formal gates：candidate 失敗於交易數、交易年度與 stress leave-one-year-out 報酬；baseline 失敗於 base／stress 報酬與 PF、交易數及多項 stress 穩健性門檻。
-- Research targets：`not_registered`（checker 明確回報，不能把 formal gates 改稱研究目標）。
-- Evidence validity：Trial `tsm-momentum-trend-volume-lead-v001` 為 `valid`；candidate／baseline 的 publication、inputs 與 evidence 綁定可驗證。
-- Candidate freeze eligibility：`不具資格`，candidate 原因為完成交易 1<20、交易年度 1<3、stress leave-one-year-out 報酬 0 不大於 0；`candidate_freeze_status`：`尚不能判斷`。
-- Provenance：允許來源確認 source bundle、Trial inputs 與 evidence bindings；未找到可引用的獨立 Development-only provenance declaration，因此未驗證完整事件鏈或實際凍結事件。
-
-**研究問題與主要變更**：本 Study 測試 TSM 上升趨勢中，訊號日前五個已完成 session 的分散量能壓力是否先於當日價格加速，並以同一價格、成本、風險、持倉與退出規則的 baseline 關閉量能壓力作控制。程式與測試也確認量能欄位只使用先前 session；這支持可識別性設計，但不等於表現成功。
-
-| Trial／模型 | 情境 | 證據狀態／原因 | 交易數／年度 | 報酬 | PF（獲利因子） | 最大回撤 | formal gate／target |
-| --- | --- | --- | ---: | ---: | ---: | ---: | --- |
-| `tsm-momentum-trend-volume-lead-v001`／candidate | Development/base | valid；只有 1 筆合法完成交易 | 1／1（2015） | 1.904% | ∞ | 0.000% | base 報酬、PF 通過；交易數與年度 gate 使 Trial 失敗；target 未登記 |
-| `tsm-momentum-trend-volume-lead-v001`／candidate | Development/stress | valid；同一筆交易的壓力成本結果 | 1／1（2015） | 1.622% | ∞ | 0.000% | stress 報酬、PF 與 bootstrap 比率通過；leave-one-year-out 報酬為 0，gate 失敗；target 未登記 |
-| `tsm-momentum-trend-volume-lead-v001`／baseline | Development/base | valid；控制組完整產出 | 16／5（2014–2018） | -0.573% | 0.956 | 4.548% | base 報酬、PF、交易數 gate 失敗；target 未登記 |
-| `tsm-momentum-trend-volume-lead-v001`／baseline | Development/stress | valid；控制組完整產出 | 16／5（2014–2018） | -2.793% | 0.780 | 4.832% | stress 報酬、PF、bootstrap 正報酬比、leave-one-year-out PF／報酬 gate 失敗；回撤與年度 gate 通過；target 未登記 |
-
-**主要發現（最多 3 項）**：已確認 candidate base／stress 各只有 1 筆、同一個 2015 年交易，雖為正報酬且 PF 為無限大，仍不滿足交易數與年度覆蓋；baseline 則有 16 筆、5 年，但 base／stress 報酬與 PF 均未達門檻。已確認候選的量能壓力條件使用先前 session，baseline 只關閉該條件，故比較設計可讀；可能原因是量能壓力條件把可接受訊號壓得很少，但一筆交易不足以證明此機制。尚不能判斷 candidate 的單筆正報酬能否跨年度重現，也不能把 PF 無限大解讀為穩健優勢。
-
-**限制（最多 2 項）**：candidate 只有 1 筆交易、1 個交易年度，無法支持跨年度或重抽樣穩健性結論；另未驗證 provenance 事件鏈與凍結事件，且研究 targets 未登記。
-
-**下一輪（單一主要變更）**：不在本 Study 內調參或重跑；若要續研，另立新 Study，唯一主要變更先事前登記一個針對交易覆蓋不足的候選機制條件，其餘價格、成本、執行與 baseline 固定。成功條件是 evidence valid、至少 20 筆交易與 3 個交易年度，base／stress 報酬及 PF 通過全部 formal gates，且 stress 回撤與 bootstrap／leave-one-year-out 門檻均通過；任一 formal gate 失敗或 evidence 無效即否證並停止凍結。
-
-**來源與盲讀聲明**：實際讀取 `workflows/strategy-forward-replication-research--v003/studies/tsm-momentum-trend-volume-lead--v001/manifests/preregistration.yml`、`workflows/strategy-forward-replication-research--v003/studies/tsm-momentum-trend-volume-lead--v001/manifests/source-bundle.yml`、`workflows/strategy-forward-replication-research--v003/studies/tsm-momentum-trend-volume-lead--v001/manifests/prepare-report.yml`；`workflows/strategy-forward-replication-research--v003/studies/tsm-momentum-trend-volume-lead--v001/evidence/trials/tsm-momentum-trend-volume-lead-v001/{publication,candidate,baseline,inputs}.yml`；`research/tsm-momentum-trend-volume-lead--v001/{assignment,candidate-definition,implementation-contract,preregistration,qualification-spec}.yml`、`research/tsm-momentum-trend-volume-lead--v001/run_development.py`；`src/trading_2026_2/tsm_momentum_trend_volume_lead_v001.py`；`tests/test_tsm_momentum_trend_volume_lead_v001.py`。未讀取或引用 `historical-evaluation-artifacts/`、正式 Evaluation／Terminal 結果、`study.yml`、events、journals、operations/runtime、freeze-plan 或其他未綁定正式結果；未驗證完整事件鏈及實際凍結狀態。
-
----
-
-## `tsm-momentum-trend-volume-ramp--v001`｜`2026-09-20`
-
-- 狀態：`complete`；evidence：`valid`；targets：`not_registered`；candidate freeze：`不具資格`
-
-**假說與結果**：三個先前 session 內的量能脈衝（至少達此前二十日均量 1.05 倍）應先於趨勢價格加速；baseline 只關閉脈衝。candidate 11 筆／4 年，base -1.865%／PF 0.828、stress -3.271%／PF 0.695；baseline 16 筆／5 年，base -0.573%／PF 0.956、stress -2.793%／PF 0.780。
-
-**Gate 與結論**：candidate 失敗報酬、PF、交易數及 stress bootstrap／leave-one-year-out 門檻；單筆損失 2.601%、stress 回撤 4.797% 與年度 gate 通過。baseline 核心及壓力 gate 亦失敗。evidence 有效但不具 freeze 資格，流程在 freeze 前停止。
-
-**限制與下一輪**：targets 未登記；不得在本 Study 內調參或重跑。若續研須另立 Study 重新預先登記；本卡只用 Development evidence，未讀取或執行 Evaluation、Terminal、events、operations/runtime 或 `historical-evaluation-artifacts/`。
-
-### 更正（2026-09-20）
-
-依 v003 成果卡規範，因 formal Development gates 失敗，本 Study 的最終成果卡狀態應為 `failed`，不是前文的 `complete`。此更正只更新判定，不改變既有 Development evidence：evidence validity 仍為 `valid`、targets 仍為 `not_registered`，candidate freeze 仍為不具資格；未執行 Evaluation、Terminal、challenge 或 replay。
-
----
-
-## `tsm-momentum-trend-volume-absorption--v001`｜`2026-09-20`
-
-- 成果卡：`failed`，原因：唯一 Development Trial 的 candidate／baseline evidence 完整且 `valid`，但 candidate 有 4 項 formal gate 失敗。
-- Formal gates：candidate 失敗於 `completed_trades`、`minimum_stress_block_bootstrap_positive_return_ratio`、`minimum_stress_leave_one_year_out_profit_factor`、`minimum_stress_leave_one_year_out_return`；baseline 另失敗於 base／stress 報酬與 PF、交易數及多項 stress 穩健性門檻。
-- Research targets：`not_registered`；不能把正式 gate 結果改稱研究目標結果。
-- Evidence validity：Trial `tsm-momentum-trend-volume-absorption-v001` 的 publication、candidate、baseline、inputs 均有一致 binding，validator 判定 `valid`。
-- Candidate freeze eligibility：`不具資格`；candidate 原因為交易數 5<20、stress bootstrap 正報酬比 0.7969<0.80、stress leave-one-year-out PF 0.7983≤1.00、stress leave-one-year-out 報酬 -0.4100%≤0；`candidate_freeze_status`：`尚不能判斷`（freeze 未完成且未產生 candidate-frozen）。
-- Provenance：prepare 與 Trial publication 已核對 source bundle、Development data、runner 與 evidence bindings；freeze plan 的 provenance 只屬文件記載，未驗證完整 provenance 事件，且未完成 registry／provenance／凍結事件。
-
-**研究問題與主要變更**：本 Study 測試 TSM 上升趨勢中，訊號日前五個已完成 session 是否先出現「高量但收盤絕對變化不超過 0.5%」的吸收狀態（成交量至少為此前二十日均量 1.20 倍），再由訊號日一日價格加速至少 2% 確認動能釋放。baseline 保留相同的價格、成本、風險、持倉與退出規則，只關閉吸收條件。這和既有 `volume-lead` 的五日分散量能壓力、`volume-ramp` 的三日單次量能脈衝，以及 v024 的事件後固定價突破不同；本輪識別的是量能與價格結果的背離，不是量能總量或尖峰本身。
-
-| Trial／模型 | 情境 | 證據狀態／原因 | 交易數／年度 | 報酬 | PF（獲利因子） | 最大回撤 | formal gate／target |
-| --- | --- | --- | ---: | ---: | ---: | ---: | --- |
-| `tsm-momentum-trend-volume-absorption-v001`／candidate | Development/base | valid；完整 evidence | 5／3（2015、2016、2018） | 3.9698% | 2.9487 | 1.9991% | base 報酬、PF、單筆損失、stress 回撤與年度 gate 通過；交易數 gate 失敗；target 未登記 |
-| `tsm-momentum-trend-volume-absorption-v001`／candidate | Development/stress | valid；完整 evidence | 5／3（2015、2016、2018） | 2.9420% | 2.4477 | 1.9997% | stress 報酬、PF、回撤與年度 gate 通過；bootstrap 正報酬比及 leave-one-year-out PF／報酬 gate 失敗；target 未登記 |
-| `tsm-momentum-trend-volume-absorption-v001`／baseline | Development/base | valid；控制組完整產出 | 16／5（2014–2018） | -0.5729% | 0.9556 | 4.5483% | base 報酬、PF、交易數及 stress 穩健性 gate 失敗；target 未登記 |
-| `tsm-momentum-trend-volume-absorption-v001`／baseline | Development/stress | valid；控制組完整產出 | 16／5（2014–2018） | -2.7935% | 0.7800 | 4.8322% | stress 報酬、PF、bootstrap 正報酬比及 leave-one-year-out PF／報酬 gate 失敗；回撤與年度 gate 通過；target 未登記 |
-
-**主要發現（最多 3 項）**：已確認 candidate 的 base／stress 報酬與 PF 為正，且最大回撤與單筆損失門檻通過；但只有 5 筆交易，不能用正報酬抵銷樣本不足。已確認 stress bootstrap 正報酬比為 0.7969，僅略低於 0.80，且剔除 2018 後 stress PF 0.7983、報酬 -0.4100%，顯示結果對 signal year 有明顯敏感度。可能原因是吸收條件在 Development 期間留下少量且集中於 2015、2016、2018 的訊號；這由逐年 evidence 支持，但不能判定是門檻、吸收定義或市場狀態的單獨原因。尚不能判斷此機制在其他期間或正式 Evaluation 是否可重現。
-
-**限制（最多 2 項）**：candidate 只有 5 筆交易、3 個年度，無法支持跨年度穩健性或凍結資格；本輪未完成 provenance／registry／candidate freeze 事件，且 targets 未登記。
-
-**下一輪（單一主要變更）**：不在本 Study 內調參或重跑；若要續研，只建立一個事前固定的「吸收狀態覆蓋」新 Study，先保留 1.20 倍與 0.5% 定義，僅改變吸收觀察窗口或另立明確替代機制。成功條件是 evidence valid、candidate 至少 20 筆且覆蓋 3 年、全部 formal gates 通過，並要求 stress bootstrap 正報酬比至少 0.80、每個 leave-one-year-out 的 stress PF>1.00 且報酬>0；任一失敗即停止 freeze。不得以本輪 5 筆正報酬反向選門檻。
-
-**來源與盲讀聲明**：實際讀取 `workflows/strategy-forward-replication-research--v003/studies/tsm-momentum-trend-volume-absorption--v001/manifests/preregistration.yml`、`manifests/source-bundle.yml`、`manifests/prepare-report.yml`；`evidence/trials/tsm-momentum-trend-volume-absorption-v001/{publication,candidate,baseline,inputs}.yml`；`research/tsm-momentum-trend-volume-absorption--v001/{assignment,candidate-definition,development-plan,freeze-plan,implementation-contract,preregistration,qualification-spec,development-trial-inputs,runner-contract,source-bundle}.yml`、`research/tsm-momentum-trend-volume-absorption--v001/run_development.py`；`src/trading_2026_2/tsm_momentum_trend_volume_absorption_v001.py`；`tests/test_tsm_momentum_trend_volume_absorption_v001.py`。未讀取或使用 `historical-evaluation-artifacts/`、任何正式 Evaluation／Terminal 結果、`study.yml`、events、journals、operations/runtime 或 Git 歷史；未驗證完整事件鏈及實際凍結狀態。未執行 Historical Evaluation、Terminal、challenge 或 replay。
-
-## `tsm-momentum-trend-volume-efficiency--v001`｜`2026-09-20`
-
-- 成果卡：`failed`；唯一 Development Trial evidence 為 `valid`，但候選只完成 6 筆交易，未達 20 筆 formal gate。
-- 假說與變更：上升趨勢中，訊號日前五個已完成 session 的成交量若集中在較大的日內高低價活動，成交量加權日內區間／未加權日內區間至少 1.15，應先於當日價格加速；baseline 固定同一價格、成本、風險與執行規則，只關閉此量價效率條件。這不同於既有五日分散量能壓力、三日量能脈衝、吸收型高量小收盤變動與事件後固定價突破。
-
-| Trial／模型 | 情境 | evidence／交易數／年度 | 報酬 | PF | 最大回撤 | formal gates／targets |
-| --- | --- | ---: | ---: | ---: | ---: | --- |
-| candidate | Development/base | valid／6／3（2015、2016、2018） | 5.208% | 3.427 | 1.999% | 只失敗 `completed_trades`；targets 未登記 |
-| candidate | Development/stress | valid／6／3 | 3.930% | 2.853 | 2.000% | 其餘 formal gates 通過；targets 未登記 |
-| baseline | Development/base | valid／16／5（2014–2018） | -0.573% | 0.956 | 4.548% | 報酬、PF、交易數及多項 stress 穩健性 gate 失敗 |
-| baseline | Development/stress | valid／16／5 | -2.793% | 0.780 | 4.832% | 報酬、PF、交易數及多項 stress gate 失敗 |
-
-- 結論與限制：候選的正報酬、PF、回撤、單筆損失、bootstrap 與 leave-one-year-out 結果均通過相關門檻，但樣本數不足使 formal Development gates 失敗；不能把三個年度的正結果宣稱為穩健優勢。candidate freeze qualification 不具資格（6<20），freeze-readiness 與 freeze 均未完成；checker 回報 candidate freeze status 為「尚不能判斷」。Provenance 只完成 prepare、source bundle、trial input 與 publication binding 驗證，未形成凍結 provenance 事件。
-- 下一輪：停止本 Study，不在原 Study 內調參或重跑；若續研，另立新 Study，只能事前固定一個新的量價效率機制，其餘價格、成本、風控、持倉、執行與 baseline 固定，並要求至少 20 筆、3 個年度及全部 formal gates 通過。
-- 來源與盲讀聲明：實際讀取 `research/tsm-momentum-trend-volume-efficiency--v001/{assignment,candidate-definition,implementation-contract,preregistration,qualification-spec,development-plan,development-trial-inputs,runner-contract,source-bundle}.yml`、`research/tsm-momentum-trend-volume-efficiency--v001/run_development.py`、`workflows/strategy-forward-replication-research--v003/studies/tsm-momentum-trend-volume-efficiency--v001/manifests/{preregistration,source-bundle,prepare-report}.yml`、`evidence/trials/tsm-momentum-trend-volume-efficiency-v001/{publication,candidate,baseline,inputs}.yml`、`src/trading_2026_2/tsm_momentum_trend_volume_efficiency_v001.py` 與 `tests/test_tsm_momentum_trend_volume_efficiency_v001.py`。未讀取或引用 `historical-evaluation-artifacts/`、正式 Evaluation／Terminal 結果、study.yml、events、journals 或 operations/runtime；未執行 Historical Evaluation、Terminal、challenge 或 replay。
-
----
-
-## `tsm-momentum-trend-volume-close-acceptance--v001`｜`2026-09-20`
-
-- 成果卡：`failed`，原因：唯一 Trial 的 candidate／baseline Development evidence 完整且 `valid`，但 candidate 的 `completed_trades` gate 失敗。
-- Formal gates：candidate 僅失敗 `completed_trades`（4<20）；baseline 失敗 base／stress 報酬與 PF、交易數，以及 stress bootstrap 正報酬比與 leave-one-year-out PF／報酬。Research targets：`not_registered`。
-- Evidence validity：Trial `tsm-momentum-trend-volume-close-acceptance-v001` 的 publication、candidate、baseline、inputs 綁定可驗證，candidate／baseline 均有 base 與 stress evidence。
-- Candidate freeze eligibility：candidate `不具資格`，原因為 4 筆完成交易未達 20 筆；baseline 為控制組、不適用 candidate 資格；`candidate_freeze_status`：`尚不能判斷`。
-- Provenance：prepare、Source Bundle、固定 Development input、runner、engine 與 Trial publication bindings 已由 v003 checker 驗證；成果卡只作 Development 文件記載，未以此宣稱已完成 provenance 事件或實際凍結。
-
-**研究問題與主要變更**：本 Study 測試量能是否先集中在訊號日前五個已完成 session 的收盤位置，形成「量能加權收盤承接」再接上當日價格加速。結構化 preregistration 與 implementation contract 固定 `weighted close location >= 0.48`、加權減未加權位置差 `>= 0.01`，另要求五日平均量能比至少 1.05；baseline 保留同一價格、成本、風險、持倉與退出規則，只關閉此承接條件。它不同於 volume-lead 的總量壓力與上漲量占比、volume-ramp 的單次量能脈衝、volume-absorption 的高量小變動、volume-efficiency 的日內區間效率，也不建立 v024 的事件狀態與固定價突破；承接欄位只讀取訊號日前資料。
-
-| Trial／模型 | 情境 | 證據狀態／原因 | 交易數／年度 | 報酬 | PF（獲利因子） | 最大回撤 | formal gate／target |
-| --- | --- | --- | ---: | ---: | ---: | ---: | --- |
-| `tsm-momentum-trend-volume-close-acceptance-v001`／candidate | Development/base | valid；完整 evidence | 4／4（2014、2015、2016、2018） | 2.7972% | 2.3142 | 2.1284% | 僅 `completed_trades` 失敗；target `not_registered` |
-| `tsm-momentum-trend-volume-close-acceptance-v001`／candidate | Development/stress | valid；同一 Trial 的壓力成本 evidence | 4／4 | 2.0084% | 1.9478 | 2.1191% | 僅 `completed_trades` 失敗；target `not_registered` |
-| `tsm-momentum-trend-volume-close-acceptance-v001`／baseline | Development/base | valid；控制組完整產出 | 16／5（2014–2018） | -0.5729% | 0.9556 | 4.5483% | base 報酬、PF、交易數失敗；target `not_registered` |
-| `tsm-momentum-trend-volume-close-acceptance-v001`／baseline | Development/stress | valid；控制組壓力 evidence | 16／5 | -2.7935% | 0.7800 | 4.8322% | 交易數、stress 報酬／PF、bootstrap 正報酬比、leave-one-year-out PF／報酬失敗；target `not_registered` |
-
-**主要發現（最多 3 項）**：已確認 candidate 的 base／stress 報酬、PF、回撤、單筆損失與其餘穩健性 gate 通過，但 4 筆交易不足以取得 freeze 資格。已確認 baseline 在同一價格路徑下有 16 筆、5 年交易，卻未通過核心報酬與 stress 穩健性門檻，因此本輪不能把 candidate 的正報酬直接解讀為新增機制的因果優勢。已確認量能承接規則與 baseline 差異可由共同 input、逐筆交易及事前 runner bindings 識別；尚不能判斷小樣本結果能否跨期間重現。
-
-**限制（最多 2 項）**：candidate 只有 4 筆交易，形式上無法滿足 20 筆門檻；targets 未登記，不能補寫成研究目標通過。另有一項規格一致性限制：immutable preregistration 的文字敘述仍留有原草案的 `0.65／0.10`，而結構化欄位、implementation contract 與實際 runner 使用 `0.48／0.01`；本 Study 已發布 evidence，不能回寫或重跑修正。
-
-**下一輪（單一主要變更）**：不在本 Study 內調參或重跑；若續研，另立 Study，只改動量能收盤承接門檻家族，並在同一份 preregistration 文字與結構化欄位中保持一致，其餘價格、成本、執行與 baseline 固定。成功條件是 evidence valid、至少 20 筆且 3 個交易年度、全部 formal gates 通過；任一 gate 失敗或 evidence 無效即否證並停止 freeze。
-
-**來源與盲讀聲明**：實際讀取 `workflows/strategy-forward-replication-research--v003/studies/tsm-momentum-trend-volume-close-acceptance--v001/manifests/{preregistration,source-bundle,prepare-report}.yml`、`evidence/trials/tsm-momentum-trend-volume-close-acceptance-v001/{publication,candidate,baseline,inputs}.yml`、`research/tsm-momentum-trend-volume-close-acceptance--v001/{assignment,candidate-definition,implementation-contract,preregistration,qualification-spec,development-plan,development-trial-inputs,runner-contract,source-bundle,create-plan,continuous-plan,freeze-plan}.yml`、`research/tsm-momentum-trend-volume-close-acceptance--v001/run_development.py`、`src/trading_2026_2/tsm_momentum_trend_volume_close_acceptance_v001.py` 與 `tests/test_tsm_momentum_trend_volume_close_acceptance_v001.py`。未讀取或引用 `historical-evaluation-artifacts/`、正式 Historical Evaluation／Terminal 結果；未以 events、journals 或 runtime 內容替代 evidence，未執行 Historical Evaluation、Terminal、challenge 或 replay。
-
-### Parent review 回修更正（2026-09-20）
-
-- 本 Trial 的 canonical tested rule 是結構化 `eligibility_rules.accepted_signal.volume_close_acceptance`、candidate-definition、implementation contract 與 runner／engine 所固定的 `weighted close location >= 0.48`、加權減未加權位置差 `>= 0.01`；evidence bindings 也綁定同一份 preregistration、engine 與 procedure digest。candidate 實際以這組門檻執行，baseline 則關閉該條件。
-- immutable preregistration 的 `novelty_and_identifiability.this_study_path` 與 `hypothesis` 仍寫 `0.65／0.10`；這兩個數字只存在於已發布文字敘述，未被本 Trial 執行。因此本成果與 4 筆 candidate 結果絕不能表述成 `0.65／0.10` 假說的測試結果；該 immutable mismatch 只能保留為限制，不能回寫或藉重跑修正。
-
-## `tsm-momentum-trend-volume-return-alignment--v001`｜`2026-09-20`
-
-- 成果卡：`failed`；唯一 Trial 的 Development evidence 為 `valid`，但 candidate 與 baseline 均未通過全部 formal gates。
-- Formal gates：candidate 失敗 `completed_trades`、stress bootstrap 正報酬比、stress leave-one-year-out PF／報酬、stress PF／報酬；baseline 另失敗 base PF／報酬。Research targets：`not_registered`。
-- Candidate freeze eligibility：`不具資格`；`candidate_freeze_status`：`尚不能判斷`。Provenance 已核對 prepare／Source Bundle／固定資料／Trial publication bindings；兩次凍結相關嘗試因無合格候選失敗，未產生 candidate-frozen 或完整 provenance 事件。
-
-**研究問題與主要變更**：本 Study 測試「量能加權的五日已完成 session 收盤報酬，是否相對未加權報酬更一致，並先於當日價格加速」；固定加權報酬下限 -2%、加權減未加權至少 0.05 個百分點，baseline 只關閉此條件。它不是既有總量壓力／上漲量占比、三日量能脈衝、高量小變動吸收、日內區間效率、收盤位置承接，也不建立 v024 的事件後固定價突破；所有量價欄位只取訊號日前資料，且 ready index 固定為 25。
-
-| Trial／模型 | 情境 | evidence／交易數／年度 | 報酬 | PF | 最大回撤 | formal gate／target |
-| --- | --- | ---: | ---: | ---: | ---: | --- |
-| `tsm-momentum-trend-volume-return-alignment-v001`／candidate | Development/base | valid／5／4（2014、2015、2016、2018） | 0.7410% | 1.1797 | 2.2588% | base 核心及回撤 gate 通過；交易數失敗；target 未登記 |
-| 同上／candidate | Development/stress | valid／5／4 | -0.0308% | 0.9925 | 2.5202% | stress PF／報酬、bootstrap 正報酬比 0、leave-one-year-out PF 0.5647／報酬 -1.7882% 失敗 |
-| 同上／baseline | Development/base | valid／16／5（2014–2018） | -0.5729% | 0.9556 | 4.5483% | base 報酬、PF、交易數失敗；target 未登記 |
-| 同上／baseline | Development/stress | valid／16／5 | -2.7935% | 0.7800 | 4.8322% | stress 報酬、PF、bootstrap 與 leave-one-year-out PF／報酬失敗 |
-
-**主要發現（最多 3 項）**：candidate base 為正但只有 5 筆交易，stress 已轉負且 PF 低於 1；因此不足以支持量能報酬一致性的穩健優勢。baseline 在相同價格與執行規則下交易較多，仍全面偏弱，不能把 candidate 的 base 差異當成因果證明。可識別性與 evidence bindings 通過，但樣本量與壓力結果不足以凍結。
-
-**限制（最多 2 項）**：targets 未登記；candidate 未達 20 筆且 freeze 未完成，不能外推正式 Evaluation 或其他期間。下一輪單一主要變更：停止本 Study，不回寫或重跑；若續研，另立 Study，只事前固定一個量能－報酬對齊的明確替代機制，其餘價格、成本、執行與 baseline 固定；任一 formal gate 失敗即停止 freeze。
-
-**來源與盲讀聲明**：實際讀取本 Study 的 `research/tsm-momentum-trend-volume-return-alignment--v001/{assignment,candidate-definition,implementation-contract,preregistration,qualification-spec,development-trial-inputs,runner-contract,source-bundle,create-plan,development-plan,freeze-plan}.yml`、`run_development.py`、新 engine／test，以及 v003 Study 的 `manifests/{preregistration,source-bundle}.yml`、Trial `publication/candidate/baseline/inputs.yml`；另只使用既有 development-only freeze-plan 的 snapshot metadata。未讀取或引用 `historical-evaluation-artifacts/`、正式 Evaluation／Terminal 結果、`study.yml`、events、journals、operations/runtime；未執行 Evaluation、Terminal、challenge 或 replay。requested skill path 的 `build-strategy-study-v003/reference/operations.md` 不存在，改讀同 workflow reference。
-
-### 驗證補充（2026-09-20）
-
-- Trial 完成後的 frozen test bytes 保持不變，以免破壞已發布 Source Bundle／evidence binding；因此完整該 test file 目前有 1 個舊夾具 assertion 不符合本 Trial 登記的 `-0.02` 下限，未藉此修改或重跑 Trial。其餘 3 個直接測試通過；v003 `test_operations.py`／`test_metrics.py` 共 18 項通過。Ruff 的 engine／test 通過，runner 只剩 `I001` import 排序；以 `--ignore I001` 檢查通過。
-
-### Parent review correction（2026-09-20；TASK-008）
-
-- Parent 重新執行 Source Bundle 綁定的直接 pytest，結果為 **3 passed、1 failed**。失敗檔案為 `tests/test_tsm_momentum_trend_volume_return_alignment_v001.py`，測試為 `test_baseline_is_same_price_path_without_return_alignment`：`candidate.iloc[40].volume_return_alignment_lead` 實際為 `True`，但舊 fixture assertion 要求 `False`。這是測試 fixture／測試規格問題，不宣稱完整 pytest 通過，也不改判為 evidence 無效；v003 evidence checker 仍判定 `valid`。
-- Parent 重新執行 Ruff：engine 與 test 通過，但 `research/tsm-momentum-trend-volume-return-alignment--v001/run_development.py` 有 `I001` import 排序錯誤，只有加 `--ignore I001` 才通過；因此不能宣稱 full Ruff passed。事後修正 runner 會改變已綁定 Source Bundle，本 Study 不修正、不改綁定、不重跑。
-- immutable preregistration 的 `novelty_and_identifiability.this_study_path`／`hypothesis` 文字寫的是量能加權五日收盤報酬至少 `0.20%`（`0.002`）；但 candidate-definition、implementation-contract、實際 runner 與已發布 evidence 綁定的 canonical tested rule 是 `volume_weighted_return_minimum=-0.02`，以及 `weighted-minus-unweighted >= 0.0005`。因此本結果不能表述為 `0.20%` 門檻假說的測試結果；此 mismatch 只能列為 immutable 限制，不能回寫 preregistration 或藉重跑修正。
-- 本回修保留成果卡 `failed`、evidence `valid`、candidate freeze `不具資格`、`candidate_freeze_status=尚不能判斷`、targets `not_registered`，且未執行 Evaluation／Terminal／challenge／replay。上述兩項測試／Ruff 驗證缺失與一項 immutable 規格 mismatch 均列為未修復限制；它們不影響已產出的 Development evidence binding，但限制 parent 對「完整測試通過」及「`0.20%` 假說」的結論。未修改任何已發布 source bundle、preregistration、candidate／baseline evidence、manifests、authority、events 或既有 Study 檔案，亦未重跑任何 Trial。
-
----
-
-## `tsm-momentum-trend-volume-range-compression--v001`｜`2026-09-21`
-
-- 成果卡：`failed`；唯一 v004 Development Trial 的 candidate／baseline evidence 均為 `valid`，但 candidate 未通過全部 formal Development gates。
-- 假說與機制差異：訊號日前五個已完成 session 的原始成交量加權日內區間，除以同窗未加權平均日內區間，壓縮比固定為至多 `1.05`，且五日平均量比至少 `1.05`；再由訊號日的趨勢、至少 2% 價格加速與既定執行規則確認。這測的是「高參與度但價格展幅不擴張，量先於價」；不同於高量小收盤變動吸收、量能加權大區間效率、收盤位置承接、量能報酬對齊、五日分散量能壓力與 v024 事件後固定價突破。所有壓縮欄位只讀取訊號日前資料，baseline 保留同一價格、成本、風控、持倉與退出規則，只關閉壓縮條件。
-
-| Trial／模型 | 情境 | evidence／交易數／年度 | 報酬 | PF（獲利因子） | 最大回撤 | formal gate／target |
-| --- | --- | ---: | ---: | ---: | ---: | --- |
-| candidate | Development/base | valid／5／2（2016、2018） | -2.4766% | 0.4663 | 2.4766% | `base_profit_factor`、`base_return`、`completed_trades` 失敗；targets 未登記 |
-| candidate | Development/stress | valid／5／2 | -3.0025% | 0.3645 | 3.0025% | bootstrap 正報酬比、leave-one-year-out PF／報酬、stress PF／報酬失敗 |
-| baseline | Development/base | valid／16／5（2014–2018） | -0.5729% | 0.9556 | 4.5483% | base 報酬、PF、交易數及部分 stress 穩健性 gate 失敗 |
-| baseline | Development/stress | valid／16／5 | -2.7935% | 0.7800 | 4.8322% | stress 報酬、PF、bootstrap 正報酬比、leave-one-year-out PF／報酬失敗 |
-
-- Evidence validity：candidate／baseline 的 publication、inputs、source bundle 與 preregistration bindings 均由 v004 validator 驗證；candidate 單筆最大損失 `1.9999%`、stress 最大回撤 `3.0025%` 與 bootstrap 最大回撤超過 10% 比率 `0` 通過相應門檻，但這不能抵銷核心 gate 失敗。
-- Candidate freeze：候選不具資格；failed reasons 為 candidate 的 base PF／報酬、交易數、stress bootstrap 正報酬比、stress leave-one-year-out PF／報酬、stress PF／報酬與交易年度（2<3）。`freeze-readiness` 與 `freeze` 均合法返回 `qualification-failed`，沒有 freeze operation、candidate-frozen 或 provenance 事件；`candidate_freeze_status` 為未完成／尚不能判斷。
-- Provenance 與固定摘要：workflow digest `62779bce…67e4`、workflow reference digest `7b13d4d7…0b47`、source bundle digest `855692fd…e718`、preregistration digest `9438ac77…82f5`、Development data digest `a42c3932…f7`、warmup digest `81fdf3d6…c847`；create operation `afbe22…d1569`，唯一 Development operation `9585be…c075`，event head `4473f541…d1d`，event_count `4`。這些是 Development binding／事件鏈資訊，不是正式 Evaluation 結果。
-
-**主要發現**：已確認 candidate 只有 5 筆交易，且兩個 signal years 的 base／stress 報酬皆為負；baseline 交易較多但也未通過核心報酬與壓力門檻。可能原因是壓縮條件在本 Development 期間留下少量且結果偏弱的訊號，並可能受 2016、2018 的年度集中影響；現有 evidence 不能把原因歸因於單一門檻或市場狀態。尚不能判斷此機制在其他期間是否有效，也不能把 Development 結果外推到正式 Evaluation。
-
-**限制與下一輪可否證條件**：targets 為 `not_registered`；candidate 未達 20 筆與 3 年，freeze 未完成。停止本 Study，不在原 Study 內調參或重跑；若續研，另立 Study 並事前固定唯一的新機制，要求 evidence valid、至少 20 筆且 3 年、全部 formal gates 通過，並要求 base／stress 報酬與 PF、stress leave-one-year-out 與 bootstrap 門檻均通過；任一條件失敗即否證並停止 freeze。未執行 Historical Evaluation、Terminal、challenge 或 replay，未讀取或引用受限資料與正式 Evaluation／Terminal 結果。
-
-### Parent review 澄清（2026-09-21）
-
-本卡明確揭露：既有 `tsm-momentum-trend-volume-efficiency--v001` 已使用同類核心指標 **volume-weighted intraday range／unweighted intraday range**，其 canonical rule 為比值 `>= 1.15`。因此，本次不是把相同規則改版本號或改名後無語義重發，也不宣稱公式本身全新。
-
-本次真正測試的是方向相反的 regime 假說：在五日量比 `>= 1.05` 的高參與度背景下，要求同一類 range ratio `<= 1.05`，代表成交量集中於窄幅區間，先觀察價格展幅未同步放大、等待後續價格釋放，再由訊號日趨勢與價格加速確認。相對地，`volume-efficiency--v001` 的 `>= 1.15` 測試的是高量伴隨較大日內區間的效率方向。故本次差異在「窄幅壓縮／量先等待釋放」與「放大量擴大區間」兩種可解釋的市場機制方向，以及本次額外固定的五日量比條件；不是單純名稱、版本或無語義重發。
-
-限制是：本次仍共用上述 range ratio 的指標家族，不能把它描述成完全獨立的新公式；可主張的研究新意僅限於反向壓縮門檻、五日量比組合及其價格釋放機制。若要進一步否證，後續必須另立 Study，事前固定同一方向相反的 regime 定義並以新的 Development evidence 檢驗，不能在本 Study 內調參或重跑。
-
-## `tsm-momentum-trend-volume-gap-anchoring--v001`｜`2026-09-21`
-
-- 成果卡：`failed`；唯一 Trial 的 candidate／baseline evidence 均 `valid`。假說：訊號日前五個 session 的量能加權隔夜缺口 `<=-0.20%`、負缺口量能占比 `>=10%`、五日量比 `>=1.05`，再由趨勢與 `>=2%` 價格加速確認，測試「負向量能壓力先行、價格反彈後確認」。
+**判定**：成果卡 failed；兩組證據 valid；研究目標未登記。候選失敗交易數、stress 逐年剔除報酬及年度；baseline 失敗 base／stress 報酬與 PF、交易數及 stress 穩健性。候選不具資格，readiness／freeze 回 qualification-failed，實際凍結狀態尚不能判斷。
 
 | 模型／情境 | evidence／交易數／年 | 報酬 | PF／最大回撤 |
 | --- | ---: | ---: | ---: |
@@ -1919,181 +824,181 @@
 | baseline／base | valid／16／5（2014–2018） | -0.5729% | 0.9556／4.5483% |
 | baseline／stress | valid／16／5 | -2.7935% | 0.7800／4.8322% |
 
-- 差異：使用 `Open／前一日 Close` 缺口及負缺口占比；不同於 volume-lead（總量壓力）、volume-ramp（單次脈衝）、volume-absorption（高量小變動）、volume-efficiency（日內區間效率）、volume-close-acceptance（收盤承接）、volume-return-alignment（收盤報酬對齊）、volume-range-compression（窄幅 range ratio）與 v024（事件後固定價突破）。仍共用 OHLCV、五日視窗、量比、趨勢與價格加速，不能宣稱指標限制完全獨立。
-- Gates／freeze：candidate 失敗 `completed_trades`、stress leave-one-year-out return、`traded_years`；baseline 失敗 base／stress 報酬與 PF、交易數及多項 stress 穩健性 gates。targets=`not_registered`；candidate 不具 freeze 資格，`candidate_freeze_status=尚不能判斷`，`freeze-readiness`／`freeze` 均 `qualification-failed`，未產生 freeze operation 或 candidate-frozen。
-- Provenance：workflow／reference／source／data／warmup digest 分別為 `62779bce…67e4`／`7b13d4d7…0b47`／`f0836cec…54e5`／`a42c3932…f7`／`81fdf3d6…c847`；create／Development operation 為 `f99d9129…25e0`／`78fe2e97…80fd0`；event head `fafed18e…97d0`、count `4`。
+**限制與更正**：三筆集中 2018 年，正結果不能證明策略有效；仍共用日線量價資料及五日窗口。preflight 的人工歷史分支不是正式評估結果。
 
-**發現與限制**：已確認 candidate base／stress 為正但僅 3 筆且集中一年，baseline 同規則下為負；這不是策略有效證明。可能原因是缺口條件留下少量年度集中訊號，尚不能判斷是聚合、門檻或市場狀態造成。限制是樣本不足且只有 Development evidence；preflight synthetic historical 分支不是正式結果。
+**下一步**：另立 Study，只改成五日中至少三日負隔夜缺口，其餘不變；有效證據、至少 20 筆／3 年及全部正式門檻通過，否則停止。
 
-**下一輪單一可否證變更**：若續研，另立 Study，只改為事前固定的「五日中至少三日負隔夜缺口」狀態，其餘固定；要求 evidence valid、至少 20 筆／3 年及全部 formal gates 通過，否則停止 freeze。未執行 Historical Evaluation、Terminal、challenge、replay，未讀取正式結果、受限資料、study.yml、events、journals、operations/runtime 或 Git 歷史。來源限於本 Study 的 research manifests／runner、v004 manifests、Development candidate／baseline／inputs／publication、engine 與直接 tests。
+**來源與歷史**：[原卡、完整來源及更正（原第 1911–1929 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1911)。
 
-## `tsm-momentum-trend-volume-persistence--v001`｜`2026-09-21`（v004 Development）
+<a id="study-42"></a>
+## `tsm-momentum-trend-volume-persistence--v001`
 
-- **成果卡判定**：`failed`；唯一 Trial `tsm-momentum-trend-volume-fade-v001` 的 candidate／baseline evidence 均 `valid`。候選假說是訊號日前五個已完成 session 的平均量比至少 `1.05`，且最新／最早量能 `V[t-1]／V[t-5] <= 1.00`，代表量能先放大後衰減或持平，再由當日趨勢與至少 2% 價格加速確認；baseline 保留平均量比、價格、成本、風控、持倉與執行，只關閉 fade filter。這不是既有總量壓力、單次脈衝、吸收、日內區間、收盤位置、量能報酬、缺口或 v024 固定突破的重命名。
+**研究與差異**：Study 名稱為 persistence，唯一 Trial 名為 tsm-momentum-trend-volume-fade-v001；前五日平均量比≥1.05，最新／最早量 V[t-1]／V[t-5]≤1.00，baseline 只關閉量能衰減條件。
 
-| 模型／情境 | evidence／交易數／年度 | 報酬 | PF／最大回撤 | formal gates |
-| --- | ---: | ---: | ---: | --- |
-| candidate／base | valid／3／2（2015、2018） | 4.8247% | inf／0% | 只失敗 `completed_trades`、`traded_years` |
-| candidate／stress | valid／3／2 | 4.0260% | inf／0% | 同上；其餘 formal gates 通過 |
-| baseline／base | valid／10／4（2014–2018 中四年） | 2.1411% | 1.3059／2.128% | 失敗 `completed_trades`、stress bootstrap 正報酬比、stress leave-one-year-out PF／報酬 |
-| baseline／stress | valid／10／4 | 0.5312% | 1.0756／2.275% | 同上；其餘 formal gates 通過 |
+**判定**：成果卡 failed；兩組證據 valid；研究目標未登記。候選只失敗交易數（3<20）及年度（2<3）；baseline 失敗交易數、stress 重抽樣正報酬比例及逐年剔除 PF／報酬。候選不具資格，readiness／freeze 回 qualification-failed，未產生 candidate-frozen，原卡凍結狀態記為尚不能判斷。
 
-- **研究目標／凍結**：research targets=`not_registered`，不把 target-only 狀態誤稱 formal gate。candidate formal gates 失敗 `completed_trades`（3<20）與 `traded_years`（2<3），candidate freeze eligibility=`不具資格`；`freeze-readiness`／`freeze` 均以 `qualification-failed` 停止，未產生 candidate-frozen，狀態為尚不能判斷。Provenance 綁定為 workflow `62779bce…67e4`、reference `7b13d4d7…0b47`、source bundle `cdc34e65…dacd`、preregistration `d8104d63…5876`、Development data `a42c3932…46f7`、warmup `81fdf3d6…c847`；create／Development operation 已由同一 Study 完成，未重跑 Trial。
+| 模型／情境 | evidence／交易數／年度 | 報酬 | PF／最大回撤 |
+| --- | ---: | ---: | ---: |
+| candidate／base | valid／3／2（2015、2018） | 4.8247% | inf／0% |
+| candidate／stress | valid／3／2 | 4.0260% | inf／0% |
+| baseline／base | valid／10／4（2014–2018 中四年） | 2.1411% | 1.3059／2.128% |
+| baseline／stress | valid／10／4 | 0.5312% | 1.0756／2.275% |
 
-- **限制與下一輪可否證條件**：candidate 正報酬與 PF 不能抵銷樣本不足；baseline 的 stress bootstrap 正報酬比 `0.5991`、leave-one-year-out PF `0.8456`／報酬 `-1.0733%` 也未達門檻，尚不能判斷 fade 機制能否跨期間重現。若續研，另立 Study 並事前固定唯一替代量先價機制，要求 evidence valid、至少 20 筆／3 年及全部 formal gates 通過；不得在本 Study 內調參或重跑。只執行 Development；未執行 Historical Evaluation、Terminal、challenge、replay 或正式 Evaluation，未讀取受限結果資料。
+**限制與更正**：三筆集中 2015、2018；baseline 重抽樣正報酬比 0.5991、逐年剔除 PF 0.8456／報酬 -1.0733% 亦未達標。無法將小樣本正結果歸因於衰減機制。
 
-### Parent review 欄位補充（同一張成果卡）
+**下一步**：另立 Study，事前固定唯一替代量先價機制；有效證據、至少 20 筆／3 年及全部正式門檻通過，不在原 Study 調參或重跑。
 
-- **已確認**：唯一 Trial 的 candidate／baseline evidence 均 `valid`；candidate 與 baseline 的 base／stress、formal gate 失敗項目、`research targets=not_registered` 及 candidate freeze 不具資格／尚不能判斷均已如上記錄。
-- **可能原因**：candidate 只有 3 筆交易且集中於 2015、2018，baseline 的 stress 穩健性也失敗；可能是 fade 狀態在本 Development 期間留下稀疏訊號，或結果受年度市場狀態影響，但現有 evidence 不能把原因歸因到單一門檻。
-- **尚不能判斷**：fade 機制能否跨期間重現、是否具有正式 Evaluation 表現，以及小樣本正報酬是否超過資料與市場狀態差異所能解釋的範圍。
-- **Development-only 來源與讀取限制**：本卡只使用本 Study 的 preregistration、candidate／implementation／runner contract、source bundle、Development plan／inputs、candidate／baseline evidence 與 publication，以及共用 Development OHLCV 的既有 binding；未讀取或引用 `historical-evaluation-artifacts/`、正式 Evaluation／Terminal、challenge、replay、`.super-admin/` 或其他受限結果資料。
+**來源與歷史**：[原卡、完整來源及更正（原第 1930–1951 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1930)。
+更正定位：[Parent review 欄位補充（同一張成果卡）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1945)。
 
-## `tsm-momentum-trend-volume-peak-lead--v001`｜`2026-09-21`
+<a id="study-43"></a>
+## `tsm-momentum-trend-volume-peak-lead--v001`
 
-- **成果卡判定**：`failed`。唯一 Trial 的 candidate／baseline Development evidence 均可驗證；候選測試「五日視窗內量能相對二十日均量的峰值，至少早於收盤報酬峰值一個 session」，並由當日趨勢與價格加速確認。這個核心是峰值先後次序，不是既有總量壓力、單次量能脈衝、吸收、日內區間效率、收盤承接、量能報酬、缺口或 v024 固定突破；但它仍共享單日峰值與 OHLCV 資料限制，不能宣稱完全獨立。
+**研究與差異**：五日視窗內量比峰值至少早於收盤報酬峰值一日，再由當日趨勢及加速確認；核心差異是峰值先後，仍共用日線量價資料限制。
 
-| Trial／模型 | 情境 | evidence／交易數／年度 | 報酬／PF／最大回撤 | formal gates／targets |
-| --- | --- | ---: | ---: | --- |
-| candidate `tsm-momentum-trend-volume-peak-lead-v001` | base | valid／1／1（2018） | -1.9986%／0／1.9986% | 失敗 `base_profit_factor`、`base_return`、`completed_trades`；targets `not_registered` |
-| 同上 | stress | valid／1／1（2018） | -2.0000%／0／2.0000% | 失敗 stress 報酬／PF、bootstrap 正報酬比、leave-one-year-out 報酬及交易年數；targets `not_registered` |
-| baseline `tsm-momentum-trend-volume-peak-lead-v001-baseline` | base | valid／10／4（2014、2015、2016、2018） | 2.1411%／1.3059／2.1279% | 失敗 `completed_trades`；targets `not_registered` |
-| 同上 | stress | valid／10／4 | 0.5312%／1.0756／2.2747% | 失敗 `completed_trades`、bootstrap 正報酬比、leave-one-year-out PF／報酬；targets `not_registered` |
+**判定**：成果卡 failed；兩組證據 valid；研究目標未登記。候選失敗 base／stress 報酬及 PF、交易數、stress 重抽樣正報酬比例、逐年剔除報酬及年度；baseline 失敗交易數及三項 stress 穩健性。候選不具資格，readiness／freeze 回 qualification-failed，未產生 candidate-frozen；凍結來源仍非 verified-clean。
 
-- **已確認**：candidate 的 evidence validity 為 `valid`，但 1 筆交易不足 20 筆，且 base／stress 報酬與 PF 均未過 gate；baseline 雖有正 base／stress 報酬與 PF，仍未通過交易數及 stress 穩健性門檻。候選 freeze eligibility=`不具資格`；`freeze-readiness`／`freeze` 均為 `qualification-failed`，沒有 `candidate-frozen`。Provenance 已綁定 v004 workflow/reference、source bundle、preregistration、固定 Development data、runner 與 engine；凍結 provenance 仍非 `verified-clean`。
-- **可能原因**：量峰先於價峰的聯合條件把共同價格路徑中的訊號由 baseline 的 10 筆縮到 1 筆，可能過度稀疏或只保留特定年度狀態；這是由逐 Trial 交易數與年度分布支持的研究解釋，不能判定單一門檻就是原因。
-- **尚不能判斷**：不能由單筆 candidate 虧損或 baseline 的較好摘要，判定量峰先行機制本身具有或不具有跨期間效果；本 Study 沒有正式 Evaluation／Terminal 證據，也沒有足夠 candidate 樣本支持凍結。
+| Trial／模型 | 情境 | evidence／交易數／年度 | 報酬／PF／最大回撤 |
+| --- | --- | ---: | ---: |
+| candidate `tsm-momentum-trend-volume-peak-lead-v001` | base | valid／1／1（2018） | -1.9986%／0／1.9986% |
+| 同上 | stress | valid／1／1（2018） | -2.0000%／0／2.0000% |
+| baseline `tsm-momentum-trend-volume-peak-lead-v001-baseline` | base | valid／10／4（2014、2015、2016、2018） | 2.1411%／1.3059／2.1279% |
+| 同上 | stress | valid／10／4 | 0.5312%／1.0756／2.2747% |
 
-- **限制與下一輪可否證條件**：本輪只到 Development；每日 OHLCV 不能辨識盤中成交主動性，且 candidate 只有 1 年／1 筆。若要續研，另立單一新 Study 並事前固定一個不同的量先價機制，保留相同資料、成本、風控與 baseline；必須取得 valid evidence、至少 20 筆／3 年且全部 formal gates 通過，任一失敗即否證並停止 freeze，不得在本 Study 內調參或重跑。
+**限制與更正**：只有一筆、一年，不能由虧損或 baseline 較好判斷跨期效果；日線資料也不能辨識盤中主動買賣。
 
-- **Development-only 來源與限制**：數值只取本 Study 的 preregistration、candidate-definition、implementation／runner contract、source bundle、trial inputs 與 Development candidate／baseline evidence、publication 及固定 Development data binding；未讀取或引用 `historical-evaluation-artifacts/`、`.super-admin/`、正式 Evaluation／Terminal、challenge 或 replay，也未以後續階段輸出替代 Development evidence。
+**下一步**：另立且事前固定一個不同量先價機制，保留資料、成本、風控及 baseline；有效證據、至少 20 筆／3 年及全部正式門檻通過，否則停止。
 
-## `tsm-momentum-trend-volume-breadth--v001`｜`2026-09-22`（v004 Development + blind review consolidated card）
+**來源與歷史**：[原卡、完整來源及更正（原第 1952–1970 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1952)。
 
-- **記錄與判定**：原始 Development 記錄日期為 `2026-09-21`，本次合併日期為 `2026-09-22`。本 Study 只有一個合法 Development Trial，判定為 `failed`；candidate／baseline 的 base／stress evidence 均為 `valid`。candidate 只有 7 筆交易，candidate freeze eligibility 不具資格；原 Development 記錄的 `freeze-readiness`／`freeze` 均為 `qualification-failed`，未產生 `candidate-frozen`。本卡只報告 Development，不宣稱任何正式 Evaluation／Terminal 結果。
-- **盲性與 binding**：本次對話沒有正式 Historical Evaluation evidence、帶 outcome 的 Terminal 或正式結果內容，因此仍具 blind eligibility。`manifests/workflow-reference.yml` 與 v004 release／release manifest／policy binding、preregistration、source bundle、trial inputs、candidate／baseline evidence、publication 的允許檔案 digest 一致；evidence 為 `stage=development`、`network_access_during_run=false`，且共用同一資料、程式與 runner contract binding。這是受限盲讀，不是完整 `status`／`validate`，也不是正式評估。
-- **假說與機制差異**：訊號日前五個已完成 session 的平均單日量比至少 `1.05`，其中至少三日的「五日滾動平均量／此前二十日均量」各自至少 `1.05`，再由上升趨勢、收盤方向與至少 `2%` 價格加速確認；下一個 XNYS open 進場，最多持有十個完整 session。baseline 保留相同價格、五日平均量比、成本、風險、停損停利與執行，只關閉多日滾動覆蓋廣度。這不同於 range-compression、gap-anchoring、persistence／fade、peak-lead、volume-lead、ramp、absorption、efficiency、close-acceptance、return-alignment 及 v024 固定突破；新意是「多日量比達標日數」，不是改名或改版本號。
+<a id="study-44"></a>
+## `tsm-momentum-trend-volume-breadth--v001`
 
-| Trial／情境 | evidence／交易數／交易年數 | 報酬／PF／最大回撤 | formal gates | candidate research targets／freeze eligibility |
-| --- | --- | --- | --- | --- |
-| candidate／base | valid／7／3 | 0.0718974225／4.2883682633／0.0199898809 | 只失敗 `completed_trades`，其餘 Development gates 通過 | `completed_trades` 失敗；`stress_return`、`traded_years` 通過；不具資格 |
-| candidate／stress | valid／7／3 | 0.0559591924／3.5981105326／0.0199892960 | 只失敗 `completed_trades` | 同上；不能因 stress 報酬為正而凍結 |
-| baseline／base | valid／10／4 | 0.0214113763／1.3058563599／0.0212790741 | 只失敗 `completed_trades` | baseline 不屬 candidate family；targets 不適用／未對 baseline 登記 |
-| baseline／stress | valid／10／4 | 0.0053120034／1.0755804379／0.0227468297 | 另失敗 `minimum_stress_block_bootstrap_positive_return_ratio`、`minimum_stress_leave_one_year_out_profit_factor`、`minimum_stress_leave_one_year_out_return` | baseline 不屬 candidate family；targets 不適用／未對 baseline 登記 |
+**研究與差異**：前五日平均單日量比≥1.05，其中至少三日的五日滾動平均量／此前二十日均量≥1.05，再由趨勢、收盤方向及至少 2% 加速確認；baseline 只關閉多日覆蓋。
 
-- **事前目標與證據強度**：`research_targets` 是 candidate 的事前登記目標，不是 baseline 的評分表；baseline 的 `completed_trades=10<20` 與三項 stress robustness 只保留為 formal gates。candidate 的 stress bootstrap 正報酬比例最低為 `0.94038`、留一年度最低 PF／報酬為 `2.767324827623105`／`0.03440598648909998`，但樣本只有 7 筆且集中於 2015（1）、2016（1）、2018（5），所以證據強度有限。baseline 有 10 筆／4 年，卻有 stress bootstrap 正報酬比例 `0.5991`、留一年度最低 PF `0.8455794438447968`、最低報酬 `-0.010732938231486466`；控制組也不足以提供穩健反事實支持。
-- **完整 metadata**：固定 initial cash=`100000`、base 成本為每邊手續費／滑價 `1/5 bps`、stress 為 `2/20 bps`、風險 `0.02`、停損／停利 `-0.04/+0.04`、退場後冷卻 5 sessions；訊號區間為 `2014-01-01`–`2018-12-31`，warmup 為 `2013-01-01`–`2013-12-31`。workflow digest=`62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4`；reference digest=`7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47`；release manifest digest=`ea04558c1473f9c6db7e9707846694147c6c6f254498af2f18729a1e4ef1fa84`；policy set digest=`c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215`（canonical-execution v001、paper-proposal-orders v001、portfolio-risk v001、us-equity-market v002）；source bundle digest=`0ee236a2306f71b33e7dbbe3825283fb6e19623930d5ba84f083aa47de18f332`；preregistration digest=`8821de3964d2ecc0559b3a9d727d241353805d4d622e17b8cebe0fa4955e1d52`；Development data digest=`a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7`；warmup digest=`81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847`。create operation=`3d83dc6f2a376ef5d63fe3cfa080053b68c6fd3ef6f2a639981b8992684c73eb`；Development operation=`3134e0ec6c2cfde7406a6a7ca308b576e398b25f36ba5335d6933f44a3eaebc0`；event head=`52ef75ad804a93ecf81e3725e27fe789ba0802723a58ad813c83a33671e14947`；event count=`4`；lifecycle=`trial-recorded`。以上為原 Development 卡既有 metadata；本次沒有重新執行流程。
-- **已確認、可能原因與限制**：已確認 candidate 報酬、PF、回撤為正向但交易數不足，baseline stress 穩健性未達門檻；candidate 訊號可能因多日覆蓋條件而稀疏，這只是與年度分布一致的解釋，不能歸因於單一門檻。尚不能判斷覆蓋廣度能否跨期間重現、是否真的優於 baseline 或正式 Evaluation；每日 OHLCV 也看不到盤中主動買賣方向。下一輪若繼續，必須另立 Study、事前固定一項明確變更並保留相同資料／成本／風控／baseline；candidate／baseline evidence 均須有效，candidate 須達至少 20 筆／3 年、全部 formal gates 與已登記 targets，任一失敗即否證並停止 freeze，不得在本 Study 內調參或重跑。
-- **Development-only 來源與限制**：只使用 skill 明確允許的 Study preregistration、candidate／qualification／implementation／runner contract、公開 workflow／release／policy binding、Development provenance／selection／assignment、source bundle 綁定的研究程式／runner／直接測試、Development plan／inputs／data quality metadata、candidate／baseline evidence 與 publication。未將 freeze provenance 納入盲讀，未以禁止範圍判定 authority；未開啟、搜尋、雜湊、複製或引用 `historical-evaluation-artifacts/`、正式 Evaluation／Terminal 結果、quarantine／full evaluation data、`events/`、`journals/`、`operations/`、`study.yml` 或 Git 歷史，也未執行完整 `status`／`validate`、runner 或測試。未使用正式結果，本卡不是正式評估；在允許讀取範圍內未發現需要升級的治理問題。此合併只整理成果卡，不修改 Study、Workflow、manifest、evidence、events 或 authority。
+**判定**：成果卡 failed；兩組證據 valid；受限盲檢討合格。候選只失敗交易數正式門檻；研究目標交易數失敗，stress 報酬及年度通過。Baseline 失敗交易數與三項 stress 穩健性門檻，候選研究目標不適用於 baseline。候選不具資格，readiness／freeze 回 qualification-failed，未產生 candidate-frozen；原記錄階段 trial-recorded。
 
-## `tsm-momentum-trend-volume-response-lag--v001`｜`2026-09-22`（v004 Development + blind review）
-
-- **判定與盲性**：唯一 Trial `tsm-momentum-trend-volume-response-lag-v001` 的 candidate／baseline Development evidence 均為 `valid`，但 candidate `disposition=fail`，formal gates 與 research targets 均未完整通過，candidate freeze eligibility=`false`；`freeze-readiness` 與 `freeze` 均以 `qualification-failed` 停止，未產生 candidate-frozen。盲檢討前未接觸正式 Historical Evaluation evidence、Terminal outcome 或正式結果；本卡的盲性狀態為 `eligible／restricted blind review completed`，不是正式評估。
-- **假說與機制差異**：訊號日前五個已完成配對以 d 日成交量對應 d→d+1 收盤報酬；量能加權五日後續報酬須不低於 `-0.02`，且比同五日未加權平均高至少 `0.0005`，再由趨勢、RSI、收盤方向與至少 2% 價格加速確認。baseline 保留同一價格、五日平均量比、成本、風險、持倉與退出，只關閉跨日量—下一日報酬傳導。這不同於既有同日量價對齊、量峰先後、量能廣度、ramp、absorption、日內 range、收盤承接、缺口、fade 及 v024 固定價突破；差異是新的跨日配對方向與加權相對未加權回應差值。
-
-| Trial／模型 | 情境 | evidence／交易數／年度 | 報酬／PF／最大回撤 | formal gates／research targets |
-| --- | --- | ---: | ---: | --- |
-| candidate | Development/base | valid／1／1（2018） | -1.9986088%／0／1.9986088% | 失敗 `base_profit_factor`、`base_return`、`completed_trades`；targets `completed_trades` 失敗 |
-| candidate | Development/stress | valid／1／1（2018） | -1.9999960%／0／1.9999960% | 另失敗 stress bootstrap 正報酬比、stress leave-one-year-out return、`stress_profit_factor`、`stress_return`、`traded_years`；targets `stress_return`、`traded_years` 失敗 |
-| baseline（控制組） | Development/base | valid／10／4（2014、2015、2016、2018） | 2.1411376%／1.3058564／2.1279074% | 失敗 `completed_trades`；targets 診斷：交易數失敗、stress return／年度通過 |
-| baseline（控制組） | Development/stress | valid／10／4 | 0.5312003%／1.0755804／2.2746830% | 另失敗 stress bootstrap 正報酬比、stress leave-one-year-out PF／return；baseline 不屬 candidate family，不適用 candidate freeze |
-
-- **已確認問題與資格**：candidate 實際只完成 1 筆交易、1 個年度，base／stress 報酬與 PF 均為負／0；candidate 的 `completed_trades>=20`、`stress_return>0`、`traded_years>=3` 三項 research targets 全失敗。baseline 的 10 筆／4 年與正報酬只屬控制組比較，仍未通過交易數及三項 stress robustness formal gates；target-only fail 不改稱 formal gate fail。兩組 evidence 的 publication、inputs、preregistration、source bundle digest 與 Development data binding 一致，沒有 evidence 缺件。
-- **可能原因與尚不能判斷**：可能是延遲回應條件使訊號過度稀疏，唯一 candidate 交易又在 2018 觸發 stop；這只能由交易數與年度分布支持，不能歸因於單一門檻。尚不能判斷跨日量—下一日報酬是否真有獨立承接效果、是否能跨期間重現、或 candidate 與 baseline 的差異是否超過資料與市場狀態造成的變異；日線 OHLCV 也不能辨識盤中主動買賣方向。
-- **Provenance／固定摘要**：workflow=`62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4`、reference=`7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47`、release=`ea04558c1473f9c6db7e9707846694147c6c6f254498af2f18729a1e4ef1fa84`、policy=`c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215`、source=`06ed3b3bdb9c596df4c213d2fb657b368de9950d3ddbe1282ccb408a3639c426`、preregistration=`8018ba3fff138c288c0e4d863ca75fc45ec30d3f219c88743d6ae035f94ba7d9`、Development data=`a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7`、warmup=`81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847`；create operation=`8587deb68665d24bcb188d323272a2a9c8b6f4efdd915f1cc6547f8dec4fa294`、Development operation=`839dd0390ec114aa171c27f13f20b060972f0969fa4f925ab8f371b29fa27b76`；event head=`bf03bed5c949ef01d87b6c007134682ac18252dfeb5678cf091b7037cff4266a`、event count=`4`、lifecycle=`trial-recorded`。固定 binding 通過；freeze provenance／candidate-frozen 尚未完成。
-- **限制與下一輪單一可否證條件**：本 Study 只到 Development，沒有正式結果可引用；Study 已達唯一 Trial 上限，不得在原 Study 調參或重跑。若另立下一輪，唯一可否證條件是：在事前固定的新 Study 與相同資料／成本／風控／baseline 下，candidate 必須同時達到至少 20 筆完成交易、3 個交易年度及 stress return > 0；任一不滿足即否證並停止 freeze。未使用正式結果，未開啟或引用 `historical-evaluation-artifacts/`、正式 Evaluation／Terminal、quarantine／full evaluation data、`events/`、`journals/`、`operations/`、`study.yml`、`.super-admin/` 或 Git 歷史。
-
-## `tsm-momentum-trend-volume-body-followthrough--v001`｜`2026-09-22`（v004 Development + blind review）
-
-- **判定與盲性**：唯一 Trial `tsm-momentum-trend-volume-body-followthrough-v001` 的 candidate／baseline Development evidence 均為 `valid`；candidate `disposition=fail`，candidate freeze eligibility=`false`。`freeze-readiness` 與 `freeze` 均依法返回 `qualification-failed`，沒有 `candidate-frozen`。本次 blind review 的 exposure check 通過：只接觸 Development 與 preflight synthetic evidence，未接觸正式 Historical Evaluation、Terminal 或正式結果。
-- **假說與差異**：訊號日前五個已完成 session，計算同日 `Close/Open-1` 的五日未加權平均與成交量加權平均；candidate 要求加權實體報酬不低於 0，且不低於未加權平均，再接上既定趨勢、RSI、收盤方向與至少 2% 價格加速。baseline 只關閉這個日內實體條件。它不同於 volume-lead／ramp／absorption、volume-efficiency 的區間比值、close-acceptance 的收盤位置、return-alignment 的 `Close/前收`、range-compression、gap-anchoring、persistence、peak-lead、breadth、response-lag 及 v024 的事件後固定價突破；新意是同一 session 的 Open 到 Close 實體與量能加權相對平均，而非改名或改版本號。
-
-| Trial／模型 | 情境 | evidence／交易數／年度 | 報酬／PF／最大回撤 | formal gates／research targets |
-| --- | --- | ---: | ---: | --- |
-| candidate | Development/base | valid／3／3（2015、2016、2018） | 5.0316%／inf／0% | 只失敗 `completed_trades`；target 同項失敗，`stress_return`／`traded_years` 通過 |
-| candidate | Development/stress | valid／3／3 | 4.2172%／inf／0% | 只失敗 `completed_trades`；target 同上 |
-| baseline（控制組） | Development/base | valid／10／4（2014、2015、2016、2018） | 2.1411%／1.3059／2.1279% | 失敗 `completed_trades` |
-| baseline（控制組） | Development/stress | valid／10／4 | 0.5312%／1.0756／2.2747% | 另失敗 stress bootstrap 正報酬比、leave-one-year-out PF／報酬；不適用 candidate targets |
-
-- **已確認、可能原因與尚不能判斷**：已確認 candidate 的三筆交易均為正、三個年度均有訊號，且其餘 candidate gates 通過；但 3<20 使正式 gate 與 research target 都失敗，不能凍結。baseline 雖有較多交易與正報酬，stress 穩健性仍不足，不能當作反事實證明。可能原因是日內實體條件把共同價格路徑由 baseline 的 10 筆縮成 3 筆；這是與年度分布一致的解釋，不能歸因到單一門檻。尚不能判斷機制能否跨期間重現、是否優於 baseline，或日線 OHLCV 是否代表盤中主動性。
-- **Provenance／限制**：workflow=`62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4`、reference=`7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47`、release=`ea04558c1473f9c6db7e9707846694147c6c6f254498af2f18729a1e4ef1fa84`、policy=`c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215`、source=`acf714eeb3906ead63adcff09570e500eee68b575d08eca3623c17d285441a24`、preregistration=`afcd8d9f582b535e8619079f4533ff9465858252930e55377dcdadd18da1b24f`、Development data=`a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7`、warmup=`81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847`；create operation=`2356a4d161f44cbe539f29a436b190bb63df619626b340872037143aad605f11`、唯一 Development operation=`03adb083dead6c2980d03a0067c6bc63cc4a1b60150099b0d483c70b83a04bb9`、event count=`4`。event head 未在盲讀中開啟或雜湊 `events／authority`，因此標示 unavailable，不補猜。另，assignment 文字仍寫「高 0.05 個百分點」，但 create 前固定並實際執行的 canonical preregistration／contract／engine 是差值下限 `0`；本卡不把結果冒稱為 0.05% 假說，這是不可回寫的規格限制。
-- **下一輪單一可否證變更與來源限制**：若續研，另立 Study，只把日內實體條件改成事前固定的「正實體成交量占比」規則，其餘資料、價格、成本、風控、執行與 baseline 不變；須同時達 20 筆／3 年及全部 formal gates，任一失敗即停止 freeze。只使用 preregistration、candidate／baseline evidence、inputs／publication、Source Bundle 綁定的程式／runner／測試、Development data metadata、provenance／assignment；未讀取、搜尋、雜湊或引用 `historical-evaluation-artifacts/`、正式 Evaluation／Terminal、quarantine／full evaluation data、`events/`、`journals/`、`operations/`、`study.yml` 或 Git 歷史，也未以完整 `status`／`validate` 取代 blind review。未使用正式結果聲明仍成立。
-
-### Parent review clarification（2026-09-22）
-
-既有 TSM Development-only 卡片 `tsm-mean-reversion-two-stage-volume-reversal--v012` 曾使用單日未加權的「當日 Close > Open」及區間位置，作為均值回歸反轉確認。因此，本 Study 不宣稱 Open→Close 概念完全前所未有；本 Study 的可主張差異是：固定訊號日前五個已完成 session，計算成交量加權的 Open→Close 實體平均及其相對同窗口未加權平均的差值，並把這個量先條件放在動能趨勢／價格加速訊號之前。也就是機制、五日窗口、成交量加權方式與動能趨勢使用情境不同，不能把兩者寫成同一規則，也不能宣稱完全獨立。此次只補充近鄰機制差異；未重跑、未使用正式結果，原 restricted blind review 聲明維持不變。
-
-## `tsm-momentum-trend-volume-body-sign-consistency--v001`｜`2026-09-22`（v004 Development＋受限 blind review）
-
-- **Trial 與判定**：唯一 Trial `tsm-momentum-trend-volume-body-sign-consistency-v001` 的 candidate 以訊號日前五個完成 session 中 `Close>=Open` 的成交量占比至少 0.60，並保留五日量比至少 1.05；平盤歸入非負類別。candidate／base 為 3 筆、PF 1.3278289106、報酬 0.6977421%；stress 為 3 筆、PF 1.1017603392、報酬 0.2156383%；evidence validity=`valid`。formal gates 失敗 `completed_trades`、stress leave-one-year-out PF 與報酬；research target 失敗 `completed_trades`。baseline `tsm-momentum-trend-volume-body-sign-consistency-baseline-v001` 的 base／stress publication 位於禁止讀取的 operation 路徑，交易數、PF、報酬、gates 與 evidence validity 均為 `unavailable`，不補猜。
-- **資格、盲性與 provenance**：candidate freeze eligibility=`false`，`freeze-readiness`／`freeze` 均為 `qualification-failed`，狀態維持 `trial-recorded`／未凍結。workflow=`62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4`、reference=`7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47`、release=`ea04558c1473f9c6db7e9707846694147c6c6f254498af2f18729a1e4ef1fa84`、policy=`c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215`、source=`8d58073e513338e438281a754638a0eee5683b4954c9ef78688dce5b0f5b9706`、preregistration=`aaeb0741a380fe2495ac826d5053e195d5f02568c94d2a100a5603a5b0971710`、Development data=`a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7`、warmup=`81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847`；create=`91b2bd76173a894dbd23933d5b3b198273cd1ba29fe692d239dcd2383ad65269`、Development=`c89b9ed497957e73c7c13ba0303d6ab124f634793e8259876026486b3c5674ad`。event head/count=`unavailable`。
-- **盲檢討結論與限制**：exposure check 通過；只讀設計、程式、prepare／preflight binding 與 Development candidate 資訊，未使用正式結果。已確認 candidate 樣本不足且 stress 留一年度不穩健；可能原因是方向量能條件使訊號稀疏，尚不能判斷是門檻、年度狀態或資料限制所致。下一輪若續研，另立 Study，唯一改動為固定「前五日中至少三日非負實體」的日數條件，其餘資料、價格、成本、風控、執行與 baseline 不變；須通過全部 gates／targets，否則停止 freeze。實際來源為本 Study preregistration、candidate／qualification／implementation／runner contract、development plan／inputs、source bundle 綁定的 engine／runner／test、prepare／preflight；未讀取、搜尋、雜湊或引用 `events/`、`journals/`、`operations/`、`study.yml`、正式 Evaluation／Terminal、quarantine／full data、`historical-evaluation-artifacts/` 或 Git 歷史。
-
-### Parent review correction（2026-09-22）
-
-- **更正與逐 Trial 證據**：parent review 更正前卡把 baseline 寫成 `unavailable` 的誤判。唯一 Trial 的 candidate／base 為 3 筆、PF `1.3278289105815337`、return `0.006977421424769781`；candidate／stress 為 3 筆、PF `1.10176033923166`、return `0.0021563831144390576`；evidence validity=`valid`。candidate formal gates 失敗 `completed_trades`、`minimum_stress_leave_one_year_out_profit_factor`、`minimum_stress_leave_one_year_out_return`，research target 失敗 `completed_trades`，candidate freeze eligibility=`false`、未凍結。baseline comparator 的 Development/base 為 10 筆／4 年、return `0.021411376349155745`、PF `1.305856359872508`、max drawdown `0.021279074115623766`；stress 為 10 筆／4 年、return `0.0053120033963509694`、PF `1.0755804379115148`、max drawdown `0.022746829677724723`；baseline evidence validity=`valid`、disposition=`fail`。baseline formal gates 失敗 `completed_trades`、`minimum_stress_block_bootstrap_positive_return_ratio`、`minimum_stress_leave_one_year_out_profit_factor`、`minimum_stress_leave_one_year_out_return`；research target／candidate freeze 資格不適用於 baseline comparator。
-- **binding、provenance 與盲性**：只讀固定的 `baseline.yml`、`publication.yml`、`inputs.yml`；publication 的 baseline artifact digest `1f6c75428fa0047dcbb3146059da8596b68ba00778e6fbbdeb4b4f7e749ac7b6` 與 baseline canonical digest 一致，inputs artifact digest `915b30bd13f2e81667ecfa19f1d898d41c1e9646ec89bdf3e2ccee78a26527f5` 與 inputs canonical digest 一致，publication 的 preregistration/source binding 亦與本 Study 相符。create operation=`91b2bd76173a894dbd23933d5b3b198273cd1ba29fe692d239dcd2383ad65269`、Development operation=`c89b9ed497957e73c7c13ba0303d6ab124f634793e8259876026486b3c5674ad` 均未改動；未重跑、未修改 immutable evidence／publication／Study binding。blind exposure check 通過；未使用正式結果，event head/count 仍為 `unavailable`。
-- **新穎性邊界與研究判斷**：既有 `tsm-mean-reversion-two-stage-volume-reversal--v012` 曾用單日、未加權的 `Close>Open` 與區間位置作均值回歸反轉確認；前一個 `tsm-momentum-trend-volume-body-followthrough--v001` 測五日 Open→Close 實體的加權／未加權平均差值。因此本 Study 只主張：五個已完成 session 中，以成交量計權的非負實體占比 `Close>=Open` 至少 `0.60`，另有固定五日量比，並用於動能趨勢／價格加速確認；Open→Close 概念並非完全前所未有，也不能宣稱與近鄰完全獨立。已確認 candidate 樣本稀疏、baseline 雖有 10 筆仍未通過上述四項 stress／交易門檻；可能原因是方向量能條件或年度狀態，尚不能判斷門檻、年份或資料限制的因果。限制是只到 Development、未使用正式結果；下一輪唯一可否證變更為另立 Study、只把條件改成五日中至少三日 `Close>=Open`，其餘資料、價格、成本、風控、執行與 baseline 固定，任一 formal gate／research target 失敗即停止 freeze。實際來源與讀取限制為上述三份固定 evidence 及既有 preregistration／程式／Development binding；未讀取、搜尋、雜湊或引用 `operations/`、`events/`、`journals/`、`study.yml`、正式 Evaluation／Terminal、quarantine／full data、`historical-evaluation-artifacts/` 或 Git 歷史。
-
-## `tsm-momentum-trend-volume-lagged-neutral-impulse--v001`｜`2026-09-23`（v004 Development；盲檢討程序未通過）
-
-- **判定**：唯一 Trial `tsm-momentum-trend-volume-lagged-neutral-impulse-v001` 的 candidate／baseline Development evidence 均為 `valid`，`network_access_during_run=false`；candidate 無交易，`disposition=fail`，13 項 formal gates 均失敗，報酬、PF 與風險統計不可估計。事前 targets `completed_trades>=20`、`stress_return>0`、`traded_years>=3` 均未達；freeze eligibility=`false`。`freeze-readiness` 與 `freeze` 都由 v004 回 `qualification-failed`，沒有凍結；操作回報沒有 freeze operation ID。唯一 Development 已完成，沒有重跑。
-- **假說與比較**：TSM 上升趨勢、當日漲幅至少 `2%` 時，若訊號日前恰好五個 session 有成交量至少為前二十日均量 `1.50` 倍的中性日（Close/Open 與 Close/前收絕對變化皆不超過 `0.5%`），其後四日量都不超過事件量一半且未有單日上漲達 `2%`，則訊號日可能是延遲量先價行反應。baseline 只關閉這個事件序列，其他趨勢、價格、成本、風險與執行相同。既有 TSM Development 記錄未見相同的固定 t−5 中性事件、四日量縮及延後加速組合；它不同於 d→d+1 的 volume-response-lag、五日內動態量／報酬峰先後的 volume-peak-lead、同日高量小變動的 absorption，以及 v024 事件價突破。這只主張規則組合不同，不代表量能機制彼此獨立。
-
-| 模型 | Development 結果 | formal gates／targets |
+| Trial／情境 | evidence／交易數／交易年數 | 報酬／PF／最大回撤 |
 | --- | --- | --- |
-| candidate | valid；0 筆／0 年；base、stress 報酬及 PF 均不可估計 | 13 項 gates 全失敗；三項 targets 全未達；不具凍結資格 |
-| baseline | valid；16 筆／5 年。base 報酬 `-0.5729%`、PF `0.9556`、最大回撤 `4.5483%`；stress `-2.7935%`、PF `0.7800`、最大回撤 `4.8322%` | 8 項 gates 失敗：`base_profit_factor`、`base_return`、`completed_trades`、stress bootstrap 正報酬比、stress leave-one-year-out PF／return、`stress_profit_factor`、`stress_return`；targets 不適用於 baseline |
+| candidate／base | valid／7／3 | 0.0718974225／4.2883682633／0.0199898809 |
+| candidate／stress | valid／7／3 | 0.0559591924／3.5981105326／0.0199892960 |
+| baseline／base | valid／10／4 | 0.0214113763／1.3058563599／0.0212790741 |
+| baseline／stress | valid／10／4 | 0.0053120034／1.0755804379／0.0227468297 |
 
-- **binding 與驗證**：v004 Workflow digest=`62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4`；reference=`7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47`；release manifest=`ea04558c1473f9c6db7e9707846694147c6c6f254498af2f18729a1e4ef1fa84`；policy=`c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215`。preregistration=`0f395ac77d1ec042f1c07e705254e94ff86c9f59cc8193b32f8b5f6169e7aece`；Source Bundle=`d56969e957bec445027d24fd95d3395b31773c6fb59e4d1134cb175803573a38`；runner／procedure=`29ca7ebb286f0161a8a60b1b7bf4516fe953b6a8757f11d8ae94d209c3c521e9`；engine=`2c99cd088cd016c807bfe67523228d53d84cb7583bc165349f61ab7bfe55d11`。TSM Yahoo `auto_adjusted`／XNYS／日線 warmup-development view 為 1,510 列、2013–2018，品質 `passed`；Development digest=`a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7`、warmup digest=`81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847`。create operation=`edcc51353af04f655d7f1d93847f60ccfa27166863766f57805b2e179e8469d0`；Development operation=`b16957291d9fbfd575f5fc2a292cc3afb03a120ba74a3d8304f5716df7856d0c`。runner-preflight、prepare 通過；重核 candidate／baseline／inputs digest、publication envelope 與 v004 `validate_envelope` 均一致有效。freeze plan 的 quarantine／historical snapshot 仍為未知占位，未補造資料；event head/count 未在盲讀範圍內查閱，記為 unavailable。
-+- **盲性、已確認問題與限制**：沒有接觸本 Study 的正式 Evaluation、帶 outcome 的 Terminal 或正式結果，但本次找成果卡 checker 時搜尋範圍誤入 v004 `studies/`，意外輸出四個鄰近 TSM Study 的 assignment 設計片段；未讀那些 Study 的 evidence 或結果。v004 blind-review skill 限定只檢討指定的單一 Study，因此這次盲檢討程序未通過，不能稱為成功或合格 review。另，preregistration／candidate metadata 尚留有舊 resistance-retest 欄位，與新 `lagged_neutral_volume_impulse` 條件並存；engine 使用新條件，但 Study 已建立、binding 固定，不能安全回改，需由 parent 判斷規格歧義。已確認的是 candidate 沒有觸發交易、baseline 也未通過主要報酬與穩健性 gates；可能原因是複合延遲條件太稀疏，尚不能判定單一門檻的因果。日線 OHLCV 不能辨識盤中主動買賣。若續研，另立 Study 並在 create 前清除規格歧義、事前固定新假說與 baseline；不得在本 Study 調參或重跑。
-+- **來源與讀取限制**：本卡數值只來自本 Study 的 preregistration、candidate／qualification／implementation、runner contract、Source Bundle、Development plan／inputs、固定 warmup-development 品質 metadata，以及 candidate／baseline evidence 和 publication；新假說盤點依 TSM Development note。runner-preflight 的歷史 runner 案例僅為隔離 synthetic fixture。本卡未讀取或引用正式結果、quarantine／full evaluation data、`historical-evaluation-artifacts/`、`.super-admin/`、本 Study 的 `events/`、`journals/`、`operations/`、`study.yml` 或 Git 歷史，亦未執行完整 `status`／`validate`、重跑 runner 或單獨測試。v004 CLI 沒有成果卡 checker；本卡按必要欄位人工核對，盲檢討程序缺失如實保留。本卡不是正式評估或成功盲檢討。
+**限制與更正**：七筆集中 2015（1）、2016（1）、2018（5）；重抽樣正報酬比最低 0.94038 也不能抵銷小樣本。baseline 不穩健，不能證明候選的因果優勢。表中報酬及回撤沿用原文小數比例，未換算百分比。
 
-### 成果卡補充（同一張卡，2026-09-23）
+**下一步**：另立並事前固定一項變更；兩組證據有效，候選至少 20 筆／3 年、全部正式門檻及已登記目標通過，否則停止，不在原 Study 重跑。
 
-- **資料與 publication 路徑**：Development data=`research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv`，品質報告為同 basename 的 `.quality.yml`。Trial publication 下 candidate／baseline／inputs artifact digest 分別為 `64881d5bb39ec5a8a0b03fd6e913e5088957cc9d60c3858a348bf3f31748bff8`、`196bcb29ca789bd609463f1f86ee6681eb781ae0bc1798fc19a91bae8c785f7d`、`8b84f3a1c75c64badac96b56c681cca213529cea9eb40035737877febeda0270`；envelope digest=`98e527b114da3781a41eeb9dc14eda683f53873b2c9e22ba43058f18890e3962`。
-- **下一輪唯一可否證條件**：若另立 Study，先消除 metadata 中未使用的舊 retest 欄位並在 create 前固定候選／baseline；candidate 必須有 valid evidence、至少 20 筆交易／3 個交易年、stress return 大於 0 且通過全部事前 Development gates 與 targets，任一不符即否證並停止 freeze。本條件不授權在目前 Study 內重跑或調參。
-- **範圍偏離明細**：checker 搜尋命令意外顯示以下四個 assignment 的設計片段：`tsm-momentum-trend-volume-body-followthrough--v001`、`tsm-momentum-trend-volume-body-sign-consistency--v001`、`tsm-momentum-trend-volume-breadth--v001`、`tsm-momentum-trend-volume-response-lag--v001`。未讀取其 evidence、結果或正式 outcome；但這已超出單一 Study allowlist，所以本 Study 的盲檢討狀態仍為未通過。
+**來源與歷史**：[原卡、完整來源及更正（原第 1971–1988 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1971)。
 
-### Parent review correction（同一成果卡，2026-09-23）
+<a id="study-45"></a>
+## `tsm-momentum-trend-volume-response-lag--v001`
 
-- **預先登記 key 歧義**：`preregistration.yml` 與 `candidate-definition.yml` 同時列出舊 `volume_lagged_neutral_impulse` resistance／`retest_*` 欄位，以及新 `lagged_neutral_volume_impulse` 固定延遲條件。綁定的 engine 實際以 `lagged_neutral_volume_impulse_enabled` 啟用新條件並讀取事件參數；舊 `volume_lagged_neutral_impulse`／`retest_*` 欄位沒有被此 engine 消費。因此，Development evidence 對應的是新 key，但 prereg／candidate metadata 仍有歧義；Study 已建立且 immutable binding 固定，未改寫原始檔。
-- **Parent review 的盲檢討判定**：parent 確認因意外讀到鄰近 Study assignment 片段而越出指定 Study allowlist，盲檢討程序未通過；當時沒有 formal outcome exposure，並已依技能停止，未再嘗試 blind review。不可將其補稱為 passed。
+**研究與差異**：以 d 日成交量配對 d→d+1 收盤報酬，五個已完成配對的加權報酬≥-0.02，且高於未加權平均至少 0.0005；baseline 只關閉跨日量與次日報酬傳導。
 
+**判定**：候選 disposition=fail；兩組證據 valid；受限盲檢討完成。候選失敗 base／stress 報酬及 PF、交易數、stress 重抽樣正報酬比、逐年剔除報酬及年度；交易數、stress 報酬、年度三項研究目標全失敗。Baseline 失敗交易數及三項 stress 穩健性正式門檻；原表 target 診斷僅屬控制組比較。候選不具資格，readiness／freeze 回 qualification-failed，未凍結、階段 trial-recorded。
 
-## `tsm-momentum-trend-volume-gap-retention--v001`｜`2026-09-23`（v004 Development；盲檢討未通過）
+| Trial／模型 | 情境 | evidence／交易數／年度 | 報酬／PF／最大回撤 |
+| --- | --- | ---: | ---: |
+| candidate | Development/base | valid／1／1（2018） | -1.9986088%／0／1.9986088% |
+| candidate | Development/stress | valid／1／1（2018） | -1.9999960%／0／1.9999960% |
+| baseline（控制組） | Development/base | valid／10／4（2014、2015、2016、2018） | 2.1411376%／1.3058564／2.1279074% |
+| baseline（控制組） | Development/stress | valid／10／4 | 0.5312003%／1.0755804／2.2746830% |
 
-- **假說與差異**：前五個已完成 session 的平均量比須達 `1.05`，量能先行後，訊號日要求正向開盤缺口至少 `0.50%`，且收盤不低於開盤，才接受缺口；其餘趨勢、至少 `2%` 收盤加速、風控與執行固定。baseline 只關閉訊號日缺口接受條件。TSM Development 成果卡中可見五日量比、負向缺口承接、收盤位置與前五日實體等近鄰，但未見此時間順序與正向當日缺口接受的同一組合；此處只主張規則組合未見嘗試，不宣稱組件首創或量能獨立因果。
-- **Development 判定**：candidate／baseline evidence 均 `valid`。candidate 9 筆、3 年；base 報酬 `0.233%`／PF `1.034`，stress `-1.073%`／PF `0.846`。Formal gates 失敗 `base_profit_factor`、`completed_trades`、stress bootstrap 正報酬比、stress 留一年度 PF／報酬、stress PF／報酬；research targets 失敗交易數與 stress 報酬，年度目標通過。baseline 10 筆、4 年；base `2.141%`／PF `1.306`、stress `0.531%`／PF `1.076`，仍失敗交易數與三項 stress 重抽樣／留年門檻。candidate freeze eligibility=`false`，未凍結。
-- **限制、盲性與下一輪**：9 筆 candidate 樣本不足，且壓力成本報酬為負；不能據此判定缺口接受的因果效果。依 blind-review skill，因檢討前的 reference-validation 搜尋超出單一 Study allowlist，已立即停止；盲檢討未通過，本卡不宣稱盲檢討成功，也不使用鄰近 Study 輸出。依派工不執行 Terminal；本輪停在 Development 完成、未達 freeze 資格。若續研，應另立 Study 事前固定一項可否證的 gap-acceptance 變更並重新驗證樣本與 stress gates，不在本 Study 調參或重跑。
-- **來源與界線**：目標 Study 的 preregistration、candidate／implementation／runner contract、Source Bundle 綁定程式、Development inputs、quality metadata、candidate／baseline evidence 與 publication，以及 v004 prepare／runner-preflight 結果；新穎性盤點僅查 TSM Development 成果卡的研究問題／差異描述。未讀取或引用正式 Evaluation／Terminal 結果、quarantine／full data、events、journals、operations、`study.yml`、Git 歷史或鄰近 Study 證據。
+**限制與更正**：唯一候選交易在 2018 停損；無法估計跨日承接的獨立效果。證據綁定一致，沒有缺件；已達唯一 Trial 上限，不能回原 Study 重跑。
 
+**下一步**：另立並事前固定新 Study，資料、成本、風控、baseline 相同；候選須同時達至少 20 筆／3 年及 stress 報酬>0，任一未達即否證並停止凍結。
 
-### 成果卡補充／Parent review correction（2026-09-23）
+**來源與歷史**：[原卡、完整來源及更正（原第 1989–2005 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:1989)。
 
-- **讀取範圍更正與盲性**：更正原卡「未讀取或引用 events、journals、operations、study.yml 或鄰近 Study 證據」的不準確說法。blind review 前的遞迴 `rg` 搜尋掃過整個 v004 workflow；輸出含 allowlist 外 Study 的 `events/`、`study.yml` 路徑與事件摘要。該輸出未被後續分析、判定或成果卡引用。依技能立即停止，blind review 未通過且未重試。除已知輸出外，無法確定遞迴搜尋實際遍歷的完整檔案集合。沒有刻意開啟、分析或引用 `historical-evaluation-artifacts/`、quarantine／full data 或正式 Evaluation／Terminal evidence；本 Study 沒有正式結果被引用。本次未執行正式 Evaluation 或 Terminal；但因搜尋範圍廣，不能保證未對 v004 樹中其他檔案發生附帶掃描。
-- **已確認**：candidate／baseline evidence 均 `valid`。candidate 9 筆、3 年；base 報酬 `0.2327%`、PF `1.0337`；stress 報酬 `-1.0725%`、PF `0.8457`。formal gates 失敗 `base_profit_factor`、`completed_trades`、stress bootstrap 正報酬比、stress 留一年度 PF／報酬、`stress_profit_factor`、`stress_return`；research targets 失敗交易數與 stress 報酬，`traded_years` 通過。baseline 10 筆、4 年；base `2.1411%`／PF `1.3059`、stress `0.5312%`／PF `1.0756`；formal gates 失敗 `completed_trades`、stress bootstrap 正報酬比及 stress 留一年度 PF／報酬。candidate freeze eligibility=`false`，未凍結。
-- **可能原因**：9 筆 candidate 樣本偏少；gap-acceptance 複合條件可能限制訊號量。這只是推測，不能據此判定該條件造成交易減少或績效差異。
-- **尚不能判斷**：gap-acceptance 是否有獨立因果效果、能否跨期間重現，或是否優於 baseline；目前 Development evidence 不足以支持這些結論。
-- **Provenance／binding**：workflow=`62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4`；reference=`7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47`；release=`ea04558c1473f9c6db7e9707846694147c6c6f254498af2f18729a1e4ef1fa84`；policy=`c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215`；preregistration=`5918d9125051ec13653cdfc3da15759e03230419d6838b62c176e5db554de2cb`；Source Bundle=`5e3dec05bde233d3671ee8cd8d282d2f394add33b271f8acdfedd6c7f63edd19`；Development data role=`4e443b4c7db125967ef936d615b6d2283da8ba0bccc62239a5770daf176eccc3`。create operation=`c69578922b8dd9bd1cd4b93b708eb1011cd4ac152e44f2e0a2fb837dd0923f40`；Development operation=`3e47478653c8a0b5df2e9ee8cf13d4ef88c323e74f195fca1af101922a423d93`。依派工不執行 Terminal，Study 停在 Development 完成且未達 freeze 資格。
+<a id="study-46"></a>
+## `tsm-momentum-trend-volume-body-followthrough--v001`
 
+**研究與差異**：前五日同日 Close/Open−1 的成交量加權平均≥0，且不低於同窗未加權平均；baseline 只關閉日內實體條件。
 
-### 成果卡補充／Parent review correction 2（2026-09-23）
+**判定**：候選 disposition=fail；兩組證據 valid；盲檢討 exposure check 通過。候選只失敗交易數正式門檻及同項研究目標，stress 報酬及年度目標通過；baseline 失敗交易數及三項 stress 穩健性，candidate targets 不適用。候選不具資格，readiness／freeze 回 qualification-failed，未產生 candidate-frozen。
 
-更精確限定前述範圍聲明：該輸出僅用於識別超出 allowlist、觸發停止並標記 blind review 未通過；其中鄰近 Study 的實質內容未用於策略分析、Development 結果解讀或成果卡研究結論，亦未轉述。
+| Trial／模型 | 情境 | evidence／交易數／年度 | 報酬／PF／最大回撤 |
+| --- | --- | ---: | ---: |
+| candidate | Development/base | valid／3／3（2015、2016、2018） | 5.0316%／inf／0% |
+| candidate | Development/stress | valid／3／3 | 4.2172%／inf／0% |
+| baseline（控制組） | Development/base | valid／10／4（2014、2015、2016、2018） | 2.1411%／1.3059／2.1279% |
+| baseline（控制組） | Development/stress | valid／10／4 | 0.5312%／1.0756／2.2747% |
 
-## `tsm-momentum-trend-volume-path-efficiency--v001`｜2026-09-23
+**限制與更正**：三筆全正、PF 無限大及零回撤不能取代足量樣本。assignment 仍寫高 0.05 個百分點，實測差值下限是 0，不得宣稱測了 0.05% 假說。v012 已用過單日未加權 Close>Open；本次差異限五日窗口、量權重及動能情境，非概念首創。
 
-- **假說**：五日量比加權絕對淨位移／總路徑≥0.20；未見同式。
-- **Trial（證據valid）**：candidate 6筆，base +3.32%、stress +2.19%；formal fail交易數、bootstrap 0.7193<0.80；target 6<20，stress報酬／3年達標。baseline 10筆，base +2.14%、stress +0.53%；formal fail交易數、bootstrap、留年PF／報酬。freeze eligibility=false，停trial-recorded。
-- **盲性／限制**：eligible、review完成；僅讀設計與Dev證據，無正式結果曝光。可能條件減少訊號；6筆尚不能判斷重現性。prereg留3/5、contract錯列volume_coverage_ratio、docstring稱方向但公式取絕對值；均已binding未改。
-- **Provenance／下一步**：v004 ref 7b13d4d7、source ec25435a、data a42c3932。另立Study校正文稿；candidate須≥20筆且bootstrap≥0.80，否則否證。
+**下一步**：另立 Study，只改成事前固定的正實體成交量占比，其餘不變；至少 20 筆／3 年且全部正式門檻通過，否則停止。
 
-### Parent review correction（2026-09-23）
+**來源與歷史**：[原卡、完整來源及更正（原第 2006–2025 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:2006)。
+更正定位：[Parent review clarification（2026-09-22）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:2022)。
 
-- **與目標 breadth Study 的關係與假說邊界**：本 Study 的 candidate-definition 列有五日成交量條件及 path-efficiency 門檻，但 preregistration 仍留有原 3/5 breadth 假說文字，且 implementation contract 與 bound engine 的欄位名稱不一致。因此，path-efficiency 究竟是取代 `tsm-momentum-trend-volume-breadth--v001` 的 3/5 覆蓋日數，或是在該條件上追加，依 immutable 定義、程式與本次報告尚不能判定；不得選擇其中一種當成已註冊意圖。可讀公式為 `abs(Σ(qᵢ × (Closeᵢ/Closeᵢ₋₁−1))) / Σ(qᵢ × (abs(Openᵢ/Closeᵢ₋₁−1)+(Highᵢ−Lowᵢ)/Closeᵢ₋₁)) ≥ 0.20`，其中 `qᵢ` 是相對此前二十個完成 session 平均量的量比。它把量加權的五日「收盤淨位移絕對值」除以「缺口加日內區間總路徑」；與既有 volume-efficiency 的量加權日內區間／未加權日內區間、range-compression 的同類窄幅比值、body-sign-consistency 的非負實體量占比、breadth 的五日中達標覆蓋日數，數學分子／分母或統計對象不同。允許讀取的 Development-only 紀錄未找到相同整體規則；不主張其 OHLCV、量權重、五日視窗等組件首創，也不主張機制彼此完全獨立。
+<a id="study-47"></a>
+## `tsm-momentum-trend-volume-body-sign-consistency--v001`
 
-- **Development Trial evidence**：以下數字皆來自該 Trial 已發布的 Development candidate／baseline evidence；`valid` 只表示 evidence validation 通過，不證明 preregistration、contract、docstring 與實作一致。
+**研究與差異**：前五日 Close≥Open 的成交量占比≥0.60，另保留五日量比≥1.05；平盤歸入非負類。與前卡加權平均不同，也不是首次使用 Open→Close 概念。
+
+**判定**：採更正後內容：baseline 證據可取得且 valid，原 unavailable 已更正；candidate 亦 valid。候選失敗交易數、stress 逐年剔除 PF／報酬；研究目標交易數失敗。Baseline disposition=fail，失敗交易數、stress 重抽樣正報酬比例及逐年剔除 PF／報酬，候選研究目標及凍結資格不適用。候選資格 false，readiness／freeze 回 qualification-failed，trial-recorded／未凍結；盲檢討 exposure check 通過。
+
+| 模型／情境 | 交易數 | 報酬（比例） | PF | 最大回撤（比例） |
+| --- | ---: | ---: | ---: | ---: |
+| candidate／base | 3 | 0.006977421424769781 | 1.3278289105815337 | 原更正未列 |
+| candidate／stress | 3 | 0.0021563831144390576 | 1.10176033923166 | 原更正未列 |
+| baseline／base | 10 | 0.021411376349155745 | 1.305856359872508 | 0.021279074115623766 |
+| baseline／stress | 10 | 0.0053120033963509694 | 1.0755804379115148 | 0.022746829677724723 |
+
+**限制與更正**：候選只有三筆，baseline 亦未通過穩健性，不能歸因單一門檻或年度。更正只補固定 baseline／publication／inputs；未重跑或修改綁定，event head/count 仍 unavailable。表中報酬及回撤採更正段的小數比例。
+
+**下一步**：另立 Study，只改為前五日至少三日 Close≥Open，其餘不變；任一正式門檻或研究目標失敗即停止凍結。
+
+Baseline 有交易年度為 4 年；候選年度與未列指標不由其他卡補入。
+
+**來源與歷史**：[原卡、完整來源及更正（原第 2026–2037 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:2026)。
+更正定位：[Parent review correction（2026-09-22）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:2032)。
+
+<a id="study-48"></a>
+## `tsm-momentum-trend-volume-lagged-neutral-impulse--v001`
+
+**研究與差異**：恰好 t−5 的中性日量比≥1.50，Close/Open 與 Close/前收絕對變化皆≤0.5%；後四日量≤事件量一半且無單日上漲達 2%，再以訊號日加速確認。baseline 只關閉該事件序列。
+
+**判定**：兩組證據 valid；候選 disposition=fail，0 筆／0 年，報酬與 PF 不可估計，13 項正式門檻及三項研究目標全失敗。Baseline 失敗 8 項正式門檻：base／stress 報酬及 PF、交易數、stress 重抽樣正報酬比例及逐年剔除 PF／報酬；baseline 研究目標不適用。候選資格 false，readiness／freeze 回 qualification-failed，沒有凍結及 freeze operation ID；盲檢討程序未通過。
+
+| 模型 | Development 結果 |
+| --- | --- |
+| candidate | valid；0 筆／0 年；base、stress 報酬及 PF 均不可估計 |
+| baseline | valid；16 筆／5 年。base 報酬 `-0.5729%`、PF `0.9556`、最大回撤 `4.5483%`；stress `-2.7935%`、PF `0.7800`、最大回撤 `4.8322%` |
+
+**限制與更正**：搜尋 checker 時越界輸出四個鄰近 Study 的 assignment 設計片段；未讀那些結果，但仍超出單 Study 範圍，已停止且未重試，不可補稱 passed。規格同時留舊 volume_lagged_neutral_impulse／retest_* 及新 lagged_neutral_volume_impulse；engine 只使用新 key，登記歧義未回改。
+
+**下一步**：另立 Study 前先清除未用舊欄位，固定候選及 baseline；有效證據、至少 20 筆／3 年、stress 報酬>0 及全部正式門檻、研究目標通過，否則停止，不授權原 Study 重跑。
+
+**來源與歷史**：[原卡、完整來源及更正（原第 2038–2063 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:2038)。
+更正定位：[成果卡補充（同一張卡，2026-09-23）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:2052)；[Parent review correction（同一成果卡，2026-09-23）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:2058)。
+
+<a id="study-49"></a>
+## `tsm-momentum-trend-volume-gap-retention--v001`
+
+**研究與差異**：前五日平均量比≥1.05，訊號日正向開盤缺口≥0.50% 且收盤不低於開盤；baseline 只關閉缺口接受條件，其餘趨勢與至少 2% 加速固定。
+
+**判定**：兩組證據 valid。候選失敗 base PF、交易數、stress 重抽樣正報酬比、逐年剔除 PF／報酬及 stress PF／報酬；研究目標交易數與 stress 報酬失敗、年度通過。Baseline 失敗交易數及三項 stress 穩健性。候選資格 false、未凍結；盲檢討未通過且未重試。
+
+| 模型 | 交易數／年 | base 報酬／PF | stress 報酬／PF |
+| --- | --- | --- | --- |
+| candidate | 9／3 | 0.2327%／1.0337 | -1.0725%／0.8457 |
+| baseline | 10／4 | 2.1411%／1.3059 | 0.5312%／1.0756 |
+
+**限制與更正**：採最新更正：遞迴搜尋掃過整個 v004 workflow，輸出含範圍外 events／study.yml 路徑與事件摘要；不能保證沒有附帶掃描。輸出僅用來識別越界並停止，未用於策略分析或研究結論，未引用正式結果；不能沿用原卡全面未讀聲明。九筆不足以判定因果。
+
+**下一步**：另立 Study，事前固定一項缺口接受變更，重新驗證樣本與 stress 門檻；不在本 Study 調參或重跑。
+
+**來源與歷史**：[原卡、完整來源及更正（原第 2064–2084 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:2064)。
+更正定位：[成果卡補充／Parent review correction（2026-09-23）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:2072)；[成果卡補充／Parent review correction 2（2026-09-23）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:2081)。
+
+<a id="study-50"></a>
+## `tsm-momentum-trend-volume-path-efficiency--v001`
+
+**研究與差異**：量比加權五日收盤淨位移絕對值／缺口加日內區間總路徑≥0.20。登記仍留 3/5 breadth 文字，因此此條件究竟取代或追加 breadth，尚不能判定，不選其中一種當成已登記意圖。
+
+**判定**：兩組證據 valid。候選失敗交易數（6<20）、stress 重抽樣正報酬比（0.7193<0.80）；研究目標交易數失敗、stress 報酬及年度通過。Baseline 失敗交易數、stress 重抽樣正報酬比、逐年剔除 PF／報酬；候選目標及凍結資格不適用。候選資格 false，trial-recorded／未凍結，未嘗試 readiness／freeze。
 
 | Trial／情境 | 交易數 | 報酬 | PF | MDD（最大回撤） | Evidence validity |
 | --- | ---: | ---: | ---: | ---: | --- |
@@ -2102,39 +1007,21 @@
 | Baseline／base | 10 | +2.141138% | 1.305856 | 2.127907% | valid |
 | Baseline／stress | 10 | +0.531200% | 1.075580 | 2.274683% | valid |
 
-- **Formal gates 與 candidate targets**：Candidate formal gates 失敗：`completed_trades`（6<20）、`minimum_stress_block_bootstrap_positive_return_ratio`（0.7193<0.80）。通過：`base_profit_factor`、`base_return`、`maximum_realized_trade_loss_fraction`、`maximum_stress_block_bootstrap_drawdown_above_10pct_ratio`、`maximum_stress_leave_one_year_out_drawdown`、`minimum_stress_leave_one_year_out_profit_factor`、`minimum_stress_leave_one_year_out_return`、`stress_maximum_drawdown`、`stress_profit_factor`、`stress_return`、`traded_years`。Candidate targets：`completed_trades` 未達（6<20）；`stress_return` 達標（+2.194951%>0）；`traded_years` 達標（3≥3）。Baseline formal gates 失敗：`completed_trades`（10<20）、`minimum_stress_block_bootstrap_positive_return_ratio`（0.5991<0.80）、`minimum_stress_leave_one_year_out_profit_factor`（0.845579<1.00）、`minimum_stress_leave_one_year_out_return`（−1.073294%≤0）。通過：`base_profit_factor`、`base_return`、`maximum_realized_trade_loss_fraction`、`maximum_stress_block_bootstrap_drawdown_above_10pct_ratio`、`maximum_stress_leave_one_year_out_drawdown`、`stress_maximum_drawdown`、`stress_profit_factor`、`stress_return`、`traded_years`。Baseline targets：未登記／不適用。Candidate freeze eligibility=`false`；baseline 不具 candidate freeze 資格。Lifecycle=`trial-recorded`、未 frozen；因候選不具資格，未嘗試 freeze-readiness／candidate-freeze。
+**限制與更正**：盲檢討 eligible／完成不等於設計無缺陷：登記留舊假說、contract 綁 volume_coverage_ratio 但 engine 輸出 prior_volume_ratio、docstring 稱方向效率而公式取絕對值，三項均未改。證據 valid 不證明規格與程式一致。來源指紋採 2026-09-23 最後一次逐字更正的完整值，保留 63／64 位差異紀錄。
 
-- **盲性與 frozen defects**：outcome exposure 檢查在允許範圍內合格，blind review 僅使用允許的設計、程式與 Development candidate／baseline evidence，未讀正式 Evaluation／Terminal 結果，也未重跑 runner。盲檢討發現三項 frozen design／traceability defects：preregistration 仍寫舊 3/5 breadth 假說；implementation contract 把 `volume_coverage_ratio` 綁到 engine 未輸出的同名欄位（engine 輸出 `prior_volume_ratio`）；engine／runner docstring 稱 directional path efficiency，但公式取絕對值。缺陷已 binding，本 Study 未修改。blind eligibility 是 outcome exposure 範圍判定，不等於 prereg／實作一致或研究設計無缺陷。
+**下一步**：另立 Study，在建立前釐清取代或追加、修正登記／contract／docstring 綁定；候選至少 20 筆並通過全部正式門檻及事前目標，否則否證，不在本 Study 補跑。
 
-- **Provenance**：workflow=`62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4`；reference=`7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47`；release manifest=`ea04558c1473f9c6db7e9707846694147c6f254498af2f18729a1e4ef1fa84`；policy=`c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215`；source bundle=`ec25435af68b584094d37a1de5a09f6b3f815098f2f8f05379d48add12ce66ec`；preregistration=`44bc95deae91907c193ef153d57c320f2dc57145f298c6947d705634dd444845`；engine=`6a1d41ed21724d4c6f2b6f41277ecbcbac6bc44a69a44f001ab24bdfb5865f2f`；runner=`95a979d0674fd7f6295817268a200f71459071aba928cb089122fb41fb975ba9`；Development data=`a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7`；warmup=`81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847`；Development role=`4e443b4c7db125967ef936d615b6d2283da8ba0bccc62239a5770daf176eccc3`；create operation=`3f2535566c7326e7b9077b9ced023eb87218b1998818d54fe8c285dac6db1226`；Development operation=`b880c89fc886bc1900d302ab9aef56447d7e6dd1ca34be380efa370bf25c89cf`。Candidate evidence=`5c699e64594e29bd6d1078da83c3d1c9985a0437970f77f3c4d181209f7cdde4`；baseline evidence=`db4ee9bfb36b0d9e11b5d1f5e7586b33ae1f4edd551c1268e190cfcf3fe2f868`；publication envelope=`f686bbd2c63d09eeb04d566f0e140d6f555bd0a629ff3bb67ddd2bcc90cfc313`。
+**目前採用的 baseline 證據指紋**：`db4ee9bfb36b0d9e11b5d1f5e7586b33ae1f4edd551c1268e190cfcf3fe2f868`（64 位；完整更正見歷史紀錄）。
 
-- **可支持範圍與下一步否證條件**：本次僅能描述同一 Development 資料與 inputs 下發布 candidate／baseline evidence 的數字與 gate 結果；交易樣本少，且候選意圖因 frozen prereg 缺陷尚不能判定，不能宣稱相對原 breadth Study 有效、改善或因果優越。若要檢驗明確假說，應另立 Study，在 create 前釐清 path-efficiency 是取代或追加 breadth、修正並核對 prereg／contract／docstring binding；之後 candidate 至少 20 筆且通過全部 formal gates 及事前 targets，任一不符即否證，不可在本 Study 內補跑。
+**來源與歷史**：[原卡、完整來源及更正（原第 2085–2123 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:2085)。
+更正定位：[Parent review correction（2026-09-23）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:2092)；[Parent review digest correction（2026-09-23）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:2115)；[Parent review exact digest correction（2026-09-23）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:2119)。
 
-- **Freeze eligibility 補充**：Candidate 的 freeze eligibility 明確為 `false`。Baseline 在 candidate-definition 中標示為排除於 candidate family 的比較基準，因此 baseline 的 freeze eligibility 為 `not applicable`，不是另一個可凍結候選。
+<a id="study-51"></a>
+## `tsm-momentum-trend-volume-breadth-dispersion--v001`
 
-### Parent review digest correction（2026-09-23）
+**研究與差異**：保留原 3/5 breadth，再加訊號日前五日最大單日原始量／五日總量≤60%；baseline 不加。既有卡未見同一上限，不代表組件首創或具獨立因果效果。
 
-- **Baseline evidence digest 核對**：允許讀取的 Development `publication.yml` 將 `baseline.yml` artifact digest 列為 `db4ee9bfb36b0d9e11b5d1f5e7586b33ae1f4edd551c1268e190cfcf3fe2f868`（64 位十六進位）。本卡上一段 Parent review correction 的 baseline digest 與 publication 一致；先前交付中被指出不一致的舊字串，無法由已讀取的允許 Development baseline／publication 來源還原，故標記 `unavailable`，不猜寫。後續以 publication 所列完整 digest 為準；未重算雜湊或修改 evidence。
-
-### Parent review exact digest correction（2026-09-23）
-
-- **Baseline digest 逐字核對**：先前回覆中的 `db4ee9bfb36b0d9e11b5d1f5e7586b33ae1f4edd551c1268e190cfcf3e2f868` 為 63 位，誤少一位；Development `publication.yml` 的 baseline artifact digest 原樣為 `db4ee9bfb36b0d9e11b5d1f5e7586b33ae1f4edd551c1268e190cfcf3fe2f868`（64 位），且與前一段成果卡 correction 中的 digest 完全相同。後續應採 publication 的完整值。本次僅從 publication 欄位複製並核對成果卡字串，未重算雜湊、重跑流程或修改 evidence／binding。
-
-
-## `tsm-momentum-trend-volume-breadth-dispersion--v001`｜`2026-09-23`
-
-- **假說**：候選保留 3/5 breadth，加訊號日前五日 max 量／總量≤0.60；baseline 不加。TSM 卡未見此上限，異於 volume-lead／ramp／peak-lead 與 TASK-021 path-efficiency。
-- **結果**：兩份 evidence valid；候選 7 筆／3 年，base／stress 報酬 +7.19%／+5.60%、PF 4.29／3.60；candidate／baseline outcome 相同，cap 未排除訊號。失敗 formal gate／target 是 7<20 筆；freeze eligibility=false。
-- **盲檢討／限制**：eligible；reference 已驗證，只讀設計／Development evidence，未讀正式結果。7 筆且兩組無差，不支持改良；新 Study 先確保足量 Development 樣本。
-- **來源**：prereg、candidate／engine／runner contract、Source Bundle、Development inputs／evidence／publication；未讀受限資料。
-
-### Parent review correction／同一成果卡補充：`tsm-momentum-trend-volume-breadth-dispersion--v001`（2026-09-23）
-
-以下補充屬於同一 Study 成果卡，原卡原文保留；若原摘要省略了細節，以本補充列出的 Development 證據為準。
-
-- **新穎性盤點**：逐項比對 TSM Development 成果卡中的原 breadth（五日內至少 3/5 日達量比）、volume-lead（五日總量壓力／上漲與平盤量占比）、volume-ramp（三日量能脈衝）、volume-peak-lead（量峰與報酬峰的先後）、吸收、效率、收盤接受、報酬對齊、區間壓縮、跳空錨定、持續性與反應延遲等機制，也對照 TASK-021 的 path-efficiency（量加權淨位移除以缺口加日內路徑）。盤點未見「訊號日前五日中，最大單日原始成交量占五日總量不得超過 60%」這個相同上限；這只表示既有 Development 紀錄未見同一規則，不表示各組件首創或具有獨立因果效果。
-
-- **Candidate／baseline Development metrics**：兩臂各自的 base 與 stress 數字如下。報酬及 MDD 以百分比表示；兩臂 trade 數及指標相同。
+**判定**：兩組證據 valid；各 13 項正式門檻，唯一失敗均為交易數（7<20），其餘 12 項通過。候選研究目標：交易數失敗、stress 報酬>0 及年度≥3 通過；baseline 無候選目標。候選資格 false，trial-recorded／未凍結，未嘗試 readiness／freeze；盲檢討 eligible／完成。
 
 | 臂別／情境 | 完成交易 | 有交易年份 | 報酬 | PF | 最大回撤 MDD |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -2143,39 +1030,29 @@
 | Baseline／base | 7 | 3 | 7.189742% | 4.288368 | 1.998988% |
 | Baseline／stress | 7 | 3 | 5.595919% | 3.598111 | 1.998930% |
 
-- **Evidence validity、formal gates 與 targets**：candidate evidence=`valid`，baseline evidence=`valid`。兩臂各有 13 項 formal gates；唯一失敗是 `completed_trades`（7，門檻 ≥20）。其餘 12 項均通過：`base_profit_factor`、`base_return`、`maximum_realized_trade_loss_fraction`、`maximum_stress_block_bootstrap_drawdown_above_10pct_ratio`、`maximum_stress_leave_one_year_out_drawdown`、`minimum_stress_block_bootstrap_positive_return_ratio`、`minimum_stress_leave_one_year_out_profit_factor`、`minimum_stress_leave_one_year_out_return`、`stress_maximum_drawdown`、`stress_profit_factor`、`stress_return`、`traded_years`。Candidate 的全部 research targets：`completed_trades ≥20` 未達（7）；`stress_return >0` 達成（5.595919%）；`traded_years ≥3` 達成（3）。Baseline 是比較臂，沒有登記 candidate research targets，故 targets 不適用；它仍接受上述 formal-gate 評估，結果相同。
+**限制與更正**：兩組交易及指標完全相同，60% 上限沒有排除已接受訊號，不能支持改善。初稿 35% 因人工測試資料 5/9=55.6% 而在建立 Study 前改為 60%；當時未建立 Study、未跑 Development，最終僅建立一次、執行一個 Trial。
 
-- **Freeze 與實際階段**：candidate `freeze eligibility=false`；Study 已完成並發布 Development Trial，現停在 `trial-recorded`、未 frozen。由於交易數未達 20 筆且 candidate 不具 freeze 資格，未嘗試 freeze-readiness 或 candidate-freeze；本任務也未執行正式 Evaluation、Terminal、challenge 或 replay。
+**下一步**：另立 Study，事前選足夠原 breadth 訊號的資料範圍，候選至少 20 筆／3 年，且 60% 規則須排除至少一筆事前定義的 baseline 訊號；任一條件、正式門檻或研究目標未達即停止，不依結果調整上限。
 
-- **預先建立前的修正**：最初草案設最大單日量占比上限 35%，v004 prepare 的 synthetic fixture 有前一交易日 5 倍量、另四日各 1 倍量，單日占比為 5/9＝55.6%，因此 35% 上限會拒絕這個人工 fixture，相關 cooldown 合成情境無法成立。這是 workflow 的合成資料檢查，不是 TSM 市場資料結果。建立 Study 前將上限調到 60%、更新 preregistration bindings；在這次 35% fixture 失敗時，尚未建立任何 Study，也尚未執行任何 Development 資料。最終 Study 僅建立一次，之後只執行一個 Development Trial。
+**來源與歷史**：[原卡、完整來源及更正（原第 2124–2166 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:2124)。
+更正定位：[Parent review correction／同一成果卡補充：`tsm-momentum-trend-volume-breadth-dispersion--v001`（2026-09-23）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:2131)。
 
-- **Blind review**：outcome-exposure eligibility 檢查為 eligible，盲檢討已完成。讀取範圍僅限已驗證的 v004 reference、目標 Study 的 preregistration／設計／candidate 與 qualification 定義、implementation／runner contract、Source Bundle 程式、Development inputs、candidate／baseline Development evidence 與 publication；未發生 allowlist 外讀取。沒有讀正式 Historical Evaluation、Terminal 或其他正式結果，也沒有重跑 runner。實質結論是兩臂 trades 與所有 metrics 相同，60% cap 沒有排除本樣本任何已接受訊號；本次試驗沒有顯示改善，也不能支持因果主張。七筆交易不足以判斷此規則能否在其他樣本重現。
+<a id="study-52"></a>
+## `tsm-industry-relative-lag-repair--v001`
 
-- **已確認**：兩份 Development evidence 均有效；candidate 與 baseline 各有 7 筆交易、3 個交易年份，base／stress 指標完全相同；唯一 formal-gate 失敗為交易數；candidate freeze eligibility 為 false；60% cap 在這組已接受訊號中未造成兩臂差異。
-- **可能原因**：在原本能通過其他條件的訊號中，單日量占比可能都沒有高於 60%，因此上限未形成篩選；目前也可能只是七筆交易樣本偏少。這些是可能解釋，不是已證明的機制。
-- **尚不能判斷**：60% 上限在更多交易、其他年份或不同樣本中是否會排除訊號、改善壓力結果或產生可重現效果；本 Trial 不能區分這些情況，也不能證明成交量集中度造成績效變化。
+**研究與差異**：在 v009 加入 SOXX 五個 XNYS 交易日漲幅>0、TSM 落後≥3 個百分點的條件，次日買進；對照為 v009。
 
-- **限制與下一輪否證條件**：本輪只有 7 筆交易，candidate 和 baseline 完全同結果，無法估計有差異的效果。若另立 Study，應先選擇有足夠原始 breadth 訊號的事前資料範圍，明確要求候選至少完成 20 筆交易、涵蓋至少 3 年，並要求 60% 規則排除至少一筆事前定義的 baseline 訊號；任何條件或正式 candidate target／gate 未達，即否證該假說並停止，不可依結果調高或調低上限。
+| 模型 | base 報酬／PF／MDD | stress 報酬／PF／MDD |
+| --- | --- | --- |
+| candidate | 28.783%／2.005／6.955% | 18.245%／1.646／7.674% |
+| v009 | 33.676%／5.036／1.9998% | 26.523%／4.204／2.119% |
 
-- **Provenance／bindings**：Study=`tsm-momentum-trend-volume-breadth-dispersion--v001`；workflow=`62779bce18802e32ab314b6d74e8fc6f2da9fac03d1ee85a6416acc5553c67e4`；reference=`7b13d4d7e6448c9858215d9ef7e2e62fbd7fe0f40502e95a778a091008b20b47`；release manifest=`ea04558c1473f9c6db7e9707846694147c6c6f254498af2f18729a1e4ef1fa84`；policy set=`c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215`；最終 preregistration=`35728c5d7ec6edcf75bf0ba194a5abfa67154b254ed0ab31eca3a66087e0571e`；Source Bundle=`89b63978611889d3f90d7ca5cc1c588c4c963f3e237e21344c83d7157c6c3d34`；engine=`265f1b29da95bd034a07039d23cb5c2843b46a5a87900b50abb88a7525282023`；Development data view=`a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7`；Development role=`4e443b4c7db125967ef936d615b6d2283da8ba0bccc62239a5770daf176eccc3`；warmup role=`81fdf3d66915935d87e930cb7882dbf52d27b88ba6776c1b047a2db6fc59c847`。資料為 `research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv`；Development 訊號期間 2014-01-01 至 2018-12-31，warmup 期間 2013-01-01 至 2013-12-31。create operation=`3fc98ae22dd4113012eb2cf4390486f0e92c5bfe4d896e1a62deb19ab5bb5b2e`；Development operation=`08d9191fd2aa35620345a6f5127ea5eb7facf2f1b048537bae7ddba16f558211`。candidate evidence=`615e23433bdc9f7681db31ad084af4488b7c5c20b63522f959cf6e331e0bae87`；baseline evidence=`e24fd0bba5c25ca9abc5c7a8c5e214279f822b938c6b738cc150737543bcb021`；Development inputs=`1cc8066d83139e86a93334735cc555117f5e441328ced41044df024162dd20f4`；publication envelope=`dd4a7da767d9c94c39fbd0f3fb6c3a99d779b44da86503f9b00b4c3e13e380a0`。
+**判定**：兩份證據有效、publication 指紋綁定。候選正式門檻通過 10/11，唯一失敗為壓力重抽樣 MDD>10% 比率 19.848%>10%；v009 全過。研究目標至少 20 筆／3 年，候選 47 筆／5 年通過。凍結資格 false；實際凍結狀態尚不能判斷，未執行 freeze／readiness。
 
-- **白話名詞補充（適用於本卡正文與以上補充）**：candidate 是加上本次 60% 規則的候選策略，baseline 是拿來比較、未加這項規則的版本；base／stress 是預先設定的基準成本與較不利成本情境。PF（獲利因子）是總獲利除以總虧損；MDD（最大回撤）是績效從高點跌到之後低點的最大幅度，數字越大代表期間內承受過的下跌越深。formal gate 是事前設定、必須逐項通過的門檻；research target 是事前設定要達成的數值目標。bootstrap（區塊重抽樣）是把過往相鄰交易成組抽取很多次，估計結果對樣本變動有多敏感，不能當成新增的真實交易。evidence validity=`valid` 表示證據檔的格式、必需欄位與來源檢核通過，不等於策略有效。freeze eligibility 是候選是否符合凍結資格；`false` 表示尚不符合，不能把它凍結成後續正式評估版本。盲檢討 eligibility 是檢討者是否符合限定讀取範圍的條件；allowlist 是事先列好的可讀資料清單；outcome exposure 指檢討前是否接觸過正式結果。provenance／binding 是記錄結果由哪個固定版本的流程、策略程式、登記規格與資料產生，避免把不同版本的證據混在一起。Source Bundle 是本次綁定的策略程式來源包；synthetic fixture 是用人工資料檢查流程能否正確處理特定情境；cooldown（冷卻期）是一次訊號後暫停一段時間，避免短時間重複進場。trial-recorded 表示 Development 試驗已記錄、Study 尚未凍結；Development 是研究階段試做，Historical Evaluation／Terminal 是正式歷史評估及其終點結果，本 Study 未讀取或使用那些結果。
+**自訂目標與限制**：TASK-023 的自訂目標不是 v005 門檻：不重疊新增 26 筆≥5 通過；扣除排擠後壓力淨增益 -$8,278.22<0，MDD 7.674%>v009 2.119%。SOXX 僅一檔參考資產，訊號期僅 2014–2018，因果及跨期效果未知。盲檢討完成，未讀正式結果或 Study 狀態資料。
 
-- **來源欄位白話補充**：engine 是依策略規則判斷何時進出場的程式；runner 是把這個程式套用到指定資料並產生試驗結果的執行工具；contract 是說明程式如何接收資料、輸出欄位的約定。preregistration 是看結果前先寫下假說、規則與目標的登記文件；Development data view 是本次允許使用的資料範圍及日期。reference 是 v004 流程規則的固定版本；release manifest 記錄該次發布包含哪些流程內容；policy set 是執行時適用的治理規則。digest 是檔案內容的指紋，用來核對綁定的是哪個確切版本；operation ID 是一次建立或試驗操作的唯一編號。publication 是列出已發布試驗證據及其指紋的索引。
+**資料**：SOXX 作參考、TSM 作交易資產；均為 Yahoo 日線調整價，America/New_York 時區、按 XNYS 對齊，收盤後可用；資料期 2013-01-02–2018-12-31，訊號期 2014-01-01–2018-12-31、暖機標示 2013-01-01–2013-12-31。逐檔 SHA-256 與 publication 資產清單指紋是不同項目，完整值見歷史來源。
 
+**下一步**：另立並事前登記；正式門檻全過、壓力淨增益>0、MDD≤v009 須同時成立，否則否證。
 
-## 精簡定稿／目前採用版本｜`tsm-industry-relative-lag-repair--v001`
-
-### Development 正文（600 字）
-【已確認】SOXX五個XNYS（美國交易日）漲>0、TSM落後≥3個百分點，次日買；候選在v009上加條件，對照是v009。
-【已確認】基準／壓力成本：候選報酬28.783%／18.245%、PF2.005／1.646、MDD6.955%／7.674%；v009為33.676%／26.523%、5.036／4.204、1.9998%／2.119%。PF=獲利除以虧損；MDD=高點後最大跌幅。兩份證據有效、publication digest綁定。
-【已確認】正式門檻：候選10/11，失敗項為壓力重抽MDD>10%率19.848%>10%；v009全過。研究目標≥20筆／≥3年，候選47筆／5年通過。candidate_freeze_eligibility=false；實際凍結狀態尚不能判斷；未執行freeze/readiness。
-【已確認】TASK-023自訂目標（非v005）：不重疊新增26筆≥5通過；排擠後壓力淨增益−$8,278.22<0，MDD 7.674%>v009 2.119%。
-【尚不能判斷】SOXX僅一檔參考資產，訊號期只有2014–2018；因果及跨期效果未知。盲檢討完成，限本Study設計／程式／Development證據，未讀正式Evaluation／Terminal。下一Study事前登記；正式門檻全過、壓力增益>0、MDD≤v009須同時成立，否則否證。
-
-### Development 資產與來源綁定（不計入正文）
-- SOXX：`asset_id=SOXX`；`use=reference`；`provider/symbol=yahoo/SOXX`；資料期2013-01-02–2018-12-31；`interval_role=warmup-development`；`available_at=after-close`；SHA-256 `41c33b0ae3c53a6ae6726c2c6dcd673c19010e86c4f44f17ac64c13e5da1263a`。
-- TSM：`asset_id=TSM`；`use=trade`；`provider/symbol=yahoo/TSM`；資料期2013-01-02–2018-12-31；`interval_role=warmup-development`；`available_at=after-close`；SHA-256 `a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7`。
-- 兩資產均為1日 Yahoo 調整價、America/New_York 時區，按 XNYS 對齊；訊號期2014-01-01–2018-12-31，暖機標示2013-01-01–2013-12-31。Publication 的資產清單 digest 為 `bdb73ca5243640ea1e84f859e4e22bc67d78fc97ec1d5c43426993ff5e122289`（不同於逐檔 SHA-256）。
-
-來源／讀取界線：本 Study 的 v005 `workflow-reference.yml`、`create-plan.yml`、`preregistration.yml`、`source-bundle.yml`、Development `inputs.yml`／`publication.yml`／candidate 與 baseline evidence、`runtime-manifest.yml`；盲檢討只用設計、程式及 Development evidence。未開啟價格 CSV，未讀 events、journals、Study 狀態資料或正式 Evaluation／Terminal。
+**來源與歷史**：[原卡、完整來源及更正（原第 2167–2181 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:2167)。
