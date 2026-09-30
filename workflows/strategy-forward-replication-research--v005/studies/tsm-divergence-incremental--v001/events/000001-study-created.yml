@@ -1,0 +1,30 @@
+actor_id: /root/task_031_divergence_ablation
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 1a893a57642724aa14fbdef3e20583b34e6a40e452542dcaf01021336250b621
+  workflow_digest: 2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2
+  workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: study-created
+execution:
+  assignment_digest: 9d30c341a12ced175d2cf5e9c348cfa127d7eaf2ea1cda51ba471e41c0abe9cb
+  assignment_path: manifests/assignments/9d30c341a12ced175d2cf5e9c348cfa127d7eaf2ea1cda51ba471e41c0abe9cb.yml
+  role: study 開發者
+occurred_at: '2026-09-30T04:41:53.826574Z'
+payload:
+  create_plan_digest: 8ea082c57a5065cb7d0cf5cc844f6af9a837661ea0765b82e4c6056e1ca7aa5d
+  create_plan_path: manifests/create-plan.yml
+  experiment_family: tsm-mean-reversion-supplemental-divergence-v004
+  historical_evaluation_operator: operator A
+  prepare_report_digest: 5ccfcba893fb9d9ed5c3577e6f218669aa247cf75948a63f834ac978251b892e
+  prepare_report_path: manifests/prepare-report.yml
+  research_owner: ochowei@gmail.com
+  research_round_id: TASK-031
+  source_bundle_digest: 1a893a57642724aa14fbdef3e20583b34e6a40e452542dcaf01021336250b621
+  source_bundle_path: manifests/source-bundle.yml
+  workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+  workflow_reference_path: manifests/workflow-reference.yml
+previous_event_digest: null
+schema_version: 1
+sequence: 1
+study_id: tsm-divergence-incremental--v001

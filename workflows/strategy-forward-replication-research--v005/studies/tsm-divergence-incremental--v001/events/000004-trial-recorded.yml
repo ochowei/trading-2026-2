@@ -1,0 +1,26 @@
+actor_id: /root/task_031_divergence_ablation
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 1a893a57642724aa14fbdef3e20583b34e6a40e452542dcaf01021336250b621
+  workflow_digest: 2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2
+  workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: trial-recorded
+execution:
+  assignment_digest: 9d30c341a12ced175d2cf5e9c348cfa127d7eaf2ea1cda51ba471e41c0abe9cb
+  assignment_path: manifests/assignments/9d30c341a12ced175d2cf5e9c348cfa127d7eaf2ea1cda51ba471e41c0abe9cb.yml
+  role: study 開發者
+occurred_at: '2026-09-30T04:42:12.578348Z'
+payload:
+  development_evidence_digest: 0d96166179d051873bcde6d344c6c667db08cf4d7880caeffc7de0759de58f96
+  development_evidence_path: evidence/trials/tsm-mr-supplemental-divergence-v004/candidate.yml
+  inputs_digest: bfdf2ba3404dddc2a0a1b243ba8121a6c24cf57df393b20cbd146f6d5e53d109
+  inputs_path: evidence/trials/tsm-mr-supplemental-divergence-v004/inputs.yml
+  publication_digest: 0d5321ae3fb1613da3b6bab0ba77a475f0080c2235e333106e61e024f57893a8
+  publication_path: evidence/trials/tsm-mr-supplemental-divergence-v004/publication.yml
+  status: completed
+  trial_id: tsm-mr-supplemental-divergence-v004
+previous_event_digest: dd83b74a07629308b3126d377e1bddfa7cfadc2cfe795382319d7ae8b8e4727f
+schema_version: 1
+sequence: 4
+study_id: tsm-divergence-incremental--v001

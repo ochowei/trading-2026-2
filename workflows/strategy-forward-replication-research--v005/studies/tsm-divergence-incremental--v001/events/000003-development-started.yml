@@ -1,0 +1,19 @@
+actor_id: /root/task_031_divergence_ablation
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 1a893a57642724aa14fbdef3e20583b34e6a40e452542dcaf01021336250b621
+  workflow_digest: 2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2
+  workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: development-started
+execution:
+  assignment_digest: 9d30c341a12ced175d2cf5e9c348cfa127d7eaf2ea1cda51ba471e41c0abe9cb
+  assignment_path: manifests/assignments/9d30c341a12ced175d2cf5e9c348cfa127d7eaf2ea1cda51ba471e41c0abe9cb.yml
+  role: study 開發者
+occurred_at: '2026-09-30T04:41:53.826574Z'
+payload:
+  operation_id: bfa8392755d4829992936211a09d81c459b6b4dac71338703d148805c8c219ce
+previous_event_digest: d8d70f4652f008c4ebf1df6f5d8d3dc918909694252321de916f49d9171e50a7
+schema_version: 1
+sequence: 3
+study_id: tsm-divergence-incremental--v001

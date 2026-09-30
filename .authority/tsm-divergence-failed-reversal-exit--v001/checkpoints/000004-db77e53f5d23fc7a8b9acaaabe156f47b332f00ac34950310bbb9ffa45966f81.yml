@@ -1,0 +1,6 @@
+created_at: '2026-09-30T07:23:58.444359Z'
+event_digest: db77e53f5d23fc7a8b9acaaabe156f47b332f00ac34950310bbb9ffa45966f81
+previous_checkpoint_digest: d67b5fd253ffd25b8055330b788ddeb4048e6280673f2672b5eb36541f73d0fe
+schema_version: 1
+sequence: 4
+study_id: tsm-divergence-failed-reversal-exit--v001

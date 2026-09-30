@@ -1,0 +1,188 @@
+creator: /root/task_031_divergence_ablation
+development_actor: /root/task_031_divergence_ablation
+identity:
+  experiment_family: tsm-mean-reversion-supplemental-divergence-v004
+  historical_evaluation_operator: operator A
+  research_owner: ochowei@gmail.com
+  research_round_id: TASK-031
+preregistration:
+  baseline_definition:
+    baseline_id: tsm-mr-v009-only-baseline-task031-v001
+    candidate_difference: Candidate 使用完整 v004 supplemental divergence path，另保留同一條 v009 core path；Baseline 只關閉 supplemental_path_enabled。
+    candidate_family: tsm-mean-reversion-supplemental-divergence-v004
+    execution_is_identical: true
+    family: tsm-mean-reversion-v009-two-stage-reversal
+    objectively_simpler_because: Baseline 沿用相同的 v009 core 訊號、成交時點、成本、倉位、風險及出場規則，但完全移除候選的補充型 state machine：低位事件、成交量位置分數轉正、縮量回測與補充確認訊號；所以 baseline 的訊號集合是較簡單的 v009-only family，且不包含在單一 candidate family 中。
+    selection_use: external-family reference only; baseline is not a candidate and is not ranked.
+    simpler_rule: 只使用 Close 相對 SMA(20) 至少低 1.5%、RSI(2) <= 50、前五個 session 曾有 volume ratio >= 1.05 且 Close > prior Close 的 v009 兩階段路徑；不允許 supplemental divergence path。
+  complete_candidate_family:
+    - tsm-mr-supplemental-divergence-v004
+  eligibility_rules:
+    accepted_signal:
+      accepted_only_when_flat: true
+      cooldown:
+        clock_anchor: completed-position-exit
+        minimum_completed_session_steps_after_exit: 5
+        position_must_be_flat: true
+      decision_time: completed-session-close
+      indicator_contract:
+        rsi_formula: simple-rolling-mean
+        rsi_not_ready: null
+        volume_lead_is_disabled_for_candidate: false
+      mean_reversion:
+        close_vs_sma20_gap_minimum: '0.015'
+        close_vs_sma20_operator: '>='
+        rsi_length: 2
+        rsi_operator: <=
+        rsi_value: '50'
+        sma_length: 20
+      price_direction_confirmation:
+        close_above_prior_close: true
+      supplemental_path:
+        atr_distance_multiplier: '1.0'
+        atr_lookback: 20
+        bollinger_ddof: 0
+        bollinger_lookback: 20
+        bollinger_percent_b_max: '0.25'
+        bollinger_recent_window: 5
+        bollinger_standard_deviation_multiplier: '2.0'
+        enabled: true
+        event_reference_low_type: window_3d_low
+        observation_window_sessions: 5
+        pullback_low_lookback: 10
+        retest_volume_lookback: 20
+        volume_score_window: 3
+      symbol: TSM
+      volume_leads_price:
+        enabled: true
+        prior_session_window: 5
+        volume_average_length: 20
+        volume_ratio_operator: '>='
+        volume_ratio_value: '1.05'
+        volume_shock_is_before_signal: true
+    costs:
+      base:
+        fee_per_side_bps: '1'
+        slippage_per_side_bps: '5'
+      stress:
+        fee_per_side_bps: '2'
+        slippage_per_side_bps: '20'
+    development_diagnostics:
+      attribution:
+        annual_incremental_pnl: 依 signal year 分組，分別加總 validated base/stress PnL，再以 Candidate 減 Baseline。
+        direction: candidate-minus-baseline
+        displaced_core_trades: 僅在合法 evidence 能確認 core 訊號來源及持倉排擠關係時統計；否則標示 unavailable。
+        divergence_only_trades: 僅在合法發布、驗證 evidence 提供可驗證的訊號來源欄位時統計；否則標示 unavailable。
+        formal_gate_source: Active v005 支援的 Development gates；上述策略增量與逐筆 attribution 均為診斷，不是 gates。
+        incremental_mdd: 分別重算 stress realized-trade-equity MDD，再以 Candidate 減 Baseline；不得解讀成相同交易路徑的因果反事實。
+        net_incremental_base_stress_pnl: 分別加總 validated raw trade PnL，再以 Candidate 減 Baseline。
+      block_bootstrap:
+        block_lengths:
+          - 3
+          - 5
+        repetitions: 50000
+        seed: 20260902
+        seed_application: exact-same-seed-for-each-block-length
+      signal_year_breakdown: true
+    development_gates:
+      base_profit_factor:
+        operator: '>'
+        value: '1.10'
+      base_return:
+        operator: '>'
+        value: '0'
+      completed_trades:
+        operator: '>='
+        value: 20
+      maximum_realized_trade_loss_fraction:
+        operator: <=
+        value: '0.04'
+      maximum_stress_block_bootstrap_drawdown_above_10pct_ratio:
+        operator: <=
+        value: '0.10'
+      maximum_stress_leave_one_year_out_drawdown:
+        operator: <=
+        value: '0.10'
+      minimum_stress_block_bootstrap_positive_return_ratio:
+        operator: '>='
+        value: '0.80'
+      minimum_stress_leave_one_year_out_profit_factor:
+        operator: '>'
+        value: '1.00'
+      minimum_stress_leave_one_year_out_return:
+        operator: '>'
+        value: '0'
+      stress_maximum_drawdown:
+        operator: <=
+        value: '0.10'
+      stress_profit_factor:
+        operator: '>'
+        value: '1.00'
+      stress_return:
+        operator: '>'
+        value: '0'
+      traded_years:
+        operator: '>='
+        value: 3
+    execution:
+      cooldown:
+        minimum_completed_session_steps_after_exit: 5
+      entry: 下一個 XNYS session open，以 MARKET proposal 模擬。
+      gap_fill: stop gap 以較差 open、target gap 以 open 價格改善成交，再套用成本。
+      intrabar_ambiguity: target 與 stop 同 session 觸及時先算 stop。
+      position_sizing:
+        risk_fraction_of_pre_entry_equity: '0.02'
+      stop:
+        level_from_raw_entry_open: '-0.04'
+      target:
+        level_from_raw_entry_open: '0.04'
+    research_targets: {}
+  evaluation_gates:
+    base_compounded_return:
+      operator: '>'
+      value: '0'
+    base_profit_factor:
+      operator: '>'
+      value: '1.10'
+    completed_trades:
+      operator: '>='
+      value: 20
+    family_wise_confidence:
+      operator: '>='
+      value: '0.90'
+    maximum_fold_positive_profit_concentration:
+      operator: <=
+      value: '0.50'
+    maximum_fold_trade_concentration:
+      operator: <=
+      value: '0.50'
+    maximum_realized_trade_loss_fraction:
+      operator: <=
+      value: '0.04'
+    positive_traded_fold_ratio:
+      operator: '>='
+      value: '0.60'
+    stress_max_drawdown:
+      operator: <=
+      value: '0.10'
+    stress_profit_factor:
+      operator: '>'
+      value: '1.00'
+    stress_return:
+      operator: '>'
+      value: '0'
+    traded_folds:
+      operator: '>='
+      value: 3
+  fold_warmup_sessions: 25
+  hypothesis: 在不改動 v009 兩階段量先價訊號與任何執行、成本及風控設定的前提下，完整 supplemental divergence path 可能增加成本後表現；Candidate 減 Baseline 是唯一增量方向，此假說尚待 Development 驗證。
+  initial_cash: '100000'
+  maximum_holding_sessions: 11
+  maximum_trials: 1
+  selection_rule:
+    eligible_candidate: 唯一候選須通過所有正式 Development gates；不依結果排名，不擴充 family。
+    method: fixed-single-candidate-no-outcome-ranking
+    selected_candidate_id: tsm-mr-supplemental-divergence-v004
+  tie_handling:
+    method: not-applicable-single-candidate
+study_id: tsm-divergence-incremental--v001

@@ -1,0 +1,26 @@
+data:
+  digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+  path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+evidence:
+  digest: 2ce95eb52e69e149e5999821fd547cf2a8a583161fbc1d95e3d5cda870ca8d08
+  path: runtime/evidence.yml
+execution_contract: request-output-v1
+execution_workspace: temporary
+operation_id: 4b2c14403e871911d66a7f4267890a7e4bbbdce9af12fff36a8c48e7cfa73b7a
+request:
+  digest: 637ab711a4217dd890c72c234c0dec247f5eb75474b214db38981277e3d7b4e5
+  path: runtime/request.yml
+resolver_version: 1
+runner:
+  digest: 716855375dc1e46043e3f5550524c8b625028df6f3b84ee86f9eb5b419be170b
+  path: research/tsm-divergence-failed-reversal-exit--v001/run_development.py
+schema_version: 1
+source_bundle:
+  digest: 7448e87ea3089d89de7ff445cdf2f86afac2b30f6942a7cd8f01de97832a64a6
+  path: manifests/source-bundle.yml
+stage: development
+study_id: tsm-divergence-failed-reversal-exit--v001
+workflow_reference:
+  digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+  path: manifests/workflow-reference.yml
+workflow_version: v005

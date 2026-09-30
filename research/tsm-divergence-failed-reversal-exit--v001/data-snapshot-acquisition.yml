@@ -1,0 +1,23 @@
+adjustment_policy: auto_adjusted
+calendar: XNYS
+development_file:
+  digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+  path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+  role: warmup-development
+interval: 1d
+prior_outcome_exposure_assessment:
+  asset_id: TSM
+  handling: 除非允許的來源證據能補足 provenance，不得將本資產或 baseline family 宣稱為 verified-clean。
+  known_exposure: 已讀到舊 v004 preregistration 所記錄的 v009 reference-study 數值績效。
+  unverified_scope:
+    - 數值所對應的資料來源與資料期間
+    - 數值屬於 Development 或正式 Historical Evaluation 的哪一階段
+    - 數值是否使用本次固定的 TSM Development snapshot
+  v005_provenance_status: provenance-unknown
+provenance_limitation: 本次受派執行者已讀到既有 v004 preregistration 內的 v009 reference-study 績效數字。目前可用且允許的紀錄未能確認數字所對應的資料期間、結果階段或原始證據，因此不能判定此曝光是否與本次 TSM Development snapshot 相同；依 v005 規則將 TSM 標為 provenance-unknown，不得標成 verified-clean。
+provenance_status: provenance-unknown
+provider: yahoo
+schema_version: 1
+source_note: 固定使用 repository 中已保存的 warmup + Development TSM CSV；此 Study 不連線資料供應商。既往績效曝光與來源階段仍無法核實，因此 provenance 維持 provenance-unknown。
+symbol: TSM
+timezone: America/New_York

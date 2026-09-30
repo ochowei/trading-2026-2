@@ -1,0 +1,26 @@
+actor_id: /root/task_033_sma20_exit
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 891e387a7bd8cfb2428ffa44320e4ebc93d0f6003bd1d6e8aef976ca26252d3a
+  workflow_digest: 2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2
+  workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: trial-recorded
+execution:
+  assignment_digest: 7e32c7c8342a707efd0ebaa07b01ae377705f10cfa549d953730c072a82c35d5
+  assignment_path: manifests/assignments/7e32c7c8342a707efd0ebaa07b01ae377705f10cfa549d953730c072a82c35d5.yml
+  role: study 開發者
+occurred_at: '2026-09-30T06:44:28.635730Z'
+payload:
+  development_evidence_digest: 079ba80b8b03008b6d0e31b45fd490e7103da98ac23bb51e11661ba73ce78709
+  development_evidence_path: evidence/trials/tsm-mr-supplemental-divergence-v004-sma20-reentry-exit/candidate.yml
+  inputs_digest: 5221552bd096a274ec5415090b8f89e6a15f85b49d1d33dec3d2cd05a525ef47
+  inputs_path: evidence/trials/tsm-mr-supplemental-divergence-v004-sma20-reentry-exit/inputs.yml
+  publication_digest: 577d2f4c3892d6b05025810ac7df83f13db7a3c9a51c17c0f4a2db2e899f0753
+  publication_path: evidence/trials/tsm-mr-supplemental-divergence-v004-sma20-reentry-exit/publication.yml
+  status: completed
+  trial_id: tsm-mr-supplemental-divergence-v004-sma20-reentry-exit
+previous_event_digest: 8cddd2451218b9893bc9a7e5c0b67049d485f7db78dc5f449eb6a462e87e9b7f
+schema_version: 1
+sequence: 4
+study_id: tsm-divergence-sma20-reentry-exit--v001

@@ -1,0 +1,30 @@
+actor_id: /root/task_035_gap_aware_entry
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: c66328036f143e755181d8876926b0736544daedca15b5a6b6a7f332e4bab221
+  workflow_digest: 2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2
+  workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: study-created
+execution:
+  assignment_digest: 58070fba5778bef7e14ff58b4be9778062f66317f4936e1227dcf160ae9dee74
+  assignment_path: manifests/assignments/58070fba5778bef7e14ff58b4be9778062f66317f4936e1227dcf160ae9dee74.yml
+  role: study 開發者
+occurred_at: '2026-09-30T08:13:08.840154Z'
+payload:
+  create_plan_digest: 02f2bebb4e11204405bbbb71dd4ea722be08b8688d8a5e29288ce5d0aa11f265
+  create_plan_path: manifests/create-plan.yml
+  experiment_family: tsm-mean-reversion-supplemental-divergence-v004-atr-gap-filter
+  historical_evaluation_operator: operator A
+  prepare_report_digest: b090caf9b1f0c54a324d5998bf6b951de4f26812a08c4cd2db12b87abd04735f
+  prepare_report_path: manifests/prepare-report.yml
+  research_owner: ochowei@gmail.com
+  research_round_id: tsm-divergence-atr-gap-filter--v001
+  source_bundle_digest: c66328036f143e755181d8876926b0736544daedca15b5a6b6a7f332e4bab221
+  source_bundle_path: manifests/source-bundle.yml
+  workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+  workflow_reference_path: manifests/workflow-reference.yml
+previous_event_digest: null
+schema_version: 1
+sequence: 1
+study_id: tsm-divergence-atr-gap-filter--v001

@@ -1,0 +1,70 @@
+candidate_freeze: null
+evidence:
+  development: c41581a124250d4d035cc559a8247c57aaa0730f66e2176186cb591796f9ffc9
+lifecycle:
+  current_event: trial-recorded
+  event_chain_head_digest: dc2e4dad48124dfca31ae5d8e65c7bcf94eb5e5eaf94a0e1e97e502bf0e8d5f0
+  event_count: 4
+  status: active
+outcome:
+  authority: none
+  status: pending
+preregistration:
+  digest: b2e0ec5b2b62735ed35c7759526de2799070dc285723c42a5bde6162e90aff28
+provenance:
+  status: null
+schema_version: 1
+study:
+  identity:
+    create_plan_digest: 02f2bebb4e11204405bbbb71dd4ea722be08b8688d8a5e29288ce5d0aa11f265
+    create_plan_path: manifests/create-plan.yml
+    experiment_family: tsm-mean-reversion-supplemental-divergence-v004-atr-gap-filter
+    historical_evaluation_operator: operator A
+    prepare_report_digest: b090caf9b1f0c54a324d5998bf6b951de4f26812a08c4cd2db12b87abd04735f
+    prepare_report_path: manifests/prepare-report.yml
+    research_owner: ochowei@gmail.com
+    research_round_id: tsm-divergence-atr-gap-filter--v001
+    source_bundle_digest: c66328036f143e755181d8876926b0736544daedca15b5a6b6a7f332e4bab221
+    source_bundle_path: manifests/source-bundle.yml
+    workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+    workflow_reference_path: manifests/workflow-reference.yml
+  study_id: tsm-divergence-atr-gap-filter--v001
+trial_registry:
+  assessments:
+    tsm-mr-supplemental-divergence-v004-gap-atr05:
+      actuals:
+        base_profit_factor: '4.992886214580229'
+        base_return: '0.24094378413320489'
+        completed_trades: 21
+        maximum_realized_trade_loss_fraction: '0.019999409114744866'
+        maximum_stress_block_bootstrap_drawdown_above_10pct_ratio: 2e-05
+        maximum_stress_leave_one_year_out_drawdown: '0.024203485887991916'
+        minimum_stress_block_bootstrap_positive_return_ratio: '0.99792'
+        minimum_stress_leave_one_year_out_profit_factor: '2.0476718080168386'
+        minimum_stress_leave_one_year_out_return: '0.0669828931982166'
+        stress_maximum_drawdown: '0.024203485887991916'
+        stress_profit_factor: '3.906026796033204'
+        stress_return: '0.18579681253265065'
+        traded_years: 5
+      candidate_freeze_eligibility:
+        eligible: true
+        reasons: []
+      development_evidence_validity:
+        status: valid
+        validated: true
+      formal_development_gates:
+        failed: []
+        status: passed
+      research_targets:
+        failed: []
+        status: not_registered
+  digest: null
+  recorded_trial_count: 1
+  trial_ids:
+    - tsm-mr-supplemental-divergence-v004-gap-atr05
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: c66328036f143e755181d8876926b0736544daedca15b5a6b6a7f332e4bab221
+  workflow_digest: 2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2
+  workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+  workflow_reference_path: manifests/workflow-reference.yml

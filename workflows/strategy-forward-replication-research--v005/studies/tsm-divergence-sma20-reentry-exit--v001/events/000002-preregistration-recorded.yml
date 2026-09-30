@@ -1,0 +1,20 @@
+actor_id: /root/task_033_sma20_exit
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 891e387a7bd8cfb2428ffa44320e4ebc93d0f6003bd1d6e8aef976ca26252d3a
+  workflow_digest: 2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2
+  workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: preregistration-recorded
+execution:
+  assignment_digest: 7e32c7c8342a707efd0ebaa07b01ae377705f10cfa549d953730c072a82c35d5
+  assignment_path: manifests/assignments/7e32c7c8342a707efd0ebaa07b01ae377705f10cfa549d953730c072a82c35d5.yml
+  role: study 開發者
+occurred_at: '2026-09-30T06:43:53.042491Z'
+payload:
+  preregistration_digest: 5c23044b882effd6d7632a648193182c78c500bfbaf4871d0b257b3d3396c788
+  preregistration_path: manifests/preregistration.yml
+previous_event_digest: 1fa37e3a0e3126caa6b71800c6caf75d703cbeed1fe31d87d43dd376841cd064
+schema_version: 1
+sequence: 2
+study_id: tsm-divergence-sma20-reentry-exit--v001

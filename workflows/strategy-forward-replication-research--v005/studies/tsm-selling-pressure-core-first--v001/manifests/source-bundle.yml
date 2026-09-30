@@ -1,0 +1,22 @@
+files:
+  - digest: 2034b904abf6032eb869d24cb62eb2445b58ebd364f00f08cd0df10b2c157d1b
+    path: research/tsm-selling-pressure-core-first--v001/candidate-definition.yml
+  - digest: 8cf2cd86423b928129b6be26bbcb15614faea10063401fa66e0e6397b2bce4a9
+    path: research/tsm-selling-pressure-core-first--v001/implementation-contract.yml
+  - digest: 761c13b3728a2c383bc6cf503735f00530928b8aaa648045c0e10f0003d2df07
+    path: research/tsm-selling-pressure-core-first--v001/preregistration.yml
+  - digest: 7197d9e7b812f8dd9e713be8dc34d8eabb5968151d82e3a59bc803bb3a049827
+    path: research/tsm-selling-pressure-core-first--v001/qualification-spec.yml
+  - digest: 77d7e74fb1e679333c66e5110f7f252894f93c2494c5fbb47247c8d48ecb1065
+    path: research/tsm-selling-pressure-core-first--v001/run_development.py
+  - digest: 3f545c0d19002c5f1463b8e1d5cb062e3d4c6d2bea944f95be5432e438e9582d
+    path: research/tsm-selling-pressure-core-first--v001/run_historical_evaluation.py
+  - digest: 94874b3d37b01fc76b811d0dd6d2d3c847d817f99356e2e52296775c2c588a30
+    path: research/tsm-selling-pressure-core-first--v001/runner-contract.yml
+  - digest: 40d65b4e1fd76dbc3b1038d0f602de8f5564066ae9c548ec7598da45140501aa
+    path: src/trading_2026_2/tsm_mean_reversion_selling_pressure_core_first_v001.py
+  - digest: 0e889edc447d5a87c08aa507dcfe1a219e377c2ba6b27cd4bf14951d439df72d
+    path: src/trading_2026_2/tsm_mean_reversion_selling_pressure_rollover_v001.py
+  - digest: f3163c9b92046d0397ce1daf0cfb320a302c9e994875a4be0e93057a83cef7c4
+    path: src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v009.py
+schema_version: 1

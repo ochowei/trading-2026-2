@@ -1,0 +1,54 @@
+baseline_comparison:
+  baseline_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v001
+  baseline_is_excluded_from_candidate_family: true
+  candidate_family: tsm-mean-reversion-v009-sma20-sma50-regime
+  candidate_id: tsm-mr-v009-sma20-over-sma50-regime-v001
+  comparison_direction: candidate-minus-control
+  execution_is_identical: true
+candidate_family: tsm-mean-reversion-v009-sma20-sma50-regime
+candidate_id: tsm-mr-v009-sma20-over-sma50-regime-v001
+complete_candidate_family:
+  - tsm-mr-v009-sma20-over-sma50-regime-v001
+cost_models:
+  base:
+    fee_per_side_bps: '1'
+    slippage_per_side_bps: '5'
+  stress:
+    fee_per_side_bps: '2'
+    slippage_per_side_bps: '20'
+data_bindings:
+  development_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+  development_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+date_controls:
+  formal_provider_access: false
+  signal_end: '2018-12-31'
+  signal_start: '2014-01-01'
+  warmup_end: '2013-12-31'
+  warmup_start: '2013-01-01'
+development_diagnostics:
+  block_lengths:
+    - 3
+    - 5
+  bootstrap_seed: 20260902
+  repetitions: 50000
+  seed_application: exact-same-seed-for-each-block-length
+execution:
+  cooldown_anchor: completed-position-exit
+  cooldown_completed_session_steps_after_exit: 5
+  entry: next-XNYS-open
+  holding_sessions: 10
+  intrabar_ambiguity: adverse-stop-first
+  position_sizing:
+    modeled_stop_includes_costs: true
+    risk_fraction: '0.02'
+  stop_market_gtc: '-0.04'
+  target_limit_day: '0.04'
+preregistration_digest: 7e837d35bf1e48082ea751ac0d24e8460859e0611221cf9c966993a0dd542154
+schema_version: 1
+selected_candidate_id: tsm-mr-v009-sma20-over-sma50-regime-v001
+source_bundle_digest: b9b814f9ddbadc0a05db1dc69818e37b89a29fcb43cf75a8d8db3a6d7e3bcb68
+strategy_engine_digest: 4d0f756827e137b673b2975d654696caeeabd0d46a9e1f44dfa2dae8f5d14888
+study_id: tsm-divergence-sma20-sma50-regime--v001
+study_procedure_digest: dc9245ffce87e41e27ca9e84ffdfb1561c25425bce44e4a3dccaa157942c1b3a
+study_procedure_path: research/tsm-divergence-sma20-sma50-regime--v001/run_development.py
+trial_id: tsm-mr-v009-sma20-over-sma50-regime-v001

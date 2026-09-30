@@ -1,0 +1,19 @@
+actor_id: /root/task_034_failed_reversal_exit
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 7448e87ea3089d89de7ff445cdf2f86afac2b30f6942a7cd8f01de97832a64a6
+  workflow_digest: 2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2
+  workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: development-started
+execution:
+  assignment_digest: 70a736ade63ce3b3c12c471e2ab479ded60a1bff487f8e828bc5241aab30d94e
+  assignment_path: manifests/assignments/70a736ade63ce3b3c12c471e2ab479ded60a1bff487f8e828bc5241aab30d94e.yml
+  role: study 開發者
+occurred_at: '2026-09-30T07:23:48.950372Z'
+payload:
+  operation_id: 0cc066d41f9a112cecb4a6aa9a457c39c379260282bbbd3b3deb6879d88fe691
+previous_event_digest: 33db200d733482199e31e2e75cdc3c478ea19601cf558a16ba9ecc47fb47e198
+schema_version: 1
+sequence: 3
+study_id: tsm-divergence-failed-reversal-exit--v001

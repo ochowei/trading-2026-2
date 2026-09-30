@@ -1,0 +1,48 @@
+actor: /root/task_035_gap_aware_entry
+data_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+data_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+trial_inputs:
+  baseline_comparison:
+    baseline_family: tsm-mean-reversion-supplemental-divergence-v004
+    baseline_id: tsm-mr-supplemental-divergence-v004-control-task035-v001
+    baseline_is_excluded_from_candidate_family: true
+    candidate_family: tsm-mean-reversion-supplemental-divergence-v004-atr-gap-filter
+    candidate_id: tsm-mr-supplemental-divergence-v004-gap-atr05
+    comparison_direction: candidate-minus-control
+    execution_is_identical: true
+  candidate_family: tsm-mean-reversion-supplemental-divergence-v004-atr-gap-filter
+  candidate_id: tsm-mr-supplemental-divergence-v004-gap-atr05
+  complete_candidate_family:
+    - tsm-mr-supplemental-divergence-v004-gap-atr05
+  cost_models:
+    base:
+      fee_per_side_bps: '1'
+      slippage_per_side_bps: '5'
+    stress:
+      fee_per_side_bps: '2'
+      slippage_per_side_bps: '20'
+  data_bindings:
+    development_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+    development_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+  date_controls:
+    formal_provider_access: false
+    signal_end: '2018-12-31'
+    signal_start: '2014-01-01'
+    warmup_end: '2013-12-31'
+    warmup_start: '2013-01-01'
+  development_diagnostics:
+    aggregate_comparison: 以既有candidate與baseline evidence重算base/stress報酬、raw PnL、profit factor與drawdown；不增加formal gate。
+    block_lengths:
+      - 3
+      - 5
+    bootstrap_seed: 20260902
+    comparison_direction: candidate-minus-control
+    repetitions: 50000
+    seed_application: exact-same-seed-for-each-block-length
+    skipped_entry_attribution: 只有既有合法發布的candidate/control evidence可逐筆識別時才報告被略過交易；若無法區分filter造成的直接略過與後續持倉路徑差異，標示無法判斷，不擴充evidence schema。
+  preregistration_digest: b2e0ec5b2b62735ed35c7759526de2799070dc285723c42a5bde6162e90aff28
+  source_bundle_digest: c66328036f143e755181d8876926b0736544daedca15b5a6b6a7f332e4bab221
+  strategy_engine_digest: 80871b6a1c707ba37f3bab1f1ab44a94df61048f323d7a4a9fb9d51cdd7b6ccb
+  study_procedure_digest: 9ac90b237d03c4f223e2cd78d079197c115f83228237003334b5cdd4a3aa4ca8
+  study_procedure_path: research/tsm-divergence-atr-gap-filter--v001/run_development.py
+  trial_id: tsm-mr-supplemental-divergence-v004-gap-atr05

@@ -1,0 +1,9 @@
+assignee: /root/task_032_core_first
+assigner: 專案管理者
+instruction: TASK-032：依 Active v005，建立且只建立 tsm-selling-pressure-core-first--v001，Control 使用 v009 Path A，Candidate 只加既有 selling-pressure-rollover v002 Path B；固定單一持倉 core-first 優先規則和 2% risk，完成唯一 Development、盲檢討及成果卡。只做 Study Development，不執行正式 Historical Evaluation、Terminal、challenge 或 replay，不讀受限資料。
+role: study 開發者
+schema_version: 1
+scope: development-to-freeze
+source_id: chatgpt-conversation://6abc7c9d-0524-83e8-8b6d-cef30a8b62b8
+study_id: tsm-selling-pressure-core-first--v001
+workflow_version: v005

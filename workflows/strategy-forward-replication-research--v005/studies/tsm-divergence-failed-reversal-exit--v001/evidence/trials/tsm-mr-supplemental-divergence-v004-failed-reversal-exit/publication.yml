@@ -1,0 +1,16 @@
+artifacts:
+  baseline:
+    digest: 5b142c3b1ac0f185feaf0a220c01287045645b62f420f1a1ad1a448491d2f760
+    path: evidence/trials/tsm-mr-supplemental-divergence-v004-failed-reversal-exit/baseline.yml
+  candidate:
+    digest: 7d6d97c81f5e43a645e93fb0fc9dc090026585321a453b881842215245afaa83
+    path: evidence/trials/tsm-mr-supplemental-divergence-v004-failed-reversal-exit/candidate.yml
+  inputs:
+    digest: 15e95ef6198fbbaef9eb734878359b1a9f53f9c73ea91891fad670a2e569baae
+    path: evidence/trials/tsm-mr-supplemental-divergence-v004-failed-reversal-exit/inputs.yml
+envelope_digest: 2ce95eb52e69e149e5999821fd547cf2a8a583161fbc1d95e3d5cda870ca8d08
+preregistration_digest: 39f39ee7c620522bacbfb97d52ec360226e438072ab5048eb27da74abea712a7
+schema_version: 1
+source_bundle_digest: 7448e87ea3089d89de7ff445cdf2f86afac2b30f6942a7cd8f01de97832a64a6
+study_id: tsm-divergence-failed-reversal-exit--v001
+trial_id: tsm-mr-supplemental-divergence-v004-failed-reversal-exit

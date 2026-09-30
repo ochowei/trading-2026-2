@@ -1,0 +1,20 @@
+actor_id: /root/task_032_core_first
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: d6876339038ad2aa76402c2e3f815db0e5b15e19455081d6d5fdf1ed154a5f3d
+  workflow_digest: 2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2
+  workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: preregistration-recorded
+execution:
+  assignment_digest: a7bc05dae9a8875e0edc97c948991eb42ddeb703178966e63d7d8787b54f1291
+  assignment_path: manifests/assignments/a7bc05dae9a8875e0edc97c948991eb42ddeb703178966e63d7d8787b54f1291.yml
+  role: study 開發者
+occurred_at: '2026-09-30T05:53:48.112712Z'
+payload:
+  preregistration_digest: 761c13b3728a2c383bc6cf503735f00530928b8aaa648045c0e10f0003d2df07
+  preregistration_path: manifests/preregistration.yml
+previous_event_digest: 5a3cb595826e9d6b3c3558c83fc3a692ff34607ff48652e8298d878cf7de75cc
+schema_version: 1
+sequence: 2
+study_id: tsm-selling-pressure-core-first--v001

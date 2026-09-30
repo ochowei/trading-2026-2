@@ -1,0 +1,24 @@
+files:
+  - digest: b7adef6a72204911b8b77434bd38eb0f29d9b0281b6dcfe2dbc3c7fdc357a7ad
+    path: research/tsm-divergence-incremental--v001/candidate-definition.yml
+  - digest: 21947a537efe82a33f85509007b5d093771fdaf943bc735be76d7cba4cab4cb3
+    path: research/tsm-divergence-incremental--v001/data-snapshot-acquisition.yml
+  - digest: 02dd970c0c10228532860b4a7026143a8130d616ca904e82c828843c859725e6
+    path: research/tsm-divergence-incremental--v001/data-snapshot-set.yml
+  - digest: 369cd5791ec4d0619a0bfc641f144da0e25beff6ec2ab6d2b7094a21117dd421
+    path: research/tsm-divergence-incremental--v001/implementation-contract.yml
+  - digest: 5eb00ae04e126614e638a1a1bae1b2fd965d26e56e14eedaacde1b655248edac
+    path: research/tsm-divergence-incremental--v001/preregistration.yml
+  - digest: 430a2ee531feac70b16f9d5f85d067f62b806abe87a56dc8e2b45bd1cae56458
+    path: research/tsm-divergence-incremental--v001/qualification-spec.yml
+  - digest: e668bc298e1ec140ffbb3caa71479ce1c35255f292c1500fe0d0f7c7da5bf4b8
+    path: research/tsm-divergence-incremental--v001/run_development.py
+  - digest: b7b2d676d79b8aac89eadb8905c9af5d2bdc65ea1b1ebc0e66b85fa804d93782
+    path: research/tsm-divergence-incremental--v001/run_historical_evaluation.py
+  - digest: a725a73a7341d54a8c6cfa1f0f7d4d0f4b1a4b79975df334c56a6f0175027cc7
+    path: research/tsm-divergence-incremental--v001/runner-contract.yml
+  - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+    path: src/trading_2026_2/__init__.py
+  - digest: cae8aa38dbe8bd40036d69f54bc5a7fd5fc87f774017b0f49a538af3c96e7384
+    path: src/trading_2026_2/tsm_mean_reversion_supplemental_divergence_v004.py
+schema_version: 1

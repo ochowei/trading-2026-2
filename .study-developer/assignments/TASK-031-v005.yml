@@ -1,0 +1,9 @@
+assignee: /root/task_031_divergence_ablation
+assigner: /root（專案管理者）
+instruction: TASK-031：只建立一個 v005 Study；Candidate 為完整 supplemental divergence v004，Baseline 為只關閉 divergence supplemental path 的 v009-only version；固定所有 SMA、RSI、volume、持有期、cooldown、停損／停利與 risk 參數。只執行 Development、blind review 與指定成果卡追加，不執行 Historical Evaluation、Terminal、challenge 或 replay。
+role: study 開發者
+schema_version: 1
+scope: development-to-freeze
+source_id: TASK-031-revised-2026-09-30
+study_id: tsm-divergence-incremental--v001
+workflow_version: v005

@@ -1,0 +1,171 @@
+baseline:
+  baseline_id: tsm-mr-supplemental-divergence-v004-control-task034-v001
+  engine_path: src/trading_2026_2/tsm_mean_reversion_failed_reversal_exit_v001.py
+  engine_spec_constant: CONTROL_SPEC
+  family: tsm-mean-reversion-supplemental-divergence-v004-control
+  signals: 與 Candidate 相同的完整 v004 supplemental divergence 與 v009 core entry；Control 不啟用 signal-day Low 失敗反轉退出。
+  supplemental_divergence_path: enabled
+  supplemental_volume_lead: enabled
+  v009_core_path: enabled
+candidate:
+  candidate_id: tsm-mr-supplemental-divergence-v004-failed-reversal-exit
+  engine_path: src/trading_2026_2/tsm_mean_reversion_failed_reversal_exit_v001.py
+  engine_spec_constant: FAILED_REVERSAL_EXIT_SPEC
+  exit:
+    condition: 持倉 session 收盤 Close < 接受訊號日 Low（以訊號日收盤時固定的 Low 值判斷）
+    decision_time: completed-session-close
+    execution: 下一個 XNYS session open 以 market exit 平倉
+    failed_reversal_exit_enabled: true
+    same_day_order: 先判斷既有停損／停利；兩者均未觸發才安排 signal-day Low 退出
+    time_exit_coincidence: 若與原 10-session 到期同在下一開盤，保留原 time exit 的優先順序、價格與持有期
+  family: tsm-mean-reversion-supplemental-divergence-v004-failed-reversal-exit
+  signal:
+    accepted_only_when_flat: true
+    cooldown:
+      clock_anchor: completed-position-exit
+      completed_session_steps_after_exit: 5
+    decision_time: completed-session-close
+    exit:
+      condition: 持倉 session 收盤 Close < 接受訊號日 Low（以訊號日收盤時固定的 Low 值判斷）
+      decision_time: completed-session-close
+      execution: 下一個 XNYS session open 以 market exit 平倉
+      failed_reversal_exit_enabled: true
+      same_day_order: 先判斷既有停損／停利；兩者均未觸發才安排 signal-day Low 退出
+      time_exit_coincidence: 若與原 10-session 到期同在下一開盤，保留原 time exit 的優先順序、價格與持有期
+    mean_reversion:
+      close_vs_sma20_gap_minimum: '0.015'
+      rsi_length: 2
+      rsi_maximum: '50'
+      sma_length: 20
+    price_direction_confirmation:
+      close_above_prior_close: true
+    supplemental_path:
+      atr_distance_multiplier: '1.0'
+      atr_lookback: 20
+      bollinger_ddof: 0
+      bollinger_lookback: 20
+      bollinger_percent_b_max: '0.25'
+      bollinger_recent_window: 5
+      bollinger_standard_deviation_multiplier: '2.0'
+      enabled: true
+      event_reference_low_type: window_3d_low
+      observation_window_sessions: 5
+      pullback_low_lookback: 10
+      retest_volume_lookback: 20
+      volume_score_window: 3
+    symbol: TSM
+    volume_leads_price:
+      enabled: true
+      prior_session_window: 5
+      volume_average_length: 20
+      volume_ratio_minimum: '1.05'
+  supplemental_divergence_path: enabled
+  supplemental_volume_lead: enabled
+  v009_core_path: enabled
+candidate_family: tsm-mean-reversion-supplemental-divergence-v004-failed-reversal-exit
+candidate_id: tsm-mr-supplemental-divergence-v004-failed-reversal-exit
+complete_candidate_family:
+  - tsm-mr-supplemental-divergence-v004-failed-reversal-exit
+costs:
+  base:
+    fee_per_side_bps: '1'
+    slippage_per_side_bps: '5'
+  stress:
+    fee_per_side_bps: '2'
+    slippage_per_side_bps: '20'
+data:
+  adjustment_policy: auto_adjusted
+  calendar: XNYS
+  interval: 1d
+  provider: yahoo
+  symbol: TSM
+  timezone: America/New_York
+execution:
+  entry: next-session-open-market
+  failed_reversal_exit:
+    condition: 持倉 session 收盤 Close < 接受訊號日 Low（以訊號日收盤時固定的 Low 值判斷）
+    decision_time: completed-session-close
+    execution: 下一個 XNYS session open 以 market exit 平倉
+    failed_reversal_exit_enabled: true
+    same_day_order: 先判斷既有停損／停利；兩者均未觸發才安排 signal-day Low 退出
+    time_exit_coincidence: 若與原 10-session 到期同在下一開盤，保留原 time exit 的優先順序、價格與持有期
+  gap_fill: stop-gap-at-open-target-gap-at-open
+  held_complete_sessions: 10
+  intrabar_ambiguity: adverse-stop-first
+  maximum_holding_session_span_for_validator: 11
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    modeled_stop_includes_costs: true
+    risk_fraction_of_pre_entry_equity: '0.02'
+    shares: maximum-integer-shares-within-risk-and-cash-caps
+  stop:
+    level_from_raw_entry_open: '-0.04'
+    order_type: STOP_MARKET
+    time_in_force: GTC
+  target:
+    level_from_raw_entry_open: '0.04'
+    order_type: LIMIT
+    reissued_each_session: true
+    time_in_force: DAY
+fixed_execution_parameters:
+  cooldown_sessions: 5
+  failed_reversal_exit: true
+  holding_sessions: 10
+  maximum_holding_session_span_for_validator: 11
+  risk_fraction: '0.02'
+  rsi_length: 2
+  rsi_maximum: '50'
+  sma_length: 20
+  sma_minimum_gap: '0.015'
+  stop_return: '-0.04'
+  target_return: '0.04'
+  volume_ratio_minimum: '1.05'
+fold_policy:
+  evaluation_fold_warmup_sessions: 25
+  indicator_state_carried_between_folds: false
+  portfolio_state_reset_each_fold: true
+  replay_warmup_sessions: 25
+initial_cash: '100000'
+only_strategy_difference: Control 保留完整 supplemental divergence v004 與全部 v009 core entry；Candidate 唯一增加持倉 session 收盤 Close < 接受訊號日 Low 後於次一 XNYS session open 市價退出。停損／停利優先；原 10-session 到期、entry、成本、參數與風控不變。
+schema_version: 1
+selected_candidate_id: tsm-mr-supplemental-divergence-v004-failed-reversal-exit
+signal:
+  accepted_only_when_flat: true
+  cooldown:
+    clock_anchor: completed-position-exit
+    completed_session_steps_after_exit: 5
+  decision_time: completed-session-close
+  exit:
+    condition: 持倉 session 收盤 Close < 固定訊號日 Low
+    decision_time: completed-session-close
+    execution: 次一 XNYS session open 以 market exit 平倉
+    failed_reversal_exit_enabled: true
+    same_day_order: 先判斷既有停損／停利；未觸發才安排 signal-day Low exit
+    time_exit_coincidence: 保留原有 10-session 到期開盤 time exit 的優先順序、價格與持有期
+  mean_reversion:
+    close_vs_sma20_gap_minimum: '0.015'
+    rsi_length: 2
+    rsi_maximum: '50'
+    sma_length: 20
+  price_direction_confirmation:
+    close_above_prior_close: true
+  supplemental_path:
+    atr_distance_multiplier: '1.0'
+    atr_lookback: 20
+    bollinger_ddof: 0
+    bollinger_lookback: 20
+    bollinger_percent_b_max: '0.25'
+    bollinger_recent_window: 5
+    bollinger_standard_deviation_multiplier: '2.0'
+    enabled: true
+    event_reference_low_type: window_3d_low
+    observation_window_sessions: 5
+    pullback_low_lookback: 10
+    retest_volume_lookback: 20
+    volume_score_window: 3
+  symbol: TSM
+  volume_leads_price:
+    enabled: true
+    prior_session_window: 5
+    volume_average_length: 20
+    volume_ratio_minimum: '1.05'

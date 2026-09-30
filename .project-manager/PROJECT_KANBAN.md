@@ -46,6 +46,117 @@
 
 ## 📋 TODO
 
+### [TASK-031] 以 v005 拆解 supplemental divergence 的增量貢獻
+- **狀態**：Done
+- **優先級**：高
+- **負責角色**：study 開發者
+- **執行者**：`/root/task_031_divergence_ablation`（study 開發者 subagent）
+- **建立日期**：2026-09-30
+- **更新日期**：2026-09-30
+- **依賴／阻塞**：無；使用者已指定 v005 create identity：research_owner 為 ochowei@gmail.com，historical_evaluation_operator 為 operator A。派工時須綁定當時 Active 的 Workflow Release；目前為 v005。
+- **驗收條件**：
+  - 依 v005 Study Development、blind review 與成果卡規範，只建立一個新 Study。為符合 v005 的 candidate／baseline 契約，Candidate 為完整 supplemental divergence v004；Baseline 為只關閉 divergence supplemental path 的 v009-only version。這保留原定兩個策略版本及唯一差異，只調換正式 candidate／baseline 標籤；preregistration 須如實說明候選家族、較簡單 baseline 家族及其差異。SMA 1.5%、RSI 50、volume 1.05、10-session、cooldown 5、停損／停利 ±4%、risk 2% 全部固定。不得測 divergence window 3／7 或加入其他訊號。
+  - 在查看本次結果前完成 preregistration，固定比較方向與計算方式，以 Candidate 減 Baseline 表示 divergence 的增量；研究診斷為 divergence-only trades、被排擠的 core trades、net incremental base／stress PnL、incremental MDD 及逐年度 incremental PnL。
+  - 正式 gates 只使用 Active workflow 支援的 Development metrics。開始前確認 control／candidate 能以合法契約表示；逐筆來源、排擠交易、年度增量與 incremental MDD 僅作診斷，須從合法發布且驗證通過的 evidence 重算，不得自行擴充 schema 或改寫 evidence。若 evidence 無法支持診斷，標示無法判斷，仍以合法的 aggregate base／stress 比較完成 Study；只有 control／candidate 無法合法表示或驗證時，才停在 Study create 前並回報原因。
+  - 若合法完成 Development，記錄 candidate／baseline、base／stress、正式 gates、evidence validity、freeze 資格與狀態；依序完成 v005 blind review，再以繁體中文 append-only 將成果卡追加至 .study-developer/development-note/TSM.md，不得覆寫既有內容。未符合資格時如實保留失敗或尚不能判斷，不得調參重跑。
+  - 僅做 Development；不得執行 Historical Evaluation、Terminal、challenge 或 replay，不得讀取或修改受限資料。完成後維持 Doing，由專案管理者驗收。
+- **摘要**：確認 supplemental divergence v004 的優勢是否真由 divergence 路徑帶來，並辨認新增交易是否排擠原有 core 交易，作為後續是否保留此路徑的依據。
+- **進度／備註**：使用者已補齊 create identity：research_owner=ochowei@gmail.com、historical_evaluation_operator=operator A。v005 prepare/precreate 通過後只建立一個 Study：`tsm-divergence-incremental--v001`，create operation `bfa8392755d4829992936211a09d81c459b6b4dac71338703d148805c8c219ce`；唯一 Development operation `693e6f5c31d70fc96e75dd82c4603bdcbee07a41448bf6c912a027437b8612e7` 完成，candidate／baseline evidence valid，正式 Development gates 均通過，研究目標未另登記。候選／baseline 的 base 報酬為 38.73%／33.68%，stress 為 30.40%／26.52%；raw PnL 增量 base／stress 約 +$5,054／+$3,872，stress MDD 差 −0.1197 個百分點。年增量、完整比較和限制已記於成果卡。盲檢討已完成，workflow reference、publication、inputs 與 evidence digest/schema 相符；交易來源與被排擠 attribution 因 evidence 無訊號來源欄位而標示無法判斷。繁體中文成果卡已 append-only 追加至 `.study-developer/development-note/TSM.md`（598 非空白字元），原文完整保留。舊 v004 preregistration 的 v009 績效數字來源／期間／階段未明，TSM provenance=`provenance-unknown`；Development gate eligibility 欄位通過不代表完整凍結資格，整體資格尚不能判斷，本次未執行 freeze。未執行 Historical Evaluation、Terminal、challenge 或 replay；TASK-032 未指派。
+- **Parent review／阻塞**：身份缺漏已解除。study 開發者已完成一個 v005 Development、盲檢討與指定成果卡；TASK-031 維持 Doing 等待專案管理者審閱。無正式 Historical Evaluation／Terminal 結果或 Study 狀態資料被讀取；本次未執行 freeze、Historical Evaluation、Terminal、challenge 或 replay。由專案管理者驗收，不得由 worker 移到 Done。
+
+- **Parent review（2026-09-30）**：驗收通過。Study tsm-divergence-incremental--v001 的唯一 Development operation 已完成；候選與 baseline evidence digest 均與 Trial event／publication 綁定相符，兩臂正式 Development gates 各 13/13 通過。重新核對候選減 baseline 的 base／stress PnL、逐年增量及 stress MDD 差，均與成果卡一致；v005 將 10 個完整持有 session 表示為 11 個 signal-to-exit sessions，符合 prepare report 的 held+1 契約。成果卡已 append-only，舊內容保留；盲檢討只用研究設計與 Development evidence。因舊 v004 preregistration 的 v009 數值來源不明，provenance 為 provenance-unknown、未凍結；沒有執行 Historical Evaluation、Terminal、challenge 或 replay。
+
+### [TASK-032] 在 core-first 規則下測試 selling-pressure supplemental path
+- **狀態**：Done
+- **優先級**：高
+- **負責角色**：study 開發者
+- **執行者**：`/root/task_032_core_first`（study 開發者 subagent）
+- **建立日期**：2026-09-30
+- **更新日期**：2026-09-30
+- **依賴／阻塞**：TASK-031 已通過專案管理者審閱；使用派工時 Active 的 Workflow Release。Study identity 沿用使用者指定的 research_owner=ochowei@gmail.com 與 historical_evaluation_operator=operator A。若合法 evidence 不支援逐筆排擠 attribution，標示無法判斷並以 aggregate candidate／baseline 比較；只有 core-first 狀態規則本身無法合法表示或驗證時，才回報 workflow 能力缺口並停止 create。
+- **驗收條件**：
+  - 依 v005 Study Development、blind review 與成果卡規範，只建立一個新 Study；Control 為 v009 two-stage reversal，Candidate 加入既有 selling-pressure-rollover v002 Path B，訊號門檻與進出場參數保持不變。
+  - 在 preregistration 固定單一 position slot 的優先順序：core 訊號與 supplemental 同時出現時只執行 core；持有 core 時略過 supplemental；若持有 supplemental 時出現 core 訊號，於下一個 open 退出 supplemental 並進入 core，並計入相應交易成本。Risk 上限維持 2%；本 Study 不測雙 sleeve、倉位比例或新訊號。
+  - 預先固定如何比較 supplemental 損益、被排擠的 core 交易及 net incremental base／stress PnL；這些逐筆 attribution 是診斷，不得自行加入正式 gates 或擴充 evidence schema。若合法 Development evidence 無法重算 attribution，明列無法判斷，仍以 workflow 支援的 candidate／baseline aggregate base／stress 指標評估整體影響；只有 core-first 狀態規則無法依 Active workflow 合法表示或驗證時，才停在 Study create 前並回報缺口。
+  - 若合法完成 Development，回報 candidate／baseline、base／stress、正式 gates、evidence validity、freeze 資格與狀態；依序完成 v005 blind review 及繁體中文 append-only 成果卡。不得在同一 Study 內調整門檻或重跑。
+  - 僅做 Development；不得執行 Historical Evaluation、Terminal、challenge 或 replay，不得讀取或修改受限資料。完成後維持 Doing，由專案管理者驗收。
+- **摘要**：測試 supplemental 交易能否在 core 優先、單一倉位不被取代的規則下增加績效，直接回應 Path B 曾排擠 v009 交易的問題。
+- **進度／備註**：Study `tsm-selling-pressure-core-first--v001` 依 Active v005 完成唯一 prepare、create 與 Development；使用者指定 identity 為 research_owner=ochowei@gmail.com、historical_evaluation_operator=operator A。兩臂 evidence valid、13/13 Development gates 通過。Candidate／Control base 報酬 37.636%／33.676%，stress 29.073%／26.523%；Candidate−Control raw PnL +$3,959.87／+$2,549.64。未登記獨立 research targets；無訊號來源欄，Path B 逐筆貢獻及被排擠 core attribution 無法判斷。Development eligibility=true，但 provenance 未完成，整體 freeze 資格未知，未 freeze。v005 Development-only blind review 完成，成果卡 append-only 追加於 `.study-developer/development-note/TSM.md`；正式 Historical Evaluation、Terminal、challenge、replay 均未執行。
+- **Parent review（2026-09-30）**：驗收通過。獨立核對 Control 為 v009 Path A-only、Candidate 僅加入 v002 Path B；Path A/B 指標與任務門檻相符，core-first 單 slot、雙訊號選 core、持有 core 略過 B、持有 B 遇 core 次開交接與雙邊成本均寫入 preregistration 並有合成 preflight 覆蓋。v005 prepare passed、僅一個 Study/create 與一個 Development；trial event、publication、inputs、candidate/baseline artifact digest 相符，重算兩臂各 13/13 gates 及 raw PnL delta 均與成果卡一致。只使用 TSM warmup+Development 資料；事件只到 trial-recorded，未 freeze 或執行正式 Historical Evaluation／Terminal／challenge／replay。成果卡長度在規範範圍，append 前 SHA-256 與原檔 prefix 相符，舊文未變。歸因未知與 provenance 未完的狀態均如實註明。
+
+### [TASK-033] 測試收盤站回 SMA(20) 的均值回歸退出
+- **狀態**：Done
+- **優先級**：高
+- **負責角色**：study 開發者
+- **執行者**：`/root/task_033_sma20_exit`（study 開發者 subagent）
+- **建立日期**：2026-09-30
+- **更新日期**：2026-09-30
+- **依賴／阻塞**：TASK-031、TASK-032 均已通過專案管理者審閱；前兩項顯示 supplemental 可提升 raw base/stress PnL，但 Path B attribution 仍未知且 PF 較低、MDD 略高，測試釋放持倉的單一 SMA(20) 退出仍有 Development 研究價值。一次只執行一個新 Study，不與其他退出或進場變更合併。Study identity 沿用使用者指定的 research_owner=ochowei@gmail.com、historical_evaluation_operator=operator A。
+- **驗收條件**：
+  - 以完整 supplemental divergence v004 為固定 Control，Candidate 只增加一條退出規則：進場後若收盤重新站回 SMA(20)，於下一個 session open 平倉。
+  - 預先固定同日觸發時的處理順序：原有停損／停利規則優先；未觸發時才適用 SMA(20) 退出；原有 10-session 到期規則及其他風控不變。不得改 entry、參數或加入 RSI exit。
+  - 依 Active workflow 完成一個新 Study 的 preregistration、唯一合法 Development trial 與 evidence validation；回報 base／stress、正式 gates、持有期間（若正式 evidence 可重算）、freeze 資格與狀態。
+  - 完成 v005 blind review 及繁體中文 append-only Development 成果卡；不得在同一 Study 內調參或重跑。
+  - 僅做 Development；不得執行 Historical Evaluation、Terminal、challenge 或 replay，不得讀取或修改受限資料。完成後維持 Doing，由專案管理者驗收。
+- **摘要**：檢查均值回歸策略在價格回到 SMA(20) 時退出，是否比固定 +4%／-4%／10-session 更能保留獲利並釋放持倉。
+- **進度／備註**：Study ID `tsm-divergence-sma20-reentry-exit--v001` 依 Active v005 完成 prepare、唯一 create 與唯一 Development trial；identity 為 research_owner=ochowei@gmail.com、historical_evaluation_operator=operator A。candidate/control evidence valid，正式 gates 各 13/13 過，targets 未登記。Candidate／Control base 報酬 25.33%／38.73%、stress 18.47%／30.40%；成本後損益差 −$13,397.90／−$11,923.77。平均持有期 5.07／6.96 session，Candidate 有 15/28 筆由 SMA exit 結束。已完成 Development-only source review 與成果卡 append；舊 v009 數值來源／階段不明，provenance=unknown，整體 freeze 資格尚不能判斷；本次未 freeze。未執行正式 Historical Evaluation、Terminal、challenge 或 replay。曾於 evidence review 前執行 Development-prefix `validate`，故不宣稱對 workflow state 全盲。
+
+- **Parent review（2026-09-30）**：驗收通過並移至 Done。獨立核對候選與 Control 僅有 SMA(20) 次日開盤退出差異，停損／停利優先與 10-session time exit 順序符合 preregistration；create identity 與派工一致。TSM Development CSV 雜湊、Source Bundle 十個檔案雜湊及 canonical digest、publication 綁定的 candidate／baseline／inputs digest 均吻合；兩臂 evidence 均為 valid/pass，各 13/13 gates，重算報酬、損益差、交易數與持有期符合交接摘要。候選縮短持有期，但 base/stress 報酬、PF 較低且 MDD 較高；這提供了明確的退出研究結果，且不取消 TASK-034 的獨立假說，因此繼續下一項。成果卡 append 前 SHA-256 `8ea27ff5…b661d2`，append 後 `a03dafdb…189b4c`；原有前綴保留，卡片 596 字元。盲檢討的研究設計與 Development evidence 範圍符合任務；worker 已揭露此前 `validate` 曾讀到 Development-prefix event 摘要，因此不宣稱 workflow state 全盲。未讀正式 Evaluation／Terminal evidence，未 freeze，未執行正式 Historical Evaluation、Terminal、challenge 或 replay。
+
+### [TASK-034] 測試跌破 signal-day low 的失敗反轉退出
+- **狀態**：Done
+- **優先級**：中
+- **負責角色**：study 開發者
+- **執行者**：`/root/task_034_failed_reversal_exit`（study 開發者 subagent）
+- **建立日期**：2026-09-30
+- **更新日期**：2026-09-30
+- **依賴／阻塞**：TASK-033 已經專案管理者審閱並確認仍值得繼續 Development；使用派工時 Active 的 Workflow Release。SMA(20) exit 結果低於 Control，但本項測試的是獨立的 signal-day low 失敗反轉假說。
+- **驗收條件**：
+  - 以完整 supplemental divergence v004 為固定 Control，Candidate 只增加失敗反轉退出：進場後若收盤跌破訊號日 low，於下一個 session open 平倉。
+  - preregistration 固定原有停損／停利優先於此訊號退出；未觸發時沿用 +4%／-4%／10-session 及其他原設定。不得改 entry、門檻或加入 SMA exit。
+  - 依 Active workflow 完成一個新 Study 的 preregistration、唯一合法 Development trial 與 evidence validation，回報 base／stress、正式 gates、可合法重算的平均虧損或輸家 MAE、freeze 資格與狀態；不可取得的診斷標示無法判斷。
+  - 完成 v005 blind review 及繁體中文 append-only Development 成果卡；不得在同一 Study 內調參或重跑。
+  - 僅做 Development；不得執行 Historical Evaluation、Terminal、challenge 或 replay，不得讀取或修改受限資料。完成後維持 Doing，由專案管理者驗收。
+- **摘要**：測試重新跌破反轉訊號日低點是否代表進場假說已失效，並觀察能否降低虧損幅度或回撤。
+- **進度／備註**：PM 已審核新版 checkpoint；唯一一次 v005 prepare 通過，Source Bundle 10 個檔案與四個 synthetic-only preflight case 均通過。Study `tsm-divergence-failed-reversal-exit--v001` 已建立並完成唯一 Development trial；Development-only evidence validation 通過，candidate／Control 發布綁定核對無誤，13/13 gates 通過，Development freeze eligibility=true（未執行 freeze）。Candidate／Control 分別 30／27 筆；base/stress 報酬為 13.95%／8.13% 對 38.73%／30.40%，獲利因子為 2.14／1.62 對 5.97／4.83。含成本平均虧損已依 preregistration 重算：Candidate base/stress 為 $873.95（14 筆）／$878.21（15 筆），Control 為 $1,559.44（5 筆）／$1,133.40（7 筆），均為診斷而非 gate。Development-only review 完成，digest、程式與唯一差異相符；TSM provenance 仍為 `provenance-unknown`。599 字元繁體中文成果卡已 append 至 `.study-developer/development-note/TSM.md`。Review 邊界：開始 review 前的 `validate` 回傳 Development-prefix event/projection 摘要，因此不宣稱 workflow-state 全盲；另一次搜尋 publication digest 定義曾輸出其他 Study 檔名與 envelope digest，未讀取其 evidence、metrics、狀態或正式結果。未執行正式 Historical Evaluation、Terminal、challenge 或 replay。
+
+- **Parent review（2026-09-30）**：驗收通過並移至 Done。獨立重算 publication 綁定的 candidate／baseline／inputs canonical digest，三者吻合；Source Bundle canonical digest `7448e87e…2a64a6` 的 10 個檔案雜湊全通過，Development CSV digest 與唯一資料存取紀錄相符，create identity 正確。事件只到唯一 `trial-recorded`，兩臂 evidence 均 `valid/pass`，各 13/13 gates。Candidate／Control base 報酬 13.95%／38.73%、stress 8.13%／30.40%；candidate−control raw PnL 為 −$24,781.59／−$22,265.74，PF 較低、MDD 較高。Candidate 平均單筆虧損較小但虧損筆數更多，這是已登記診斷且不能解讀為交易路徑的因果比較。候選 trial-level eligibility=true；整體 provenance 未完成、凍結資格未知，未 freeze。成果卡從前次 104,455-byte 內容 append：原文前綴 SHA-256 `a03dafdb…189b4c` 保留，新增尾段僅一張 599 字元卡；最後 SHA-256 `2eeb3f1d…69502c`。Development-only review 的可見範圍限制（Development-prefix projection 與其他 Study 的檔名／envelope digest）已如實揭露，未讀其他 Study evidence／metrics，也未接觸正式 Evaluation／Terminal 結果。TASK-035 測試不同的跳空 entry filter，仍值得依序進行。
+
+### [TASK-035] 測試以 ATR(20) 衡量的跳空追價過濾
+- **狀態**：Done
+- **優先級**：中
+- **負責角色**：study 開發者
+- **執行者**：`/root/task_035_gap_aware_entry`（study 開發者 subagent）
+- **建立日期**：2026-09-30
+- **更新日期**：2026-09-30
+- **依賴／阻塞**：TASK-034 已通過專案管理者審閱；雖 signal-day low exit 的總報酬低於 Control，跳空追價過濾是不同的 entry 假說，仍值得測試。使用派工時 Active 的 Workflow Release。
+- **驗收條件**：
+  - 以完整 supplemental divergence v004 為固定 Control，Candidate 只新增一項 entry filter：若下一 session open 相對訊號日 close 的正向跳空大於 0.5 × ATR(20)，則略過該交易。ATR 僅使用訊號日收盤前已完成的資料計算。
+  - preregistration 固定計算方式、資料可得時間與略過規則；exit、風控及所有其他 entry 條件不變。不得改成固定百分比門檻或同時測其他濾網。
+  - 依 Active workflow 完成一個新 Study 的 preregistration、唯一合法 Development trial 與 evidence validation，回報 candidate／baseline、base／stress、正式 gates、freeze 資格與狀態；略過交易的逐筆影響只在合法 evidence 足以重算時報告。
+  - 完成 v005 blind review 及繁體中文 append-only Development 成果卡；不得在同一 Study 內調參或重跑。
+  - 僅做 Development；不得執行 Historical Evaluation、Terminal、challenge 或 replay，不得讀取或修改受限資料。完成後維持 Doing，由專案管理者驗收。
+- **摘要**：檢查隔日跳空已消耗過多預期反彈空間時，放棄進場是否改善均值回歸策略的風險報酬。
+- **進度／備註**：依參照對話列為第五順位。Study ID=`tsm-divergence-atr-gap-filter--v001`；身份為 research_owner=`ochowei@gmail.com`、historical_evaluation_operator=`operator A`。第一次 prepare 因 preregistration 缺少 v005 必要的 block bootstrap 設定而在建 Study 前失敗；修復並重新綁定後 prepare 通過。第一次 create 因 `--report` 指到不存在的 `create-report.yml` 而在寫入前失敗；改用成功的 `prepare-report.yml` 後唯一 create 成功，事件為 study-created、preregistration-recorded、development-started。唯一 Development operation=`8b2091f63a4f189781b5ab8bb7d95012df5448f3a741440ddb235cafee3a181a` 完成，候選／Control evidence 有效、13/13 gates 均過；Candidate／Control 21／27 筆。base／stress 報酬為 24.09%／18.58% 對 38.73%／30.40%；PF 4.99／3.91 對 5.97／4.83；MDD 2.15%／2.42% 對 2.00%／2.00%。候選點估計低於 Control；因缺少逐筆 skip reason 且後續訊號交易日不同，直接略過筆數無法判斷。Candidate Development eligibility=true，但 provenance=`provenance-unknown`，整體 freeze 資格／狀態未知；未執行 freeze。Development-only blind review 已完成；先前 validate 顯示 Development-prefix event projection，因此不宣稱 review 對 workflow state 全盲。兩次 synthetic preflight 出現兩則非致命 NumPy `invalid value encountered in subtract` warnings，但 preflight passed。繁中成果卡已 append-only 追加，另以 append-only 補充美元損益單位，原有前綴完整保留。未執行正式 Historical Evaluation、Terminal、challenge 或 replay。
+- **Parent review（2026-09-30）**：驗收通過並移至 Done。獨立重跑唯讀 precreate 為 passed、0 errors／warnings；13 個 Development gates 受支援、Source Bundle 11/11 檔案雜湊通過。Candidate、Control、trial inputs canonical digest 均與 publication 相符；Development runtime manifest 指向 v005、temporary workspace，資料 SHA 與綁定相符。獨立加總逐筆 raw PnL 為 Candidate base／stress +$24,094.38／+$18,579.68、Control +$38,730.41／+$30,395.41；兩臂各 13/13 gates 通過。美元單位補註前完整檔 SHA-256 以 `b2895587` 開頭，符合補註後前綴；最終檔 SHA-256 以 `6b2300fe` 開頭，append-only 驗收通過。策略假說未獲 Control 比較支持，但 TASK-036 的 SMA(20)>SMA(50) 是不同 regime 條件；仍值得作為最後一項預先固定的獨立 Development 假說，不得用本次結果調參。未讀正式 Evaluation／Terminal 證據，未 freeze。
+
+### [TASK-036] 測試 SMA(20) 高於 SMA(50) 的均值回歸 regime 濾網
+- **狀態**：Pending
+- **優先級**：中
+- **負責角色**：study 開發者
+- **執行者**：`/root/task_036_trend_regime`（study 開發者 subagent）
+- **建立日期**：2026-09-30
+- **更新日期**：2026-09-30
+- **依賴／阻塞**：TASK-035 已經專案管理者審閱；本項是不同的長期趨勢 regime 假說，仍值得作為最後一項固定的 Development 探索。使用派工時 Active 的 Workflow Release。
+- **驗收條件**：
+  - 以 v009 two-stage reversal 為固定 Control，Candidate 只增加一個長期趨勢條件：訊號日 SMA(20) 必須高於 SMA(50)。不得同時測 SMA(50) slope、動能加速或其他 filter。
+  - preregistration 固定指標計算與可得時間；短期超跌、反轉、持有、停損／停利、risk 與成本設定沿用 v009。
+  - 依 Active workflow 完成一個新 Study 的 preregistration、唯一合法 Development trial 與 evidence validation，回報 candidate／baseline、base／stress、正式 gates、freeze 資格與狀態。
+  - 完成 v005 blind review 及繁體中文 append-only Development 成果卡；不得在同一 Study 內調參或重跑。
+  - 僅做 Development；不得執行 Historical Evaluation、Terminal、challenge 或 replay，不得讀取或修改受限資料。完成後維持 Doing，由專案管理者驗收。
+- **摘要**：測試將長期上升趨勢當作 v009 均值回歸的 regime 條件，是否能避開較不利的市場狀態。
+- **進度／備註**：依參照對話列為第六順位，經 TASK-035 PM review 確認值得作為獨立假說繼續；不得依先前研究結果調整此預登記規則。Study ID=`tsm-divergence-sma20-sma50-regime--v001`，使用者指定身份為 research_owner=`ochowei@gmail.com`、historical_evaluation_operator=`operator A`。派工給 `/root/task_036_trend_regime`（study 開發者），assignment=`.study-developer/assignments/TASK-036-v005.yml`。PM 已審閱 `.study-developer/task-036-v005/prepare-before-checkpoint.md`（SHA-256 `168021ff…92b6cf`），並獨立重跑唯讀 `precreate`：只有 `signal` 與 `holding-cooldown` 兩項 `synthetic-fixture-invalid`，其餘 contract、identity、參數、Source Bundle 11/11 digest 與綁定檢查通過；隔離 v005 runner-preflight 通過，Candidate 專屬 synthetic preflight 通過。正式 Study 目錄不存在，未執行 prepare/create/Development。TASK-036 暫移 Pending：Active v005 不可修改；要修正 native precreate 對 SMA regime 的合成案例，須另建並完整發布新 workflow version。待使用者決定是否擴大範圍交給 workflow 維護者；決定前不再派發 subagent。
+
 ### [TASK-027] 建立 v005 Study Development 專用 skill
 - **狀態**：Done
 - **優先級**：高

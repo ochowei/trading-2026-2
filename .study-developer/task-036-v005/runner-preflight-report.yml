@@ -1,0 +1,193 @@
+binding:
+  authority_root: /Users/william/.codex/worktrees/0825/trading-2026-2/.authority
+  environment:
+    executable: /Users/william/.local/share/uv/python/cpython-3.11.15-macos-aarch64-none/bin/python3.11
+    executable_digest: 4c78423e7d5986362ac04df40edb18cdd1174f9818d653402e3abbd2a5bbf793
+    packages:
+      - PyYAML==6.0.3
+      - Pygments==2.21.0
+      - attrs==26.1.0
+      - beautifulsoup4==4.15.0
+      - certifi==2026.7.22
+      - cffi==2.1.1
+      - charset-normalizer==3.5.1
+      - contourpy==1.3.3
+      - curl_cffi==0.16.2
+      - cycler==0.12.1
+      - exchange_calendars==4.13.2
+      - execnet==2.1.2
+      - fonttools==4.64.0
+      - idna==3.19
+      - iniconfig==2.3.0
+      - jsonschema-specifications==2025.9.1
+      - jsonschema==4.26.0
+      - kiwisolver==1.5.1
+      - korean_lunar_calendar==0.4.0
+      - lxml==6.1.2
+      - matplotlib==3.11.1
+      - multitasking==0.0.13
+      - numpy==2.4.6
+      - packaging==26.3
+      - pandas==3.0.5
+      - peewee==4.4.0
+      - pillow==12.3.0
+      - platformdirs==4.11.7
+      - pluggy==1.6.0
+      - protobuf==7.36.1
+      - pycparser==3.0
+      - pyluach==2.3.0
+      - pyparsing==3.3.2
+      - pytest-xdist==3.8.0
+      - pytest==9.1.1
+      - python-dateutil==2.9.0.post0
+      - pytz==2026.3.post1
+      - referencing==0.37.0
+      - requests==2.34.2
+      - rpds-py==2026.6.3
+      - ruff==0.16.5
+      - six==1.17.0
+      - soupsieve==2.9.2
+      - toolz==1.1.0
+      - trading-2026-2==0.1.0
+      - typing_extensions==4.16.0
+      - tzdata==2026.3
+      - urllib3==2.7.0
+      - websockets==17.1
+      - yfinance==1.7.0
+    python: 3.11.15 (main, Apr 14 2026, 14:45:51) [Clang 22.1.3 ]
+  repository: /Users/william/.codex/worktrees/0825/trading-2026-2
+  settings:
+    candidate-definition.yml: a732be072bf435b2f4cfc5842729f56ad2c1ba05d2235bb9d260848d8fdf13f8
+    development-trial-inputs.yml: aa5e55b3214f81833525c04ffd36896a7a51df50e66d3415e18cf09026427097
+    implementation-contract.yml: 8295f8834920f69fd5f38c800f6e76a78f1160140beb7982a12f1ba867012140
+    preregistration.yml: 7e837d35bf1e48082ea751ac0d24e8460859e0611221cf9c966993a0dd542154
+    qualification-spec.yml: d95db264fdb5b4bc116c190f4ecac664922695387ef3c1c8d941fe7b35a730db
+    runner-contract.yml: accbbc6674cb5a52b7aa6e56885cfeb9d95ba2a78e310dfceddfdc785b11f22f
+    source-bundle.yml: b9b814f9ddbadc0a05db1dc69818e37b89a29fcb43cf75a8d8db3a6d7e3bcb68
+  source_bundle:
+    files:
+      - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+        path: pyproject.toml
+      - digest: a732be072bf435b2f4cfc5842729f56ad2c1ba05d2235bb9d260848d8fdf13f8
+        path: research/tsm-divergence-sma20-sma50-regime--v001/candidate-definition.yml
+      - digest: 8295f8834920f69fd5f38c800f6e76a78f1160140beb7982a12f1ba867012140
+        path: research/tsm-divergence-sma20-sma50-regime--v001/implementation-contract.yml
+      - digest: 7e837d35bf1e48082ea751ac0d24e8460859e0611221cf9c966993a0dd542154
+        path: research/tsm-divergence-sma20-sma50-regime--v001/preregistration.yml
+      - digest: d95db264fdb5b4bc116c190f4ecac664922695387ef3c1c8d941fe7b35a730db
+        path: research/tsm-divergence-sma20-sma50-regime--v001/qualification-spec.yml
+      - digest: accbbc6674cb5a52b7aa6e56885cfeb9d95ba2a78e310dfceddfdc785b11f22f
+        path: research/tsm-divergence-sma20-sma50-regime--v001/runner-contract.yml
+      - digest: dc9245ffce87e41e27ca9e84ffdfb1561c25425bce44e4a3dccaa157942c1b3a
+        path: research/tsm-divergence-sma20-sma50-regime--v001/run_development.py
+      - digest: e7427ef77581c07a7bcf3e52e781565532c54843311bf33910476e8c4b8608aa
+        path: research/tsm-divergence-sma20-sma50-regime--v001/synthetic_preflight.py
+      - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+        path: src/trading_2026_2/__init__.py
+      - digest: 4d0f756827e137b673b2975d654696caeeabd0d46a9e1f44dfa2dae8f5d14888
+        path: src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_sma20_sma50_regime_v001.py
+      - digest: f3163c9b92046d0397ce1daf0cfb320a302c9e994875a4be0e93057a83cef7c4
+        path: src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v009.py
+    schema_version: 1
+  study_id: tsm-divergence-sma20-sma50-regime--v001
+  workflow_digest: 2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2
+  workflow_reference:
+    policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+    reference_mode: repository-workflow-package
+    release_manifest_digest: 6cf440bf81e2c081ff6e77025c5779cf5f2e4849015278419b836c0777db6405
+    release_manifest_path: workflows/strategy-forward-replication-research--v005/release-manifest.yml
+    resolver_version: 1
+    schema_version: 1
+    workflow_digest: 2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2
+    workflow_id: strategy-forward-replication-research
+    workflow_package_path: workflows/strategy-forward-replication-research--v005
+    workflow_version: v005
+  workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+cases:
+  - case: 0
+    data_digest: d0cdb8e426b60a9546def222824deec9352a13c78a1793c1f186c214480a0fef
+    evidence_digest: abe11d2cd974674e5715a660b3d6b8deb7f63e72f759ff4d8fbf3e26a80d8531
+    expect: trades
+    request_digest: bad07563c4b223c25ef91c38b92f33e78722b8978065fc35b0688046454fe770
+    stage: development
+    validation:
+      baseline:
+        failed_gates:
+          - completed_trades
+          - minimum_stress_leave_one_year_out_return
+          - traded_years
+        trades: 1
+      candidate:
+        failed_gates:
+          - completed_trades
+          - minimum_stress_leave_one_year_out_return
+          - traded_years
+        trades: 1
+  - case: 1
+    data_digest: 0c773d8d814aad1fc1f09325dba2ab43bdfa392a7347fcf5fd840eaa364a7695
+    evidence_digest: c46fae48bacd1e535eacf5e0ca8c4d65c68a34c63ff60cb43e5cc2d7a04737b0
+    expect: no-trades
+    request_digest: 263a6185297e42ff1225ccb10be2b42ec580323cde14e723b9edc11dbd915f8f
+    stage: development
+    validation:
+      baseline:
+        failed_gates:
+          - base_profit_factor
+          - base_return
+          - completed_trades
+          - minimum_stress_block_bootstrap_positive_return_ratio
+          - minimum_stress_leave_one_year_out_return
+          - stress_profit_factor
+          - stress_return
+          - traded_years
+        trades: 1
+      candidate:
+        failed_gates:
+          - base_profit_factor
+          - base_return
+          - completed_trades
+          - maximum_realized_trade_loss_fraction
+          - maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+          - maximum_stress_leave_one_year_out_drawdown
+          - minimum_stress_block_bootstrap_positive_return_ratio
+          - minimum_stress_leave_one_year_out_profit_factor
+          - minimum_stress_leave_one_year_out_return
+          - stress_maximum_drawdown
+          - stress_profit_factor
+          - stress_return
+          - traded_years
+          - no-trades
+        trades: 0
+  - case: 2
+    data_digest: 089fd845aec1f46f22923fc300590adc5cd8f0d39513bb1a813e4c75970b98ce
+    evidence_digest: 2ab3a0cee226f45fd839c1efe75f6c01eef219e8f24912ca9eba773c64311f86
+    expect: trades
+    request_digest: 7df6f17eaa8827c95bf9c7c4e2b0348632525cb1386c50a0d2f3f56e4048e421
+    stage: historical-evaluation
+    validation:
+      candidate:
+        failed_gates:
+          - completed_trades
+          - maximum_fold_positive_profit_concentration
+          - maximum_fold_trade_concentration
+          - traded_folds
+        trades: 1
+  - case: 3
+    data_digest: 5e4abf8e5242250eadc6a094497b72cbc0d67d9b686015a8ec205e77505cc385
+    evidence_digest: 86545c14433aa670715008d9367bf691459216a427e3954f51fd1c5a24092a11
+    expect: no-trades
+    request_digest: 3f3f2ad83a45dc69dc4eb2e8551ec0cfc03cefac0f2d00fb196d4fbfd0d215de
+    stage: historical-evaluation
+    validation:
+      candidate:
+        failed_gates:
+          - base_compounded_return
+          - base_profit_factor
+          - completed_trades
+          - positive_traded_fold_ratio
+          - stress_profit_factor
+          - stress_return
+          - traded_folds
+        trades: 0
+schema_version: 1
+status: passed

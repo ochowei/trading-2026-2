@@ -1,0 +1,22 @@
+files:
+  - digest: fe83ac9d5b562d59f62c8bd233be729b496ef7995084e8856dd26801013f88d4
+    path: research/tsm-divergence-failed-reversal-exit--v001/candidate-definition.yml
+  - digest: e0461accbe24d9cda1b695847f687c2a9b841f083233ec707cf67580a7f9020e
+    path: research/tsm-divergence-failed-reversal-exit--v001/data-snapshot-acquisition.yml
+  - digest: 32b819dc7436d13cebeba9788868945dcb65fdd29927a1a10b6f2b8118eaecd9
+    path: research/tsm-divergence-failed-reversal-exit--v001/implementation-contract.yml
+  - digest: 39f39ee7c620522bacbfb97d52ec360226e438072ab5048eb27da74abea712a7
+    path: research/tsm-divergence-failed-reversal-exit--v001/preregistration.yml
+  - digest: bc042b709b37309cc706ad00eab83ef9fbc714491840a98cef5ba3fedba6bb36
+    path: research/tsm-divergence-failed-reversal-exit--v001/qualification-spec.yml
+  - digest: 716855375dc1e46043e3f5550524c8b625028df6f3b84ee86f9eb5b419be170b
+    path: research/tsm-divergence-failed-reversal-exit--v001/run_development.py
+  - digest: 53d7439f999c71a58e1073294a1cd2c4014b9896df0e8cfd2870820dbd9c60d0
+    path: research/tsm-divergence-failed-reversal-exit--v001/run_historical_evaluation.py
+  - digest: a84c3078ced07ccb4f8adae626529a3e5dd7cdfaa5da144ef1331543cb6d073b
+    path: research/tsm-divergence-failed-reversal-exit--v001/runner-contract.yml
+  - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+    path: src/trading_2026_2/__init__.py
+  - digest: 11bdf3fa578cddf9a62fb604f03feffef752412a79a5dabf07a86952d5f903d9
+    path: src/trading_2026_2/tsm_mean_reversion_failed_reversal_exit_v001.py
+schema_version: 1

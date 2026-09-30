@@ -1,0 +1,70 @@
+candidate_freeze: null
+evidence:
+  development: 079ba80b8b03008b6d0e31b45fd490e7103da98ac23bb51e11661ba73ce78709
+lifecycle:
+  current_event: trial-recorded
+  event_chain_head_digest: d5e782ac72b5fa6b1abec412c04ef57c18e1c4b5514ea8710737a71eb8e7c74b
+  event_count: 4
+  status: active
+outcome:
+  authority: none
+  status: pending
+preregistration:
+  digest: 5c23044b882effd6d7632a648193182c78c500bfbaf4871d0b257b3d3396c788
+provenance:
+  status: null
+schema_version: 1
+study:
+  identity:
+    create_plan_digest: bcaca30667933a8cc724038f5e8af8f10e03daa23b7db5dc373e47285268cb04
+    create_plan_path: manifests/create-plan.yml
+    experiment_family: tsm-mean-reversion-supplemental-divergence-v004-sma20-reentry-exit
+    historical_evaluation_operator: operator A
+    prepare_report_digest: 74b980377ebb2ab3b69c2b0c3f7205942e77cee9151e2bfe5d167da09f447459
+    prepare_report_path: manifests/prepare-report.yml
+    research_owner: ochowei@gmail.com
+    research_round_id: tsm-mean-reversion-sma20-exit-2026-09
+    source_bundle_digest: 891e387a7bd8cfb2428ffa44320e4ebc93d0f6003bd1d6e8aef976ca26252d3a
+    source_bundle_path: manifests/source-bundle.yml
+    workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+    workflow_reference_path: manifests/workflow-reference.yml
+  study_id: tsm-divergence-sma20-reentry-exit--v001
+trial_registry:
+  assessments:
+    tsm-mr-supplemental-divergence-v004-sma20-reentry-exit:
+      actuals:
+        base_profit_factor: '4.102207303619728'
+        base_return: '0.2533250851579031'
+        completed_trades: 28
+        maximum_realized_trade_loss_fraction: '0.019999891900857533'
+        maximum_stress_block_bootstrap_drawdown_above_10pct_ratio: '0.00052'
+        maximum_stress_leave_one_year_out_drawdown: '0.030741250630144084'
+        minimum_stress_block_bootstrap_positive_return_ratio: '0.99532'
+        minimum_stress_leave_one_year_out_profit_factor: '2.4503125091023565'
+        minimum_stress_leave_one_year_out_return: '0.09525299833627288'
+        stress_maximum_drawdown: '0.03074125063014395'
+        stress_profit_factor: '3.1977357858895745'
+        stress_return: '0.1847164073230952'
+        traded_years: 5
+      candidate_freeze_eligibility:
+        eligible: true
+        reasons: []
+      development_evidence_validity:
+        status: valid
+        validated: true
+      formal_development_gates:
+        failed: []
+        status: passed
+      research_targets:
+        failed: []
+        status: not_registered
+  digest: null
+  recorded_trial_count: 1
+  trial_ids:
+    - tsm-mr-supplemental-divergence-v004-sma20-reentry-exit
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 891e387a7bd8cfb2428ffa44320e4ebc93d0f6003bd1d6e8aef976ca26252d3a
+  workflow_digest: 2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2
+  workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+  workflow_reference_path: manifests/workflow-reference.yml
