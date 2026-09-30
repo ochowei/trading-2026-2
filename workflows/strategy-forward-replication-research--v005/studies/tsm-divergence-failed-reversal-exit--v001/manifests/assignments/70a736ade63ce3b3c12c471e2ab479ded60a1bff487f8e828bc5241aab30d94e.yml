@@ -1,0 +1,9 @@
+assignee: /root/task_034_failed_reversal_exit
+assigner: 專案管理者
+instruction: TASK-034：依 Active v005 建立且只建立 tsm-divergence-failed-reversal-exit--v001。Control 固定完整 supplemental divergence v004；Candidate 唯一增加持倉 session 收盤低於接受訊號日 Low 後於下一 XNYS session open 市價退出，既有 stop／target 優先；所有 entry、風控、成本、10-session 到期不變。完成唯一 Development、evidence validation、Development-only blind review 與繁體中文 append-only 成果卡。禁止正式 Historical Evaluation、Terminal、challenge、replay、freeze 與讀取受限資料。
+role: study 開發者
+schema_version: 1
+scope: development-to-freeze
+source_id: chatgpt-conversation://6abc7c9d-0524-83e8-8b6d-cef30a8b62b8
+study_id: tsm-divergence-failed-reversal-exit--v001
+workflow_version: v005

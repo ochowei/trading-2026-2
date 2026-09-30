@@ -1,0 +1,17 @@
+artifacts:
+  baseline:
+    digest: 66c7911332c2a83d135abcb8073197c6014c790ba73892bc912778992053e83f
+    path: evidence/trials/tsm-mr-selling-pressure-core-first-v001/baseline.yml
+  candidate:
+    digest: 7f0c052d80c8cdcb29defa69bc920ffff0c2dfba3d1da7d34e7d238ad73ebf1e
+    path: evidence/trials/tsm-mr-selling-pressure-core-first-v001/candidate.yml
+  inputs:
+    digest: 19ca8118b73ad30b75ecb0ffc82864543ad916cbc3cad4d0026a86d7a9997194
+    path: evidence/trials/tsm-mr-selling-pressure-core-first-v001/inputs.yml
+data_assets_digest: 44ea9307e44260f86fa288067df80876d8c5f463beb94ce6861989471759639b
+envelope_digest: e27cf027934b68e5f195d2a62e401bb2323aac091bb8b6b8ecfeddf9478d3081
+preregistration_digest: 761c13b3728a2c383bc6cf503735f00530928b8aaa648045c0e10f0003d2df07
+schema_version: 1
+source_bundle_digest: d6876339038ad2aa76402c2e3f815db0e5b15e19455081d6d5fdf1ed154a5f3d
+study_id: tsm-selling-pressure-core-first--v001
+trial_id: tsm-mr-selling-pressure-core-first-v001

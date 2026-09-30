@@ -1,0 +1,128 @@
+baseline:
+  baseline_id: tsm-mr-v009-only-baseline-task031-v001
+  engine_path: src/trading_2026_2/tsm_mean_reversion_supplemental_divergence_v004.py
+  engine_spec_constant: V009_ONLY_SPEC
+  family: tsm-mean-reversion-v009-two-stage-reversal
+  signals: exact same v009 core signal as Candidate; no supplemental signal state or entry path.
+  supplemental_divergence_path: disabled
+  supplemental_volume_lead: irrelevant because the path is disabled
+  v009_core_path: enabled
+candidate:
+  candidate_id: tsm-mr-supplemental-divergence-v004
+  engine_path: src/trading_2026_2/tsm_mean_reversion_supplemental_divergence_v004.py
+  engine_spec_constant: DEFAULT_SPEC
+  family: tsm-mean-reversion-supplemental-divergence-v004
+  signal:
+    close_above_prior_close: true
+    core_mean_reversion_gap: '0.015'
+    core_rsi_length: 2
+    core_rsi_maximum: '50'
+    decision_time: completed-session-close
+    supplemental_path:
+      atr_distance_multiplier: '1.0'
+      atr_lookback: 20
+      bollinger_ddof: 0
+      bollinger_lookback: 20
+      bollinger_percent_b_max: '0.25'
+      bollinger_recent_window: 5
+      event_reference_low_type: window_3d_low
+      observation_window_sessions: 5
+      pullback_low_lookback: 10
+      volume_score_window: 3
+    volume_lead_prior_session_window: 5
+    volume_ratio_minimum: '1.05'
+  supplemental_divergence_path: enabled
+  supplemental_volume_lead: enabled
+  v009_core_path: enabled
+candidate_family: tsm-mean-reversion-supplemental-divergence-v004
+candidate_id: tsm-mr-supplemental-divergence-v004
+complete_candidate_family:
+  - tsm-mr-supplemental-divergence-v004
+costs:
+  base:
+    fee_per_side_bps: '1'
+    slippage_per_side_bps: '5'
+  stress:
+    fee_per_side_bps: '2'
+    slippage_per_side_bps: '20'
+data:
+  adjustment_policy: auto_adjusted
+  calendar: XNYS
+  interval: 1d
+  provider: yahoo
+  symbol: TSM
+  timezone: America/New_York
+execution:
+  entry: next-session-open-market
+  gap_fill: stop-gap-at-open-target-gap-at-open
+  held_complete_sessions: 10
+  intrabar_ambiguity: adverse-stop-first
+  maximum_holding_session_span_for_validator: 11
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    modeled_stop_includes_costs: true
+    risk_fraction_of_pre_entry_equity: '0.02'
+    shares: maximum-integer-shares-within-risk-and-cash-caps
+  stop:
+    level_from_raw_entry_open: '-0.04'
+    order_type: STOP_MARKET
+    time_in_force: GTC
+  target:
+    level_from_raw_entry_open: '0.04'
+    order_type: LIMIT
+    reissued_each_session: true
+    time_in_force: DAY
+fixed_execution_parameters:
+  cooldown_sessions: 5
+  holding_sessions: 10
+  maximum_holding_session_span_for_validator: 11
+  risk_fraction: '0.02'
+  rsi_length: 2
+  rsi_maximum: '50'
+  sma_length: 20
+  sma_minimum_gap: '0.015'
+  stop_return: '-0.04'
+  target_return: '0.04'
+  volume_ratio_minimum: '1.05'
+fold_policy:
+  evaluation_fold_warmup_sessions: 25
+  indicator_state_carried_between_folds: false
+  portfolio_state_reset_each_fold: true
+  replay_warmup_sessions: 25
+initial_cash: '100000'
+only_strategy_difference: Candidate retains the v004 supplemental divergence path; Baseline disables only that path. All v009 core rules and all execution and risk parameters are identical.
+schema_version: 1
+selected_candidate_id: tsm-mr-supplemental-divergence-v004
+signal:
+  accepted_only_when_flat: true
+  cooldown:
+    clock_anchor: completed-position-exit
+    completed_session_steps_after_exit: 5
+  decision_time: completed-session-close
+  mean_reversion:
+    close_vs_sma20_gap_minimum: '0.015'
+    rsi_length: 2
+    rsi_maximum: '50'
+    sma_length: 20
+  price_direction_confirmation:
+    close_above_prior_close: true
+  supplemental_path:
+    atr_distance_multiplier: '1.0'
+    atr_lookback: 20
+    bollinger_ddof: 0
+    bollinger_lookback: 20
+    bollinger_percent_b_max: '0.25'
+    bollinger_recent_window: 5
+    bollinger_standard_deviation_multiplier: '2.0'
+    enabled: true
+    event_reference_low_type: window_3d_low
+    observation_window_sessions: 5
+    pullback_low_lookback: 10
+    retest_volume_lookback: 20
+    volume_score_window: 3
+  symbol: TSM
+  volume_leads_price:
+    enabled: true
+    prior_session_window: 5
+    volume_average_length: 20
+    volume_ratio_minimum: '1.05'

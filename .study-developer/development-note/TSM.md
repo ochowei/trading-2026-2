@@ -1056,3 +1056,53 @@ Baseline 有交易年度為 4 年；候選年度與未列指標不由其他卡�
 **下一步**：另立並事前登記；正式門檻全過、壓力淨增益>0、MDD≤v009 須同時成立，否則否證。
 
 **來源與歷史**：[原卡、完整來源及更正（原第 2167–2181 行）](/Users/william/.codex/worktrees/3256/trading-2026-2/.study-developer/development-note/TSM-history-before-condensation-2026-09-26.md:2167)。
+
+
+<a id="study-53"></a>
+## `tsm-divergence-incremental--v001`
+
+Candidate=完整 v004 divergence；Baseline=v009-only（supplemental path 關閉）；其餘依事前登記固定，Δ=C−B。
+
+**結果**：兩臂 Development 證據有效、正式門檻全過；無獨立研究目標。Base／stress 報酬 C／B=38.73%／33.68%、30.40%／26.52%；交易 27／24。Δ損益 base／stress=+$5,054／+$3,872，壓力 MDD（最大回撤）差 −0.1197pp。2014–18 年增量 base／stress（千美元）：+2.04／+1.71、+2.40／+1.96、−2.18／−1.99、+0.03／+0.01、+2.76／+2.18。
+
+**尚不能判斷**：逐筆無訊號來源，不能區分 divergence-only 與被排擠交易。舊 v004 prereg 的 v009 數字來源未明，TSM provenance=`provenance-unknown`；整體凍結資格未明，未凍結。
+
+**盲檢討**：Reference 與 Trial digest/schema 相符；只檢討設計和 Development evidence，未讀正式 Evaluation、Terminal 或 Study 狀態；成果卡另核 runtime 綁定。
+
+<a id="study-54"></a>
+## `tsm-selling-pressure-core-first--v001`
+
+Candidate=A+B、Control=A-only（v009 A+既有 v002 B）；core-first 單一 slot：持有 A 忽略 B，持有 B 遇 A 次開盤交接，雙邊成本計入。
+
+兩臂 evidence 有效，gates 各 13/13 通過，targets 未登記。Candidate（29 筆）base／stress 報酬 37.636%／29.073%；Control（24 筆）33.676%／26.523%；Δ損益 +$3,959.87／+$2,549.64。PF 較低、MDD 略高。無 signal origin，Path B 貢獻／被排擠 core 無法判斷。
+
+Development eligibility=true；provenance 未完，整體 freeze 資格未明，未凍結。盲檢討核對 v005 reference、bundle、publication／inputs digest/schema並重算；限設計與 Development，未讀 Study 狀態或正式 Evaluation／Terminal。prepare 僅合成預檢，未跑正式 HE。來源：preregistration／Dev evidence。
+
+<a id="study-55"></a>
+## `tsm-divergence-sma20-reentry-exit--v001`
+
+C=完整 v004 加 Close>SMA20 次開盤退出；B=完整 v004。原 stop/target、10-session 不變。
+
+C／B交易28／27。base、stress報酬／PF（獲利因子）／MDD（最大回撤）：C 25.33／4.10／2.85%、18.47／3.20／3.07%；B 38.73／5.97／2.00%、30.40／4.83／2.00%。Evidence有效；兩臂 gates 各13/13過，targets未登記。成本後損益差 C−B −$13,397.90／−$11,923.77。平均持有5.07／6.96 session，中位5／7；候選15筆SMA exit。
+
+Candidate gates合格；舊 v009數值來源／階段不明，provenance=unknown，整體 freeze資格／狀態尚不能判斷，未 freeze。來源限 v005 reference、prereg、bundle、publication／inputs、Development證據；未讀CSV、正式Evaluation或Terminal。曾執行Development-prefix validate，review不稱對state全盲。
+
+## TASK-034｜失敗反轉退出（2026-09-30）
+
+**設計／證據。** Candidate 僅增持倉收盤 Close < 固定訊號日 Low 後下一 XNYS 開盤退出；停損／停利與 10-session 到期不變。digest 綁定一致，10 檔雜湊通過；資料限 2013 warmup、2014–18 Development。
+
+**結果。** Candidate 30 筆：base/stress 報酬 13.95%/8.13%，獲利因子 2.14/1.62；Control 27 筆：38.73%/30.40%，因子 5.97/4.83。13/13 gates 通過、證據有效；Candidate 指標較低，交易不同，不作因果解讀。未執行 freeze。
+
+**虧損診斷。** 含成本平均虧損：Candidate base 14 筆/$873.95、stress 15 筆/$878.21；Control 5 筆/$1,559.44、7 筆/$1,133.40。非 gate。
+
+**限制／下一步。** 舊 Study provenance 為 `provenance-unknown`；Development 不代表正式評估。可在預先固定的未使用期間檢查平均虧損能否重現，並預設回報損失界線。未讀正式 Evaluation、Terminal 或 quarantine 結果。
+
+## TASK-035｜ATR gap
+
+Candidate沿用v004，只加次日XNYS開盤−訊號收盤 >0.5×ATR20略過（含訊號日20日TR均值，auto-adjusted OHLCV）。v005 reference、bundle與publication/envelope綁定/schema通過，兩臂證據有效、offline。
+
+13/13 gates過、targets未登記；Candidate／Control交易21／27筆。base／stress報酬24.09／18.58%對38.73／30.40%，PF 4.99／3.91對5.97／4.83，MDD 2.15／2.42%對2.00／2.00%；損益加總$24.09／$18.58k對$38.73／$30.40k。候選點估計較弱，eligibility≠freeze。
+
+無逐筆skip標記且訊號日分歧，直接略過筆數未知。provenance-unknown；無selection佐證，freeze狀態未知。未來可預登記逐訊號skip標記。來源限v005 reference／bundle、publication／inputs、Development evidence／runtime；未讀CSV或正式Evaluation／Terminal／quarantine。validate先於review，不稱state全盲。
+
+**TASK-035 損益補註：** Candidate base／stress 逐筆損益加總為 +US$24,094.38／+US$18,579.68；Control base／stress 為 +US$38,730.41／+US$30,395.41；金額皆為美元。

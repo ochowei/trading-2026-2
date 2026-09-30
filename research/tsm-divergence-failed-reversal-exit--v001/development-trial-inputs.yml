@@ -1,0 +1,42 @@
+baseline_comparison:
+  baseline_family: tsm-mean-reversion-supplemental-divergence-v004-control
+  baseline_id: tsm-mr-supplemental-divergence-v004-control-task034-v001
+  baseline_is_excluded_from_candidate_family: true
+  candidate_family: tsm-mean-reversion-supplemental-divergence-v004-failed-reversal-exit
+  candidate_id: tsm-mr-supplemental-divergence-v004-failed-reversal-exit
+  comparison_direction: candidate-minus-baseline
+  execution_is_identical: false
+candidate_family: tsm-mean-reversion-supplemental-divergence-v004-failed-reversal-exit
+candidate_id: tsm-mr-supplemental-divergence-v004-failed-reversal-exit
+complete_candidate_family:
+  - tsm-mr-supplemental-divergence-v004-failed-reversal-exit
+cost_models:
+  base:
+    fee_per_side_bps: '1'
+    slippage_per_side_bps: '5'
+  stress:
+    fee_per_side_bps: '2'
+    slippage_per_side_bps: '20'
+data_bindings:
+  development_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+  development_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+date_controls:
+  formal_provider_access: false
+  signal_end: '2018-12-31'
+  signal_start: '2014-01-01'
+  warmup_end: '2013-12-31'
+  warmup_start: '2013-01-01'
+development_diagnostics:
+  block_lengths:
+    - 3
+    - 5
+  bootstrap_seed: 20260902
+  repetitions: 50000
+  seed_application: exact-same-seed-for-each-block-length
+preregistration_digest: 39f39ee7c620522bacbfb97d52ec360226e438072ab5048eb27da74abea712a7
+selected_candidate_id: tsm-mr-supplemental-divergence-v004-failed-reversal-exit
+source_bundle_digest: 7448e87ea3089d89de7ff445cdf2f86afac2b30f6942a7cd8f01de97832a64a6
+strategy_engine_digest: 11bdf3fa578cddf9a62fb604f03feffef752412a79a5dabf07a86952d5f903d9
+study_procedure_digest: 716855375dc1e46043e3f5550524c8b625028df6f3b84ee86f9eb5b419be170b
+study_procedure_path: research/tsm-divergence-failed-reversal-exit--v001/run_development.py
+trial_id: tsm-mr-supplemental-divergence-v004-failed-reversal-exit

@@ -1,0 +1,9 @@
+assignee: /root/task_033_sma20_exit
+assigner: /root
+instruction: 建立 Study tsm-divergence-sma20-reentry-exit--v001；Control 為完整 supplemental divergence v004，Candidate 唯一新增持倉收盤重新站回 SMA(20) 後次一 session open 平倉；既有停損／停利優先、10-session 到期與所有風控不變；僅完成 v005 prepare/create、唯一 Development、合法證據驗證、blind review 與繁體中文 append-only 成果卡。不得執行正式 Historical Evaluation、Terminal、challenge 或 replay；不調參、不重跑。
+role: study 開發者
+schema_version: 1
+scope: development-to-freeze
+source_id: codex-project-manager-task:TASK-033
+study_id: tsm-divergence-sma20-reentry-exit--v001
+workflow_version: v005

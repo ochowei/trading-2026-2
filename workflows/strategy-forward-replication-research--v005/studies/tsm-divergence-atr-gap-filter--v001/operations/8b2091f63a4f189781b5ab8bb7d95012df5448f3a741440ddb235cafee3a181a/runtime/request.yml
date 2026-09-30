@@ -1,0 +1,273 @@
+data_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+data_path: run/bars.csv
+preregistration:
+  baseline_definition:
+    baseline_id: tsm-mr-supplemental-divergence-v004-control-task035-v001
+    candidate_difference: Candidate 與 Control 均使用完整 supplemental divergence v004；Candidate 唯一多出的規則是 次一 session open 若 next_open − signal_day_close > 0.5 × signal_day_ATR20 就略過該次 entry。
+    candidate_family: tsm-mean-reversion-supplemental-divergence-v004-atr-gap-filter
+    execution_is_identical: true
+    family: tsm-mean-reversion-supplemental-divergence-v004
+    objectively_simpler_because: Control 保留完整 v004 主路徑、補充 divergence path、同一進出場、成交成本、風險與冷卻設定，但不做 ATR 跳空判斷；它比 Candidate 少一個 entry 條件。
+    selection_use: external-family control reference only; control is not a candidate and is not ranked.
+    simpler_rule: 完整 supplemental divergence v004；只缺少 Candidate 新增的 ATR(20) 跳空 entry filter。
+  complete_candidate_family:
+    - tsm-mr-supplemental-divergence-v004-gap-atr05
+  eligibility_rules:
+    accepted_signal:
+      accepted_only_when_flat: true
+      cooldown:
+        clock_anchor: completed-position-exit
+        minimum_completed_session_steps_after_exit: 5
+        position_must_be_flat: true
+      decision_time: completed-session-close
+      entry_gap_filter:
+        apply_at: next-XNYS-session-open-before-market-entry
+        atr_formula: TR_t=max(High_t-Low_t, abs(High_t-Close_(t-1)), abs(Low_t-Close_(t-1))); ATR20_t=arithmetic_mean(TR_(t-19)..TR_t)
+        atr_lookback: 20
+        atr_min_periods: 20
+        atr_window: 最近20個已完成XNYS session，包含signal day；只使用signal day close時已完成的資料
+        data_adjustment: 與策略及Development CSV相同的auto_adjusted OHLCV價格
+        gap_price_basis: next_session_open - signal_day_close
+        maximum_gap_atr_multiple: '0.5'
+        otherwise: 等於門檻、低於門檻或負gap均照常按原規則於次日open進場
+        skip_operator: '>'
+        skip_when: next_session_open - signal_day_close > 0.5 * signal_day_ATR20
+        unavailable_atr: 若符合原策略訊號但signal-day ATR20未就緒或非正值，runner須停止並回報錯誤，不得靜默放行
+      indicator_contract:
+        rsi_formula: simple-rolling-mean
+        rsi_not_ready: null
+        volume_lead_is_disabled_for_candidate: false
+      mean_reversion:
+        close_vs_sma20_gap_minimum: '0.015'
+        close_vs_sma20_operator: '>='
+        rsi_length: 2
+        rsi_operator: <=
+        rsi_value: '50'
+        sma_length: 20
+      price_direction_confirmation:
+        close_above_prior_close: true
+      supplemental_path:
+        atr_distance_multiplier: '1.0'
+        atr_lookback: 20
+        bollinger_ddof: 0
+        bollinger_lookback: 20
+        bollinger_percent_b_max: '0.25'
+        bollinger_recent_window: 5
+        bollinger_standard_deviation_multiplier: '2.0'
+        enabled: true
+        event_reference_low_type: window_3d_low
+        observation_window_sessions: 5
+        pullback_low_lookback: 10
+        retest_volume_lookback: 20
+        volume_score_window: 3
+      symbol: TSM
+      volume_leads_price:
+        enabled: true
+        prior_session_window: 5
+        volume_average_length: 20
+        volume_ratio_operator: '>='
+        volume_ratio_value: '1.05'
+        volume_shock_is_before_signal: true
+    costs:
+      base:
+        fee_per_side_bps: '1'
+        slippage_per_side_bps: '5'
+      stress:
+        fee_per_side_bps: '2'
+        slippage_per_side_bps: '20'
+    development_diagnostics:
+      aggregate_comparison: 以既有candidate與baseline evidence重算base/stress報酬、raw PnL、profit factor與drawdown；不增加formal gate。
+      block_bootstrap:
+        block_lengths:
+          - 3
+          - 5
+        repetitions: 50000
+        seed: 20260902
+        seed_application: exact-same-seed-for-each-block-length
+      comparison_direction: candidate-minus-control
+      skipped_entry_attribution: 只有既有合法發布的candidate/control evidence可逐筆識別時才報告被略過交易；若無法區分filter造成的直接略過與後續持倉路徑差異，標示無法判斷，不擴充evidence schema。
+    development_gates:
+      base_profit_factor:
+        operator: '>'
+        value: '1.10'
+      base_return:
+        operator: '>'
+        value: '0'
+      completed_trades:
+        operator: '>='
+        value: 20
+      maximum_realized_trade_loss_fraction:
+        operator: <=
+        value: '0.04'
+      maximum_stress_block_bootstrap_drawdown_above_10pct_ratio:
+        operator: <=
+        value: '0.10'
+      maximum_stress_leave_one_year_out_drawdown:
+        operator: <=
+        value: '0.10'
+      minimum_stress_block_bootstrap_positive_return_ratio:
+        operator: '>='
+        value: '0.80'
+      minimum_stress_leave_one_year_out_profit_factor:
+        operator: '>'
+        value: '1.00'
+      minimum_stress_leave_one_year_out_return:
+        operator: '>'
+        value: '0'
+      stress_maximum_drawdown:
+        operator: <=
+        value: '0.10'
+      stress_profit_factor:
+        operator: '>'
+        value: '1.00'
+      stress_return:
+        operator: '>'
+        value: '0'
+      traded_years:
+        operator: '>='
+        value: 3
+    execution:
+      cooldown:
+        minimum_completed_session_steps_after_exit: 5
+      entry: 下一個 XNYS session open，以 MARKET proposal 模擬。
+      entry_gap_filter:
+        apply_at: next-XNYS-session-open-before-market-entry
+        atr_formula: TR_t=max(High_t-Low_t, abs(High_t-Close_(t-1)), abs(Low_t-Close_(t-1))); ATR20_t=arithmetic_mean(TR_(t-19)..TR_t)
+        atr_lookback: 20
+        atr_min_periods: 20
+        atr_window: 最近20個已完成XNYS session，包含signal day；只使用signal day close時已完成的資料
+        data_adjustment: 與策略及Development CSV相同的auto_adjusted OHLCV價格
+        gap_price_basis: next_session_open - signal_day_close
+        maximum_gap_atr_multiple: '0.5'
+        otherwise: 等於門檻、低於門檻或負gap均照常按原規則於次日open進場
+        skip_operator: '>'
+        skip_when: next_session_open - signal_day_close > 0.5 * signal_day_ATR20
+        unavailable_atr: 若符合原策略訊號但signal-day ATR20未就緒或非正值，runner須停止並回報錯誤，不得靜默放行
+      gap_fill: stop gap 以較差 open、target gap 以 open 價格改善成交，再套用成本。
+      intrabar_ambiguity: target 與 stop 同 session 觸及時先算 stop。
+      position_sizing:
+        risk_fraction_of_pre_entry_equity: '0.02'
+      stop:
+        level_from_raw_entry_open: '-0.04'
+      target:
+        level_from_raw_entry_open: '0.04'
+    research_targets: {}
+  evaluation_gates:
+    base_compounded_return:
+      operator: '>'
+      value: '0'
+    base_profit_factor:
+      operator: '>'
+      value: '1.10'
+    completed_trades:
+      operator: '>='
+      value: 20
+    family_wise_confidence:
+      operator: '>='
+      value: '0.90'
+    maximum_fold_positive_profit_concentration:
+      operator: <=
+      value: '0.50'
+    maximum_fold_trade_concentration:
+      operator: <=
+      value: '0.50'
+    maximum_realized_trade_loss_fraction:
+      operator: <=
+      value: '0.04'
+    positive_traded_fold_ratio:
+      operator: '>='
+      value: '0.60'
+    stress_max_drawdown:
+      operator: <=
+      value: '0.10'
+    stress_profit_factor:
+      operator: '>'
+      value: '1.00'
+    stress_return:
+      operator: '>'
+      value: '0'
+    traded_folds:
+      operator: '>='
+      value: 3
+  fold_warmup_sessions: 25
+  hypothesis: 在完整 supplemental divergence v004 的訊號、成交、成本、出場與風控規則全部固定時，於訊號日收盤確認後，若次一 XNYS session open 相對訊號日 close 的正向跳空嚴格大於 0.5 × ATR(20)，略過該次進場，可能改善均值回歸策略的 base／stress 風險報酬；ATR 使用訊號日收盤時已完成的調整後 OHLCV 計算，Candidate 減 Control 為比較方向。
+  initial_cash: '100000'
+  maximum_holding_sessions: 11
+  maximum_trials: 1
+  selection_rule:
+    eligible_candidate: 唯一候選須通過所有正式 Development gates；不依結果排名，不擴充 family。
+    method: fixed-single-candidate-no-outcome-ranking
+    selected_candidate_id: tsm-mr-supplemental-divergence-v004-gap-atr05
+  tie_handling:
+    method: not-applicable-single-candidate
+source_bundle:
+  files:
+    - digest: dd2792a53aa7ac2990f362fd36870c783a50a3dbf7710be33991e281cbe2ed0d
+      path: research/tsm-divergence-atr-gap-filter--v001/candidate-definition.yml
+    - digest: 0a901cfb49db9304348fffe23b47abe75b9f186c580bd6161f50a43d978683e5
+      path: research/tsm-divergence-atr-gap-filter--v001/data-snapshot-acquisition.yml
+    - digest: f1ff920dfd262be2a48b62bfdaeef8dd433a08d4d284c53420e01e1d515ee9f0
+      path: research/tsm-divergence-atr-gap-filter--v001/implementation-contract.yml
+    - digest: b2e0ec5b2b62735ed35c7759526de2799070dc285723c42a5bde6162e90aff28
+      path: research/tsm-divergence-atr-gap-filter--v001/preregistration.yml
+    - digest: e31d544b96e27b39bfa953bd371b65eaac896c8f07edabac9738581472741f26
+      path: research/tsm-divergence-atr-gap-filter--v001/qualification-spec.yml
+    - digest: 9ac90b237d03c4f223e2cd78d079197c115f83228237003334b5cdd4a3aa4ca8
+      path: research/tsm-divergence-atr-gap-filter--v001/run_development.py
+    - digest: 8eb4d91ee2f485c8d4d0e5a347006962e21d7ec648656974041ed99507b8aff9
+      path: research/tsm-divergence-atr-gap-filter--v001/run_historical_evaluation.py
+    - digest: 277647addebaabf093433d9f8e85afa0002e8b91179c8438e3c47fcbedc4f266
+      path: research/tsm-divergence-atr-gap-filter--v001/runner-contract.yml
+    - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+      path: src/trading_2026_2/__init__.py
+    - digest: 80871b6a1c707ba37f3bab1f1ab44a94df61048f323d7a4a9fb9d51cdd7b6ccb
+      path: src/trading_2026_2/tsm_mean_reversion_divergence_atr_gap_filter_v001.py
+    - digest: cae8aa38dbe8bd40036d69f54bc5a7fd5fc87f774017b0f49a538af3c96e7384
+      path: src/trading_2026_2/tsm_mean_reversion_supplemental_divergence_v004.py
+  schema_version: 1
+stage: development
+trial_inputs:
+  baseline_comparison:
+    baseline_family: tsm-mean-reversion-supplemental-divergence-v004
+    baseline_id: tsm-mr-supplemental-divergence-v004-control-task035-v001
+    baseline_is_excluded_from_candidate_family: true
+    candidate_family: tsm-mean-reversion-supplemental-divergence-v004-atr-gap-filter
+    candidate_id: tsm-mr-supplemental-divergence-v004-gap-atr05
+    comparison_direction: candidate-minus-control
+    execution_is_identical: true
+  candidate_family: tsm-mean-reversion-supplemental-divergence-v004-atr-gap-filter
+  candidate_id: tsm-mr-supplemental-divergence-v004-gap-atr05
+  complete_candidate_family:
+    - tsm-mr-supplemental-divergence-v004-gap-atr05
+  cost_models:
+    base:
+      fee_per_side_bps: '1'
+      slippage_per_side_bps: '5'
+    stress:
+      fee_per_side_bps: '2'
+      slippage_per_side_bps: '20'
+  data_bindings:
+    development_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+    development_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+  date_controls:
+    formal_provider_access: false
+    signal_end: '2018-12-31'
+    signal_start: '2014-01-01'
+    warmup_end: '2013-12-31'
+    warmup_start: '2013-01-01'
+  development_diagnostics:
+    aggregate_comparison: 以既有candidate與baseline evidence重算base/stress報酬、raw PnL、profit factor與drawdown；不增加formal gate。
+    block_lengths:
+      - 3
+      - 5
+    bootstrap_seed: 20260902
+    comparison_direction: candidate-minus-control
+    repetitions: 50000
+    seed_application: exact-same-seed-for-each-block-length
+    skipped_entry_attribution: 只有既有合法發布的candidate/control evidence可逐筆識別時才報告被略過交易；若無法區分filter造成的直接略過與後續持倉路徑差異，標示無法判斷，不擴充evidence schema。
+  preregistration_digest: b2e0ec5b2b62735ed35c7759526de2799070dc285723c42a5bde6162e90aff28
+  source_bundle_digest: c66328036f143e755181d8876926b0736544daedca15b5a6b6a7f332e4bab221
+  strategy_engine_digest: 80871b6a1c707ba37f3bab1f1ab44a94df61048f323d7a4a9fb9d51cdd7b6ccb
+  study_procedure_digest: 9ac90b237d03c4f223e2cd78d079197c115f83228237003334b5cdd4a3aa4ca8
+  study_procedure_path: research/tsm-divergence-atr-gap-filter--v001/run_development.py
+  trial_id: tsm-mr-supplemental-divergence-v004-gap-atr05

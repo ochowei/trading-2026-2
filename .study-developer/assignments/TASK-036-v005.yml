@@ -1,0 +1,9 @@
+assignee: /root/task_036_trend_regime
+assigner: 專案管理者
+instruction: 依 TASK-036 建立唯一 Study tsm-divergence-sma20-sma50-regime--v001。Control 固定為 v009 two-stage reversal；Candidate 唯一增加訊號日 SMA(20)>SMA(50) 的長期趨勢條件。SMA 以 auto-adjusted close 按 XNYS completed sessions 計算，納入訊號日收盤，不使用未來資料；其他 v009 訊號、進出場、持有、停損／ 停利、risk 與成本不變，不加 slope、動能或其他 filter。身份固定 research_owner=ochowei@gmail.com、historical_evaluation_operator=operator A。 先完成設計 checkpoint 並等 PM 審核；未獲批准前不得 prepare、create 或 Development。 通過後依 Active v005 僅執行一次 prepare、create 與 Development，完成 evidence validation、Development-only blind review 和繁體中文 append-only 成果卡。只使用 TSM warmup+Development CSV；禁止正式 Historical Evaluation、Terminal、challenge、 replay、freeze，且不得存取 historical-evaluation-artifacts/ 或 .super-admin/。
+role: study 開發者
+schema_version: 1
+scope: development-to-freeze
+source_id: codex-project-manager-task:TASK-036
+study_id: tsm-divergence-sma20-sma50-regime--v001
+workflow_version: v005

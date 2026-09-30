@@ -1,0 +1,6 @@
+created_at: '2026-09-30T08:13:28.920286Z'
+event_digest: dc2e4dad48124dfca31ae5d8e65c7bcf94eb5e5eaf94a0e1e97e502bf0e8d5f0
+previous_checkpoint_digest: 85ca40b35dd7137e153d9f2f477f36c8efc8f42a9c6a11835c258e9c4637b66e
+schema_version: 1
+sequence: 4
+study_id: tsm-divergence-atr-gap-filter--v001

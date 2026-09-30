@@ -1,0 +1,26 @@
+data:
+  digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+  path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+evidence:
+  digest: de0246ec45870cf2fa5377665def3af016ce45d083a88d267ae6c1abe5cf8499
+  path: runtime/evidence.yml
+execution_contract: request-output-v1
+execution_workspace: temporary
+operation_id: 8b2091f63a4f189781b5ab8bb7d95012df5448f3a741440ddb235cafee3a181a
+request:
+  digest: 4af3500534ead9938e9f3fab2c22ba4c7d9140ec8a7867aaccd1331724726b4b
+  path: runtime/request.yml
+resolver_version: 1
+runner:
+  digest: 9ac90b237d03c4f223e2cd78d079197c115f83228237003334b5cdd4a3aa4ca8
+  path: research/tsm-divergence-atr-gap-filter--v001/run_development.py
+schema_version: 1
+source_bundle:
+  digest: c66328036f143e755181d8876926b0736544daedca15b5a6b6a7f332e4bab221
+  path: manifests/source-bundle.yml
+stage: development
+study_id: tsm-divergence-atr-gap-filter--v001
+workflow_reference:
+  digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+  path: manifests/workflow-reference.yml
+workflow_version: v005

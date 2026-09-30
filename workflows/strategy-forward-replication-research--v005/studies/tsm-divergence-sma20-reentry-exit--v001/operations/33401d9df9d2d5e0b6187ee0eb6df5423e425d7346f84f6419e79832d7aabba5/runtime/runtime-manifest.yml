@@ -1,0 +1,26 @@
+data:
+  digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+  path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+evidence:
+  digest: cabd76068ed3f054be130ae70af7ecf72d9f8a77410679992512914dbed33e09
+  path: runtime/evidence.yml
+execution_contract: request-output-v1
+execution_workspace: temporary
+operation_id: 33401d9df9d2d5e0b6187ee0eb6df5423e425d7346f84f6419e79832d7aabba5
+request:
+  digest: 8c97fe73605515a567d7b0edde25600954f5b6c9c5bbd92e3b5a335833d1ba89
+  path: runtime/request.yml
+resolver_version: 1
+runner:
+  digest: e13b726f400ec3449c1faa7f50e81e4e2bb9441a02de10c9c65bcb8eb7a2ba5a
+  path: research/tsm-divergence-sma20-reentry-exit--v001/run_development.py
+schema_version: 1
+source_bundle:
+  digest: 891e387a7bd8cfb2428ffa44320e4ebc93d0f6003bd1d6e8aef976ca26252d3a
+  path: manifests/source-bundle.yml
+stage: development
+study_id: tsm-divergence-sma20-reentry-exit--v001
+workflow_reference:
+  digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+  path: manifests/workflow-reference.yml
+workflow_version: v005

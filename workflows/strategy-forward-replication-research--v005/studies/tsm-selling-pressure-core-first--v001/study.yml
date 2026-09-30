@@ -1,0 +1,70 @@
+candidate_freeze: null
+evidence:
+  development: 7f0c052d80c8cdcb29defa69bc920ffff0c2dfba3d1da7d34e7d238ad73ebf1e
+lifecycle:
+  current_event: trial-recorded
+  event_chain_head_digest: 064e24f2bf81ca07df552edbcf13eada15920cfeb0d058918ea025ddd7dc593f
+  event_count: 4
+  status: active
+outcome:
+  authority: none
+  status: pending
+preregistration:
+  digest: 761c13b3728a2c383bc6cf503735f00530928b8aaa648045c0e10f0003d2df07
+provenance:
+  status: null
+schema_version: 1
+study:
+  identity:
+    create_plan_digest: 44c9928c60e7d66b1d3e377c75b64164fe90e695815a3484d6c288f2a7df86d2
+    create_plan_path: manifests/create-plan.yml
+    experiment_family: tsm-mr-selling-pressure-core-first-v001-family
+    historical_evaluation_operator: operator A
+    prepare_report_digest: ea2050ef9c84e7b0a56766e80ab2e4f468761657cf1e72f80e8679382bba2d2c
+    prepare_report_path: manifests/prepare-report.yml
+    research_owner: ochowei@gmail.com
+    research_round_id: tsm-core-first-2026-09-v001
+    source_bundle_digest: d6876339038ad2aa76402c2e3f815db0e5b15e19455081d6d5fdf1ed154a5f3d
+    source_bundle_path: manifests/source-bundle.yml
+    workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+    workflow_reference_path: manifests/workflow-reference.yml
+  study_id: tsm-selling-pressure-core-first--v001
+trial_registry:
+  assessments:
+    tsm-mr-selling-pressure-core-first-v001:
+      actuals:
+        base_profit_factor: '4.76782116678459'
+        base_return: '0.3763601756278996'
+        completed_trades: 29
+        maximum_realized_trade_loss_fraction: '0.019999840380168547'
+        maximum_stress_block_bootstrap_drawdown_above_10pct_ratio: '0.0'
+        maximum_stress_leave_one_year_out_drawdown: '0.022696879817363808'
+        minimum_stress_block_bootstrap_positive_return_ratio: '0.99998'
+        minimum_stress_leave_one_year_out_profit_factor: '3.419741917072218'
+        minimum_stress_leave_one_year_out_return: '0.17392088051371957'
+        stress_maximum_drawdown: '0.022696879817363808'
+        stress_profit_factor: '3.889996105014582'
+        stress_return: '0.2907280855776393'
+        traded_years: 5
+      candidate_freeze_eligibility:
+        eligible: true
+        reasons: []
+      development_evidence_validity:
+        status: valid
+        validated: true
+      formal_development_gates:
+        failed: []
+        status: passed
+      research_targets:
+        failed: []
+        status: not_registered
+  digest: null
+  recorded_trial_count: 1
+  trial_ids:
+    - tsm-mr-selling-pressure-core-first-v001
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: d6876339038ad2aa76402c2e3f815db0e5b15e19455081d6d5fdf1ed154a5f3d
+  workflow_digest: 2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2
+  workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+  workflow_reference_path: manifests/workflow-reference.yml

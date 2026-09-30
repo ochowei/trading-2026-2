@@ -1,0 +1,24 @@
+files:
+  - digest: dd2792a53aa7ac2990f362fd36870c783a50a3dbf7710be33991e281cbe2ed0d
+    path: research/tsm-divergence-atr-gap-filter--v001/candidate-definition.yml
+  - digest: 0a901cfb49db9304348fffe23b47abe75b9f186c580bd6161f50a43d978683e5
+    path: research/tsm-divergence-atr-gap-filter--v001/data-snapshot-acquisition.yml
+  - digest: f1ff920dfd262be2a48b62bfdaeef8dd433a08d4d284c53420e01e1d515ee9f0
+    path: research/tsm-divergence-atr-gap-filter--v001/implementation-contract.yml
+  - digest: b2e0ec5b2b62735ed35c7759526de2799070dc285723c42a5bde6162e90aff28
+    path: research/tsm-divergence-atr-gap-filter--v001/preregistration.yml
+  - digest: e31d544b96e27b39bfa953bd371b65eaac896c8f07edabac9738581472741f26
+    path: research/tsm-divergence-atr-gap-filter--v001/qualification-spec.yml
+  - digest: 9ac90b237d03c4f223e2cd78d079197c115f83228237003334b5cdd4a3aa4ca8
+    path: research/tsm-divergence-atr-gap-filter--v001/run_development.py
+  - digest: 8eb4d91ee2f485c8d4d0e5a347006962e21d7ec648656974041ed99507b8aff9
+    path: research/tsm-divergence-atr-gap-filter--v001/run_historical_evaluation.py
+  - digest: 277647addebaabf093433d9f8e85afa0002e8b91179c8438e3c47fcbedc4f266
+    path: research/tsm-divergence-atr-gap-filter--v001/runner-contract.yml
+  - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+    path: src/trading_2026_2/__init__.py
+  - digest: 80871b6a1c707ba37f3bab1f1ab44a94df61048f323d7a4a9fb9d51cdd7b6ccb
+    path: src/trading_2026_2/tsm_mean_reversion_divergence_atr_gap_filter_v001.py
+  - digest: cae8aa38dbe8bd40036d69f54bc5a7fd5fc87f774017b0f49a538af3c96e7384
+    path: src/trading_2026_2/tsm_mean_reversion_supplemental_divergence_v004.py
+schema_version: 1

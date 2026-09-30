@@ -1,0 +1,26 @@
+actor_id: /root/task_035_gap_aware_entry
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: c66328036f143e755181d8876926b0736544daedca15b5a6b6a7f332e4bab221
+  workflow_digest: 2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2
+  workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: trial-recorded
+execution:
+  assignment_digest: 58070fba5778bef7e14ff58b4be9778062f66317f4936e1227dcf160ae9dee74
+  assignment_path: manifests/assignments/58070fba5778bef7e14ff58b4be9778062f66317f4936e1227dcf160ae9dee74.yml
+  role: study 開發者
+occurred_at: '2026-09-30T08:13:28.920286Z'
+payload:
+  development_evidence_digest: c41581a124250d4d035cc559a8247c57aaa0730f66e2176186cb591796f9ffc9
+  development_evidence_path: evidence/trials/tsm-mr-supplemental-divergence-v004-gap-atr05/candidate.yml
+  inputs_digest: 5d8457b3e2577ddca0c27cad536b9c269252e48189751af39524e0bf374bdfeb
+  inputs_path: evidence/trials/tsm-mr-supplemental-divergence-v004-gap-atr05/inputs.yml
+  publication_digest: bfd731b5a1d458382bb4c810ceda04d0e27db503f2be2759a4d8186b4898e378
+  publication_path: evidence/trials/tsm-mr-supplemental-divergence-v004-gap-atr05/publication.yml
+  status: completed
+  trial_id: tsm-mr-supplemental-divergence-v004-gap-atr05
+previous_event_digest: f48088ac9b25c13fd8d53306d85ba03a50ae42592062ba21f2e264a1587db2c6
+schema_version: 1
+sequence: 4
+study_id: tsm-divergence-atr-gap-filter--v001

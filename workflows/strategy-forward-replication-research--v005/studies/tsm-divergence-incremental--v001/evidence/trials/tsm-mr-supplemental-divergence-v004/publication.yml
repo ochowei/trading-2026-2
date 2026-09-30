@@ -1,0 +1,16 @@
+artifacts:
+  baseline:
+    digest: 51a6663b0f554af6b1072c19f2e88f22c4942d305d3af138b330fbcac8bcc38c
+    path: evidence/trials/tsm-mr-supplemental-divergence-v004/baseline.yml
+  candidate:
+    digest: 0d96166179d051873bcde6d344c6c667db08cf4d7880caeffc7de0759de58f96
+    path: evidence/trials/tsm-mr-supplemental-divergence-v004/candidate.yml
+  inputs:
+    digest: bfdf2ba3404dddc2a0a1b243ba8121a6c24cf57df393b20cbd146f6d5e53d109
+    path: evidence/trials/tsm-mr-supplemental-divergence-v004/inputs.yml
+envelope_digest: 6bfba18010eb8b411806eaff61af788561835d4d7d9a8c75df1ea4424f33f249
+preregistration_digest: 5eb00ae04e126614e638a1a1bae1b2fd965d26e56e14eedaacde1b655248edac
+schema_version: 1
+source_bundle_digest: 1a893a57642724aa14fbdef3e20583b34e6a40e452542dcaf01021336250b621
+study_id: tsm-divergence-incremental--v001
+trial_id: tsm-mr-supplemental-divergence-v004

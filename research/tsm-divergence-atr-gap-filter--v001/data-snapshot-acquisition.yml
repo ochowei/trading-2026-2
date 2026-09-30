@@ -1,0 +1,28 @@
+adjustment_policy: auto_adjusted
+calendar: XNYS
+development_file:
+  digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+  path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+  role: warmup-development
+  signal_range:
+    end: '2018-12-31'
+    start: '2014-01-01'
+  warmup_range:
+    end: '2013-12-31'
+    start: '2013-01-01'
+interval: 1d
+prior_outcome_exposure_assessment:
+  asset_id: TSM
+  handling: 依v005規範標示provenance-unknown，不宣稱verified-clean。
+  known_exposure: 本專案較早的相關TSM Development摘要已出現在任務規劃中；無法由允許來源證明所有舊參考數字與本候選的資料／研究範圍關係。
+  unverified_scope:
+    - 較早的參考數值所使用的資料區間與策略版本是否和本 Study 完全一致
+    - 既有Development結果對本次研究選擇的影響範圍
+  v005_provenance_status: provenance-unknown
+provenance_limitation: 研究前已知相關TSM Development結果曾在專案規劃摘要中曝光；可用來源不足以證明舊參考數值的資料期間、策略版本和本次候選完全一致，因此保守標記provenance-unknown。未讀取本次Study的正式Historical Evaluation或Terminal結果。
+provenance_status: provenance-unknown
+provider: yahoo
+schema_version: 1
+source_note: 僅使用固定TSM warmup+Development CSV；不讀取隔離期或Historical Evaluation資料。
+symbol: TSM
+timezone: America/New_York

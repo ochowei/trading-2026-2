@@ -1,0 +1,96 @@
+engine:
+  base_cost_constant: BASE_COST
+  baseline_spec_constant: V009_ONLY_SPEC
+  candidate_spec_constant: DEFAULT_SPEC
+  path: src/trading_2026_2/tsm_mean_reversion_supplemental_divergence_v004.py
+  stress_cost_constant: STRESS_COST
+execution:
+  cooldown:
+    anchor: completed-position-exit
+    minimum_completed_session_steps_after_exit: 5
+  decision:
+    entry: next-session-open
+    signal: completed-session-close
+  drawdown:
+    formal_gate_definition: realized-trade-equity-drawdown
+    formal_gate_metric: stress_maximum_drawdown
+  exits:
+    gap_fill: stop-gap-at-open-target-gap-at-open
+    holding_exit: next-open-after-10-complete-sessions
+    same_session_ambiguity: adverse-stop-first
+    stop_return: '-0.04'
+    target_return: '0.04'
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    modeled_stop_includes_entry_exit_costs: true
+    risk_fraction_of_pre_entry_equity: '0.02'
+    shares: maximum-integer-shares-within-risk-and-cash-caps
+  price_direction_confirmation:
+    close_above_prior_close: true
+    rule: close-above-prior-close
+fixed_parameters:
+  cooldown_sessions: 5
+  holding_sessions: 10
+  maximum_holding_session_span_for_validator: 11
+  risk_fraction: '0.02'
+  rsi_length: 2
+  rsi_maximum: '50'
+  sma_length: 20
+  sma_minimum_gap: '0.015'
+  stop_return: '-0.04'
+  target_return: '0.04'
+  volume_ratio_minimum: '1.05'
+indicator_contract:
+  atr:
+    lookback: 20
+    min_periods: 20
+  bollinger:
+    ddof: 0
+    lookback: 20
+    min_periods: 20
+    percent_b_max: '0.25'
+    recent_window: 5
+    standard_deviation_multiplier: '2.0'
+  columns:
+    bollinger: bollinger_percent_b
+    rsi: rsi_2
+    sma: sma_20
+    volume_lead: prior_volume_spike_ratio
+    volume_score: volume_score_3d
+  required_history_sessions: 25
+  rsi:
+    formula: simple-rolling-mean
+    length: 2
+    min_periods: 2
+    not_ready: null
+    zero_gain_and_loss: 50
+    zero_gain_only: 0
+    zero_loss_only: 100
+  sma:
+    lookback: 20
+    min_periods: 20
+    not_ready: null
+  supplemental_path:
+    atr_distance_multiplier: '1.0'
+    atr_lookback: 20
+    event_reference_low_type: window_3d_low
+    observation_window_sessions: 5
+    pullback_low_lookback: 10
+    retest_volume_lookback: 20
+    volume_score_window: 3
+  volume_lead:
+    average_min_periods: 20
+    enabled: true
+    lead_min_periods: 5
+    prior_session_window: 5
+    uses_prior_sessions_only: true
+    volume_average_length: 20
+procedure:
+  development_runner: research/tsm-divergence-incremental--v001/run_development.py
+  historical_evaluation_runner: research/tsm-divergence-incremental--v001/run_historical_evaluation.py
+  path: research/tsm-divergence-incremental--v001/run_development.py
+strategy_identity:
+  baseline_family: tsm-mean-reversion-v009-two-stage-reversal
+  baseline_only_change: supplemental_path_enabled=False
+  candidate_family: tsm-mean-reversion-supplemental-divergence-v004
+  candidate_is_full_supplemental_divergence: true

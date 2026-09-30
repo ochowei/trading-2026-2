@@ -1,0 +1,9 @@
+assignee: /root/task_035_gap_aware_entry
+assigner: 專案管理者
+instruction: 依 TASK-035 指派建立唯一 v005 Study；Control 為完整 supplemental divergence v004，Candidate 只在下一 XNYS session open 增加 next_open - signal_day_close > 0.5 × ATR(20) 時略過 entry。先完成設計 checkpoint 等專案管理者審閱批准，再執行一次 prepare、一次 create、一次 Development、evidence validation、Development-only blind review 與繁體中文 append-only 成果卡。不得調參重跑或執行正式 Historical Evaluation、Terminal、challenge、replay、freeze；僅使用允許的 TSM warmup+Development CSV。
+role: study 開發者
+schema_version: 1
+scope: development-to-freeze
+source_id: codex-project-manager-task:TASK-035
+study_id: tsm-divergence-atr-gap-filter--v001
+workflow_version: v005

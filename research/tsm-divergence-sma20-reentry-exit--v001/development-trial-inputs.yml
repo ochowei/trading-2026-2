@@ -1,0 +1,42 @@
+baseline_comparison:
+  baseline_family: tsm-mean-reversion-supplemental-divergence-v004-control
+  baseline_id: tsm-mr-supplemental-divergence-v004-control-task033-v001
+  baseline_is_excluded_from_candidate_family: true
+  candidate_family: tsm-mean-reversion-supplemental-divergence-v004-sma20-reentry-exit
+  candidate_id: tsm-mr-supplemental-divergence-v004-sma20-reentry-exit
+  comparison_direction: candidate-minus-baseline
+  execution_is_identical: false
+candidate_family: tsm-mean-reversion-supplemental-divergence-v004-sma20-reentry-exit
+candidate_id: tsm-mr-supplemental-divergence-v004-sma20-reentry-exit
+complete_candidate_family:
+  - tsm-mr-supplemental-divergence-v004-sma20-reentry-exit
+cost_models:
+  base:
+    fee_per_side_bps: '1'
+    slippage_per_side_bps: '5'
+  stress:
+    fee_per_side_bps: '2'
+    slippage_per_side_bps: '20'
+data_bindings:
+  development_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+  development_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+date_controls:
+  formal_provider_access: false
+  signal_end: '2018-12-31'
+  signal_start: '2014-01-01'
+  warmup_end: '2013-12-31'
+  warmup_start: '2013-01-01'
+development_diagnostics:
+  block_lengths:
+    - 3
+    - 5
+  bootstrap_seed: 20260902
+  repetitions: 50000
+  seed_application: exact-same-seed-for-each-block-length
+preregistration_digest: 5c23044b882effd6d7632a648193182c78c500bfbaf4871d0b257b3d3396c788
+selected_candidate_id: tsm-mr-supplemental-divergence-v004-sma20-reentry-exit
+source_bundle_digest: 891e387a7bd8cfb2428ffa44320e4ebc93d0f6003bd1d6e8aef976ca26252d3a
+strategy_engine_digest: 56124aef3be3b093a7eeb678c277f3054f41d804fedb691e5a0967a0b96fe74b
+study_procedure_digest: e13b726f400ec3449c1faa7f50e81e4e2bb9441a02de10c9c65bcb8eb7a2ba5a
+study_procedure_path: research/tsm-divergence-sma20-reentry-exit--v001/run_development.py
+trial_id: tsm-mr-supplemental-divergence-v004-sma20-reentry-exit

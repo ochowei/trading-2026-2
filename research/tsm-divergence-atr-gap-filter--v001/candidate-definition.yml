@@ -1,0 +1,133 @@
+baseline:
+  baseline_id: tsm-mr-supplemental-divergence-v004-control-task035-v001
+  engine_path: src/trading_2026_2/tsm_mean_reversion_divergence_atr_gap_filter_v001.py
+  engine_spec_constant: CONTROL_SPEC
+  family: tsm-mean-reversion-supplemental-divergence-v004
+  signals: 完整 supplemental divergence v004 主路徑與補充路徑，完全不做新增 ATR 跳空 entry 檢查。
+  supplemental_divergence_path: enabled
+  v009_core_path: enabled
+candidate:
+  candidate_id: tsm-mr-supplemental-divergence-v004-gap-atr05
+  engine_path: src/trading_2026_2/tsm_mean_reversion_divergence_atr_gap_filter_v001.py
+  engine_spec_constant: ATR_GAP_FILTER_SPEC
+  family: tsm-mean-reversion-supplemental-divergence-v004-atr-gap-filter
+  only_added_entry_filter:
+    apply_at: next-XNYS-session-open-before-market-entry
+    atr_formula: TR_t=max(High_t-Low_t, abs(High_t-Close_(t-1)), abs(Low_t-Close_(t-1))); ATR20_t=arithmetic_mean(TR_(t-19)..TR_t)
+    atr_lookback: 20
+    atr_min_periods: 20
+    atr_window: 最近20個已完成XNYS session，包含signal day；只使用signal day close時已完成的資料
+    data_adjustment: 與策略及Development CSV相同的auto_adjusted OHLCV價格
+    gap_price_basis: next_session_open - signal_day_close
+    maximum_gap_atr_multiple: '0.5'
+    otherwise: 等於門檻、低於門檻或負gap均照常按原規則於次日open進場
+    skip_operator: '>'
+    skip_when: next_session_open - signal_day_close > 0.5 * signal_day_ATR20
+    unavailable_atr: 若符合原策略訊號但signal-day ATR20未就緒或非正值，runner須停止並回報錯誤，不得靜默放行
+  supplemental_divergence_path: enabled
+  v009_core_path: enabled
+candidate_family: tsm-mean-reversion-supplemental-divergence-v004-atr-gap-filter
+candidate_id: tsm-mr-supplemental-divergence-v004-gap-atr05
+complete_candidate_family:
+  - tsm-mr-supplemental-divergence-v004-gap-atr05
+costs:
+  base:
+    fee_per_side_bps: '1'
+    slippage_per_side_bps: '5'
+  stress:
+    fee_per_side_bps: '2'
+    slippage_per_side_bps: '20'
+data:
+  adjustment_policy: auto_adjusted
+  calendar: XNYS
+  interval: 1d
+  provider: yahoo
+  symbol: TSM
+  timezone: America/New_York
+execution:
+  entry: next-session-open-market
+  gap_fill: stop-gap-at-open-target-gap-at-open
+  held_complete_sessions: 10
+  intrabar_ambiguity: adverse-stop-first
+  maximum_holding_session_span_for_validator: 11
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    modeled_stop_includes_costs: true
+    risk_fraction_of_pre_entry_equity: '0.02'
+    shares: maximum-integer-shares-within-risk-and-cash-caps
+  stop:
+    level_from_raw_entry_open: '-0.04'
+    order_type: STOP_MARKET
+    time_in_force: GTC
+  target:
+    level_from_raw_entry_open: '0.04'
+    order_type: LIMIT
+    reissued_each_session: true
+    time_in_force: DAY
+fixed_execution_parameters:
+  cooldown_sessions: 5
+  holding_sessions: 10
+  maximum_holding_session_span_for_validator: 11
+  risk_fraction: '0.02'
+  rsi_length: 2
+  rsi_maximum: '50'
+  sma_length: 20
+  sma_minimum_gap: '0.015'
+  stop_return: '-0.04'
+  target_return: '0.04'
+  volume_ratio_minimum: '1.05'
+fold_policy:
+  evaluation_fold_warmup_sessions: 25
+  indicator_state_carried_between_folds: false
+  portfolio_state_reset_each_fold: true
+  replay_warmup_sessions: 25
+initial_cash: '100000'
+only_strategy_difference: Candidate 與 Control 的所有 v004 訊號、持倉、成本、出場、停損停利、風險和冷卻規則相同；Candidate 唯一增加 signal-day ATR(20) 正向跳空門檻，於次日open前判斷是否略過本次entry。
+schema_version: 1
+selected_candidate_id: tsm-mr-supplemental-divergence-v004-gap-atr05
+signal:
+  accepted_only_when_flat: true
+  cooldown:
+    clock_anchor: completed-position-exit
+    completed_session_steps_after_exit: 5
+  decision_time: completed-session-close
+  entry_gap_filter:
+    apply_at: next-XNYS-session-open-before-market-entry
+    atr_formula: TR_t=max(High_t-Low_t, abs(High_t-Close_(t-1)), abs(Low_t-Close_(t-1))); ATR20_t=arithmetic_mean(TR_(t-19)..TR_t)
+    atr_lookback: 20
+    atr_min_periods: 20
+    atr_window: 最近20個已完成XNYS session，包含signal day；只使用signal day close時已完成的資料
+    data_adjustment: 與策略及Development CSV相同的auto_adjusted OHLCV價格
+    gap_price_basis: next_session_open - signal_day_close
+    maximum_gap_atr_multiple: '0.5'
+    otherwise: 等於門檻、低於門檻或負gap均照常按原規則於次日open進場
+    skip_operator: '>'
+    skip_when: next_session_open - signal_day_close > 0.5 * signal_day_ATR20
+    unavailable_atr: 若符合原策略訊號但signal-day ATR20未就緒或非正值，runner須停止並回報錯誤，不得靜默放行
+  mean_reversion:
+    close_vs_sma20_gap_minimum: '0.015'
+    rsi_length: 2
+    rsi_maximum: '50'
+    sma_length: 20
+  price_direction_confirmation:
+    close_above_prior_close: true
+  supplemental_path:
+    atr_distance_multiplier: '1.0'
+    atr_lookback: 20
+    bollinger_ddof: 0
+    bollinger_lookback: 20
+    bollinger_percent_b_max: '0.25'
+    bollinger_recent_window: 5
+    bollinger_standard_deviation_multiplier: '2.0'
+    enabled: true
+    event_reference_low_type: window_3d_low
+    observation_window_sessions: 5
+    pullback_low_lookback: 10
+    retest_volume_lookback: 20
+    volume_score_window: 3
+  symbol: TSM
+  volume_leads_price:
+    enabled: true
+    prior_session_window: 5
+    volume_average_length: 20
+    volume_ratio_minimum: '1.05'

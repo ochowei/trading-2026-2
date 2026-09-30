@@ -1,0 +1,6 @@
+created_at: '2026-09-30T04:41:53.826574Z'
+event_digest: dd83b74a07629308b3126d377e1bddfa7cfadc2cfe795382319d7ae8b8e4727f
+previous_checkpoint_digest: 61ec7935a33f1ca7136b3666e7533ad7619ecfdc44cf0ddeedcf235944bcbb25
+schema_version: 1
+sequence: 3
+study_id: tsm-divergence-incremental--v001

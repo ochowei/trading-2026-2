@@ -1,0 +1,16 @@
+artifacts:
+  baseline:
+    digest: 65361a1e9b26859c8aa4de8c2a03e65d2aa482eab97dc4e80dff99c303043440
+    path: evidence/trials/tsm-mr-supplemental-divergence-v004-sma20-reentry-exit/baseline.yml
+  candidate:
+    digest: 079ba80b8b03008b6d0e31b45fd490e7103da98ac23bb51e11661ba73ce78709
+    path: evidence/trials/tsm-mr-supplemental-divergence-v004-sma20-reentry-exit/candidate.yml
+  inputs:
+    digest: 5221552bd096a274ec5415090b8f89e6a15f85b49d1d33dec3d2cd05a525ef47
+    path: evidence/trials/tsm-mr-supplemental-divergence-v004-sma20-reentry-exit/inputs.yml
+envelope_digest: cabd76068ed3f054be130ae70af7ecf72d9f8a77410679992512914dbed33e09
+preregistration_digest: 5c23044b882effd6d7632a648193182c78c500bfbaf4871d0b257b3d3396c788
+schema_version: 1
+source_bundle_digest: 891e387a7bd8cfb2428ffa44320e4ebc93d0f6003bd1d6e8aef976ca26252d3a
+study_id: tsm-divergence-sma20-reentry-exit--v001
+trial_id: tsm-mr-supplemental-divergence-v004-sma20-reentry-exit

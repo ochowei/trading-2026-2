@@ -1,0 +1,70 @@
+candidate_freeze: null
+evidence:
+  development: 7d6d97c81f5e43a645e93fb0fc9dc090026585321a453b881842215245afaa83
+lifecycle:
+  current_event: trial-recorded
+  event_chain_head_digest: db77e53f5d23fc7a8b9acaaabe156f47b332f00ac34950310bbb9ffa45966f81
+  event_count: 4
+  status: active
+outcome:
+  authority: none
+  status: pending
+preregistration:
+  digest: 39f39ee7c620522bacbfb97d52ec360226e438072ab5048eb27da74abea712a7
+provenance:
+  status: null
+schema_version: 1
+study:
+  identity:
+    create_plan_digest: b0098602eff619ad4ab34ada73819d46f9df52992df1c23d7b963717c76d18f3
+    create_plan_path: manifests/create-plan.yml
+    experiment_family: tsm-mean-reversion-supplemental-divergence-v004-failed-reversal-exit
+    historical_evaluation_operator: operator A
+    prepare_report_digest: 8b630e2609125361275437053f2904651cc89e20cbad3b9ff20db082c3b6834a
+    prepare_report_path: manifests/prepare-report.yml
+    research_owner: ochowei@gmail.com
+    research_round_id: TASK-034
+    source_bundle_digest: 7448e87ea3089d89de7ff445cdf2f86afac2b30f6942a7cd8f01de97832a64a6
+    source_bundle_path: manifests/source-bundle.yml
+    workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+    workflow_reference_path: manifests/workflow-reference.yml
+  study_id: tsm-divergence-failed-reversal-exit--v001
+trial_registry:
+  assessments:
+    tsm-mr-supplemental-divergence-v004-failed-reversal-exit:
+      actuals:
+        base_profit_factor: '2.1400463055723593'
+        base_return: '0.13948815259429015'
+        completed_trades: 30
+        maximum_realized_trade_loss_fraction: '0.01999994935723705'
+        maximum_stress_block_bootstrap_drawdown_above_10pct_ratio: '0.01636'
+        maximum_stress_leave_one_year_out_drawdown: '0.03706278879551953'
+        minimum_stress_block_bootstrap_positive_return_ratio: '0.86912'
+        minimum_stress_leave_one_year_out_profit_factor: '1.1696594227512773'
+        minimum_stress_leave_one_year_out_return: '0.017624178740219376'
+        stress_maximum_drawdown: '0.03580127124673613'
+        stress_profit_factor: '1.6171395544368368'
+        stress_return: '0.08129670653956564'
+        traded_years: 5
+      candidate_freeze_eligibility:
+        eligible: true
+        reasons: []
+      development_evidence_validity:
+        status: valid
+        validated: true
+      formal_development_gates:
+        failed: []
+        status: passed
+      research_targets:
+        failed: []
+        status: not_registered
+  digest: null
+  recorded_trial_count: 1
+  trial_ids:
+    - tsm-mr-supplemental-divergence-v004-failed-reversal-exit
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 7448e87ea3089d89de7ff445cdf2f86afac2b30f6942a7cd8f01de97832a64a6
+  workflow_digest: 2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2
+  workflow_reference_digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+  workflow_reference_path: manifests/workflow-reference.yml

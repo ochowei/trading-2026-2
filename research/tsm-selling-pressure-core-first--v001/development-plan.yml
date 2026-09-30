@@ -1,0 +1,101 @@
+actor: /root/task_032_core_first
+data_assets:
+  - asset_id: TSM
+    available_at: after-close
+    data_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+    data_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+    end_date: '2018-12-31'
+    interval_role: warmup-development
+    provider: yahoo
+    start_date: '2013-01-02'
+    symbol: TSM
+    timezone: America/New_York
+    use: trade
+trial_inputs:
+  baseline_comparison:
+    baseline_id: tsm-mr-two-stage-volume-reversal-v009-control
+    candidate_id: tsm-mr-selling-pressure-core-first-v001
+    execution_is_identical: false
+  candidate_family: tsm-mr-selling-pressure-core-first-v001-family
+  candidate_id: tsm-mr-selling-pressure-core-first-v001
+  cost_models:
+    base:
+      fee_per_side_bps: '1'
+      slippage_per_side_bps: '5'
+    stress:
+      fee_per_side_bps: '2'
+      slippage_per_side_bps: '20'
+  data_bindings:
+    adjustment_policy: auto_adjusted
+    assets:
+      - asset_id: TSM
+        available_at: after-close
+        data_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+        data_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+        end_date: '2018-12-31'
+        interval_role: warmup-development
+        provider: yahoo
+        start_date: '2013-01-02'
+        symbol: TSM
+        timezone: America/New_York
+        use: trade
+    calendar: XNYS
+    interval: 1d
+  date_controls:
+    formal_provider_access: false
+    signal_end: '2018-12-31'
+    signal_start: '2014-01-01'
+    warmup_end: '2013-12-31'
+    warmup_start: '2013-01-02'
+  development_diagnostics:
+    block_lengths:
+      - 3
+      - 5
+    bootstrap_seed: 20260902
+    repetitions: 50000
+    seed_application: exact-same-seed-for-each-block-length
+  execution:
+    cooldown_anchor: completed-position-exit
+    cooldown_completed_session_steps_after_exit: 5
+    entry: next-XNYS-open
+    holding_sessions: 10
+    intrabar_ambiguity: adverse-stop-first
+    position_sizing:
+      cash_cap: available-cash-no-borrowing
+      modeled_stop_includes_costs: true
+      risk_fraction_of_pre_entry_equity: '0.02'
+    slot_priority:
+      flat_and_both_paths_signal: path-a-only
+      handoff_bypasses_flat_cooldown: true
+      holding_core: ignore-path-b
+      holding_supplemental_and_path_a_signals: exit-supplemental-and-enter-core-at-next-open-with-both-side-costs
+      same_session_supplemental_stop_or_target_before_close_signal: no-handoff; normal-cooldown-applies
+      simultaneous_positions: 1
+    stop_market_gtc: '-0.04'
+    target_limit_day: '0.04'
+  preregistration_digest: 761c13b3728a2c383bc6cf503735f00530928b8aaa648045c0e10f0003d2df07
+  schema_version: 1
+  selected_candidate_id: tsm-mr-selling-pressure-core-first-v001
+  signal:
+    mean_reversion_close_vs_sma20_gap_minimum: '0.015'
+    mean_reversion_rsi_length: 2
+    mean_reversion_rsi_maximum: '50'
+    mean_reversion_sma_length: 20
+    price_direction_confirmation_close_above_prior_close: true
+    slot_priority:
+      flat_and_both_paths_signal: path-a-only
+      handoff_bypasses_flat_cooldown: true
+      holding_core: ignore-path-b
+      holding_supplemental_and_path_a_signals: exit-supplemental-and-enter-core-at-next-open-with-both-side-costs
+      same_session_supplemental_stop_or_target_before_close_signal: no-handoff; normal-cooldown-applies
+      simultaneous_positions: 1
+    supplemental_path: selling-pressure-rollover-v002-path-b
+    volume_average_length: 20
+    volume_lead_enabled: true
+    volume_lead_window: 5
+    volume_spike_ratio_minimum: '1.05'
+  source_bundle_digest: d6876339038ad2aa76402c2e3f815db0e5b15e19455081d6d5fdf1ed154a5f3d
+  strategy_engine_digest: 40d65b4e1fd76dbc3b1038d0f602de8f5564066ae9c548ec7598da45140501aa
+  study_id: tsm-selling-pressure-core-first--v001
+  study_procedure_digest: 77d7e74fb1e679333c66e5110f7f252894f93c2494c5fbb47247c8d48ecb1065
+  trial_id: tsm-mr-selling-pressure-core-first-v001

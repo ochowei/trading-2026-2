@@ -1,0 +1,34 @@
+data_assets:
+  - asset_id: TSM
+    available_at: after-close
+    digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+    end_date: '2018-12-31'
+    path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+    provider: yahoo
+    start_date: '2013-01-02'
+    symbol: TSM
+    timezone: America/New_York
+    use: trade
+evidence:
+  digest: e27cf027934b68e5f195d2a62e401bb2323aac091bb8b6b8ecfeddf9478d3081
+  path: runtime/evidence.yml
+execution_contract: request-output-v1
+execution_workspace: temporary
+operation_id: fe9c38ffff62ada68d1d59130cf0120e3a443903673c4c3a9a94b174cea598f2
+request:
+  digest: 17df6bc0e1ad35cc4f4f1866ae670cd102f137f5828c2264674f2347e1abc2fc
+  path: runtime/request.yml
+resolver_version: 1
+runner:
+  digest: 77d7e74fb1e679333c66e5110f7f252894f93c2494c5fbb47247c8d48ecb1065
+  path: research/tsm-selling-pressure-core-first--v001/run_development.py
+schema_version: 1
+source_bundle:
+  digest: d6876339038ad2aa76402c2e3f815db0e5b15e19455081d6d5fdf1ed154a5f3d
+  path: manifests/source-bundle.yml
+stage: development
+study_id: tsm-selling-pressure-core-first--v001
+workflow_reference:
+  digest: 40396c0c742a653a589c5bfb738358149ae7c4302e55dc732362975902af3b90
+  path: manifests/workflow-reference.yml
+workflow_version: v005

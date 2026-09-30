@@ -1,0 +1,319 @@
+availability_policy: after-close-next-session
+data_assets:
+  - asset_id: TSM
+    available_at: after-close
+    data_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+    data_path: run/assets/TSM.csv
+    end_date: '2018-12-31'
+    interval_role: warmup-development
+    provider: yahoo
+    start_date: '2013-01-02'
+    symbol: TSM
+    timezone: America/New_York
+    use: trade
+preregistration:
+  baseline_definition:
+    baseline_id: tsm-mr-two-stage-volume-reversal-v009-control
+    candidate_family: tsm-mr-selling-pressure-core-first-v001-family
+    execution_is_identical: false
+    family: tsm-mean-reversion-two-stage-volume-reversal-v009
+    objectively_simpler_because: Control 只保留 v009 的 Path A 核心訊號；Candidate 僅加既有 Path B 並採單一 slot core-first。Control 沒有 supplemental path 或交接規則，因此少一個訊號來源及狀態轉換。兩邊 SMA、RSI、volume 門檻、成本、2% 風險預算、停損停利、持有期與一般冷卻設定固定相同。
+    simpler_rule: TSM v009 Path A：共同 oversold 條件、prior-volume lead >= 1.05 與 Close > prior Close；不啟用 Path B。
+  complete_candidate_family:
+    - tsm-mr-selling-pressure-core-first-v001
+  eligibility_rules:
+    accepted_signal:
+      cooldown:
+        clock_anchor: completed-position-exit
+        minimum_completed_session_steps_after_exit: 5
+        position_must_be_flat: true
+      decision_time: completed-session-close
+      indicator_contract:
+        rsi_formula: simple-rolling-mean
+        rsi_not_ready: null
+        volume_lead_is_disabled_for_candidate: false
+      mean_reversion:
+        close_vs_sma20_gap_minimum: '0.015'
+        close_vs_sma20_operator: '>='
+        rsi_length: 2
+        rsi_operator: <=
+        rsi_value: '50'
+        sma_length: 20
+      path_b:
+        base_oversold_shared_with_path_a: true
+        price_direction_confirmation_required: false
+        source: selling-pressure-rollover-v002
+        svb_current_minimum: '-0.15'
+        svb_lookback: 3
+        svb_prior_minimum: '-0.50'
+        svb_prior_window: 5
+      price_direction_confirmation:
+        close_above_prior_close: true
+      slot_priority:
+        flat_and_both_paths_signal: path-a-only
+        handoff_bypasses_flat_cooldown: true
+        holding_core: ignore-path-b
+        holding_supplemental_and_path_a_signals: exit-supplemental-and-enter-core-at-next-open-with-both-side-costs
+        same_session_supplemental_stop_or_target_before_close_signal: no-handoff; normal-cooldown-applies
+        simultaneous_positions: 1
+      symbol: TSM
+      volume_leads_price:
+        enabled: true
+        prior_session_window: 5
+        volume_average_length: 20
+        volume_ratio_operator: '>='
+        volume_ratio_value: '1.05'
+        volume_shock_is_before_signal: true
+    costs:
+      base:
+        fee_per_side_bps: '1'
+        slippage_per_side_bps: '5'
+      stress:
+        fee_per_side_bps: '2'
+        slippage_per_side_bps: '20'
+    development_diagnostics:
+      block_bootstrap:
+        block_lengths:
+          - 3
+          - 5
+        maximum_stress_drawdown_above_10pct_ratio: '0.10'
+        minimum_stress_positive_return_ratio: '0.80'
+        repetitions: 50000
+        seed: 20260902
+        seed_application: exact-same-seed-for-each-block-length
+      leave_one_signal_year_out:
+        maximum_stress_drawdown: '0.10'
+        minimum_stress_profit_factor: '1.00'
+        minimum_stress_return: '0'
+      signal_year_breakdown: true
+    development_gates:
+      base_profit_factor:
+        operator: '>'
+        value: '1.10'
+      base_return:
+        operator: '>'
+        value: '0'
+      completed_trades:
+        operator: '>='
+        value: 20
+      maximum_realized_trade_loss_fraction:
+        operator: <=
+        value: '0.04'
+      maximum_stress_block_bootstrap_drawdown_above_10pct_ratio:
+        operator: <=
+        value: '0.10'
+      maximum_stress_leave_one_year_out_drawdown:
+        operator: <=
+        value: '0.10'
+      minimum_stress_block_bootstrap_positive_return_ratio:
+        operator: '>='
+        value: '0.80'
+      minimum_stress_leave_one_year_out_profit_factor:
+        operator: '>'
+        value: '1.00'
+      minimum_stress_leave_one_year_out_return:
+        operator: '>'
+        value: '0'
+      stress_maximum_drawdown:
+        operator: <=
+        value: '0.10'
+      stress_profit_factor:
+        operator: '>'
+        value: '1.00'
+      stress_return:
+        operator: '>'
+        value: '0'
+      traded_years:
+        operator: '>='
+        value: 3
+    diagnostic_comparison:
+      aggregate_base_and_stress_pnl: sum of published raw trade PnL per cost model; candidate minus control
+      candidate_minus_control: true
+      displaced_core_trades: identify Control Path A trades absent from Candidate only if legal Development evidence supports one-to-one attribution
+      formal_gate: false
+      supplemental_path_pnl: sum PnL of trades attributable to Path B if and only if legal Development evidence supports origin attribution
+      unsupported_attribution: mark unable-to-determine; do not extend or rewrite evidence schema
+    execution:
+      decision_time: completed-session-close
+      drawdown_definition:
+        formal_gate: stress_maximum_drawdown
+        formal_gate_semantics: completed-trade realized equity curve
+        mark_to_market_diagnostic: holding-session-low-after-costs
+      entry: next-session-open-market
+      gap_fill: stop-gap-at-open-target-gap-at-open
+      holding_period: entry session is the first complete session; after 10 complete sessions exit at next open
+      intrabar_ambiguity: adverse-stop-first
+      position_sizing:
+        cash_cap: available-cash-no-borrowing
+        maximum_simultaneous_positions: 1
+        modeled_stop_includes_costs: true
+        risk_fraction_of_pre_entry_equity: '0.02'
+        shares: maximum-integer-shares-within-risk-and-cash-caps
+      stop:
+        level_from_raw_entry_open: '-0.04'
+        order: STOP_MARKET
+        time_in_force: GTC
+      target:
+        level_from_raw_entry_open: '0.04'
+        order: LIMIT
+        time_in_force: DAY
+  evaluation_gates:
+    base_compounded_return:
+      operator: '>'
+      value: '0'
+    base_profit_factor:
+      operator: '>'
+      value: '1.10'
+    completed_trades:
+      operator: '>='
+      value: 20
+    family_wise_confidence:
+      operator: '>='
+      value: '0.90'
+    maximum_fold_positive_profit_concentration:
+      operator: <=
+      value: '0.50'
+    maximum_fold_trade_concentration:
+      operator: <=
+      value: '0.50'
+    maximum_realized_trade_loss_fraction:
+      operator: <=
+      value: '0.04'
+    positive_traded_fold_ratio:
+      operator: '>='
+      value: '0.60'
+    stress_max_drawdown:
+      operator: <=
+      value: '0.10'
+    stress_profit_factor:
+      operator: '>'
+      value: '1.00'
+    stress_return:
+      operator: '>'
+      value: '0'
+    traded_folds:
+      operator: '>='
+      value: 3
+  fold_warmup_sessions: 25
+  hypothesis: 在 TSM 的 SMA(20)／RSI(2) 均值回歸規則與所有既有門檻不變時，加入 selling-pressure-rollover v002 Path B，並以單一持倉 slot 讓 Path A 永遠優先；比較候選與 v009 Path A-only Control 的 Development aggregate 表現，判斷 supplemental path 是否在不取代 core 優先權下提供增量。
+  initial_cash: '100000'
+  maximum_holding_sessions: 11
+  maximum_trials: 1
+  selection_rule:
+    eligible_candidate: 唯一 Trial 通過全部預先登記 Development gates 才符合資格；不以 outcome 排名。
+    method: fixed-single-candidate-no-outcome-ranking
+    selected_candidate_id: tsm-mr-selling-pressure-core-first-v001
+  tie_handling:
+    method: not-applicable-single-candidate
+source_bundle:
+  files:
+    - digest: 2034b904abf6032eb869d24cb62eb2445b58ebd364f00f08cd0df10b2c157d1b
+      path: research/tsm-selling-pressure-core-first--v001/candidate-definition.yml
+    - digest: 8cf2cd86423b928129b6be26bbcb15614faea10063401fa66e0e6397b2bce4a9
+      path: research/tsm-selling-pressure-core-first--v001/implementation-contract.yml
+    - digest: 761c13b3728a2c383bc6cf503735f00530928b8aaa648045c0e10f0003d2df07
+      path: research/tsm-selling-pressure-core-first--v001/preregistration.yml
+    - digest: 7197d9e7b812f8dd9e713be8dc34d8eabb5968151d82e3a59bc803bb3a049827
+      path: research/tsm-selling-pressure-core-first--v001/qualification-spec.yml
+    - digest: 77d7e74fb1e679333c66e5110f7f252894f93c2494c5fbb47247c8d48ecb1065
+      path: research/tsm-selling-pressure-core-first--v001/run_development.py
+    - digest: 3f545c0d19002c5f1463b8e1d5cb062e3d4c6d2bea944f95be5432e438e9582d
+      path: research/tsm-selling-pressure-core-first--v001/run_historical_evaluation.py
+    - digest: 94874b3d37b01fc76b811d0dd6d2d3c847d817f99356e2e52296775c2c588a30
+      path: research/tsm-selling-pressure-core-first--v001/runner-contract.yml
+    - digest: 40d65b4e1fd76dbc3b1038d0f602de8f5564066ae9c548ec7598da45140501aa
+      path: src/trading_2026_2/tsm_mean_reversion_selling_pressure_core_first_v001.py
+    - digest: 0e889edc447d5a87c08aa507dcfe1a219e377c2ba6b27cd4bf14951d439df72d
+      path: src/trading_2026_2/tsm_mean_reversion_selling_pressure_rollover_v001.py
+    - digest: f3163c9b92046d0397ce1daf0cfb320a302c9e994875a4be0e93057a83cef7c4
+      path: src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v009.py
+  schema_version: 1
+stage: development
+trial_inputs:
+  baseline_comparison:
+    baseline_id: tsm-mr-two-stage-volume-reversal-v009-control
+    candidate_id: tsm-mr-selling-pressure-core-first-v001
+    execution_is_identical: false
+  candidate_family: tsm-mr-selling-pressure-core-first-v001-family
+  candidate_id: tsm-mr-selling-pressure-core-first-v001
+  cost_models:
+    base:
+      fee_per_side_bps: '1'
+      slippage_per_side_bps: '5'
+    stress:
+      fee_per_side_bps: '2'
+      slippage_per_side_bps: '20'
+  data_bindings:
+    adjustment_policy: auto_adjusted
+    assets:
+      - asset_id: TSM
+        available_at: after-close
+        data_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+        data_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+        end_date: '2018-12-31'
+        interval_role: warmup-development
+        provider: yahoo
+        start_date: '2013-01-02'
+        symbol: TSM
+        timezone: America/New_York
+        use: trade
+    calendar: XNYS
+    interval: 1d
+  date_controls:
+    formal_provider_access: false
+    signal_end: '2018-12-31'
+    signal_start: '2014-01-01'
+    warmup_end: '2013-12-31'
+    warmup_start: '2013-01-02'
+  development_diagnostics:
+    block_lengths:
+      - 3
+      - 5
+    bootstrap_seed: 20260902
+    repetitions: 50000
+    seed_application: exact-same-seed-for-each-block-length
+  execution:
+    cooldown_anchor: completed-position-exit
+    cooldown_completed_session_steps_after_exit: 5
+    entry: next-XNYS-open
+    holding_sessions: 10
+    intrabar_ambiguity: adverse-stop-first
+    position_sizing:
+      cash_cap: available-cash-no-borrowing
+      modeled_stop_includes_costs: true
+      risk_fraction_of_pre_entry_equity: '0.02'
+    slot_priority:
+      flat_and_both_paths_signal: path-a-only
+      handoff_bypasses_flat_cooldown: true
+      holding_core: ignore-path-b
+      holding_supplemental_and_path_a_signals: exit-supplemental-and-enter-core-at-next-open-with-both-side-costs
+      same_session_supplemental_stop_or_target_before_close_signal: no-handoff; normal-cooldown-applies
+      simultaneous_positions: 1
+    stop_market_gtc: '-0.04'
+    target_limit_day: '0.04'
+  preregistration_digest: 761c13b3728a2c383bc6cf503735f00530928b8aaa648045c0e10f0003d2df07
+  schema_version: 1
+  selected_candidate_id: tsm-mr-selling-pressure-core-first-v001
+  signal:
+    mean_reversion_close_vs_sma20_gap_minimum: '0.015'
+    mean_reversion_rsi_length: 2
+    mean_reversion_rsi_maximum: '50'
+    mean_reversion_sma_length: 20
+    price_direction_confirmation_close_above_prior_close: true
+    slot_priority:
+      flat_and_both_paths_signal: path-a-only
+      handoff_bypasses_flat_cooldown: true
+      holding_core: ignore-path-b
+      holding_supplemental_and_path_a_signals: exit-supplemental-and-enter-core-at-next-open-with-both-side-costs
+      same_session_supplemental_stop_or_target_before_close_signal: no-handoff; normal-cooldown-applies
+      simultaneous_positions: 1
+    supplemental_path: selling-pressure-rollover-v002-path-b
+    volume_average_length: 20
+    volume_lead_enabled: true
+    volume_lead_window: 5
+    volume_spike_ratio_minimum: '1.05'
+  source_bundle_digest: d6876339038ad2aa76402c2e3f815db0e5b15e19455081d6d5fdf1ed154a5f3d
+  strategy_engine_digest: 40d65b4e1fd76dbc3b1038d0f602de8f5564066ae9c548ec7598da45140501aa
+  study_id: tsm-selling-pressure-core-first--v001
+  study_procedure_digest: 77d7e74fb1e679333c66e5110f7f252894f93c2494c5fbb47247c8d48ecb1065
+  trial_id: tsm-mr-selling-pressure-core-first-v001

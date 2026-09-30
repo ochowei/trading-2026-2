@@ -1,0 +1,18 @@
+assignment_digest: 9d30c341a12ced175d2cf5e9c348cfa127d7eaf2ea1cda51ba471e41c0abe9cb
+assignment_path: .study-developer/assignments/TASK-031-v005.yml
+create_plan_digest: 8ea082c57a5065cb7d0cf5cc844f6af9a837661ea0765b82e4c6056e1ca7aa5d
+create_plan_path: .study-developer/task-031-v005-identity-resolved/create-plan.yml
+data_snapshot_provenance_status: provenance-unknown
+development_plan_digest: 8878131f6aa50027a27663511be363839e92f3220ee34cf620f61bb37efb84c6
+development_plan_path: .study-developer/task-031-v005-identity-resolved/development-plan.yml
+identity:
+  experiment_family: tsm-mean-reversion-supplemental-divergence-v004
+  historical_evaluation_operator: operator A
+  research_owner: ochowei@gmail.com
+  research_round_id: TASK-031
+preregistration_digest: 5eb00ae04e126614e638a1a1bae1b2fd965d26e56e14eedaacde1b655248edac
+schema_version: 1
+scope: development-only; no freeze, Historical Evaluation, or terminal operation
+source_bundle_digest: 1a893a57642724aa14fbdef3e20583b34e6a40e452542dcaf01021336250b621
+study_id: tsm-divergence-incremental--v001
+trial_inputs_digest: bfdf2ba3404dddc2a0a1b243ba8121a6c24cf57df393b20cbd146f6d5e53d109
