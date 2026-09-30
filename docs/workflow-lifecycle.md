@@ -1,10 +1,10 @@
-# Workflow Lifecycle：strategy-forward-replication-research（v001／v002／v003／v004／v005）
+# Workflow Lifecycle：strategy-forward-replication-research（v001／v002／v003／v004／v005／v006）
 
 ## 文件目的
 
 本文件定義 Workflow Package（流程套件）的生命週期，處理的是研究流程本身如何建立、發布、取代與封存；它與 Study Lifecycle（單一研究個案從建立到終止的流程）不同。
 
-本文件目前適用於 `strategy-forward-replication-research--v001`、`strategy-forward-replication-research--v002`、`strategy-forward-replication-research--v003`、`strategy-forward-replication-research--v004` 與 `strategy-forward-replication-research--v005`。它位於 Workflow Package 外部，是專案治理文件，不列入任何 Workflow Package 的 release digest。這樣可以記錄 Workflow 的治理狀態，而不會因為在已發布的 Package 內新增文件，意外改變既有 Release Record。
+本文件目前適用於 `strategy-forward-replication-research--v001`、`strategy-forward-replication-research--v002`、`strategy-forward-replication-research--v003`、`strategy-forward-replication-research--v004`、`strategy-forward-replication-research--v005` 與 `strategy-forward-replication-research--v006`。它位於 Workflow Package 外部，是專案治理文件，不列入任何 Workflow Package 的 release digest。這樣可以記錄 Workflow 的治理狀態，而不會因為在已發布的 Package 內新增文件，意外改變既有 Release Record。
 
 ## 目前狀態
 
@@ -160,3 +160,17 @@ Trusted Approver 必須檢視 Release Candidate 的規則、測試報告、manif
 - [Release Record 規範](adr/0034-release-workflows-with-an-immutable-release-record.md)
 - [自包含 Workflow Package 規範](adr/0031-each-workflow-is-a-self-contained-package.md)
 - [Study Lifecycle 指南](../workflows/strategy-forward-replication-research--v001/reference/strategy-forward-replication-research-v001-guide.md)
+
+## v006 的 Draft 適用規格與後續啟用條件
+
+2026-09-30，TASK-037 只建立 v006 Draft 定義與開發層級人造診斷。尚未形成 v006 Release Candidate，沒有建立 Workflow 根層的 manifest、test report 或 Release；目前接受新 Study 的仍是上表原核准的 v005 Active。這段是 Package 外的治理紀錄，不寫入受 release digest 保護的 README。
+
+v006 維持研究目的、固定資料期間、資格門檻、成本、風控、候選凍結、一次歷史評估與 1–16 資產契約；新增均線 regime（策略適用環境條件）的完整表示、最長就緒推導與原生人造價格檢查。SMA50 含當日收盤，最早為 index=49，不能因通用案例往後排而豁免原有 25 日暖機不足。候選、事前登記與引擎規格需由被派工的 study 開發者另行一致準備。
+
+Workflow 維護者負責制定與維護本規格，可以修改 Draft 的程式、Schema、案例與文件並跑開發檢查；Workflow 執行者依明確派工執行以下 Lifecycle。TASK-037 不執行這些步驟：
+
+1. **TASK-038／形成 Release Candidate**：對 v006 完整發布定義做 Schema／canonical YAML、政策、所有必要 tests／Ruff、合成 Study 端到端、失敗／恢復及 terminal 反例。另驗證新的 `native_synthetic` prepare report：完整原生 guard、來源／契約／報告指紋、內嵌及凍結副本相容性、隔離 consumer、create 前重算、單一 CSV 與 1–16 資產路徑都需通過。形成 RC 後重新跑整套檢查，確認測試不假設 Package 永遠是 Draft。此步驟才能產生正式 `release-manifest.yml` 與 `release-test-report.yml`。
+2. **TASK-039／啟用與取代**：在有效 RC 的 exact manifest、report 與 Workflow digest 上，由 Trusted Approver 核准建立新的 `release.yml`。Workflow 執行者核對該 Release 與原始核准證據後，才記錄 v006 Active 及 v005 停止接受新 Study 的時間、理由與取代版本。原 v005 Package、Release 及既有 Study 均原地保留。
+3. **正式使用**：只能在上述啟用後，依各角色自己的明確派工建立新 Study。原 TASK-036 的 25 日暖機契約不能直接宣稱通過 v006，也不能藉 Draft 診斷或測試專用 `ready_engine.py` 形成正式候選。
+
+維護者制定規格不代表已取得執行 Lifecycle、建立正式 RC／Release 或切換 Active／Superseded 的權限。開發檢查的命令與結果、未執行的完整發布驗收點見 [v006 IMPLEMENTATION-PLAN](../workflows/strategy-forward-replication-research--v006/IMPLEMENTATION-PLAN.md)；可重現根因見 [SMA regime 根因](../workflows/strategy-forward-replication-research--v006/reference/sma-regime-root-cause.md)。

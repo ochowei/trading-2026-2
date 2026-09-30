@@ -1,0 +1,12 @@
+family: paper-proposal-orders
+kind: proposal-orders
+schema_version: 1
+values:
+  actionable: false
+  allowed_order_types:
+    - MARKET
+    - LIMIT
+    - STOP_MARKET
+  broker_order_creation_allowed: false
+  unlisted_order_types_allowed: false
+version: v001

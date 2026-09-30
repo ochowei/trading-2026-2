@@ -1,0 +1,102 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  adjustment_policy:
+    const: auto_adjusted
+  assets:
+    items:
+      additionalProperties: false
+      properties:
+        asset_id:
+          pattern: ^[A-Z][A-Z0-9_]{0,31}$
+          type: string
+        available_at:
+          const: after-close
+        data_digest:
+          format: sha256
+          type: string
+        end_date:
+          format: date
+          type: string
+        provider:
+          minLength: 1
+          type: string
+        start_date:
+          format: date
+          type: string
+        symbol:
+          minLength: 1
+          type: string
+        timezone:
+          const: America/New_York
+        use:
+          enum:
+            - trade
+            - reference
+      required:
+        - asset_id
+        - use
+        - provider
+        - symbol
+        - data_digest
+        - start_date
+        - end_date
+        - timezone
+        - available_at
+      type: object
+    maxItems: 16
+    minItems: 1
+    type: array
+  calendar:
+    const: XNYS
+  data_digest:
+    format: sha256
+    type: string
+  fields:
+    items:
+      type: string
+    minItems: 1
+    type: array
+    uniqueItems: true
+  interval:
+    const: 1d
+  provider:
+    const: yahoo
+  role:
+    description: 舊版 Study 可保留 retrospective-execution-replay；目前新 Study 的必要資料角色只有前四種。
+    enum:
+      - warmup-only
+      - development
+      - quarantine
+      - historical-evaluation
+      - retrospective-execution-replay
+  schema_version:
+    const: 1
+  sessions:
+    items:
+      pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+      type: string
+    minItems: 1
+    type: array
+    uniqueItems: true
+  symbols:
+    items:
+      type: string
+    minItems: 1
+    type: array
+    uniqueItems: true
+  timezone:
+    const: America/New_York
+required:
+  - schema_version
+  - role
+  - provider
+  - symbols
+  - timezone
+  - calendar
+  - interval
+  - adjustment_policy
+  - fields
+  - sessions
+  - data_digest
+type: object

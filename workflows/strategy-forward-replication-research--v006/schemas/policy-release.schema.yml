@@ -1,0 +1,48 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  conformance:
+    items:
+      additionalProperties: false
+      properties:
+        digest:
+          format: sha256
+          type: string
+        path:
+          type: string
+      required:
+        - path
+        - digest
+      type: object
+    minItems: 1
+    type: array
+  policy:
+    pattern: ^[a-z0-9-]+$
+    type: string
+  policy_digest:
+    format: sha256
+    type: string
+  schema_version:
+    const: 1
+  source:
+    additionalProperties: false
+    properties:
+      policy_path:
+        type: string
+      repository:
+        type: string
+    required:
+      - repository
+      - policy_path
+    type: object
+  version:
+    pattern: ^v[0-9]{3}$
+    type: string
+required:
+  - schema_version
+  - policy
+  - version
+  - policy_digest
+  - source
+  - conformance
+type: object

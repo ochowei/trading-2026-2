@@ -46,23 +46,6 @@
 
 ## 📋 TODO
 
-### [TASK-037] 確認 SMA regime 阻塞根因並建立 v006 Draft
-- **狀態**：TODO
-- **優先級**：高
-- **負責角色**：workflow 維護者
-- **執行者**：尚未指派
-- **建立日期**：2026-09-30
-- **更新日期**：2026-09-30
-- **依賴／阻塞**：使用者已要求建立新版 workflow 計劃；目前只完成規劃。基準為 Active v005，workflow digest=`2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2`；預定 v006，派工前須核對版本未被占用。worker 的完整要求以本任務為準，不讀取 `.project-manager/` 其他內容或 `.study-developer/`。
-- **驗收條件**：
-  - 先以公開 Workflow 程式與共享看板的 SMA(20)>SMA(50) 條件，在隔離暫存環境建立最小合成重現；核對呼叫路徑、engine/spec、契約與最長暖機要求。以實際均線、原始／接受／拒絕訊號和拒絕理由，證明是通用案例不足或準備／呼叫問題；若根因與目前假設不同，回報 PM 調整範圍。
-  - 建立自包含的 `workflows/strategy-forward-replication-research--v006/` Draft，提供完整規則、Schema、validator、writer、operations、tests、examples 與 reference。以 v005 發布定義為基準，不帶入舊 Study、正式結果、操作日誌、authority 或舊 release artifacts；固定 Policy、資料區間、gates、成本、風控、唯一評估規則與 1–16 資產能力沿用原契約。
-  - 擴充可重現的內建合成案例，至少支持長期上升趨勢＋短期回檔／反轉的 SMA(20)>SMA(50)。訊號與持有／冷卻案例依最長指標暖機與契約排定；實際 indicators/backtest 決定訊號，不依 Study ID 特判或注入預設訊號。
-  - 覆蓋均線條件成立、不成立、相等、指標未就緒／剛就緒、兩筆合法持有交易與冷卻拒絕；以同一合成資料比較 Control。案例無效、實作錯誤與契約不支援須可區分，完整原生檢查仍阻擋無效輸入；來源、契約與報告納入 Schema／digest 綁定。
-  - 補齊 v006 CLI、範例、錯誤診斷、版本引用及 `IMPLEMENTATION-PLAN.md`；制定 v006 適用的 Lifecycle 與啟用／取代條件。開發層級合成測試與靜態檢查通過，v005 受保護定義無變更；不執行 Lifecycle、不建立正式 RC／Release 或真實 Study。
-- **摘要**：補足建 Study 前對長期趨勢條件的驗證能力，讓符合契約的策略可接受完整檢查，並保留錯誤輸入的拒絕能力。
-- **進度／備註**：2026-09-30 已由專案管理者建立計劃。TASK-036 目前只有 signal／holding-cooldown 兩項 synthetic-fixture-invalid；根因需由本任務以合成資料證實。尚未建立 v006 Package 或指派執行者。完成後維持 Doing，由 PM 驗收。
-
 ### [TASK-038] 依 Lifecycle 形成並驗證 v006 Release Candidate
 - **狀態**：TODO
 - **優先級**：高
@@ -464,6 +447,8 @@
 
 ## 🔨 Doing
 
+
+
 > 正由被指派的角色處理中的任務。
 
 
@@ -549,9 +534,32 @@
 - **進度／備註**：依參照對話列為第六順位，經 TASK-035 PM review 確認值得作為獨立假說繼續；不得依先前研究結果調整此預登記規則。Study ID=`tsm-divergence-sma20-sma50-regime--v001`，使用者指定身份為 research_owner=`ochowei@gmail.com`、historical_evaluation_operator=`operator A`。派工給 `/root/task_036_trend_regime`（study 開發者），assignment=`.study-developer/assignments/TASK-036-v005.yml`。PM 已審閱 `.study-developer/task-036-v005/prepare-before-checkpoint.md`（SHA-256 `168021ff…92b6cf`），並獨立重跑唯讀 `precreate`：只有 `signal` 與 `holding-cooldown` 兩項 `synthetic-fixture-invalid`，其餘 contract、identity、參數、Source Bundle 11/11 digest 與綁定檢查通過；隔離 v005 runner-preflight 通過，Candidate 專屬 synthetic preflight 通過。正式 Study 目錄不存在，未執行 prepare/create/Development。TASK-036 暫移 Pending：Active v005 不可修改；要修正 native precreate 對 SMA regime 的合成案例，須另建並完整發布新 workflow version。待使用者決定是否擴大範圍交給 workflow 維護者；決定前不再派發 subagent。
 - **PM 新版規劃（2026-09-30）**：使用者要求建立新版 workflow 計劃，已新增 TASK-037 至 TASK-041 的 TODO 任務。上段等待決策是新版計劃建立前的紀錄；目前阻塞改為等待 v006 正式啟用與開發指引驗收。此次僅完成規劃，未指派 subagent、建立新版 Package 或執行 Study。根因先由 TASK-037 核對呼叫方式與合成案例，以可重現證據確認；若結論不同，PM 重新調整依賴與範圍。本項移入 Pending 欄，原定研究假說與 v005 阻塞紀錄保留。
 
+- **PM 根因與 Draft 驗收（2026-09-30）**：TASK-037 已驗收 Done。公開引擎與人造重建契約確認兩個問題：舊通用價格無法形成 SMA20>SMA50，以及原生暖機推導未納入新增 50 日均線。v006 已補案例與最長就緒檢查，但原公開候選 DEFAULT_SPEC 的 25 日暖機仍會被拒絕；後續 study 開發者須依新明確派工重新準備相符的暖機、候選／事前登記／來源綁定，維持原假說與交易門檻，不得靠重試或測試用 ready_engine 繞過。本項仍 Pending，TASK-039、TASK-040 依賴不變；本次未重新派發或執行 Study。
+
 ## ✅ Done
 
 > 已完成工作並由專案管理者驗收確認的任務。
+
+### [TASK-037] 確認 SMA regime 阻塞根因並建立 v006 Draft
+- **狀態**：Done
+- **優先級**：高
+- **負責角色**：workflow 維護者
+- **執行者**：`/root/task_037_v006_maintainer`（workflow 維護者 subagent）
+- **建立日期**：2026-09-30
+- **更新日期**：2026-09-30
+- **依賴／阻塞**：本次根因與 Draft 交付已由 PM 驗收通過。使用者已明確要求派一位 subagent 完成 TODO 第一項。2026-09-30 派工前確認 v006 Package 不存在；基準 Active v005 的 workflow digest=`2441c16d2c477afef9d4d9ca159e3a8bff150080b8552991d5da5fbcc9daf2c2`、Release Record SHA-256=`92c2c35d15e371378c189f60de69093220ab1ee74c256208c36be31534f9aeb8`。worker 的完整要求以本任務為準，不讀取 `.project-manager/` 其他內容或 `.study-developer/`。
+- **驗收條件**：
+  - 先以公開 Workflow 程式與共享看板的 SMA(20)>SMA(50) 條件，在隔離暫存環境建立最小合成重現；核對呼叫路徑、engine/spec、契約與最長暖機要求。以實際均線、原始／接受／拒絕訊號和拒絕理由，證明是通用案例不足或準備／呼叫問題；若根因與目前假設不同，回報 PM 調整範圍。
+  - 建立自包含的 `workflows/strategy-forward-replication-research--v006/` Draft，提供完整規則、Schema、validator、writer、operations、tests、examples 與 reference。以 v005 發布定義為基準，不帶入舊 Study、正式結果、操作日誌、authority 或舊 release artifacts；固定 Policy、資料區間、gates、成本、風控、唯一評估規則與 1–16 資產能力沿用原契約。
+  - 擴充可重現的內建合成案例，至少支持長期上升趨勢＋短期回檔／反轉的 SMA(20)>SMA(50)。訊號與持有／冷卻案例依最長指標暖機與契約排定；實際 indicators/backtest 決定訊號，不依 Study ID 特判或注入預設訊號。
+  - 覆蓋均線條件成立、不成立、相等、指標未就緒／剛就緒、兩筆合法持有交易與冷卻拒絕；以同一合成資料比較 Control。案例無效、實作錯誤與契約不支援須可區分，完整原生檢查仍阻擋無效輸入；來源、契約與報告納入 Schema／digest 綁定。
+  - 補齊 v006 CLI、範例、錯誤診斷、版本引用及 `IMPLEMENTATION-PLAN.md`；制定 v006 適用的 Lifecycle 與啟用／取代條件。開發層級合成測試與靜態檢查通過，v005 受保護定義無變更；不執行 Lifecycle、不建立正式 RC／Release 或真實 Study。
+- **摘要**：補足建 Study 前對長期趨勢條件的驗證能力，讓符合契約的策略可接受完整檢查，並保留錯誤輸入的拒絕能力。
+- **進度／備註**：2026-09-30 由 `/root/task_037_v006_maintainer` 以 workflow 維護者完成指派交付，維持 Doing 供 PM 驗收。已在隔離人造資料重現 v005 的 8 次 signal／160 次 holding 搜尋無有效案例：實際 SMA20=99.25、SMA50=99.70，候選 raw／accepted=0／0、Control=1／1；另核對原 25 日暖機與 SMA50 第 50 列（index=49）就緒缺口。v006 明列 regime 契約、推導最長就緒，保留原 25 日不足拒絕，不修改候選參數。
+- **交付／開發驗證**：自包含 v006 Draft 提供 119 個發布定義、完整程式／Schema／範例／診斷；四份 Policy 與四份 Policy Release 原始 bytes 保留。最終三個限定開發測試 66 passed、0 failed（10.07 秒、0 warnings、exit 0）；Ruff、唯讀定義 checker、60 份 Python AST 與追蹤檔案空白檢查皆 exit 0。涵蓋真實指標與交易、regime 正反／相等／就緒邊界、冷卻第 4 步拒絕及第 5 步接受後次日開盤、來源與完整原生報告綁定、內嵌／同 bytes 凍結副本相容及錯誤拒絕。v005 的 102 份定義、原 Release 與八份 Policy 核對相符，公開候選與 Control 未變。
+- **PM 驗收入口／邊界**：`workflows/strategy-forward-replication-research--v006/IMPLEMENTATION-PLAN.md` 記載確切命令、結果與交接；`reference/sma-regime-root-cause.md`、`reference/synthetic-diagnostics.md` 提供可重現根因／CLI；`docs/workflow-lifecycle.md` 補 v006 適用與啟用規格，v005 Active 保持。未執行 Lifecycle、正式 RC／Release、真實 Study 或 commit。TASK-038 完整 prepare／consumer／create pipeline 與 RC 後重跑、TASK-039 啟用仍待另行派工；原 TASK-036 暖機契約需由 study 開發者另行重新準備。本 worker 不移到 Done 或 Pending。
+- **PM 派工（2026-09-30）**：依使用者要求只派 TASK-037，由指定 workflow 維護者接手後移至 Doing。交付範圍為根因證據與 v006 Draft；TASK-038 至 TASK-041 尚未指派。本次執行者只使用共享看板及允許的公開程式／文件，不讀取其他角色專屬資料夾；完成後由 PM 驗收。
+- **Parent review（2026-09-30）**：PM 獨立重跑三個限定開發測試，66 passed、0 failed（10.06 秒、無 warnings）；Ruff、119 檔唯讀定義 checker、60 份 Python 語法解析與空白檢查通過。獨立重現 v005 的 8 次 signal／160 次 holding 搜尋與兩項預期 fixture-invalid，SMA20=99.25 小於 SMA50=99.70、同資料 Control 有訊號；公開候選原 25 日暖機也不足以覆蓋含當日收盤的 SMA50（index=49 就緒），v006 完整 precreate 保留該拒絕。核對 v005 的 102 份定義、manifest／test report／release 及八份 Policy／Release 原始內容無變更；v006 最終定義與 PM 測試使用的定義相同，根層無 RC／Release／Study 狀態資料。Draft、診斷、相容性修正、CLI 與 Lifecycle 規格符合本任務，移至 Done。完整驗收紀錄：`.project-manager/reviews/task-037-v006-draft-acceptance.md`；完整 prepare／consumer／create pipeline 與 RC 後重跑仍留 TASK-038，本次驗收不代表 v006 已發布，v005 仍 Active。
 
 ### [TASK-023] 在 v005 驗證 TSM 相對半導體產業落後後修復假說
 - **狀態**：Done

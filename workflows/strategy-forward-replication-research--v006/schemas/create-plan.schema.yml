@@ -1,0 +1,42 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  creator:
+    minLength: 1
+    type: string
+  development_actor:
+    minLength: 1
+    type: string
+  identity:
+    additionalProperties: false
+    properties:
+      experiment_family:
+        minLength: 1
+        type: string
+      historical_evaluation_operator:
+        minLength: 1
+        type: string
+      research_owner:
+        minLength: 1
+        type: string
+      research_round_id:
+        minLength: 1
+        type: string
+    required:
+      - research_round_id
+      - experiment_family
+      - research_owner
+      - historical_evaluation_operator
+    type: object
+  preregistration:
+    type: object
+  study_id:
+    minLength: 1
+    type: string
+required:
+  - study_id
+  - creator
+  - identity
+  - preregistration
+  - development_actor
+type: object

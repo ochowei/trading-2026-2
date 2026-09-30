@@ -1,0 +1,204 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+allOf:
+  - if:
+      required:
+        - prepare_checks
+    then:
+      required:
+        - native_synthetic
+properties:
+  binding:
+    additionalProperties: false
+    properties:
+      authority_root:
+        minLength: 1
+        type: string
+      environment:
+        type: object
+      repository:
+        minLength: 1
+        type: string
+      settings:
+        additionalProperties:
+          format: sha256
+          type: string
+        type: object
+      source_bundle:
+        type: object
+      study_id:
+        minLength: 1
+        type: string
+      workflow_digest:
+        format: sha256
+        type: string
+      workflow_reference:
+        type: object
+      workflow_reference_digest:
+        format: sha256
+        type: string
+    required:
+      - study_id
+      - repository
+      - authority_root
+      - settings
+      - source_bundle
+      - environment
+      - workflow_digest
+      - workflow_reference
+      - workflow_reference_digest
+    type: object
+  cases:
+    items:
+      additionalProperties: false
+      properties:
+        case:
+          minimum: 0
+          type: integer
+        data_assets:
+          items:
+            additionalProperties: false
+            properties:
+              asset_id:
+                pattern: ^[A-Z][A-Z0-9_]{0,31}$
+                type: string
+              digest:
+                format: sha256
+                type: string
+            required:
+              - asset_id
+              - digest
+            type: object
+          maxItems: 16
+          minItems: 1
+          type: array
+        data_digest:
+          format: sha256
+          type: string
+        evidence_digest:
+          format: sha256
+          type: string
+        expect:
+          enum:
+            - trades
+            - no-trades
+        request_digest:
+          format: sha256
+          type: string
+        stage:
+          enum:
+            - development
+            - historical-evaluation
+        validation:
+          type: object
+      required:
+        - case
+        - stage
+        - expect
+        - data_digest
+        - request_digest
+        - evidence_digest
+        - validation
+      type: object
+    minItems: 4
+    type: array
+  checks:
+    type: object
+  native_synthetic:
+    $schema: https://json-schema.org/draft/2020-12/schema
+    additionalProperties: false
+    properties:
+      binding:
+        additionalProperties: false
+        properties:
+          contract_source_digest:
+            format: sha256
+            type: string
+          contract_source_path:
+            minLength: 1
+            type: string
+          cost_constant:
+            minLength: 1
+            type: string
+          engine_digest:
+            format: sha256
+            type: string
+          engine_path:
+            minLength: 1
+            type: string
+          implementation_contract_digest:
+            format: sha256
+            type: string
+          source_bundle_digest:
+            format: sha256
+            type: string
+          spec_constant:
+            minLength: 1
+            type: string
+          workflow_digest:
+            format: sha256
+            type: string
+        required:
+          - source_bundle_digest
+          - implementation_contract_digest
+          - contract_source_digest
+          - engine_path
+          - engine_digest
+          - spec_constant
+          - cost_constant
+          - workflow_digest
+          - contract_source_path
+        type: object
+      check:
+        properties:
+          details:
+            type: object
+          errors:
+            type: array
+          name:
+            const: synthetic
+          status:
+            enum:
+              - passed
+              - failed
+          warnings:
+            type: array
+        required:
+          - name
+          - status
+          - errors
+          - warnings
+          - details
+        type: object
+      generator:
+        const: deterministic-contract-bars-v2
+      report_digest:
+        format: sha256
+        type: string
+      schema_version:
+        const: 1
+      synthetic_only:
+        const: true
+      workflow_version:
+        const: v006
+    required:
+      - schema_version
+      - workflow_version
+      - synthetic_only
+      - generator
+      - binding
+      - check
+      - report_digest
+    type: object
+  prepare_checks:
+    const: passed
+  schema_version:
+    const: 1
+  status:
+    const: passed
+required:
+  - schema_version
+  - status
+  - binding
+  - cases
+type: object

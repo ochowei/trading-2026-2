@@ -2,7 +2,7 @@
 
 - 建立日期：2026-09-30
 - 規劃角色：專案管理者
-- 計劃狀態：已建立任務與驗收條件，待分派執行。
+- 計劃狀態：TASK-037 已指派並驗收 Done；v006 Draft 完成，TASK-038 至 TASK-041 待另行分派。
 - Workflow ID：`strategy-forward-replication-research`
 - 預定新版本：`v006`
 - 目標 Package：`workflows/strategy-forward-replication-research--v006/`
@@ -17,6 +17,14 @@ TASK-036 要在原本的反轉策略上增加一個市場狀態條件：訊號�
 v005 公開程式的通用資料產生器主要使用平坦價格搭配單日急跌／反彈；持有與冷卻案例沿用這種形狀，而且第一個訊號的搜尋從固定第 40 個位置開始。這些設計可能不足以涵蓋 50 日均線所需的資料與趨勢條件。目前把「通用合成案例覆蓋不足」列為待證實的根因；TASK-037 必須先核對執行路徑、引擎規格與實際指標，再以最小合成案例證實。
 
 規劃依據只有共享看板、公開 Workflow 程式與治理文件。worker 的完整派工內容保存於共享看板，不以這份專案管理者專屬計劃作為必讀文件。workflow 維護者與執行者的重現材料限公開程式與合成案例，不讀取 `.study-developer/`；study 開發者依自身角色處理該資料夾。
+
+## TASK-037 已確認結果與目前進度
+
+2026-09-30 已獨立重現舊原生搜尋的 8 個訊號案例與 160 個持有／冷卻案例：平坦價格加回檔使 SMA20=99.25、SMA50=99.70，候選沒有原始／接受訊號，同資料 Control 有訊號。根因確認為人造價格不足以形成長期上升環境，並有暖機推導未納入 SMA50 的缺口；單純重新執行同樣輸入不能解決。上述最初段落保留規劃當時的證據與待確認假設，結論以本節和驗收紀錄為準。
+
+v006 Draft 已補上完整 regime 契約、最長就緒與實際均線／訊號／交易檢查、來源及原生報告綁定、CLI、範例與治理規格。PM 重跑 66 項開發測試全部通過，無 warnings；Ruff、119 檔定義 checker、60 份 Python 語法解析通過。v005 的 102 份受保護定義、三份發布檔案與八份 Policy／Release 未變，v005 仍 Active。完整驗收見 [TASK-037 驗收紀錄](../reviews/task-037-v006-draft-acceptance.md)。
+
+SMA50 含當日收盤，需有 50 列資料、最早 index=49 就緒。原公開候選的 25 日暖機在 v006 仍被拒絕，恢復 TASK-036 時需在正式建立 Study 前，由 study 開發者依新派工重新準備一致的暖機與候選契約；這不授權更改研究假說、交易門檻或已存在的正式研究。完整 prepare／consumer／create 整合與 RC 後重跑尚待 TASK-038，正式啟用待 TASK-039；四個版本專屬 skills 仍由 TASK-040、TASK-041 建立。
 
 ## 版本基準與改動範圍
 
@@ -73,7 +81,7 @@ v006 必須是自包含 Package：包含自己的規則、Schema（資料格式�
 
 TASK-037 經專案管理者驗收後才進 TASK-038。TASK-040／041 可在 TASK-037 的介面穩定後準備文件；以 TASK-039 的有效 Release 為最終核對基準。TASK-041 是正式評估操作準備，不是 TASK-036 僅做 Development 的前置條件。
 
-這次只建立計劃與 TODO 任務，執行者尚未指派。實際派工時須重新確認版本名稱未被占用、基準 Release 與任務範圍一致，並明確指定一個角色。worker 完成後維持 Doing，由專案管理者驗收並移至 Done。
+2026-09-30 使用者要求只派遣 TODO 第一項 TASK-037，已由唯一 workflow 維護者 subagent `/root/task_037_v006_maintainer` 完成 Draft；專案管理者獨立驗收通過並移至 Done。TASK-038 至 TASK-041 尚未指派。後續每次派工仍須核對版本、有效 Release 與任務範圍，明確指定一個角色；worker 完成後維持 Doing，由專案管理者驗收。
 
 ## Release Candidate 與啟用程序
 
@@ -98,7 +106,7 @@ v006 驗證為 Active 後，執行者依維護者制定的 Lifecycle 更新 `doc
 1. TASK-039、TASK-040 已由專案管理者驗收 Done；v006 的有效 Release 可獨立驗證。
 2. 確認 `tsm-divergence-sma20-sma50-regime--v001` 仍未正式建立；若已存在正式事件，先回報專案管理者，依原 Workflow 綁定處理。
 3. 專案管理者明確重新分派 v006；study 開發者在自己的合法範圍保存新版本派工與準備文件。舊 v005 準備紀錄保留，新版重新計算 Workflow／release／source／data 綁定。
-4. 固定原有研究假說與參數，重新執行 v006 `precreate`、runner preflight、`prepare`。完整成功後才建立唯一 Study、執行唯一 Development trial、驗證 evidence、完成盲檢討與 append-only（只追加）的成果卡。
+4. 固定原有研究假說與交易參數；先依最長指標需求，由 study 開發者在新的明確派工下重新準備暖機及一致的候選／事前登記／來源契約，再執行 v006 `precreate`、runner preflight、`prepare`。不可直接沿用公開候選的 25 日暖機或借用測試規格宣稱通過。完整成功後才建立唯一 Study、執行唯一 Development trial、驗證 evidence、完成盲檢討與 append-only（只追加）的成果卡。
 5. 依正式 gates、研究目標、證據有效性與來源暴露情形如實判斷凍結資格；工具檢查成功不會消除原有來源不明或資格限制。結果仍由專案管理者驗收。
 
 ## 專案管理者驗收重點
