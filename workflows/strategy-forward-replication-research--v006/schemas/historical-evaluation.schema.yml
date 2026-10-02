@@ -1,0 +1,63 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  family_wise_confidence:
+    pattern: ^(0(\.[0-9]+)?|1(\.0+)?)$
+    type: string
+  initial_cash:
+    pattern: ^[0-9]+(\.[0-9]+)?$
+    type: string
+  schema_version:
+    const: 1
+  stage:
+    const: historical-evaluation
+  stress_drawdown_limit:
+    pattern: ^(0(\.[0-9]+)?|1(\.0+)?)$
+    type: string
+  trades:
+    items:
+      additionalProperties: false
+      properties:
+        base_pnl:
+          type: string
+        exit_date:
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+          type: string
+        fold:
+          enum:
+            - 2020
+            - 2021
+            - 2022
+            - 2023
+            - 2024
+        order_type:
+          enum:
+            - MARKET
+            - LIMIT
+            - STOP_MARKET
+        signal_date:
+          pattern: ^[0-9]{4}-[0-9]{2}-[0-9]{2}$
+          type: string
+        stress_pnl:
+          type: string
+        trade_id:
+          minLength: 1
+          type: string
+      required:
+        - trade_id
+        - fold
+        - signal_date
+        - exit_date
+        - order_type
+        - base_pnl
+        - stress_pnl
+      type: object
+    type: array
+required:
+  - schema_version
+  - stage
+  - initial_cash
+  - family_wise_confidence
+  - stress_drawdown_limit
+  - trades
+type: object

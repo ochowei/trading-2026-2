@@ -1,0 +1,89 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  baseline:
+    $schema: https://json-schema.org/draft/2020-12/schema
+    properties:
+      bindings:
+        type: object
+      candidate_id:
+        minLength: 1
+        type: string
+      diagnostics:
+        type: object
+      disposition:
+        enum:
+          - pass
+          - fail
+      failed_gates:
+        type: array
+      gates:
+        type: array
+      metrics:
+        type: object
+      network_access_during_run:
+        const: false
+      schema_version:
+        const: 1
+      stage:
+        const: development
+      trades:
+        type: array
+    required:
+      - schema_version
+      - stage
+      - candidate_id
+      - bindings
+      - trades
+      - metrics
+      - diagnostics
+      - gates
+      - failed_gates
+      - disposition
+      - network_access_during_run
+    type: object
+  candidate:
+    $schema: https://json-schema.org/draft/2020-12/schema
+    properties:
+      bindings:
+        type: object
+      candidate_id:
+        minLength: 1
+        type: string
+      diagnostics:
+        type: object
+      disposition:
+        enum:
+          - pass
+          - fail
+      failed_gates:
+        type: array
+      gates:
+        type: array
+      metrics:
+        type: object
+      network_access_during_run:
+        const: false
+      schema_version:
+        const: 1
+      stage:
+        const: development
+      trades:
+        type: array
+    required:
+      - schema_version
+      - stage
+      - candidate_id
+      - bindings
+      - trades
+      - metrics
+      - diagnostics
+      - gates
+      - failed_gates
+      - disposition
+      - network_access_during_run
+    type: object
+required:
+  - candidate
+  - baseline
+type: object

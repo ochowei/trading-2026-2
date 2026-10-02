@@ -1,0 +1,230 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+anyOf:
+  - required:
+      - indicator_contract
+  - required:
+      - indicators
+  - required:
+      - sma
+      - required_history_sessions
+properties:
+  engine:
+    properties:
+      cost_constant:
+        minLength: 1
+        type: string
+      path:
+        minLength: 1
+        type: string
+      spec_constant:
+        minLength: 1
+        type: string
+    type: object
+  execution:
+    type: object
+  indicator_contract:
+    properties:
+      columns:
+        type: object
+      regime:
+        additionalProperties: false
+        properties:
+          allowed_column:
+            minLength: 1
+            type: string
+          fast:
+            additionalProperties: false
+            properties:
+              column:
+                minLength: 1
+                type: string
+              lookback:
+                minimum: 2
+                type: integer
+              min_periods:
+                minimum: 2
+                type: integer
+            required:
+              - lookback
+              - min_periods
+              - column
+            type: object
+          include_current_session:
+            const: true
+          input:
+            const: Close
+          kind:
+            const: sma-comparison
+          not_ready_allowed:
+            const: false
+          operator:
+            const: '>'
+          slow:
+            additionalProperties: false
+            properties:
+              column:
+                minLength: 1
+                type: string
+              lookback:
+                minimum: 2
+                type: integer
+              min_periods:
+                minimum: 2
+                type: integer
+            required:
+              - lookback
+              - min_periods
+              - column
+            type: object
+        required:
+          - kind
+          - operator
+          - input
+          - include_current_session
+          - not_ready_allowed
+          - fast
+          - slow
+          - allowed_column
+        type: object
+      required_history_sessions:
+        minimum: 0
+        type: integer
+    required:
+      - required_history_sessions
+    type: object
+  indicators:
+    properties:
+      columns:
+        type: object
+      regime:
+        additionalProperties: false
+        properties:
+          allowed_column:
+            minLength: 1
+            type: string
+          fast:
+            additionalProperties: false
+            properties:
+              column:
+                minLength: 1
+                type: string
+              lookback:
+                minimum: 2
+                type: integer
+              min_periods:
+                minimum: 2
+                type: integer
+            required:
+              - lookback
+              - min_periods
+              - column
+            type: object
+          include_current_session:
+            const: true
+          input:
+            const: Close
+          kind:
+            const: sma-comparison
+          not_ready_allowed:
+            const: false
+          operator:
+            const: '>'
+          slow:
+            additionalProperties: false
+            properties:
+              column:
+                minLength: 1
+                type: string
+              lookback:
+                minimum: 2
+                type: integer
+              min_periods:
+                minimum: 2
+                type: integer
+            required:
+              - lookback
+              - min_periods
+              - column
+            type: object
+        required:
+          - kind
+          - operator
+          - input
+          - include_current_session
+          - not_ready_allowed
+          - fast
+          - slow
+          - allowed_column
+        type: object
+      required_history_sessions:
+        minimum: 0
+        type: integer
+    required:
+      - required_history_sessions
+    type: object
+  regime:
+    additionalProperties: false
+    properties:
+      allowed_column:
+        minLength: 1
+        type: string
+      fast:
+        additionalProperties: false
+        properties:
+          column:
+            minLength: 1
+            type: string
+          lookback:
+            minimum: 2
+            type: integer
+          min_periods:
+            minimum: 2
+            type: integer
+        required:
+          - lookback
+          - min_periods
+          - column
+        type: object
+      include_current_session:
+        const: true
+      input:
+        const: Close
+      kind:
+        const: sma-comparison
+      not_ready_allowed:
+        const: false
+      operator:
+        const: '>'
+      slow:
+        additionalProperties: false
+        properties:
+          column:
+            minLength: 1
+            type: string
+          lookback:
+            minimum: 2
+            type: integer
+          min_periods:
+            minimum: 2
+            type: integer
+        required:
+          - lookback
+          - min_periods
+          - column
+        type: object
+    required:
+      - kind
+      - operator
+      - input
+      - include_current_session
+      - not_ready_allowed
+      - fast
+      - slow
+      - allowed_column
+    type: object
+  required_history_sessions:
+    minimum: 0
+    type: integer
+  schema_version:
+    const: 1
+type: object

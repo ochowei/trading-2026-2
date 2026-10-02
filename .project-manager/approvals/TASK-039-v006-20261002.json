@@ -1,0 +1,22 @@
+{
+  "任務": "TASK-039",
+  "workflow": "strategy-forward-replication-research",
+  "workflow_version": "v006",
+  "approved_by": "ochowei@gmail.com",
+  "approved_at": "2026-10-02T03:25:11Z",
+  "核准時間來源": "收到使用者本次明確核准後即刻讀取 UTC 時鐘；此為本次核准記錄時間。",
+  "原始回覆": "核准 v006: ochowei@gmail.com",
+  "來源": "目前對話中 request_user_input_async 的使用者回覆，對應下列三個完整指紋及 v006 Active／v005 Superseded 的啟用詢問。",
+  "workflow_digest": "e527578ca62d907d5b1e16f57d5a4c52f0b7cabb9d616970eb2eb2e383f8e7a9",
+  "release_manifest_digest": "e87dbb536b95c7b7e3ec9842732cb6d87a6db3fb9238262841cde16ba4880882",
+  "test_report_digest": "e7028200de3a9ed38b321d666c741234ac7306edf34f66b00dbccc8b211bf8fe",
+  "核准範圍": [
+    "新增上述固定 v006 的正式 Release Record",
+    "v006 Active",
+    "v005 Superseded，停止接受新 Study",
+    "套用已審閱的兩份治理文件交接內容"
+  ],
+  "PM 核對": "核准後已再獨立驗證 RC 三個指紋及 v005／Policy 保護基準全部相符。",
+  "執行角色": "workflow 執行者",
+  "專案管理者驗收": "啟用完成後獨立驗收，當前尚未完成。"
+}

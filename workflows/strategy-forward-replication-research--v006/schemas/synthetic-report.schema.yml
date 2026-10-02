@@ -1,0 +1,85 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  binding:
+    additionalProperties: false
+    properties:
+      contract_source_digest:
+        format: sha256
+        type: string
+      contract_source_path:
+        minLength: 1
+        type: string
+      cost_constant:
+        minLength: 1
+        type: string
+      engine_digest:
+        format: sha256
+        type: string
+      engine_path:
+        minLength: 1
+        type: string
+      implementation_contract_digest:
+        format: sha256
+        type: string
+      source_bundle_digest:
+        format: sha256
+        type: string
+      spec_constant:
+        minLength: 1
+        type: string
+      workflow_digest:
+        format: sha256
+        type: string
+    required:
+      - source_bundle_digest
+      - implementation_contract_digest
+      - contract_source_digest
+      - engine_path
+      - engine_digest
+      - spec_constant
+      - cost_constant
+      - workflow_digest
+      - contract_source_path
+    type: object
+  check:
+    properties:
+      details:
+        type: object
+      errors:
+        type: array
+      name:
+        const: synthetic
+      status:
+        enum:
+          - passed
+          - failed
+      warnings:
+        type: array
+    required:
+      - name
+      - status
+      - errors
+      - warnings
+      - details
+    type: object
+  generator:
+    const: deterministic-contract-bars-v2
+  report_digest:
+    format: sha256
+    type: string
+  schema_version:
+    const: 1
+  synthetic_only:
+    const: true
+  workflow_version:
+    const: v006
+required:
+  - schema_version
+  - workflow_version
+  - synthetic_only
+  - generator
+  - binding
+  - check
+  - report_digest
+type: object

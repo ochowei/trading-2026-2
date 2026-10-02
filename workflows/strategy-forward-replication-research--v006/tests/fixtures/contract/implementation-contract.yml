@@ -1,0 +1,50 @@
+engine:
+  baseline_spec_constant: BASELINE_SPEC
+  cost_constant: BASE_COST
+  path: src/trading_2026_2/tsm_mean_reversion_reversal_trigger_v001.py
+  spec_constant: DEFAULT_SPEC
+execution:
+  cooldown:
+    anchor: completed-position-exit
+    minimum_completed_session_steps_after_exit: 5
+  decision:
+    entry: next-session-open
+    signal: completed-session-close
+  exits:
+    gap_fill: stop-gap-at-open-target-gap-at-open
+    holding_exit: next-open-after-15-complete-sessions
+    same_session_ambiguity: adverse-stop-first
+    stop_return: '-0.04'
+    target_return: '0.04'
+  position_sizing:
+    cash_cap: available-cash-no-borrowing
+    modeled_stop_includes_entry_exit_costs: true
+    risk_fraction_of_pre_entry_equity: '0.02'
+    shares: maximum-integer-shares-within-risk-and-cash-caps
+  price_direction_confirmation:
+    rule: signal_close_above_prior_xnys_session_close
+indicator_contract:
+  columns:
+    rsi: rsi_2
+    sma: sma_20
+    volume_lead: prior_volume_spike_ratio
+  required_history_sessions: 25
+  rsi:
+    formula: simple-rolling-mean
+    length: 2
+    min_periods: 2
+    not_ready: null
+    zero_gain_and_loss: 50
+    zero_gain_only: 0
+    zero_loss_only: 100
+  sma:
+    lookback: 20
+    min_periods: 20
+    not_ready: null
+  volume_lead:
+    average_min_periods: 20
+    lead_min_periods: 5
+    prior_session_window: 5
+    uses_prior_sessions_only: true
+    volume_average_length: 20
+schema_version: 1

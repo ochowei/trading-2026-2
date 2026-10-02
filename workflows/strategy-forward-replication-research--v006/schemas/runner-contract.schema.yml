@@ -1,0 +1,87 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+additionalProperties: false
+properties:
+  cases:
+    items:
+      additionalProperties: false
+      oneOf:
+        - required:
+            - rows
+        - required:
+            - assets
+      properties:
+        assets:
+          items:
+            additionalProperties: false
+            properties:
+              asset_id:
+                pattern: ^[A-Z][A-Z0-9_]{0,31}$
+                type: string
+              rows:
+                items:
+                  maxItems: 6
+                  minItems: 6
+                  type: array
+                minItems: 1
+                type: array
+              use:
+                enum:
+                  - trade
+                  - reference
+            required:
+              - asset_id
+              - use
+              - rows
+            type: object
+          maxItems: 16
+          minItems: 1
+          type: array
+        expect:
+          enum:
+            - trades
+            - no-trades
+        required_output_keys:
+          items:
+            minLength: 1
+            type: string
+          type: array
+        rows:
+          items:
+            maxItems: 6
+            minItems: 6
+            type: array
+          minItems: 1
+          type: array
+        stage:
+          enum:
+            - development
+            - historical-evaluation
+      required:
+        - stage
+        - expect
+      type: object
+    minItems: 4
+    type: array
+  protocol:
+    const: request-output-v1
+  runners:
+    additionalProperties: false
+    properties:
+      development:
+        minLength: 1
+        type: string
+      historical-evaluation:
+        minLength: 1
+        type: string
+    required:
+      - development
+      - historical-evaluation
+    type: object
+  synthetic_only:
+    const: true
+required:
+  - protocol
+  - synthetic_only
+  - runners
+  - cases
+type: object

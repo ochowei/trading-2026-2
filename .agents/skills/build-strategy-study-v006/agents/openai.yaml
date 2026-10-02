@@ -1,0 +1,4 @@
+interface:
+  display_name: "v006 Study 開發"
+  short_description: "依有效 v006 契約完成原生檢查、唯一 Development Trial 與合法凍結"
+  default_prompt: "請使用 $build-strategy-study-v006 完成已明確指派 Study 的 Development 與合法凍結。"

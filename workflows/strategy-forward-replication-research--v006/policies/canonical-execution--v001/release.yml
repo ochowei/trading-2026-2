@@ -1,0 +1,10 @@
+conformance:
+  - digest: d6662c3b8314d2ff79eb1f0c36c37a4676ab2a9e27130ebb45828649c48d67d2
+    path: tests/test_policy_conformance.py
+policy: canonical-execution
+policy_digest: 0e0254fd535fceb63567b56b55d5752b6ffc1287356bc0e9b74218bd91b85200
+schema_version: 1
+source:
+  policy_path: policies/canonical-execution--v001/policy.yml
+  repository: trading-2026-1-migration-source-only
+version: v001

@@ -1,0 +1,4 @@
+interface:
+  display_name: "v006 Development 成果卡"
+  short_description: "依 Development 證據撰寫繁中成果卡，區分門檻、有效性與凍結資格及狀態"
+  default_prompt: "請使用 $study-development-note-authoring-v006 為明確指定的 Study 撰寫 Development 成果卡。"
