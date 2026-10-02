@@ -1,0 +1,741 @@
+accepted_signal_count: 24
+bindings:
+  preregistration_digest: e12625c614c9737d4c262d5c8292aff75a5ad39833247d72ba842d4d75d94cd5
+  source_bundle_digest: ea1e654018d4e976f8f964040b6761f6998c466ff0e03e2558a8cc5ff09d7256
+  trial_inputs_digest: 1e843da711fd339e943782726df9f093631ab98cd4536acf91919ef25be94ba9
+candidate_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002
+diagnostics:
+  block_bootstrap:
+    base:
+      - block_length: 3
+        drawdown_above_10pct_ratio: '0.0'
+        maximum_drawdown_q05_q50_q95:
+          - '0.019995375827511607'
+          - '0.019998100605706847'
+          - '0.03959360689577093'
+        positive_return_ratio: '1.0'
+        profit_factor_above_one_ratio: '1.0'
+        profit_factor_q05_q50_q95:
+          - '2.778039316306635'
+          - '5.333704644505821'
+          - '16.39372284932986'
+        repetitions: 50000
+        return_q05_q50_q95:
+          - '0.21628699506325472'
+          - '0.33604107609402334'
+          - '0.47604107687276825'
+        seed: 20260902
+      - block_length: 5
+        drawdown_above_10pct_ratio: '0.0'
+        maximum_drawdown_q05_q50_q95:
+          - '0.019995375827511624'
+          - '0.019998100605706833'
+          - '0.03959199426382937'
+        positive_return_ratio: '1.0'
+        profit_factor_above_one_ratio: '1.0'
+        profit_factor_q05_q50_q95:
+          - '2.784784609198841'
+          - '5.380340861676661'
+          - '14.565100291372568'
+        repetitions: 50000
+        return_q05_q50_q95:
+          - '0.21559941793195542'
+          - '0.33950654429314575'
+          - '0.46186207852415256'
+        seed: 20260902
+    gating: true
+    stress:
+      - block_length: 3
+        drawdown_above_10pct_ratio: '0.0'
+        maximum_drawdown_q05_q50_q95:
+          - '0.01999336400515558'
+          - '0.019999035395027544'
+          - '0.03959255140577838'
+        positive_return_ratio: '1.0'
+        profit_factor_above_one_ratio: '1.0'
+        profit_factor_q05_q50_q95:
+          - '2.321283214532195'
+          - '4.3936671356732955'
+          - '12.635217415221325'
+        repetitions: 50000
+        return_q05_q50_q95:
+          - '0.1588777923530804'
+          - '0.26458302666986244'
+          - '0.3873143808560558'
+        seed: 20260902
+      - block_length: 5
+        drawdown_above_10pct_ratio: '0.0'
+        maximum_drawdown_q05_q50_q95:
+          - '0.019993364005155542'
+          - '0.019999035395027544'
+          - '0.03959035724015534'
+        positive_return_ratio: '0.99998'
+        profit_factor_above_one_ratio: '0.99998'
+        profit_factor_q05_q50_q95:
+          - '2.332366005336097'
+          - '4.436430754270732'
+          - '11.179884139836236'
+        repetitions: 50000
+        return_q05_q50_q95:
+          - '0.15831561120528367'
+          - '0.2676341917604447'
+          - '0.37497280502286506'
+        seed: 20260902
+  by_signal_year:
+    '2014':
+      base_pnl: '8442.900507296432'
+      stress_pnl: '6895.75616069859'
+      trades: 6
+    '2015':
+      base_pnl: '8434.642351203904'
+      stress_pnl: '6891.089339845751'
+      trades: 5
+    '2016':
+      base_pnl: '4633.522405943104'
+      stress_pnl: '3340.530858746361'
+      trades: 5
+    '2017':
+      base_pnl: '1388.8572277071262'
+      stress_pnl: '903.0061678733941'
+      trades: 2
+    '2018':
+      base_pnl: '10776.227310848213'
+      stress_pnl: '8492.786623221571'
+      trades: 6
+  leave_one_signal_year_out:
+    base:
+      '2014':
+        maximum_drawdown: '0.019998100605706802'
+        omitted_trades: 6
+        profit_factor: '4.024475900628742'
+        remaining_trades: 18
+        return: '0.23268696408581024'
+      '2015':
+        maximum_drawdown: '0.019998100605706816'
+        omitted_trades: 5
+        profit_factor: '5.324256714178355'
+        remaining_trades: 19
+        return: '0.24029210905256138'
+      '2016':
+        maximum_drawdown: '0.019998100605706844'
+        omitted_trades: 5
+        profit_factor: '5.8913166189996256'
+        remaining_trades: 19
+        return: '0.2857874213971785'
+      '2017':
+        maximum_drawdown: '0.019998100605706785'
+        omitted_trades: 2
+        profit_factor: '5.339118893139294'
+        remaining_trades: 22
+        return: '0.32165513481500607'
+      '2018':
+        maximum_drawdown: '0.019996455070673776'
+        omitted_trades: 6
+        profit_factor: '5.078205971177611'
+        remaining_trades: 18
+        return: '0.2289992249215056'
+    gating: true
+    stress:
+      '2014':
+        maximum_drawdown: '0.021193312757407858'
+        omitted_trades: 6
+        profit_factor: '3.409152560517444'
+        remaining_trades: 18
+        return: '0.1836126493195931'
+      '2015':
+        maximum_drawdown: '0.019999035395027495'
+        omitted_trades: 5
+        profit_factor: '4.352357141892281'
+        remaining_trades: 19
+        return: '0.1886075036778967'
+      '2016':
+        maximum_drawdown: '0.019996796465675037'
+        omitted_trades: 5
+        profit_factor: '4.896033827433311'
+        remaining_trades: 19
+        return: '0.22914665621742225'
+      '2017':
+        maximum_drawdown: '0.02119331275740792'
+        omitted_trades: 2
+        profit_factor: '4.508303766915476'
+        remaining_trades: 22
+        return: '0.25555187858828043'
+      '2018':
+        maximum_drawdown: '0.02119331275740792'
+        omitted_trades: 6
+        profit_factor: '4.165195906669963'
+        remaining_trades: 18
+        return: '0.1803038252716409'
+disposition: pass
+failed_gates: []
+gates:
+  - actual: '5.036448192285741'
+    gate: base_profit_factor
+    operator: '>'
+    passed: true
+    required: '1.10'
+  - actual: '0.3367614980299878'
+    gate: base_return
+    operator: '>'
+    passed: true
+    required: '0'
+  - actual: 24
+    gate: completed_trades
+    operator: '>='
+    passed: true
+    required: 20
+  - actual: '0.019999035395027506'
+    gate: maximum_realized_trade_loss_fraction
+    operator: <=
+    passed: true
+    required: '0.04'
+  - actual: '0.0'
+    gate: maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+    operator: <=
+    passed: true
+    required: '0.10'
+  - actual: '0.02119331275740792'
+    gate: maximum_stress_leave_one_year_out_drawdown
+    operator: <=
+    passed: true
+    required: '0.10'
+  - actual: '0.99998'
+    gate: minimum_stress_block_bootstrap_positive_return_ratio
+    operator: '>='
+    passed: true
+    required: '0.80'
+  - actual: '3.409152560517444'
+    gate: minimum_stress_leave_one_year_out_profit_factor
+    operator: '>'
+    passed: true
+    required: '1.00'
+  - actual: '0.1803038252716409'
+    gate: minimum_stress_leave_one_year_out_return
+    operator: '>'
+    passed: true
+    required: '0'
+  - actual: '0.02119331275740792'
+    gate: stress_maximum_drawdown
+    operator: <=
+    passed: true
+    required: '0.10'
+  - actual: '4.204178313326062'
+    gate: stress_profit_factor
+    operator: '>'
+    passed: true
+    required: '1.00'
+  - actual: '0.2652316915038567'
+    gate: stress_return
+    operator: '>'
+    passed: true
+    required: '0'
+  - actual: 5
+    gate: traded_years
+    operator: '>='
+    passed: true
+    required: 3
+metrics:
+  base:
+    completed_trades: 24
+    maximum_drawdown: '0.019998100605706906'
+    maximum_realized_trade_loss_fraction: '0.019998100605706833'
+    profit_factor: '5.036448192285741'
+    return: '0.3367614980299878'
+    traded_years: 5
+  stress:
+    completed_trades: 24
+    maximum_drawdown: '0.02119331275740792'
+    maximum_realized_trade_loss_fraction: '0.019999035395027506'
+    profit_factor: '4.204178313326062'
+    return: '0.2652316915038567'
+    traded_years: 5
+  trade_count_by_signal_year:
+    '2014': 6
+    '2015': 5
+    '2016': 5
+    '2017': 2
+    '2018': 6
+network_access_during_run: false
+schema_version: 1
+stage: development
+trades:
+  - base:
+      executed_entry_price: '12.397035716527572'
+      executed_exit_price: '13.001698837738791'
+      fees: '9.953764071816988'
+      pnl: '2359.721007954951'
+      pnl_fraction_of_pre_entry_equity: '0.02359721007954951'
+      shares: 3919
+    entry_session: '2014-01-08'
+    exit_reason: target-gap
+    exit_session: '2014-01-16'
+    held_sessions: 7
+    signal_session: '2014-01-07'
+    stress:
+      executed_entry_price: '12.415621976972142'
+      executed_exit_price: '12.982186533329978'
+      fees: '18.499763718904063'
+      pnl: '2044.9283505363342'
+      pnl_fraction_of_pre_entry_equity: '0.02044928350536334'
+      shares: 3642
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0001
+  - base:
+      executed_entry_price: '14.373588247023493'
+      executed_exit_price: '14.933590715658154'
+      fees: '10.14028392108785'
+      pnl: '1927.4682575548384'
+      pnl_fraction_of_pre_entry_equity: '0.018830339107753565'
+      shares: 3460
+    entry_session: '2014-05-06'
+    exit_reason: target
+    exit_session: '2014-05-08'
+    held_sessions: 3
+    signal_session: '2014-05-05'
+    stress:
+      executed_entry_price: '14.395137854590246'
+      executed_exit_price: '14.911179123788731'
+      fees: '18.785349183140923'
+      pnl: '1635.1269185980043'
+      pnl_fraction_of_pre_entry_equity: '0.016023598085944567'
+      shares: 3205
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0002
+  - base:
+      executed_entry_price: '15.246877183892785'
+      executed_exit_price: '15.261328241373423'
+      fees: '10.137876662815962'
+      pnl: '37.88298734534491'
+      pnl_fraction_of_pre_entry_equity: '0.0003632563847213945'
+      shares: 3323
+    entry_session: '2014-07-21'
+    exit_reason: time
+    exit_session: '2014-08-04'
+    held_sessions: 10
+    signal_session: '2014-07-18'
+    stress:
+      executed_entry_price: '15.26973607022546'
+      executed_exit_price: '15.23842479728932'
+      fees: '18.732010772654075'
+      pnl: '-114.85761868660389'
+      pnl_fraction_of_pre_entry_equity: '-0.001107808231664756'
+      shares: 3070
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0003
+  - base:
+      executed_entry_price: '14.80849466008509'
+      executed_exit_price: '15.385441308610947'
+      fees: '10.335384282084654'
+      pnl: '1964.552993621922'
+      pnl_fraction_of_pre_entry_equity: '0.01883107244690316'
+      shares: 3423
+    entry_session: '2014-09-29'
+    exit_reason: target
+    exit_session: '2014-10-03'
+    held_sessions: 5
+    signal_session: '2014-09-26'
+    stress:
+      executed_entry_price: '14.830696301254635'
+      executed_exit_price: '15.362351601794622'
+      fees: '19.069929055565915'
+      pnl: '1659.8975100497114'
+      pnl_fraction_of_pre_entry_equity: '0.01602756087669703'
+      shares: 3158
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0004
+  - base:
+      executed_entry_price: '14.778771584318125'
+      executed_exit_price: '15.354560206363825'
+      fees: '10.531599460843342'
+      pnl: '2001.8496345888766'
+      pnl_fraction_of_pre_entry_equity: '0.018833913751664367'
+      shares: 3495
+    entry_session: '2014-10-14'
+    exit_reason: target
+    exit_session: '2014-10-16'
+    held_sessions: 3
+    signal_session: '2014-10-13'
+    stress:
+      executed_entry_price: '14.800928663155185'
+      executed_exit_price: '15.331516844373283'
+      fees: '19.375162461340807'
+      pnl: '1686.4658401548447'
+      pnl_fraction_of_pre_entry_equity: '0.016027220860028845'
+      shares: 3215
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0005
+  - base:
+      executed_entry_price: '16.38370487646764'
+      executed_exit_price: '16.434130379243054'
+      fees: '10.541088684134275'
+      pnl: '151.42562623049807'
+      pnl_fraction_of_pre_entry_equity: '0.0013983153004131247'
+      shares: 3212
+    entry_session: '2014-12-18'
+    exit_reason: time
+    exit_session: '2015-01-05'
+    held_sessions: 10
+    signal_session: '2014-12-17'
+    stress:
+      executed_entry_price: '16.408268152144505'
+      executed_exit_price: '16.409466851910523'
+      fees: '19.33620946438922'
+      pnl: '-15.80483995370004'
+      pnl_fraction_of_pre_entry_equity: '-0.00014783097174685917'
+      shares: 2946
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0006
+  - base:
+      executed_entry_price: '15.343467378337778'
+      executed_exit_price: '16.768161921081987'
+      fees: '11.027133501420748'
+      pnl: '4881.373926282195'
+      pnl_fraction_of_pre_entry_equity: '0.04501331026233255'
+      shares: 3434
+    entry_session: '2015-01-14'
+    exit_reason: target-gap
+    exit_session: '2015-01-15'
+    held_sessions: 2
+    signal_session: '2015-01-13'
+    stress:
+      executed_entry_price: '15.366471077555676'
+      executed_exit_price: '16.742997095787715'
+      fees: '20.203277374667664'
+      pnl: '4310.3475759833245'
+      pnl_fraction_of_pre_entry_equity: '0.040322906453867914'
+      shares: 3146
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0007
+  - base:
+      executed_entry_price: '17.022708829923534'
+      executed_exit_price: '17.68592241332226'
+      fees: '11.228242207190014'
+      pnl: '2134.2677000876874'
+      pnl_fraction_of_pre_entry_equity: '0.018833279195964496'
+      shares: 3235
+    entry_session: '2015-03-27'
+    exit_reason: target
+    exit_session: '2015-04-02'
+    held_sessions: 5
+    signal_session: '2015-03-26'
+    stress:
+      executed_entry_price: '17.048230132517126'
+      executed_exit_price: '17.659380258624925'
+      fees: '20.47749013077381'
+      pnl: '1782.4153818872312'
+      pnl_fraction_of_pre_entry_equity: '0.01602803553038512'
+      shares: 2950
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0008
+  - base:
+      executed_entry_price: '17.126726376644246'
+      executed_exit_price: '17.82219849019672'
+      fees: '11.4492677863771'
+      pnl: '2266.917376211524'
+      pnl_fraction_of_pre_entry_equity: '0.019634037762118237'
+      shares: 3276
+    entry_session: '2015-06-10'
+    exit_reason: target-gap
+    exit_session: '2015-06-23'
+    held_sessions: 10
+    signal_session: '2015-06-09'
+    stress:
+      executed_entry_price: '17.15240362758374'
+      executed_exit_price: '17.795451819125887'
+      fees: '20.821932275149596'
+      pnl: '1894.8186303289035'
+      pnl_fraction_of_pre_entry_equity: '0.01677001030821988'
+      shares: 2979
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0009
+  - base:
+      executed_entry_price: '16.912167803078972'
+      executed_exit_price: '16.219453523648514'
+      fees: '11.205114332699235'
+      pnl: '-2353.964807366508'
+      pnl_fraction_of_pre_entry_equity: '-0.01999537582751161'
+      shares: 3382
+    entry_session: '2015-07-24'
+    exit_reason: stop
+    exit_session: '2015-08-06'
+    held_sessions: 10
+    signal_session: '2015-07-23'
+    stress:
+      executed_entry_price: '16.937523376996634'
+      executed_exit_price: '16.19511217268756'
+      fees: '20.32355864617628'
+      pnl: '-2297.29872226211'
+      pnl_fraction_of_pre_entry_equity: '-0.019996796465674985'
+      shares: 3067
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0010
+  - base:
+      executed_entry_price: '17.188163898286568'
+      executed_exit_price: '17.653484357497'
+      fees: '11.361861496211022'
+      pnl: '1506.0481559890065'
+      pnl_fraction_of_pre_entry_equity: '0.013053901744728143'
+      shares: 3261
+    entry_session: '2015-12-15'
+    exit_reason: time
+    exit_session: '2015-12-30'
+    held_sessions: 10
+    signal_session: '2015-12-14'
+    stress:
+      executed_entry_price: '17.213933259453412'
+      executed_exit_price: '17.626990884224117'
+      fees: '20.60492253857089'
+      pnl: '1200.806473908403'
+      pnl_fraction_of_pre_entry_equity: '0.010665678305143258'
+      shares: 2957
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0011
+  - base:
+      executed_entry_price: '16.27585253102155'
+      executed_exit_price: '16.63487119779159'
+      fees: '11.482551508982905'
+      pnl: '1241.1335768516894'
+      pnl_fraction_of_pre_entry_equity: '0.010619093681275346'
+      shares: 3489
+    entry_session: '2016-01-12'
+    exit_reason: time
+    exit_session: '2016-01-27'
+    held_sessions: 10
+    signal_session: '2016-01-11'
+    stress:
+      executed_entry_price: '16.300254109029076'
+      executed_exit_price: '16.609906408600306'
+      fees: '20.772893318727668'
+      pnl: '956.4897641280737'
+      pnl_fraction_of_pre_entry_equity: '0.00840597838810373'
+      shares: 3156
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0012
+  - base:
+      executed_entry_price: '19.304101437318696'
+      executed_exit_price: '18.513414703784143'
+      fees: '11.243147548749874'
+      pnl: '-2361.954806346976'
+      pnl_fraction_of_pre_entry_equity: '-0.019996455070673828'
+      shares: 2973
+    entry_session: '2016-04-22'
+    exit_reason: stop
+    exit_session: '2016-04-28'
+    held_sessions: 5
+    signal_session: '2016-04-21'
+    stress:
+      executed_entry_price: '19.333043118634016'
+      executed_exit_price: '18.485630689721436'
+      fees: '20.301064100325206'
+      pnl: '-2294.756023301691'
+      pnl_fraction_of_pre_entry_equity: '-0.019999035395027506'
+      shares: 2684
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0013
+  - base:
+      executed_entry_price: '17.908810951460072'
+      executed_exit_price: '18.863569141990528'
+      fees: '11.550204587352834'
+      pnl: '2987.3452718688077'
+      pnl_fraction_of_pre_entry_equity: '0.025807099836872637'
+      shares: 3141
+    entry_session: '2016-05-11'
+    exit_reason: target-gap
+    exit_session: '2016-05-23'
+    held_sessions: 9
+    signal_session: '2016-05-10'
+    stress:
+      executed_entry_price: '17.935660742991498'
+      executed_exit_price: '18.835259633523307'
+      fees: '20.849111853483898'
+      pnl: '2529.5137428041953'
+      pnl_fraction_of_pre_entry_equity: '0.02249484839977033'
+      shares: 2835
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0014
+  - base:
+      executed_entry_price: '23.289873329935368'
+      executed_exit_price: '23.504991771304304'
+      fees: '11.591088085577066'
+      pnl: '521.2572911852784'
+      pnl_fraction_of_pre_entry_equity: '0.004389754408701681'
+      shares: 2477
+    entry_session: '2016-11-14'
+    exit_reason: time
+    exit_session: '2016-11-29'
+    held_sessions: 10
+    signal_session: '2016-11-11'
+    stress:
+      executed_entry_price: '23.324790681254612'
+      executed_exit_price: '23.469716646084738'
+      fees: '20.860991366527884'
+      pnl: '302.1789842398224'
+      pnl_fraction_of_pre_entry_equity: '0.0026281439915811877'
+      shares: 2229
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0015
+  - base:
+      executed_entry_price: '23.067159078871224'
+      executed_exit_price: '23.965867585512306'
+      fees: '11.814696298093143'
+      pnl: '2245.741072384305'
+      pnl_fraction_of_pre_entry_equity: '0.018829790532978986'
+      shares: 2512
+    entry_session: '2016-12-27'
+    exit_reason: target
+    exit_session: '2017-01-10'
+    held_sessions: 10
+    signal_session: '2016-12-23'
+    stress:
+      executed_entry_price: '23.101742525766085'
+      executed_exit_price: '23.929900800741652'
+      fees: '21.220677468920293'
+      pnl: '1847.1043908759607'
+      pnl_fraction_of_pre_entry_equity: '0.01602272756072299'
+      shares: 2256
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0016
+  - base:
+      executed_entry_price: '25.262514516133763'
+      executed_exit_price: '26.246755211624915'
+      fees: '12.037716335377203'
+      pnl: '2288.132789027446'
+      pnl_fraction_of_pre_entry_equity: '0.018830653686129763'
+      shares: 2337
+    entry_session: '2017-04-18'
+    exit_reason: target
+    exit_session: '2017-04-25'
+    held_sessions: 6
+    signal_session: '2017-04-17'
+    stress:
+      executed_entry_price: '25.300389350490786'
+      executed_exit_price: '26.20736538389361'
+      fees: '21.56114613181331'
+      pnl: '1876.739691780297'
+      pnl_fraction_of_pre_entry_equity: '0.01602306608510856'
+      shares: 2093
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0017
+  - base:
+      executed_entry_price: '32.812392591011196'
+      executed_exit_price: '32.32830351751222'
+      fees: '11.940289596692342'
+      pnl: '-899.2755613203199'
+      pnl_fraction_of_pre_entry_equity: '-0.007263985352569959'
+      shares: 1833
+    entry_session: '2017-12-01'
+    exit_reason: time
+    exit_session: '2017-12-15'
+    held_sessions: 10
+    signal_session: '2017-11-30'
+    stress:
+      executed_entry_price: '32.86158658290177'
+      executed_exit_price: '32.27978680387913'
+      fees: '21.327285646832067'
+      pnl: '-973.733523906903'
+      pnl_fraction_of_pre_entry_equity: '-0.008182351638064536'
+      shares: 1637
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0018
+  - base:
+      executed_entry_price: '34.5207673721023'
+      executed_exit_price: '35.86571441074753'
+      fees: '12.17686134843302'
+      pnl: '2314.5815155078158'
+      pnl_fraction_of_pre_entry_equity: '0.018833059196238667'
+      shares: 1730
+    entry_session: '2018-02-12'
+    exit_reason: target
+    exit_session: '2018-02-15'
+    held_sessions: 4
+    signal_session: '2018-02-09'
+    stress:
+      executed_entry_price: '34.57252264552374'
+      executed_exit_price: '35.81188892638923'
+      fees: '21.720629411092343'
+      pnl: '1890.621541964358'
+      pnl_fraction_of_pre_entry_equity: '0.016018092134279415'
+      shares: 1543
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0019
+  - base:
+      executed_entry_price: '31.210771001223094'
+      executed_exit_price: '32.46779225568249'
+      fees: '12.4109519787709'
+      pnl: '2437.5234729625913'
+      pnl_fraction_of_pre_entry_equity: '0.019466782161382097'
+      shares: 1949
+    entry_session: '2018-05-04'
+    exit_reason: target-gap
+    exit_session: '2018-05-10'
+    held_sessions: 5
+    signal_session: '2018-05-03'
+    stress:
+      executed_entry_price: '31.25756376134487'
+      executed_exit_price: '32.41906620427326'
+      fees: '22.09579059806949'
+      pnl: '1993.1109478826834'
+      pnl_fraction_of_pre_entry_equity: '0.016620198966427555'
+      shares: 1735
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0020
+  - base:
+      executed_entry_price: '31.48182017356701'
+      executed_exit_price: '32.70836824989449'
+      fees: '12.645467119421916'
+      pnl: '2403.654243245718'
+      pnl_fraction_of_pre_entry_equity: '0.018829738083170046'
+      shares: 1970
+    entry_session: '2018-05-31'
+    exit_reason: target
+    exit_session: '2018-06-04'
+    held_sessions: 3
+    signal_session: '2018-05-30'
+    stress:
+      executed_entry_price: '31.529019304262015'
+      executed_exit_price: '32.65928115397168'
+      fees: '22.4402298401985'
+      pnl: '1953.2574834523025'
+      pnl_fraction_of_pre_entry_equity: '0.01602158604177832'
+      shares: 1748
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0021
+  - base:
+      executed_entry_price: '30.904928018496292'
+      executed_exit_price: '32.20937101136527'
+      fees: '12.90687415160669'
+      pnl: '2654.6790462654535'
+      pnl_fraction_of_pre_entry_equity: '0.020411865218636503'
+      shares: 2045
+    entry_session: '2018-06-25'
+    exit_reason: target-gap
+    exit_session: '2018-07-09'
+    held_sessions: 10
+    signal_session: '2018-06-22'
+    stress:
+      executed_entry_price: '30.951262243411584'
+      executed_exit_price: '32.16103278573541'
+      fees: '22.834028341545384'
+      pnl: '2165.6408827222517'
+      pnl_fraction_of_pre_entry_equity: '0.017483545820059673'
+      shares: 1809
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0022
+  - base:
+      executed_entry_price: '31.117774182823023'
+      executed_exit_price: '32.9068066362495'
+      fees: '13.265893145711825'
+      pnl: '3693.609350353946'
+      pnl_fraction_of_pre_entry_equity: '0.027832109934141865'
+      shares: 2072
+    entry_session: '2018-10-26'
+    exit_reason: target-gap
+    exit_session: '2018-10-31'
+    held_sessions: 4
+    signal_session: '2018-10-25'
+    stress:
+      executed_entry_price: '31.164427517429957'
+      executed_exit_price: '32.85742173384392'
+      fees: '23.40638808626573'
+      pnl: '3071.3870395184613'
+      pnl_fraction_of_pre_entry_equity: '0.024369702485652234'
+      shares: 1828
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0023
+  - base:
+      executed_entry_price: '32.522543014140034'
+      executed_exit_price: '31.190435255299995'
+      fees: '12.984704971311878'
+      pnl: '-2727.82031748731'
+      pnl_fraction_of_pre_entry_equity: '-0.019998100605706833'
+      shares: 2038
+    entry_session: '2018-11-14'
+    exit_reason: stop
+    exit_session: '2018-11-16'
+    held_sessions: 3
+    signal_session: '2018-11-13'
+    stress:
+      executed_entry_price: '32.57130244894384'
+      executed_exit_price: '31.143626197888338'
+      fees: '22.835430427024654'
+      pnl: '-2581.2312723184837'
+      pnl_fraction_of_pre_entry_equity: '-0.019993364005155563'
+      shares: 1792
+    trade_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002-0024

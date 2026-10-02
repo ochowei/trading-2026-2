@@ -1,0 +1,68 @@
+actor: /root/task_036_v006_resume
+data_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+data_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+trial_inputs:
+  baseline_comparison:
+    baseline_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002
+    baseline_is_excluded_from_candidate_family: true
+    candidate_family: tsm-mean-reversion-v009-sma20-sma50-regime
+    candidate_id: tsm-mr-v009-sma20-over-sma50-regime-v002
+    comparison_direction: candidate-minus-control
+    control_engine_digest: f3163c9b92046d0397ce1daf0cfb320a302c9e994875a4be0e93057a83cef7c4
+    control_engine_path: src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v009.py
+    control_spec_constant: DEFAULT_SPEC
+    execution_is_identical: true
+  candidate_family: tsm-mean-reversion-v009-sma20-sma50-regime
+  candidate_id: tsm-mr-v009-sma20-over-sma50-regime-v002
+  complete_candidate_family:
+    - tsm-mr-v009-sma20-over-sma50-regime-v002
+  cost_models:
+    base:
+      fee_per_side_bps: '1'
+      slippage_per_side_bps: '5'
+    stress:
+      fee_per_side_bps: '2'
+      slippage_per_side_bps: '20'
+  data_bindings:
+    development_digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+    development_path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+  date_controls:
+    formal_provider_access: false
+    signal_end: '2018-12-31'
+    signal_start: '2014-01-01'
+    warmup_end: '2013-12-31'
+    warmup_start: '2013-01-01'
+  development_diagnostics:
+    block_lengths:
+      - 3
+      - 5
+    bootstrap_seed: 20260902
+    repetitions: 50000
+    seed_application: exact-same-seed-for-each-block-length
+  execution:
+    cooldown_anchor: completed-position-exit
+    cooldown_completed_session_steps_after_exit: 5
+    entry: next-XNYS-open
+    holding_sessions: 10
+    intrabar_ambiguity: adverse-stop-first
+    position_sizing:
+      modeled_stop_includes_costs: true
+      risk_fraction: '0.02'
+    stop_market_gtc: '-0.04'
+    target_limit_day: '0.04'
+  preregistration_digest: e12625c614c9737d4c262d5c8292aff75a5ad39833247d72ba842d4d75d94cd5
+  schema_version: 1
+  selected_candidate_id: tsm-mr-v009-sma20-over-sma50-regime-v002
+  source_bundle_digest: ea1e654018d4e976f8f964040b6761f6998c466ff0e03e2558a8cc5ff09d7256
+  strategy_engine_digest: 401cc9f72db9b28b2ad5ef4d79abf3f8d00a26b3fc75d0c9dc588ced767c6b8e
+  study_id: tsm-divergence-sma20-sma50-regime--v002
+  study_procedure_digest: 02a5d14fe751ad14d431560e172af4304577fe44ba91ff37f80be5cbd9653d5a
+  study_procedure_path: research/tsm-divergence-sma20-sma50-regime--v002/run_development.py
+  trial_id: tsm-mr-v009-sma20-over-sma50-regime-v002
+  warmup_contract:
+    candidate_fold_warmup_sessions: 49
+    candidate_required_history_sessions: 49
+    common_development_warmup_end: '2013-12-31'
+    common_development_warmup_start: '2013-01-01'
+    control_fold_warmup_sessions: 25
+    control_required_history_sessions: 25

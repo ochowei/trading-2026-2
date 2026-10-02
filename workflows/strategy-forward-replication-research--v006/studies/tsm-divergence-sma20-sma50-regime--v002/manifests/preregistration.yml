@@ -1,0 +1,202 @@
+baseline_definition:
+  baseline_id: tsm-mr-v009-two-stage-volume-reversal-control-task036-v002
+  candidate_family: tsm-mean-reversion-v009-sma20-sma50-regime
+  execution_is_identical: true
+  family: TSM v009 two-stage reversal full DEFAULT_SPEC Control
+  objectively_simpler_because: Control 完整保留 v009 訊號與執行；Candidate 僅增加 SMA(20)>SMA(50) 的訊號日篩選。
+  selection_use: 同一 Development Trial 的固定 Control；用於 Candidate 減 Control 比較，不屬候選家族。
+  simpler_rule: 完整 v009 DEFAULT_SPEC：SMA(20) 短線超跌、RSI(2)、prior-volume 先行與收盤反轉確認；不加 SMA(20)>SMA(50) 條件。
+complete_candidate_family:
+  - tsm-mr-v009-sma20-over-sma50-regime-v002
+eligibility_rules:
+  accepted_signal:
+    accepted_only_when_flat: true
+    cooldown:
+      clock_anchor: completed-position-exit
+      completed_session_steps_after_exit: 5
+      minimum_completed_session_steps_after_exit: 5
+    decision_time: completed-session-close
+    long_term_trend:
+      comparison: SMA20 > SMA50
+      decision_time: completed-session-close
+      include_signal_day_close: true
+      input: Yahoo auto-adjusted Close
+      long_sma_formula: simple-moving-average
+      long_sma_length: 50
+      minimum_periods: 50
+      not_ready: reject-candidate-signal
+      short_sma_formula: simple-moving-average
+      short_sma_length: 20
+      strict: true
+      uses_future_sessions: false
+    mean_reversion:
+      close_vs_sma20_gap_minimum: '0.015'
+      rsi_length: 2
+      rsi_maximum: '50'
+      rsi_value: '50'
+      sma_length: 20
+    price_direction_confirmation:
+      close_above_prior_close: true
+    regime:
+      allowed_column: sma20_above_sma50
+      fast:
+        column: regime_sma20
+        lookback: 20
+        min_periods: 20
+      include_current_session: true
+      input: Close
+      kind: sma-comparison
+      not_ready_allowed: false
+      operator: '>'
+      slow:
+        column: regime_sma50
+        lookback: 50
+        min_periods: 50
+    symbol: TSM
+    volume_leads_price:
+      enabled: true
+      prior_session_window: 5
+      volume_average_length: 20
+      volume_ratio_minimum: '1.05'
+      volume_ratio_value: '1.05'
+  costs:
+    base:
+      fee_per_side_bps: '1'
+      slippage_per_side_bps: '5'
+    stress:
+      fee_per_side_bps: '2'
+      slippage_per_side_bps: '20'
+  development_diagnostics:
+    block_bootstrap:
+      block_lengths:
+        - 3
+        - 5
+      maximum_stress_drawdown_above_10pct_ratio: '0.10'
+      minimum_stress_positive_return_ratio: '0.80'
+      repetitions: 50000
+      seed: 20260902
+      seed_application: exact-same-seed-for-each-block-length
+    leave_one_signal_year_out:
+      maximum_stress_drawdown: '0.10'
+      minimum_stress_profit_factor: '1.00'
+      minimum_stress_return: '0'
+    signal_year_breakdown: true
+  development_gates:
+    base_profit_factor:
+      operator: '>'
+      value: '1.10'
+    base_return:
+      operator: '>'
+      value: '0'
+    completed_trades:
+      operator: '>='
+      value: 20
+    maximum_realized_trade_loss_fraction:
+      operator: <=
+      value: '0.04'
+    maximum_stress_block_bootstrap_drawdown_above_10pct_ratio:
+      operator: <=
+      value: '0.10'
+    maximum_stress_leave_one_year_out_drawdown:
+      operator: <=
+      value: '0.10'
+    minimum_stress_block_bootstrap_positive_return_ratio:
+      operator: '>='
+      value: '0.80'
+    minimum_stress_leave_one_year_out_profit_factor:
+      operator: '>'
+      value: '1.00'
+    minimum_stress_leave_one_year_out_return:
+      operator: '>'
+      value: '0'
+    stress_maximum_drawdown:
+      operator: <=
+      value: '0.10'
+    stress_profit_factor:
+      operator: '>'
+      value: '1.00'
+    stress_return:
+      operator: '>'
+      value: '0'
+    traded_years:
+      operator: '>='
+      value: 3
+  execution:
+    cooldown:
+      anchor: completed-position-exit
+      minimum_completed_session_steps_after_exit: 5
+    decision_time: completed-session-close
+    entry: next-session-open
+    gap_fill: stop-gap-at-open-target-gap-at-open
+    holding_period: next-open-after-10-complete-sessions
+    intrabar_ambiguity: adverse-stop-first
+    position_sizing:
+      cash_cap: available-cash-no-borrowing
+      modeled_stop_includes_costs: true
+      risk_fraction_of_pre_entry_equity: '0.02'
+      shares: maximum-integer-shares-within-risk-and-cash-caps
+    stop:
+      level_from_raw_entry_open: '-0.04'
+      order: STOP_MARKET
+      time_in_force: GTC
+    target:
+      level_from_raw_entry_open: '0.04'
+      order: LIMIT
+      reissued_each_open_position_session: true
+      time_in_force: DAY
+  gate_policy: 正式 Development gates 任一失敗即否證假說；不調參、不追加候選 Trial。
+  research_targets: {}
+  source_and_adjustment:
+    adjustment_policy: Yahoo auto_adjust，OHLC 全部使用同一調整基礎
+    calendar: XNYS
+    interval: 1d
+    provider: yahoo
+    timezone: America/New_York
+evaluation_gates:
+  base_compounded_return:
+    operator: '>'
+    value: '0'
+  base_profit_factor:
+    operator: '>'
+    value: '1.10'
+  completed_trades:
+    operator: '>='
+    value: 20
+  family_wise_confidence:
+    operator: '>='
+    value: '0.90'
+  maximum_fold_positive_profit_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_fold_trade_concentration:
+    operator: <=
+    value: '0.50'
+  maximum_realized_trade_loss_fraction:
+    operator: <=
+    value: '0.04'
+  positive_traded_fold_ratio:
+    operator: '>='
+    value: '0.60'
+  stress_max_drawdown:
+    operator: <=
+    value: '0.10'
+  stress_profit_factor:
+    operator: '>'
+    value: '1.00'
+  stress_return:
+    operator: '>'
+    value: '0'
+  traded_folds:
+    operator: '>='
+    value: 3
+fold_warmup_sessions: 49
+hypothesis: TSM v009 two-stage reversal 在其他規則固定時，只接受訊號日收盤 SMA(20) 嚴格高於 SMA(50) 的訊號，可檢驗長期均線狀態是否能區分較合適的短線反轉情境。Control 是完整 v009 DEFAULT_SPEC；Candidate 唯一新增訊號日 SMA(20)>SMA(50) 條件。兩條均線使用 Yahoo auto-adjusted Close 與 XNYS 已完成 session 的簡單平均，包含訊號日收盤；均線未就緒或相等即拒絕 Candidate 訊號，不讀未來資料。原短期超跌、RSI、成交量先行、收盤方向、進出場、持有、停損／停利、冷卻、風險及成本全部沿用 v009。候選、Control、條件及唯一 Trial 在看 Development 前固定；不得依 TASK-035 表現調整。 本次依 v006 明確派工將 Candidate 最長指標就緒及 fold 暖機一致固定為49個先前 XNYS sessions；Control 使用未修改 v009，最長就緒及 fold 暖機25。Development 兩臂共用2013全年暖機及2014–2018訊號／退出期間，所以不額外縮短任一臂交易期間。原 v005 準備未建立 Study、未看真實 Development 結果；改用 v002 不代表來源乾淨，既有來源及結果曝光仍依實際證據稽核。
+initial_cash: '100000'
+maximum_holding_sessions: 11
+maximum_trials: 1
+selection_rule:
+  eligible_candidate: 唯一 Candidate 必須通過全部 13 項 Development gates；targets 為空，不按結果排名。
+  method: fixed-single-candidate-no-outcome-ranking
+  selected_candidate_id: tsm-mr-v009-sma20-over-sma50-regime-v002
+tie_handling:
+  method: not-applicable-single-candidate

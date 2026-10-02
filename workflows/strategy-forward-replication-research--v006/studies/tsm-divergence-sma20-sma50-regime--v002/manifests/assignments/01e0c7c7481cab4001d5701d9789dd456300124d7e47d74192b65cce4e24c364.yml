@@ -1,0 +1,9 @@
+assignee: /root/task_036_v006_resume
+assigner: 專案管理者 /root
+instruction: 本次恢復派工原文：「請恢復 TASK-036，撤銷先前的暫停指令，依 AGENTS.md 分派 study 開發者執行，完成後由你驗收。」這是恢復派工，與初次 v006 派工 .study-developer/assignments/TASK-036-v006.yml 分開保存；保留舊紀錄。本次只執行 TASK-036 v006 Stage A：在新 worktree／authority 核對 Active Release、Study 缺席、來源、固定資料與參照，完成並保存新 native precreate、runner-preflight、prepare 報告及來源差異。create plan creator 與 development_actor 必須和本檔 assignee 完全相同。只允許 Study tsm-divergence-sma20-sma50-regime--v002、固定單一 Candidate 與唯一 Development Trial。PM 明確審閱通過前不得 create、寫入 Study 或執行真實 Trial。不得讀 historical-evaluation-artifacts、.super-admin 或 PM checkpoint；不得執行 freeze、Historical Evaluation、Terminal、challenge、replay 或 commit。完成 Stage A 後交 PM 審閱並維持 Doing。
+role: study 開發者
+schema_version: 1
+scope: development-to-freeze
+source_id: codex-project-manager-task:TASK-036:v006-resume:2026-10-02
+study_id: tsm-divergence-sma20-sma50-regime--v002
+workflow_version: v006

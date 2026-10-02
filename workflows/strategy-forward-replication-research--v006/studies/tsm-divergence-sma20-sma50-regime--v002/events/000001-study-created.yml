@@ -1,0 +1,30 @@
+actor_id: /root/task_036_v006_resume
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: ea1e654018d4e976f8f964040b6761f6998c466ff0e03e2558a8cc5ff09d7256
+  workflow_digest: e527578ca62d907d5b1e16f57d5a4c52f0b7cabb9d616970eb2eb2e383f8e7a9
+  workflow_reference_digest: cfe747174027f22b45f6c699cd1675753abedca2a71ed6035cf7626064e906f1
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: study-created
+execution:
+  assignment_digest: 01e0c7c7481cab4001d5701d9789dd456300124d7e47d74192b65cce4e24c364
+  assignment_path: manifests/assignments/01e0c7c7481cab4001d5701d9789dd456300124d7e47d74192b65cce4e24c364.yml
+  role: study 開發者
+occurred_at: '2026-10-02T09:00:06.904462Z'
+payload:
+  create_plan_digest: d1ce1899823ae7e81a0b60f4f66cb2b6352148f9daa8548cf9f4408d57720698
+  create_plan_path: manifests/create-plan.yml
+  experiment_family: tsm-mean-reversion-v009-sma20-sma50-regime
+  historical_evaluation_operator: operator A
+  prepare_report_digest: 256c07fa8dae958825fe8f7b064622337bfbf362db9857bada71572bbbb842d1
+  prepare_report_path: manifests/prepare-report.yml
+  research_owner: ochowei@gmail.com
+  research_round_id: tsm-divergence-sma20-sma50-regime--v001
+  source_bundle_digest: ea1e654018d4e976f8f964040b6761f6998c466ff0e03e2558a8cc5ff09d7256
+  source_bundle_path: manifests/source-bundle.yml
+  workflow_reference_digest: cfe747174027f22b45f6c699cd1675753abedca2a71ed6035cf7626064e906f1
+  workflow_reference_path: manifests/workflow-reference.yml
+previous_event_digest: null
+schema_version: 1
+sequence: 1
+study_id: tsm-divergence-sma20-sma50-regime--v002
