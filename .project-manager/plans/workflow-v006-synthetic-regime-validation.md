@@ -2,7 +2,7 @@
 
 - 建立日期：2026-09-30
 - 規劃角色：專案管理者
-- 計劃狀態：TASK-037 已指派並驗收 Done；v006 Draft 完成，TASK-038 至 TASK-041 待另行分派。
+- 計劃狀態：2026-10-02 v006 已正式啟用，v005 Superseded，TASK-039 通過 PM 獨立驗收並移至 Done。TASK-037／038 亦已 Done；下一項 TASK-040 的 v006 專用 skills 尚未分派，TASK-041 另行分派，TASK-036 維持 Pending。
 - Workflow ID：`strategy-forward-replication-research`
 - 預定新版本：`v006`
 - 目標 Package：`workflows/strategy-forward-replication-research--v006/`
@@ -20,11 +20,29 @@ v005 公開程式的通用資料產生器主要使用平坦價格搭配單日急
 
 ## TASK-037 已確認結果與目前進度
 
+2026-10-02 正式啟用與交接驗收完成：本次核准者 `ochowei@gmail.com`、核准 UTC `2026-10-02T03:25:11Z`，實際啟用 UTC `2026-10-02T03:30:52Z`。新增正式 Release 指紋 `61d6eeebe58fdd40d6805ca461ccc9a327b9aa153eedd6414a612ddc5ad3594f`，原三個核准指紋與全部保護基準不變；兩份治理文件精確符合已審閱提案，v006 Active、v005 Superseded。正式九項命令及 PM 獨立驗收均通過，TASK-039 移至 Done。完整結果見 [TASK-039 正式啟用驗收](../reviews/task-039-v006-activation-acceptance.md)。TASK-040／041 仍 TODO，TASK-036 仍 Pending；本次沒有建立真實 Study、重跑完整 pytest 或 commit。
+
+2026-10-02 使用者要求「開始進行下一步」，PM 已指派原 workflow 執行者接續 TASK-039。先完成 RC 與保護基準重驗、Release Record 草案及具體啟用／文件變更準備，再向核准者提供最終三個指紋及可審閱內容。一般開始指令不代替 Lifecycle 規定的本次獨立核准；核准者身份及時間等待真實新核准，不沿用 v005。核准前 v006 維持 RC、v005 仍 Active，不建立根層 release.yml 或真實 Study。
+
+2026-10-02 啟用前具體草案已收齊：待核准的 Release Record 模板、兩份治理文件差異與完整預覽、核准後 Active 驗證方式及七項隔離示範。PM 獨立重驗 RC／保護基準、模板欄位與治理提案均通過；現在只等待本次新的獨立核准，再指派正式落檔。完整指紋、影響與可審閱材料見 [TASK-039 啟用前審閱](../reviews/task-039-v006-preactivation-review.md)。
+
+2026-10-02 使用者透過本次核准詢問明確回覆「核准 v006: ochowei@gmail.com」，對應詢問中列出的三個完整指紋及 v006 Active／v005 Superseded 交接。PM 收到回覆後即刻記錄 UTC `2026-10-02T03:25:11Z`，保存原始回覆與範圍，重新驗證所有指紋及保護基準仍相符，再授權原 workflow 執行者正式新增 release.yml。前段「等待核准」是本次回覆前的紀錄；執行者交付後再做獨立 PM 驗收。
+
+2026-10-01 最終 RC 驗收完成：第三輪完整 Draft 為 207 passed／212 warnings（629.83 秒），執行者完整 RC 為 207 passed／212 warnings（822.51 秒），PM 獨立完整 RC 為 207 passed／212 warnings（801.75 秒）；三套均零失敗／錯誤／略過，逐案確認為相同 13 個檔案、207 個唯一案例。兩套 RC 使用同一份固定初版檔案，結果收齊後才定稿報告；完整歷史與最終三個指紋見 [TASK-038 驗收紀錄](../reviews/task-038-v006-release-candidate-acceptance.md)。PM 完成定稿 Schema／manifest／候選 checker／Ruff／既有 v005 與 Policy 基準核對後，將 TASK-037 修正與 TASK-038 移至 Done。v006 為 RC，v005 仍 Active；新核准、正式啟用與版本專屬 skills 依後續任務另行分派。
+
+2026-10-01 第三輪完整 Draft 通過時，唯一第二輪失敗是新觀察測試把完整原生檢查次數寫少，已精確修正為每 consumer 四次、外層建立三次；最新凍結指紋為 `e527578ca62d907d5b1e16f57d5a4c52f0b7cabb9d616970eb2eb2e383f8e7a9`。當時才形成 RC 初版，後續完整 RC 與 PM 獨立驗收結果以上段為準。
+
+2026-10-01 原維護者已完成整合修正：共用測試來源改走真正的 prepare、資格與來源指紋一起重綁、macOS 根路徑別名一致解析並保留根外拒絕、README 按發布條件檢查，另補 SMA 完整管線與 16 資產成功案例定義。三個限定開發測試為 75 passed／0 failed／0 warnings，Ruff、122 檔定義 checker 與 63 份 AST 通過。PM 獨立重算凍結指紋為 `bcbc215e2ccf0c50317212d3d6c7d792442d826e39770787e3a4668082ea76a9`。完整整合仍由同一 TASK-038 執行者驗證，限定開發通過不能取代整套發布證據。
+
+2026-10-01 TASK-038 第一輪全套為 83 failed／108 passed／15 warnings，完整失敗日誌已保留。這是發布整合測試失敗數，不能和原 SMA 案例搜尋混為一談。主要為舊 dummy 契約／成功旗標不符新增原生 guard，另有事前登記指紋、README 斷言及 macOS 暫存根別名未一致解析的 CLI 問題；新 regime 完整管線也需補證據。TASK-037 重新開啟，由原維護者修正未發布的 Draft，TASK-038 隨後對新定義重跑。原 66 項開發驗收如實保留，v006 仍未形成 RC。
+
+2026-10-01 使用者要求繼續 TASK-038，專案管理者已指派 `/root/task_038_v006_executor` 以 workflow 執行者角色進行完整發布候選版驗證。派工前 v006 仍為原 119 個定義的 Draft，沒有發布檔案或真實 Study；定義指紋與 TASK-037 驗收時相同。完整檢查通過後才形成 RC，交由 PM 獨立驗收；若需要修改定義，交回 workflow 維護者並重新完整驗證。
+
 2026-09-30 已獨立重現舊原生搜尋的 8 個訊號案例與 160 個持有／冷卻案例：平坦價格加回檔使 SMA20=99.25、SMA50=99.70，候選沒有原始／接受訊號，同資料 Control 有訊號。根因確認為人造價格不足以形成長期上升環境，並有暖機推導未納入 SMA50 的缺口；單純重新執行同樣輸入不能解決。上述最初段落保留規劃當時的證據與待確認假設，結論以本節和驗收紀錄為準。
 
 v006 Draft 已補上完整 regime 契約、最長就緒與實際均線／訊號／交易檢查、來源及原生報告綁定、CLI、範例與治理規格。PM 重跑 66 項開發測試全部通過，無 warnings；Ruff、119 檔定義 checker、60 份 Python 語法解析通過。v005 的 102 份受保護定義、三份發布檔案與八份 Policy／Release 未變，v005 仍 Active。完整驗收見 [TASK-037 驗收紀錄](../reviews/task-037-v006-draft-acceptance.md)。
 
-SMA50 含當日收盤，需有 50 列資料、最早 index=49 就緒。原公開候選的 25 日暖機在 v006 仍被拒絕，恢復 TASK-036 時需在正式建立 Study 前，由 study 開發者依新派工重新準備一致的暖機與候選契約；這不授權更改研究假說、交易門檻或已存在的正式研究。完整 prepare／consumer／create 整合與 RC 後重跑尚待 TASK-038，正式啟用待 TASK-039；四個版本專屬 skills 仍由 TASK-040、TASK-041 建立。
+SMA50 含當日收盤，需有 50 列資料、最早 index=49 就緒。原公開候選的 25 日暖機在 v006 仍被拒絕，恢復 TASK-036 時需在正式建立 Study 前，由 study 開發者依新派工重新準備一致的暖機與候選契約；這不授權更改研究假說、交易門檻或已存在的正式研究。完整 prepare／consumer／create 整合與 RC 後重跑已由 TASK-038 通過；測試管線的 baseline 是候選自身 BASELINE_SPEC，同資料公開 v009 Control 是直接引擎比較，原 TASK-036 的正式 baseline 管線仍待重新派工。正式啟用待 TASK-039；四個版本專屬 skills 仍由 TASK-040、TASK-041 建立。
 
 ## 版本基準與改動範圍
 
@@ -81,7 +99,7 @@ v006 必須是自包含 Package：包含自己的規則、Schema（資料格式�
 
 TASK-037 經專案管理者驗收後才進 TASK-038。TASK-040／041 可在 TASK-037 的介面穩定後準備文件；以 TASK-039 的有效 Release 為最終核對基準。TASK-041 是正式評估操作準備，不是 TASK-036 僅做 Development 的前置條件。
 
-2026-09-30 使用者要求只派遣 TODO 第一項 TASK-037，已由唯一 workflow 維護者 subagent `/root/task_037_v006_maintainer` 完成 Draft；專案管理者獨立驗收通過並移至 Done。TASK-038 至 TASK-041 尚未指派。後續每次派工仍須核對版本、有效 Release 與任務範圍，明確指定一個角色；worker 完成後維持 Doing，由專案管理者驗收。
+2026-09-30 使用者要求只派遣 TODO 第一項 TASK-037，已由唯一 workflow 維護者 subagent `/root/task_037_v006_maintainer` 完成 Draft；專案管理者當日獨立驗收通過並移至 Done，當時 TASK-038 至 TASK-041 尚未指派。2026-10-01 使用者要求繼續 TASK-038，由唯一 workflow 執行者 `/root/task_038_v006_executor` 接手；整合失敗交回原維護者重開 TASK-037 修正，最終兩項均通過 PM 驗收。TASK-039 至 TASK-041 尚未分派。後續每次派工仍須核對版本、有效 Release 與任務範圍，明確指定一個角色；worker 完成後維持 Doing，由專案管理者驗收。
 
 ## Release Candidate 與啟用程序
 

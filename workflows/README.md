@@ -11,9 +11,17 @@
 
 因此，`study-terminal` 只會終止單一 Study；它不會封存所屬 Workflow。反過來，Workflow 進入 `Superseded` 或 `Archived`，也不會改寫或終止既有 Study。
 
-## Strategy Forward Replication Research v005（Active）
+## Strategy Forward Replication Research v006（Active）
 
-[v005 Package](strategy-forward-replication-research--v005/README.md) 已正式啟用，可供新 Study 使用。v005 支援一次提交 1 至 16 個逐檔驗證的資產資料。
+[v006 Package](strategy-forward-replication-research--v006/README.md) 於 `2026-10-02T03:30:52Z` 正式啟用。新 Study 使用 v006；既有 Study 保持原綁定。v006 保留 1–16 資產與固定研究期間／Policy／門檻，加入 SMA20>SMA50 的原生合成檢查、最長就緒推導、完整來源／報告綁定與 create 前重算。
+
+- [`release.yml`](strategy-forward-replication-research--v006/release.yml)：本次新的 Trusted Approver 核准；核准者 `ochowei@gmail.com`、核准時間 `2026-10-02T03:25:11Z`。
+- [`release-manifest.yml`](strategy-forward-replication-research--v006/release-manifest.yml)：122 份發布定義，與核准的指紋一致。
+- [`release-test-report.yml`](strategy-forward-replication-research--v006/release-test-report.yml)：已驗收的原始發布前歷史報告，保留 RC 與 release_record_created=false，未因啟用而改寫。
+
+## Strategy Forward Replication Research v005（Superseded）
+
+[v005 Package](strategy-forward-replication-research--v005/README.md) 於 `2026-10-02T03:30:52Z` 停止接受新的 Study，由 v006 取代。v005 原 Package、發布核准、所有資料與既有 Study 維持原狀；既有研究仍依原版本完成。v005 原有的一次提交 1 至 16 個資產能力保留。
 
 - [`release.yml`](strategy-forward-replication-research--v005/release.yml)：Trusted Approver 建立的正式啟用紀錄，核准者為 `ochowei@gmail.com`，時間為 `2026-09-24T10:59:32Z`。
 - [`release-manifest.yml`](strategy-forward-replication-research--v005/release-manifest.yml)：v005 權威檔案與 SHA-256 數位指紋清單。

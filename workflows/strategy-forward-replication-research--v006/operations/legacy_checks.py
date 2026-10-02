@@ -92,6 +92,12 @@ class StudyContext:
     workflow_root: Path
     study_id: str
 
+    def __post_init__(self) -> None:
+        # macOS 暫存目錄可同時以 /var 與 /private/var 表示；後續相對路徑
+        # 與來源邊界一律使用解析後的實體根目錄，仍拒絕根外 symlink。
+        object.__setattr__(self, "repository_root", Path(self.repository_root).expanduser().resolve())
+        object.__setattr__(self, "workflow_root", Path(self.workflow_root).expanduser().resolve())
+
     @property
     def study_root(self) -> Path:
         return self.workflow_root / "studies" / self.study_id

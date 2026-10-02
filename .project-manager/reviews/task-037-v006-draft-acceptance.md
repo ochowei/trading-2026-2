@@ -3,7 +3,7 @@
 - 日期：2026-09-30
 - 驗收角色：專案管理者
 - 執行者：`/root/task_037_v006_maintainer`，角色為 workflow 維護者
-- 結論：指派的 Draft 交付符合驗收條件，TASK-037 移到 Done。v006 仍為 Draft；接受新 Study 的版本仍為 v005 Active。
+- 2026-09-30 結論：指派的 Draft 交付符合驗收條件，TASK-037 移到 Done。當時 v006 為 Draft；接受新 Study 的版本為 v005 Active。2026-10-01 重開修正與整合驗收見末節。
 
 ## 已確認的實際問題
 
@@ -58,3 +58,13 @@ PM 測試時與 subagent 最終交付的定義指紋相同：`be58a60f4165140fdf
 TASK-038 仍需由 workflow 執行者完成全部測試、prepare／runner preflight／隔離 consumer／create 與來源綁定整合、原有失敗恢復與 terminal 案例，形成 RC 後再重跑全部檢查。TASK-039 必須取得對最終三份數位指紋的獨立新核准才能啟用；TASK-040、TASK-041 的 v006 專屬 skills 仍待另行指派。
 
 TASK-036 維持 Pending，等待 TASK-039 與 TASK-040 驗收 Done，再依原假說明確重新派工；新版本不會自動消除原 25 日暖機不足。此次未執行 Workflow／Study Lifecycle，未建立 RC、Release 或真實 Study，也未 commit。
+
+## 2026-10-01 重開修正與整合驗收
+
+TASK-038 完整 Draft 發現 83 個失敗後，PM 重開 TASK-037，交同一 workflow 維護者修正未發布定義。共用來源改走完整真實 prepare、資格與來源一起重新綁定、macOS 路徑別名一致解析；保留根外拒絕及原生檢查，另補 SMA 完整流程和 16 資產邊界。第二輪完整測試僅餘一項新觀察斷言失敗，再按實際入口精確修正為每個 consumer 四次、外層 create 三次，確認第一個事件尚未發布。未改 Policy、公開策略引擎、研究門檻或計算公式。
+
+維護者限定開發測試最終 75 passed／0 warnings，122 檔 checker、63 份 AST 與 Ruff 通過；最終凍結 Workflow 指紋為 `e527578ca62d907d5b1e16f57d5a4c52f0b7cabb9d616970eb2eb2e383f8e7a9`。維護者只維護定義，由 workflow 執行者完成發布流程。
+
+完整 Draft、執行者 RC、PM 獨立 RC 均為相同 207 個案例通過，每套 212 個 NumPy 警告如實保留。PM 最終重驗定稿報告、manifest、候選 checker、Ruff、v005 的 102 個定義與三份發布檔、八份 Policy、兩份公開引擎，全數相符。重開修正與整合交付通過，TASK-037 再移至 Done；v006 維持 RC，v005 仍 Active。
+
+完整失敗／中止歷史、三套實際結果、最終 manifest／report 指紋與後續依賴見 [TASK-038 驗收紀錄](task-038-v006-release-candidate-acceptance.md)。本節不取代原 66 項限定開發紀錄，也不代表 TASK-036 真實 Study 已建立或 v006 已正式啟用。

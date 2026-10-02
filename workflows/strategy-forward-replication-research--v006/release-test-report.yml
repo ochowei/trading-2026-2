@@ -1,0 +1,37 @@
+checks:
+  - command: .venv/bin/python /private/tmp/task038-v006-release-20261001-1ib8gl60/baseline_r3.py
+    result: passed
+    summary: 完整Draft後122份固定定義與PM交接指紋相符；v005的102份manifest明列定義、原Release、manifest、report及八份Policy／Release仍相符；沒有warnings；退出碼=0；耗時=0.134160秒；日誌=/private/tmp/task038-v006-release-20261001-1ib8gl60/r3-after-draft-baseline.log；日誌SHA-256=d950611def0b48ec2dcbac07daeedb7f08ba4076b689f4739711d024e68afe40。
+  - command: .venv/bin/python /private/tmp/task038-v006-release-20261001-1ib8gl60/compare_protected_baseline_r3_postdraft.py
+    result: passed
+    summary: 完整Draft後逐項比較第一輪保護基準：v005的102份明列定義、3份發布檔與8份Policy／Release原始內容指紋相同；沒有warnings；退出碼=0；耗時=0.018293秒；日誌=/private/tmp/task038-v006-release-20261001-1ib8gl60/r3-after-draft-protected-compare.log；日誌SHA-256=e1b56fe14ec5e1553d0dc34b1e05c80fc39374186dfbaf10d5d0b6eaa45cdc86。
+  - command: .venv/bin/python -m pytest workflows/strategy-forward-replication-research--v006/tests/test_regime_pipeline.py::test_regime_prepare_consumer_create_trial_and_frozen_source_copy -q --tb=long --basetemp=/private/tmp/task038-v006-release-20261001-1ib8gl60/r3-regime-pipeline-tmp --junitxml=/private/tmp/task038-v006-release-20261001-1ib8gl60/r3-regime-pipeline-junit.xml -o cache_dir=/private/tmp/task038-v006-release-20261001-1ib8gl60/pytest-cache
+    result: passed
+    summary: 新SMA完整pipeline單案實際診斷：1 passed、0 failed、0 errors、0 skipped；pytest 3 warnings；1 passed, 3 warnings in 17.56s；JUnit=/private/tmp/task038-v006-release-20261001-1ib8gl60/r3-regime-pipeline-junit.xml；JUnit SHA-256=236f7c547d73b6f581fabfafa33f867198c99febf5543978c18ad7634d7f112d；真正prepare及兩個consumer各4份原生報告，外層create在首次事件前3次重算，來源副本與Trial完成，修改副本後拒絕；退出碼=0；耗時=17.697131秒；日誌=/private/tmp/task038-v006-release-20261001-1ib8gl60/r3-regime-pipeline-diagnostic.log；日誌SHA-256=d32f03c8bf7a5a928f3294275a21e7f7a28df1c71238423ca0840da73f7dfa71。
+  - command: .venv/bin/python workflows/strategy-forward-replication-research--v006/operations/release_candidate.py
+    result: passed
+    summary: canonical YAML、schemas、Workflow schema與固定Policy綁定通過；122份定義；沒有warnings；退出碼=0；耗時=0.227447秒；日誌=/private/tmp/task038-v006-release-20261001-1ib8gl60/r3-draft-definitions.log；日誌SHA-256=a652e408316b4d7d520a75b6966e0b0a0616537ff78985a509f6b9f705b7005d。
+  - command: .venv/bin/python -m ruff check workflows/strategy-forward-replication-research--v006
+    result: passed
+    summary: All checks passed；沒有Ruff診斷；退出碼=0；耗時=0.055381秒；日誌=/private/tmp/task038-v006-release-20261001-1ib8gl60/r3-draft-ruff.log；日誌SHA-256=3fcfaf5e225da4f049078161619c7e9b4176fd1873d5df3d0fa3ab8defdc09b0。
+  - command: .venv/bin/python -m pytest workflows/strategy-forward-replication-research--v006/tests -n 4 -q --tb=long --basetemp=/private/tmp/task038-v006-release-20261001-1ib8gl60/r3-draft-pytest-tmp --junitxml=/private/tmp/task038-v006-release-20261001-1ib8gl60/r3-draft-pytest-junit.xml -o cache_dir=/private/tmp/task038-v006-release-20261001-1ib8gl60/pytest-cache
+    result: passed
+    summary: 完整Draft四程序執行：207 passed、0 failed、0 errors、0 skipped；pytest 212 warnings；207 passed, 212 warnings in 629.83s (0:10:29)；JUnit=/private/tmp/task038-v006-release-20261001-1ib8gl60/r3-draft-pytest-junit.xml；JUnit SHA-256=f978f42e82b99ccb61bb66e408531edfaf42e04f1095f900f1e13570f0ce1123；全部端到端只用專案外人造fixture。涵蓋SMA原生檢查與真正prepare／consumer／create／Trial、來源副本、報告缺失／替換／造假拒絕、25日不足暖機拒絕、單CSV、多資產1／2／3／16與terminal／故障恢復。SMA管線baseline是候選自身BASELINE_SPEC；同資料v009 Control是直接引擎比較，沒有建立TASK-036正式Study或執行其baseline管線。首輪119份定義為108 passed／83 failed／15 warnings、exit 1；第二輪122份定義為206 passed／1 failed／211 warnings、exit 1，失敗歷史與維護者修正需求保留於外部draft-round-1-handoff.md與draft-round-2b-handoff.md，均未列為通過。第二輪序列檢查由PM指示在60個通過進度標記時中止，pytest exit -15，沒有JUnit，不算全套通過；記錄於r2-serial-interrupted.json。；退出碼=0；耗時=629.976410秒；日誌=/private/tmp/task038-v006-release-20261001-1ib8gl60/r3-draft-pytest.log；日誌SHA-256=07731c00f357c4d38992d5cf2db49ac0472c800f62d3154aa5dd6d8d93824d1a。
+  - command: .venv/bin/python -m pytest workflows/strategy-forward-replication-research--v006/tests -n 4 -q --tb=long --basetemp=/private/tmp/task038-v006-release-20261001-1ib8gl60/r3-rc-pytest-tmp --junitxml=/private/tmp/task038-v006-release-20261001-1ib8gl60/r3-rc-pytest-junit.xml -o cache_dir=/private/tmp/task038-v006-release-20261001-1ib8gl60/pytest-cache
+    result: passed
+    summary: manifest與report存在時完整RC四程序重跑：207 passed、0 failed、0 errors、0 skipped；pytest 212 warnings；207 passed, 212 warnings in 822.51s (0:13:42)；JUnit=/private/tmp/task038-v006-release-20261001-1ib8gl60/r3-rc-pytest-junit.xml；JUnit SHA-256=9bc8211db76e7abc0a49bc5736c8f0b9c6c55305375cc689ead3f9029523e747；測試時manifest SHA-256=e87dbb536b95c7b7e3ec9842732cb6d87a6db3fb9238262841cde16ba4880882、初版report SHA-256=800fd8eeaa172b65dee37871dc887662e25fe6bf6caedd82c70dceb34d069518；本報告在執行者與PM獨立全套完成後追加本次真實結果，發布定義及manifest未改；真實Package的RC狀態與所有fixture相容，仍只執行專案外人造資料與合成角色／派工；NumPy warnings如實保存，不作歸零。；退出碼=0；耗時=822.655775秒；日誌=/private/tmp/task038-v006-release-20261001-1ib8gl60/r3-rc-pytest.log；日誌SHA-256=5e93d2aed74c537d0aa1e3079ce9b281bb4a664882c24c0fbff503b96286c817。
+  - command: .venv/bin/python -m ruff check workflows/strategy-forward-replication-research--v006
+    result: passed
+    summary: RC artifacts存在時All checks passed；沒有Ruff診斷；退出碼=0；耗時=0.051337秒；日誌=/private/tmp/task038-v006-release-20261001-1ib8gl60/r3-rc-ruff.log；日誌SHA-256=5625badb3980edd94f3caba91f50b66c969d36e197dc836bde37b24ce7d20f46。
+  - command: .venv/bin/python workflows/strategy-forward-replication-research--v006/operations/release_candidate.py --candidate
+    result: passed
+    summary: release_candidate.py --candidate通過canonical YAML、Workflow／Policy schemas、完整manifest及report schema；122份定義；release-candidate、release_record_created=false；沒有warnings；退出碼=0；耗時=0.271505秒；日誌=/private/tmp/task038-v006-release-20261001-1ib8gl60/r3-rc-candidate.log；日誌SHA-256=2307166c2db437b40a31d7e34127808768ead61e13c6aaab5607f598df04d2d5。
+  - command: /Users/william/.codex/worktrees/5aa6/trading-2026-2/.venv/bin/python -m pytest workflows/strategy-forward-replication-research--v006/tests -n 4 -q --tb=long --basetemp=/private/tmp/task038-v006-pm-acceptance-20261001-VjNLIvJU/pytest-tmp --junitxml=/private/tmp/task038-v006-pm-acceptance-20261001-VjNLIvJU/pm-rc-pytest-junit.xml -o cache_dir=/private/tmp/task038-v006-pm-acceptance-20261001-VjNLIvJU/pytest-cache
+    result: passed
+    summary: PM獨立完整RC驗收（分開記錄，不屬執行者的pytest結果）：207 tests、207 passed、0 failed、0 errors、0 skipped；212 NumPy warnings；207 passed, 212 warnings in 801.75s (0:13:21)；退出碼=0；wrapper耗時=801.916秒；日誌=/private/tmp/task038-v006-pm-acceptance-20261001-VjNLIvJU/pm-rc-pytest.log；日誌SHA-256=5519f2cc676f3150a1a7208920537f16ac3a32cce5fe3d34bfcc29676058552a；JUnit=/private/tmp/task038-v006-pm-acceptance-20261001-VjNLIvJU/pm-rc-pytest-junit.xml；JUnit SHA-256=2d172df808fa7dd87590fe509beacee3c396f0f8938d39b9ce6a52f4f09c4b50；同一固定初版RC，manifest SHA-256=e87dbb536b95c7b7e3ec9842732cb6d87a6db3fb9238262841cde16ba4880882、report SHA-256=800fd8eeaa172b65dee37871dc887662e25fe6bf6caedd82c70dceb34d069518；全部使用PM自己的專案外人造fixture，未改定義或artifacts。
+generated_at: '2026-09-30T21:37:06.494046Z'
+release_record_created: false
+schema_version: 1
+status: release-candidate
+workflow: strategy-forward-replication-research
+workflow_version: v006

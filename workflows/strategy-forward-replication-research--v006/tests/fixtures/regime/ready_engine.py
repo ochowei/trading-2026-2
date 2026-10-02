@@ -14,5 +14,6 @@ loader.loader.exec_module(module)
 for name in module.__all__:
     globals()[name] = getattr(module, name)
 DEFAULT_SPEC = module.DEFAULT_SPEC.with_changes(fold_warmup_sessions=49)
+BASELINE_SPEC = module.BASELINE_SPEC.with_changes(fold_warmup_sessions=49)
 _rsi = module._rsi
 _intraday_exit = module._intraday_exit

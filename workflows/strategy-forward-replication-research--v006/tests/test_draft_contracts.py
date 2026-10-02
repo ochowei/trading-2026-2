@@ -146,3 +146,68 @@ def test_one_to_sixteen_assets_accept_only_aligned_synthetic_files(tmp_path, cou
 def test_unsupported_asset_counts_still_rejected(tmp_path, count):
     with pytest.raises(ValidationError, match="1 至 16"):
         validate_assets(tmp_path, [{}] * count, [])
+
+
+@pytest.mark.parametrize("kind", ["shared", "full", "regime-ready", "regime-short"])
+def test_shared_pipeline_sources_pass_real_native_guards_without_running_pipeline(tmp_path, kind):
+    from operations import legacy_checks as native
+    from regime_pipeline_helpers import regime_repository
+    from repair_helpers import full_repository
+    from test_operations import fixture_repository, refresh_bundle, write
+
+    if kind.startswith("regime"):
+        repo, package, study_id, authority, research = regime_repository(tmp_path, ready=kind == "regime-ready")
+    else:
+        factory = fixture_repository if kind == "shared" else full_repository
+        repo, package, study_id, authority, research = factory(tmp_path)
+    context = native.StudyContext(repo, package, study_id)
+    result = native.run_precreate(context)
+    if kind == "regime-short":
+        assert result.status == "failed"
+        assert any(item["code"] == "fold-warmup-too-short" for item in result.errors)
+    else:
+        assert result.status == "passed", result.errors
+        prereg = load_canonical(research / "preregistration.yml")
+        prereg["hypothesis"] += "重新準備人造來源。"
+        write(research / "preregistration.yml", prereg)
+        refresh_bundle(repo, research)
+        assert native.run_precreate(context).status == "passed"
+        trial = load_canonical(research / "development-trial-inputs.yml")
+        assert trial["preregistration_digest"] == canonical_digest((research / "preregistration.yml").read_bytes())
+        assert trial["source_bundle_digest"] == canonical_digest((research / "source-bundle.yml").read_bytes())
+    assert not (package / "studies").exists()
+    assert not authority.exists()
+
+
+@pytest.mark.parametrize("passing", [True, False])
+def test_terminal_price_recipes_use_real_engine_and_fixed_floors_in_memory(passing):
+    import pandas as pd
+    from fixture_prices import evaluation_rows
+    from operations import legacy_checks as native
+    from validator.artifacts import evaluate_historical
+
+    rows = evaluation_rows(passing=passing)
+    frame = pd.DataFrame(rows, columns=["Date", "Open", "High", "Low", "Close", "Volume"])
+    frame.index = pd.to_datetime(frame.pop("Date"))
+    module = native._load_engine(PACKAGE / "tests/fixtures/contract/engine.py", native.CheckResult("engine"))
+    base = module.backtest(frame.astype(float), spec=module.DEFAULT_SPEC, cost=module.BASE_COST)
+    stress = module.backtest(frame.astype(float), spec=module.DEFAULT_SPEC, cost=module.STRESS_COST)
+    value = {
+        "initial_cash": str(module.DEFAULT_SPEC.initial_cash),
+        "family_wise_confidence": "0.95", "stress_drawdown_limit": "0.1",
+        "trades": [{
+            "trade_id": f"human-{index}", "fold": trade.signal_session.year,
+            "signal_date": trade.signal_session.strftime("%Y-%m-%d"),
+            "exit_date": trade.exit_session.strftime("%Y-%m-%d"), "order_type": "MARKET",
+            "base_pnl": str(trade.pnl), "stress_pnl": str(worse.pnl),
+        } for index, (trade, worse) in enumerate(zip(base.trades, stress.trades, strict=True))],
+    }
+    floors = load_canonical(PACKAGE / "rules/workflow-floors.yml")["historical_evaluation"]
+    metrics, failures = evaluate_historical(value, floors, fold_warmup_sessions=25, maximum_holding_sessions=16)
+    if passing:
+        assert not failures, (metrics, failures)
+        assert metrics["traded_folds"] == 5
+        assert len(base.trades) >= 20
+    else:
+        assert not base.trades
+        assert "completed_trades" in failures

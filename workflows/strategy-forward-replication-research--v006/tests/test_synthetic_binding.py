@@ -37,6 +37,44 @@ def test_native_synthetic_report_is_schema_and_digest_bound(tmp_path):
     assert check.warnings == []
 
 
+@pytest.mark.parametrize("nested_alias", [False, True])
+def test_native_precreate_resolves_repository_alias_without_false_drift(tmp_path, nested_alias):
+    context = make_context(tmp_path / "physical")
+    alias = tmp_path / "alias"
+    alias.symlink_to(context.repository_root, target_is_directory=True)
+    root = alias / "research" / ".." if nested_alias else alias
+    aliased = native.StudyContext(root, PACKAGE, context.study_id)
+    assert aliased.repository_root == context.repository_root.resolve()
+    check = native.run_precreate(aliased)
+    assert check.status == "passed", check.errors
+    canonical = native.run_precreate(context)
+    assert check.details["development_trial_bindings"] == canonical.details["development_trial_bindings"]
+    report = native_report_from_precreate(check.as_dict(aliased), PACKAGE)
+    expected = native_report_from_precreate(canonical.as_dict(context), PACKAGE)
+    assert report == expected
+
+
+def test_repository_alias_does_not_allow_engine_symlink_escape(tmp_path, monkeypatch):
+    context = make_context(tmp_path / "physical")
+    alias = tmp_path / "alias"
+    alias.symlink_to(context.repository_root, target_is_directory=True)
+    outside = tmp_path / "outside-engine.py"
+    outside.write_bytes((context.repository_root / "src/ready_engine.py").read_bytes())
+    engine = context.repository_root / "src/ready_engine.py"
+    engine.unlink()
+    engine.symlink_to(outside)
+    original = native._load_engine
+
+    def guarded(path, *args, **kwargs):
+        assert path.resolve() != outside.resolve(), "根外人造引擎不得被 import"
+        return original(path, *args, **kwargs)
+
+    monkeypatch.setattr(native, "_load_engine", guarded)
+    check = native.run_precreate(native.StudyContext(alias, PACKAGE, context.study_id))
+    assert check.status == "failed"
+    assert any("path" in item["code"] or "binding" in item["code"] for item in check.errors)
+
+
 def test_prepare_cannot_use_candidate_success_or_short_warmup_report(tmp_path):
     context = make_context(tmp_path / "good")
     precreate = native.run_precreate(context).as_dict(context)

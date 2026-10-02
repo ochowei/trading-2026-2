@@ -21,22 +21,12 @@ from writer.service import StudyService
 
 
 def evaluation_fixture(tmp_path, *, passing=False):
-    import exchange_calendars as xcals
+    from fixture_prices import evaluation_rows
     from operations.preflight import synthetic_csv
 
     service, study_id, research, report = prepared_service(tmp_path, eligible=True)
     publish_trial(service, study_id, research)
-    days = xcals.get_calendar("XNYS").sessions_in_range("2020-01-01", "2024-12-31")
-    rows = [[day.strftime("%Y-%m-%d"), 100, 101, 99, 100, 1000] for day in days]
-    if passing:
-        for offset in range(4, len(rows) - 3, 4):
-            if (
-                rows[offset][0][:4] != rows[offset + 2][0][:4]
-                or not "02-01" <= rows[offset][0][5:] <= "11-30"
-            ):
-                continue
-            rows[offset + 1][1:5] = [101, 102, 100, 101]
-            rows[offset + 2][1:5] = [103, 104, 102, 103]
+    rows = evaluation_rows(passing=passing)
     data = synthetic_csv({"rows": rows})
     (research / "synthetic-evaluation.csv").write_bytes(data)
     plan = freeze_plan(service)

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+
 import pytest
 from conftest import WORKFLOW_ROOT
 from operations.release_candidate import verify
@@ -65,12 +67,22 @@ def test_real_package_is_in_a_complete_release_state() -> None:
 
 def test_readme_describes_release_states_without_hardcoding_current_artifacts() -> None:
     readme = (WORKFLOW_ROOT / "README.md").read_text(encoding="utf-8")
-    introduction = readme.split("\n\n", maxsplit=2)[1]
-
-    assert "目前是 Draft" not in introduction
-    assert "沒有 `release-manifest.yml`" not in introduction
-    assert "只有 Active 可用來建立正式 Study" in introduction
-    assert "Draft 與 Release Candidate 都不得供正式 Study 使用" in introduction
+    # 內容可增補問題說明；發行界線驗整段條件，不依賴第幾個段落或舊句。
+    states = next(block for block in readme.split("\n\n")
+                  if all(name in block for name in ("Draft", "Release Candidate", "Active")))
+    assert "有效 artifacts" in states
+    assert "Draft" in states and "Release Candidate" in states and "Active" in states
+    draft = re.search(r"[^；。\n]*Draft", states).group()
+    candidate = re.search(r"[^；。\n]*Release Candidate", states).group()
+    active = re.search(r"[^；。\n]*才是 Active", states).group()
+    assert "尚無有效 Workflow Release" in draft
+    assert "驗證通過" in candidate
+    assert "release-manifest.yml" in candidate and "release-test-report.yml" in candidate
+    assert "Trusted Approver" in active and "核准" in active and "release.yml" in active
+    assert all(name in active for name in ("manifest", "report", "Workflow digest", "一致"))
+    assert re.search(r"只有\s*Active\s*(?:可以|才能|可用來)建立正式\s*Study", states)
+    assert "目前是 Draft" not in states
+    assert "沒有 `release-manifest.yml`" not in states
 
 
 def test_draft_has_reproducible_digest_and_no_release_artifacts(draft_workflow_root) -> None:

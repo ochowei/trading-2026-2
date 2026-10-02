@@ -34,13 +34,13 @@ def setup_assets(tmp_path, count, *, eligible=False):
     for case in contract["cases"]:
         if case["stage"] == "development":
             rows = case.pop("rows")
-            rows.insert(4, ["2014-01-10", *rows[3][1:]])
+            # 共用 fixture 已含完整 XNYS session，不再插入重複／錯序日期。
+            assert len({row[0] for row in rows}) == len(rows)
             case["assets"] = [
                 {"asset_id": f"A{n:02d}", "use": "trade" if n == 0 else "reference", "rows": deepcopy(rows)}
                 for n in range(count)
             ]
     write(research / "runner-contract.yml", contract)
-    refresh_bundle(repository, research)
     source_case = contract["cases"][0]["assets"][0]
     data = synthetic_csv(source_case)
     assets = []
@@ -66,13 +66,15 @@ def setup_assets(tmp_path, count, *, eligible=False):
         inputs["preregistration_digest"] = canonical_digest(prereg)
     inputs["data_bindings"] = {"assets": assets}
     write(research / "development-trial-inputs.yml", inputs)
+    refresh_bundle(repository, research)
+    inputs = load_canonical(research / "development-trial-inputs.yml")
     report = passed_report(repository, package, study_id, authority)
     service = make_service(package, authority, repository, study_id)
     create(service, plan_for(study_id, research), report)
     return service, study_id, inputs, assets, report
 
 
-@pytest.mark.parametrize("count", [1, 2, 3])
+@pytest.mark.parametrize("count", [1, 2, 3, 16])
 def test_preflight_and_development_accept_variable_asset_count(tmp_path, count):
     service, study_id, inputs, assets, report = setup_assets(tmp_path, count)
     assert len(report["cases"][0]["data_assets"]) == count
@@ -99,7 +101,11 @@ def test_multi_asset_rejects_bad_inputs(tmp_path, monkeypatch, fault):
         bad[1]["end_date"] = "2014-01-17"
     elif fault == "gap":
         path = service.repository_root / bad[1]["data_path"]
-        path.write_bytes(path.read_bytes().replace(b"2014-01-10,", b"2014-01-09,"))
+        rows = path.read_text().splitlines()
+        original = rows[5].split(",", 1)
+        # 把一個已有 session 換成前列日期，真正留下缺漏與重複。
+        rows[5] = rows[4].split(",", 1)[0] + "," + original[1]
+        path.write_text("\n".join(rows) + "\n")
         bad[1]["data_digest"] = canonical_digest(path.read_bytes())
     elif fault == "quarantine":
         path = service.repository_root / bad[1]["data_path"]
@@ -158,7 +164,7 @@ def test_snapshot_and_evaluation_plan_bind_each_asset(tmp_path):
     assert canonical_digest([snapshot_identity(asset) for asset in assets]) == frozen["data_digest"]
 
 
-@pytest.mark.parametrize("count", [2, 3])
+@pytest.mark.parametrize("count", [2, 3, 16])
 def test_multi_asset_synthetic_evaluation_reaches_terminal(tmp_path, count):
     import exchange_calendars as xcals
     from operations.evaluation import historical_evaluation

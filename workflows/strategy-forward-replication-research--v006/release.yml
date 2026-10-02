@@ -1,0 +1,9 @@
+approved_at: '2026-10-02T03:25:11Z'
+approved_by: ochowei@gmail.com
+release_manifest_digest: e87dbb536b95c7b7e3ec9842732cb6d87a6db3fb9238262841cde16ba4880882
+schema_version: 1
+test_report_digest: e7028200de3a9ed38b321d666c741234ac7306edf34f66b00dbccc8b211bf8fe
+test_report_path: release-test-report.yml
+workflow: strategy-forward-replication-research
+workflow_digest: e527578ca62d907d5b1e16f57d5a4c52f0b7cabb9d616970eb2eb2e383f8e7a9
+workflow_version: v006
