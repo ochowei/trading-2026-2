@@ -1,0 +1,502 @@
+accepted_signal_count: 12
+bindings:
+  preregistration_digest: e12625c614c9737d4c262d5c8292aff75a5ad39833247d72ba842d4d75d94cd5
+  source_bundle_digest: ea1e654018d4e976f8f964040b6761f6998c466ff0e03e2558a8cc5ff09d7256
+  trial_inputs_digest: 1e843da711fd339e943782726df9f093631ab98cd4536acf91919ef25be94ba9
+candidate_id: tsm-mr-v009-sma20-over-sma50-regime-v002
+diagnostics:
+  block_bootstrap:
+    base:
+      - block_length: 3
+        drawdown_above_10pct_ratio: '0.0'
+        maximum_drawdown_q05_q50_q95:
+          - '0.0'
+          - '0.019993663328877725'
+          - '0.02711284441600934'
+        positive_return_ratio: '0.9994'
+        profit_factor_above_one_ratio: '0.9994'
+        profit_factor_q05_q50_q95:
+          - '1.9333806152729767'
+          - '5.041458736840447'
+          - nan
+        repetitions: 50000
+        return_q05_q50_q95:
+          - '0.052245966269036215'
+          - '0.11085763645054225'
+          - '0.16717574349321995'
+        seed: 20260902
+      - block_length: 5
+        drawdown_above_10pct_ratio: '0.0'
+        maximum_drawdown_q05_q50_q95:
+          - '0.0'
+          - '0.019993663328877736'
+          - '0.027112844416009255'
+        positive_return_ratio: '1.0'
+        profit_factor_above_one_ratio: '1.0'
+        profit_factor_q05_q50_q95:
+          - '1.9341837451490693'
+          - '4.863740020064984'
+          - nan
+        repetitions: 50000
+        return_q05_q50_q95:
+          - '0.05307301653869034'
+          - '0.1108678844481894'
+          - '0.1605250085171368'
+        seed: 20260902
+    gating: true
+    stress:
+      - block_length: 3
+        drawdown_above_10pct_ratio: '0.0'
+        maximum_drawdown_q05_q50_q95:
+          - '0.001255696439312075'
+          - '0.01999919760148801'
+          - '0.029352916891886252'
+        positive_return_ratio: '0.99578'
+        profit_factor_above_one_ratio: '0.99578'
+        profit_factor_q05_q50_q95:
+          - '1.5349184963045195'
+          - '3.857778338811406'
+          - '31.29187532407273'
+        repetitions: 50000
+        return_q05_q50_q95:
+          - '0.030493231341950144'
+          - '0.08372797988930669'
+          - '0.13469728814540516'
+        seed: 20260902
+      - block_length: 5
+        drawdown_above_10pct_ratio: '0.0'
+        maximum_drawdown_q05_q50_q95:
+          - '0.0011079989048857952'
+          - '0.019999197601487998'
+          - '0.029352916891886186'
+        positive_return_ratio: '0.996'
+        profit_factor_above_one_ratio: '0.996'
+        profit_factor_q05_q50_q95:
+          - '1.5412926814641315'
+          - '3.761731381864891'
+          - '46.02510243774346'
+        repetitions: 50000
+        return_q05_q50_q95:
+          - '0.03124462305645226'
+          - '0.0837328524473342'
+          - '0.1286974882677403'
+        seed: 20260902
+  by_signal_year:
+    '2014':
+      base_pnl: '3984.3344826058665'
+      stress_pnl: '3100.911112738738'
+      trades: 4
+    '2015':
+      base_pnl: '5448.6479633495255'
+      stress_pnl: '4544.906636048696'
+      trades: 3
+    '2016':
+      base_pnl: '-1717.2142660802556'
+      stress_pnl: '-1875.5953355510399'
+      trades: 2
+    '2017':
+      base_pnl: '1231.443892816601'
+      stress_pnl: '815.558908473137'
+      trades: 2
+    '2018':
+      base_pnl: '2051.0135625858275'
+      stress_pnl: '1708.053421580243'
+      trades: 1
+  leave_one_signal_year_out:
+    base:
+      '2014':
+        maximum_drawdown: '0.019993663328877736'
+        omitted_trades: 4
+        profit_factor: '3.3495577546757374'
+        remaining_trades: 8
+        return: '0.0674514212892805'
+      '2015':
+        maximum_drawdown: '0.01999366332887778'
+        omitted_trades: 3
+        profit_factor: '2.928969208112467'
+        remaining_trades: 9
+        return: '0.054716445029233673'
+      '2016':
+        maximum_drawdown: '0.0072644235253763395'
+        omitted_trades: 2
+        profit_factor: '16.76385301994519'
+        remaining_trades: 10
+        return: '0.1276776912729627'
+      '2017':
+        maximum_drawdown: '0.01999366332887771'
+        omitted_trades: 2
+        profit_factor: '5.45326753444162'
+        remaining_trades: 10
+        return: '0.09743598880984483'
+      '2018':
+        maximum_drawdown: '0.01999366332887771'
+        omitted_trades: 1
+        profit_factor: '3.9971938615148956'
+        remaining_trades: 11
+        return: '0.08947212072691735'
+    gating: true
+    stress:
+      '2014':
+        maximum_drawdown: '0.01999919760148797'
+        omitted_trades: 4
+        profit_factor: '2.7127136796113485'
+        remaining_trades: 8
+        return: '0.050367388362579035'
+      '2015':
+        maximum_drawdown: '0.02014410185749508'
+        omitted_trades: 3
+        profit_factor: '2.2275131867217484'
+        remaining_trades: 9
+        return: '0.03721568226474892'
+      '2016':
+        maximum_drawdown: '0.008180862394722306'
+        omitted_trades: 2
+        profit_factor: '10.988754137515306'
+        remaining_trades: 10
+        return: '0.1021418062778543'
+      '2017':
+        maximum_drawdown: '0.019999197601487988'
+        omitted_trades: 2
+        profit_factor: '4.273276840310706'
+        remaining_trades: 10
+        return: '0.07465206378770595'
+      '2018':
+        maximum_drawdown: '0.019999197601487988'
+        omitted_trades: 1
+        profit_factor: '3.084234537569291'
+        remaining_trades: 11
+        return: '0.06585781321709527'
+disposition: fail
+failed_gates:
+  - completed_trades
+gates:
+  - actual: '4.684255396406697'
+    gate: base_profit_factor
+    operator: '>'
+    passed: true
+    required: '1.10'
+  - actual: '0.10998225635277566'
+    gate: base_return
+    operator: '>'
+    passed: true
+    required: '0'
+  - actual: 12
+    gate: completed_trades
+    operator: '>='
+    passed: false
+    required: 20
+  - actual: '0.019999197601488012'
+    gate: maximum_realized_trade_loss_fraction
+    operator: <=
+    passed: true
+    required: '0.04'
+  - actual: '0.0'
+    gate: maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+    operator: <=
+    passed: true
+    required: '0.10'
+  - actual: '0.02014410185749508'
+    gate: maximum_stress_leave_one_year_out_drawdown
+    operator: <=
+    passed: true
+    required: '0.10'
+  - actual: '0.99578'
+    gate: minimum_stress_block_bootstrap_positive_return_ratio
+    operator: '>='
+    passed: true
+    required: '0.80'
+  - actual: '2.2275131867217484'
+    gate: minimum_stress_leave_one_year_out_profit_factor
+    operator: '>'
+    passed: true
+    required: '1.00'
+  - actual: '0.03721568226474892'
+    gate: minimum_stress_leave_one_year_out_return
+    operator: '>'
+    passed: true
+    required: '0'
+  - actual: '0.019999197601487988'
+    gate: stress_maximum_drawdown
+    operator: <=
+    passed: true
+    required: '0.10'
+  - actual: '3.624790586938213'
+    gate: stress_profit_factor
+    operator: '>'
+    passed: true
+    required: '1.00'
+  - actual: '0.08293834743289774'
+    gate: stress_return
+    operator: '>'
+    passed: true
+    required: '0'
+  - actual: 5
+    gate: traded_years
+    operator: '>='
+    passed: true
+    required: 3
+metrics:
+  base:
+    completed_trades: 12
+    maximum_drawdown: '0.01999366332887771'
+    maximum_realized_trade_loss_fraction: '0.019993663328877732'
+    profit_factor: '4.684255396406697'
+    return: '0.10998225635277566'
+    traded_years: 5
+  stress:
+    completed_trades: 12
+    maximum_drawdown: '0.019999197601487988'
+    maximum_realized_trade_loss_fraction: '0.019999197601488012'
+    profit_factor: '3.624790586938213'
+    return: '0.08293834743289774'
+    traded_years: 5
+  trade_count_by_signal_year:
+    '2014': 4
+    '2015': 3
+    '2016': 2
+    '2017': 2
+    '2018': 1
+network_access_during_run: false
+schema_version: 1
+stage: development
+trades:
+  - base:
+      executed_entry_price: '14.373588247023493'
+      executed_exit_price: '14.933590715658154'
+      fees: '9.905826489386396'
+      pnl: '1882.902517495767'
+      pnl_fraction_of_pre_entry_equity: '0.01882902517495767'
+      shares: 3380
+    entry_session: '2014-05-06'
+    exit_reason: target
+    exit_session: '2014-05-08'
+    held_sessions: 3
+    signal_session: '2014-05-05'
+    stress:
+      executed_entry_price: '14.395137854590246'
+      executed_exit_price: '14.911179123788731'
+      fees: '18.410228325817673'
+      pnl: '1602.4753982266245'
+      pnl_fraction_of_pre_entry_equity: '0.016024753982266247'
+      shares: 3141
+    trade_id: tsm-mr-v009-sma20-over-sma50-regime-v002-0001
+  - base:
+      executed_entry_price: '15.246877183892785'
+      executed_exit_price: '15.261328241373423'
+      fees: '9.906014301583937'
+      pnl: '37.01656933804843'
+      pnl_fraction_of_pre_entry_equity: '0.00036332464450246484'
+      shares: 3247
+    entry_session: '2014-07-21'
+    exit_reason: time
+    exit_session: '2014-08-04'
+    held_sessions: 10
+    signal_session: '2014-07-18'
+    stress:
+      executed_entry_price: '15.26973607022546'
+      executed_exit_price: '15.23842479728932'
+      fees: '18.35981121007039'
+      pnl: '-112.57543147491565'
+      pnl_fraction_of_pre_entry_equity: '-0.001107998904885742'
+      shares: 3009
+    trade_id: tsm-mr-v009-sma20-over-sma50-regime-v002-0002
+  - base:
+      executed_entry_price: '14.80849466008509'
+      executed_exit_price: '15.385441308610947'
+      fees: '10.096852187931955'
+      pnl: '1919.2127404825324'
+      pnl_fraction_of_pre_entry_equity: '0.018830595213163385'
+      shares: 3344
+    entry_session: '2014-09-29'
+    exit_reason: target
+    exit_session: '2014-10-03'
+    held_sessions: 5
+    signal_session: '2014-09-26'
+    stress:
+      executed_entry_price: '14.830696301254635'
+      executed_exit_price: '15.362351601794622'
+      fees: '18.68345804240688'
+      pnl: '1626.258041828311'
+      pnl_fraction_of_pre_entry_equity: '0.016023841213372723'
+      shares: 3094
+    trade_id: tsm-mr-v009-sma20-over-sma50-regime-v002-0003
+  - base:
+      executed_entry_price: '16.38370487646764'
+      executed_exit_price: '16.434130379243054'
+      fees: '10.107893258758894'
+      pnl: '145.20265528951867'
+      pnl_fraction_of_pre_entry_equity: '0.0013983423468041849'
+      shares: 3080
+    entry_session: '2014-12-18'
+    exit_reason: time
+    exit_session: '2015-01-05'
+    held_sessions: 10
+    signal_session: '2014-12-17'
+    stress:
+      executed_entry_price: '16.408268152144505'
+      executed_exit_price: '16.409466851910523'
+      fees: '18.653600576304875'
+      pnl: '-15.246895841281571'
+      pnl_fraction_of_pre_entry_equity: '-0.0001478613646564772'
+      shares: 2842
+    trade_id: tsm-mr-v009-sma20-over-sma50-regime-v002-0004
+  - base:
+      executed_entry_price: '17.022708829923534'
+      executed_exit_price: '17.68592241332226'
+      fees: '10.301521752995352'
+      pnl: '1958.1163937744222'
+      pnl_fraction_of_pre_entry_equity: '0.01883087874262415'
+      shares: 2968
+    entry_session: '2015-03-27'
+    exit_reason: target
+    exit_session: '2015-04-02'
+    held_sessions: 5
+    signal_session: '2015-03-26'
+    stress:
+      executed_entry_price: '17.048230132517126'
+      executed_exit_price: '17.659380258624925'
+      fees: '18.985062883954704'
+      pnl: '1652.5105320208736'
+      pnl_fraction_of_pre_entry_equity: '0.016028088541466787'
+      shares: 2735
+    trade_id: tsm-mr-v009-sma20-over-sma50-regime-v002-0005
+  - base:
+      executed_entry_price: '17.126726376644246'
+      executed_exit_price: '17.82219849019672'
+      fees: '10.505646814972394'
+      pnl: '2080.083526523761'
+      pnl_fraction_of_pre_entry_equity: '0.019634089161774455'
+      shares: 3006
+    entry_session: '2015-06-10'
+    exit_reason: target-gap
+    exit_session: '2015-06-23'
+    held_sessions: 10
+    signal_session: '2015-06-09'
+    stress:
+      executed_entry_price: '17.15240362758374'
+      executed_exit_price: '17.795451819125887'
+      fees: '19.298205777673058'
+      pnl: '1756.157851070192'
+      pnl_fraction_of_pre_entry_equity: '0.01676468246570202'
+      shares: 2761
+    trade_id: tsm-mr-v009-sma20-over-sma50-regime-v002-0006
+  - base:
+      executed_entry_price: '17.188163898286568'
+      executed_exit_price: '17.653484357497'
+      fees: '10.640639377316301'
+      pnl: '1410.4480430513418'
+      pnl_fraction_of_pre_entry_equity: '0.013056979738974015'
+      shares: 3054
+    entry_session: '2015-12-15'
+    exit_reason: time
+    exit_session: '2015-12-30'
+    held_sessions: 10
+    signal_session: '2015-12-14'
+    stress:
+      executed_entry_price: '17.213933259453412'
+      executed_exit_price: '17.626990884224117'
+      fees: '19.496981150801943'
+      pnl: '1136.2382529576298'
+      pnl_fraction_of_pre_entry_equity: '0.010667944220004335'
+      shares: 2798
+    trade_id: tsm-mr-v009-sma20-over-sma50-regime-v002-0007
+  - base:
+      executed_entry_price: '19.304101437318696'
+      executed_exit_price: '18.513414703784143'
+      fees: '10.414943945259722'
+      pnl: '-2187.966208099419'
+      pnl_fraction_of_pre_entry_equity: '-0.019993663328877732'
+      shares: 2754
+    entry_session: '2016-04-22'
+    exit_reason: stop
+    exit_session: '2016-04-28'
+    held_sessions: 5
+    signal_session: '2016-04-21'
+    stress:
+      executed_entry_price: '19.333043118634016'
+      executed_exit_price: '18.485630689721436'
+      fees: '19.045484129887804'
+      pnl: '-2152.8299801317653'
+      pnl_fraction_of_pre_entry_equity: '-0.019999197601488012'
+      shares: 2518
+    trade_id: tsm-mr-v009-sma20-over-sma50-regime-v002-0008
+  - base:
+      executed_entry_price: '23.289873329935368'
+      executed_exit_price: '23.504991771304304'
+      fees: '10.468011323147316'
+      pnl: '470.7519420191635'
+      pnl_fraction_of_pre_entry_equity: '0.004389499470773493'
+      shares: 2237
+    entry_session: '2016-11-14'
+    exit_reason: time
+    exit_session: '2016-11-29'
+    held_sessions: 10
+    signal_session: '2016-11-11'
+    stress:
+      executed_entry_price: '23.324790681254612'
+      executed_exit_price: '23.469716646084738'
+      fees: '19.138953496881797'
+      pnl: '277.2346445807254'
+      pnl_fraction_of_pre_entry_equity: '0.0026279912100764104'
+      shares: 2045
+    trade_id: tsm-mr-v009-sma20-over-sma50-regime-v002-0009
+  - base:
+      executed_entry_price: '25.262514516133763'
+      executed_exit_price: '26.246755211624915'
+      fees: '10.672720687591598'
+      pnl: '2028.674000370076'
+      pnl_fraction_of_pre_entry_equity: '0.018833584299212187'
+      shares: 2072
+    entry_session: '2017-04-18'
+    exit_reason: target
+    exit_session: '2017-04-25'
+    held_sessions: 6
+    signal_session: '2017-04-17'
+    stress:
+      executed_entry_price: '25.300389350490786'
+      executed_exit_price: '26.20736538389361'
+      fees: '19.4699312895973'
+      pnl: '1694.7147718417398'
+      pnl_fraction_of_pre_entry_equity: '0.016022607622215402'
+      shares: 1890
+    trade_id: tsm-mr-v009-sma20-over-sma50-regime-v002-0010
+  - base:
+      executed_entry_price: '32.812392591011196'
+      executed_exit_price: '32.32830351751222'
+      fees: '10.585363117635055'
+      pnl: '-797.2301075534751'
+      pnl_fraction_of_pre_entry_equity: '-0.007264423525376325'
+      shares: 1625
+    entry_session: '2017-12-01'
+    exit_reason: time
+    exit_session: '2017-12-15'
+    held_sessions: 10
+    signal_session: '2017-11-30'
+    stress:
+      executed_entry_price: '32.86158658290177'
+      executed_exit_price: '32.27978680387913'
+      fees: '19.255789973132433'
+      pnl: '-879.1558633686028'
+      pnl_fraction_of_pre_entry_equity: '-0.008180862394722328'
+      shares: 1478
+    trade_id: tsm-mr-v009-sma20-over-sma50-regime-v002-0011
+  - base:
+      executed_entry_price: '34.5207673721023'
+      executed_exit_price: '35.86571441074753'
+      fees: '10.790247657310879'
+      pnl: '2051.0135625858275'
+      pnl_fraction_of_pre_entry_equity: '0.0188257553687317'
+      shares: 1533
+    entry_session: '2018-02-12'
+    exit_reason: target
+    exit_session: '2018-02-15'
+    held_sessions: 4
+    signal_session: '2018-02-09'
+    stress:
+      executed_entry_price: '34.57252264552374'
+      executed_exit_price: '35.81188892638923'
+      fees: '19.623173946249334'
+      pnl: '1708.053421580243'
+      pnl_fraction_of_pre_entry_equity: '0.016025152702355286'
+      shares: 1394
+    trade_id: tsm-mr-v009-sma20-over-sma50-regime-v002-0012

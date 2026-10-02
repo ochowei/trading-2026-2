@@ -1,0 +1,6 @@
+created_at: '2026-10-02T09:23:27.760719Z'
+event_digest: 72483ee20cc35dfb6add87d6bd6899820d297f678910f4f437dd32842fdc4feb
+previous_checkpoint_digest: 23270f6cd17636808c977ec7bb6ca69ced370d53a3aa8ed70289326ababb7ab0
+schema_version: 1
+sequence: 4
+study_id: tsm-divergence-sma20-sma50-regime--v002

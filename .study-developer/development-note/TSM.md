@@ -1106,3 +1106,10 @@ Candidate沿用v004，只加次日XNYS開盤−訊號收盤 >0.5×ATR20略過（
 無逐筆skip標記且訊號日分歧，直接略過筆數未知。provenance-unknown；無selection佐證，freeze狀態未知。未來可預登記逐訊號skip標記。來源限v005 reference／bundle、publication／inputs、Development evidence／runtime；未讀CSV或正式Evaluation／Terminal／quarantine。validate先於review，不稱state全盲。
 
 **TASK-035 損益補註：** Candidate base／stress 逐筆損益加總為 +US$24,094.38／+US$18,579.68；Control base／stress 為 +US$38,730.41／+US$30,395.41；金額皆為美元。
+### TASK-036 v006 Development 成果卡
+
+Study `tsm-divergence-sma20-sma50-regime--v002` 唯一 Candidate 加訊號日 SMA20>SMA50，對照原 v009 `DEFAULT_SPEC`；需49日前史，2013暖機、2014–2018 Development。
+
+Candidate base／stress：12筆，報酬10.998%／8.294%，PF 4.684／3.625；Control：24筆，33.676%／26.523%，PF 5.036／4.204。Candidate gates 12/13，僅 completed_trades 未達20筆；Control 13/13。研究 targets 空。
+
+Inputs、兩臂證據與 publication／envelope 綁定、Schema、raw-trade 重算通過，evidence valid。Candidate freeze eligibility=false，完整資格未達、未 freeze。provenance unknown，provenance／selection 記錄缺席。未讀正式 Evaluation／Terminal；盲檢前曾核 create Events 與 Development status，故非全盲；未讀CSV。
