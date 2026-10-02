@@ -2,7 +2,7 @@
 
 - 建立日期：2026-09-30
 - 規劃角色：專案管理者
-- 計劃狀態：2026-10-02 v006 已正式啟用，v005 Superseded，TASK-039 通過 PM 獨立驗收並移至 Done。TASK-037／038 亦已 Done；TASK-040 三份專用 skills 已建立並通過 PM 驗收，移至 Done；TASK-036 前置條件已齊備，維持 Pending 等待另行重新派工，TASK-041 尚未分派。
+- 計劃狀態：2026-10-02 v006 Active、v005 Superseded，TASK-037 至041已驗收Done。依使用者最新要求暫停；TASK-036 停在create前，準備保留、Pending，等待明確恢復。
 - Workflow ID：`strategy-forward-replication-research`
 - 預定新版本：`v006`
 - 目標 Package：`workflows/strategy-forward-replication-research--v006/`
@@ -19,6 +19,12 @@ v005 公開程式的通用資料產生器主要使用平坦價格搭配單日急
 規劃依據只有共享看板、公開 Workflow 程式與治理文件。worker 的完整派工內容保存於共享看板，不以這份專案管理者專屬計劃作為必讀文件。workflow 維護者與執行者的重現材料限公開程式與合成案例，不讀取 `.study-developer/`；study 開發者依自身角色處理該資料夾。
 
 ## TASK-037 已確認結果與目前進度
+
+2026-10-02 使用者最新要求「在完成 Task-041 之後先暫停」。TASK-041 已Done；PM 立即中斷TASK-036執行者，尚未授權create，沒有正式Study或Development Trial。worker已交的建立前checkpoint與新research準備保留，檢查點另保存PM專屬目錄以便恢復，尚未完成PM驗收。本次只記錄暫停與保存既有成果，不執行其他工作；TASK-036已由Doing移回Pending，等待使用者明確恢復。
+
+2026-10-02 TASK-041 驗收 Done：新歷史評估 skill 格式、契約與獨立三情境審閱通過，145項保護指紋不變。依使用者順序重新派工 TASK-036，以新v006研究ID `tsm-divergence-sma20-sma50-regime--v002` 保留v005/v001準備歷史，明確允許49-session暖機及來源綁定一致性修補，固定原v009 Control和唯一SMA20>SMA50差異。先完整建立前檢查與PM checkpoint，再唯一Development及盲檢討／成果卡；不freeze或評估。
+
+2026-10-02 使用者要求先做 TASK-041，再做 TASK-036。PM 已派固定 workflow 維護者 `/root/task_041_v006_evaluation_skill` 建立 v006 歷史評估技能；沿用 skill-creator 與公開發布契約，僅制定操作指引。TASK-041 驗收 Done 後再重新派工 TASK-036；目前不啟動 Study 或正式評估。
 
 2026-10-02 TASK-040 驗收通過：三份 v006 skills 及 UI metadata 已安裝，格式3/3通過；PM 契約與139項保護指紋核對通過，獨立 study 開發者三個假設情境審閱未發現阻塞問題。任務移至 Done。TASK-036 的正式 Release 與技能前置條件齊備，待明確重新派工；TASK-041 仍 TODO。本次未執行真實 Study。完整結果見 [TASK-040 驗收](../reviews/task-040-v006-skills-acceptance.md)。
 

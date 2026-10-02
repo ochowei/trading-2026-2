@@ -1,0 +1,4 @@
+interface:
+  display_name: "v006 Study 歷史評估"
+  short_description: "依明確派工評估已凍結的 v006 Study，維持唯一操作與原操作恢復"
+  default_prompt: "使用 $run-strategy-historical-evaluation-v006，依指定 Study 的明確評估派工完成一次歷史評估至 terminal。"

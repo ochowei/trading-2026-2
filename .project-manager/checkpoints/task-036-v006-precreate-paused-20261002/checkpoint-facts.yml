@@ -1,0 +1,24 @@
+all_other_functions_and_indicators_ast_equal: true
+all_preserved_bytes_unchanged: true
+backtest_executable_ast_equal: true
+baseline_pipeline: run_development.py main development branch -> model_evidence(control_engine, control_engine.DEFAULT_SPEC) -> v009.backtest base/stress
+candidate_engine: src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_sma20_sma50_regime_v002.py
+candidate_fold_warmup_sessions: 49
+candidate_required_history_sessions: 49
+candidate_source_changed_ast_members:
+  - StrategySpec
+  - _required_history_sessions
+  - backtest
+candidate_spec_constant: DEFAULT_SPEC
+control_engine: src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v009.py
+control_fold_warmup_sessions: 25
+control_required_history_sessions: 25
+control_spec_constant: DEFAULT_SPEC
+preserved_originals_files: 16
+provenance: provenance-unknown
+provenance_reason: 原已知 v004 preregistration 的 v009 績效來源／期間／階段未明；新 ID 不抹除既有來源及曝露，不用 prepare 的 synthetic-fixture 來源冒充真實 clean provenance。
+source_bundle_all_digests_verified: true
+source_bundle_count: 11
+study_and_authority_absent: true
+true_development_trials_started: 0
+true_studies_created: 0

@@ -49,20 +49,6 @@
 
 
 
-### [TASK-041] 建立 v006 Historical Evaluation 專用 skill
-- **狀態**：TODO
-- **優先級**：中
-- **負責角色**：workflow 維護者
-- **執行者**：尚未指派
-- **建立日期**：2026-09-30
-- **更新日期**：2026-09-30
-- **依賴／阻塞**：TASK-037 介面穩定後可準備文件；最終驗收需 TASK-039 已 Done 且 v006 Active。本任務不是 TASK-036 僅做 Development 的前置條件。
-- **驗收條件**：
-  - 依 skill-creator 規範與 v006 公開 CLI／Schema／reference，在 `.agents/skills/run-strategy-historical-evaluation-v006/SKILL.md` 建立繁體中文指引；限定已凍結單一 Study、明確評估派工及歷史評估角色。
-  - 正確說明固定多資產 snapshot／digest、唯一評估 operation、原 operation resume、indeterminate、禁止調整策略與只新增結果等規則；實際評估角色僅可在指定 artifact 子目錄保存結果。
-  - 格式 checker 與有效 v006 Release 契約審閱通過；保留 v004／v005 skill。維護者只制定指引，不讀取 `historical-evaluation-artifacts/`、不執行 Lifecycle 或正式評估。
-- **摘要**：補齊 v006 各角色的操作準備，讓後續已凍結 Study 的評估交接有明確依據。
-- **進度／備註**：計劃任務，尚未指派。完成後維持 Doing，由 PM 驗收。
 
 ### [TASK-031] 以 v005 拆解 supplemental divergence 的增量貢獻
 - **狀態**：Done
@@ -471,9 +457,9 @@
 - **狀態**：Pending
 - **優先級**：中
 - **負責角色**：study 開發者
-- **執行者**：`/root/task_036_trend_regime`（study 開發者 subagent；原 v005 派工，後續須重新指派）
+- **執行者**：`/root/task_036_v006_development`（study 開發者 subagent；新 v006 派工，保留原 v005 準備紀錄）
 - **建立日期**：2026-09-30
-- **更新日期**：2026-09-30
+- **更新日期**：2026-10-02
 - **依賴／阻塞**：TASK-035 已經專案管理者審閱；本項是不同的長期趨勢 regime 假說。後續等待 TASK-039（v006 Active）與 TASK-040（v006 Development／盲檢討／成果卡 skills）驗收 Done，再由 PM 明確重新分派 v006；派工時再次核對 Active Release。TASK-041 不是本項 Development 的前置條件。
 - **驗收條件**：
   - 以 v009 two-stage reversal 為固定 Control，Candidate 只增加一個長期趨勢條件：訊號日 SMA(20) 必須高於 SMA(50)。不得同時測 SMA(50) slope、動能加速或其他 filter。
@@ -487,9 +473,37 @@
 
 - **PM 根因與 Draft 驗收（2026-09-30）**：TASK-037 已驗收 Done。公開引擎與人造重建契約確認兩個問題：舊通用價格無法形成 SMA20>SMA50，以及原生暖機推導未納入新增 50 日均線。v006 已補案例與最長就緒檢查，但原公開候選 DEFAULT_SPEC 的 25 日暖機仍會被拒絕；後續 study 開發者須依新明確派工重新準備相符的暖機、候選／事前登記／來源綁定，維持原假說與交易門檻，不得靠重試或測試用 ready_engine 繞過。本項仍 Pending，TASK-039、TASK-040 依賴不變；本次未重新派發或執行 Study。
 
+- **PM v006 重新派工（2026-10-02）**：使用者要求先完成 TASK-041，再進行 TASK-036；TASK-039／040／041 現已 Done。PM 指派 `/root/task_036_v006_development`，固定 study 開發者，以 Active v006 完成一個新 Study 的完整建立前檢查、唯一 Development Trial、獨立 Development-only 盲檢討及指定成果卡追加。新 Study ID=`tsm-divergence-sma20-sma50-regime--v002`，原 v001／v005 未建立 Study 的準備文件保留，不用更換 ID 重設來源乾淨。明確授權在輸入凍結及 create 前修正 SMA50 暖機／required history 一致性（至少49先前sessions），保持原假說、交易門檻、v009 Control、持有、成本與風險不變；原公開v001／v009引擎與已引用來源不改，以新增來源版本及新research命名空間綁定。身份沿用 research_owner=ochowei@gmail.com、historical_evaluation_operator=operator A。先交完整precreate／runner／prepare及來源差異 checkpoint 供PM審閱，再create與唯一Trial；不執行freeze、Historical Evaluation、Terminal、challenge或replay。成果卡明確指定 `.study-developer/development-note/TSM.md`，只追加並驗證原文前綴。接手可Pending→Doing，完成維持Doing待PM驗收。
+
+- **v006 開發接手（2026-10-02）**：`/root/task_036_v006_development` 已依 PM 重新派工接手；先核對正式 Release 及原 v001／新 v002 Study 不存在，保存舊準備與公開來源完整指紋。正在新增 v002 候選及一致的 49-session 暖機登記，完整 precreate／runner preflight／prepare 後提供外部 checkpoint；PM 審閱前不 create 或啟動 Trial。
+
+- **v006 建立前 checkpoint（2026-10-02）**：新research `tsm-divergence-sma20-sma50-regime--v002` 已固定真實派工、create／Development計畫及11檔Source Bundle。原生完整precreate error=0/warning=0、runner-preflight及prepare均passed；prepare含完整native_synthetic，49-session就緒與regime/持有/冷卻/成交實際檢查通過。Control直接使用未修改v009.DEFAULT_SPEC，25-session就緒；Candidate新增來源v002只修暖機49/required-history推導，共同完整2013暖機與2014–2018交易期間。舊research/private準備、v001/v009來源16原檔bytes全保留；未create/啟動真實Trial。完整外部checkpoint `/private/tmp/task-036-v006-checkpoint/checkpoint.md` 及同目錄完整指紋/報告供PM審閱；目前provenance-unknown，等待PM接續通知。
+
+- **使用者暫停（2026-10-02）**：使用者最新明確指示「在完成 Task-041 之後先暫停」。TASK-041 已完成驗收Done，PM 已立即中斷 TASK-036 執行者並停止全部後續操作。TASK-036 停在 create 前：worker 已交完整 precreate／runner／prepare checkpoint；PM 尚未完成此 checkpoint 驗收，沒有接續 create 授權，正式 Study 與唯一 Development Trial 均未啟動。已完成準備保留，不做盲檢討或成果卡。由 PM 將 Doing 移回 Pending，等待使用者明確恢復；本段暫停優先於前段重新派工。外部 checkpoint=`/private/tmp/task-036-v006-checkpoint/checkpoint.md`，SHA-256=`9a708195a7e0045099727b9af611439341eb91db6701ae05ece49a576aef34c8`；已交檢查點另保存於 `.project-manager/checkpoints/task-036-v006-precreate-paused-20261002/`，此保存只保留既有成果，不執行新檢查或Study操作。
+
+
 ## ✅ Done
 
 > 已完成工作並由專案管理者驗收確認的任務。
+
+
+### [TASK-041] 建立 v006 Historical Evaluation 專用 skill
+- **狀態**：Done
+- **優先級**：中
+- **負責角色**：workflow 維護者
+- **執行者**：`/root/task_041_v006_evaluation_skill`（workflow 維護者 subagent）
+- **建立日期**：2026-09-30
+- **更新日期**：2026-10-02
+- **依賴／阻塞**：TASK-037 介面穩定後可準備文件；最終驗收需 TASK-039 已 Done 且 v006 Active。本任務不是 TASK-036 僅做 Development 的前置條件。
+- **驗收條件**：
+  - 依 skill-creator 規範與 v006 公開 CLI／Schema／reference，在 `.agents/skills/run-strategy-historical-evaluation-v006/SKILL.md` 建立繁體中文指引；限定已凍結單一 Study、明確評估派工及歷史評估角色。
+  - 正確說明固定多資產 snapshot／digest、唯一評估 operation、原 operation resume、indeterminate、禁止調整策略與只新增結果等規則；實際評估角色僅可在指定 artifact 子目錄保存結果。
+  - 格式 checker 與有效 v006 Release 契約審閱通過；保留 v004／v005 skill。維護者只制定指引，不讀取 `historical-evaluation-artifacts/`、不執行 Lifecycle 或正式評估。
+- **摘要**：補齊 v006 各角色的操作準備，讓後續已凍結 Study 的評估交接有明確依據。
+- **進度／備註**：2026-10-02 使用者指定先完成 TASK-041，再進行 TASK-036；PM 已派工建立 v006 評估 skill。PM 已審閱草稿；以限縮提權只新增 `.agents/skills/run-strategy-historical-evaluation-v006/SKILL.md` 與 `agents/openai.yaml`。安裝後 checker 通過、兩檔與草稿 bytes 完全相同、18 份既有技能檔案指紋未變。逐項對照 v006 CLI／Schema／snapshot／恢復分支／writer，只制定指引，未執行 Lifecycle 或讀取正式結果。外部交接：`/var/folders/w4/jth3symj3q92qfklnhw_4tx80000gn/T/task041-v006-skill-rkdf4tqt/handoff.json`。工作完成維持 Doing，待 PM 最終驗收。
+
+- **Parent review（2026-10-02）**：PM 驗收通過。新skill兩檔與審閱草稿一致，格式 checker、單／多資產snapshot、唯一operation、marker恢復及只新增保存契約通過；145項保護指紋不變，Active Release有效。獨立三情境審閱通過，初始檔名列舉範圍失誤及未讀Study內容界線已記於 `.project-manager/reviews/task-041-v006-evaluation-skill-acceptance.md`。未執行真實評估或Lifecycle；依使用者順序接續TASK-036。
+
 
 ### [TASK-040] 建立 v006 Development、盲檢討與成果卡專用 skills
 - **狀態**：Done

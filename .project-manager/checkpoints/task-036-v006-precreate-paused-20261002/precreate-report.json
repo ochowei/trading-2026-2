@@ -1,0 +1,754 @@
+{
+  "checks": [
+    {
+      "details": {
+        "contract_source": "research/tsm-divergence-sma20-sma50-regime--v002/implementation-contract.yml",
+        "development_trial_bindings": {
+          "preregistration_digest": "e12625c614c9737d4c262d5c8292aff75a5ad39833247d72ba842d4d75d94cd5",
+          "procedure_path": "research/tsm-divergence-sma20-sma50-regime--v002/run_development.py",
+          "source_bundle_digest": "ea1e654018d4e976f8f964040b6761f6998c466ff0e03e2558a8cc5ff09d7256",
+          "strategy_engine_path": "src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_sma20_sma50_regime_v002.py"
+        },
+        "development_trial_inputs_path": "research/tsm-divergence-sma20-sma50-regime--v002/development-trial-inputs.yml",
+        "engine_path": "src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_sma20_sma50_regime_v002.py",
+        "identity": {
+          "candidate_definition_has_explicit_candidate_id": true,
+          "candidate_family": [
+            "tsm-mr-v009-sma20-over-sma50-regime-v002"
+          ],
+          "candidate_id": "tsm-mr-v009-sma20-over-sma50-regime-v002",
+          "study_id": "tsm-divergence-sma20-sma50-regime--v002",
+          "trial_id": "tsm-mr-v009-sma20-over-sma50-regime-v002"
+        },
+        "precreate_guards": [
+          "canonical-yaml-and-artifact-shape",
+          "study-candidate-trial-family-identity",
+          "preregistration-qualification-trial-source-digests",
+          "implementation-contract",
+          "outcome-relevant-parameters",
+          "holding-cooldown-stop-target-gap-indicator-readiness",
+          "synthetic-contract",
+          "source-bundle-path-and-sha256"
+        ],
+        "required_documents": [
+          "preregistration.yml",
+          "candidate-definition.yml",
+          "qualification-spec.yml",
+          "development-trial-inputs.yml",
+          "source-bundle.yml"
+        ],
+        "research_root": "research/tsm-divergence-sma20-sma50-regime--v002",
+        "source_bundle_file_count": 11,
+        "source_bundle_verified_file_count": 11,
+        "study_event_required": false,
+        "subchecks": [
+          {
+            "details": {
+              "contract_source": "research/tsm-divergence-sma20-sma50-regime--v002/implementation-contract.yml",
+              "derived_required_history_sessions": 49,
+              "engine_path": "src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_sma20_sma50_regime_v002.py",
+              "engine_spec_constant": "DEFAULT_SPEC",
+              "engine_spec_fields_checked": [
+                "sma_lookback",
+                "sma_min_periods",
+                "rsi_lookback",
+                "rsi_min_periods",
+                "rsi_max",
+                "mean_reversion_min",
+                "volume_lookback",
+                "volume_average_min_periods",
+                "volume_lead_window",
+                "volume_lead_min_periods",
+                "volume_spike_ratio",
+                "volume_lead_enabled",
+                "cooldown_sessions",
+                "holding_sessions",
+                "target_return",
+                "stop_return",
+                "fold_warmup_sessions",
+                "risk_fraction",
+                "initial_cash",
+                "require_close_above_prior_close"
+              ],
+              "holding_period": {
+                "paths": {
+                  "engine.holding_sessions": "implementation contract engine spec",
+                  "execution.held_complete_sessions": "candidate-definition.yml",
+                  "preregistration.maximum_holding_sessions": "preregistration.yml"
+                },
+                "relation": {
+                  "engine.holding_sessions": 10,
+                  "entry_to_exit_complete_sessions": 10,
+                  "execution.held_complete_sessions": 10,
+                  "formula": {
+                    "engine.holding_sessions": "execution.held_complete_sessions",
+                    "preregistration.maximum_holding_sessions": "signal_to_exit_session_span",
+                    "signal_to_exit_session_span": "1 + execution.held_complete_sessions"
+                  },
+                  "preregistration.maximum_holding_sessions": 11,
+                  "signal_to_entry_sessions": 1,
+                  "signal_to_exit_session_span": 11
+                },
+                "status": "complete",
+                "values": {
+                  "engine.holding_sessions": 10,
+                  "execution.held_complete_sessions": 10,
+                  "preregistration.maximum_holding_sessions": 11
+                }
+              },
+              "outcome_relevant_parameters": [
+                {
+                  "actual": 20,
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:sma_lookback",
+                  "expected": 20,
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml:registered_sma_lookback",
+                  "label": "SMA length"
+                },
+                {
+                  "actual": 2,
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:rsi_lookback",
+                  "expected": 2,
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml:registered_rsi_lookback",
+                  "label": "RSI length"
+                },
+                {
+                  "actual": "50",
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:rsi_max",
+                  "expected": "50",
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml:registered_rsi_max",
+                  "label": "RSI threshold"
+                },
+                {
+                  "actual": "0.015",
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:mean_reversion_gap",
+                  "expected": "0.015",
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml:registered_mean_reversion_gap",
+                  "label": "mean-reversion gap"
+                },
+                {
+                  "actual": 20,
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:volume_lookback",
+                  "expected": 20,
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml:registered_volume_lookback",
+                  "label": "Volume average length"
+                },
+                {
+                  "actual": 5,
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:volume_lead_window",
+                  "expected": 5,
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml:registered_volume_lead_window",
+                  "label": "Volume lead window"
+                },
+                {
+                  "actual": "1.05",
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:volume_spike_ratio",
+                  "expected": "1.05",
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml:registered_volume_spike_ratio",
+                  "label": "Volume spike ratio"
+                },
+                {
+                  "actual": 5,
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:cooldown_sessions",
+                  "expected": 5,
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml:registered_cooldown_sessions",
+                  "label": "Cooldown"
+                },
+                {
+                  "actual": "completed-session-close",
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:decision_time",
+                  "expected": "completed-session-close",
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml:registered_decision_time",
+                  "label": "Signal decision time"
+                },
+                {
+                  "actual": "0.04",
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:target_return",
+                  "expected": "0.04",
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml:registered_target_return",
+                  "label": "Target return"
+                },
+                {
+                  "actual": "-0.04",
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:stop_return",
+                  "expected": "-0.04",
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml:registered_stop_return",
+                  "label": "Stop return"
+                },
+                {
+                  "actual": "next-session-open",
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:entry",
+                  "expected": "next-session-open",
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml:registered_entry",
+                  "label": "Entry timing"
+                },
+                {
+                  "actual": "stop-gap-at-open-target-gap-at-open",
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:gap_fill",
+                  "expected": "stop-gap-at-open-target-gap-at-open",
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml:registered_gap_fill",
+                  "label": "Gap fill"
+                },
+                {
+                  "actual": "adverse-stop-first",
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:intrabar_ambiguity",
+                  "expected": "adverse-stop-first",
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml:registered_intrabar_ambiguity",
+                  "label": "Intrabar ambiguity"
+                },
+                {
+                  "actual": 49,
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:fold_warmup_sessions",
+                  "expected": 49,
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml:registered_fold_warmup_sessions",
+                  "label": "Fold warmup"
+                },
+                {
+                  "actual": "0.02",
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:risk_fraction",
+                  "expected": "0.02",
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml:registered_risk_fraction",
+                  "label": "Risk fraction"
+                },
+                {
+                  "actual": true,
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:price_direction_above",
+                  "expected": true,
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml:registered_price_direction_above",
+                  "label": "Close direction confirmation"
+                },
+                {
+                  "actual": null,
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:price_direction_below",
+                  "expected": null,
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml:registered_price_direction_below",
+                  "label": "Close-below direction confirmation"
+                },
+                {
+                  "actual": null,
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:supplemental_enabled",
+                  "expected": null,
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml:registered_supplemental_enabled",
+                  "label": "Supplemental path enabled"
+                },
+                {
+                  "actual": null,
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:supplemental_atr_lookback",
+                  "expected": null,
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml:registered_supplemental_atr_lookback",
+                  "label": "ATR lookback"
+                },
+                {
+                  "actual": null,
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:supplemental_atr_distance_multiplier",
+                  "expected": null,
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml:registered_supplemental_atr_distance_multiplier",
+                  "label": "ATR distance multiplier"
+                },
+                {
+                  "actual": null,
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:supplemental_bollinger_lookback",
+                  "expected": null,
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml:registered_supplemental_bollinger_lookback",
+                  "label": "Bollinger lookback"
+                },
+                {
+                  "actual": null,
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:supplemental_pullback_low_lookback",
+                  "expected": null,
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml:registered_supplemental_pullback_low_lookback",
+                  "label": "Pullback low lookback"
+                },
+                {
+                  "actual": 5,
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:Contract cooldown",
+                  "expected": 5,
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/implementation-contract.yml:Contract cooldown",
+                  "label": "Contract cooldown"
+                },
+                {
+                  "actual": "0.04",
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:Contract target",
+                  "expected": "0.04",
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/implementation-contract.yml:Contract target",
+                  "label": "Contract target"
+                },
+                {
+                  "actual": "-0.04",
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:Contract stop",
+                  "expected": "-0.04",
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/implementation-contract.yml:Contract stop",
+                  "label": "Contract stop"
+                },
+                {
+                  "actual": "next-session-open",
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:Contract entry",
+                  "expected": "next-session-open",
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/implementation-contract.yml:Contract entry",
+                  "label": "Contract entry"
+                },
+                {
+                  "actual": "completed-session-close",
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:Contract signal decision time",
+                  "expected": "completed-session-close",
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/implementation-contract.yml:Contract signal decision time",
+                  "label": "Contract signal decision time"
+                },
+                {
+                  "actual": "stop-gap-at-open-target-gap-at-open",
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:Contract gap fill",
+                  "expected": "stop-gap-at-open-target-gap-at-open",
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/implementation-contract.yml:Contract gap fill",
+                  "label": "Contract gap fill"
+                },
+                {
+                  "actual": "adverse-stop-first",
+                  "actual_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml:Contract same-session ambiguity",
+                  "expected": "adverse-stop-first",
+                  "expected_path": "/Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/implementation-contract.yml:Contract same-session ambiguity",
+                  "label": "Contract same-session ambiguity"
+                }
+              ],
+              "source_bundle_file_count": 11,
+              "source_bundle_path": "research/tsm-divergence-sma20-sma50-regime--v002/source-bundle.yml",
+              "source_bundle_verified_file_count": 11,
+              "validator_metrics": {
+                "development": [
+                  "base_profit_factor",
+                  "base_return",
+                  "completed_trades",
+                  "maximum_realized_trade_loss_fraction",
+                  "maximum_stress_block_bootstrap_drawdown_above_10pct_ratio",
+                  "maximum_stress_leave_one_year_out_drawdown",
+                  "minimum_stress_block_bootstrap_positive_return_ratio",
+                  "minimum_stress_leave_one_year_out_profit_factor",
+                  "minimum_stress_leave_one_year_out_return",
+                  "stress_maximum_drawdown",
+                  "stress_profit_factor",
+                  "stress_return",
+                  "traded_years"
+                ],
+                "evaluation": [
+                  "base_compounded_return",
+                  "base_profit_factor",
+                  "completed_trades",
+                  "family_wise_confidence",
+                  "maximum_fold_positive_profit_concentration",
+                  "maximum_fold_trade_concentration",
+                  "maximum_realized_trade_loss_fraction",
+                  "positive_traded_fold_ratio",
+                  "stress_max_drawdown",
+                  "stress_profit_factor",
+                  "stress_return",
+                  "traded_folds"
+                ]
+              }
+            },
+            "errors": [],
+            "name": "contract",
+            "status": "passed",
+            "study_id": "tsm-divergence-sma20-sma50-regime--v002",
+            "warnings": []
+          },
+          {
+            "details": {
+              "accepted_signal_count": 2,
+              "accepted_signals": [
+                "2020-03-23T00:00:00"
+              ],
+              "binding": {
+                "contract_source_digest": "01b46a4dc516571677ea08a89a29188fd7818eff561bdefe79c22f26430a81b3",
+                "contract_source_path": "research/tsm-divergence-sma20-sma50-regime--v002/implementation-contract.yml",
+                "cost_constant": "BASE_COST",
+                "engine_digest": "401cc9f72db9b28b2ad5ef4d79abf3f8d00a26b3fc75d0c9dc588ced767c6b8e",
+                "engine_path": "src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_sma20_sma50_regime_v002.py",
+                "implementation_contract_digest": "01b46a4dc516571677ea08a89a29188fd7818eff561bdefe79c22f26430a81b3",
+                "source_bundle_digest": "ea1e654018d4e976f8f964040b6761f6998c466ff0e03e2558a8cc5ff09d7256",
+                "spec_constant": "DEFAULT_SPEC",
+                "workflow_digest": "e527578ca62d907d5b1e16f57d5a4c52f0b7cabb9d616970eb2eb2e383f8e7a9"
+              },
+              "cooldown_boundary_cases": {
+                "at-completion": {
+                  "accepted_signals": [
+                    "2020-03-23T00:00:00",
+                    "2020-04-14T00:00:00"
+                  ],
+                  "data_digest": "d4265d87841d3b0caddce54ec7857d17ba1d41092803023c5aef2c1712d0cd36",
+                  "probe": {
+                    "accepted": true,
+                    "index": 73,
+                    "raw_signal": true,
+                    "steps_after_exit": 5
+                  },
+                  "raw_signals": [
+                    "2020-03-23T00:00:00",
+                    "2020-04-14T00:00:00"
+                  ],
+                  "rejected_signals": [],
+                  "rejection_reasons": {},
+                  "trades": [
+                    {
+                      "entry_session": "2020-03-24T00:00:00",
+                      "executed_entry_price": 139.96995,
+                      "executed_exit_price": 139.83005,
+                      "exit_reason": "time",
+                      "exit_session": "2020-04-07T00:00:00",
+                      "fees": 9.709060000000001,
+                      "held_sessions": 10,
+                      "pnl": -58.25436000000627,
+                      "raw_entry_price": 139.9,
+                      "raw_exit_price": 139.9,
+                      "shares": 347,
+                      "signal_session": "2020-03-23T00:00:00"
+                    },
+                    {
+                      "entry_session": "2020-04-15T00:00:00",
+                      "executed_entry_price": 139.96995,
+                      "executed_exit_price": 139.83005,
+                      "exit_reason": "time",
+                      "exit_session": "2020-04-29T00:00:00",
+                      "fees": 9.681080000000001,
+                      "held_sessions": 10,
+                      "pnl": -58.08647999999812,
+                      "raw_entry_price": 139.9,
+                      "raw_exit_price": 139.9,
+                      "shares": 346,
+                      "signal_session": "2020-04-14T00:00:00"
+                    }
+                  ]
+                },
+                "one-step-before-complete": {
+                  "accepted_signals": [
+                    "2020-03-23T00:00:00",
+                    "2020-04-15T00:00:00"
+                  ],
+                  "data_digest": "7d8646c9d9ade48e44d9edae8e117a42020487b316ae92b485f26eb02008a948",
+                  "probe": {
+                    "accepted": false,
+                    "index": 72,
+                    "raw_signal": true,
+                    "steps_after_exit": 4
+                  },
+                  "raw_signals": [
+                    "2020-03-23T00:00:00",
+                    "2020-04-13T00:00:00",
+                    "2020-04-15T00:00:00"
+                  ],
+                  "rejected_signals": [
+                    {
+                      "reason": "cooldown-not-complete",
+                      "session": "2020-04-13T00:00:00"
+                    }
+                  ],
+                  "rejection_reasons": {
+                    "2020-04-13T00:00:00": "cooldown-not-complete"
+                  },
+                  "trades": [
+                    {
+                      "entry_session": "2020-03-24T00:00:00",
+                      "executed_entry_price": 139.96995,
+                      "executed_exit_price": 139.83005,
+                      "exit_reason": "time",
+                      "exit_session": "2020-04-07T00:00:00",
+                      "fees": 9.709060000000001,
+                      "held_sessions": 10,
+                      "pnl": -58.25436000000627,
+                      "raw_entry_price": 139.9,
+                      "raw_exit_price": 139.9,
+                      "shares": 347,
+                      "signal_session": "2020-03-23T00:00:00"
+                    },
+                    {
+                      "entry_session": "2020-04-16T00:00:00",
+                      "executed_entry_price": 139.96995,
+                      "executed_exit_price": 139.83005,
+                      "exit_reason": "time",
+                      "exit_session": "2020-04-30T00:00:00",
+                      "fees": 9.681080000000001,
+                      "held_sessions": 10,
+                      "pnl": -58.08647999999812,
+                      "raw_entry_price": 139.9,
+                      "raw_exit_price": 139.9,
+                      "shares": 346,
+                      "signal_session": "2020-04-15T00:00:00"
+                    }
+                  ]
+                }
+              },
+              "cooldown_sessions": 5,
+              "engine_path": "src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_sma20_sma50_regime_v002.py",
+              "first_ready_index": 49,
+              "holding_cooldown_case": {
+                "accepted_signal_seed": "2020-04-14T00:00:00",
+                "accepted_signals": [
+                  "2020-03-23T00:00:00",
+                  "2020-04-14T00:00:00"
+                ],
+                "data_digest": "ffadf875efb72d341683706cd12cd9b3ba6c6c6da389d824226c9eae932543f5",
+                "first_signal_seed": "2020-03-23T00:00:00",
+                "fixture_search_attempts": 1,
+                "raw_signals": [
+                  "2020-03-23T00:00:00",
+                  "2020-04-10T00:00:00",
+                  "2020-04-14T00:00:00"
+                ],
+                "rejected_signal_seed": "2020-04-10T00:00:00",
+                "rejected_signals": [
+                  {
+                    "reason": "cooldown-not-complete",
+                    "session": "2020-04-10T00:00:00"
+                  }
+                ],
+                "rejection_reasons": {
+                  "2020-04-10T00:00:00": "cooldown-not-complete"
+                },
+                "trades": [
+                  {
+                    "entry_session": "2020-03-24T00:00:00",
+                    "executed_entry_price": 139.96995,
+                    "executed_exit_price": 139.83005,
+                    "exit_reason": "time",
+                    "exit_session": "2020-04-07T00:00:00",
+                    "fees": 9.709060000000001,
+                    "held_sessions": 10,
+                    "pnl": -58.25436000000627,
+                    "raw_entry_price": 139.9,
+                    "raw_exit_price": 139.9,
+                    "shares": 347,
+                    "signal_session": "2020-03-23T00:00:00"
+                  },
+                  {
+                    "entry_session": "2020-04-15T00:00:00",
+                    "executed_entry_price": 139.96995,
+                    "executed_exit_price": 139.83005,
+                    "exit_reason": "time",
+                    "exit_session": "2020-04-29T00:00:00",
+                    "fees": 9.681080000000001,
+                    "held_sessions": 10,
+                    "pnl": -58.08647999999812,
+                    "raw_entry_price": 139.9,
+                    "raw_exit_price": 139.9,
+                    "shares": 346,
+                    "signal_session": "2020-04-14T00:00:00"
+                  }
+                ]
+              },
+              "holding_sessions": 10,
+              "indicator_columns": {
+                "regime_fast": "regime_sma20",
+                "regime_slow": "regime_sma50",
+                "rsi": "rsi_2",
+                "sma": "sma_20",
+                "volume_lead": "prior_volume_spike_ratio"
+              },
+              "intraday_exit_cases": 4,
+              "passed_cases": [
+                "rsi",
+                "readiness",
+                "regime",
+                "cooldown-boundaries",
+                "intraday-exit",
+                "holding-cooldown"
+              ],
+              "passed_signal_cases": [
+                "signal"
+              ],
+              "raw_signals": [
+                "2020-03-23T00:00:00"
+              ],
+              "regime_cases": {
+                "above": {
+                  "accepted_signals": [
+                    "2020-03-23T00:00:00"
+                  ],
+                  "data_digest": "2f3fcdba9635a94bbddf23d180ac5f10f6122d6cc588316cf0781e3afa905f06",
+                  "probe": {
+                    "allowed": true,
+                    "fast_sma": 131.53625,
+                    "filter_rejection": null,
+                    "index": 57,
+                    "session": "2020-03-23T00:00:00",
+                    "slow_sma": 122.0645
+                  },
+                  "raw_signals": [
+                    "2020-03-23T00:00:00"
+                  ],
+                  "rejected_signals": [],
+                  "rejection_reasons": {},
+                  "trades": [
+                    {
+                      "entry_session": "2020-03-24T00:00:00",
+                      "executed_entry_price": 139.96995,
+                      "executed_exit_price": 139.83005,
+                      "exit_reason": "time",
+                      "exit_session": "2020-04-07T00:00:00",
+                      "fees": 9.709060000000001,
+                      "held_sessions": 10,
+                      "pnl": -58.25436000000627,
+                      "raw_entry_price": 139.9,
+                      "raw_exit_price": 139.9,
+                      "shares": 347,
+                      "signal_session": "2020-03-23T00:00:00"
+                    }
+                  ]
+                },
+                "below": {
+                  "accepted_signals": [],
+                  "data_digest": "4b7b85f9d77f33a03e904eb9a73a2561dcb9c42afcfd1eac06890c5a830a7575",
+                  "probe": {
+                    "allowed": false,
+                    "fast_sma": 105.36500000000001,
+                    "filter_rejection": "sma-fast-not-above-slow",
+                    "index": 57,
+                    "session": "2020-03-23T00:00:00",
+                    "slow_sma": 116.63599999999998
+                  },
+                  "raw_signals": [],
+                  "rejected_signals": [],
+                  "rejection_reasons": {},
+                  "trades": []
+                },
+                "equal": {
+                  "accepted_signals": [],
+                  "data_digest": "d7da1a8b268af0be70a12a4142a4fdc3d375033971a2527e9a2d9abfb33c5bf4",
+                  "probe": {
+                    "allowed": false,
+                    "fast_sma": 98.75,
+                    "filter_rejection": "sma-fast-not-above-slow",
+                    "index": 57,
+                    "session": "2020-03-23T00:00:00",
+                    "slow_sma": 98.75
+                  },
+                  "raw_signals": [],
+                  "rejected_signals": [],
+                  "rejection_reasons": {},
+                  "trades": []
+                },
+                "just-ready": {
+                  "accepted_signals": [
+                    "2020-03-11T00:00:00"
+                  ],
+                  "data_digest": "0a806dcf160e096a3d683de4d43cf329c2048d33973129397cbcdbd7211bdb7e",
+                  "probe": {
+                    "allowed": true,
+                    "fast_sma": 126.00625000000002,
+                    "filter_rejection": null,
+                    "index": 49,
+                    "session": "2020-03-11T00:00:00",
+                    "slow_sma": 116.4925
+                  },
+                  "raw_signals": [
+                    "2020-03-11T00:00:00"
+                  ],
+                  "rejected_signals": [],
+                  "rejection_reasons": {},
+                  "trades": [
+                    {
+                      "entry_session": "2020-03-12T00:00:00",
+                      "executed_entry_price": 134.36715,
+                      "executed_exit_price": 134.23285,
+                      "exit_reason": "time",
+                      "exit_session": "2020-03-26T00:00:00",
+                      "fees": 9.69646,
+                      "held_sessions": 10,
+                      "pnl": -58.17876000000979,
+                      "raw_entry_price": 134.3,
+                      "raw_exit_price": 134.3,
+                      "shares": 361,
+                      "signal_session": "2020-03-11T00:00:00"
+                    }
+                  ]
+                },
+                "not-ready": {
+                  "accepted_signals": [],
+                  "data_digest": "77a29f88a891ae83538528bff1cda33141753a4a61fa0be2ac5571b63f662d64",
+                  "probe": {
+                    "allowed": false,
+                    "fast_sma": 125.31499999999998,
+                    "filter_rejection": "regime-not-ready",
+                    "index": 48,
+                    "session": "2020-03-10T00:00:00",
+                    "slow_sma": null
+                  },
+                  "raw_signals": [],
+                  "rejected_signals": [],
+                  "rejection_reasons": {},
+                  "trades": []
+                }
+              },
+              "rejected_signals": [],
+              "rejection_reasons": {},
+              "rsi_case": "passed",
+              "signal_audit": {
+                "sma-regime": {
+                  "accepted_signals": [
+                    "2020-03-23T00:00:00"
+                  ],
+                  "data_digest": "2f3fcdba9635a94bbddf23d180ac5f10f6122d6cc588316cf0781e3afa905f06",
+                  "raw_signals": [
+                    "2020-03-23T00:00:00"
+                  ],
+                  "rejected_signals": [],
+                  "rejection_reasons": {},
+                  "trades": [
+                    {
+                      "entry_session": "2020-03-24T00:00:00",
+                      "executed_entry_price": 139.96995,
+                      "executed_exit_price": 139.83005,
+                      "exit_reason": "time",
+                      "exit_session": "2020-04-07T00:00:00",
+                      "fees": 9.709060000000001,
+                      "held_sessions": 10,
+                      "pnl": -58.25436000000627,
+                      "raw_entry_price": 139.9,
+                      "raw_exit_price": 139.9,
+                      "shares": 347,
+                      "signal_session": "2020-03-23T00:00:00"
+                    }
+                  ]
+                }
+              },
+              "signal_case": {
+                "fixture_search_attempts": 1,
+                "kind": "sma-regime",
+                "raw_signal_columns": [
+                  "raw_signal"
+                ]
+              },
+              "trades": [
+                {
+                  "entry_session": "2020-03-24T00:00:00",
+                  "executed_entry_price": 139.96995,
+                  "executed_exit_price": 139.83005,
+                  "exit_reason": "time",
+                  "exit_session": "2020-04-07T00:00:00",
+                  "fees": 9.709060000000001,
+                  "held_sessions": 10,
+                  "pnl": -58.25436000000627,
+                  "raw_entry_price": 139.9,
+                  "raw_exit_price": 139.9,
+                  "shares": 347,
+                  "signal_session": "2020-03-23T00:00:00"
+                }
+              ]
+            },
+            "errors": [],
+            "name": "synthetic",
+            "status": "passed",
+            "study_id": "tsm-divergence-sma20-sma50-regime--v002",
+            "warnings": []
+          }
+        ]
+      },
+      "errors": [],
+      "name": "precreate",
+      "status": "passed",
+      "study_id": "tsm-divergence-sma20-sma50-regime--v002",
+      "warnings": []
+    }
+  ],
+  "command": "precreate",
+  "error_count": 0,
+  "status": "passed",
+  "study_id": "tsm-divergence-sma20-sma50-regime--v002",
+  "warning_count": 0
+}
