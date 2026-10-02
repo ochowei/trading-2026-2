@@ -48,21 +48,6 @@
 
 
 
-### [TASK-040] 建立 v006 Development、盲檢討與成果卡專用 skills
-- **狀態**：TODO
-- **優先級**：高
-- **負責角色**：study 開發者
-- **執行者**：尚未指派
-- **建立日期**：2026-09-30
-- **更新日期**：2026-09-30
-- **依賴／阻塞**：TASK-037 介面穩定後可準備文件；最終驗收需 TASK-039 已 Done 且 v006 Active。完成後才能重新派工 TASK-036。
-- **驗收條件**：
-  - 依 skill-creator 規範，在 `.agents/skills/` 建立 `build-strategy-study-v006`、`blind-review-strategy-study-v006`、`study-development-note-authoring-v006` 三份繁體中文 skill；以 v006 實際 CLI、reference、Schema 與發布契約為準，版本及命令不能只改名稱。
-  - Development 指引明列完整建 Study 前檢查、暖機與合成案例、固定 release／policy／source／data bindings、明確派工、唯一 Trial 及合法凍結資格；保留多資產與單資產路徑。
-  - 盲檢討只用研究設計與 Development evidence，避免正式 Evaluation／Terminal／Study 狀態暴露；成果卡分清 gates、研究目標、evidence validity、凍結資格／狀態及限制，寫檔依明確要求並只追加。
-  - 三份 skills 通過格式 checker，並逐項對照有效 v006 Release 完成契約審閱；v004／v005 skills 原地保留。建立指引期間不執行真實 Study Lifecycle 或讀取正式結果。
-- **摘要**：讓 study 開發者依 v006 的真實檢查與操作契約恢復 TASK-036，避免沿用 v005 的固定版本指引。
-- **進度／備註**：計劃任務，尚未執行。完成後維持 Doing，由 PM 驗收；不以此任務授權執行 TASK-036。
 
 ### [TASK-041] 建立 v006 Historical Evaluation 專用 skill
 - **狀態**：TODO
@@ -418,7 +403,6 @@
 
 > 正由被指派的角色處理中的任務。
 
-
 ### [TASK-015] 在 v004 開發新的 TSM 動能趨勢 × 量先價行假說，完成 blind review 與成果卡
 - **狀態**：Done
 - **優先級**：高
@@ -506,6 +490,25 @@
 ## ✅ Done
 
 > 已完成工作並由專案管理者驗收確認的任務。
+
+### [TASK-040] 建立 v006 Development、盲檢討與成果卡專用 skills
+- **狀態**：Done
+- **優先級**：高
+- **負責角色**：study 開發者
+- **執行者**：`/root/task_040_v006_skills_developer`（study 開發者 subagent）
+- **建立日期**：2026-09-30
+- **更新日期**：2026-10-02
+- **依賴／阻塞**：TASK-037 介面穩定後可準備文件；最終驗收需 TASK-039 已 Done 且 v006 Active。完成後才能重新派工 TASK-036。
+- **驗收條件**：
+  - 依 skill-creator 規範，在 `.agents/skills/` 建立 `build-strategy-study-v006`、`blind-review-strategy-study-v006`、`study-development-note-authoring-v006` 三份繁體中文 skill；以 v006 實際 CLI、reference、Schema 與發布契約為準，版本及命令不能只改名稱。
+  - Development 指引明列完整建 Study 前檢查、暖機與合成案例、固定 release／policy／source／data bindings、明確派工、唯一 Trial 及合法凍結資格；保留多資產與單資產路徑。
+  - 盲檢討只用研究設計與 Development evidence，避免正式 Evaluation／Terminal／Study 狀態暴露；成果卡分清 gates、研究目標、evidence validity、凍結資格／狀態及限制，寫檔依明確要求並只追加。
+  - 三份 skills 通過格式 checker，並逐項對照有效 v006 Release 完成契約審閱；v004／v005 skills 原地保留。建立指引期間不執行真實 Study Lifecycle 或讀取正式結果。
+- **摘要**：讓 study 開發者依 v006 的真實檢查與操作契約恢復 TASK-036，避免沿用 v005 的固定版本指引。
+- **進度／備註**：2026-10-02：三份 v006 skill 及 agents/openai.yaml 已新增至指定 .agents/skills/ 目錄；依 skill-creator 完成格式 checker 3/3、UI與精確草稿bytes核對。Development 指引包含實際CLI／完整precreate／49-session SMA50暖機／native_synthetic來源與報告綁定、單資產及1–16多資產、唯一已登記Trial與完整凍結資格；盲檢討先設Development白名單、禁止status／events／runtime，成果卡只在明確指定時新增或append。worker所保護六份v004/v005技能共9檔重驗不變；完整有效Release與保護基準另由PM獨立核對。外部契約對照與安裝指紋：/var/folders/w4/jth3symj3q92qfklnhw_4tx80000gn/T/task040-v006-skills-20261002-u9jue406/contract-review.md、installed-hashes.json。未執行真實Study／pytest／正式評估，未修改Workflow／Policy或commit；維持Doing交PM驗收，不啟動TASK-036／041。
+
+- **Parent review（2026-10-02）**：PM 驗收通過。三份 v006 skills 與 UI metadata 已安裝，六檔與審閱草稿一致；PM 安裝後格式 checker 3/3 通過，實際 CLI／Schema／原生 guard／資格／盲性白名單契約核對與獨立三情境審閱通過。139項保護檔案指紋不變，Active v006 Release 重驗有效，舊技能及 Policy 原地保留。完整紀錄：`.project-manager/reviews/task-040-v006-skills-acceptance.md`。未執行真實 Study、正式評估、pytest 或 commit；TASK-036／041 未啟動。
+
 
 ### [TASK-039] 依獨立核准啟用 v006 並完成版本交接
 - **狀態**：Done

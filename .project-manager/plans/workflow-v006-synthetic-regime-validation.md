@@ -2,7 +2,7 @@
 
 - 建立日期：2026-09-30
 - 規劃角色：專案管理者
-- 計劃狀態：2026-10-02 v006 已正式啟用，v005 Superseded，TASK-039 通過 PM 獨立驗收並移至 Done。TASK-037／038 亦已 Done；下一項 TASK-040 的 v006 專用 skills 尚未分派，TASK-041 另行分派，TASK-036 維持 Pending。
+- 計劃狀態：2026-10-02 v006 已正式啟用，v005 Superseded，TASK-039 通過 PM 獨立驗收並移至 Done。TASK-037／038 亦已 Done；TASK-040 三份專用 skills 已建立並通過 PM 驗收，移至 Done；TASK-036 前置條件已齊備，維持 Pending 等待另行重新派工，TASK-041 尚未分派。
 - Workflow ID：`strategy-forward-replication-research`
 - 預定新版本：`v006`
 - 目標 Package：`workflows/strategy-forward-replication-research--v006/`
@@ -19,6 +19,10 @@ v005 公開程式的通用資料產生器主要使用平坦價格搭配單日急
 規劃依據只有共享看板、公開 Workflow 程式與治理文件。worker 的完整派工內容保存於共享看板，不以這份專案管理者專屬計劃作為必讀文件。workflow 維護者與執行者的重現材料限公開程式與合成案例，不讀取 `.study-developer/`；study 開發者依自身角色處理該資料夾。
 
 ## TASK-037 已確認結果與目前進度
+
+2026-10-02 TASK-040 驗收通過：三份 v006 skills 及 UI metadata 已安裝，格式3/3通過；PM 契約與139項保護指紋核對通過，獨立 study 開發者三個假設情境審閱未發現阻塞問題。任務移至 Done。TASK-036 的正式 Release 與技能前置條件齊備，待明確重新派工；TASK-041 仍 TODO。本次未執行真實 Study。完整結果見 [TASK-040 驗收](../reviews/task-040-v006-skills-acceptance.md)。
+
+2026-10-02 使用者要求「進行下一步」，PM 已派 `/root/task_040_v006_skills_developer` 處理 TASK-040。依 skill-creator 與 Active v006 公開命令、Schema 及 reference 建立開發、盲檢討、成果卡三份專用 skills，保留 v004／v005 指引；不執行真實 Study，完成後由 PM 驗收。TASK-041 尚未分派，TASK-036 維持 Pending。
 
 2026-10-02 正式啟用與交接驗收完成：本次核准者 `ochowei@gmail.com`、核准 UTC `2026-10-02T03:25:11Z`，實際啟用 UTC `2026-10-02T03:30:52Z`。新增正式 Release 指紋 `61d6eeebe58fdd40d6805ca461ccc9a327b9aa153eedd6414a612ddc5ad3594f`，原三個核准指紋與全部保護基準不變；兩份治理文件精確符合已審閱提案，v006 Active、v005 Superseded。正式九項命令及 PM 獨立驗收均通過，TASK-039 移至 Done。完整結果見 [TASK-039 正式啟用驗收](../reviews/task-039-v006-activation-acceptance.md)。TASK-040／041 仍 TODO，TASK-036 仍 Pending；本次沒有建立真實 Study、重跑完整 pytest 或 commit。
 

@@ -1,0 +1,4 @@
+interface:
+  display_name: "v006 Study 盲檢討"
+  short_description: "只依研究設計與 Development 證據檢討指定 v006 Study，保留盲性邊界"
+  default_prompt: "請使用 $blind-review-strategy-study-v006 盲檢討明確指定 Study 的 Development 證據。"
