@@ -1,0 +1,15 @@
+available_at: after-close
+candidate_required_history_sessions: 49
+complete_xnys_sessions: true
+control_required_history_sessions: 25
+development_signal_end: '2018-12-31'
+development_signal_start: '2014-01-01'
+digest: a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7
+first_session: '2013-01-02'
+interval_role: warmup-development
+last_session: '2018-12-31'
+path: research/market-data/yahoo/TSM-warmup-development--sha256-a42c3932a4cb825e0025f564b3dca34bd755c9173789951232e678b7250f46f7.csv
+provider: yahoo
+rows: 1510
+symbol: TSM
+timezone: America/New_York

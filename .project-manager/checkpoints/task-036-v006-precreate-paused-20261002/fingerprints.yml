@@ -1,0 +1,55 @@
+authority_root: /Users/william/.codex/worktrees/5aa6/trading-2026-2/.authority
+files:
+  - digest: 3c09c56860c7bfc676e317870861d76c35a3e04d68c4a062ce9c0b7151ed6301
+    path: /Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/assignment.yml
+  - digest: 38034d16a087215361790c324825ca0b05bd4bcbf746f24e85b6fe4bc23fad0c
+    path: /Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/candidate-definition.yml
+  - digest: 5a33c27d07a8c3aa8045dbd73af8709d31489f873f4a9c237759741254afa8af
+    path: /Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/create-plan.yml
+  - digest: dd8fd4ab22d18d9e9ed8f6d7184092d043f22f14cd12247d6eba724b2f7eb8cb
+    path: /Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/development-plan.yml
+  - digest: 1e843da711fd339e943782726df9f093631ab98cd4536acf91919ef25be94ba9
+    path: /Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/development-trial-inputs.yml
+  - digest: 01b46a4dc516571677ea08a89a29188fd7818eff561bdefe79c22f26430a81b3
+    path: /Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/implementation-contract.yml
+  - digest: e12625c614c9737d4c262d5c8292aff75a5ad39833247d72ba842d4d75d94cd5
+    path: /Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/preregistration.yml
+  - digest: ed28af4c90889dcbfd0f542eb0b6746cc9712e2421b3a4a3636c8cb101a45289
+    path: /Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/qualification-spec.yml
+  - digest: 02a5d14fe751ad14d431560e172af4304577fe44ba91ff37f80be5cbd9653d5a
+    path: /Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/run_development.py
+  - digest: eb39b8d1e0b2d374a5ab94a795824e550a877d34538c9494b2f18cba173a7391
+    path: /Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/runner-contract.yml
+  - digest: ea1e654018d4e976f8f964040b6761f6998c466ff0e03e2558a8cc5ff09d7256
+    path: /Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/source-bundle.yml
+  - digest: 896aa7103e3177e5e28bfd94c73f0407ffd3b8da6692bf8365baa36e8b2da523
+    path: /Users/william/.codex/worktrees/5aa6/trading-2026-2/research/tsm-divergence-sma20-sma50-regime--v002/synthetic_preflight.py
+  - digest: 401cc9f72db9b28b2ad5ef4d79abf3f8d00a26b3fc75d0c9dc588ced767c6b8e
+    path: /Users/william/.codex/worktrees/5aa6/trading-2026-2/src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_sma20_sma50_regime_v002.py
+  - digest: 280a0682230df782f288f694bcd5acd22693e8e5b47846a89edf619b5ae9ba7f
+    path: /private/tmp/task-036-v006-checkpoint/candidate-source.diff
+  - digest: 1d180511f78731634b995bd314b46923225b9d7ebb95e6e48e4c6fddd6a69065
+    path: /private/tmp/task-036-v006-checkpoint/checkpoint-facts.yml
+  - digest: 9a708195a7e0045099727b9af611439341eb91db6701ae05ece49a576aef34c8
+    path: /private/tmp/task-036-v006-checkpoint/checkpoint.md
+  - digest: 8f2041b1851a194c12cb7ea9801f0b63b0965c42ca841b45aad1bec11ad1d232
+    path: /private/tmp/task-036-v006-checkpoint/data-check.yml
+  - digest: b96600577775d4ef63be47207cd2245e474e0b3db5679aa375d02738b304ff05
+    path: /private/tmp/task-036-v006-checkpoint/finalize_checkpoint.py
+  - digest: 9fc198487135eb681f301866f489c62d36c9bf15e62d99a0a0e5e498bcabeef4
+    path: /private/tmp/task-036-v006-checkpoint/precreate-report.json
+  - digest: 41b54e0ad58c5c6540926b047ebedd0fc14746461b21ddaaa43863bf2951b930
+    path: /private/tmp/task-036-v006-checkpoint/prepare-report.yml
+  - digest: 82e1f58ffbab46e56824c786a2cf14ad125495935fd5fff61c2fc9e4c7414865
+    path: /private/tmp/task-036-v006-checkpoint/prepare-response.json
+  - digest: 07f79b17524a2f42f8570b2f8decd80aeae604f6f97319700ebf7ebe7b426b94
+    path: /private/tmp/task-036-v006-checkpoint/prepare_inputs.py
+  - digest: cf5c2adad00d536482d5fbcdb27818bc8ac2cc462abb36d60478ca1a5c74ba53
+    path: /private/tmp/task-036-v006-checkpoint/preserved-originals.yml
+  - digest: 6df7fb37976fa34aa87278a10746e8e055417b814874b46b1777b05643233bdd
+    path: /private/tmp/task-036-v006-checkpoint/release-check.yml
+  - digest: 67dade1ec4a14b2243f16b235a35719701c0ce28ad3f16d1f90120b3d8f8cf28
+    path: /private/tmp/task-036-v006-checkpoint/runner-preflight-report.yml
+  - digest: f4fb34ba2fe93e7aa29c41a733686d2f1867dd4c294db3730e5f904ba9518597
+    path: /private/tmp/task-036-v006-checkpoint/runner-preflight-response.json
+reference_digest: cfe747174027f22b45f6c699cd1675753abedca2a71ed6035cf7626064e906f1

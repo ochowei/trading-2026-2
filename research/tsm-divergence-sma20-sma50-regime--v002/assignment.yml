@@ -1,0 +1,9 @@
+assignee: /root/task_036_v006_development
+assigner: 專案管理者 /root
+instruction: 使用者原文「能不能間進行 TASK-041 再進行 TASK-036 ?」。TASK-041 已 Done，PM 於共享 PROJECT_KANBAN TASK-036 的「PM v006 重新派工（2026-10-02）」明確指派 /root/task_036_v006_development，以 Active v006 重新準備唯一 Study tsm-divergence-sma20-sma50-regime--v002；保留 v005／v001 準備全部 bytes。Candidate 僅增加訊號日 Close 含當日 SMA20>SMA50；Control 固定未修改 v009.DEFAULT_SPEC。明確授權在 create 及輸入凍結前一致修正 SMA50 required history／fold warmup 至至少49先前XNYS sessions，其他訊號、門檻、持有、退出、成本、risk 不變。先交完整 precreate／runner preflight／prepare／來源差異 checkpoint 供 PM 審閱，收到接續通知前不得 create 或啟動真實 Trial。之後只一個 create／唯一 Development，獨立 Development-only 盲檢討及指定 .study-developer/development-note/TSM.md append-only 300–600繁中字成果卡。只用2013暖機及2014–2018 Development；不freeze、terminate、Historical Evaluation、Terminal、challenge、replay、不commit。scope development-to-freeze 是 Schema 唯一開發值，不擴張此指令範圍。
+role: study 開發者
+schema_version: 1
+scope: development-to-freeze
+source_id: codex-project-manager-task:TASK-036:v006:2026-10-02
+study_id: tsm-divergence-sma20-sma50-regime--v002
+workflow_version: v006

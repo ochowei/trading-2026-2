@@ -1,0 +1,28 @@
+--- src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_sma20_sma50_regime_v001.py
++++ src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_sma20_sma50_regime_v002.py
+@@ -55,7 +55,7 @@
+     target_return: float = 0.04
+     stop_return: float = -0.04
+     holding_sessions: int = 10
+-    fold_warmup_sessions: int = 25
++    fold_warmup_sessions: int = 49
+     initial_cash: float = 100_000.0
+     risk_fraction: float = 0.02
+ 
+@@ -265,6 +265,7 @@
+     """回傳訊號用到的最早完整指標列的 zero-based index。"""
+ 
+     return max(
++        50 - 1,  # regime SMA50 含當日收盤，需要 49 個先前 sessions。
+         spec.sma_min_periods - 1,
+         spec.rsi_min_periods,
+         spec.volume_average_min_periods + spec.volume_lead_min_periods,
+@@ -282,7 +283,7 @@
+ ) -> BacktestResult:
+     """以單一 TSM sleeve 執行不可重疊持倉的確定性回測。
+ 
+-    ``reset_at_start`` 用於每個 Historical Evaluation fold：前 25 個
++    ``reset_at_start`` 用於每個 Historical Evaluation fold：前 49 個
+     session 只暖機，不接受訊號。Development 則把 2013 warmup 與 2014--2018
+     合併，並以 ``signal_start``／``signal_end`` 限制正式訊號與完整交易期間。
+     """

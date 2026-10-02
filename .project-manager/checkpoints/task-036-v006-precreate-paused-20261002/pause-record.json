@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-02",
+  "reason": "使用者明確暫停",
+  "instruction": "在完成 Task-041 之後先暫停",
+  "task041": "Done",
+  "task036": "Pending",
+  "stop_point": "before create; checkpoint not accepted",
+  "worker_interrupted": true,
+  "saved_existing_files": {
+    "checkpoint.md": "9a708195a7e0045099727b9af611439341eb91db6701ae05ece49a576aef34c8",
+    "prepare-report.yml": "41b54e0ad58c5c6540926b047ebedd0fc14746461b21ddaaa43863bf2951b930",
+    "fingerprints.yml": "0e2594e249efcda871d1bdf54a28215bc54201daeff4e18c0fcd97e11f44e3ce",
+    "precreate-report.json": "9fc198487135eb681f301866f489c62d36c9bf15e62d99a0a0e5e498bcabeef4",
+    "runner-preflight-report.yml": "67dade1ec4a14b2243f16b235a35719701c0ce28ad3f16d1f90120b3d8f8cf28",
+    "release-check.yml": "6df7fb37976fa34aa87278a10746e8e055417b814874b46b1777b05643233bdd",
+    "data-check.yml": "8f2041b1851a194c12cb7ea9801f0b63b0965c42ca841b45aad1bec11ad1d232",
+    "checkpoint-facts.yml": "1d180511f78731634b995bd314b46923225b9d7ebb95e6e48e4c6fddd6a69065",
+    "candidate-source.diff": "280a0682230df782f288f694bcd5acd22693e8e5b47846a89edf619b5ae9ba7f",
+    "preserved-originals.yml": "cf5c2adad00d536482d5fbcdb27818bc8ac2cc462abb36d60478ca1a5c74ba53"
+  }
+}
