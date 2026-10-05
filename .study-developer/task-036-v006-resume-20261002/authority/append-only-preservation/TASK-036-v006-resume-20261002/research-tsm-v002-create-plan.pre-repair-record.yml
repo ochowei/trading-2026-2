@@ -1,0 +1,7 @@
+byte_length: 8101
+preserved_target_path: .study-developer/task-036-v006-resume-20261002/authority/append-only-preservation/TASK-036-v006-resume-20261002/research-tsm-v002-create-plan.pre-repair.yml
+purpose: 保存修復前 research create-plan 原始 bytes；本次 PM 授權 copy-forward 修復
+schema_version: 1
+source_path: research/tsm-divergence-sma20-sma50-regime--v002/create-plan.yml
+source_sha256: 5a33c27d07a8c3aa8045dbd73af8709d31489f873f4a9c237759741254afa8af
+target_sha256: 5a33c27d07a8c3aa8045dbd73af8709d31489f873f4a9c237759741254afa8af

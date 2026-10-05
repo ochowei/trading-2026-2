@@ -1,0 +1,19 @@
+actor_id: /root/task_036_v006_resume
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: ea1e654018d4e976f8f964040b6761f6998c466ff0e03e2558a8cc5ff09d7256
+  workflow_digest: e527578ca62d907d5b1e16f57d5a4c52f0b7cabb9d616970eb2eb2e383f8e7a9
+  workflow_reference_digest: cfe747174027f22b45f6c699cd1675753abedca2a71ed6035cf7626064e906f1
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: development-started
+execution:
+  assignment_digest: 01e0c7c7481cab4001d5701d9789dd456300124d7e47d74192b65cce4e24c364
+  assignment_path: manifests/assignments/01e0c7c7481cab4001d5701d9789dd456300124d7e47d74192b65cce4e24c364.yml
+  role: study 開發者
+occurred_at: '2026-10-02T09:00:06.904462Z'
+payload:
+  operation_id: 426bf4bf89155a48a99a947c8dbc83fd9c691e8af92dbbcea2010f65b599165f
+previous_event_digest: 07150346034b2b420c3f0136210d6f50169399d7d7784e2704ff1fce5082b298
+schema_version: 1
+sequence: 3
+study_id: tsm-divergence-sma20-sma50-regime--v002

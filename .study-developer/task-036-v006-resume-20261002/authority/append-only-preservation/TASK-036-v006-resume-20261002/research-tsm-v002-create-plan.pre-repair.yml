@@ -1,5 +1,5 @@
-creator: /root/task_036_v006_resume
-development_actor: /root/task_036_v006_resume
+creator: /root/task_036_v006_development
+development_actor: /root/task_036_v006_development
 identity:
   experiment_family: tsm-mean-reversion-v009-sma20-sma50-regime
   historical_evaluation_operator: operator A

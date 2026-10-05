@@ -1,0 +1,16 @@
+artifacts:
+  baseline:
+    digest: 2be64b969f5182252bf32adf38933731d57f14108267cb2c2b495876b27d5458
+    path: evidence/trials/tsm-mr-v009-sma20-over-sma50-regime-v002/baseline.yml
+  candidate:
+    digest: 78d6962fb334ee7853fe14a6ad398473524121eb068d2c289b268c29f428c045
+    path: evidence/trials/tsm-mr-v009-sma20-over-sma50-regime-v002/candidate.yml
+  inputs:
+    digest: 1e843da711fd339e943782726df9f093631ab98cd4536acf91919ef25be94ba9
+    path: evidence/trials/tsm-mr-v009-sma20-over-sma50-regime-v002/inputs.yml
+envelope_digest: 84f5104a599dba7e686c5000d239c7d6b9d11b4542739b53263dfb8b5e19d01b
+preregistration_digest: e12625c614c9737d4c262d5c8292aff75a5ad39833247d72ba842d4d75d94cd5
+schema_version: 1
+source_bundle_digest: ea1e654018d4e976f8f964040b6761f6998c466ff0e03e2558a8cc5ff09d7256
+study_id: tsm-divergence-sma20-sma50-regime--v002
+trial_id: tsm-mr-v009-sma20-over-sma50-regime-v002

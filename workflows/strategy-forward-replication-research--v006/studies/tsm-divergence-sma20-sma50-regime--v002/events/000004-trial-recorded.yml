@@ -1,0 +1,26 @@
+actor_id: /root/task_036_v006_resume
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: ea1e654018d4e976f8f964040b6761f6998c466ff0e03e2558a8cc5ff09d7256
+  workflow_digest: e527578ca62d907d5b1e16f57d5a4c52f0b7cabb9d616970eb2eb2e383f8e7a9
+  workflow_reference_digest: cfe747174027f22b45f6c699cd1675753abedca2a71ed6035cf7626064e906f1
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: trial-recorded
+execution:
+  assignment_digest: 01e0c7c7481cab4001d5701d9789dd456300124d7e47d74192b65cce4e24c364
+  assignment_path: manifests/assignments/01e0c7c7481cab4001d5701d9789dd456300124d7e47d74192b65cce4e24c364.yml
+  role: study 開發者
+occurred_at: '2026-10-02T09:23:27.760719Z'
+payload:
+  development_evidence_digest: 78d6962fb334ee7853fe14a6ad398473524121eb068d2c289b268c29f428c045
+  development_evidence_path: evidence/trials/tsm-mr-v009-sma20-over-sma50-regime-v002/candidate.yml
+  inputs_digest: 1e843da711fd339e943782726df9f093631ab98cd4536acf91919ef25be94ba9
+  inputs_path: evidence/trials/tsm-mr-v009-sma20-over-sma50-regime-v002/inputs.yml
+  publication_digest: 57960a83d723459b77f5b379f65e1082d96be256d4590b0ec665e820189d05d6
+  publication_path: evidence/trials/tsm-mr-v009-sma20-over-sma50-regime-v002/publication.yml
+  status: completed
+  trial_id: tsm-mr-v009-sma20-over-sma50-regime-v002
+previous_event_digest: 77fab0576766488a927f72d4efee659b3f221c4f7edf580867d2546341f59d0b
+schema_version: 1
+sequence: 4
+study_id: tsm-divergence-sma20-sma50-regime--v002

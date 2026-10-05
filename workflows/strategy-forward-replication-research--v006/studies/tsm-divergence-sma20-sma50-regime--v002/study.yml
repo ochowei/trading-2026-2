@@ -1,0 +1,72 @@
+candidate_freeze: null
+evidence:
+  development: 78d6962fb334ee7853fe14a6ad398473524121eb068d2c289b268c29f428c045
+lifecycle:
+  current_event: trial-recorded
+  event_chain_head_digest: 72483ee20cc35dfb6add87d6bd6899820d297f678910f4f437dd32842fdc4feb
+  event_count: 4
+  status: active
+outcome:
+  authority: none
+  status: pending
+preregistration:
+  digest: e12625c614c9737d4c262d5c8292aff75a5ad39833247d72ba842d4d75d94cd5
+provenance:
+  status: null
+schema_version: 1
+study:
+  identity:
+    create_plan_digest: d1ce1899823ae7e81a0b60f4f66cb2b6352148f9daa8548cf9f4408d57720698
+    create_plan_path: manifests/create-plan.yml
+    experiment_family: tsm-mean-reversion-v009-sma20-sma50-regime
+    historical_evaluation_operator: operator A
+    prepare_report_digest: 256c07fa8dae958825fe8f7b064622337bfbf362db9857bada71572bbbb842d1
+    prepare_report_path: manifests/prepare-report.yml
+    research_owner: ochowei@gmail.com
+    research_round_id: tsm-divergence-sma20-sma50-regime--v001
+    source_bundle_digest: ea1e654018d4e976f8f964040b6761f6998c466ff0e03e2558a8cc5ff09d7256
+    source_bundle_path: manifests/source-bundle.yml
+    workflow_reference_digest: cfe747174027f22b45f6c699cd1675753abedca2a71ed6035cf7626064e906f1
+    workflow_reference_path: manifests/workflow-reference.yml
+  study_id: tsm-divergence-sma20-sma50-regime--v002
+trial_registry:
+  assessments:
+    tsm-mr-v009-sma20-over-sma50-regime-v002:
+      actuals:
+        base_profit_factor: '4.684255396406697'
+        base_return: '0.10998225635277566'
+        completed_trades: 12
+        maximum_realized_trade_loss_fraction: '0.019999197601488012'
+        maximum_stress_block_bootstrap_drawdown_above_10pct_ratio: '0.0'
+        maximum_stress_leave_one_year_out_drawdown: '0.02014410185749508'
+        minimum_stress_block_bootstrap_positive_return_ratio: '0.99578'
+        minimum_stress_leave_one_year_out_profit_factor: '2.2275131867217484'
+        minimum_stress_leave_one_year_out_return: '0.03721568226474892'
+        stress_maximum_drawdown: '0.019999197601487988'
+        stress_profit_factor: '3.624790586938213'
+        stress_return: '0.08293834743289774'
+        traded_years: 5
+      candidate_freeze_eligibility:
+        eligible: false
+        reasons:
+          - completed_trades
+      development_evidence_validity:
+        status: valid
+        validated: true
+      formal_development_gates:
+        failed:
+          - completed_trades
+        status: failed
+      research_targets:
+        failed: []
+        status: not_registered
+  digest: null
+  recorded_trial_count: 1
+  trial_ids:
+    - tsm-mr-v009-sma20-over-sma50-regime-v002
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: ea1e654018d4e976f8f964040b6761f6998c466ff0e03e2558a8cc5ff09d7256
+  workflow_digest: e527578ca62d907d5b1e16f57d5a4c52f0b7cabb9d616970eb2eb2e383f8e7a9
+  workflow_reference_digest: cfe747174027f22b45f6c699cd1675753abedca2a71ed6035cf7626064e906f1
+  workflow_reference_path: manifests/workflow-reference.yml
