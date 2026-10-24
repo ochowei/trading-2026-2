@@ -1,0 +1,68 @@
+actor: /root
+data_digest: 97ebeae17a5f1813a027fb92961560f3a4c84cc70ff0554c9a1b11c14cc8a848
+data_path: research/fxi-deep-pullback-sma20-sma50-regime--v001/data/snapshots/FXI-warmup-development--sha256-97ebeae17a5f1813a027fb92961560f3a4c84cc70ff0554c9a1b11c14cc8a848.csv
+trial_inputs:
+  baseline_comparison:
+    baseline_id: fxi-mr-v009-two-stage-volume-reversal-control-v001
+    baseline_is_excluded_from_candidate_family: true
+    candidate_family: fxi-mean-reversion-v009-sma20-sma50-regime
+    candidate_id: fxi-mr-v009-sma20-over-sma50-regime-v001
+    comparison_direction: candidate-minus-control
+    control_engine_digest: f3163c9b92046d0397ce1daf0cfb320a302c9e994875a4be0e93057a83cef7c4
+    control_engine_path: src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v009.py
+    control_spec_constant: DEFAULT_SPEC
+    execution_is_identical: true
+  candidate_family: fxi-mean-reversion-v009-sma20-sma50-regime
+  candidate_id: fxi-mr-v009-sma20-over-sma50-regime-v001
+  complete_candidate_family:
+    - fxi-mr-v009-sma20-over-sma50-regime-v001
+  cost_models:
+    base:
+      fee_per_side_bps: '1'
+      slippage_per_side_bps: '5'
+    stress:
+      fee_per_side_bps: '2'
+      slippage_per_side_bps: '20'
+  data_bindings:
+    development_digest: 97ebeae17a5f1813a027fb92961560f3a4c84cc70ff0554c9a1b11c14cc8a848
+    development_path: research/fxi-deep-pullback-sma20-sma50-regime--v001/data/snapshots/FXI-warmup-development--sha256-97ebeae17a5f1813a027fb92961560f3a4c84cc70ff0554c9a1b11c14cc8a848.csv
+  date_controls:
+    formal_provider_access: false
+    signal_end: '2018-12-31'
+    signal_start: '2014-01-01'
+    warmup_end: '2013-12-31'
+    warmup_start: '2013-01-01'
+  development_diagnostics:
+    block_lengths:
+      - 3
+      - 5
+    bootstrap_seed: 20260902
+    repetitions: 50000
+    seed_application: exact-same-seed-for-each-block-length
+  execution:
+    cooldown_anchor: completed-position-exit
+    cooldown_completed_session_steps: 5
+    entry: next-XNYS-open
+    holding_sessions: 10
+    intrabar_ambiguity: adverse-stop-first
+    position_sizing:
+      modeled_stop_includes_costs: true
+      risk_fraction: '0.02'
+    stop_market_gtc: '-0.04'
+    target_limit_day: '0.04'
+  preregistration_digest: 3f8f1e3ecf36333e2e183dd118cf8ca40b04d152b3cd0eac4eb96ff2c09a99e2
+  schema_version: 1
+  selected_candidate_id: fxi-mr-v009-sma20-over-sma50-regime-v001
+  source_bundle_digest: 209208429eda1c09e205b62181aa83838de31746833ab21efabd09111ae165b4
+  strategy_engine_digest: 5554dc645c10f1d73d10acbe59ff9145908ef03ec0467dba44cf3dc7b276a148
+  study_id: fxi-deep-pullback-sma20-sma50-regime--v001
+  study_procedure_digest: bbb43ea1e3e357a4acfd27bcf878320a5e9620eb059025fcf42d708f703efe60
+  study_procedure_path: research/fxi-deep-pullback-sma20-sma50-regime--v001/run_development.py
+  trial_id: fxi-mr-v009-sma20-over-sma50-regime-v001
+  warmup_contract:
+    candidate_fold_warmup_sessions: 49
+    candidate_required_history_sessions: 49
+    common_development_warmup_end: '2013-12-31'
+    common_development_warmup_start: '2013-01-01'
+    control_fold_warmup_sessions: 25
+    control_required_history_sessions: 25

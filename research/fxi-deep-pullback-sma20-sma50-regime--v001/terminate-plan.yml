@@ -1,0 +1,17 @@
+actor: /root
+evidence_unavailable:
+  reason: 候選已完成唯一 Development Trial，但正式門檻未通過，無合格候選可凍結。
+  stage: development
+  unavailable_path: evidence/not-applicable.yml
+reason_kind: no-eligible-candidate
+terminal_evidence:
+  authority: none
+  bindings: {}
+  outcome: fail
+  reasons:
+    - completed_trades
+    - minimum_stress_block_bootstrap_positive_return_ratio
+    - minimum_stress_leave_one_year_out_profit_factor
+    - minimum_stress_leave_one_year_out_return
+  recomputed: true
+  schema_version: 1

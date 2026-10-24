@@ -1,0 +1,445 @@
+accepted_signal_count: 9
+bindings:
+  preregistration_digest: 3f8f1e3ecf36333e2e183dd118cf8ca40b04d152b3cd0eac4eb96ff2c09a99e2
+  source_bundle_digest: 209208429eda1c09e205b62181aa83838de31746833ab21efabd09111ae165b4
+  trial_inputs_digest: faac4c1405c8a242f14dab5aa52789026bc0422c6bf759394556c6adee904117
+candidate_id: fxi-mr-v009-sma20-over-sma50-regime-v001
+diagnostics:
+  block_bootstrap:
+    base:
+      - block_length: 3
+        drawdown_above_10pct_ratio: '0.0199'
+        maximum_drawdown_q05_q50_q95:
+          - '0.019996846809749183'
+          - '0.041996188614121466'
+          - '0.09097029685108125'
+        positive_return_ratio: '0.61186'
+        profit_factor_above_one_ratio: '0.61186'
+        profit_factor_q05_q50_q95:
+          - '0.33230678080540843'
+          - '1.2695834029324446'
+          - '6.97182296007157'
+        repetitions: 50000
+        return_q05_q50_q95:
+          - '-0.07423497083858699'
+          - '0.0182162982002394'
+          - '0.11901203571495622'
+        seed: 20260902
+      - block_length: 5
+        drawdown_above_10pct_ratio: '0.0'
+        maximum_drawdown_q05_q50_q95:
+          - '0.019996846809749207'
+          - '0.047014638223637176'
+          - '0.07615432340112485'
+        positive_return_ratio: '0.64188'
+        profit_factor_above_one_ratio: '0.64188'
+        profit_factor_q05_q50_q95:
+          - '0.36033175492146624'
+          - '1.2616736939543534'
+          - '5.398301982053425'
+        repetitions: 50000
+        return_q05_q50_q95:
+          - '-0.06796263229263044'
+          - '0.0182162982002394'
+          - '0.10973175780609057'
+        seed: 20260902
+    gating: true
+    stress:
+      - block_length: 3
+        drawdown_above_10pct_ratio: '0.0287'
+        maximum_drawdown_q05_q50_q95:
+          - '0.019991795470666665'
+          - '0.04320253927266571'
+          - '0.09342786968607134'
+        positive_return_ratio: '0.55796'
+        profit_factor_above_one_ratio: '0.55796'
+        profit_factor_q05_q50_q95:
+          - '0.2784369089055348'
+          - '1.0565797900446003'
+          - '5.668976579736524'
+        repetitions: 50000
+        return_q05_q50_q95:
+          - '-0.08106198681311827'
+          - '0.0038886940909812484'
+          - '0.09588380967786048'
+        seed: 20260902
+      - block_length: 5
+        drawdown_above_10pct_ratio: '0.0'
+        maximum_drawdown_q05_q50_q95:
+          - '0.019991795470666745'
+          - '0.0478591856695099'
+          - '0.08286133118370999'
+        positive_return_ratio: '0.58026'
+        profit_factor_above_one_ratio: '0.58026'
+        profit_factor_q05_q50_q95:
+          - '0.29343768386454827'
+          - '1.0556793080281095'
+          - '4.269680267422254'
+        repetitions: 50000
+        return_q05_q50_q95:
+          - '-0.07529630602633897'
+          - '0.0038886940909810264'
+          - '0.0874362913747806'
+        seed: 20260902
+  by_signal_year:
+    '2014':
+      base_pnl: '-1999.6846809749222'
+      stress_pnl: '-1999.1795470666711'
+      trades: 1
+    '2015':
+      base_pnl: '-2241.0361551348287'
+      stress_pnl: '-2494.565119000802'
+      trades: 3
+    '2016':
+      base_pnl: '-608.258353387215'
+      stress_pnl: '-701.0118011471006'
+      trades: 1
+    '2017':
+      base_pnl: '2029.602119072775'
+      stress_pnl: '1600.287546980941'
+      trades: 2
+    '2018':
+      base_pnl: '4641.006890448129'
+      stress_pnl: '3983.3383293317293'
+      trades: 2
+  leave_one_signal_year_out:
+    base:
+      '2014':
+        maximum_drawdown: '0.047014638223637176'
+        omitted_trades: 1
+        profit_factor: '1.8140525886186971'
+        remaining_trades: 8
+        return: '0.03899287965104126'
+      '2015':
+        maximum_drawdown: '0.026221779886506993'
+        omitted_trades: 3
+        profit_factor: '2.6034540866645415'
+        remaining_trades: 6
+        return: '0.042045420118637766'
+      '2016':
+        maximum_drawdown: '0.04240720836109744'
+        omitted_trades: 1
+        profit_factor: '1.4062911294338891'
+        remaining_trades: 8
+        return: '0.02472530423779684'
+      '2017':
+        maximum_drawdown: '0.04848979189496953'
+        omitted_trades: 2
+        profit_factor: '0.954451018878529'
+        remaining_trades: 7
+        return: '-0.0030489900249577317'
+      '2018':
+        maximum_drawdown: '0.04848979189496953'
+        omitted_trades: 2
+        profit_factor: '0.5788121577838394'
+        remaining_trades: 7
+        return: '-0.028193770704241783'
+    gating: true
+    stress:
+      '2014':
+        maximum_drawdown: '0.047859185669509856'
+        omitted_trades: 1
+        profit_factor: '1.5011257795321726'
+        remaining_trades: 8
+        return: '0.02436764248633705'
+      '2015':
+        maximum_drawdown: '0.027185013487580872'
+        omitted_trades: 3
+        profit_factor: '2.1075828342461365'
+        remaining_trades: 6
+        return: '0.030109654287594267'
+      '2016':
+        maximum_drawdown: '0.04493744666067476'
+        omitted_trades: 1
+        profit_factor: '1.1865524996876715'
+        remaining_trades: 8
+        return: '0.011311678256962665'
+      '2017':
+        maximum_drawdown: '0.05194756467214582'
+        omitted_trades: 2
+        profit_factor: '0.8111418923659164'
+        remaining_trades: 7
+        return: '-0.012775397250204934'
+      '2018':
+        maximum_drawdown: '0.05194756467214582'
+        omitted_trades: 2
+        profit_factor: '0.46863131930088053'
+        remaining_trades: 7
+        return: '-0.0359446892023364'
+disposition: fail
+failed_gates:
+  - completed_trades
+  - minimum_stress_block_bootstrap_positive_return_ratio
+  - minimum_stress_leave_one_year_out_profit_factor
+  - minimum_stress_leave_one_year_out_return
+gates:
+  - actual: '1.2721339906112876'
+    gate: base_profit_factor
+    operator: '>'
+    passed: true
+    required: '1.10'
+  - actual: '0.018216298200239383'
+    gate: base_return
+    operator: '>'
+    passed: true
+    required: '0'
+  - actual: 9
+    gate: completed_trades
+    operator: '>='
+    passed: false
+    required: 20
+  - actual: '0.025130538746044446'
+    gate: maximum_realized_trade_loss_fraction
+    operator: <=
+    passed: true
+    required: '0.04'
+  - actual: '0.0287'
+    gate: maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+    operator: <=
+    passed: true
+    required: '0.10'
+  - actual: '0.05194756467214582'
+    gate: maximum_stress_leave_one_year_out_drawdown
+    operator: <=
+    passed: true
+    required: '0.10'
+  - actual: '0.55796'
+    gate: minimum_stress_block_bootstrap_positive_return_ratio
+    operator: '>='
+    passed: false
+    required: '0.80'
+  - actual: '0.46863131930088053'
+    gate: minimum_stress_leave_one_year_out_profit_factor
+    operator: '>'
+    passed: false
+    required: '1.00'
+  - actual: '-0.0359446892023364'
+    gate: minimum_stress_leave_one_year_out_return
+    operator: '>'
+    passed: false
+    required: '0'
+  - actual: '0.05194756467214582'
+    gate: stress_maximum_drawdown
+    operator: <=
+    passed: true
+    required: '0.10'
+  - actual: '1.0574863851829526'
+    gate: stress_profit_factor
+    operator: '>'
+    passed: true
+    required: '1.00'
+  - actual: '0.0038886940909809687'
+    gate: stress_return
+    operator: '>'
+    passed: true
+    required: '0'
+  - actual: 5
+    gate: traded_years
+    operator: '>='
+    passed: true
+    required: 3
+metrics:
+  base:
+    completed_trades: 9
+    maximum_drawdown: '0.04848979189496953'
+    maximum_realized_trade_loss_fraction: '0.025130538746044446'
+    profit_factor: '1.2721339906112876'
+    return: '0.018216298200239383'
+    traded_years: 5
+  stress:
+    completed_trades: 9
+    maximum_drawdown: '0.05194756467214582'
+    maximum_realized_trade_loss_fraction: '0.02476140645085298'
+    profit_factor: '1.0574863851829526'
+    return: '0.0038886940909809687'
+    traded_years: 5
+  trade_count_by_signal_year:
+    '2014': 1
+    '2015': 3
+    '2016': 1
+    '2017': 2
+    '2018': 2
+network_access_during_run: false
+schema_version: 1
+stage: development
+trades:
+  - base:
+      executed_entry_price: '28.7506542292431'
+      executed_exit_price: '27.573041225430625'
+      fees: '9.518704531839859'
+      pnl: '-1999.6846809749222'
+      pnl_fraction_of_pre_entry_equity: '-0.01999684680974922'
+      shares: 1690
+    entry_session: '2014-09-29'
+    exit_reason: stop
+    exit_session: '2014-10-02'
+    held_sessions: 4
+    signal_session: '2014-09-26'
+    stress:
+      executed_entry_price: '28.7937586583724'
+      executed_exit_price: '27.531660973466494'
+      fees: '17.68618176439741'
+      pnl: '-1999.1795470666711'
+      pnl_fraction_of_pre_entry_equity: '-0.01999179547066671'
+      shares: 1570
+    trade_id: fxi-mr-v009-sma20-over-sma50-regime-v001-0001
+  - base:
+      executed_entry_price: '31.545376875134547'
+      executed_exit_price: '32.774401153588066'
+      fees: '9.705854504534244'
+      pnl: '1844.8917816818257'
+      pnl_fraction_of_pre_entry_equity: '0.018825365772304526'
+      shares: 1509
+    entry_session: '2015-03-12'
+    exit_reason: target
+    exit_session: '2015-03-18'
+    held_sessions: 5
+    signal_session: '2015-03-11'
+    stress:
+      executed_entry_price: '31.5926712932382'
+      executed_exit_price: '32.72521495876027'
+      fees: '18.03473530506037'
+      pnl: '1569.7914837568785'
+      pnl_fraction_of_pre_entry_equity: '0.016018146343078826'
+      shares: 1402
+    trade_id: fxi-mr-v009-sma20-over-sma50-regime-v001-0002
+  - base:
+      executed_entry_price: '37.39555329002879'
+      executed_exit_price: '35.46824919560415'
+      fees: '9.450435182386592'
+      pnl: '-2509.163845651147'
+      pnl_fraction_of_pre_entry_equity: '-0.025130538746044446'
+      shares: 1297
+    entry_session: '2015-06-02'
+    exit_reason: time
+    exit_session: '2015-06-16'
+    held_sessions: 10
+    signal_session: '2015-06-01'
+    stress:
+      executed_entry_price: '37.451618587315195'
+      executed_exit_price: '35.4150202073166'
+      fees: '17.517139966229482'
+      pnl: '-2465.5083927245396'
+      pnl_fraction_of_pre_entry_equity: '-0.02476140645085298'
+      shares: 1202
+    trade_id: fxi-mr-v009-sma20-over-sma50-regime-v001-0003
+  - base:
+      executed_entry_price: '29.195639398537047'
+      executed_exit_price: '28.228070602151'
+      fees: '9.302641020111464'
+      pnl: '-1576.7640911655074'
+      pnl_fraction_of_pre_entry_equity: '-0.01619918006152986'
+      shares: 1620
+    entry_session: '2015-11-12'
+    exit_reason: time
+    exit_session: '2015-11-27'
+    held_sessions: 10
+    signal_session: '2015-11-11'
+    stress:
+      executed_entry_price: '29.2394109718482'
+      executed_exit_price: '28.185707314604'
+      fees: '17.23902050959295'
+      pnl: '-1598.8482100331412'
+      pnl_fraction_of_pre_entry_equity: '-0.016465130582032084'
+      shares: 1501
+    trade_id: fxi-mr-v009-sma20-over-sma50-regime-v001-0004
+  - base:
+      executed_entry_price: '24.941762008880097'
+      executed_exit_price: '24.62057435330065'
+      fees: '9.24337573154671'
+      pnl: '-608.258353387215'
+      pnl_fraction_of_pre_entry_equity: '-0.006351952089637099'
+      shares: 1865
+    entry_session: '2016-05-06'
+    exit_reason: time
+    exit_session: '2016-05-20'
+    held_sessions: 10
+    signal_session: '2016-05-05'
+    stress:
+      executed_entry_price: '24.9791559549204'
+      executed_exit_price: '24.5836250171026'
+      fees: '17.138809660125553'
+      pnl: '-701.0118011471006'
+      pnl_fraction_of_pre_entry_equity: '-0.007339956934716478'
+      shares: 1729
+    trade_id: fxi-mr-v009-sma20-over-sma50-regime-v001-0005
+  - base:
+      executed_entry_price: '30.6641457112503'
+      executed_exit_price: '31.89119543359595'
+      fees: '9.427089910528329'
+      pnl: '1839.7368416643676'
+      pnl_fraction_of_pre_entry_equity: '0.019334914391809573'
+      shares: 1507
+    entry_session: '2017-03-13'
+    exit_reason: target-gap
+    exit_session: '2017-03-21'
+    held_sessions: 7
+    signal_session: '2017-03-10'
+    stress:
+      executed_entry_price: '30.710118943201202'
+      executed_exit_price: '31.8433347100838'
+      fees: '17.464924259997172'
+      pnl: '1564.5042863081073'
+      pnl_fraction_of_pre_entry_equity: '0.016502297003931778'
+      shares: 1396
+    trade_id: fxi-mr-v009-sma20-over-sma50-regime-v001-0006
+  - base:
+      executed_entry_price: '36.928422603509844'
+      executed_exit_price: '37.0846211472332'
+      fees: '9.444064382594814'
+      pnl: '189.8652774084074'
+      pnl_fraction_of_pre_entry_equity: '0.0019575605140575427'
+      shares: 1276
+    entry_session: '2017-12-05'
+    exit_reason: time
+    exit_session: '2017-12-19'
+    held_sessions: 10
+    signal_session: '2017-12-04'
+    stress:
+      executed_entry_price: '36.9837875549394'
+      executed_exit_price: '37.028966388132794'
+      fees: '17.43740482898781'
+      pnl: '35.78326067283372'
+      pnl_fraction_of_pre_entry_equity: '0.0003713121750614778'
+      shares: 1178
+    trade_id: fxi-mr-v009-sma20-over-sma50-regime-v001-0007
+  - base:
+      executed_entry_price: '38.089721435946444'
+      executed_exit_price: '40.32473018858005'
+      fees: '9.715550556278833'
+      pnl: '2759.4602939567567'
+      pnl_fraction_of_pre_entry_equity: '0.028395169847351805'
+      shares: 1239
+    entry_session: '2018-02-12'
+    exit_reason: target-gap
+    exit_session: '2018-02-15'
+    held_sessions: 4
+    signal_session: '2018-02-09'
+    stress:
+      executed_entry_price: '38.1468274650858'
+      executed_exit_price: '40.264212834620196'
+      fees: '17.90908160445285'
+      pnl: '2400.145010403828'
+      pnl_fraction_of_pre_entry_equity: '0.02489634135636821'
+      shares: 1142
+    trade_id: fxi-mr-v009-sma20-over-sma50-regime-v001-0008
+  - base:
+      executed_entry_price: '38.28686336384955'
+      executed_exit_price: '39.77853945972447'
+      fees: '9.898693078029186'
+      pnl: '1881.5465964913722'
+      pnl_fraction_of_pre_entry_equity: '0.018826746344437005'
+      shares: 1268
+    entry_session: '2018-05-31'
+    exit_reason: target
+    exit_session: '2018-06-06'
+    held_sessions: 5
+    signal_session: '2018-05-30'
+    stress:
+      executed_entry_price: '38.3442649580982'
+      executed_exit_price: '39.71884180170587'
+      fees: '18.18870387503435'
+      pnl: '1583.1933189279014'
+      pnl_fraction_of_pre_entry_equity: '0.01602330333211907'
+      shares: 1165
+    trade_id: fxi-mr-v009-sma20-over-sma50-regime-v001-0009

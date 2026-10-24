@@ -1,0 +1,24 @@
+files:
+  - digest: bfefacc0c357e3500f770fcaf51c6d0c7f4d06b445eb3ae664b11b6fc156a97d
+    path: pyproject.toml
+  - digest: b0010fcb63f328ceae0960929291dfe0d42349d4365b778b1f817b35f701cf5e
+    path: research/fxi-deep-pullback-sma20-sma50-regime--v001/candidate-definition.yml
+  - digest: ea8b03153ef3bc2498061e272ded5dcc55c99184181308c66b796421bc76bdb6
+    path: research/fxi-deep-pullback-sma20-sma50-regime--v001/implementation-contract.yml
+  - digest: 3f8f1e3ecf36333e2e183dd118cf8ca40b04d152b3cd0eac4eb96ff2c09a99e2
+    path: research/fxi-deep-pullback-sma20-sma50-regime--v001/preregistration.yml
+  - digest: 06ad57a839d410215ecc7dc4c14e35316e4114762aee7420b10ec22f0e5af6db
+    path: research/fxi-deep-pullback-sma20-sma50-regime--v001/qualification-spec.yml
+  - digest: bbb43ea1e3e357a4acfd27bcf878320a5e9620eb059025fcf42d708f703efe60
+    path: research/fxi-deep-pullback-sma20-sma50-regime--v001/run_development.py
+  - digest: 3bfb751da5945a7e5f08f2ad384b0e470b19f2def2d6d0d07e4b2f3f6b49b87c
+    path: research/fxi-deep-pullback-sma20-sma50-regime--v001/runner-contract.yml
+  - digest: d7ee2f115a1b15eb39e29b4a162e8f62f3d2edaf29e6831d92dbe15fa661094b
+    path: src/trading_2026_2/__init__.py
+  - digest: 5554dc645c10f1d73d10acbe59ff9145908ef03ec0467dba44cf3dc7b276a148
+    path: src/trading_2026_2/fxi_mean_reversion_two_stage_volume_reversal_sma20_sma50_regime_v001.py
+  - digest: f3163c9b92046d0397ce1daf0cfb320a302c9e994875a4be0e93057a83cef7c4
+    path: src/trading_2026_2/tsm_mean_reversion_two_stage_volume_reversal_v009.py
+  - digest: 9a2e3b037308f3f6fadbd24e6350ddd38a476cac807245660bf6f651871c27b4
+    path: uv.lock
+schema_version: 1

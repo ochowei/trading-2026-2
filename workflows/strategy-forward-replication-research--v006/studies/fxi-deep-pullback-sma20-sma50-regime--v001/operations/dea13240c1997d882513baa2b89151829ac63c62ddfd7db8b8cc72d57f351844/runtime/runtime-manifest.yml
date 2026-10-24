@@ -1,0 +1,26 @@
+data:
+  digest: 97ebeae17a5f1813a027fb92961560f3a4c84cc70ff0554c9a1b11c14cc8a848
+  path: research/fxi-deep-pullback-sma20-sma50-regime--v001/data/snapshots/FXI-warmup-development--sha256-97ebeae17a5f1813a027fb92961560f3a4c84cc70ff0554c9a1b11c14cc8a848.csv
+evidence:
+  digest: 8949f400eb9af19fec6fe9430b7622f3137ee59ef398da392d73e1e7870f5109
+  path: runtime/evidence.yml
+execution_contract: request-output-v1
+execution_workspace: temporary
+operation_id: dea13240c1997d882513baa2b89151829ac63c62ddfd7db8b8cc72d57f351844
+request:
+  digest: 35d2eea4bd68a4b20cc3490a955edae2bfa2db5b4d71949e71df01ea4d837aac
+  path: runtime/request.yml
+resolver_version: 1
+runner:
+  digest: bbb43ea1e3e357a4acfd27bcf878320a5e9620eb059025fcf42d708f703efe60
+  path: research/fxi-deep-pullback-sma20-sma50-regime--v001/run_development.py
+schema_version: 1
+source_bundle:
+  digest: 209208429eda1c09e205b62181aa83838de31746833ab21efabd09111ae165b4
+  path: manifests/source-bundle.yml
+stage: development
+study_id: fxi-deep-pullback-sma20-sma50-regime--v001
+workflow_reference:
+  digest: cfe747174027f22b45f6c699cd1675753abedca2a71ed6035cf7626064e906f1
+  path: manifests/workflow-reference.yml
+workflow_version: v006

@@ -1,0 +1,17 @@
+authority: none
+bindings:
+  development_evidence_digest: 0110bdfc6dab78e49975050f4b8c229c7a2ff5f9de9de1ca42036d476b7d9080
+  event_chain_head_digest: 61255b698af6817c44b4c916f74dd0b922e47d604e62f739963d90962b9c1177
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  preregistration_digest: 3f8f1e3ecf36333e2e183dd118cf8ca40b04d152b3cd0eac4eb96ff2c09a99e2
+  source_bundle_digest: 209208429eda1c09e205b62181aa83838de31746833ab21efabd09111ae165b4
+  trial_registry_digest: aeee2b688db0ca4f422d01dccfc5303f45ce6900dc7394ae7a0f26b7c475f2b3
+  workflow_digest: e527578ca62d907d5b1e16f57d5a4c52f0b7cabb9d616970eb2eb2e383f8e7a9
+outcome: fail
+reasons:
+  - completed_trades
+  - minimum_stress_block_bootstrap_positive_return_ratio
+  - minimum_stress_leave_one_year_out_profit_factor
+  - minimum_stress_leave_one_year_out_return
+recomputed: true
+schema_version: 1

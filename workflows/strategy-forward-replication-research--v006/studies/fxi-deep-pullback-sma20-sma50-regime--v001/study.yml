@@ -1,0 +1,78 @@
+candidate_freeze: null
+evidence:
+  development: 0110bdfc6dab78e49975050f4b8c229c7a2ff5f9de9de1ca42036d476b7d9080
+lifecycle:
+  current_event: study-terminal
+  event_chain_head_digest: 66bfc9f97e7cbebc74550123aa8723350b37a3dee3fd4d62ee9f2dd13bddc67d
+  event_count: 6
+  status: terminal
+outcome:
+  authority: none
+  status: fail
+preregistration:
+  digest: 3f8f1e3ecf36333e2e183dd118cf8ca40b04d152b3cd0eac4eb96ff2c09a99e2
+provenance:
+  status: null
+schema_version: 1
+study:
+  identity:
+    create_plan_digest: 241f30479657db7ae12e211605bfbf05672e513b9be376ec65a66ee4789ead50
+    create_plan_path: manifests/create-plan.yml
+    experiment_family: fxi-mean-reversion-v009-sma20-sma50-regime
+    historical_evaluation_operator: ochowei@gmail.com
+    prepare_report_digest: c2b2fd947d5fad1e2792cc6ac61a3b80541ccec72878dee65bb7f5ff5a80581b
+    prepare_report_path: manifests/prepare-report.yml
+    research_owner: ochowei@gmail.com
+    research_round_id: fxi-deep-pullback-sma20-sma50-regime--v001-round-001
+    source_bundle_digest: 209208429eda1c09e205b62181aa83838de31746833ab21efabd09111ae165b4
+    source_bundle_path: manifests/source-bundle.yml
+    workflow_reference_digest: cfe747174027f22b45f6c699cd1675753abedca2a71ed6035cf7626064e906f1
+    workflow_reference_path: manifests/workflow-reference.yml
+  study_id: fxi-deep-pullback-sma20-sma50-regime--v001
+trial_registry:
+  assessments:
+    fxi-mr-v009-sma20-over-sma50-regime-v001:
+      actuals:
+        base_profit_factor: '1.2721339906112876'
+        base_return: '0.018216298200239383'
+        completed_trades: 9
+        maximum_realized_trade_loss_fraction: '0.025130538746044446'
+        maximum_stress_block_bootstrap_drawdown_above_10pct_ratio: '0.0287'
+        maximum_stress_leave_one_year_out_drawdown: '0.05194756467214582'
+        minimum_stress_block_bootstrap_positive_return_ratio: '0.55796'
+        minimum_stress_leave_one_year_out_profit_factor: '0.46863131930088053'
+        minimum_stress_leave_one_year_out_return: '-0.0359446892023364'
+        stress_maximum_drawdown: '0.05194756467214582'
+        stress_profit_factor: '1.0574863851829526'
+        stress_return: '0.0038886940909809687'
+        traded_years: 5
+      candidate_freeze_eligibility:
+        eligible: false
+        reasons:
+          - completed_trades
+          - minimum_stress_block_bootstrap_positive_return_ratio
+          - minimum_stress_leave_one_year_out_profit_factor
+          - minimum_stress_leave_one_year_out_return
+      development_evidence_validity:
+        status: valid
+        validated: true
+      formal_development_gates:
+        failed:
+          - completed_trades
+          - minimum_stress_block_bootstrap_positive_return_ratio
+          - minimum_stress_leave_one_year_out_profit_factor
+          - minimum_stress_leave_one_year_out_return
+        status: failed
+      research_targets:
+        failed: []
+        status: not_registered
+  digest: aeee2b688db0ca4f422d01dccfc5303f45ce6900dc7394ae7a0f26b7c475f2b3
+  recorded_trial_count: 1
+  trial_ids:
+    - fxi-mr-v009-sma20-over-sma50-regime-v001
+workflow_binding:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 209208429eda1c09e205b62181aa83838de31746833ab21efabd09111ae165b4
+  workflow_digest: e527578ca62d907d5b1e16f57d5a4c52f0b7cabb9d616970eb2eb2e383f8e7a9
+  workflow_reference_digest: cfe747174027f22b45f6c699cd1675753abedca2a71ed6035cf7626064e906f1
+  workflow_reference_path: manifests/workflow-reference.yml
