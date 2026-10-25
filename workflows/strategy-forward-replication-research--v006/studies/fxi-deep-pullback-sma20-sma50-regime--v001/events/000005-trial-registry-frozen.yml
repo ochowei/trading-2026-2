@@ -1,0 +1,24 @@
+actor_id: /root
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 209208429eda1c09e205b62181aa83838de31746833ab21efabd09111ae165b4
+  workflow_digest: e527578ca62d907d5b1e16f57d5a4c52f0b7cabb9d616970eb2eb2e383f8e7a9
+  workflow_reference_digest: cfe747174027f22b45f6c699cd1675753abedca2a71ed6035cf7626064e906f1
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: trial-registry-frozen
+execution:
+  assignment_digest: 2e465eec842125d5da24f5e0b54de4c62f30b126c8c8a5d9928f04465509bbf3
+  assignment_path: manifests/assignments/2e465eec842125d5da24f5e0b54de4c62f30b126c8c8a5d9928f04465509bbf3.yml
+  role: study 開發者
+occurred_at: '2026-10-24T05:29:03.231161Z'
+payload:
+  candidate_available: false
+  complete_family_trial_ids:
+    - fxi-mr-v009-sma20-over-sma50-regime-v001
+  maximum_trials: 1
+  recorded_trial_count: 1
+  trial_registry_digest: aeee2b688db0ca4f422d01dccfc5303f45ce6900dc7394ae7a0f26b7c475f2b3
+previous_event_digest: 09cbc49357e8c9fc3fbb5457704318ffe3f6b819942067f345b52850128dd8bc
+schema_version: 1
+sequence: 5
+study_id: fxi-deep-pullback-sma20-sma50-regime--v001

@@ -1,0 +1,22 @@
+actor_id: /root
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 209208429eda1c09e205b62181aa83838de31746833ab21efabd09111ae165b4
+  workflow_digest: e527578ca62d907d5b1e16f57d5a4c52f0b7cabb9d616970eb2eb2e383f8e7a9
+  workflow_reference_digest: cfe747174027f22b45f6c699cd1675753abedca2a71ed6035cf7626064e906f1
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: study-terminal
+execution:
+  assignment_digest: 2e465eec842125d5da24f5e0b54de4c62f30b126c8c8a5d9928f04465509bbf3
+  assignment_path: manifests/assignments/2e465eec842125d5da24f5e0b54de4c62f30b126c8c8a5d9928f04465509bbf3.yml
+  role: study 開發者
+occurred_at: '2026-10-24T05:29:05.062279Z'
+payload:
+  authority: none
+  outcome: fail
+  terminal_evidence_digest: 2c9b3864cfb080afa0fcd8190660bdd3af7dd56fde1924611e22be67643c86b3
+  terminal_evidence_path: evidence/terminal.yml
+previous_event_digest: 61255b698af6817c44b4c916f74dd0b922e47d604e62f739963d90962b9c1177
+schema_version: 1
+sequence: 6
+study_id: fxi-deep-pullback-sma20-sma50-regime--v001

@@ -1,0 +1,1334 @@
+baseline:
+  accepted_signal_count: 31
+  bindings:
+    preregistration_digest: 3f8f1e3ecf36333e2e183dd118cf8ca40b04d152b3cd0eac4eb96ff2c09a99e2
+    source_bundle_digest: 209208429eda1c09e205b62181aa83838de31746833ab21efabd09111ae165b4
+    trial_inputs_digest: faac4c1405c8a242f14dab5aa52789026bc0422c6bf759394556c6adee904117
+  candidate_id: fxi-mr-v009-two-stage-volume-reversal-control-v001
+  diagnostics:
+    block_bootstrap:
+      base:
+        - block_length: 3
+          drawdown_above_10pct_ratio: '0.35584'
+          maximum_drawdown_q05_q50_q95:
+            - '0.03014469869986631'
+            - '0.08662904395413959'
+            - '0.18598361204646935'
+          positive_return_ratio: '0.83042'
+          profit_factor_above_one_ratio: '0.83042'
+          profit_factor_q05_q50_q95:
+            - '0.7297227001284227'
+            - '1.5627815147059314'
+            - '3.580643182546674'
+          repetitions: 50000
+          return_q05_q50_q95:
+            - '-0.09356892112096063'
+            - '0.14019071308504671'
+            - '0.39051107702298443'
+          seed: 20260902
+        - block_length: 5
+          drawdown_above_10pct_ratio: '0.47262'
+          maximum_drawdown_q05_q50_q95:
+            - '0.029192362626551237'
+            - '0.09675556535924892'
+            - '0.20814612615908795'
+          positive_return_ratio: '0.8132'
+          profit_factor_above_one_ratio: '0.8132'
+          profit_factor_q05_q50_q95:
+            - '0.6740217267753533'
+            - '1.5795741508686905'
+            - '3.713372655865549'
+          repetitions: 50000
+          return_q05_q50_q95:
+            - '-0.11482801764535257'
+            - '0.1434604675194011'
+            - '0.399791675243943'
+          seed: 20260902
+      gating: true
+      stress:
+        - block_length: 3
+          drawdown_above_10pct_ratio: '0.39098'
+          maximum_drawdown_q05_q50_q95:
+            - '0.03339945741785624'
+            - '0.09034942977080038'
+            - '0.1938728385961731'
+          positive_return_ratio: '0.7317'
+          profit_factor_above_one_ratio: '0.7317'
+          profit_factor_q05_q50_q95:
+            - '0.6237585108688332'
+            - '1.3322935830310856'
+            - '3.02816084288395'
+          repetitions: 50000
+          return_q05_q50_q95:
+            - '-0.12684627787826602'
+            - '0.08054638936843272'
+            - '0.2992672022226572'
+          seed: 20260902
+        - block_length: 5
+          drawdown_above_10pct_ratio: '0.48746'
+          maximum_drawdown_q05_q50_q95:
+            - '0.029947998438965732'
+            - '0.09866039192058394'
+            - '0.21363978287546992'
+          positive_return_ratio: '0.71948'
+          profit_factor_above_one_ratio: '0.71948'
+          profit_factor_q05_q50_q95:
+            - '0.5762235960836023'
+            - '1.346082519110511'
+            - '3.1289770439292464'
+          repetitions: 50000
+          return_q05_q50_q95:
+            - '-0.14591038883233498'
+            - '0.08340304812340427'
+            - '0.30734514208236025'
+          seed: 20260902
+    by_signal_year:
+      '2014':
+        base_pnl: '1894.59781517775'
+        stress_pnl: '1030.7532234858536'
+        trades: 5
+      '2015':
+        base_pnl: '-9646.752741545808'
+        stress_pnl: '-9963.45469087644'
+        trades: 8
+      '2016':
+        base_pnl: '5784.056450304058'
+        stress_pnl: '4468.818880091068'
+        trades: 6
+      '2017':
+        base_pnl: '2091.5617440659917'
+        stress_pnl: '1611.7679842841035'
+        trades: 2
+      '2018':
+        base_pnl: '13129.893186167043'
+        stress_pnl: '10231.909717449298'
+        trades: 10
+    leave_one_signal_year_out:
+      base:
+        '2014':
+          maximum_drawdown: '0.1285377284598844'
+          omitted_trades: 5
+          profit_factor: '1.5489473830905347'
+          remaining_trades: 26
+          return: '0.11147557262647445'
+        '2015':
+          maximum_drawdown: '0.029192362626551224'
+          omitted_trades: 8
+          profit_factor: '3.2553995978658743'
+          remaining_trades: 23
+          return: '0.2509674559774704'
+        '2016':
+          maximum_drawdown: '0.12853772845988426'
+          omitted_trades: 6
+          profit_factor: '1.3197946359185215'
+          remaining_trades: 25
+          return: '0.0657120710549628'
+        '2017':
+          maximum_drawdown: '0.12853772845988426'
+          omitted_trades: 2
+          profit_factor: '1.4611444699501688'
+          remaining_trades: 29
+          return: '0.10887513523700698'
+        '2018':
+          maximum_drawdown: '0.12853772845988426'
+          omitted_trades: 10
+          profit_factor: '1.0064148240708175'
+          remaining_trades: 21
+          return: '0.001234632680019887'
+      gating: true
+      stress:
+        '2014':
+          maximum_drawdown: '0.12748662146806872'
+          omitted_trades: 5
+          profit_factor: '1.313647465329749'
+          remaining_trades: 26
+          return: '0.06284266610290001'
+        '2015':
+          maximum_drawdown: '0.029947998438965708'
+          omitted_trades: 8
+          profit_factor: '2.737068224307829'
+          remaining_trades: 23
+          return: '0.19127960927820298'
+        '2016':
+          maximum_drawdown: '0.12748662146806886'
+          omitted_trades: 6
+          profit_factor: '1.116596631914813'
+          remaining_trades: 25
+          return: '0.023569737067481222'
+        '2017':
+          maximum_drawdown: '0.12748662146806886'
+          omitted_trades: 2
+          profit_factor: '1.2408419067425602'
+          remaining_trades: 29
+          return: '0.055982708412374294'
+        '2018':
+          maximum_drawdown: '0.12748662146806886'
+          omitted_trades: 10
+          profit_factor: '0.8503647031700867'
+          remaining_trades: 21
+          return: '-0.02852114603015432'
+  disposition: fail
+  failed_gates:
+    - maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+    - maximum_stress_leave_one_year_out_drawdown
+    - minimum_stress_block_bootstrap_positive_return_ratio
+    - minimum_stress_leave_one_year_out_profit_factor
+    - minimum_stress_leave_one_year_out_return
+    - stress_maximum_drawdown
+  gates:
+    - actual: '1.5591459136407135'
+      gate: base_profit_factor
+      operator: '>'
+      passed: true
+      required: '1.10'
+    - actual: '0.13253356454169035'
+      gate: base_return
+      operator: '>'
+      passed: true
+      required: '0'
+    - actual: 31
+      gate: completed_trades
+      operator: '>='
+      passed: true
+      required: 20
+    - actual: '0.03325887738950271'
+      gate: maximum_realized_trade_loss_fraction
+      operator: <=
+      passed: true
+      required: '0.04'
+    - actual: '0.48746'
+      gate: maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+      operator: <=
+      passed: false
+      required: '0.10'
+    - actual: '0.12748662146806886'
+      gate: maximum_stress_leave_one_year_out_drawdown
+      operator: <=
+      passed: false
+      required: '0.10'
+    - actual: '0.71948'
+      gate: minimum_stress_block_bootstrap_positive_return_ratio
+      operator: '>='
+      passed: false
+      required: '0.80'
+    - actual: '0.8503647031700867'
+      gate: minimum_stress_leave_one_year_out_profit_factor
+      operator: '>'
+      passed: false
+      required: '1.00'
+    - actual: '-0.02852114603015432'
+      gate: minimum_stress_leave_one_year_out_return
+      operator: '>'
+      passed: false
+      required: '0'
+    - actual: '0.12748662146806886'
+      gate: stress_maximum_drawdown
+      operator: <=
+      passed: false
+      required: '0.10'
+    - actual: '1.3165232214427147'
+      gate: stress_profit_factor
+      operator: '>'
+      passed: true
+      required: '1.00'
+    - actual: '0.07379795114433886'
+      gate: stress_return
+      operator: '>'
+      passed: true
+      required: '0'
+    - actual: 5
+      gate: traded_years
+      operator: '>='
+      passed: true
+      required: 3
+  metrics:
+    base:
+      completed_trades: 31
+      maximum_drawdown: '0.12853772845988426'
+      maximum_realized_trade_loss_fraction: '0.03325887738950271'
+      profit_factor: '1.5591459136407135'
+      return: '0.13253356454169035'
+      traded_years: 5
+    stress:
+      completed_trades: 31
+      maximum_drawdown: '0.12748662146806886'
+      maximum_realized_trade_loss_fraction: '0.032296071126443254'
+      profit_factor: '1.3165232214427147'
+      return: '0.07379795114433886'
+      traded_years: 5
+    trade_count_by_signal_year:
+      '2014': 5
+      '2015': 8
+      '2016': 6
+      '2017': 2
+      '2018': 10
+  network_access_during_run: false
+  schema_version: 1
+  stage: development
+  trades:
+    - base:
+        executed_entry_price: '26.8266471044421'
+        executed_exit_price: '26.3049097773941'
+        fees: '9.622124951300535'
+        pnl: '-954.488424235224'
+        pnl_fraction_of_pre_entry_equity: '-0.00954488424235224'
+        shares: 1811
+      entry_session: '2014-01-08'
+      exit_reason: time
+      exit_session: '2014-01-23'
+      held_sessions: 10
+      signal_session: '2014-01-07'
+      stress:
+        executed_entry_price: '26.866866965168402'
+        executed_exit_price: '26.2654326741764'
+        fees: '17.88433205860346'
+        pnl: '-1030.0982437981447'
+        pnl_fraction_of_pre_entry_equity: '-0.010300982437981446'
+        shares: 1683
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0001
+    - base:
+        executed_entry_price: '24.95588573271285'
+        executed_exit_price: '25.92818001143464'
+        fees: '9.810447875471636'
+        pnl: '1864.77292150014'
+        pnl_fraction_of_pre_entry_equity: '0.018827434901718728'
+        shares: 1928
+      entry_session: '2014-02-05'
+      exit_reason: target
+      exit_session: '2014-02-11'
+      held_sessions: 5
+      signal_session: '2014-02-04'
+      stress:
+        executed_entry_price: '24.9933008537514'
+        executed_exit_price: '25.889268285554547'
+        fees: '18.21595975187153'
+        pnl: '1585.5657431757613'
+        pnl_fraction_of_pre_entry_equity: '0.016020686239353606'
+        shares: 1790
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0002
+    - base:
+        executed_entry_price: '24.54919305819795'
+        executed_exit_price: '25.514507298533'
+        fees: '9.997720961239171'
+        pnl: '1917.7348169878574'
+        pnl_fraction_of_pre_entry_equity: '0.019004354477266745'
+        shares: 1997
+      entry_session: '2014-03-17'
+      exit_reason: target-gap
+      exit_session: '2014-03-24'
+      held_sessions: 6
+      signal_session: '2014-03-14'
+      stress:
+        executed_entry_price: '24.5859984450918'
+        executed_exit_price: '25.476216392132'
+        fees: '18.51300704680536'
+        pnl: '1627.4999770305226'
+        pnl_fraction_of_pre_entry_equity: '0.01618509681773988'
+        shares: 1849
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0003
+    - base:
+        executed_entry_price: '28.7506542292431'
+        executed_exit_price: '27.573041225430625'
+        fees: '9.789058270022293'
+        pnl: '-2056.4804588961038'
+        pnl_fraction_of_pre_entry_equity: '-0.019999222708076216'
+        shares: 1738
+      entry_session: '2014-09-29'
+      exit_reason: stop
+      exit_session: '2014-10-02'
+      held_sessions: 4
+      signal_session: '2014-09-26'
+      stress:
+        executed_entry_price: '28.7937586583724'
+        executed_exit_price: '27.531660973466494'
+        fees: '18.06919461789392'
+        pnl: '-2042.4738812069686'
+        pnl_fraction_of_pre_entry_equity: '-0.01998839857218408'
+        shares: 1604
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0004
+    - base:
+        executed_entry_price: '28.570587902073598'
+        executed_exit_price: '29.231595051419752'
+        fees: '9.90729415822876'
+        pnl: '1123.0589598210804'
+        pnl_fraction_of_pre_entry_equity: '0.011144604643113301'
+        shares: 1714
+      entry_session: '2014-10-14'
+      exit_reason: time
+      exit_session: '2014-10-28'
+      held_sessions: 10
+      signal_session: '2014-10-13'
+      stress:
+        executed_entry_price: '28.6134223666944'
+        executed_exit_price: '29.187725724179'
+        fees: '18.288283255952344'
+        pnl: '890.259628284683'
+        pnl_fraction_of_pre_entry_equity: '0.00889010625295485'
+        shares: 1582
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0005
+    - base:
+        executed_entry_price: '31.545376875134547'
+        executed_exit_price: '32.774401153588066'
+        fees: '10.091773172706578'
+        pnl: '1918.2473197208644'
+        pnl_fraction_of_pre_entry_equity: '0.01882580000168695'
+        shares: 1569
+      entry_session: '2015-03-12'
+      exit_reason: target
+      exit_session: '2015-03-18'
+      held_sessions: 5
+      signal_session: '2015-03-11'
+      stress:
+        executed_entry_price: '31.5926712932382'
+        executed_exit_price: '32.72521495876027'
+        fees: '18.600732704077956'
+        pnl: '1619.057407640832'
+        pnl_fraction_of_pre_entry_equity: '0.016025391833508196'
+        shares: 1446
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0006
+    - base:
+        executed_entry_price: '37.39555329002879'
+        executed_exit_price: '35.46824919560415'
+        fees: '9.829326955311885'
+        pnl: '-2609.7625503341537'
+        pnl_fraction_of_pre_entry_equity: '-0.02513911016447842'
+        shares: 1349
+      entry_session: '2015-06-02'
+      exit_reason: time
+      exit_session: '2015-06-16'
+      held_sessions: 10
+      signal_session: '2015-06-01'
+      stress:
+        executed_entry_price: '37.451618587315195'
+        executed_exit_price: '35.4150202073166'
+        fees: '18.05635309330976'
+        pnl: '-2541.4017459115676'
+        pnl_fraction_of_pre_entry_equity: '-0.024757977927929404'
+        shares: 1239
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0007
+    - base:
+        executed_entry_price: '34.900362258999294'
+        executed_exit_price: '33.47086016467267'
+        fees: '9.63350523949538'
+        pnl: '-2023.8019561457063'
+        pnl_fraction_of_pre_entry_equity: '-0.019997433916646108'
+        shares: 1409
+      entry_session: '2015-07-01'
+      exit_reason: stop
+      exit_session: '2015-07-06'
+      held_sessions: 3
+      signal_session: '2015-06-30'
+      stress:
+        executed_entry_price: '34.9526866401972'
+        executed_exit_price: '33.420628758722685'
+        fees: '17.70868868832025'
+        pnl: '-2001.723645197817'
+        pnl_fraction_of_pre_entry_equity: '-0.019995559488843788'
+        shares: 1295
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0008
+    - base:
+        executed_entry_price: '32.7849603210165'
+        executed_exit_price: '30.54735373337455'
+        fees: '9.309850165995485'
+        pnl: '-3298.5915339996604'
+        pnl_fraction_of_pre_entry_equity: '-0.03325887738950271'
+        shares: 1470
+      entry_session: '2015-07-17'
+      exit_reason: stop-gap
+      exit_session: '2015-07-27'
+      held_sessions: 7
+      signal_session: '2015-07-16'
+      stress:
+        executed_entry_price: '32.834113185066'
+        executed_exit_price: '30.501509780798198'
+        fees: '17.113285325376506'
+        pnl: '-3168.4604844911796'
+        pnl_fraction_of_pre_entry_equity: '-0.032296071126443254'
+        shares: 1351
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0009
+    - base:
+        executed_entry_price: '31.043756920499547'
+        executed_exit_price: '29.68524833090995'
+        fees: '9.109350787711424'
+        pnl: '-2046.8722351721074'
+        pnl_fraction_of_pre_entry_equity: '-0.021348117691941466'
+        shares: 1500
+      entry_session: '2015-08-05'
+      exit_reason: time
+      exit_session: '2015-08-19'
+      held_sessions: 10
+      signal_session: '2015-08-04'
+      stress:
+        executed_entry_price: '31.0902992846982'
+        executed_exit_price: '29.640698183339797'
+        fees: '16.761755301178486'
+        pnl: '-2017.2112751757757'
+        pnl_fraction_of_pre_entry_equity: '-0.021247619495416765'
+        shares: 1380
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0010
+    - base:
+        executed_entry_price: '26.667847696718248'
+        executed_exit_price: '25.575545449230482'
+        fees: '8.928395888642637'
+        pnl: '-1875.6729368452338'
+        pnl_fraction_of_pre_entry_equity: '-0.019989306623419027'
+        shares: 1709
+      entry_session: '2015-09-03'
+      exit_reason: stop
+      exit_session: '2015-09-04'
+      held_sessions: 2
+      signal_session: '2015-09-02'
+      stress:
+        executed_entry_price: '26.707829477373'
+        executed_exit_price: '25.53716293980192'
+        fees: '16.43627461444323'
+        pnl: '-1857.8947382137517'
+        pnl_fraction_of_pre_entry_equity: '-0.019994344321337322'
+        shares: 1573
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0011
+    - base:
+        executed_entry_price: '29.195639398537047'
+        executed_exit_price: '28.228070602151'
+        fees: '8.78582763010527'
+        pnl: '-1489.1660861007572'
+        pnl_fraction_of_pre_entry_equity: '-0.016193955451703983'
+        shares: 1530
+      entry_session: '2015-11-12'
+      exit_reason: time
+      exit_session: '2015-11-27'
+      held_sessions: 10
+      signal_session: '2015-11-11'
+      stress:
+        executed_entry_price: '29.2394109718482'
+        executed_exit_price: '28.185707314604'
+        fees: '16.17091330946494'
+        pnl: '-1499.7856627093024'
+        pnl_fraction_of_pre_entry_equity: '-0.016469737512024435'
+        shares: 1408
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0012
+    - base:
+        executed_entry_price: '27.164244049357496'
+        executed_exit_price: '28.26921090371'
+        fees: '8.96913301140632'
+        pnl: '1778.867237330946'
+        pnl_fraction_of_pre_entry_equity: '0.019662731688532123'
+        shares: 1618
+      entry_session: '2015-12-15'
+      exit_reason: target-gap
+      exit_session: '2015-12-23'
+      held_sessions: 7
+      signal_session: '2015-12-14'
+      stress:
+        executed_entry_price: '27.20497005243'
+        executed_exit_price: '28.226785874839997'
+        fees: '16.49649056395555'
+        pnl: '1503.9654531821213'
+        pnl_fraction_of_pre_entry_equity: '0.01679220057440652'
+        shares: 1488
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0013
+    - base:
+        executed_entry_price: '23.131220427298498'
+        executed_exit_price: '24.0592453585005'
+        fees: '9.145512269287845'
+        pnl: '1789.3668044001945'
+        pnl_fraction_of_pre_entry_equity: '0.019397383244800216'
+        shares: 1938
+      entry_session: '2016-01-15'
+      exit_reason: target-gap
+      exit_session: '2016-01-19'
+      held_sessions: 2
+      signal_session: '2016-01-14'
+      stress:
+        executed_entry_price: '23.165899918194'
+        executed_exit_price: '24.023138437002'
+        fees: '16.770984231436657'
+        pnl: '1506.5418636903792'
+        pnl_fraction_of_pre_entry_equity: '0.016543170687674635'
+        shares: 1777
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0014
+    - base:
+        executed_entry_price: '23.3341211917809'
+        executed_exit_price: '24.243230681091866'
+        fees: '9.315645496708488'
+        pnl: '1770.7207345741663'
+        pnl_fraction_of_pre_entry_equity: '0.018830000371244746'
+        shares: 1958
+      entry_session: '2016-01-27'
+      exit_reason: target
+      exit_session: '2016-01-29'
+      held_sessions: 3
+      signal_session: '2016-01-26'
+      stress:
+        executed_entry_price: '23.3691048817236'
+        executed_exit_price: '24.20684764355146'
+        fees: '17.041706194553527'
+        pnl: '1483.3555802391402'
+        pnl_fraction_of_pre_entry_equity: '0.016023485402453182'
+        shares: 1791
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0015
+    - base:
+        executed_entry_price: '21.9528064731777'
+        executed_exit_price: '23.49011605180735'
+        fees: '9.63389957529683'
+        pnl: '3249.462407119568'
+        pnl_fraction_of_pre_entry_equity: '0.03391642339532131'
+        shares: 2120
+      entry_session: '2016-02-11'
+      exit_reason: target-gap
+      exit_session: '2016-02-16'
+      held_sessions: 3
+      signal_session: '2016-02-10'
+      stress:
+        executed_entry_price: '21.985719226510803'
+        executed_exit_price: '23.4548632513294'
+        fees: '17.576417302428588'
+        pnl: '2823.748126696738'
+        pnl_fraction_of_pre_entry_equity: '0.030021606506333415'
+        shares: 1934
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0016
+    - base:
+        executed_entry_price: '24.941762008880097'
+        executed_exit_price: '24.62057435330065'
+        fees: '9.565530917900883'
+        pnl: '-629.4577061862333'
+        pnl_fraction_of_pre_entry_equity: '-0.006354474656444233'
+        shares: 1930
+      entry_session: '2016-05-06'
+      exit_reason: time
+      exit_session: '2016-05-20'
+      held_sessions: 10
+      signal_session: '2016-05-05'
+      stress:
+        executed_entry_price: '24.9791559549204'
+        executed_exit_price: '24.5836250171026'
+        fees: '17.38662356498567'
+        pnl: '-711.1478884974058'
+        pnl_fraction_of_pre_entry_equity: '-0.007340431031923177'
+        shares: 1754
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0017
+    - base:
+        executed_entry_price: '29.45705731637415'
+        executed_exit_price: '28.068933334988802'
+        fees: '9.336468282716208'
+        pnl: '-2262.261690071137'
+        pnl_fraction_of_pre_entry_equity: '-0.022983938826887745'
+        shares: 1623
+      entry_session: '2016-11-01'
+      exit_reason: stop-gap
+      exit_session: '2016-11-11'
+      held_sessions: 9
+      signal_session: '2016-10-31'
+      stress:
+        executed_entry_price: '29.5012208205966'
+        executed_exit_price: '28.0268088727552'
+        fees: '16.959263153600112'
+        pnl: '-2190.2424742718235'
+        pnl_fraction_of_pre_entry_equity: '-0.022774743843495465'
+        shares: 1474
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0018
+    - base:
+        executed_entry_price: '27.6410343289593'
+        executed_exit_price: '28.750949208063002'
+        fees: '9.530245217756768'
+        pnl: '1866.225900467499'
+        pnl_fraction_of_pre_entry_equity: '0.019406361868392685'
+        shares: 1690
+      entry_session: '2016-12-28'
+      exit_reason: target-gap
+      exit_session: '2017-01-05'
+      held_sessions: 6
+      signal_session: '2016-12-27'
+      stress:
+        executed_entry_price: '27.6824751600372'
+        executed_exit_price: '28.707801210252'
+        fees: '17.311814845678782'
+        pnl: '1556.5636722340407'
+        pnl_fraction_of_pre_entry_equity: '0.016562790631381812'
+        shares: 1535
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0019
+    - base:
+        executed_entry_price: '30.6641457112503'
+        executed_exit_price: '31.89119543359595'
+        fees: '9.714844479794623'
+        pnl: '1895.8933743230011'
+        pnl_fraction_of_pre_entry_equity: '0.01933955523508936'
+        shares: 1553
+      entry_session: '2017-03-13'
+      exit_reason: target-gap
+      exit_session: '2017-03-21'
+      held_sessions: 7
+      signal_session: '2017-03-10'
+      stress:
+        executed_entry_price: '30.710118943201202'
+        executed_exit_price: '31.8433347100838'
+        fees: '17.590031167303742'
+        pnl: '1575.7113370696268'
+        pnl_fraction_of_pre_entry_equity: '0.016493357483461573'
+        shares: 1406
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0020
+    - base:
+        executed_entry_price: '36.928422603509844'
+        executed_exit_price: '37.0846211472332'
+        fees: '9.732715253222711'
+        pnl: '195.66836974299036'
+        pnl_fraction_of_pre_entry_equity: '0.001958097543753559'
+        shares: 1315
+      entry_session: '2017-12-05'
+      exit_reason: time
+      exit_session: '2017-12-19'
+      held_sessions: 10
+      signal_session: '2017-12-04'
+      stress:
+        executed_entry_price: '36.9837875549394'
+        executed_exit_price: '37.028966388132794'
+        fees: '17.57062778608534'
+        pnl: '36.05664721447676'
+        pnl_fraction_of_pre_entry_equity: '0.00037128996208468705'
+        shares: 1187
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0021
+    - base:
+        executed_entry_price: '38.089721435946444'
+        executed_exit_price: '40.32473018858005'
+        fees: '10.013525472452033'
+        pnl: '2844.0926516406603'
+        pnl_fraction_of_pre_entry_equity: '0.02840585571863245'
+        shares: 1277
+      entry_session: '2018-02-12'
+      exit_reason: target-gap
+      exit_session: '2018-02-15'
+      held_sessions: 4
+      signal_session: '2018-02-09'
+      stress:
+        executed_entry_price: '38.1468274650858'
+        executed_exit_price: '40.264212834620196'
+        fees: '18.05022147699232'
+        pnl: '2419.060338857098'
+        pnl_fraction_of_pre_entry_equity: '0.024900802822129'
+        shares: 1151
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0022
+    - base:
+        executed_entry_price: '38.13079825849365'
+        executed_exit_price: '39.6600439774403'
+        fees: '10.206158501354535'
+        pnl: '1996.1642247566563'
+        pnl_fraction_of_pre_entry_equity: '0.019386341716360552'
+        shares: 1312
+      entry_session: '2018-03-02'
+      exit_reason: target-gap
+      exit_session: '2018-03-09'
+      held_sessions: 6
+      signal_session: '2018-03-01'
+      stress:
+        executed_entry_price: '38.1879658720746'
+        executed_exit_price: '39.600524151561196'
+        fees: '18.34252594757332'
+        pnl: '1647.063685567124'
+        pnl_fraction_of_pre_entry_equity: '0.016542273878089053'
+        shares: 1179
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0023
+    - base:
+        executed_entry_price: '37.38328627478639'
+        executed_exit_price: '39.19229872126321'
+        fees: '10.444909793461164'
+        pnl: '2457.048067200913'
+        pnl_fraction_of_pre_entry_equity: '0.023408545960649403'
+        shares: 1364
+      entry_session: '2018-04-04'
+      exit_reason: target-gap
+      exit_session: '2018-04-10'
+      held_sessions: 5
+      signal_session: '2018-04-03'
+      stress:
+        executed_entry_price: '37.4393331807456'
+        executed_exit_price: '39.1334808642528'
+        fees: '18.71439575259761'
+        pnl: '2051.534073493205'
+        pnl_fraction_of_pre_entry_equity: '0.02026926988883087'
+        shares: 1222
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0024
+    - base:
+        executed_entry_price: '38.28686336384955'
+        executed_exit_price: '39.77853945972447'
+        fees: '10.64031440485314'
+        pnl: '2022.514204272666'
+        pnl_fraction_of_pre_entry_equity: '0.018827962580649813'
+        shares: 1363
+      entry_session: '2018-05-31'
+      exit_reason: target
+      exit_session: '2018-06-06'
+      held_sessions: 5
+      signal_session: '2018-05-30'
+      stress:
+        executed_entry_price: '38.3442649580982'
+        executed_exit_price: '39.71884180170587'
+        fees: '19.00056018533631'
+        pnl: '1653.8594584851983'
+        pnl_fraction_of_pre_entry_equity: '0.016015598257775557'
+        shares: 1217
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0025
+    - base:
+        executed_entry_price: '36.130923663314846'
+        executed_exit_price: '34.65101836424174'
+        fees: '10.41910186645633'
+        pnl: '-2188.8397021020637'
+        pnl_fraction_of_pre_entry_equity: '-0.019999762925464026'
+        shares: 1472
+      entry_session: '2018-06-25'
+      exit_reason: stop
+      exit_session: '2018-07-05'
+      held_sessions: 8
+      signal_session: '2018-06-22'
+      stress:
+        executed_entry_price: '36.1850929641594'
+        executed_exit_price: '34.599015835430976'
+        fees: '18.559593327252596'
+        pnl: '-2097.90670909022'
+        pnl_fraction_of_pre_entry_equity: '-0.01999541219294073'
+        shares: 1311
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0026
+    - base:
+        executed_entry_price: '34.782560751381155'
+        executed_exit_price: '36.13770739614761'
+        fees: '10.62385616849981'
+        pnl: '2019.3858176916524'
+        pnl_fraction_of_pre_entry_equity: '0.018827992263973373'
+        shares: 1498
+      entry_session: '2018-08-06'
+      exit_reason: target
+      exit_session: '2018-08-09'
+      held_sessions: 4
+      signal_session: '2018-08-03'
+      stress:
+        executed_entry_price: '34.8347085186246'
+        executed_exit_price: '36.08347371821442'
+        fees: '18.92097102078865'
+        pnl: '1646.93180523203'
+        pnl_fraction_of_pre_entry_equity: '0.016017388050053566'
+        shares: 1334
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0027
+    - base:
+        executed_entry_price: '33.80874847617495'
+        executed_exit_price: '35.12595488857006'
+        fees: '10.822748428264966'
+        pnl: '2057.1913190320556'
+        pnl_fraction_of_pre_entry_equity: '0.018826020344292618'
+        shares: 1570
+      entry_session: '2018-08-17'
+      exit_reason: target
+      exit_session: '2018-08-21'
+      held_sessions: 3
+      signal_session: '2018-08-16'
+      stress:
+        executed_entry_price: '33.8594362549998'
+        executed_exit_price: '35.07323959859221'
+        fees: '19.23221656315217'
+        pnl: '1674.0234477482597'
+        pnl_fraction_of_pre_entry_equity: '0.016024204431932268'
+        shares: 1395
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0028
+    - base:
+        executed_entry_price: '33.95857264302105'
+        executed_exit_price: '35.28161628282611'
+        fees: '11.029962095887452'
+        pnl: '2096.5785561135685'
+        pnl_fraction_of_pre_entry_equity: '0.01883193524077158'
+        shares: 1593
+      entry_session: '2018-09-07'
+      exit_reason: target
+      exit_session: '2018-09-19'
+      held_sessions: 9
+      signal_session: '2018-09-06'
+      stress:
+        executed_entry_price: '34.009485045784196'
+        executed_exit_price: '35.22866738395243'
+        fees: '19.539006615671674'
+        pnl: '1700.7272725397024'
+        pnl_fraction_of_pre_entry_equity: '0.016023063802924592'
+        shares: 1411
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0029
+    - base:
+        executed_entry_price: '33.492476356843795'
+        executed_exit_price: '32.12064059362195'
+        fees: '10.793357738351615'
+        pnl: '-2267.4631882382873'
+        pnl_fraction_of_pre_entry_equity: '-0.01999040110247268'
+        shares: 1645
+      entry_session: '2018-10-08'
+      exit_reason: stop
+      exit_session: '2018-10-18'
+      held_sessions: 9
+      signal_session: '2018-10-05'
+      stress:
+        executed_entry_price: '33.542689964575196'
+        executed_exit_price: '32.072435530199805'
+        fees: '19.08087849388057'
+        pnl: '-2156.8308260756994'
+        pnl_fraction_of_pre_entry_equity: '-0.01999969632459824'
+        shares: 1454
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0030
+    - base:
+        executed_entry_price: '32.3022610666038'
+        executed_exit_price: '33.56077394654005'
+        fees: '11.012299454197652'
+        pnl: '2093.2212357992207'
+        pnl_fraction_of_pre_entry_equity: '0.018830682705514596'
+        shares: 1672
+      entry_session: '2018-10-26'
+      exit_reason: target
+      exit_session: '2018-11-01'
+      held_sessions: 5
+      signal_session: '2018-10-25'
+      stress:
+        executed_entry_price: '32.350690243615205'
+        executed_exit_price: '33.5104076024482'
+        fees: '19.455368303727127'
+        pnl: '1693.4471706926026'
+        pnl_fraction_of_pre_entry_equity: '0.016023329442645277'
+        shares: 1477
+      trade_id: fxi-mr-v009-two-stage-volume-reversal-control-v001-0031
+candidate:
+  accepted_signal_count: 9
+  bindings:
+    preregistration_digest: 3f8f1e3ecf36333e2e183dd118cf8ca40b04d152b3cd0eac4eb96ff2c09a99e2
+    source_bundle_digest: 209208429eda1c09e205b62181aa83838de31746833ab21efabd09111ae165b4
+    trial_inputs_digest: faac4c1405c8a242f14dab5aa52789026bc0422c6bf759394556c6adee904117
+  candidate_id: fxi-mr-v009-sma20-over-sma50-regime-v001
+  diagnostics:
+    block_bootstrap:
+      base:
+        - block_length: 3
+          drawdown_above_10pct_ratio: '0.0199'
+          maximum_drawdown_q05_q50_q95:
+            - '0.019996846809749183'
+            - '0.041996188614121466'
+            - '0.09097029685108125'
+          positive_return_ratio: '0.61186'
+          profit_factor_above_one_ratio: '0.61186'
+          profit_factor_q05_q50_q95:
+            - '0.33230678080540843'
+            - '1.2695834029324446'
+            - '6.97182296007157'
+          repetitions: 50000
+          return_q05_q50_q95:
+            - '-0.07423497083858699'
+            - '0.0182162982002394'
+            - '0.11901203571495622'
+          seed: 20260902
+        - block_length: 5
+          drawdown_above_10pct_ratio: '0.0'
+          maximum_drawdown_q05_q50_q95:
+            - '0.019996846809749207'
+            - '0.047014638223637176'
+            - '0.07615432340112485'
+          positive_return_ratio: '0.64188'
+          profit_factor_above_one_ratio: '0.64188'
+          profit_factor_q05_q50_q95:
+            - '0.36033175492146624'
+            - '1.2616736939543534'
+            - '5.398301982053425'
+          repetitions: 50000
+          return_q05_q50_q95:
+            - '-0.06796263229263044'
+            - '0.0182162982002394'
+            - '0.10973175780609057'
+          seed: 20260902
+      gating: true
+      stress:
+        - block_length: 3
+          drawdown_above_10pct_ratio: '0.0287'
+          maximum_drawdown_q05_q50_q95:
+            - '0.019991795470666665'
+            - '0.04320253927266571'
+            - '0.09342786968607134'
+          positive_return_ratio: '0.55796'
+          profit_factor_above_one_ratio: '0.55796'
+          profit_factor_q05_q50_q95:
+            - '0.2784369089055348'
+            - '1.0565797900446003'
+            - '5.668976579736524'
+          repetitions: 50000
+          return_q05_q50_q95:
+            - '-0.08106198681311827'
+            - '0.0038886940909812484'
+            - '0.09588380967786048'
+          seed: 20260902
+        - block_length: 5
+          drawdown_above_10pct_ratio: '0.0'
+          maximum_drawdown_q05_q50_q95:
+            - '0.019991795470666745'
+            - '0.0478591856695099'
+            - '0.08286133118370999'
+          positive_return_ratio: '0.58026'
+          profit_factor_above_one_ratio: '0.58026'
+          profit_factor_q05_q50_q95:
+            - '0.29343768386454827'
+            - '1.0556793080281095'
+            - '4.269680267422254'
+          repetitions: 50000
+          return_q05_q50_q95:
+            - '-0.07529630602633897'
+            - '0.0038886940909810264'
+            - '0.0874362913747806'
+          seed: 20260902
+    by_signal_year:
+      '2014':
+        base_pnl: '-1999.6846809749222'
+        stress_pnl: '-1999.1795470666711'
+        trades: 1
+      '2015':
+        base_pnl: '-2241.0361551348287'
+        stress_pnl: '-2494.565119000802'
+        trades: 3
+      '2016':
+        base_pnl: '-608.258353387215'
+        stress_pnl: '-701.0118011471006'
+        trades: 1
+      '2017':
+        base_pnl: '2029.602119072775'
+        stress_pnl: '1600.287546980941'
+        trades: 2
+      '2018':
+        base_pnl: '4641.006890448129'
+        stress_pnl: '3983.3383293317293'
+        trades: 2
+    leave_one_signal_year_out:
+      base:
+        '2014':
+          maximum_drawdown: '0.047014638223637176'
+          omitted_trades: 1
+          profit_factor: '1.8140525886186971'
+          remaining_trades: 8
+          return: '0.03899287965104126'
+        '2015':
+          maximum_drawdown: '0.026221779886506993'
+          omitted_trades: 3
+          profit_factor: '2.6034540866645415'
+          remaining_trades: 6
+          return: '0.042045420118637766'
+        '2016':
+          maximum_drawdown: '0.04240720836109744'
+          omitted_trades: 1
+          profit_factor: '1.4062911294338891'
+          remaining_trades: 8
+          return: '0.02472530423779684'
+        '2017':
+          maximum_drawdown: '0.04848979189496953'
+          omitted_trades: 2
+          profit_factor: '0.954451018878529'
+          remaining_trades: 7
+          return: '-0.0030489900249577317'
+        '2018':
+          maximum_drawdown: '0.04848979189496953'
+          omitted_trades: 2
+          profit_factor: '0.5788121577838394'
+          remaining_trades: 7
+          return: '-0.028193770704241783'
+      gating: true
+      stress:
+        '2014':
+          maximum_drawdown: '0.047859185669509856'
+          omitted_trades: 1
+          profit_factor: '1.5011257795321726'
+          remaining_trades: 8
+          return: '0.02436764248633705'
+        '2015':
+          maximum_drawdown: '0.027185013487580872'
+          omitted_trades: 3
+          profit_factor: '2.1075828342461365'
+          remaining_trades: 6
+          return: '0.030109654287594267'
+        '2016':
+          maximum_drawdown: '0.04493744666067476'
+          omitted_trades: 1
+          profit_factor: '1.1865524996876715'
+          remaining_trades: 8
+          return: '0.011311678256962665'
+        '2017':
+          maximum_drawdown: '0.05194756467214582'
+          omitted_trades: 2
+          profit_factor: '0.8111418923659164'
+          remaining_trades: 7
+          return: '-0.012775397250204934'
+        '2018':
+          maximum_drawdown: '0.05194756467214582'
+          omitted_trades: 2
+          profit_factor: '0.46863131930088053'
+          remaining_trades: 7
+          return: '-0.0359446892023364'
+  disposition: fail
+  failed_gates:
+    - completed_trades
+    - minimum_stress_block_bootstrap_positive_return_ratio
+    - minimum_stress_leave_one_year_out_profit_factor
+    - minimum_stress_leave_one_year_out_return
+  gates:
+    - actual: '1.2721339906112876'
+      gate: base_profit_factor
+      operator: '>'
+      passed: true
+      required: '1.10'
+    - actual: '0.018216298200239383'
+      gate: base_return
+      operator: '>'
+      passed: true
+      required: '0'
+    - actual: 9
+      gate: completed_trades
+      operator: '>='
+      passed: false
+      required: 20
+    - actual: '0.025130538746044446'
+      gate: maximum_realized_trade_loss_fraction
+      operator: <=
+      passed: true
+      required: '0.04'
+    - actual: '0.0287'
+      gate: maximum_stress_block_bootstrap_drawdown_above_10pct_ratio
+      operator: <=
+      passed: true
+      required: '0.10'
+    - actual: '0.05194756467214582'
+      gate: maximum_stress_leave_one_year_out_drawdown
+      operator: <=
+      passed: true
+      required: '0.10'
+    - actual: '0.55796'
+      gate: minimum_stress_block_bootstrap_positive_return_ratio
+      operator: '>='
+      passed: false
+      required: '0.80'
+    - actual: '0.46863131930088053'
+      gate: minimum_stress_leave_one_year_out_profit_factor
+      operator: '>'
+      passed: false
+      required: '1.00'
+    - actual: '-0.0359446892023364'
+      gate: minimum_stress_leave_one_year_out_return
+      operator: '>'
+      passed: false
+      required: '0'
+    - actual: '0.05194756467214582'
+      gate: stress_maximum_drawdown
+      operator: <=
+      passed: true
+      required: '0.10'
+    - actual: '1.0574863851829526'
+      gate: stress_profit_factor
+      operator: '>'
+      passed: true
+      required: '1.00'
+    - actual: '0.0038886940909809687'
+      gate: stress_return
+      operator: '>'
+      passed: true
+      required: '0'
+    - actual: 5
+      gate: traded_years
+      operator: '>='
+      passed: true
+      required: 3
+  metrics:
+    base:
+      completed_trades: 9
+      maximum_drawdown: '0.04848979189496953'
+      maximum_realized_trade_loss_fraction: '0.025130538746044446'
+      profit_factor: '1.2721339906112876'
+      return: '0.018216298200239383'
+      traded_years: 5
+    stress:
+      completed_trades: 9
+      maximum_drawdown: '0.05194756467214582'
+      maximum_realized_trade_loss_fraction: '0.02476140645085298'
+      profit_factor: '1.0574863851829526'
+      return: '0.0038886940909809687'
+      traded_years: 5
+    trade_count_by_signal_year:
+      '2014': 1
+      '2015': 3
+      '2016': 1
+      '2017': 2
+      '2018': 2
+  network_access_during_run: false
+  schema_version: 1
+  stage: development
+  trades:
+    - base:
+        executed_entry_price: '28.7506542292431'
+        executed_exit_price: '27.573041225430625'
+        fees: '9.518704531839859'
+        pnl: '-1999.6846809749222'
+        pnl_fraction_of_pre_entry_equity: '-0.01999684680974922'
+        shares: 1690
+      entry_session: '2014-09-29'
+      exit_reason: stop
+      exit_session: '2014-10-02'
+      held_sessions: 4
+      signal_session: '2014-09-26'
+      stress:
+        executed_entry_price: '28.7937586583724'
+        executed_exit_price: '27.531660973466494'
+        fees: '17.68618176439741'
+        pnl: '-1999.1795470666711'
+        pnl_fraction_of_pre_entry_equity: '-0.01999179547066671'
+        shares: 1570
+      trade_id: fxi-mr-v009-sma20-over-sma50-regime-v001-0001
+    - base:
+        executed_entry_price: '31.545376875134547'
+        executed_exit_price: '32.774401153588066'
+        fees: '9.705854504534244'
+        pnl: '1844.8917816818257'
+        pnl_fraction_of_pre_entry_equity: '0.018825365772304526'
+        shares: 1509
+      entry_session: '2015-03-12'
+      exit_reason: target
+      exit_session: '2015-03-18'
+      held_sessions: 5
+      signal_session: '2015-03-11'
+      stress:
+        executed_entry_price: '31.5926712932382'
+        executed_exit_price: '32.72521495876027'
+        fees: '18.03473530506037'
+        pnl: '1569.7914837568785'
+        pnl_fraction_of_pre_entry_equity: '0.016018146343078826'
+        shares: 1402
+      trade_id: fxi-mr-v009-sma20-over-sma50-regime-v001-0002
+    - base:
+        executed_entry_price: '37.39555329002879'
+        executed_exit_price: '35.46824919560415'
+        fees: '9.450435182386592'
+        pnl: '-2509.163845651147'
+        pnl_fraction_of_pre_entry_equity: '-0.025130538746044446'
+        shares: 1297
+      entry_session: '2015-06-02'
+      exit_reason: time
+      exit_session: '2015-06-16'
+      held_sessions: 10
+      signal_session: '2015-06-01'
+      stress:
+        executed_entry_price: '37.451618587315195'
+        executed_exit_price: '35.4150202073166'
+        fees: '17.517139966229482'
+        pnl: '-2465.5083927245396'
+        pnl_fraction_of_pre_entry_equity: '-0.02476140645085298'
+        shares: 1202
+      trade_id: fxi-mr-v009-sma20-over-sma50-regime-v001-0003
+    - base:
+        executed_entry_price: '29.195639398537047'
+        executed_exit_price: '28.228070602151'
+        fees: '9.302641020111464'
+        pnl: '-1576.7640911655074'
+        pnl_fraction_of_pre_entry_equity: '-0.01619918006152986'
+        shares: 1620
+      entry_session: '2015-11-12'
+      exit_reason: time
+      exit_session: '2015-11-27'
+      held_sessions: 10
+      signal_session: '2015-11-11'
+      stress:
+        executed_entry_price: '29.2394109718482'
+        executed_exit_price: '28.185707314604'
+        fees: '17.23902050959295'
+        pnl: '-1598.8482100331412'
+        pnl_fraction_of_pre_entry_equity: '-0.016465130582032084'
+        shares: 1501
+      trade_id: fxi-mr-v009-sma20-over-sma50-regime-v001-0004
+    - base:
+        executed_entry_price: '24.941762008880097'
+        executed_exit_price: '24.62057435330065'
+        fees: '9.24337573154671'
+        pnl: '-608.258353387215'
+        pnl_fraction_of_pre_entry_equity: '-0.006351952089637099'
+        shares: 1865
+      entry_session: '2016-05-06'
+      exit_reason: time
+      exit_session: '2016-05-20'
+      held_sessions: 10
+      signal_session: '2016-05-05'
+      stress:
+        executed_entry_price: '24.9791559549204'
+        executed_exit_price: '24.5836250171026'
+        fees: '17.138809660125553'
+        pnl: '-701.0118011471006'
+        pnl_fraction_of_pre_entry_equity: '-0.007339956934716478'
+        shares: 1729
+      trade_id: fxi-mr-v009-sma20-over-sma50-regime-v001-0005
+    - base:
+        executed_entry_price: '30.6641457112503'
+        executed_exit_price: '31.89119543359595'
+        fees: '9.427089910528329'
+        pnl: '1839.7368416643676'
+        pnl_fraction_of_pre_entry_equity: '0.019334914391809573'
+        shares: 1507
+      entry_session: '2017-03-13'
+      exit_reason: target-gap
+      exit_session: '2017-03-21'
+      held_sessions: 7
+      signal_session: '2017-03-10'
+      stress:
+        executed_entry_price: '30.710118943201202'
+        executed_exit_price: '31.8433347100838'
+        fees: '17.464924259997172'
+        pnl: '1564.5042863081073'
+        pnl_fraction_of_pre_entry_equity: '0.016502297003931778'
+        shares: 1396
+      trade_id: fxi-mr-v009-sma20-over-sma50-regime-v001-0006
+    - base:
+        executed_entry_price: '36.928422603509844'
+        executed_exit_price: '37.0846211472332'
+        fees: '9.444064382594814'
+        pnl: '189.8652774084074'
+        pnl_fraction_of_pre_entry_equity: '0.0019575605140575427'
+        shares: 1276
+      entry_session: '2017-12-05'
+      exit_reason: time
+      exit_session: '2017-12-19'
+      held_sessions: 10
+      signal_session: '2017-12-04'
+      stress:
+        executed_entry_price: '36.9837875549394'
+        executed_exit_price: '37.028966388132794'
+        fees: '17.43740482898781'
+        pnl: '35.78326067283372'
+        pnl_fraction_of_pre_entry_equity: '0.0003713121750614778'
+        shares: 1178
+      trade_id: fxi-mr-v009-sma20-over-sma50-regime-v001-0007
+    - base:
+        executed_entry_price: '38.089721435946444'
+        executed_exit_price: '40.32473018858005'
+        fees: '9.715550556278833'
+        pnl: '2759.4602939567567'
+        pnl_fraction_of_pre_entry_equity: '0.028395169847351805'
+        shares: 1239
+      entry_session: '2018-02-12'
+      exit_reason: target-gap
+      exit_session: '2018-02-15'
+      held_sessions: 4
+      signal_session: '2018-02-09'
+      stress:
+        executed_entry_price: '38.1468274650858'
+        executed_exit_price: '40.264212834620196'
+        fees: '17.90908160445285'
+        pnl: '2400.145010403828'
+        pnl_fraction_of_pre_entry_equity: '0.02489634135636821'
+        shares: 1142
+      trade_id: fxi-mr-v009-sma20-over-sma50-regime-v001-0008
+    - base:
+        executed_entry_price: '38.28686336384955'
+        executed_exit_price: '39.77853945972447'
+        fees: '9.898693078029186'
+        pnl: '1881.5465964913722'
+        pnl_fraction_of_pre_entry_equity: '0.018826746344437005'
+        shares: 1268
+      entry_session: '2018-05-31'
+      exit_reason: target
+      exit_session: '2018-06-06'
+      held_sessions: 5
+      signal_session: '2018-05-30'
+      stress:
+        executed_entry_price: '38.3442649580982'
+        executed_exit_price: '39.71884180170587'
+        fees: '18.18870387503435'
+        pnl: '1583.1933189279014'
+        pnl_fraction_of_pre_entry_equity: '0.01602330333211907'
+        shares: 1165
+      trade_id: fxi-mr-v009-sma20-over-sma50-regime-v001-0009

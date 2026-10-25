@@ -1,0 +1,211 @@
+creator: /root
+development_actor: /root
+identity:
+  experiment_family: fxi-mean-reversion-v009-sma20-sma50-regime
+  historical_evaluation_operator: ochowei@gmail.com
+  research_owner: ochowei@gmail.com
+  research_round_id: fxi-deep-pullback-sma20-sma50-regime--v001-round-001
+preregistration:
+  baseline_definition:
+    baseline_id: fxi-mr-v009-two-stage-volume-reversal-control-v001
+    candidate_family: fxi-mean-reversion-v009-sma20-sma50-regime
+    execution_is_identical: true
+    family: FXI v009 two-stage reversal unfiltered control
+    objectively_simpler_because: Control 保留原 v009 訊號與執行；Candidate 僅新增 SMA(20)>SMA(50) 訊號篩選。
+    selection_use: 同一 Development Trial 的固定 Control；用於 Candidate 減 Control 比較，不屬候選家族。
+    simpler_rule: 完整 v009 DEFAULT_SPEC：短線超跌、RSI(2)、先前五個 session 的量能先行與收盤反轉確認；不加 SMA(20)>SMA(50) 條件。
+  complete_candidate_family:
+    - fxi-mr-v009-sma20-over-sma50-regime-v001
+  eligibility_rules:
+    accepted_signal:
+      accepted_only_when_flat: true
+      cooldown:
+        clock_anchor: completed-position-exit
+        completed_session_steps_after_exit: 5
+        minimum_completed_session_steps_after_exit: 5
+      decision_time: completed-session-close
+      long_term_trend:
+        comparison: SMA20 > SMA50
+        decision_time: completed-session-close
+        include_signal_day_close: true
+        input: Yahoo auto-adjusted FXI Close
+        long_sma_formula: simple-moving-average
+        long_sma_length: 50
+        minimum_periods: 50
+        not_ready: reject-candidate-signal
+        short_sma_formula: simple-moving-average
+        short_sma_length: 20
+        strict: true
+        uses_future_sessions: false
+      mean_reversion:
+        close_vs_sma20_gap_minimum: '0.015'
+        rsi_length: 2
+        rsi_maximum: '50'
+        rsi_value: '50'
+        sma_length: 20
+      price_direction_confirmation:
+        close_above_prior_close: true
+      regime:
+        allowed_column: sma20_above_sma50
+        fast:
+          column: regime_sma20
+          lookback: 20
+          min_periods: 20
+        include_current_session: true
+        input: Close
+        kind: sma-comparison
+        not_ready_allowed: false
+        operator: '>'
+        slow:
+          column: regime_sma50
+          lookback: 50
+          min_periods: 50
+      symbol: FXI
+      volume_leads_price:
+        enabled: true
+        prior_session_window: 5
+        volume_average_length: 20
+        volume_ratio_minimum: '1.05'
+        volume_ratio_value: '1.05'
+    costs:
+      base:
+        fee_per_side_bps: '1'
+        slippage_per_side_bps: '5'
+      stress:
+        fee_per_side_bps: '2'
+        slippage_per_side_bps: '20'
+    development_diagnostics:
+      block_bootstrap:
+        block_lengths:
+          - 3
+          - 5
+        maximum_stress_drawdown_above_10pct_ratio: '0.10'
+        minimum_stress_positive_return_ratio: '0.80'
+        repetitions: 50000
+        seed: 20260902
+        seed_application: exact-same-seed-for-each-block-length
+      leave_one_signal_year_out:
+        maximum_stress_drawdown: '0.10'
+        minimum_stress_profit_factor: '1.00'
+        minimum_stress_return: '0'
+      signal_year_breakdown: true
+    development_gates:
+      base_profit_factor:
+        operator: '>'
+        value: '1.10'
+      base_return:
+        operator: '>'
+        value: '0'
+      completed_trades:
+        operator: '>='
+        value: 20
+      maximum_realized_trade_loss_fraction:
+        operator: <=
+        value: '0.04'
+      maximum_stress_block_bootstrap_drawdown_above_10pct_ratio:
+        operator: <=
+        value: '0.10'
+      maximum_stress_leave_one_year_out_drawdown:
+        operator: <=
+        value: '0.10'
+      minimum_stress_block_bootstrap_positive_return_ratio:
+        operator: '>='
+        value: '0.80'
+      minimum_stress_leave_one_year_out_profit_factor:
+        operator: '>'
+        value: '1.00'
+      minimum_stress_leave_one_year_out_return:
+        operator: '>'
+        value: '0'
+      stress_maximum_drawdown:
+        operator: <=
+        value: '0.10'
+      stress_profit_factor:
+        operator: '>'
+        value: '1.00'
+      stress_return:
+        operator: '>'
+        value: '0'
+      traded_years:
+        operator: '>='
+        value: 3
+    execution:
+      cooldown:
+        anchor: completed-position-exit
+        minimum_completed_session_steps_after_exit: 5
+      decision_time: completed-session-close
+      entry: next-session-open
+      gap_fill: stop-gap-at-open-target-gap-at-open
+      holding_period: next-open-after-10-complete-sessions
+      intrabar_ambiguity: adverse-stop-first
+      position_sizing:
+        cash_cap: available-cash-no-borrowing
+        modeled_stop_includes_costs: true
+        risk_fraction_of_pre_entry_equity: '0.02'
+        shares: maximum-integer-shares-within-risk-and-cash-caps
+      stop:
+        level_from_raw_entry_open: '-0.04'
+        order: STOP_MARKET
+        time_in_force: GTC
+      target:
+        level_from_raw_entry_open: '0.04'
+        order: LIMIT
+        reissued_each_open_position_session: true
+        time_in_force: DAY
+    gate_policy: 正式 Development gates 任一失敗即否證假說；不調參、不追加候選 Trial。
+    research_targets: {}
+    source_and_adjustment:
+      adjustment_policy: Yahoo auto_adjust，OHLC 全部使用同一調整基礎
+      calendar: XNYS
+      interval: 1d
+      provider: yahoo
+      timezone: America/New_York
+  evaluation_gates:
+    base_compounded_return:
+      operator: '>'
+      value: '0'
+    base_profit_factor:
+      operator: '>'
+      value: '1.10'
+    completed_trades:
+      operator: '>='
+      value: 20
+    family_wise_confidence:
+      operator: '>='
+      value: '0.90'
+    maximum_fold_positive_profit_concentration:
+      operator: <=
+      value: '0.50'
+    maximum_fold_trade_concentration:
+      operator: <=
+      value: '0.50'
+    maximum_realized_trade_loss_fraction:
+      operator: <=
+      value: '0.04'
+    positive_traded_fold_ratio:
+      operator: '>='
+      value: '0.60'
+    stress_max_drawdown:
+      operator: <=
+      value: '0.10'
+    stress_profit_factor:
+      operator: '>'
+      value: '1.00'
+    stress_return:
+      operator: '>'
+      value: '0'
+    traded_folds:
+      operator: '>='
+      value: 3
+  fold_warmup_sessions: 49
+  hypothesis: 將 TSM Development 中 v009「短線超跌、量先價後確認」規則轉用於 FXI，並只在訊號日 SMA(20)>SMA(50) 時接受候選訊號；假說是 FXI 短線反彈在中期均線向上時較不易落入持續下跌。唯一 candidate 與不加 regime 的完整 v009 Control 比較。兩者共用 SMA20 偏離、RSI(2)、前五個 session 量能先行、收盤高於前收、next-session-open 進場、10 個完整 session 持有、5-session 退場後冷卻、2% 風險預算、-4% stop、+4% target 及 base/stress 成本。Regime 以 XNYS 已完成交易日的 auto-adjusted FXI Close 計算含訊號日的 SMA20 與 SMA50；SMA20 嚴格高於 SMA50 才接受，均線未就緒或相等均拒絕，需 49 個先前 session，不使用未來資料。只登記一個 candidate 與唯一 Development Trial；任一正式 Development gate 失敗即否證，不調參、不重跑、不擴大家族。
+  initial_cash: '100000'
+  maximum_holding_sessions: 11
+  maximum_trials: 1
+  selection_rule:
+    eligible_candidate: 唯一 Candidate 須通過全部事前 Development gates；無 research targets，不按結果排名。
+    method: fixed-single-candidate-no-outcome-ranking
+    selected_candidate_id: fxi-mr-v009-sma20-over-sma50-regime-v001
+  tie_handling:
+    method: not-applicable-single-candidate
+study_id: fxi-deep-pullback-sma20-sma50-regime--v001

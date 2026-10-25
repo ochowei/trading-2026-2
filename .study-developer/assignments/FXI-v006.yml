@@ -1,0 +1,9 @@
+assignee: /root
+assigner: ochowei@gmail.com（使用者直接派工）
+instruction: 使用者原文：「你是 study 開發者，參考目前的 [TSM.md](.study-developer/development-note/TSM.md) ，發想一個 FXI 的假說，並進行 study」。使用者補充身分：「ochowei@gmail.com 同一人兼任，其他如你建議」。
+role: study 開發者
+schema_version: 1
+scope: development-to-freeze
+source_id: codex-user-request:2026-10-24-fxi-study
+study_id: fxi-deep-pullback-sma20-sma50-regime--v001
+workflow_version: v006

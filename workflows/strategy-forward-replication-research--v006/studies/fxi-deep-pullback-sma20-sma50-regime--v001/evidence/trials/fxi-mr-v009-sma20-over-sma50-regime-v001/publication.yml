@@ -1,0 +1,16 @@
+artifacts:
+  baseline:
+    digest: 56a895f356d60dfeabd129ef9df80c920653819baddbd4d1baf81fe67e968bc8
+    path: evidence/trials/fxi-mr-v009-sma20-over-sma50-regime-v001/baseline.yml
+  candidate:
+    digest: 0110bdfc6dab78e49975050f4b8c229c7a2ff5f9de9de1ca42036d476b7d9080
+    path: evidence/trials/fxi-mr-v009-sma20-over-sma50-regime-v001/candidate.yml
+  inputs:
+    digest: faac4c1405c8a242f14dab5aa52789026bc0422c6bf759394556c6adee904117
+    path: evidence/trials/fxi-mr-v009-sma20-over-sma50-regime-v001/inputs.yml
+envelope_digest: 8949f400eb9af19fec6fe9430b7622f3137ee59ef398da392d73e1e7870f5109
+preregistration_digest: 3f8f1e3ecf36333e2e183dd118cf8ca40b04d152b3cd0eac4eb96ff2c09a99e2
+schema_version: 1
+source_bundle_digest: 209208429eda1c09e205b62181aa83838de31746833ab21efabd09111ae165b4
+study_id: fxi-deep-pullback-sma20-sma50-regime--v001
+trial_id: fxi-mr-v009-sma20-over-sma50-regime-v001

@@ -1,0 +1,19 @@
+actor_id: /root
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 209208429eda1c09e205b62181aa83838de31746833ab21efabd09111ae165b4
+  workflow_digest: e527578ca62d907d5b1e16f57d5a4c52f0b7cabb9d616970eb2eb2e383f8e7a9
+  workflow_reference_digest: cfe747174027f22b45f6c699cd1675753abedca2a71ed6035cf7626064e906f1
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: development-started
+execution:
+  assignment_digest: 2e465eec842125d5da24f5e0b54de4c62f30b126c8c8a5d9928f04465509bbf3
+  assignment_path: manifests/assignments/2e465eec842125d5da24f5e0b54de4c62f30b126c8c8a5d9928f04465509bbf3.yml
+  role: study 開發者
+occurred_at: '2026-10-24T05:28:18.062780Z'
+payload:
+  operation_id: 12123ceea75f71d16aff8c4602f417f4c1f8cf3b86aff86eff3449be98b48c0a
+previous_event_digest: 8bae64f91edf922b5d5575d326e056dd93a59b00fd99af00e7ea93241bacc0b5
+schema_version: 1
+sequence: 3
+study_id: fxi-deep-pullback-sma20-sma50-regime--v001

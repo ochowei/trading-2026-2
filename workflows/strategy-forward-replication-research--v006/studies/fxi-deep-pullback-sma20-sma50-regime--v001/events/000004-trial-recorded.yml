@@ -1,0 +1,26 @@
+actor_id: /root
+bindings:
+  policy_set_digest: c86066b33119366a3172f475ff75f8813ba4b7545571894edfe581afabe32215
+  source_bundle_digest: 209208429eda1c09e205b62181aa83838de31746833ab21efabd09111ae165b4
+  workflow_digest: e527578ca62d907d5b1e16f57d5a4c52f0b7cabb9d616970eb2eb2e383f8e7a9
+  workflow_reference_digest: cfe747174027f22b45f6c699cd1675753abedca2a71ed6035cf7626064e906f1
+  workflow_reference_path: manifests/workflow-reference.yml
+event_type: trial-recorded
+execution:
+  assignment_digest: 2e465eec842125d5da24f5e0b54de4c62f30b126c8c8a5d9928f04465509bbf3
+  assignment_path: manifests/assignments/2e465eec842125d5da24f5e0b54de4c62f30b126c8c8a5d9928f04465509bbf3.yml
+  role: study 開發者
+occurred_at: '2026-10-24T05:28:26.959422Z'
+payload:
+  development_evidence_digest: 0110bdfc6dab78e49975050f4b8c229c7a2ff5f9de9de1ca42036d476b7d9080
+  development_evidence_path: evidence/trials/fxi-mr-v009-sma20-over-sma50-regime-v001/candidate.yml
+  inputs_digest: faac4c1405c8a242f14dab5aa52789026bc0422c6bf759394556c6adee904117
+  inputs_path: evidence/trials/fxi-mr-v009-sma20-over-sma50-regime-v001/inputs.yml
+  publication_digest: 82edd25543ae7536c2dfe04968a35876fd52a8a41af8e181a30404517af98bdf
+  publication_path: evidence/trials/fxi-mr-v009-sma20-over-sma50-regime-v001/publication.yml
+  status: completed
+  trial_id: fxi-mr-v009-sma20-over-sma50-regime-v001
+previous_event_digest: 6c6bde59ff0ac1a58f663f6822474182add8f8981a746e3bb2b8c49005dd6a9a
+schema_version: 1
+sequence: 4
+study_id: fxi-deep-pullback-sma20-sma50-regime--v001
